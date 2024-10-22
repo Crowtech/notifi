@@ -128,6 +128,7 @@ class Notifi {
     });
 
     if (isWeb) {
+      await navigator.serviceWorker.ready;
       final fcmToken =
           await FirebaseMessaging.instance.getToken(vapidKey: vapidKey);
       print("Web fcm token is $fcmToken");
