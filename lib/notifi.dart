@@ -107,11 +107,11 @@ class Notifi {
 
     NotificationSettings settings = await messaging.requestPermission(
       alert: true,
-      announcement: false,
+      announcement: true,
       badge: true,
       carPlay: false,
       criticalAlert: false,
-      provisional: false,
+      provisional: true,
       sound: true,
     );
 
