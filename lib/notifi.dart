@@ -111,7 +111,7 @@ class Notifi {
       badge: true,
       carPlay: false,
       criticalAlert: false,
-      provisional: false,
+      provisional: true,
       sound: true,
     );
 
