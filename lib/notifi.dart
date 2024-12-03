@@ -71,7 +71,10 @@ class Notifi {
   String? vapidKey;
   int secondsToast;
   List<String> _topics = ["all"];
+  String? _fcmToken;
   FirebaseOptions? options;
+
+  String get fcmToken => _fcmToken ?? '';
 
   Notifi(
       {this.options,
@@ -125,19 +128,19 @@ class Notifi {
     }
     print('User granted permission: ${settings.authorizationStatus}');
 
-    FirebaseMessaging.instance.onTokenRefresh.listen((fcmToken) async {
+    FirebaseMessaging.instance.onTokenRefresh.listen((__fcmToken) async {
       // TODO: If necessary send token to application server.
 
       // Note: This callback is fired at each app startup and whenever a new
       // token is generated.
-      print("Refresh Notifi FCM TOKEN = $fcmToken");
+      print("Refresh Notifi FCM TOKEN = $__fcmToken");
+      _fcmToken = __fcmToken;
     }).onError((err) {
       // Error getting token.
     });
 
     if (isWeb) {
-      final fcmToken =
-          await FirebaseMessaging.instance.getToken(vapidKey: vapidKey);
+      _fcmToken = await FirebaseMessaging.instance.getToken(vapidKey: vapidKey);
       print("Web fcm token is $fcmToken");
     }
 
@@ -145,12 +148,12 @@ class Notifi {
       final apnsToken = await FirebaseMessaging.instance.getAPNSToken();
       if (apnsToken != null) {
         // APNS token is available, make FCM plugin API requests...
-        final fcmToken = await FirebaseMessaging.instance.getToken();
+        _fcmToken = await FirebaseMessaging.instance.getToken();
         print("Mobile Apple fcm token is $fcmToken");
       }
     }
     if (isAndroid) {
-      final fcmToken = await FirebaseMessaging.instance.getToken();
+      _fcmToken = await FirebaseMessaging.instance.getToken();
       print("Mobile Android fcm token is $fcmToken");
     }
     await setupFlutterNotifications();
