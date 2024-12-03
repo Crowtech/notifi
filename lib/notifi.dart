@@ -70,7 +70,7 @@ Future<void> setupFlutterNotifications() async {
 class Notifi {
   String? vapidKey;
   int secondsToast;
-  List<String> _topics = ["all"];
+  List<String> _topics = [];
   String? _fcmToken;
   FirebaseOptions? options;
 
@@ -81,7 +81,7 @@ class Notifi {
       this.vapidKey,
       this.secondsToast = 2,
       List<String>? topics}) {
-    if (kIsWeb) {
+    if (isWeb) {
       topics = [];
     }
     if (topics != null && topics.isNotEmpty) {
@@ -144,20 +144,20 @@ class Notifi {
 
     if (isWeb) {
       _fcmToken = await FirebaseMessaging.instance.getToken(vapidKey: vapidKey);
-      print("Web fcm token is $fcmToken");
+      print("Web fcm token is $_fcmToken");
     }
 
     if (isIOS) {
       final apnsToken = await FirebaseMessaging.instance.getAPNSToken();
       if (apnsToken != null) {
         // APNS token is available, make FCM plugin API requests...
-        _fcmToken = await FirebaseMessaging.instance.getToken();
-        print("Mobile Apple fcm token is $fcmToken");
+        //_fcmToken = await FirebaseMessaging.instance.getToken();
+        print("Mobile Apple fcm token is $_fcmToken");
       }
     }
     if (isAndroid) {
-      _fcmToken = await FirebaseMessaging.instance.getToken();
-      print("Mobile Android fcm token is $fcmToken");
+      //_fcmToken = await FirebaseMessaging.instance.getToken();
+      print("Mobile Android fcm token is $_fcmToken");
     }
     await setupFlutterNotifications();
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
