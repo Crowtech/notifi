@@ -81,6 +81,9 @@ class Notifi {
       this.vapidKey,
       this.secondsToast = 2,
       List<String>? topics}) {
+    if (kIsWeb) {
+      topics = [];
+    }
     if (topics != null && topics.isNotEmpty) {
       this._topics.addAll(topics);
     }
