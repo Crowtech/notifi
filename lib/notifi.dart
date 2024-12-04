@@ -15,7 +15,10 @@ import 'package:get_storage/get_storage.dart';
 bool get isAndroid => !kIsWeb && Platform.isAndroid;
 bool get isIOS => !kIsWeb && Platform.isIOS;
 bool get isWindows => !kIsWeb && Platform.isWindows;
-bool get isWeb => kIsWeb;
+
+String? _fcmToken = '';
+String? get fcmToken => _fcmToken;
+
 late AndroidNotificationChannel _androidChannel;
 
 bool isFlutterLocalNotificationsInitialized = false;
@@ -67,21 +70,44 @@ Future<void> setupFlutterNotifications() async {
   isFlutterLocalNotificationsInitialized = true;
 }
 
-class Notifi {
+class Notifi extends ChangeNotifier {
   String? vapidKey;
-  int secondsToast;
-  List<String> _topics = [];
-  String? _fcmToken;
+  int secondsToast = 2;
+  final List<String> _topics = [];
+
   FirebaseOptions? options;
 
-  String get fcmToken => _fcmToken ?? '';
+  late String _fcm;
+  String get fcm => _fcm;
+
+  set fcm(String newFcm) {
+    _fcm = newFcm;
+    notifyListeners();
+  }
+
+  /// List of items in the cart.
+  List<String> get topics => _topics;
+
+  void addTopic(String topic) {
+    _topics.add(topic);
+    // This line tells [Model] that it should rebuild the widgets that
+    // depend on it.
+    notifyListeners();
+  }
+
+  void removeTopic(String topic) {
+    _topics.remove(topic);
+    // This line tells [Model] that it should rebuild the widgets that
+    // depend on it.
+    notifyListeners();
+  }
 
   Notifi(
       {this.options,
       this.vapidKey,
       this.secondsToast = 2,
       List<String>? topics}) {
-    if (isWeb) {
+    if (kIsWeb) {
       topics = [];
     }
     if (topics != null && topics.isNotEmpty) {
@@ -138,27 +164,48 @@ class Notifi {
       // token is generated.
       print("Refresh Notifi FCM TOKEN = $__fcmToken");
       _fcmToken = __fcmToken;
+      fcm = __fcmToken;
+      notifyListeners();
     }).onError((err) {
       // Error getting token.
     });
 
-    if (isWeb) {
-      _fcmToken = await FirebaseMessaging.instance.getToken(vapidKey: vapidKey);
-      print("Web fcm token is $_fcmToken");
+    if (kIsWeb) {
+      print("Got to here: WEB detected");
+    } else {
+      print("Got to here: WEB not detected");
+    }
+    if (kIsWeb) {
+      print("vapidKey is $vapidKey");
+      FirebaseMessaging.instance.getToken(vapidKey: vapidKey).then((token) {
+        print("Web fcm token is $token");
+        _fcmToken = token;
+        fcm = token!;
+        notifyListeners();
+      });
     }
 
     if (isIOS) {
       final apnsToken = await FirebaseMessaging.instance.getAPNSToken();
       if (apnsToken != null) {
         // APNS token is available, make FCM plugin API requests...
-        //_fcmToken = await FirebaseMessaging.instance.getToken();
-        print("Mobile Apple fcm token is $_fcmToken");
+        FirebaseMessaging.instance.getToken().then((token) {
+          _fcmToken = token;
+          fcm = token!;
+          notifyListeners();
+          print("Mobile Apple fcm token is $_fcmToken");
+        });
       }
     }
     if (isAndroid) {
-      //_fcmToken = await FirebaseMessaging.instance.getToken();
-      print("Mobile Android fcm token is $_fcmToken");
+      FirebaseMessaging.instance.getToken().then((token) {
+        _fcmToken = token;
+        fcm = token!;
+        notifyListeners();
+        print("Mobile Android fcm token is $_fcmToken");
+      });
     }
+    print("Got to here before setup Flutter Notifications");
     await setupFlutterNotifications();
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       final notification = message.notification;
@@ -188,10 +235,16 @@ class Notifi {
 
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-    if (!isWeb) {
+    if (!kIsWeb) {
+      print("Subscribing to topics");
+
       for (final topic in _topics) {
-        await FirebaseMessaging.instance.subscribeToTopic(topic);
+        FirebaseMessaging.instance.subscribeToTopic(topic).then((_) {
+          print("Subscribed to topic: $topic");
+        });
       }
+    } else {
+      print("Not subscribing to topics");
     }
   }
 }
