@@ -88,7 +88,7 @@ class Notifi extends ChangeNotifier {
   /// List of items in the cart.
   List<String> get topics => _topics;
   Nest get nest => _nest;
-  String get fcm => _fcm;
+  String get fcm2 => _fcm;
 
   set fcm(String newFcm) {
     _fcm = newFcm;
