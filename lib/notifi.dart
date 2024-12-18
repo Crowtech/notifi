@@ -78,12 +78,12 @@ class Notifi extends ChangeNotifier {
   final List<String> _topics = [];
   late String _fcm;
 
-  Nest nest = Nest();
+  late Nest _nest;
 
   FirebaseOptions? options;
 
-  String get deviceId => nest.deviceId;
-  PackageInfo get packageInfo => nest.packageInfo;
+  String get deviceId => _nest.deviceId;
+  PackageInfo get packageInfo => _nest.packageInfo;
 
   /// List of items in the cart.
   List<String> get topics => _topics;
@@ -141,7 +141,7 @@ class Notifi extends ChangeNotifier {
   Future<void> init() async {
     await GetStorage.init();
     await Firebase.initializeApp(options: options);
-    await nest.init();
+    await _nest.init();
 
     FirebaseMessaging messaging = FirebaseMessaging.instance;
 
