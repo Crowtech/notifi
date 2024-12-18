@@ -9,12 +9,16 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:notifi/nest.dart';
 
 //import 'firebase_options.dart';
+
+Nest nest = Nest();
 
 bool get isAndroid => !kIsWeb && Platform.isAndroid;
 bool get isIOS => !kIsWeb && Platform.isIOS;
 bool get isWindows => !kIsWeb && Platform.isWindows;
+String get deviceId => nest.deviceId;
 
 String? _fcmToken = '';
 String? get fcmToken => _fcmToken;
@@ -134,6 +138,7 @@ class Notifi extends ChangeNotifier {
   Future<void> init() async {
     await GetStorage.init();
     await Firebase.initializeApp(options: options);
+    await nest.init();
 
     FirebaseMessaging messaging = FirebaseMessaging.instance;
 
