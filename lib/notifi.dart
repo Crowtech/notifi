@@ -10,15 +10,13 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:notifi/nest.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 //import 'firebase_options.dart';
-
-Nest nest = Nest();
 
 bool get isAndroid => !kIsWeb && Platform.isAndroid;
 bool get isIOS => !kIsWeb && Platform.isIOS;
 bool get isWindows => !kIsWeb && Platform.isWindows;
-String get deviceId => nest.deviceId;
 
 String? _fcmToken = '';
 String? get fcmToken => _fcmToken;
@@ -78,19 +76,24 @@ class Notifi extends ChangeNotifier {
   String? vapidKey;
   int secondsToast = 2;
   final List<String> _topics = [];
+  late String _fcm;
+
+  Nest nest = Nest();
 
   FirebaseOptions? options;
 
-  late String _fcm;
+  String get deviceId => nest.deviceId;
+  PackageInfo get packageInfo => nest.packageInfo;
+
+  /// List of items in the cart.
+  List<String> get topics => _topics;
+
   String get fcm => _fcm;
 
   set fcm(String newFcm) {
     _fcm = newFcm;
     notifyListeners();
   }
-
-  /// List of items in the cart.
-  List<String> get topics => _topics;
 
   void addTopic(String topic) {
     _topics.add(topic);
