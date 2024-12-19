@@ -9,7 +9,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:notifi/nest.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 //import 'firebase_options.dart';
@@ -73,22 +72,25 @@ Future<void> setupFlutterNotifications() async {
 }
 
 class Notifi extends ChangeNotifier {
-  String? vapidKey;
+  String? _vapidKey;
   int secondsToast = 2;
   final List<String> _topics = [];
   late String _fcm;
 
-  late Nest _nest;
+  late PackageInfo _packageInfo ;
+  late String _deviceId;
 
   FirebaseOptions? options;
 
-  String get deviceId => _nest.deviceId;
-  PackageInfo get packageInfo => _nest.packageInfo;
+  String? get vapidKey => _vapidKey;
+ String? get deviceId  => _deviceId ;
+
+ PackageInfo? get packageInfo => _packageInfo ;
 
   /// List of items in the cart.
   List<String> get topics => _topics;
-  Nest get nest => _nest;
-  String get fcm2 => _fcm;
+
+  String get fcm => _fcm;
 
   set fcm(String newFcm) {
     _fcm = newFcm;
@@ -109,11 +111,20 @@ class Notifi extends ChangeNotifier {
     notifyListeners();
   }
 
-  Notifi(
-      {this.options,
-      this.vapidKey,
-      this.secondsToast = 2,
-      List<String>? topics}) {
+  Notifi({
+    this.options,
+    String? vapidKey,
+    required  PackageInfo packageInfo,
+    required String deviceId,
+    this.secondsToast = 2,
+    List<String>? topics,
+  }) {
+    print("notifi constructor");
+    _vapidKey = vapidKey;
+    _packageInfo = packageInfo;
+    _deviceId = deviceId;
+
+
     if (kIsWeb) {
       topics = [];
     }
@@ -136,12 +147,20 @@ class Notifi extends ChangeNotifier {
       // We use 'web' as the default platform for unknown platforms.
       this._topics.add('web');
     }
+    // print("PACKAGE ${packageInfo!.version} ${deviceId} ");
   }
 
-  Future<void> init() async {
+  ChangeNotifier initialise()
+  {
+    init();
+    return this;
+  }
+
+  Future<ChangeNotifier> init() async {
+    print("Notifi initing!");
     await GetStorage.init();
     await Firebase.initializeApp(options: options);
-    await _nest.init();
+
 
     FirebaseMessaging messaging = FirebaseMessaging.instance;
 
@@ -254,5 +273,6 @@ class Notifi extends ChangeNotifier {
     } else {
       print("Not subscribing to topics");
     }
+    return this;
   }
 }
