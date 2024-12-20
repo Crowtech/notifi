@@ -10,8 +10,12 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:logger/logger.dart' as logger;
 
-//import 'firebase_options.dart';
+var log = logger.Logger(
+  printer: logger.PrettyPrinter(),
+  level: logger.Level.info,
+);
 
 bool get isAndroid => !kIsWeb && Platform.isAndroid;
 bool get isIOS => !kIsWeb && Platform.isIOS;
@@ -33,12 +37,12 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // make sure you call `initializeApp` before using other Firebase services.
   await Firebase.initializeApp();
 
-  print("Handling a background message: ${message.messageId}");
+  log.d("Handling a background message: ${message.messageId}");
 }
 
 Future<void> setupFlutterNotifications() async {
   if (isFlutterLocalNotificationsInitialized) {
-    print("Flutter Local Notifications not initialised, exiting");
+    log.d("Flutter Local Notifications not initialised, exiting");
     return;
   }
   _androidChannel = const AndroidNotificationChannel(
@@ -119,7 +123,7 @@ class Notifi extends ChangeNotifier {
     this.secondsToast = 2,
     List<String>? topics,
   }) {
-    print("notifi constructor");
+    log.d("notifi constructor");
     _vapidKey = vapidKey;
     _packageInfo = packageInfo;
     _deviceId = deviceId;
@@ -147,7 +151,7 @@ class Notifi extends ChangeNotifier {
       // We use 'web' as the default platform for unknown platforms.
       this._topics.add('web');
     }
-    // print("PACKAGE ${packageInfo!.version} ${deviceId} ");
+    // log.d("PACKAGE ${packageInfo!.version} ${deviceId} ");
   }
 
   ChangeNotifier initialise()
@@ -157,7 +161,7 @@ class Notifi extends ChangeNotifier {
   }
 
   Future<ChangeNotifier> init() async {
-    print("Notifi initing!");
+    log.d("Notifi initing!");
     await GetStorage.init();
     await Firebase.initializeApp(options: options);
 
@@ -175,21 +179,21 @@ class Notifi extends ChangeNotifier {
     );
 
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      print('User granted permission');
+      log.d('User granted permission');
     } else if (settings.authorizationStatus ==
         AuthorizationStatus.provisional) {
-      print('User granted provisional permission');
+      log.d('User granted provisional permission');
     } else {
-      print('User declined or has not accepted permission');
+      log.d('User declined or has not accepted permission');
     }
-    print('User granted permission: ${settings.authorizationStatus}');
+    log.d('User granted permission: ${settings.authorizationStatus}');
 
     FirebaseMessaging.instance.onTokenRefresh.listen((__fcmToken) async {
       // TODO: If necessary send token to application server.
 
       // Note: This callback is fired at each app startup and whenever a new
       // token is generated.
-      print("Refresh Notifi FCM TOKEN = $__fcmToken");
+      log.d("Refresh Notifi FCM TOKEN = $__fcmToken");
       _fcmToken = __fcmToken;
       fcm = __fcmToken;
       notifyListeners();
@@ -198,14 +202,14 @@ class Notifi extends ChangeNotifier {
     });
 
     if (kIsWeb) {
-      print("Got to here: WEB detected");
+      log.d("Got to here: WEB detected");
     } else {
-      print("Got to here: WEB not detected");
+      log.d("Got to here: WEB not detected");
     }
     if (kIsWeb) {
-      print("vapidKey is $vapidKey");
+      log.d("vapidKey is $vapidKey");
       FirebaseMessaging.instance.getToken(vapidKey: vapidKey).then((token) {
-        print("Web fcm token is $token");
+        log.d("Web fcm token is $token");
         _fcmToken = token;
         fcm = token!;
         notifyListeners();
@@ -220,7 +224,7 @@ class Notifi extends ChangeNotifier {
           _fcmToken = token;
           fcm = token!;
           notifyListeners();
-          print("Mobile Apple fcm token is $_fcmToken");
+          log.d("Mobile Apple fcm token is $_fcmToken");
         });
       }
     }
@@ -229,16 +233,16 @@ class Notifi extends ChangeNotifier {
         _fcmToken = token;
         fcm = token!;
         notifyListeners();
-        print("Mobile Android fcm token is $_fcmToken");
+        log.d("Mobile Android fcm token is $_fcmToken");
       });
     }
-    print("Got to here before setup Flutter Notifications");
+    log.d("Got to here before setup Flutter Notifications");
     await setupFlutterNotifications();
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       final notification = message.notification;
       if (notification == null) return;
 
-      print("Foreground msg:${notification.title!}::${notification.body!}");
+      log.d("Foreground msg:${notification.title!}::${notification.body!}");
       flutterLocalNotificationsPlugin.show(
         notification.hashCode,
         notification.title,
@@ -263,15 +267,15 @@ class Notifi extends ChangeNotifier {
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
     if (!kIsWeb) {
-      print("Subscribing to topics");
+      log.d("Subscribing to topics");
 
       for (final topic in _topics) {
         FirebaseMessaging.instance.subscribeToTopic(topic).then((_) {
-          print("Subscribed to topic: $topic");
+          log.d("Subscribed to topic: $topic");
         });
       }
     } else {
-      print("Not subscribing to topics");
+      log.d("Not subscribing to topics");
     }
     return this;
   }
