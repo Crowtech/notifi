@@ -78,17 +78,28 @@ Future<Map> registerLogin(
   throw "Register Login error";
 }
 
-void initNotifi(BuildContext context, String token) async {
+Future<void> registerLogout(
+    BuildContext context, String token) async {
+  apiPost(context, token, "/p/persons/logout")
+      .then((result) {
+    log.d("logout result ${result}");
+  }).catchError((error) {
+    log.e("Register logout error");
+  });
 
-  void notifiListener() {
-    log.d(
-        "Main:NotifiListener triggered , fcm is ${Provider.of<Notifi>(context, listen: false).fcm}");
-    registerFCM(context,token, Provider.of<Notifi>(context, listen: false).deviceId!, Provider.of<Notifi>(context, listen: false).fcm);
-  }
-
-  Provider.of<Notifi>(context, listen: false).addListener(notifiListener);
-    await Provider.of<Notifi>(context, listen: false).init();
 }
+
+// void initNotifi(BuildContext context, String token) async {
+
+//   void notifiListener() {
+//     log.d(
+//         "Main:NotifiListener triggered , fcm is ${Provider.of<Notifi>(context, listen: false).fcm}");
+//     registerFCM(context,token, Provider.of<Notifi>(context, listen: false).deviceId!, Provider.of<Notifi>(context, listen: false).fcm);
+//   }
+
+//   Provider.of<Notifi>(context, listen: false).addListener(notifiListener);
+//     await Provider.of<Notifi>(context, listen: false).init();
+// }
 
 Future<Map> registerFCM(
     BuildContext context, String token, String deviceid, String fcm) async {
