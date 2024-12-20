@@ -13,6 +13,9 @@ const _defaultClientSecret = String.fromEnvironment(
     'AUTH_OPENID_CLIENT_SECRET',
     defaultValue: "setme");
 
+const _defaultMobilePath = String.fromEnvironment(
+    'MOBILE_PATH');
+
 const _defaultRedirectUrl = String.fromEnvironment(
     'AUTH_OPENID_REDIRECT_URL');
 
@@ -44,6 +47,7 @@ String get defaultAuthBaseUrl => _defaultAuthBaseUrl;
 String get defaultDiscoveryUrl => _defaultDiscoveryUrl;
 String get defaultClientId => _defaultClientId;
 String get defaultClientSecret => _defaultClientSecret;
+String get defaultMobilePath => _defaultMobilePath;
 String get defaultRedirectUrl => _defaultRedirectUrl;
 String get defaultRealmBaseUrl => _defaultRealmBaseUrl;
 String get defaultAuthEndpointUrl => _defaultAuthEndpointUrl;

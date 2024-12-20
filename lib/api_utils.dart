@@ -56,7 +56,7 @@ Future<Map> apiPostData(BuildContext context, String token, String apiPath,
   }
 
   log.d(response.statusCode);
-  if (response.statusCode == 202) {
+  if (response.statusCode == 202 || response.statusCode == 200 || response.statusCode == 200){
     log.d("Register login Post created successfully!");
     final resultMap = jsonDecode(response.body);
     return resultMap;
