@@ -1,44 +1,37 @@
-final _defaultRealm =
-    const String.fromEnvironment('AUTH_REALM', defaultValue: "crowtech");
+const _defaultRealm =
+     String.fromEnvironment('AUTH_REALM', defaultValue: "crowtech");
 
-final _defaultAuthBaseUrl = const String.fromEnvironment('AUTH_BASE_URL',
+const _defaultAuthBaseUrl = String.fromEnvironment('AUTH_BASE_URL',
     defaultValue: 'https://auth.crowtech.com.au');
 
-final _defaultDiscoveryUrl = String.fromEnvironment('AUTH_OPENID_URL',
-    defaultValue:
-        '${defaultAuthBaseUrl}/realms/$defaultRealm/.well-known/openid-configuration');
+const _defaultDiscoveryUrl = String.fromEnvironment('AUTH_OPENID_URL');
 
-final _defaultClientId = const String.fromEnvironment('AUTH_OPENID_CLIENT_ID',
+const _defaultClientId = String.fromEnvironment('AUTH_OPENID_CLIENT_ID',
     defaultValue: "panta");
 
-final _defaultClientSecret = const String.fromEnvironment(
+const _defaultClientSecret = String.fromEnvironment(
     'AUTH_OPENID_CLIENT_SECRET',
     defaultValue: "setme");
 
-final _defaultRedirectUrl = const String.fromEnvironment(
-    'AUTH_OPENID_REDIRECT_URL',
-    defaultValue: "https://app.pantagroup.org/callback.html");
+const _defaultRedirectUrl = String.fromEnvironment(
+    'AUTH_OPENID_REDIRECT_URL');
 
-final _defaultRealmBaseUrl = String.fromEnvironment('AUTH_REALM_BASE_URL',
-    defaultValue: '$defaultAuthBaseUrl/realms/$defaultRealm');
+const _defaultRealmBaseUrl = String.fromEnvironment('AUTH_REALM_BASE_URL');
 
-final _defaultAuthEndpointUrl = String.fromEnvironment(
-    'AUTHORIZATION_ENDPOINT_URL',
-    defaultValue: '$defaultRealmBaseUrl/protocol/openid-connect/auth');
 
-final _defaultAPIBaseUrl = const String.fromEnvironment('API_BASE_URL',
-    defaultValue: "https://api.pantagroup.org");
+const _defaultAuthEndpointUrl = String.fromEnvironment(
+    'AUTHORIZATION_ENDPOINT_URL');
 
-final _testUsername =
-    const String.fromEnvironment('TEST_USERNAME', defaultValue: "crowtech");
-final _testPassword =
-    const String.fromEnvironment('TEST_PASSWORD', defaultValue: "password");
+const _defaultAPIBaseUrl = String.fromEnvironment('API_BASE_URL');
 
-final _defaultEncryptionKey = const String.fromEnvironment('ENCRYPTION_KEY',
+const _testUsername = String.fromEnvironment('TEST_USERNAME', defaultValue: "crowtech");
+const _testPassword = String.fromEnvironment('TEST_PASSWORD', defaultValue: "password");
+
+const _defaultEncryptionKey = String.fromEnvironment('ENCRYPTION_KEY',
     defaultValue: "crowtech123456789");
-final _defaultAudience = const ["fieldservice"];
+const _defaultAudience = ["fieldservice"];
 
-final _defaultscopes = [
+const _defaultscopes = [
   "openid",
   "profile",
   "email",

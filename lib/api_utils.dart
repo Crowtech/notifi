@@ -120,13 +120,13 @@ Future<bool> saveFCM(String token, String deviceid, String fcm) async {
   if (response.statusCode == 202) {
     log.d("FCMPost created successfully!");
     return true;
-    final map = jsonDecode(response.body);
+    //final map = jsonDecode(response.body);
     // MyPage<Attribute> pageAttribute =
     //     new MyPage<Attribute>(itemFromJson: Attribute.fromJson).fromJson(map);
     // log.d(pageAttribute);
   } else {
-    log.d("FCM Post created unsuccessfully!");
-    throw "FCM Post created unsuccessfully!";
+    log.d("FCM Post created unsuccessfully! ${response.statusCode}");
+   return false;
   }
 }
 
