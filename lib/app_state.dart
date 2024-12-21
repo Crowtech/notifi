@@ -5,13 +5,18 @@ import 'dart:io';
 import 'package:async/async.dart';
 import 'package:bdaya_shared_value/bdaya_shared_value.dart';
 import 'package:flutter/foundation.dart';
+import 'package:logger/logger.dart' as logger;
 import 'package:notifi/credentials.dart';
 import 'package:oidc/oidc.dart';
 import 'package:oidc_default_store/oidc_default_store.dart';
-import 'package:logger/logger.dart' as logger;
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
+  level: logger.Level.info,
+);
+
+var logNoStack = logger.Logger(
+  printer: logger.PrettyPrinter(methodCount: 0),
   level: logger.Level.info,
 );
 
@@ -86,7 +91,7 @@ Future<void> initApp() {
     currentManager.userChanges().listen((event) {
       cachedAuthedUser.$ = event;
       if (event?.userInfo != null) {
-        log.i(
+        logNoStack.i(
           'NOTIFI User changed: ${event?.claims.toJson()}, info: ${event?.userInfo}',
         );
       }

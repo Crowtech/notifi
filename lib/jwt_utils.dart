@@ -63,7 +63,7 @@ String getUsername(OidcUser user) {
   return user.claims.toJson()['preferred_username'];
 }
 
-Future<bool> loginUser(BuildContext context,String token) async {
+Future<bool> loginUser(BuildContext context, String token) async {
   // OgAuthProvider authProvider =
   //     Provider.of<OgAuthProvider>(context, listen: false);
 
@@ -88,7 +88,7 @@ Future<bool> loginUser(BuildContext context,String token) async {
     final userMap = jsonDecode(response.body);
     log.d("logged in user: ${userMap}");
     return true;
-    
+
     // MyPage<Attribute> pageAttribute =
     //     new MyPage<Attribute>(itemFromJson: Attribute.fromJson).fromJson(map);
     // log.d(pageAttribute);
@@ -98,53 +98,37 @@ Future<bool> loginUser(BuildContext context,String token) async {
   }
 }
 
-void initNotifi(BuildContext context,String token, String topic) async {
+void initNotifi(BuildContext context, String token, String topic) async {
+  // var packageInfo = await fetchPackageInfo();
+  // var deviceId = await fetchDeviceId();
 
-  var packageInfo = await fetchPackageInfo();
-  var deviceId = await fetchDeviceId();
+  log.i("NOTIFI INIT ");
 
-    log.d("NOTIFI INIT ${packageInfo!.version} ${deviceId} ");
-
-  List<String> topics = [];
-  topics.add(topic);
-  // Notifi notifi = Notifi(
-  //     // Initialize notification system
-  //     options: DefaultFirebaseOptions.currentPlatform,
-  //     vapidKey:
-  //         "BJx1wQv5p6KfUVYDvlhivY_kvg3CLawanH5fidaQN6lk1yNBTq4-QLmbq0Y2T1jlWUgzr6fBqjXp0cjr22QZGTQ",
-  //     secondsToast: 4,
-  //     topics: topics,
-  //     packageInfoFuture: fetchPackageInfo(),
-  //    deviceId: deviceId);
-  await Provider.of<Notifi>(context,listen:false).init();
-  //await notifi.init(); // Initialize notifications
   
-  //await notifi.nest.init();
-
+  var notifi = Provider.of<Notifi>(context, listen: false);
+  await Provider.of<Notifi>(context, listen: false).init();
 
   void notifiListener() {
     if (!context.mounted) return;
-    log.d("Main:NotifiListener triggered , fcm is ${Provider.of<Notifi>(context,listen:false).fcm}");
-    saveFCM(token, deviceId, Provider.of<Notifi>(context,listen:false).fcm);
+    log.d(
+        "Main:NotifiListener triggered , fcm is ${notifi.fcm}");
+    saveFCM(token, notifi.deviceId!, notifi.fcm);
   }
 
-  Provider.of<Notifi>(context,listen:false).addListener(notifiListener);
+  Provider.of<Notifi>(context, listen: false).addListener(notifiListener);
 }
 
+Future<PackageInfo> fetchPackageInfo() async {
+  var info = await PackageInfo.fromPlatform();
+  log.d("NOTIFI PACKAGE INFO is $info");
 
+  return info;
+}
 
- Future<PackageInfo> fetchPackageInfo() async {
-    var info = await PackageInfo.fromPlatform();
-    log.d("NOTIFI PACKAGE INFO is $info");
+Future<String> fetchDeviceId() async {
+  String deviceId = "Loading...";
+  final _appSetIdPlugin = AppSetId();
+  deviceId = await _appSetIdPlugin.getIdentifier() ?? "Unknown";
 
-    return info;
-
-  }
-
-  Future<String> fetchDeviceId() async {
-    String deviceId = "Loading...";
-      final _appSetIdPlugin = AppSetId();
-      deviceId = await _appSetIdPlugin.getIdentifier() ?? "Unknown";
-    
-    return deviceId;
-  }
+  return deviceId;
+}
