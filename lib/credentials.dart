@@ -6,8 +6,7 @@ const _defaultAuthBaseUrl = String.fromEnvironment('AUTH_BASE_URL',
 
 const _defaultDiscoveryUrl = String.fromEnvironment('AUTH_OPENID_URL');
 
-const _defaultClientId = String.fromEnvironment('AUTH_OPENID_CLIENT_ID',
-    defaultValue: "panta");
+const _defaultClientId = String.fromEnvironment('AUTH_OPENID_CLIENT_ID');
 
 const _defaultClientSecret = String.fromEnvironment(
     'AUTH_OPENID_CLIENT_SECRET',
