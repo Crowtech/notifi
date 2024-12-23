@@ -94,6 +94,7 @@ Future<void> initApp() {
         logNoStack.i(
           'NOTIFI User changed: ${event?.claims.toJson()}, info: ${event?.userInfo}',
         );
+        
       }
     });
 
@@ -101,4 +102,4 @@ Future<void> initApp() {
   });
 }
 
-final cachedAuthedUser = SharedValue<OidcUser?>(value: null, autosave: true);
+final cachedAuthedUser = SharedValue<OidcUser?>(value: null, autosave: false);
