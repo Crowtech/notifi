@@ -101,4 +101,4 @@ Future<void> initApp() {
   });
 }
 
-final cachedAuthedUser = SharedValue<OidcUser?>(value: null);
+final cachedAuthedUser = SharedValue<OidcUser?>(value: null, autosave: true);
