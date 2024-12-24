@@ -9,6 +9,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:notifi/geo_page.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:logger/logger.dart' as logger;
 
@@ -160,7 +161,7 @@ class Notifi extends ChangeNotifier {
   }
 
   Future<ChangeNotifier> init() async {
-    log.i("Notifi initing!");
+    logNoStack.i("Notifi initing!");
     await GetStorage.init();
     await Firebase.initializeApp(options: options);
 
@@ -177,14 +178,14 @@ class Notifi extends ChangeNotifier {
     );
 
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      log.i('User granted permission');
+      logNoStack.i('User granted permission');
     } else if (settings.authorizationStatus ==
         AuthorizationStatus.provisional) {
-      log.i('User granted provisional permission');
+      logNoStack.i('User granted provisional permission');
     } else {
-      log.i('User declined or has not accepted permission');
+      logNoStack.i('User declined or has not accepted permission');
     }
-    log.i('User granted permission: ${settings.authorizationStatus}');
+    logNoStack.i('User granted permission: ${settings.authorizationStatus}');
 
     FirebaseMessaging.instance.onTokenRefresh.listen((__fcmToken) async {
       // TODO: If necessary send token to application server.
@@ -202,7 +203,7 @@ class Notifi extends ChangeNotifier {
     if (kIsWeb) {
       log.d("Got to here: WEB detected");
     } else {
-      log.i("Got to here: WEB not detected");
+      logNoStack.i("Got to here: WEB not detected");
     }
     if (kIsWeb) {
       log.i("vapidKey is $vapidKey");
@@ -215,7 +216,7 @@ class Notifi extends ChangeNotifier {
     }
 
     if (isIOS) {
-      log.i("Fetching Mobile Apple fcm token ");
+      logNoStack.i("Fetching Mobile Apple fcm token ");
       FirebaseMessaging.instance.getAPNSToken().then((apnsToken){
       if (apnsToken != null) {
         // APNS token is available, make FCM plugin API requests...
@@ -223,7 +224,7 @@ class Notifi extends ChangeNotifier {
           _fcmToken = token;
           fcm = token!;
           notifyListeners();
-          log.i("Mobile Apple fcm token is $_fcmToken");
+          logNoStack.i("Mobile Apple fcm token is $_fcmToken");
           subscribeToTopics();
         });
       }
@@ -235,19 +236,19 @@ class Notifi extends ChangeNotifier {
         _fcmToken = token;
         fcm = token!;
         notifyListeners();
-        log.d("Mobile Android fcm token is $_fcmToken");
+        logNoStack.d("Mobile Android fcm token is $_fcmToken");
         subscribeToTopics();
       });
     }
 
 
-    log.d("Got to here before setup Flutter Notifications");
+    logNoStack.d("Got to here before setup Flutter Notifications");
     await setupFlutterNotifications();
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       final notification = message.notification;
       if (notification == null) return;
 
-      log.d("Foreground msg:${notification.title!}::${notification.body!}");
+      logNoStack.d("Foreground msg:${notification.title!}::${notification.body!}");
       flutterLocalNotificationsPlugin.show(
         notification.hashCode,
         notification.title,
@@ -278,19 +279,19 @@ class Notifi extends ChangeNotifier {
   void subscribeToTopics()
   {
      if (!kIsWeb) {
-      log.i("Subscribing to topics");
+      logNoStack.i("Subscribing to topics");
 
       for (final topic in _topics) {
         try {
           FirebaseMessaging.instance.subscribeToTopic(topic).then((_) {
-            log.i("Subscribed to topic: $topic");
+            logNoStack.i("Subscribed to topic: $topic");
           });
         } on Exception catch (_) {
           log.e("Firebase error");
         }
       }
     } else {
-      log.i("Not subscribing to topics");
+      logNoStack.i("Not subscribing to topics");
     }
   }
 }
