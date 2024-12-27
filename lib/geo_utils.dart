@@ -6,9 +6,11 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/credentials.dart';
 import 'package:notifi/geo_page.dart';
+import 'package:notifi/models/gps.dart';
 //import 'package:logger/printart';
 import 'package:notifi/notifi.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -66,3 +68,88 @@ String isoDate = now.toIso8601String();
   bg.Location loc = bg.Location(location);
   return loc;
 }
+
+
+Future<String> sendGPS(int orgId, deviceId,token,bg.Location location) async {
+    // Create a Map
+    String resourcecode = "";
+    String jwtType = "UNKNOWN";
+
+      logNoStack.d("Resourcecode is NULL! ");
+      if (token != null) {
+        Map<String, dynamic> decodedToken = JwtDecoder.decode(token);
+        String resourcecode = decodedToken['sub'];
+        jwtType = decodedToken['typ'];
+        // convert to backend format
+        final RegExp pattern = RegExp(r'[^a-zA-Z0-9]');
+        resourcecode = resourcecode.replaceAll(pattern, "_");
+        resourcecode = "PER_${resourcecode.toUpperCase()}";
+
+
+        logNoStack.d(
+            "HomeView Constructor resourcecode is $resourcecode from JWT:$jwtType");
+      }
+
+
+    // if (JwtDecoder.isExpired(token!)) {
+    //   logNoStack.d("JWT has EXPIRED!");
+    //   widget.jwt = "sadfsadf";//Provider.of<OgAuthProvider>(context, listen: false)
+    //       // .userRefreshToken
+    //       // .toString();
+    //   jwtType = JwtDecoder.decode(widget.jwt!)['typ'];
+    // }
+
+    // logNoStack.d(
+    //     "Send GPS using $jwtType as ${widget.jwt!.substring(widget.jwt!.length - 10)}");
+
+    // var authProvider = await Provider.of<OgAuthProvider>(context, listen: false);
+    //     authProvider.checkTokenStatus(context
+    //       , widget.jwt!);
+
+    var gps = GPS(
+      jwt: token,
+      longitude: location.coords.longitude,
+      latitude: location.coords.latitude,
+      speed: location.coords.speed,
+      heading: location.coords.heading,
+      battery: location.battery.level,
+      charging: location.battery.isCharging,
+      timestampStr: location.timestamp,
+      moving: location.isMoving,
+      resourcecode: resourcecode,
+      devicecode: deviceId,
+      orgid: orgId,
+    );
+
+    String gpsJson;
+    gpsJson = jsonEncode(gps);
+    //gpsJson = json.encode(locMap);
+
+    //logNoStack.d('JsonObject: $json');
+    var url = Uri.parse(
+        "$defaultAPIBaseUrl/p/gps?resourcecode=$resourcecode");
+    logNoStack.d("SEND GPS to $url $gpsJson using jwt ${token}");
+    try {
+      final response = await http.post(
+        url,
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Authorization": "Bearer ${token}",
+          // "Accept-Language": "$myLocale",
+        },
+        body: gpsJson,
+        encoding: Encoding.getByName('utf-8'),
+      );
+
+      if (response.statusCode == 201) {
+        logNoStack.d('Response: ${response.body}');
+      } else {
+        logNoStack.d('Error: ${response.statusCode}');
+      }
+    } catch (error) {
+      logNoStack.d('Exception: $error');
+    }
+
+    return gpsJson;
+  }
