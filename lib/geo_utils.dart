@@ -78,7 +78,8 @@ Future<String> sendGPS(int orgId, deviceId,token,bg.Location location) async {
       logNoStack.d("Resourcecode is NULL! ");
       if (token != null) {
         Map<String, dynamic> decodedToken = JwtDecoder.decode(token);
-        String resourcecode = decodedToken['sub'];
+        resourcecode = decodedToken['sub'];
+        logNoStack.d("resource sub code is $resourcecode");
         jwtType = decodedToken['typ'];
         // convert to backend format
         final RegExp pattern = RegExp(r'[^a-zA-Z0-9]');
@@ -87,10 +88,13 @@ Future<String> sendGPS(int orgId, deviceId,token,bg.Location location) async {
 
 
         logNoStack.d(
-            "HomeView Constructor resourcecode is $resourcecode from JWT:$jwtType");
+            "sendGPS Constructor resourcecode is $resourcecode from JWT:$jwtType");
+      } else {
+        logNoStack.e("SendGPS TOKEN is null");
       }
 
 
+logNoStack.d("RESOURCECODE in sendGPS IS $resourcecode");
     // if (JwtDecoder.isExpired(token!)) {
     //   logNoStack.d("JWT has EXPIRED!");
     //   widget.jwt = "sadfsadf";//Provider.of<OgAuthProvider>(context, listen: false)
@@ -120,6 +124,8 @@ Future<String> sendGPS(int orgId, deviceId,token,bg.Location location) async {
       devicecode: deviceId,
       orgid: orgId,
     );
+
+  logNoStack.d("Sending GPS gps $gps");
 
     String gpsJson;
     gpsJson = jsonEncode(gps);

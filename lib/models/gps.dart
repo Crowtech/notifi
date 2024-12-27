@@ -57,7 +57,7 @@ class GPS {
       if (!resourcecode.startsWith("PER_")) {
         resourcecode = "PER_$resourcecode";
       }
-      logger.d("Direct Usercode in GPS is $resourcecode");
+     // logger.d("Direct Usercode in GPS is $resourcecode");
     } else if (jwt != null && jwt.isNotEmpty) {
       Map<String, dynamic> decodedToken = JwtDecoder.decode(jwt);
       resourcecode = decodedToken['sub'];

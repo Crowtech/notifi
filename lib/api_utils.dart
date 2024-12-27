@@ -111,7 +111,7 @@ Future<Map> registerFCM(
 DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
 if (kIsWeb) {
   WebBrowserInfo webBrowserInfo = await deviceInfo.webBrowserInfo;
-  logNoStack.i('Running on : ${webBrowserInfo.platform}');
+  logNoStack.i('Running on : ${webBrowserInfo}');
   deviceid = webBrowserInfo.browserName.name;
 } else {
   if (Platform.isAndroid) {
