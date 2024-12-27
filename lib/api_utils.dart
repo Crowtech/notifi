@@ -1,10 +1,14 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:app_set_id/app_set_id.dart';
+import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/credentials.dart';
+import 'package:notifi/geo_page.dart';
 //import 'package:logger/printart';
 import 'package:notifi/notifi.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -14,10 +18,11 @@ var log = logger.Logger(
   printer: logger.PrettyPrinter(),
   level: logger.Level.info,
 );
-//import '../routes.dart'; // Importing application routes
 
-// import '../credentials.dart' as credentials;
-// import '../firebase_options.dart'; // Importing credentials
+var logNoStack = logger.Logger(
+  printer: logger.PrettyPrinter(methodCount: 0),
+  level: logger.Level.info,
+);
 
 Future<Map> apiPost(BuildContext context, String token, String apiPath) async {
   return apiPostData(context, token, apiPath, null, null);
@@ -103,9 +108,25 @@ Future<void> registerLogout(
 
 Future<Map> registerFCM(
     BuildContext context, String token, String deviceid, String fcm) async {
+DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+if (kIsWeb) {
+  WebBrowserInfo webBrowserInfo = await deviceInfo.webBrowserInfo;
+  logNoStack.i('Running on : ${webBrowserInfo.platform}');
+  deviceid = webBrowserInfo.browserName.name;
+} else {
+  if (Platform.isAndroid) {
+    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+    logNoStack.i('Running on : ${androidInfo.product}');
+    deviceid = 'AND${androidInfo.brand}${deviceid}';
+  } else if (Platform.isIOS) {
+    IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+    logNoStack.i('Running on : ${iosInfo.utsname.machine}');
+    deviceid = 'IOS${iosInfo.model}${deviceid}';
+  }
+}
   apiPost(context, token, "/p/persons/devicefcm/${deviceid}/${fcm}")
       .then((result) {
-    log.d("result ${result}");
+    logNoStack.d("result ${result}");
     return result;
   }).catchError((error) {
     log.d("Register login error");
@@ -113,32 +134,32 @@ Future<Map> registerFCM(
   throw "Register Login error";
 }
 
-Future<bool> saveFCM(String token, String deviceid, String fcm) async {
-  // OgAuthProvider authProvider =
-  //     Provider.of<OgAuthProvider>(context, listen: false);
-  log.d("Save FCM");
-  var url = Uri.parse(
-      "$defaultAPIBaseUrl/p/persons/devicefcm/${deviceid}/${fcm}");
-  final response = await http.post(
-    url,
-    headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json",
-      "Authorization": "Bearer $token"
-    },
-  );
-  log.d(response.statusCode);
-  if (response.statusCode == 202) {
-    log.d("FCMPost created successfully!");
-    return true;
-    //final map = jsonDecode(response.body);
-    // MyPage<Attribute> pageAttribute =
-    //     new MyPage<Attribute>(itemFromJson: Attribute.fromJson).fromJson(map);
-    // log.d(pageAttribute);
-  } else {
-    log.d("FCM Post created unsuccessfully! ${response.statusCode}");
-   return false;
-  }
-}
+// Future<bool> saveFCM(String token, String deviceid, String fcm) async {
+//   // OgAuthProvider authProvider =
+//   //     Provider.of<OgAuthProvider>(context, listen: false);
+//   log.d("Save FCM");
+//   var url = Uri.parse(
+//       "$defaultAPIBaseUrl/p/persons/devicefcm/${deviceid}/${fcm}");
+//   final response = await http.post(
+//     url,
+//     headers: {
+//       "Content-Type": "application/json",
+//       "Accept": "application/json",
+//       "Authorization": "Bearer $token"
+//     },
+//   );
+//   log.d(response.statusCode);
+//   if (response.statusCode == 202) {
+//     log.d("FCMPost created successfully!");
+//     return true;
+//     //final map = jsonDecode(response.body);
+//     // MyPage<Attribute> pageAttribute =
+//     //     new MyPage<Attribute>(itemFromJson: Attribute.fromJson).fromJson(map);
+//     // log.d(pageAttribute);
+//   } else {
+//     log.d("FCM Post created unsuccessfully! ${response.statusCode}");
+//    return false;
+//   }
+// }
 
 

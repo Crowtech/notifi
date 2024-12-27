@@ -22,6 +22,11 @@ var log = logger.Logger(
   level: logger.Level.info,
 );
 
+var logNoStack = logger.Logger(
+  printer: logger.PrettyPrinter(methodCount: 0),
+  level: logger.Level.info,
+);
+
 String getResourceCodeFromSub(String? sub) {
   if (sub == null) {
     return "PER_UNKNOWN";
@@ -112,7 +117,7 @@ void initNotifi(BuildContext context, String token, String topic) async {
     if (!context.mounted) return;
     log.d(
         "Main:NotifiListener triggered , fcm is ${notifi.fcm}");
-    saveFCM(token, notifi.deviceId!, notifi.fcm);
+    registerFCM(context, token,notifi.deviceId!, notifi.fcm);
   }
 
   Provider.of<Notifi>(context, listen: false).addListener(notifiListener);
