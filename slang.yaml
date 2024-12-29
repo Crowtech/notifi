@@ -1,0 +1,11 @@
+
+base_locale: en
+fallback_strategy: base_locale
+input_directory: lib/i18n
+input_file_pattern: .i18n.json
+output_directory: lib/i18n
+
+gpt:
+  model: gpt-4o 
+  description: |
+    "Slang GPT" is a sample application demonstrating the usage of the slang and slang_gpt packages to localize Flutter apps.

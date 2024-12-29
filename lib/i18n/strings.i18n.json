@@ -1,0 +1,22 @@
+{
+  "app_title(ignoreGpt)": "Crowtech", 
+  "deviceid": "DeviceID",
+  "email": "Email",
+  "firstname": "Firstname",
+  "intro_title": "Welcome to Crowtech",
+  "intro_description": "Advanced Design",
+  "movement_status": "Is Moving?",
+  "highlight_title": "Generate Context-Aware Translations",
+  "highlight_description": "Generate context-aware aware translatinons with GPT",
+  "lastname": "Lastname",
+  "login": "Login",
+  "logout": "Logout",
+  "moving": "Moving",
+  "odometer": "Odometer",
+  "still": "Still",
+  "locales(map)": {
+    "en": "English",
+    "zh": "Chinese"
+  }
+ 
+}

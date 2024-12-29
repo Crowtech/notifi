@@ -13,6 +13,7 @@ import 'package:notifi/app_state.dart' as app_state;
 import 'package:provider/provider.dart';
 
 import 'package:logger/logger.dart' as logger;
+import 'package:notifi/i18n/strings.g.dart' as nt;
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -274,7 +275,7 @@ class _AuthPageState extends State<AuthPage> {
                     );
                   }
                 },
-                child: const Text('Start Auth code flow'),
+                child: Text(nt.t.login),
               ),
               // const Divider(),
               // ElevatedButton(

@@ -1,0 +1,54 @@
+### Meta ###
+From: <en> lib/i18n/strings.i18n.json
+To: <> lib/i18n/strings_.i18n.json
+
+### Tokens ###
+Input: 205
+Output: 35
+Total: 240
+
+### Conversation ###
+
+>> System:
+The user wants to internationalize the app. The user will provide you with a JSON file containing the English strings.
+You will translate it to .
+Parameters are interpolated with ${parameter} or $parameter.
+Linked translations are denoted with the "@:path0.path1" syntax.
+
+Here is the app description. Respect this context when translating:
+"Slang GPT" is a sample application demonstrating the usage of the slang and slang_gpt packages to localize Flutter apps.
+
+
+>> User:
+{"deviceid":"DeviceID","email":"Email","firstname":"Firstname","intro_title":"Welcome to Crowtech","intro_description":"Advanced Design","movement_status":"Is Moving?","highlight_title":"Generate Context-Aware Translations","highlight_description":"Generate context-aware aware translatinons with GPT","lastname":"Lastname","login":"Login","logout":"Logout","moving":"Moving","odometer":"Odometer","still":"Still","locales(map)":{"en":"English","zh":"Chinese"}}
+
+>> Assistant:
+I'm sorry, it seems like your request to translate this JSON file is incomplete as you haven't specified the language to translate into. Could you please specify the target language for translation?
+
+### JSON ###
+Input:
+{
+  "deviceid": "DeviceID",
+  "email": "Email",
+  "firstname": "Firstname",
+  "intro_title": "Welcome to Crowtech",
+  "intro_description": "Advanced Design",
+  "movement_status": "Is Moving?",
+  "highlight_title": "Generate Context-Aware Translations",
+  "highlight_description": "Generate context-aware aware translatinons with GPT",
+  "lastname": "Lastname",
+  "login": "Login",
+  "logout": "Logout",
+  "moving": "Moving",
+  "odometer": "Odometer",
+  "still": "Still",
+  "locales(map)": {
+    "en": "English",
+    "zh": "Chinese"
+  }
+}
+
+Output:
+{
+  "!error": "Error: RangeError (start): Invalid value: Not in inclusive range 0..198: -1"
+}
