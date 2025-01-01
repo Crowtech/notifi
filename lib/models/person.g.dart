@@ -26,11 +26,11 @@ Person _$PersonFromJson(Map<String, dynamic> json) => Person(
       nickname: json['nickname'] as String,
       gender: $enumDecode(_$GenderTypeEnumMap, json['gender']),
       i18n: json['i18n'] as String,
-      country: json['country'] as String,
-      longitude: (json['longitude'] as num).toDouble(),
-      latitude: (json['latitude'] as num).toDouble(),
-      birthyear: (json['birthyear'] as num).toInt(),
-      fcm: json['fcm'] as String,
+      country: json['country'] as String?,
+      longitude: (json['longitude'] as num?)?.toDouble(),
+      latitude: (json['latitude'] as num?)?.toDouble(),
+      birthyear: (json['birthyear'] as num?)?.toInt(),
+      fcm: json['fcm'] as String?,
     );
 
 Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{

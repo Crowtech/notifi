@@ -63,8 +63,8 @@ class _GeoPageState extends State<GeoPage>
     final user = app_state.cachedAuthedUser.of(context);
     if ((user != null) && (!_loggedin)) {
       log.i("home page didChangeDependencies: initNotifi");
-      initNotifi(context, user.token.accessToken.toString(), defaultRealm);
-      loginUser(context, user.token.accessToken!);
+     // initNotifi(context, user.token.accessToken.toString(), defaultRealm);
+     // loginUser(context, user.token.accessToken!);
       setState(() {
         _loggedin = true;
         token = user.token.accessToken!;

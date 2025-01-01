@@ -1,5 +1,7 @@
 // ignore_for_file: avoid_redundant_argument_values
 
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -15,10 +17,16 @@ import 'package:provider/provider.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/i18n/strings.g.dart' as nt;
 
-import 'notifi.dart';
+import 'api_utils.dart';
+
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
+  level: logger.Level.info,
+);
+
+var logNoStack = logger.Logger(
+  printer: logger.PrettyPrinter(methodCount: 0),
   level: logger.Level.info,
 );
 
@@ -120,7 +128,8 @@ class _AuthPageState extends State<AuthPage> {
 
       logNoStack
           .i("gotoLogin accessToken = ${result.userInfo['access_token']}");
-      initNotifi(result.userInfo['access_token'], "", defaultRealm);
+
+     // initNotifi(result.userInfo['access_token'], "", defaultRealm);
 
       if (kIsWeb &&
           webNavigationMode ==

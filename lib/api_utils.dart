@@ -10,6 +10,7 @@ import 'package:notifi/credentials.dart';
 import 'package:notifi/models/gps.dart';
 import 'package:notifi/models/gpsfilter.dart';
 
+import 'jwt_utils.dart';
 import 'models/crowtech_basepage.dart';
 import 'models/person.dart';
 
@@ -22,6 +23,8 @@ var logNoStack = logger.Logger(
   printer: logger.PrettyPrinter(methodCount: 0),
   level: logger.Level.info,
 );
+
+final String defaultLocale = Platform.localeName;
 
 Future<dynamic> apiPost(Locale locale, String token, String apiPath) async {
   return apiPostData(locale, token, apiPath, null, null);
@@ -106,21 +109,23 @@ Future<http.Response> apiPostDataStr(
   }
 }
 
-Future<Person> registerLogin(
-    Locale locale, String token, String deviceId) async {
-  log.i("registerLogin: deviceid=$deviceId");
-  apiPostData(locale, token, "$defaultApiPrefixPath/persons/register",
-          "deviceid", deviceId)
-      .then((result) {
-    Person user = Person.fromJson(result);
+// Future<Person> registerLogin(
+//   String token,
+// ) async {
+//   String deviceId = await fetchDeviceId();
+//   log.i("registerLogin: deviceid=$deviceId");
+//   apiPostData(defaultLocale, token, "$defaultApiPrefixPath/persons/register",
+//           "deviceid", deviceId)
+//       .then((result) {
 
-    log.d("Registered user $user");
-    return user;
-  }).catchError((error) {
-    log.d("Register login error");
-  });
-  throw "Register Login error";
-}
+
+//     log.d("Registered user $user");
+//     return user;
+//   }).catchError((error) {
+//     log.d("Register login error");
+//   });
+//   throw "Register Login error";
+// }
 
 Future<void> registerLogout(Locale locale, String token) async {
   apiPost(locale, token, "$defaultApiPrefixPath/persons/logout").then((result) {

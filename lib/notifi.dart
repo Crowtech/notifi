@@ -2,6 +2,7 @@ library notifi;
 
 import 'dart:convert';
 import 'dart:io' show Platform;
+import 'dart:ui';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -10,6 +11,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:notifi/geo_page.dart';
+import 'package:notifi/models/person.dart' as Person;
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:logger/logger.dart' as logger;
 
@@ -88,7 +90,7 @@ class Notifi extends ChangeNotifier {
   late PackageInfo _packageInfo;
   late String _deviceId;
 
-  late Person user;
+  late Person.Person user;
 
   FirebaseOptions? options;
 
@@ -303,4 +305,6 @@ class Notifi extends ChangeNotifier {
       logNoStack.i("Not subscribing to topics");
     }
   }
+
+  
 }

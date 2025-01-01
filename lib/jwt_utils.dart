@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 import 'dart:io';
 
@@ -9,12 +11,14 @@ import 'package:http/http.dart' as http;
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/notifi.dart';
+import 'package:notifi/models/person.dart' as person;
 import 'package:oidc/oidc.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 
 import 'api_utils.dart';
 import 'credentials.dart';
+import 'models/person.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -71,7 +75,8 @@ Future<bool> loginUser(BuildContext context, String token) async {
   Locale myLocale = Localizations.localeOf(context);
   logNoStack.d("token used is $token");
   logNoStack.d("locale used is $myLocale");
-  var url = Uri.parse("$defaultAPIBaseUrl$defaultApiPrefixPath/persons/register");
+  var url =
+      Uri.parse("$defaultAPIBaseUrl$defaultApiPrefixPath/persons/register");
   var fcm;
   final response = await http.post(url,
       headers: {
@@ -85,9 +90,15 @@ Future<bool> loginUser(BuildContext context, String token) async {
       }));
   log.d(response.statusCode);
   if (response.statusCode == 202) {
-    logNoStack.d("Register login Post created successfully!");
+    logNoStack.i("Register login Post created successfully!");
     final userMap = jsonDecode(response.body);
-    logNoStack.d("logged in user: $userMap");
+    logNoStack.i("logged in user map: $userMap");
+    String userJson = jsonEncode(userMap);
+    logNoStack.i("logged in user json: $userJson");
+   person.Person user = person.Person.fromJson(userMap);
+   logNoStack.d("logged in user: $user");
+   Provider.of<Notifi>(context,listen:false).user = user;
+    logNoStack.d("logged in notifi user: ${Provider.of<Notifi>(context,listen:false).user}");
     return true;
 
     // MyPage<Attribute> pageAttribute =
