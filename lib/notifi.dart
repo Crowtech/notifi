@@ -88,10 +88,13 @@ class Notifi extends ChangeNotifier {
   late PackageInfo _packageInfo;
   late String _deviceId;
 
+  late Person user;
+
   FirebaseOptions? options;
 
   String? get vapidKey => _vapidKey;
   String? get deviceId => _deviceId;
+
 
   PackageInfo? get packageInfo => _packageInfo;
 
@@ -106,6 +109,7 @@ class Notifi extends ChangeNotifier {
  set preventAutoLogin(bool value) {
    _preventAutoLogin = value;
  }
+
 
   set fcm(String newFcm) {
     _fcm = newFcm;

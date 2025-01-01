@@ -10,8 +10,8 @@ import 'package:notifi/credentials.dart';
 import 'package:notifi/models/gps.dart';
 import 'package:notifi/models/gpsfilter.dart';
 
-
 import 'models/crowtech_basepage.dart';
+import 'models/person.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -29,7 +29,6 @@ Future<dynamic> apiPost(Locale locale, String token, String apiPath) async {
 
 Future<dynamic> apiPostData(Locale locale, String token, String apiPath,
     String? dataName, Object? data) async {
-
   var url = Uri.parse("$defaultAPIBaseUrl$apiPath");
   String jsonData;
   final http.Response response;
@@ -60,20 +59,20 @@ Future<dynamic> apiPostData(Locale locale, String token, String apiPath,
   if (response.statusCode == 202 ||
       response.statusCode == 201 ||
       response.statusCode == 200) {
-    logNoStack.i(
-        "$apiPath created successfully! with status ${response.statusCode}");
+    logNoStack
+        .i("$apiPath created successfully! with status ${response.statusCode}");
     final resultMap = jsonDecode(response.body);
     return resultMap;
   } else {
-    logNoStack.d("$apiPath created unsuccessfully! with status ${response.statusCode}");
-    return Future.error("$apiPath created unsuccessfully! with status ${response.statusCode}");
+    logNoStack.d(
+        "$apiPath created unsuccessfully! with status ${response.statusCode}");
+    return Future.error(
+        "$apiPath created unsuccessfully! with status ${response.statusCode}");
   }
-  
 }
 
 Future<http.Response> apiPostDataStr(
     Locale locale, String token, String apiPath, String? jsonDataStr) async {
-
   var url = Uri.parse("$defaultAPIBaseUrl$apiPath");
 
   final http.Response response;
@@ -107,12 +106,16 @@ Future<http.Response> apiPostDataStr(
   }
 }
 
-Future<Map> registerLogin(Locale locale, String token, String deviceId) async {
+Future<Person> registerLogin(
+    Locale locale, String token, String deviceId) async {
   log.i("registerLogin: deviceid=$deviceId");
-  apiPostData(locale, token, "$defaultApiPrefixPath/persons/register", "deviceid", deviceId)
+  apiPostData(locale, token, "$defaultApiPrefixPath/persons/register",
+          "deviceid", deviceId)
       .then((result) {
-    log.d("result $result");
-    return result;
+    Person user = Person.fromJson(result);
+
+    log.d("Registered user $user");
+    return user;
   }).catchError((error) {
     log.d("Register login error");
   });
@@ -129,10 +132,10 @@ Future<void> registerLogout(Locale locale, String token) async {
 
 Future<Map> registerFCM(
     Locale locale, String token, String deviceid, String fcm) async {
-  
   logNoStack.i(
       "About to send FCM and deviceid to api $defaultApiPrefixPath/persons/devicefcm/$deviceid/$fcm");
-  apiPost(locale, token, "$defaultApiPrefixPath/persons/devicefcm/$deviceid/$fcm")
+  apiPost(locale, token,
+          "$defaultApiPrefixPath/persons/devicefcm/$deviceid/$fcm")
       .then((response) {
     logNoStack.i("back from send FCM");
     logNoStack.i("result ${response.toString()}");
@@ -166,7 +169,7 @@ Future<CrowtechBasePage<GPS>> fetchGPS(
   logNoStack.i("Sending GPSFilter gps $gpsfilter with json as $jsonDataStr");
 
   apiPostDataStr(locale, token, "$defaultApiPrefixPath/gps/fetch", jsonDataStr)
-  .then((response) {
+      .then((response) {
     logNoStack.d("result ${response.body.toString()}");
     final map = jsonDecode(response.body);
 
@@ -199,8 +202,7 @@ Future<CrowtechBasePage<GPS>> fetchGPS(
       //logNoStack.i(page);
       return page;
     }
-  }
-  );
+  });
   throw "error in page fetch";
 //   ).catchError((error) {
 //     log.d("Fetch GPS error");
@@ -221,5 +223,3 @@ Future<CrowtechBasePage<GPS>> fetchGPS(
 //     //   return retOne;
 //  throw Future.error("Nothing");
 }
-
-
