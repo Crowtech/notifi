@@ -118,7 +118,6 @@ Future<http.Response> apiPostDataStr(
 //           "deviceid", deviceId)
 //       .then((result) {
 
-
 //     log.d("Registered user $user");
 //     return user;
 //   }).catchError((error) {
@@ -142,7 +141,7 @@ Future<Map> registerFCM(
   apiPost(locale, token,
           "$defaultApiPrefixPath/persons/devicefcm/$deviceid/$fcm")
       .then((response) {
-    logNoStack.i("back from send FCM");
+    logNoStack.i("back from send FCM sending $deviceid");
     logNoStack.i("result ${response.toString()}");
     return response;
   }).catchError((error) {
@@ -173,8 +172,8 @@ Future<CrowtechBasePage<GPS>> fetchGPS(
   String jsonDataStr = jsonEncode(gpsfilter);
   logNoStack.i("Sending GPSFilter gps $gpsfilter with json as $jsonDataStr");
 
-  apiPostDataStr(locale, token, "$defaultApiPrefixPath/gps/fetch", jsonDataStr)
-      .then((response) {
+  var response = await apiPostDataStr(locale, token, "$defaultApiPrefixPath/gps/fetch", jsonDataStr);
+     // .then((response) {
     logNoStack.d("result ${response.body.toString()}");
     final map = jsonDecode(response.body);
 
@@ -182,33 +181,37 @@ Future<CrowtechBasePage<GPS>> fetchGPS(
       logNoStack.i("Empty List");
       CrowtechBasePage<GPS> page =
           CrowtechBasePage<GPS>(itemFromJson: GPS.fromJson).fromJson(map);
-      page.processingTime = map['processingTime'];
-      page.startIndex = map['startIndex'];
-      page.totalItems = map['totalItems'];
+     // page.processingTime = map['processingTime'];
+     // page.startIndex = map['startIndex'];
+     // page.totalItems = map['totalItems'];
       return page;
     } else {
       logNoStack.d("map = $map");
 
       CrowtechBasePage<GPS> page =
           CrowtechBasePage<GPS>(itemFromJson: GPS.fromJson).fromJson(map);
-      page.processingTime = map['processingTime'];
-      page.startIndex = map['startIndex'];
-      page.totalItems = map['totalItems'];
+      //page.processingTime = map['processingTime'];
+      //page.startIndex = map['startIndex'];
+     // page.totalItems = map['totalItems'];
 
-      String pageJson = page.toString();
-      // logNoStack.i("page is $pageJson");
-      logNoStack.i("Number of items returned = ${page.items!.length}");
-      logNoStack.i("Processing Time = ${page.processingTime}");
-      logNoStack.i("Total Number of items available = ${page.totalItems}");
-      for (int i = 0; i < page.items!.length; i++) {
-        logNoStack.i("item $i = ${page.items!.elementAt(i)}");
-      }
+      //String pageJson = page.toString();
+      //logNoStack.i("page is ${page.toString()}");
+      // logNoStack.i("Number of items returned = ${page.items!.length}");
+      // logNoStack.i("Processing Time = ${page.processingTime}");
+      // logNoStack.i("Total Number of items available = ${page.totalItems}");
+      // for (int i = 0; i < page.items!.length; i++) {
+      //   logNoStack.i("item $i = ${page.items!.elementAt(i)}");
+      // }
 
       //logNoStack.i(page);
       return page;
     }
-  });
-  throw "error in page fetch";
+  // }).catchError((error) {
+  //   log.e("Fetch GPS Page error");
+  //  // return CrowtechBasePage<GPS>();
+  //   throw "api Post created unsuccessfully!";
+  // });
+  //return  CrowtechBasePage<GPS>();
 //   ).catchError((error) {
 //     log.d("Fetch GPS error");
 //        // ignore: invalid_return_type_for_catch_error

@@ -7,9 +7,9 @@ part 'crowtech_basepage.g.dart';
 
 @JsonSerializable(explicitToJson: true, genericArgumentFactories: true)
 class CrowtechBasePage<T extends CrowtechBase> {
-  DateTime? created;
-  int? startIndex;
-
+  DateTime? created= DateTime.now().toUtc();
+  int? startIndex = 0;
+ 
   List<T>? items;
 
   int? totalItems = 0;
@@ -43,6 +43,12 @@ class CrowtechBasePage<T extends CrowtechBase> {
 
   @override
   String toString() {
-    return "${T.toString()} ${super.toString()} $startIndex ${items != null ? items!.length : 0} $totalItems $processingTime ";
+    String ret = "${T.toString()} ${super.toString()} i:$startIndex s:${items != null ? items!.length : 0} total:$totalItems ns:$processingTime ";
+    if ((items !=null)&& (items!.isNotEmpty)){
+        for (int i=0;i<items!.length;i++) {
+          ret += "${items![i].toString()}\n";
+        }
+    }
+    return ret;
   }
 }

@@ -17,11 +17,11 @@ class GPSFilter {
   List<String> resourceCodeList = [];
   List<int> resourceIdList = [];
   List<String> deviceCodeList = [];
-  String query = "";
-  int limit = 10;
-  int offset = 0;
-  String sortby = "";
-  bool caseinsensitive = true;
+  String query;
+  int limit;
+  int offset;
+  String sortby;
+  bool caseinsensitive;
 
   GPSFilter(
       {
@@ -29,11 +29,11 @@ class GPSFilter {
       required this.resourceCodeList,
       required this.resourceIdList,
       required this.deviceCodeList,
-      String query = "",
-      int offset = 0,
-      int limit = 10,
-      String sortby = "",
-      bool caseinsensitive = true});
+      this.query = "",
+      this.offset=0,
+      this.limit=10,
+      this.sortby = "",
+      this.caseinsensitive = true});
 
   factory GPSFilter.fromJson(Map<String, dynamic> json) =>
       _$GPSFilterFromJson(json);
