@@ -32,7 +32,7 @@ var logNoStack = logger.Logger(
 );
 
 bg.Location createBgLocation({required double lat, required double long,double heading=0.0 , double speed=0.0, String ltype = 'still'}) {
-  var uuid = Uuid();
+  var uuid = const Uuid();
   collection.HashMap<String, dynamic> coords = collection.HashMap();
   coords.addAll({'latitude': lat});
   coords.addAll({'longitude': long});
@@ -133,15 +133,15 @@ logNoStack.d("RESOURCECODE in sendGPS IS $resourcecode");
 
     //logNoStack.d('JsonObject: $json');
     var url = Uri.parse(
-        "$defaultAPIBaseUrl/p/gps?resourcecode=$resourcecode");
-    logNoStack.d("SEND GPS to $url $gpsJson using jwt ${token}");
+        "$defaultAPIBaseUrl$defaultApiPrefixPath/gps?resourcecode=$resourcecode");
+    logNoStack.d("SEND GPS to $url $gpsJson using jwt $token");
     try {
       final response = await http.post(
         url,
         headers: {
           "Content-Type": "application/json",
           "Accept": "application/json",
-          "Authorization": "Bearer ${token}",
+          "Authorization": "Bearer $token",
           // "Accept-Language": "$myLocale",
         },
         body: gpsJson,

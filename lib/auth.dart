@@ -15,6 +15,8 @@ import 'package:provider/provider.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/i18n/strings.g.dart' as nt;
 
+import 'notifi.dart';
+
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
   level: logger.Level.info,
@@ -34,47 +36,11 @@ class _AuthPageState extends State<AuthPage> {
   final passwordController = TextEditingController();
 
   OidcPlatformSpecificOptions_Web_NavigationMode webNavigationMode =
-      OidcPlatformSpecificOptions_Web_NavigationMode.newPage;
+      OidcPlatformSpecificOptions_Web_NavigationMode.samePage; // was newPage
 
   bool allowInsecureConnections = false;
   bool preferEphemeralSession = false;
 
-  // final _appSetIdPlugin = AppSetId();
-  // String? _deviceId = 'Loading...';
-
-  // PackageInfo _packageInfo = PackageInfo(
-  //   appName: 'Unknown',
-  //   packageName: 'Unknown',
-  //   version: 'Unknown',
-  //   buildNumber: 'Unknown',
-  //   buildSignature: 'Unknown',
-  //   installerStore: 'Unknown',
-  // );
-
-  //  String get deviceId => _deviceId ?? "Unknown";
-  // PackageInfo get packageInfo => _packageInfo ;
-
-  // Future<void> _initPackageInfo() async {
-  //   final info = await PackageInfo.fromPlatform();
-  //   setState(() {
-  //     _packageInfo = info;
-  //   });
-  // }
-
-  // Future<void> _initDeviceId() async {
-  //   String deviceId;
-  //   try {
-  //     deviceId = await _appSetIdPlugin.getIdentifier() ?? "Unknown";
-  //   } on PlatformException {
-  //     deviceId = 'Failed to get deviceId.';
-  //   }
-
-  //   if (!mounted) {
-  //     setState(() {
-  //       _deviceId = deviceId;
-  //     });
-  //   }
-  // }
 
   OidcPlatformSpecificOptions _getOptions() {
     return OidcPlatformSpecificOptions(
@@ -100,15 +66,9 @@ class _AuthPageState extends State<AuthPage> {
   @override
   void initState() {
     super.initState();
-    // _initDeviceId();
-    // _initPackageInfo();
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       gotoLogin();
-      //  if (Provider.of<Notifi>(context).nest.packageInfo.version == "Unknown")
-      //   {
-      //     Provider.of<Notifi>(context,listen:false).nest.init();
-      //   }
-      // initNotifi(app_state.currentManager.currentUser!.token.accessToken!, "device","panta");
     });
   }
 
@@ -119,18 +79,48 @@ class _AuthPageState extends State<AuthPage> {
     final parsedOriginalUri =
         originalUri == null ? null : Uri.tryParse(originalUri);
     try {
-      final result = await app_state.currentManager.loginAuthorizationCodeFlow(
-        originalUri: parsedOriginalUri ?? Uri.parse('/'),
-        //store any arbitrary data, here we store the authorization
-        //start time.
-        extraStateData: DateTime.now().toIso8601String(),
-        options: _getOptions(),
-        //NOTE: you can pass more parameters here.
-      );
+      OidcUser? result;
+      if (skipLogin && (!Provider.of<Notifi>(context,listen:false).preventAutoLogin)) {
+        logNoStack.i("Skipping Login!");
+        // final messenger = ScaffoldMessenger.of(context);
+        try {
+          result = await app_state.currentManager.loginPassword(
+            username: testUsername,
+            password: testPassword,
+          );
+          logNoStack.i("Result is ${result.toString()}");
+          // messenger.showSnackBar(
+          //   SnackBar(
+          //     content: Text(
+          //       'loginPassword returned user id: ${result?.uid}',
+          //     ),
+          //   ),
+          // );
+        } catch (e) {
+          logNoStack.e(e.toString());
+          // messenger.showSnackBar(
+          //   const SnackBar(
+          //     content: Text(
+          //       'loginPassword failed!',
+          //     ),
+          //   ),
+          // );
+        }
+      } else {
+        result = await app_state.currentManager.loginAuthorizationCodeFlow(
+          originalUri: parsedOriginalUri ?? Uri.parse('/'),
+          //store any arbitrary data, here we store the authorization
+          //start time.
+          extraStateData: DateTime.now().toIso8601String(),
+          options: _getOptions(),
+          //NOTE: you can pass more parameters here.
+        );
+      }
       log.d("AUTH RESULT is ${result!.userInfo.toString()}");
-      
-        print("gotoLogin accessToken = ${result.userInfo['access_token']}");
-        initNotifi(result.userInfo['access_token'], "", defaultRealm);
+
+      logNoStack
+          .i("gotoLogin accessToken = ${result.userInfo['access_token']}");
+      initNotifi(result.userInfo['access_token'], "", defaultRealm);
 
       if (kIsWeb &&
           webNavigationMode ==
@@ -156,7 +146,7 @@ class _AuthPageState extends State<AuthPage> {
       return Scaffold(
         appBar: AppBar(
           title: Text(
-            "${widget.title} !!! ${Provider.of<Notifi>(context,listen:false).packageInfo!.version}",
+            "${widget.title} !!! ${Provider.of<Notifi>(context, listen: false).packageInfo!.version}",
             style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -313,5 +303,9 @@ class _AuthPageState extends State<AuthPage> {
         ),
       );
     });
+  }
+
+  void directLogin() async {
+    // skip login
   }
 }

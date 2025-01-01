@@ -1,9 +1,9 @@
 {
-  "app_title(ignoreGpt)": "Panta",
+  "app_title(ignoreGpt)": "Crowtech",
   "deviceid": "设备标识符",
   "email": "电子邮件",
   "firstname": "给定的名称",
-  "intro_title": "欢迎使用 Panta",
+  "intro_title": "欢迎使用 Crowtech",
   "intro_description": "出行即服务",
   "movement_status": "是移動的嗎",
   "highlight_title": "生成上下文感知的翻译",

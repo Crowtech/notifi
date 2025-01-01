@@ -29,6 +29,8 @@ late AndroidNotificationChannel _androidChannel;
 
 bool isFlutterLocalNotificationsInitialized = false;
 
+
+
 // /// Initialize the [FlutterLocalNotificationsPlugin] package.
 late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
@@ -81,6 +83,7 @@ class Notifi extends ChangeNotifier {
   int secondsToast = 2;
   final List<String> _topics = [];
   String _fcm = "Loading ...";
+  bool _preventAutoLogin = false;
 
   late PackageInfo _packageInfo;
   late String _deviceId;
@@ -95,9 +98,14 @@ class Notifi extends ChangeNotifier {
   /// List of items in the cart.
   List<String> get topics => _topics;
 
-  String get fcm => _fcm ;
- Notifi get notifi => this;
+  String get fcm => _fcm;
+  Notifi get notifi => this;
 
+  bool get preventAutoLogin => _preventAutoLogin;
+
+ set preventAutoLogin(bool value) {
+   _preventAutoLogin = value;
+ }
 
   set fcm(String newFcm) {
     _fcm = newFcm;
@@ -118,15 +126,14 @@ class Notifi extends ChangeNotifier {
     notifyListeners();
   }
 
-  Notifi({
-    this.options,
-    String? vapidKey,
-    required PackageInfo packageInfo,
-    required String deviceId,
-    this.secondsToast = 2,
-    List<String>? topics,
-  }) {
-    log.d("notifi constructor");
+  Notifi(
+      {this.options,
+      String? vapidKey,
+      required PackageInfo packageInfo,
+      required String deviceId,
+      this.secondsToast = 2,
+      List<String>? topics}) {
+    logNoStack.d("notifi constructor");
     _vapidKey = vapidKey;
     _packageInfo = packageInfo;
     _deviceId = deviceId;
@@ -135,23 +142,23 @@ class Notifi extends ChangeNotifier {
       topics = [];
     }
     if (topics != null && topics.isNotEmpty) {
-      this._topics.addAll(topics);
+      _topics.addAll(topics);
     }
     if (defaultTargetPlatform == TargetPlatform.android) {
-      this._topics.add('android');
+      _topics.add('android');
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
-      this._topics.add('ios');
+      _topics.add('ios');
     } else if (defaultTargetPlatform == TargetPlatform.linux) {
-      this._topics.add('linux');
+      _topics.add('linux');
     } else if (defaultTargetPlatform == TargetPlatform.windows) {
-      this._topics.add('windows');
+      _topics.add('windows');
     } else if (defaultTargetPlatform == TargetPlatform.macOS) {
-      this._topics.add('macos');
+      _topics.add('macos');
     } else if (defaultTargetPlatform == TargetPlatform.fuchsia) {
-      this._topics.add('fuchsia');
+      _topics.add('fuchsia');
     } else {
       // We use 'web' as the default platform for unknown platforms.
-      this._topics.add('web');
+      _topics.add('web');
     }
     // log.d("PACKAGE ${packageInfo!.version} ${deviceId} ");
   }
@@ -188,14 +195,14 @@ class Notifi extends ChangeNotifier {
     }
     logNoStack.i('User granted permission: ${settings.authorizationStatus}');
 
-    FirebaseMessaging.instance.onTokenRefresh.listen((__fcmToken) async {
+    FirebaseMessaging.instance.onTokenRefresh.listen((_fcmToken) async {
       // TODO: If necessary send token to application server.
 
       // Note: This callback is fired at each app startup and whenever a new
       // token is generated.
-      log.d("Refresh Notifi FCM TOKEN = $__fcmToken");
-      _fcmToken = __fcmToken;
-      fcm = __fcmToken;
+      log.d("Refresh Notifi FCM TOKEN = $_fcmToken");
+      _fcmToken = _fcmToken;
+      fcm = _fcmToken;
       notifyListeners();
     }).onError((err) {
       // Error getting token.
@@ -207,9 +214,9 @@ class Notifi extends ChangeNotifier {
       logNoStack.i("Got to here: WEB not detected");
     }
     if (kIsWeb) {
-      log.i("vapidKey is $vapidKey");
+      logNoStack.i("vapidKey is $vapidKey");
       FirebaseMessaging.instance.getToken(vapidKey: vapidKey).then((token) {
-        log.d("Web fcm token is $token");
+        logNoStack.d("Web fcm token is $token");
         _fcmToken = token;
         fcm = token!;
         notifyListeners();
@@ -218,19 +225,18 @@ class Notifi extends ChangeNotifier {
 
     if (isIOS) {
       logNoStack.i("Fetching Mobile Apple fcm token ");
-      FirebaseMessaging.instance.getAPNSToken().then((apnsToken){
-      if (apnsToken != null) {
-        // APNS token is available, make FCM plugin API requests...
-        FirebaseMessaging.instance.getToken().then((token) {
-          _fcmToken = token;
-          fcm = token!;
-          notifyListeners();
-          logNoStack.i("Mobile Apple fcm token is $_fcmToken");
-          subscribeToTopics();
-        });
-      }
+      FirebaseMessaging.instance.getAPNSToken().then((apnsToken) {
+        if (apnsToken != null) {
+          // APNS token is available, make FCM plugin API requests...
+          FirebaseMessaging.instance.getToken().then((token) {
+            _fcmToken = token;
+            fcm = token!;
+            notifyListeners();
+            logNoStack.i("Mobile Apple fcm token is $_fcmToken");
+            subscribeToTopics();
+          });
+        }
       });
-      
     }
     if (isAndroid) {
       FirebaseMessaging.instance.getToken().then((token) {
@@ -242,14 +248,14 @@ class Notifi extends ChangeNotifier {
       });
     }
 
-
     logNoStack.d("Got to here before setup Flutter Notifications");
     await setupFlutterNotifications();
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       final notification = message.notification;
       if (notification == null) return;
 
-      logNoStack.d("Foreground msg:${notification.title!}::${notification.body!}");
+      logNoStack
+          .d("Foreground msg:${notification.title!}::${notification.body!}");
       flutterLocalNotificationsPlugin.show(
         notification.hashCode,
         notification.title,
@@ -273,13 +279,11 @@ class Notifi extends ChangeNotifier {
 
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-   
     return this;
   }
 
-  void subscribeToTopics()
-  {
-     if (!kIsWeb) {
+  void subscribeToTopics() {
+    if (!kIsWeb) {
       logNoStack.i("Subscribing to topics");
 
       for (final topic in _topics) {

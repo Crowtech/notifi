@@ -33,11 +33,11 @@ class TranslationsZh implements Translations {
 	late final TranslationsZh _root = this; // ignore: unused_field
 
 	// Translations
-	@override String get app_title => 'Panta';
+	@override String get app_title => 'Crowtech';
 	@override String get deviceid => '设备标识符';
 	@override String get email => '电子邮件';
 	@override String get firstname => '给定的名称';
-	@override String get intro_title => '欢迎使用 Panta';
+	@override String get intro_title => '欢迎使用 Crowtech';
 	@override String get intro_description => '出行即服务';
 	@override String get movement_status => '是移動的嗎';
 	@override String get highlight_title => '生成上下文感知的翻译';
@@ -59,11 +59,11 @@ class TranslationsZh implements Translations {
 extension on TranslationsZh {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
-			case 'app_title': return 'Panta';
+			case 'app_title': return 'Crowtech';
 			case 'deviceid': return '设备标识符';
 			case 'email': return '电子邮件';
 			case 'firstname': return '给定的名称';
-			case 'intro_title': return '欢迎使用 Panta';
+			case 'intro_title': return '欢迎使用 Crowtech';
 			case 'intro_description': return '出行即服务';
 			case 'movement_status': return '是移動的嗎';
 			case 'highlight_title': return '生成上下文感知的翻译';

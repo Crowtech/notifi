@@ -7,6 +7,11 @@ part of 'gps.dart';
 // **************************************************************************
 
 GPS _$GPSFromJson(Map<String, dynamic> json) => GPS(
+      id: (json['id'] as num?)?.toInt(),
+      code: json['code'] as String?,
+      created: json['created'] == null
+          ? null
+          : DateTime.parse(json['created'] as String),
       orgid: (json['orgid'] as num?)?.toInt() ?? 2,
       resourcecode: json['resourcecode'] as String? ?? "",
       resourceid: (json['resourceid'] as num?)?.toInt() ?? 0,
@@ -18,16 +23,16 @@ GPS _$GPSFromJson(Map<String, dynamic> json) => GPS(
       battery: (json['battery'] as num?)?.toDouble() ?? 0.0,
       charging: json['charging'] as bool? ?? false,
       moving: json['moving'] as bool? ?? false,
-    )
-      ..created = DateTime.parse(json['created'] as String)
-      ..timestamp = (json['timestamp'] as num).toInt();
+    )..timestamp = (json['timestamp'] as num).toInt();
 
 Map<String, dynamic> _$GPSToJson(GPS instance) => <String, dynamic>{
+      'id': instance.id,
+      'created': instance.created?.toIso8601String(),
+      'code': instance.code,
       'orgid': instance.orgid,
       'resourcecode': instance.resourcecode,
       'resourceid': instance.resourceid,
       'devicecode': instance.devicecode,
-      'created': instance.created.toIso8601String(),
       'timestamp': instance.timestamp,
       'longitude': instance.longitude,
       'latitude': instance.latitude,

@@ -123,7 +123,7 @@ class _GeoPageState extends State<GeoPage>
                 "deviceid": Provider.of<Notifi>(context).deviceId,
               },
               method: "POST",
-              url: "$defaultAPIBaseUrl/p/gps/location",
+              url: "$defaultAPIBaseUrl$defaultApiPrefixPath/gps/location",
               logLevel: bg.Config.LOG_LEVEL_VERBOSE))
           .then((bg.State state) async {
         log.i('[ready] ${state.toMap()}');
@@ -168,7 +168,7 @@ class _GeoPageState extends State<GeoPage>
         "Authorization":
             "Bearer ${app_state.cachedAuthedUser.of(context)!.token.accessToken}"
       },
-      url: "$defaultAPIBaseUrl/p/gps/location",
+      url: "$defaultAPIBaseUrl$defaultApiPrefixPath/gps/location",
     ));
   }
 
@@ -178,7 +178,7 @@ class _GeoPageState extends State<GeoPage>
 
     String responseText = response.responseText;
     logNoStack.d(
-        '[onHttp] status: ${status}, success? ${success}, responseText: ${responseText}');
+        '[onHttp] status: $status, success? $success, responseText: $responseText');
   }
 
   void _onAuthChange(bg.AuthorizationEvent event) async {
@@ -227,7 +227,7 @@ class _GeoPageState extends State<GeoPage>
 
   OidcUser? processUser()
   {
-     OidcUser? oldUser = null;
+     OidcUser? oldUser;
     final user = app_state.cachedAuthedUser.of(context);
     if (user == null) {
       // put a guard here as well, just in case
@@ -240,10 +240,10 @@ class _GeoPageState extends State<GeoPage>
         "Authorization":
             "Bearer ${app_state.cachedAuthedUser.of(context)!.token.accessToken}"
       },
-      url: "$defaultAPIBaseUrl/p/gps/location",
+      url: "$defaultAPIBaseUrl$defaultApiPrefixPath/gps/location",
     ));
       }
-      // initNotifi(context, user.token.accessToken.toString(), "panta");
+
       if (!_geoStarted) {
         setState(() {
           _geoStarted = true;
@@ -373,8 +373,9 @@ class _GeoPageState extends State<GeoPage>
                     _loggedin = false;
                   });
                   bg.BackgroundGeolocation.stop();
+                  Locale locale = Localizations.localeOf(context);
                   await registerLogout(
-                      context,
+                      locale,
                       app_state.cachedAuthedUser
                           .of(context)!
                           .token
@@ -389,7 +390,7 @@ class _GeoPageState extends State<GeoPage>
                     ),
                   );
                 },
-                child: Text('Logout'),
+                child: const Text('Logout'),
               ),
               const Divider(),
               Wrap(

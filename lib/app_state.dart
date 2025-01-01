@@ -7,6 +7,7 @@ import 'package:bdaya_shared_value/bdaya_shared_value.dart';
 import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/credentials.dart';
+import 'package:notifi/jwt_utils.dart';
 import 'package:oidc/oidc.dart';
 import 'package:oidc_default_store/oidc_default_store.dart';
 
@@ -54,7 +55,7 @@ final duendeManager = OidcUserManager.lazy(
     // scopes supported by the provider and needed by the client.
     scope: defaultscopes, //['openid', 'profile', 'email', 'offline_access'],
     postLogoutRedirectUri: kIsWeb
-        ? Uri.parse("${defaultRedirectUrl}")
+        ? Uri.parse(defaultRedirectUrl)
         : Platform.isAndroid || Platform.isIOS || Platform.isMacOS
             ? Uri.parse('$defaultMobilePath:/endsessionredirect')
             : Platform.isWindows || Platform.isLinux
@@ -88,13 +89,19 @@ final duendeManager = OidcUserManager.lazy(
 final initMemoizer = AsyncMemoizer<void>();
 Future<void> initApp() {
   return initMemoizer.runOnce(() async {
-    currentManager.userChanges().listen((event) {
+    currentManager.userChanges().listen((event) async {
       cachedAuthedUser.$ = event;
       if (event?.userInfo != null) {
+        var exp = event?.claims['exp'];
+        var name = event?.claims['name'];
+        var username = event?.claims['preferred_username'];
+        // logNoStack.i(
+        //   'NOTIFI User changed: ${event?.claims.toJson()}',
+        // );
+        var deviceId = await fetchDeviceId();
         logNoStack.i(
-          'NOTIFI User changed: ${event?.claims.toJson()}, info: ${event?.userInfo}',
+          'NOTIFI User changed: exp:$exp, $username, $name $deviceId',
         );
-        
       }
     });
 
