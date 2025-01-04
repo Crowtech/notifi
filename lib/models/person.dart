@@ -83,6 +83,6 @@ class Person extends Resource {
 
   String getInitials()
   {
-    return "${firstname.substring(0,1).toUpperCase()}${lastname.substring(0,1).toUpperCase()}}";
+    return "${firstname.substring(0,1).toUpperCase()}${lastname.substring(0,1).toUpperCase()}";
   }
 }
