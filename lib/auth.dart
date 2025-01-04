@@ -1,12 +1,10 @@
 // ignore_for_file: avoid_redundant_argument_values
 
-import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:notifi/credentials.dart';
-import 'package:notifi/jwt_utils.dart';
 
 import 'package:notifi/notifi.dart';
 import 'package:oidc/oidc.dart';
@@ -17,7 +15,6 @@ import 'package:provider/provider.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/i18n/strings.g.dart' as nt;
 
-import 'api_utils.dart';
 
 
 var log = logger.Logger(

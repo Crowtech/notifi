@@ -1,8 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
 
 import 'package:logger/logger.dart';
 
+import '../jwt_utils.dart';
 import 'crowtech_object.dart';
 part 'resource.g.dart';
 
@@ -15,22 +15,24 @@ class Resource extends CrowtechObject {
   static String className = "Resource";
   static String tablename = className.toLowerCase();
 
-    String? description;
-    String? location;
-    String? devicecode;
+  String? description;
+  String? location;
+  String? devicecode;
+  String? avatarUrl;
 
-  Resource({
-    super.id,
-    super.code,
-    super.created,
-    super.updated,
-    super.name,
-    this.description,
-    this.location,
-    this.devicecode
-  });
+  Resource(
+      {super.id,
+      super.code,
+      super.created,
+      super.updated,
+      super.name,
+      this.description,
+      this.location,
+      this.devicecode,
+      this.avatarUrl});
 
-  factory Resource.fromJson(Map<String, dynamic> json) => _$ResourceFromJson(json);
+  factory Resource.fromJson(Map<String, dynamic> json) =>
+      _$ResourceFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$ResourceToJson(this);
 
@@ -42,5 +44,10 @@ class Resource extends CrowtechObject {
   @override
   String toString() {
     return "Resource=>${super.toString()} $description, $location, $devicecode";
+  }
+
+  String getAvatarUrl() {
+    return avatarUrl ??
+        "http://gravatar.com/avatar/${generateMd5(email)}?s=64";
   }
 }

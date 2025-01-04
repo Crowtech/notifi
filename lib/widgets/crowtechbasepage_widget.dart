@@ -1,4 +1,3 @@
-import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/material.dart';
 
@@ -6,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:notifi/credentials.dart';
 import 'package:oidc/oidc.dart';
 
-import 'package:provider/provider.dart';
 
 import '../api_utils.dart';
 import '../models/crowtech_base.dart';

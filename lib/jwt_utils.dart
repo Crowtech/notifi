@@ -2,6 +2,8 @@
 
 import 'dart:convert';
 import 'dart:io';
+import 'dart:convert';
+import 'package:crypto/crypto.dart';
 
 import 'package:app_set_id/app_set_id.dart';
 import 'package:device_info_plus/device_info_plus.dart';
@@ -95,13 +97,7 @@ Future<bool> loginUser(BuildContext context, String token) async {
           "$defaultApiPrefixPath/persons/login?devicecode=$deviceid")
       .then((resultMap) {
     logNoStack.i("Register login Post created successfully!");
-    // final userMap = jsonDecode(response.body);
-    // logNoStack.i("logged in user map: $userMap");
-    // String userJson = jsonEncode(userMap);
-    // logNoStack.i("logged in user json: $userJson");
-    // String uJson = '{"id":37,"created":"2024-11-16T23:49:52.669864","updated":"2025-01-01T08:27:02.340004","code":"PER_2DC66E1A_A275_4EFF_AD81_C1F1A7CCA6E0","name":"Panta Dev","description":"Panta Dev registered 2024-11-16T23:49:52.669739","devicecode":"test","username":"hello@pantagroup.org","email":"hello@pantagroup.org","firstname":"Panta","lastname":"Dev","nickname":"Panta Dev","gender":"UNDEFINED","i18n":"en","fcm":"dSfKKWS2uUTPdf3pcZGL_Y:APA91bHQonVTK_Wc3gGK7VW3b86zqzotNvjDokVN7QRmxGMoTerkGak9MXCkNeUUCFR05ReI4W_ajpw9GH6upoBOv43jpGQM5R4Z-KwFVEE-H2vNuQnUs00"}';
-//var uMap = jsonDecode(uJson);
-    //person.Person user = person.Person.fromJson(uMap);
+
     person.Person user = person.Person.fromJson(resultMap);
     //logNoStack.i("logged in user: $user");
     Provider.of<Notifi>(context, listen: false).user = user;
@@ -170,11 +166,15 @@ Future<String> fetchDeviceId() async {
   String deviceType = await fetchDeviceType();
 
   if (kIsWeb) {
-    deviceId = "Web:" + deviceType;
+    deviceId = "Web:$deviceType";
   } else {
     final appSetIdPlugin = AppSetId();
     deviceId = await appSetIdPlugin.getIdentifier() ?? "Unknown";
     deviceId = "$deviceType:$deviceId"; // watch for OS
   }
   return deviceId;
+}
+
+String generateMd5(String input) {
+  return md5.convert(utf8.encode(input)).toString();
 }

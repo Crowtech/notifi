@@ -22,6 +22,7 @@ class CrowtechObject extends CrowtechBase<CrowtechObject> {
 
   factory CrowtechObject.fromJson(Map<String, dynamic> json) =>
       _$CrowtechObjectFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$CrowtechObjectToJson(this);
 
   @override

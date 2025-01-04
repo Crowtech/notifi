@@ -19,6 +19,7 @@ Resource _$ResourceFromJson(Map<String, dynamic> json) => Resource(
       description: json['description'] as String?,
       location: json['location'] as String?,
       devicecode: json['devicecode'] as String?,
+      avatarUrl: json['avatarUrl'] as String?,
     );
 
 Map<String, dynamic> _$ResourceToJson(Resource instance) => <String, dynamic>{
@@ -30,4 +31,5 @@ Map<String, dynamic> _$ResourceToJson(Resource instance) => <String, dynamic>{
       'description': instance.description,
       'location': instance.location,
       'devicecode': instance.devicecode,
+      'avatarUrl': instance.avatarUrl,
     };

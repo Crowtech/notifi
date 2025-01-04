@@ -1,20 +1,11 @@
 import 'dart:convert';
-import 'dart:io';
 
-import 'package:app_set_id/app_set_id.dart';
-import 'package:device_info_plus/device_info_plus.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/credentials.dart';
-import 'package:notifi/geo_page.dart';
 import 'package:notifi/models/gps.dart';
 //import 'package:logger/printart';
-import 'package:notifi/notifi.dart';
-import 'package:package_info_plus/package_info_plus.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_background_geolocation/flutter_background_geolocation.dart'
     as bg;
 import 'dart:collection' as collection;

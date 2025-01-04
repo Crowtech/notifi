@@ -201,14 +201,14 @@ class Notifi extends ChangeNotifier {
     }
     logNoStack.i('User granted permission: ${settings.authorizationStatus}');
 
-    FirebaseMessaging.instance.onTokenRefresh.listen((_fcmToken) async {
+    FirebaseMessaging.instance.onTokenRefresh.listen((fcmToken) async {
       // TODO: If necessary send token to application server.
 
       // Note: This callback is fired at each app startup and whenever a new
       // token is generated.
-      log.d("Refresh Notifi FCM TOKEN = $_fcmToken");
-      _fcmToken = _fcmToken;
-      fcm = _fcmToken;
+      log.d("Refresh Notifi FCM TOKEN = $fcmToken");
+      fcmToken = fcmToken;
+      fcm = fcmToken;
       notifyListeners();
     }).onError((err) {
       // Error getting token.

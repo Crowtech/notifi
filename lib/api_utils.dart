@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:device_info_plus/device_info_plus.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart' as logger;
@@ -10,9 +8,7 @@ import 'package:notifi/credentials.dart';
 import 'package:notifi/models/gps.dart';
 import 'package:notifi/models/gpsfilter.dart';
 
-import 'jwt_utils.dart';
 import 'models/crowtech_basepage.dart';
-import 'models/person.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),

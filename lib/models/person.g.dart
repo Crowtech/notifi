@@ -31,7 +31,7 @@ Person _$PersonFromJson(Map<String, dynamic> json) => Person(
       latitude: (json['latitude'] as num?)?.toDouble(),
       birthyear: (json['birthyear'] as num?)?.toInt(),
       fcm: json['fcm'] as String?,
-    );
+    )..avatarUrl = json['avatarUrl'] as String?;
 
 Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{
       'id': instance.id,
@@ -42,6 +42,7 @@ Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{
       'description': instance.description,
       'location': instance.location,
       'devicecode': instance.devicecode,
+      'avatarUrl': instance.avatarUrl,
       'username': instance.username,
       'email': instance.email,
       'firstname': instance.firstname,
