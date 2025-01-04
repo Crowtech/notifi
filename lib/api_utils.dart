@@ -28,7 +28,7 @@ Future<dynamic> apiPost(Locale locale, String token, String apiPath) async {
 
 Future<dynamic> apiPostData(Locale locale, String token, String apiPath,
     String? dataName, Object? data) async {
-  var url = Uri.parse("$defaultAPIBaseUrl$apiPath");
+  var url = Uri.parse("$apiPath");
   String jsonData;
   final http.Response response;
   if (dataName != null) {
