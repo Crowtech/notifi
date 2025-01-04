@@ -80,4 +80,9 @@ class Person extends Resource {
     //   return avatarUrl!;
     // }
   }
+
+  String getInitials()
+  {
+    return "${firstname.substring(0,1).toUpperCase()}${lastname.substring(0,1).toUpperCase()}}";
+  }
 }
