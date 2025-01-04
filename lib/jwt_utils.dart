@@ -99,13 +99,13 @@ Future<bool> loginUser(BuildContext context, String token) async {
     logNoStack.i("Register login Post created successfully!");
 
     person.Person user = person.Person.fromJson(resultMap);
-    //logNoStack.i("logged in user: $user");
+    logNoStack.i("logged in user: $user");
     Provider.of<Notifi>(context, listen: false).user = user;
     logNoStack.i(
         "logged in notifi user: ${Provider.of<Notifi>(context, listen: false).user}");
     return true;
   }).catchError((error) {
-    log.e("login api error");
+    log.e("login api error $error");
     
   });
 
