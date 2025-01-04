@@ -92,7 +92,7 @@ Future<bool> loginUser(BuildContext context, String token) async {
   //       fcm,
   //     })
   //     );
-String url = "$defaultApiPrefixPath/persons/login?devicecode=$deviceid";
+String url = "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/login?devicecode=$deviceid";
 logNoStack.i("login api url = $url");
   apiPost(myLocale, token,url
           )
