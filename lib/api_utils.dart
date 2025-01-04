@@ -28,7 +28,8 @@ Future<dynamic> apiPost(Locale locale, String token, String apiPath) async {
 
 Future<dynamic> apiPostData(Locale locale, String token, String apiPath,
     String? dataName, Object? data) async {
-  var url = Uri.parse("$apiPath");
+      logNoStack.i("APIPath -> $apiPath");
+  var url = Uri.parse(apiPath);
   String jsonData;
   final http.Response response;
   if (dataName != null) {
@@ -63,7 +64,7 @@ Future<dynamic> apiPostData(Locale locale, String token, String apiPath,
     final resultMap = jsonDecode(response.body);
     return resultMap;
   } else {
-    logNoStack.d(
+    logNoStack.e(
         "$apiPath created unsuccessfully! with status ${response.statusCode}");
     return Future.error(
         "$apiPath created unsuccessfully! with status ${response.statusCode}");
