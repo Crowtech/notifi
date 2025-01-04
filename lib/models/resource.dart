@@ -47,7 +47,10 @@ class Resource extends CrowtechObject {
   }
 
   String getAvatarUrl() {
-    return avatarUrl ??
-        "http://gravatar.com/avatar/${generateMd5("unknown@unknown.com")}?s=64";
+    if (avatarUrl == null) {
+      return "http://gravatar.com/avatar/${generateMd5("unknown@unknown.com")}?s=64";
+    } else {
+      return avatarUrl!;
+    }
   }
 }
