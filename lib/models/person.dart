@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'package:logger/logger.dart';
 
+import '../jwt_utils.dart';
 import 'gendertype.dart';
 import 'resource.dart';
 
@@ -67,5 +68,10 @@ class Person extends Resource {
 
   String toShortString() {
     return "Person=>$username $nickname $gender";
+  }
+
+  @override
+  String getAvatarUrl() {
+    return avatarUrl ?? "http://gravatar.com/avatar/${generateMd5(email)}?s=64";
   }
 }
