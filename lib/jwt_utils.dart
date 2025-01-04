@@ -92,9 +92,10 @@ Future<bool> loginUser(BuildContext context, String token) async {
   //       fcm,
   //     })
   //     );
-
-  apiPost(myLocale, token,
-          "$defaultApiPrefixPath/persons/login?devicecode=$deviceid")
+String url = "$defaultApiPrefixPath/persons/login?devicecode=$deviceid";
+logNoStack.i("login api url = $url");
+  apiPost(myLocale, token,url
+          )
       .then((resultMap) {
     logNoStack.i("Register login Post created successfully!");
 
@@ -106,7 +107,7 @@ Future<bool> loginUser(BuildContext context, String token) async {
     return true;
   }).catchError((error) {
     log.e("login api error $error");
-    
+    return false;
   });
 
   return false;
