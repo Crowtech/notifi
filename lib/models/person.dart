@@ -72,6 +72,10 @@ class Person extends Resource {
 
   @override
   String getAvatarUrl() {
-    return avatarUrl ?? "http://gravatar.com/avatar/${generateMd5(email)}?s=64";
+    if (avatarUrl == null) {
+    return "http://gravatar.com/avatar/${generateMd5(email)}?s=64";
+    } else {
+      return avatarUrl!;
+    }
   }
 }
