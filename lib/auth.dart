@@ -41,7 +41,7 @@ class _AuthPageState extends State<AuthPage> {
   final passwordController = TextEditingController();
 
   OidcPlatformSpecificOptions_Web_NavigationMode webNavigationMode =
-      OidcPlatformSpecificOptions_Web_NavigationMode.samePage; // was newPage
+      (kIsWeb?OidcPlatformSpecificOptions_Web_NavigationMode.samePage:OidcPlatformSpecificOptions_Web_NavigationMode.newPage); // was newPage
 
   bool allowInsecureConnections = false;
   bool preferEphemeralSession = false;
@@ -133,7 +133,7 @@ class _AuthPageState extends State<AuthPage> {
               OidcPlatformSpecificOptions_Web_NavigationMode.samePage) {
         //in samePage navigation, you can't know the result here.
         return;
-      }
+      } 
     } catch (e) {
       app_state.log.e(e.toString());
     }
