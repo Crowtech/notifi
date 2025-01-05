@@ -26,6 +26,7 @@ const _defaultAuthEndpointUrl = String.fromEnvironment(
 
 const _posthogKey = String.fromEnvironment('POSTHOG_KEY');
 const _transistorsoftKey=String.fromEnvironment('TRANSISTORSOFT_KEY');
+const _vapidKey=String.fromEnvironment('VAPID_KEY');
 const _displayName=String.fromEnvironment('DISPLAY_NAME');
 
 const _defaultAPIBaseUrl = String.fromEnvironment('API_BASE_URL');
@@ -67,4 +68,5 @@ List<String> get defaultscopes => _defaultscopes;
 String get defaultApiPrefixPath => _defaultApiPrefixPath;
 String get posthogKey => _posthogKey;
 String get transistorsoftKey => _transistorsoftKey;
+String get vapidKey => _vapidKey;
 String get displayName => _displayName;
