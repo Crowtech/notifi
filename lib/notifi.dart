@@ -91,10 +91,16 @@ class Notifi extends ChangeNotifier {
   late String _deviceId;
 
   Person.Person? user;
+  bool _userReady = false;
 
   FirebaseOptions? options;
 
   Person.Person? get currentUser => user;
+  bool get userReady => _userReady;
+  set userReady(bool value) {
+    _userReady = value;
+  }
+
   String? get vapidKey => _vapidKey;
   String? get deviceId => _deviceId;
 
