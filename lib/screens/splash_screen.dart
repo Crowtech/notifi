@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:session_storage/session_storage.dart';
@@ -6,9 +8,10 @@ import '../themes.dart';
 
 class SplashScreen extends StatefulWidget {
   String nextScreenRoute;
-  const SplashScreen({super.key,required this.nextScreenRoute});
+  SplashScreen({super.key,required this.nextScreenRoute});
 
   @override
+  // ignore: library_private_types_in_public_api
   _SplashScreenState createState() => _SplashScreenState();
 }
 
