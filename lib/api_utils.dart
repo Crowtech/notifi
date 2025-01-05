@@ -124,7 +124,7 @@ Future<http.Response> apiPostDataStr(
 // }
 
 Future<void> registerLogout(Locale locale, String token) async {
-  apiPost(locale, token, "$defaultApiPrefixPath/persons/logout").then((result) {
+  apiPost(locale, token, "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout").then((result) {
     log.d("logout result $result");
   }).catchError((error) {
     log.e("Register logout error");
@@ -134,9 +134,9 @@ Future<void> registerLogout(Locale locale, String token) async {
 Future<Map> registerFCM(
     Locale locale, String token, String deviceid, String fcm) async {
   logNoStack.i(
-      "About to send FCM and deviceid to api $defaultApiPrefixPath/persons/devicefcm/$deviceid/$fcm");
+      "About to send FCM and deviceid to api $defaultAPIBaseUrl$defaultApiPrefixPath/persons/devicefcm/$deviceid/$fcm");
   apiPost(locale, token,
-          "$defaultApiPrefixPath/persons/devicefcm/$deviceid/$fcm")
+          "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/devicefcm/$deviceid/$fcm")
       .then((response) {
     logNoStack.i("back from send FCM sending $deviceid");
     logNoStack.i("result ${response.toString()}");
