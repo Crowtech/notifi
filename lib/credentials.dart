@@ -24,6 +24,8 @@ const _defaultRealmBaseUrl = String.fromEnvironment('AUTH_REALM_BASE_URL');
 const _defaultAuthEndpointUrl = String.fromEnvironment(
     'AUTHORIZATION_ENDPOINT_URL');
 
+const _posthogKey = String.fromEnvironment('POSTHOG_KEY');
+const _transistorsoftKey=String.fromEnvironment('TRANSISTORSOFT_KEY');
 const _defaultAPIBaseUrl = String.fromEnvironment('API_BASE_URL');
 
 const _defaultApiPrefixPath = String.fromEnvironment('API_PREFIX_PATH');
@@ -61,3 +63,5 @@ String get defaultEncryptionKey => _defaultEncryptionKey;
 List<String> get defaultAudience => _defaultAudience;
 List<String> get defaultscopes => _defaultscopes;
 String get defaultApiPrefixPath => _defaultApiPrefixPath;
+String get posthogKey => _posthogKey;
+String get transistorsoftKey => _transistorsoftKey;
