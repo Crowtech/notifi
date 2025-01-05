@@ -15,6 +15,8 @@ import 'package:notifi/models/person.dart' as Person;
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:logger/logger.dart' as logger;
 
+import 'models/person.dart';
+
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
   level: logger.Level.info,
@@ -30,8 +32,6 @@ String? get fcmToken => _fcmToken;
 late AndroidNotificationChannel _androidChannel;
 
 bool isFlutterLocalNotificationsInitialized = false;
-
-
 
 // /// Initialize the [FlutterLocalNotificationsPlugin] package.
 late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
@@ -90,13 +90,13 @@ class Notifi extends ChangeNotifier {
   late PackageInfo _packageInfo;
   late String _deviceId;
 
-  Person.Person? user;
+  Person.Person user;
 
   FirebaseOptions? options;
 
+  Person.Person get currentUser => user;
   String? get vapidKey => _vapidKey;
   String? get deviceId => _deviceId;
-
 
   PackageInfo? get packageInfo => _packageInfo;
 
@@ -108,10 +108,9 @@ class Notifi extends ChangeNotifier {
 
   bool get preventAutoLogin => _preventAutoLogin;
 
- set preventAutoLogin(bool value) {
-   _preventAutoLogin = value;
- }
-
+  set preventAutoLogin(bool value) {
+    _preventAutoLogin = value;
+  }
 
   set fcm(String newFcm) {
     _fcm = newFcm;
@@ -305,6 +304,4 @@ class Notifi extends ChangeNotifier {
       logNoStack.i("Not subscribing to topics");
     }
   }
-
-  
 }
