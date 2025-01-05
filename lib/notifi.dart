@@ -90,7 +90,7 @@ class Notifi extends ChangeNotifier {
   late PackageInfo _packageInfo;
   late String _deviceId;
 
-  late Person.Person? user;
+  Person.Person? user;
 
   FirebaseOptions? options;
 
