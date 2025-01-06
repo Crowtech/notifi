@@ -1,6 +1,6 @@
 name: notifi
 description: "Notification Package."
-version: 0.0.7
+version: 0.0.8
 #homepage:
 
 environment:
@@ -42,6 +42,7 @@ dependencies:
   oidc: ^0.9.0+1
   oidc_core: ^0.9.1
   oidc_default_store: ^0.2.0+12
+  onboarding: ^4.0.2
   package_info_plus: ^8.1.1
   posthog_flutter: ^4.7.1
   provider: ^6.1.2
