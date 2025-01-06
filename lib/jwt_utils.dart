@@ -101,10 +101,10 @@ logNoStack.i("login api url = $url");
 
     person.Person user = person.Person.fromJson(resultMap);
     logNoStack.i("logged in user: $user");
-    Provider.of<Notifi>(context, listen: false).user = user;
-    Provider.of<Notifi>(context, listen: false).userReady= true;
+    Provider.of<Notifi>(context, listen: false).currentUser = user;
     logNoStack.i(
-        "logged in notifi user: ${Provider.of<Notifi>(context, listen: false).user}");
+        "logged in notifi user: ${Provider.of<Notifi>(context, listen: false).currentUser}");
+
     return true;
   }).catchError((error) {
     log.e("login api error $error");

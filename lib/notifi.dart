@@ -90,12 +90,12 @@ class Notifi extends ChangeNotifier {
   late PackageInfo _packageInfo;
   late String _deviceId;
 
-  Person.Person? user;
+  Person.Person? _user;
   bool _userReady = false;
 
   FirebaseOptions? options;
 
-  Person.Person? get currentUser => user;
+
   bool get userReady => _userReady;
   set userReady(bool value) {
     _userReady = value;
@@ -116,6 +116,14 @@ class Notifi extends ChangeNotifier {
 
   set preventAutoLogin(bool value) {
     _preventAutoLogin = value;
+  }
+
+ Person.Person? get currentUser => _user;
+
+  set currentUser(Person.Person? user) {
+    _user = user;
+    _userReady = true;
+    notifyListeners();
   }
 
   set fcm(String newFcm) {
