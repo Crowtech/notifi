@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:collection' as collection;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -33,15 +32,15 @@ var logNoStack = logger.Logger(
   level: logger.Level.info,
 );
 
-class CrowHomePage extends StatefulWidget {
-  const CrowHomePage({super.key});
+class CrowtechHomePage extends StatefulWidget {
+  const CrowtechHomePage({super.key});
 
   @override
-  State<CrowHomePage> createState() => _CrowHomePageState();
+  State<CrowtechHomePage> createState() => _CrowtechHomePageState();
 }
 
-class _CrowHomePageState extends State<CrowHomePage>
-    with TickerProviderStateMixin<CrowHomePage>, WidgetsBindingObserver {
+class _CrowtechHomePageState extends State<CrowtechHomePage>
+    with TickerProviderStateMixin<CrowtechHomePage>, WidgetsBindingObserver {
   OidcPlatformSpecificOptions_Web_NavigationMode webNavigationMode =
       OidcPlatformSpecificOptions_Web_NavigationMode.newPage;
 
@@ -100,7 +99,7 @@ class _CrowHomePageState extends State<CrowHomePage>
               Provider.of<Notifi>(context, listen: false).currentUser;
           _userReady = Provider.of<Notifi>(context, listen: false).userReady;
         });
-        logNoStack.d("HomePage:NotifiListener triggered , updated user");
+        logNoStack.d("CrowtechHomePage:NotifiListener triggered , updated user");
       }
 
       Provider.of<Notifi>(context, listen: false).addListener(notifiListener);
