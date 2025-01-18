@@ -9,11 +9,14 @@ import 'package:flutter_background_geolocation/flutter_background_geolocation.da
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map/plugin_api.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:notifi/models/gps.dart';
 import 'package:notifi/util/dialog.dart' as util;
 
 import 'package:latlong2/latlong.dart';
 import 'package:notifi/util/geospatial.dart';
 import 'package:logger/logger.dart' as logger;
+
+import '../models/crowtech_basepage.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -26,7 +29,9 @@ var logNoStack = logger.Logger(
 );
 
 class GeoMap2 extends StatefulWidget {
-  const GeoMap2({super.key});
+  CrowtechBasePage<GPS>? points;
+  
+   GeoMap2({super.key, this.points});
 
   @override
   State createState() => GeoMap2State();

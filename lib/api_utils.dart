@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/credentials.dart';
 import 'package:notifi/models/gps.dart';
-import 'package:notifi/models/gpsfilter.dart';
+import 'package:notifi/models/nestfilter.dart';
 
 import 'models/crowtech_basepage.dart';
 
@@ -155,7 +155,7 @@ Future<CrowtechBasePage<GPS>> fetchGPS(
   List<int> orgIdList = [];
   orgIdList.add(orgid);
 
-  var gpsfilter = GPSFilter(
+  var nestfilter = NestFilter(
       orgIdList: orgIdList,
       resourceCodeList: [],
       resourceIdList: [],
@@ -164,10 +164,11 @@ Future<CrowtechBasePage<GPS>> fetchGPS(
       offset: offset,
       limit: limit,
       sortby: 'id DESC',
-      caseinsensitive: true);
+      caseinsensitive: true,
+      distinctField: 'resourcecode');
 
-  String jsonDataStr = jsonEncode(gpsfilter);
-  logNoStack.i("Sending GPSFilter gps $gpsfilter with json as $jsonDataStr");
+  String jsonDataStr = jsonEncode(nestfilter);
+  logNoStack.i("Sending NestFilter gps $nestfilter with json as $jsonDataStr");
 
   var response = await apiPostDataStr(locale, token, "$defaultApiPrefixPath/gps/fetch", jsonDataStr);
      // .then((response) {

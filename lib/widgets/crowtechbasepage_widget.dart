@@ -13,7 +13,7 @@ import 'package:notifi/app_state.dart' as app_state;
 import 'package:logger/logger.dart' as logger;
 
 import '../models/gps.dart';
-import '../models/gpsfilter.dart';
+import '../models/nestfilter.dart';
 import 'paginations.widget.dart';
 
 var log = logger.Logger(

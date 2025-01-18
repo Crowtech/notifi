@@ -444,12 +444,12 @@ class _CrowtechHomePageState extends State<CrowtechHomePage>
 
               Visibility(
                 visible: _locationReady,
-                child: const SizedBox(
+                child: SizedBox(
                     width: 300.0,
                     height: 400.0,
                     child: Card(
                       // child: GeoMapHome(location: _location),
-                      child: GeoMap2(),
+                      child: GeoMap2(points:points),
                     )),
               ),
 
