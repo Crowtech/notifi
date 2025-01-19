@@ -104,8 +104,9 @@ class LocationsFetcher extends Notifier<List<Marker>> {
 
       if (page.items != null) {
         for (var i = 0; i < page.items!.length; i++) {
-          print('Number $i');
+          
           GPS gps = page.items![i];
+          logNoStack.i('GPS $gps');
           LatLng ll = LatLng(gps.latitude, gps.longitude);
           _userlocations.add(Marker(
               point: ll,
