@@ -1,6 +1,6 @@
 name: notifi
 description: "Notification Package."
-version: 0.0.13
+version: 0.0.14
 #homepage:
 
 environment:
@@ -117,3 +117,7 @@ dev_dependencies:
   #
   # For details regarding fonts in packages, see
   # https://flutter.dev/to/font-from-package
+
+  assets:
+    - assets/
+    - assets/images/markers/
