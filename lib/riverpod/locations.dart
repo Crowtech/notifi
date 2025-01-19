@@ -31,6 +31,10 @@ var logNoStack = logger.Logger(
 // Notifier for generating a random number exposed by a state notifier
 // provider
 class LocationsFetcher extends Notifier<List<Marker>> {
+
+    static const LOCATION_ARROW_IMAGE_PATH =
+      "assets/images/markers/location-arrow-green.png";
+
   @override
   List<Marker> build() {
     return [];
@@ -68,6 +72,7 @@ class LocationsFetcher extends Notifier<List<Marker>> {
     logNoStack.d("result ${response.body.toString()}");
     final map = jsonDecode(response.body);
 
+List<String> colours = ['red', 'green', 'blue', 'amber'];
     final List<Marker> _userlocations = [];
     if (map["totalItems"] == 0) {
       logNoStack.i("Empty List");
@@ -78,9 +83,11 @@ class LocationsFetcher extends Notifier<List<Marker>> {
 
       if (page.items != null) {
         for (var i = 0; i < page.items!.length; i++) {
-          print('Number $i');
-          GPS gps = page.items![i];
+          String colour = colours[i % colours.length];
+           GPS gps = page.items![i];
+          logNoStack.i('GPS $gps');
           LatLng ll = LatLng(gps.latitude, gps.longitude);
+          double heading = gps.heading.round().toDouble();
           _userlocations.add(Marker(
               point: ll,
               width: 24,
@@ -88,9 +95,9 @@ class LocationsFetcher extends Notifier<List<Marker>> {
               rotate: false,
               builder: (context) {
                 return Transform.rotate(
-                    angle: (gps.heading * (math.pi / 180)),
+                    angle: (heading * (math.pi / 180)),
                     child: Image.asset(
-                        "assets/images/markers/location-arrow-red.png"));
+                        "assets/images/markers/location-arrow-$colour.png"));
               }));
         }
       }
@@ -117,7 +124,7 @@ class LocationsFetcher extends Notifier<List<Marker>> {
                 return Transform.rotate(
                     angle: (gps.heading * (math.pi / 180)),
                     child: Image.asset(
-                        "assets/images/markers/location-arrow-red.png"));
+                        LOCATION_ARROW_IMAGE_PATH));
               }));
         }
       }
