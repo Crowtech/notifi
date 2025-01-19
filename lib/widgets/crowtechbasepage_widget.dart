@@ -60,7 +60,7 @@ class _CrowtechBasePageWidgetState<T extends CrowtechBase<T>> extends State<Crow
     token = user!.token.accessToken;
 
    
-    var gpsfilter = GPSFilter(
+    var gpsfilter = NestFilter(
       orgIdList: [2],
       resourceCodeList: [],
       resourceIdList: [],
@@ -69,7 +69,8 @@ class _CrowtechBasePageWidgetState<T extends CrowtechBase<T>> extends State<Crow
       offset: 0,
       limit: 10,
       sortby: '',
-      caseinsensitive: false
+      caseinsensitive: false,
+      distinctField: ''
     );
 
   logNoStack.d("Sending CrowtechFilter  $gpsfilter");
