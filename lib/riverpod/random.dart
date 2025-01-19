@@ -3,9 +3,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-#void main() {
-#  runApp(const ProviderScope(child: RandomNumberApp()));
-#}
+//void main() {
+//  runApp(const ProviderScope(child: RandomNumberApp()));
+//}
 
 // Notifier for generating a random number exposed by a state notifier
 // provider
