@@ -509,8 +509,7 @@ class GeoMap2State extends State<GeoMap2>
             ),
             // Polyline joining last stationary location to motionchange:true location.
             PolylineLayer(polylines: _motionChangePolylines),
-           // MarkerLayer(markers: _locations),
-            MarkerLayer(markers: _userlocations),
+           MarkerLayer(markers: _locations),
             Consumer(
                       builder: (context, ref, child) {
                         return MarkerLayer(markers: ref.watch(locationsProvider));
