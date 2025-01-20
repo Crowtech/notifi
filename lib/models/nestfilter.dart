@@ -25,10 +25,10 @@ class NestFilter {
 
   NestFilter(
       {
-      required this.orgIdList,
-      required this.resourceCodeList,
-      required this.resourceIdList,
-      required this.deviceCodeList,
+      this.orgIdList = const [],
+      this.resourceCodeList  = const [],
+      this.resourceIdList  = const [],
+      this.deviceCodeList = const [],
       this.query = "",
       this.offset=0,
       this.limit=10,
