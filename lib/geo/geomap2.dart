@@ -9,14 +9,16 @@ import 'package:flutter_background_geolocation/flutter_background_geolocation.da
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map/plugin_api.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:notifi/models/gps.dart';
+import 'package:notifi/riverpod/locations.dart';
 import 'package:notifi/util/dialog.dart' as util;
 
 import 'package:latlong2/latlong.dart';
 import 'package:notifi/util/geospatial.dart';
 import 'package:logger/logger.dart' as logger;
-
-import '../models/crowtech_basepage.dart';
+import 'package:provider/provider.dart' as prov;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:notifi/riverpod/random.dart';
+import 'package:notifi/riverpod/locations.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -29,9 +31,7 @@ var logNoStack = logger.Logger(
 );
 
 class GeoMap2 extends StatefulWidget {
-  CrowtechBasePage<GPS>? points;
-  
-   GeoMap2({super.key, this.points});
+  const GeoMap2({super.key});
 
   @override
   State createState() => GeoMap2State();
@@ -51,6 +51,7 @@ class GeoMap2State extends State<GeoMap2>
   //     const LatLng(-37.81719301824116, 144.96717154241364);
   final List<LatLng> _polyline = [];
   final List<Marker> _locations = [];
+  final List<Marker> _userlocations = [];
   final List<CircleMarker> _stopLocations = [];
   final List<Polyline> _motionChangePolylines = [];
   final List<CircleMarker> _stationaryMarker = [];
@@ -83,7 +84,7 @@ class GeoMap2State extends State<GeoMap2>
     _mapOptions = MapOptions(
       onPositionChanged: _onPositionChanged,
       center: _center,
-      zoom: 12.0,
+      zoom: 18.0,
       onTap: _onTap,
       //  onLongPress: _onAddGeofence
     );
@@ -103,6 +104,30 @@ class GeoMap2State extends State<GeoMap2>
     //     onLongPress: _onAddGeofence);
     // _mapController = MapController();
 
+//-37.86340767006725, 145.0922203600181
+//-37.86273509717357, 145.0908529973133
+  //   _userlocations.add(Marker(
+  //             point: LatLng(-37.86273509717357, 145.0908529973133),
+  //             width: 24,
+  //             height: 24,
+  //             rotate: false,
+  //             builder: (context) {
+  //               return Transform.rotate(
+  //                   angle: (0.0 * (math.pi / 180)),
+  //                   child: Image.asset(
+  //                       "assets/images/markers/location-arrow-green.png"));
+  //             }));
+  // _userlocations.add(Marker(
+  //             point: LatLng(-37.86273509717357, 145.0918529973133),
+  //             width: 24,
+  //             height: 24,
+  //             rotate: false,
+  //             builder: (context) {
+  //               return Transform.rotate(
+  //                   angle: (0.0 * (math.pi / 180)),
+  //                   child: Image.asset(
+  //                       "assets/images/markers/location-arrow-green.png"));
+  //             }));
     if (!kIsWeb) {
       bg.BackgroundGeolocation.onLocation(_onLocation);
       bg.BackgroundGeolocation.onMotionChange(_onMotionChange);
@@ -177,6 +202,9 @@ class GeoMap2State extends State<GeoMap2>
   }
 
   void _onLocation(bg.Location location) {
+    if (!mounted) {
+      return;
+    }
     _lastLocation = location;
     LatLng ll = LatLng(location.coords.latitude, location.coords.longitude);
     _mapController?.move(ll, _mapController!.zoom);
@@ -233,32 +261,14 @@ class GeoMap2State extends State<GeoMap2>
     GeofenceMarker? marker = _geofences.firstWhereOrNull(
         (GeofenceMarker marker) =>
             marker.geofence?.identifier == event.identifier);
-    if (marker == null) {
-      bool exists =
-          await bg.BackgroundGeolocation.geofenceExists(event.identifier);
-      if (exists) {
-        // Maybe this is a boot from a geofence event and geofencechange hasn't yet fired
-        bg.Geofence? geofence =
-            await bg.BackgroundGeolocation.getGeofence(event.identifier);
-        marker = GeofenceMarker(geofence!);
-        _geofences.add(marker);
-      } else {
-        logNoStack.d(
-            "[_onGeofence] failed to find geofence marker: ${event.identifier}");
-        return;
-      }
-    }
 
-    bg.Geofence? geofence = marker.geofence;
+    bg.Geofence? geofence = marker!.geofence;
 
     // Render a new greyed-out geofence CircleMarker to show it's been fired but only if it hasn't been drawn yet.
     // since we can have multiple hits on the same geofence.  No point re-drawing the same hit circle twice.
     GeofenceMarker? eventMarker = _geofenceEvents.firstWhereOrNull(
         (GeofenceMarker marker) =>
             marker.geofence?.identifier == event.identifier);
-    if (eventMarker == null) {
-      _geofenceEvents.add(GeofenceMarker(geofence!, true));
-    }
 
     // Build geofence hit statistic markers:
     // 1.  A computed CircleMarker upon the edge of the geofence circle (red=exit, green=enter)
@@ -321,6 +331,7 @@ class GeoMap2State extends State<GeoMap2>
   }
 
   void _onGeofencesChange(bg.GeofencesChangeEvent event) {
+    if (!mounted) return;
     logNoStack.d('[${bg.Event.GEOFENCESCHANGE}] - $event');
     setState(() {
       for (var identifier in event.off) {
@@ -447,6 +458,7 @@ class GeoMap2State extends State<GeoMap2>
     if (_mapController == null) {
       return const SizedBox.shrink();
     }
+
     return Column(children: [
       // Container(
       //     color: const Color.fromARGB(255, 165, 240, 255),
@@ -464,6 +476,7 @@ class GeoMap2State extends State<GeoMap2>
                 urlTemplate:
                     "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                 subdomains: const ['a', 'b', 'c']),
+                
             // Active geofence circles
             CircleLayer(circles: _geofences),
             PolygonLayer(polygons: _geofencePolygons),
@@ -496,20 +509,27 @@ class GeoMap2State extends State<GeoMap2>
             ),
             // Polyline joining last stationary location to motionchange:true location.
             PolylineLayer(polylines: _motionChangePolylines),
-            MarkerLayer(markers: _locations),
+           // MarkerLayer(markers: _locations),
+            MarkerLayer(markers: _userlocations),
+            Consumer(
+                      builder: (context, ref, child) {
+                        return MarkerLayer(markers: ref.watch(locationsProvider));
+                      },
+                    ),
+            
             CircleLayer(circles: _geofenceEvents),
             PolylineLayer(polylines: _geofenceEventPolylines),
             MarkerLayer(markers: _geofenceEventLocations),
             MarkerLayer(markers: _geofenceEventEdges),
             // Geofence events (edge marker, event location and polyline joining the two)
-            CircleLayer(circles: [
-              // White background
-              CircleMarker(
-                  point: _currentPosition, color: Colors.white, radius: 10),
-              // Blue foreground
-              CircleMarker(
-                  point: _currentPosition, color: Colors.blue, radius: 7)
-            ]),
+            // CircleLayer(circles: [
+            //   // White background
+            //   CircleMarker(
+            //       point: _currentPosition, color: Colors.white, radius: 10),
+            //   // Blue foreground
+            //   CircleMarker(
+            //       point: _currentPosition, color: Colors.blue, radius: 7)
+            // ]),
           ]))
     ]);
   }
