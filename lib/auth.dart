@@ -148,6 +148,7 @@ class _AuthPageState extends State<AuthPage> {
     final parsedOriginalUri =
         originalUri == null ? null : Uri.tryParse(originalUri);
 
+logNoStack.i("parsedOriginalUri=$parsedOriginalUri");
     return Consumer<Notifi>(builder: (context, notifi, child) {
       return Scaffold(
         appBar: AppBar(
