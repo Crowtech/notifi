@@ -21,16 +21,12 @@ var logNoStack = logger.Logger(
 );
 
 class UsersFetcher extends Notifier<CrowtechBasePage<Person>> {
-
-
   @override
   CrowtechBasePage<Person> build() {
     return CrowtechBasePage<Person>();
   }
 
-  void fetchUsers(
-      Locale locale, String token, NestFilter nestfilter) async {
-
+  void fetchUsers(Locale locale, String token, NestFilter nestfilter) async {
     String jsonDataStr = jsonEncode(nestfilter);
     logNoStack
         .i("Sending NestFilter gps $nestfilter with json as $jsonDataStr");
@@ -41,15 +37,16 @@ class UsersFetcher extends Notifier<CrowtechBasePage<Person>> {
     logNoStack.d("result ${response.body.toString()}");
     final map = jsonDecode(response.body);
 
-  
-      CrowtechBasePage<Person> page =
-          CrowtechBasePage<Person>(itemFromJson: Person.fromJson).fromJson(map);
+    CrowtechBasePage<Person> page =
+        CrowtechBasePage<Person>(itemFromJson: Person.fromJson).fromJson(map);
 
-      state = page;
-   
-      }
+    for (int i = 0; i < page.itemCount(); i++) {
+      logNoStack.i("User $i  ${page.items![i]}");
+    }
+    state = page;
+  }
 }
 
 // Notifier provider holding the state
-final locationsProvider =
+final usersProvider =
     NotifierProvider<UsersFetcher, CrowtechBasePage<Person>>(UsersFetcher.new);

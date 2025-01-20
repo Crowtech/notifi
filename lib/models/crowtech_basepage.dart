@@ -45,6 +45,15 @@ class CrowtechBasePage<T extends CrowtechBase> {
     return this;
   }
 
+
+  int itemCount() {
+    if (items == null) {
+      return 0;
+    } else {
+      return items!.length;
+    }
+  }
+
   @override
   String toString() {
     String ret =
