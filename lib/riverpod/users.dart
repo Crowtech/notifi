@@ -26,7 +26,7 @@ class UsersFetcher extends Notifier<CrowtechBasePage<Person>> {
     return CrowtechBasePage<Person>();
   }
 
-  void fetchUsers(Locale locale, String token, NestFilter nestfilter) async {
+  void fetch(Locale locale, String token, NestFilter nestfilter) async {
     String jsonDataStr = jsonEncode(nestfilter);
     logNoStack
         .i("Sending NestFilter gps $nestfilter with json as $jsonDataStr");
