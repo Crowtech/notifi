@@ -111,10 +111,11 @@ List<String> colours = ['red', 'green', 'blue', 'amber'];
 
       if (page.items != null) {
         for (var i = 0; i < page.items!.length; i++) {
-          
-          GPS gps = page.items![i];
+          String colour = colours[i % colours.length];
+           GPS gps = page.items![i];
           logNoStack.i('GPS $gps');
           LatLng ll = LatLng(gps.latitude, gps.longitude);
+          double heading = gps.heading.round().toDouble();
           _userlocations.add(Marker(
               point: ll,
               width: 24,
@@ -122,9 +123,9 @@ List<String> colours = ['red', 'green', 'blue', 'amber'];
               rotate: false,
               builder: (context) {
                 return Transform.rotate(
-                    angle: (gps.heading * (math.pi / 180)),
+                    angle: (heading * (math.pi / 180)),
                     child: Image.asset(
-                        LOCATION_ARROW_IMAGE_PATH));
+                        "assets/images/markers/location-arrow-$colour.png"));
               }));
         }
       }

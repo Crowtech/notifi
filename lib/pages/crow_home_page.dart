@@ -10,6 +10,7 @@ import 'package:logger/logger.dart' as logger;
 import 'package:notifi/api_utils.dart';
 import 'package:notifi/app_state.dart' as app_state;
 import 'package:notifi/credentials.dart';
+import 'package:notifi/geo/geomap2.dart';
 import 'package:notifi/geo_utils.dart';
 import 'package:notifi/jwt_utils.dart';
 import 'package:notifi/models/crowtech_basepage.dart';
@@ -19,7 +20,6 @@ import 'package:notifi/notifi.dart';
 import 'package:oidc/oidc.dart';
 import 'package:provider/provider.dart';
 
-import '../geo/geomap2.dart';
 import '../i18n/strings.g.dart';
 
 var log = logger.Logger(
@@ -449,7 +449,7 @@ class _CrowtechHomePageState extends State<CrowtechHomePage>
                     height: 400.0,
                     child: Card(
                       // child: GeoMapHome(location: _location),
-                      child: GeoMap2(points:points),
+                      child: GeoMap2(),
                     )),
               ),
 
