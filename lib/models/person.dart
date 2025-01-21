@@ -75,7 +75,7 @@ class Person extends Resource {
    // return "https://gravatar.com/avatar/e011911a71acf8c16ac28471deeeea2a?s=64";
     
     if (avatarUrl == null) {
-    return "http://gravatar.com/avatar/${generateMd5(email)}?s=64";
+    return "https://gravatar.com/avatar/${generateMd5(email)}?s=64";
     } else {
       return avatarUrl!;
     }
