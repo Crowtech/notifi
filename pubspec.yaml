@@ -1,6 +1,6 @@
 name: notifi
 description: "Notification Package."
-version: 0.0.24
+version: 0.0.25
 #homepage:
 
 environment:
@@ -80,6 +80,8 @@ dev_dependencies:
   #custom_lint: any 
   #custom_lint: ^0.7.0 
   riverpod_lint: ^2.6.1
+  flutter_web_plugins:
+    sdk: flutter
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
