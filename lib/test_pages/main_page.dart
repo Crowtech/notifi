@@ -1,7 +1,7 @@
 import '../providers/bottom_nav_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../i18n/strings.g.dart' as t;
+import '../../i18n/strings.g.dart' as t;
 import 'package:logger/logger.dart' as logger;
 
 
