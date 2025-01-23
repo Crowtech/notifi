@@ -14,6 +14,9 @@
   "moving": "动人",
   "odometer": "里程表",
   "still": "固定的",
+  "home": "家",
+  "favourite": "最喜欢的",
+  "settings": "设置",
   "locales(map)": {
     "en": "英文",
     "zh": "中文"

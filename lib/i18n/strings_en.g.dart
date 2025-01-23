@@ -52,6 +52,9 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get moving => 'Moving';
 	String get odometer => 'Odometer';
 	String get still => 'Still';
+	String get home => 'Home';
+	String get favourite => 'Favourite';
+	String get settings => 'Settings';
 	Map<String, String> get locales => {
 		'en': 'English',
 		'zh': 'Chinese',
@@ -78,6 +81,9 @@ extension on Translations {
 			case 'moving': return 'Moving';
 			case 'odometer': return 'Odometer';
 			case 'still': return 'Still';
+			case 'home': return 'Home';
+			case 'favourite': return 'Favourite';
+			case 'settings': return 'Settings';
 			case 'locales.en': return 'English';
 			case 'locales.zh': return 'Chinese';
 			default: return null;

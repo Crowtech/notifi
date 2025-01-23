@@ -48,6 +48,9 @@ class TranslationsZh implements Translations {
 	@override String get moving => '动人';
 	@override String get odometer => '里程表';
 	@override String get still => '固定的';
+	@override String get home => '家';
+	@override String get favourite => '最喜欢的';
+	@override String get settings => '设置';
 	@override Map<String, String> get locales => {
 		'en': '英文',
 		'zh': '中文',
@@ -74,6 +77,9 @@ extension on TranslationsZh {
 			case 'moving': return '动人';
 			case 'odometer': return '里程表';
 			case 'still': return '固定的';
+			case 'home': return '家';
+			case 'favourite': return '最喜欢的';
+			case 'settings': return '设置';
 			case 'locales.en': return '英文';
 			case 'locales.zh': return '中文';
 			default: return null;
