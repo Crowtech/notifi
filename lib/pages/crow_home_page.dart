@@ -444,7 +444,7 @@ class _CrowtechHomePageState extends State<CrowtechHomePage>
 
               Visibility(
                 visible: _locationReady,
-                child: SizedBox(
+                child: const SizedBox(
                     width: 300.0,
                     height: 400.0,
                     child: Card(

@@ -35,6 +35,7 @@ class CrowtechRoutes {
 
 final GoRouter router = GoRouter(
   initialLocation: CrowtechRoutes.auth,
+  
   observers: [PosthogObserver()],
   routes: [
 

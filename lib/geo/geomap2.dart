@@ -15,10 +15,7 @@ import 'package:notifi/util/dialog.dart' as util;
 import 'package:latlong2/latlong.dart';
 import 'package:notifi/util/geospatial.dart';
 import 'package:logger/logger.dart' as logger;
-import 'package:provider/provider.dart' as prov;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:notifi/riverpod/random.dart';
-import 'package:notifi/riverpod/locations.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),

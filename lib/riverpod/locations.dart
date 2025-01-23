@@ -1,10 +1,8 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:http/http.dart' as http;
 import 'package:latlong2/latlong.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/credentials.dart';
@@ -12,7 +10,6 @@ import 'package:notifi/models/gps.dart';
 import 'package:notifi/models/nestfilter.dart';
 import '../api_utils.dart';
 import '../models/crowtech_basepage.dart';
-import '../models/nestfilter.dart';
 import 'dart:math' as math;
 
 var log = logger.Logger(
