@@ -1,7 +1,7 @@
 import '../providers/bottom_nav_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../i18n/strings.g.dart' as t;
+import '../i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
 
 
@@ -39,10 +39,10 @@ class MainPage extends ConsumerWidget {
           ref.read(indexBottomNavbarProvider.notifier).update((state) => value);
         },
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: t.home),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: nt.home),
           BottomNavigationBarItem(
-              icon: Icon(Icons.favorite), label: t.favourite),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: t.settings),
+              icon: Icon(Icons.favorite), label: nt.favourite),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: nt.settings),
         ],
       ),
       body: bodies[indexBottomNavbar],
