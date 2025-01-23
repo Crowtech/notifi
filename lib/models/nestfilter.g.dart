@@ -7,18 +7,22 @@ part of 'nestfilter.dart';
 // **************************************************************************
 
 NestFilter _$NestFilterFromJson(Map<String, dynamic> json) => NestFilter(
-      orgIdList: (json['orgIdList'] as List<dynamic>)
-          .map((e) => (e as num).toInt())
-          .toList(),
-      resourceCodeList: (json['resourceCodeList'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
-      resourceIdList: (json['resourceIdList'] as List<dynamic>)
-          .map((e) => (e as num).toInt())
-          .toList(),
-      deviceCodeList: (json['deviceCodeList'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
+      orgIdList: (json['orgIdList'] as List<dynamic>?)
+              ?.map((e) => (e as num).toInt())
+              .toList() ??
+          const [],
+      resourceCodeList: (json['resourceCodeList'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      resourceIdList: (json['resourceIdList'] as List<dynamic>?)
+              ?.map((e) => (e as num).toInt())
+              .toList() ??
+          const [],
+      deviceCodeList: (json['deviceCodeList'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
       query: json['query'] as String? ?? "",
       offset: (json['offset'] as num?)?.toInt() ?? 0,
       limit: (json['limit'] as num?)?.toInt() ?? 10,
