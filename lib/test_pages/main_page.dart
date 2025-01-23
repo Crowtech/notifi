@@ -21,14 +21,14 @@ class MainPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final bodies = [
-      const Center(
-        child: Text('Hello From Home'),
+      Center(
+        child: Text("Hello From ${nt.t.home}"),
       ),
-      const Center(
-        child: Text('Hello From Favorite'),
+      Center(
+        child: Text("Hello From ${nt.t.favourite}"),
       ),
-      const Center(
-        child: Text('Hello From Settings'),
+      Center(
+        child: Text('Hello From ${nt.t.settings}'),
       ),
     ];
     final indexBottomNavbar = ref.watch(indexBottomNavbarProvider);
