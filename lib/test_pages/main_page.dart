@@ -38,11 +38,11 @@ class MainPage extends ConsumerWidget {
         onTap: (value) {
           ref.read(indexBottomNavbarProvider.notifier).update((state) => value);
         },
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: nt.home),
+        items:  [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: nt.t.home),
           BottomNavigationBarItem(
-              icon: Icon(Icons.favorite), label: nt.favourite),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: nt.settings),
+              icon: Icon(Icons.favorite), label: nt.t.favourite),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: nt.t.settings),
         ],
       ),
       body: bodies[indexBottomNavbar],
