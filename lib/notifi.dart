@@ -202,6 +202,7 @@ class Notifi extends ChangeNotifier {
 
     WidgetsFlutterBinding.ensureInitialized();
 
+logNoStack.i("Camera is ${enableCamera?"ENABLED":"DISABLED"}");
     if (enableCamera) {
       initialiseCamera();
     }
