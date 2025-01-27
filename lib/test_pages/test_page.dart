@@ -37,7 +37,7 @@ class TestPage extends ConsumerWidget {
     return Scaffold(
             appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             context.pop();
           },
@@ -50,10 +50,10 @@ class TestPage extends ConsumerWidget {
           ref.read(indexBottomNavbarProvider.notifier).update((state) => value);
         },
         items:  [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: nt.t.home),
+          BottomNavigationBarItem(icon: const Icon(Icons.home), label: nt.t.home),
           BottomNavigationBarItem(
-              icon: Icon(Icons.favorite), label: nt.t.favourite),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: nt.t.settings),
+              icon: const Icon(Icons.favorite), label: nt.t.favourite),
+          BottomNavigationBarItem(icon: const Icon(Icons.settings), label: nt.t.settings),
         ],
       ),
       body: bodies[indexBottomNavbar],

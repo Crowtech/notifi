@@ -15,11 +15,11 @@ class Dashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Dashboard"),
-        leading: TopLeftMenu.new(),
+        title: const Text("Dashboard"),
+        leading: const TopLeftMenu.new(),
         actions: [
           PopupMenuButton<String>(
-            icon: Icon(Icons.settings),
+            icon: const Icon(Icons.settings),
             onSelected: (value) {
               if (value == "Item 3") {
                 // Handle Item 3 action
@@ -28,11 +28,11 @@ class Dashboard extends StatelessWidget {
               }
             },
             itemBuilder: (BuildContext context) => [
-              PopupMenuItem(
+              const PopupMenuItem(
                 value: "Item 3",
                 child: Text("Item 3"),
               ),
-              PopupMenuItem(
+              const PopupMenuItem(
                 value: "Item 4",
                 child: Text("Item 4"),
               ),
@@ -40,7 +40,7 @@ class Dashboard extends StatelessWidget {
           ),
         ],
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           "Dashboard Content Here",
           style: TextStyle(fontSize: 24),

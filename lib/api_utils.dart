@@ -7,6 +7,7 @@ import 'package:logger/logger.dart' as logger;
 import 'package:notifi/credentials.dart';
 import 'package:notifi/models/gps.dart';
 import 'package:notifi/models/nestfilter.dart';
+import 'package:minio/minio.dart';
 
 import 'models/crowtech_basepage.dart';
 
@@ -147,6 +148,11 @@ Future<Map> registerFCM(
     return Map;
   });
   return <dynamic, dynamic>{};
+}
+
+Future<void> uploadMinio(String file)
+async {
+  
 }
 
 //Future<CrowtechBasePage<GPS>> fetchGPS(

@@ -14,6 +14,18 @@ import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 import 'package:notifi/notifi.dart' as notifi;
 import '../i18n/strings.g.dart' as nt; // Importing localization strings
+import 'package:logger/logger.dart' as logger;
+
+var log = logger.Logger(
+  printer: logger.PrettyPrinter(),
+  level: logger.Level.info,
+);
+
+var logNoStack = logger.Logger(
+  printer: logger.PrettyPrinter(methodCount: 0),
+  level: logger.Level.info,
+);
+
 
 /// Camera example home widget.
 class CameraHome extends StatefulWidget {
@@ -138,7 +150,7 @@ class _CameraHomeState extends State<CameraHome>
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             context.pop();
           },
@@ -722,6 +734,8 @@ class _CameraHomeState extends State<CameraHome>
         });
         if (file != null) {
           showInSnackBar('Picture saved to ${file.path}');
+          log.i("The file is ${file.toString()}");
+          
         }
       }
     });

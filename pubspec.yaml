@@ -1,7 +1,7 @@
 name: notifi
 description: "Notification Package."
 
-version: 0.0.35
+version: 0.0.36
 #homepage:
 
 environment:
@@ -41,6 +41,7 @@ dependencies:
   latlng: ^2.0.7
   latlong2: ^0.9.1
   logger: ^2.5.0
+  minio: ^3.5.7
   mockito: ^5.0.13
   oidc: ^0.9.0+1
   oidc_core: ^0.9.1

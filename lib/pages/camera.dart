@@ -132,7 +132,7 @@ class CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
         child: Scaffold(
           appBar: AppBar(
               leading: IconButton(
-                icon: Icon(Icons.arrow_back),
+                icon: const Icon(Icons.arrow_back),
                 onPressed: () {
                   context.pop();
                 },

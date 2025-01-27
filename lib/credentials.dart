@@ -24,6 +24,9 @@ const _defaultRealmBaseUrl = String.fromEnvironment('AUTH_REALM_BASE_URL');
 const _defaultAuthEndpointUrl = String.fromEnvironment(
     'AUTHORIZATION_ENDPOINT_URL');
 
+const _defaultMinioEndpointUrl = String.fromEnvironment(
+    'MINIO_ENDPOINT_URL');
+
 const _posthogKey = String.fromEnvironment('POSTHOG_KEY');
 const _transistorsoftKey=String.fromEnvironment('TRANSISTORSOFT_KEY');
 const _vapidKey=String.fromEnvironment('VAPID_KEY');
@@ -40,6 +43,8 @@ const _testPassword = String.fromEnvironment('TEST_PASSWORD', defaultValue: "pas
 
 const _defaultEncryptionKey = String.fromEnvironment('ENCRYPTION_KEY',
     defaultValue: "crowtech123456789");
+
+
 const _defaultAudience = ["fieldservice"];
 
 const _defaultscopes = [
@@ -60,6 +65,8 @@ String get defaultRedirectUrl => _defaultRedirectUrl;
 String get defaultRealmBaseUrl => _defaultRealmBaseUrl;
 String get defaultAuthEndpointUrl => _defaultAuthEndpointUrl;
 String get defaultAPIBaseUrl => _defaultAPIBaseUrl;
+String get defaultMinioEndpointUrl => _defaultMinioEndpointUrl;
+
 bool get skipLogin => _skipLogin;
 bool get enableCamera => _enableCamera;
 String get testUsername => _testUsername;

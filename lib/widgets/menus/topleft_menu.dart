@@ -8,7 +8,7 @@ class TopLeftMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<String>(
-          icon: Icon(Icons.menu),
+          icon: const Icon(Icons.menu),
           onSelected: (value) {
             if (value == "Item 1") {
               // Handle Item 1 action
@@ -17,11 +17,11 @@ class TopLeftMenu extends StatelessWidget {
             }
           },
           itemBuilder: (BuildContext context) => [
-            PopupMenuItem(
+            const PopupMenuItem(
               value: "Item 1",
               child: Text("Item 1"),
             ),
-            PopupMenuItem(
+            const PopupMenuItem(
               value: "Item 2",
               child: Text("Item 2"),
             ),
