@@ -34,6 +34,7 @@ const _defaultAPIBaseUrl = String.fromEnvironment('API_BASE_URL');
 const _defaultApiPrefixPath = String.fromEnvironment('API_PREFIX_PATH');
 
 const _skipLogin = bool.fromEnvironment('SKIP_LOGIN', defaultValue: false);
+const _enableCamera = bool.fromEnvironment('ENABLE_CAMERA', defaultValue: false);
 const _testUsername = String.fromEnvironment('TEST_USERNAME', defaultValue: "crowtech");
 const _testPassword = String.fromEnvironment('TEST_PASSWORD', defaultValue: "password");
 
@@ -60,6 +61,7 @@ String get defaultRealmBaseUrl => _defaultRealmBaseUrl;
 String get defaultAuthEndpointUrl => _defaultAuthEndpointUrl;
 String get defaultAPIBaseUrl => _defaultAPIBaseUrl;
 bool get skipLogin => _skipLogin;
+bool get enableCamera => _enableCamera;
 String get testUsername => _testUsername;
 String get testPassword => _testPassword;
 String get defaultEncryptionKey => _defaultEncryptionKey;

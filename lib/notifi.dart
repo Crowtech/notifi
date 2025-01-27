@@ -3,9 +3,11 @@ library notifi;
 import 'dart:convert';
 import 'dart:io' show Platform;
 
+import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_storage/get_storage.dart';
@@ -13,6 +15,8 @@ import 'package:notifi/geo_page.dart';
 import 'package:notifi/models/person.dart' as Person;
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:logger/logger.dart' as logger;
+
+import 'credentials.dart';
 
 
 var log = logger.Logger(
@@ -87,6 +91,7 @@ class Notifi extends ChangeNotifier {
 
   late PackageInfo _packageInfo;
   late String _deviceId;
+  List<CameraDescription> _cameras = <CameraDescription>[];
 
   Person.Person? _user;
   bool _userReady = false;
@@ -108,6 +113,8 @@ class Notifi extends ChangeNotifier {
   List<String> get topics => _topics;
 
   String get fcm => _fcm;
+  List<CameraDescription> get cameras => _cameras;
+
   Notifi get notifi => this;
 
   bool get preventAutoLogin => _preventAutoLogin;
@@ -180,6 +187,9 @@ class Notifi extends ChangeNotifier {
     // log.d("PACKAGE ${packageInfo!.version} ${deviceId} ");
   }
 
+  
+
+
   ChangeNotifier initialise() {
     init();
     return this;
@@ -189,6 +199,12 @@ class Notifi extends ChangeNotifier {
     logNoStack.i("Notifi initing!");
     await GetStorage.init();
     await Firebase.initializeApp(options: options);
+
+    WidgetsFlutterBinding.ensureInitialized();
+
+    if (enableCamera) {
+      initialiseCamera();
+    }
 
     FirebaseMessaging messaging = FirebaseMessaging.instance;
 
@@ -315,5 +331,15 @@ class Notifi extends ChangeNotifier {
     } else {
       logNoStack.i("Not subscribing to topics");
     }
+  }
+
+  void initialiseCamera() async 
+  {
+      // Fetch the available cameras before initializing the app.
+  try {
+    _cameras = await availableCameras();
+  } on CameraException catch (e) {
+    logNoStack.e("${e.code} ${e..description}");
+  }
   }
 }
