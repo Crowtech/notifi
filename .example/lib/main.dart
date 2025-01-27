@@ -15,7 +15,7 @@ import 'package:provider/provider.dart'; // Importing provider for state managem
 import 'package:shared_preferences/shared_preferences.dart'; // Importing shared preferences for persistent storage
 import 'package:background_fetch/background_fetch.dart';
 import 'firebase_options.dart';
-import 'l10n/strings.g.dart'; // Importing localization strings
+import 'i18n/strings.g.dart'; // Importing localization strings
 import 'routes.dart'; // Importing application routes
 
 var log = logger.Logger(

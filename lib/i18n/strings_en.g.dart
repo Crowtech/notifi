@@ -38,12 +38,26 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 	// Translations
 	String get app_title => 'Crowtech';
+	String get audio_access_denied => 'You have denied audio access';
+	String get audio_access_denied_without_prompt => 'Please go to Settings app to enable audio access';
+	String get audio_access_restricted => 'Audio access is restricted';
+	String get auto => 'Auto';
+	String get camera_title => 'Camera';
+	String get camera_access_denied_without_prompt => 'Please go to Settings app to enable camera access.';
+	String get camera_access_restricted => 'Camera access is restricted';
+	String get camera_denied => 'Camera access denied by user.';
+	String get camera_not_found => 'No camera found.';
 	String get deviceid => 'DeviceID';
 	String get email => 'Email';
+	String get exposure_mode => 'Exposure Mode';
+	String get exposure_offset => 'Exposure Offset';
 	String get firstname => 'Firstname';
+	String get focus_mode => 'Focus Mode';
 	String get intro_title => 'Welcome to Crowtech';
 	String get intro_description => 'Advanced Design';
+	String get locked => 'Locked';
 	String get movement_status => 'Is Moving?';
+	String get none => 'None';
 	String get highlight_title => 'Generate Context-Aware Translations';
 	String get highlight_description => 'Generate context-aware aware translatinons with GPT';
 	String get lastname => 'Lastname';
@@ -51,6 +65,9 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get logout => 'Logout';
 	String get moving => 'Moving';
 	String get odometer => 'Odometer';
+	String get reset_offset => 'Reset Offset';
+	String get resetting_exposure_point => 'Resetting exposure point';
+	String get resetting_focus_point => 'Resetting focus point';
 	String get still => 'Still';
 	String get home => 'Home';
 	String get favourite => 'Favourite';
@@ -67,12 +84,26 @@ extension on Translations {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
 			case 'app_title': return 'Crowtech';
+			case 'audio_access_denied': return 'You have denied audio access';
+			case 'audio_access_denied_without_prompt': return 'Please go to Settings app to enable audio access';
+			case 'audio_access_restricted': return 'Audio access is restricted';
+			case 'auto': return 'Auto';
+			case 'camera_title': return 'Camera';
+			case 'camera_access_denied_without_prompt': return 'Please go to Settings app to enable camera access.';
+			case 'camera_access_restricted': return 'Camera access is restricted';
+			case 'camera_denied': return 'Camera access denied by user.';
+			case 'camera_not_found': return 'No camera found.';
 			case 'deviceid': return 'DeviceID';
 			case 'email': return 'Email';
+			case 'exposure_mode': return 'Exposure Mode';
+			case 'exposure_offset': return 'Exposure Offset';
 			case 'firstname': return 'Firstname';
+			case 'focus_mode': return 'Focus Mode';
 			case 'intro_title': return 'Welcome to Crowtech';
 			case 'intro_description': return 'Advanced Design';
+			case 'locked': return 'Locked';
 			case 'movement_status': return 'Is Moving?';
+			case 'none': return 'None';
 			case 'highlight_title': return 'Generate Context-Aware Translations';
 			case 'highlight_description': return 'Generate context-aware aware translatinons with GPT';
 			case 'lastname': return 'Lastname';
@@ -80,6 +111,9 @@ extension on Translations {
 			case 'logout': return 'Logout';
 			case 'moving': return 'Moving';
 			case 'odometer': return 'Odometer';
+			case 'reset_offset': return 'Reset Offset';
+			case 'resetting_exposure_point': return 'Resetting exposure point';
+			case 'resetting_focus_point': return 'Resetting focus point';
 			case 'still': return 'Still';
 			case 'home': return 'Home';
 			case 'favourite': return 'Favourite';

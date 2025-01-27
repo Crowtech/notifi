@@ -9,9 +9,11 @@ import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 import 'package:notifi/notifi.dart' as notifi;
+import '../i18n/strings.g.dart' as nt; // Importing localization strings
 
 /// Camera example home widget.
 class CameraHome extends StatefulWidget {
@@ -135,7 +137,13 @@ class _CameraHomeState extends State<CameraHome>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Camera example'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            context.pop();
+          },
+        ),
+        title: Text(nt.t.camera_title),
       ),
       body: Column(
         children: <Widget>[
@@ -388,8 +396,8 @@ class _CameraHomeState extends State<CameraHome>
           color: Colors.grey.shade50,
           child: Column(
             children: <Widget>[
-              const Center(
-                child: Text('Exposure Mode'),
+              Center(
+                child: Text(nt.t.exposure_mode),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -403,10 +411,10 @@ class _CameraHomeState extends State<CameraHome>
                     onLongPress: () {
                       if (controller != null) {
                         controller!.setExposurePoint(null);
-                        showInSnackBar('Resetting exposure point');
+                        showInSnackBar(nt.t.resetting_exposure_point);
                       }
                     },
-                    child: const Text('AUTO'),
+                    child: Text(nt.t.auto),
                   ),
                   TextButton(
                     style: styleLocked,
@@ -414,19 +422,19 @@ class _CameraHomeState extends State<CameraHome>
                         ? () =>
                             onSetExposureModeButtonPressed(ExposureMode.locked)
                         : null,
-                    child: const Text('LOCKED'),
+                    child: Text(nt.t.locked),
                   ),
                   TextButton(
                     style: styleLocked,
                     onPressed: controller != null
                         ? () => controller!.setExposureOffset(0.0)
                         : null,
-                    child: const Text('RESET OFFSET'),
+                    child: Text(nt.t.reset_offset),
                   ),
                 ],
               ),
-              const Center(
-                child: Text('Exposure Offset'),
+              Center(
+                child: Text(nt.t.exposure_offset),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -471,8 +479,8 @@ class _CameraHomeState extends State<CameraHome>
           color: Colors.grey.shade50,
           child: Column(
             children: <Widget>[
-              const Center(
-                child: Text('Focus Mode'),
+              Center(
+                child: Text(nt.t.focus_mode),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -486,16 +494,16 @@ class _CameraHomeState extends State<CameraHome>
                       if (controller != null) {
                         controller!.setFocusPoint(null);
                       }
-                      showInSnackBar('Resetting focus point');
+                      showInSnackBar(nt.t.resetting_focus_point);
                     },
-                    child: const Text('AUTO'),
+                    child: Text(nt.t.auto),
                   ),
                   TextButton(
                     style: styleLocked,
                     onPressed: controller != null
                         ? () => onSetFocusModeButtonPressed(FocusMode.locked)
                         : null,
-                    child: const Text('LOCKED'),
+                    child: Text(nt.t.locked),
                   ),
                 ],
               ),
@@ -581,11 +589,12 @@ class _CameraHomeState extends State<CameraHome>
 
     if (Provider.of<notifi.Notifi>(context, listen: false).cameras.isEmpty) {
       SchedulerBinding.instance.addPostFrameCallback((_) async {
-        showInSnackBar('No camera found.');
+        showInSnackBar(nt.t.camera_not_found);
       });
-      return const Text('None');
+      return Text(nt.t.none);
     } else {
-      for (final CameraDescription cameraDescription in Provider.of<notifi.Notifi>(context, listen: false).cameras) {
+      for (final CameraDescription cameraDescription
+          in Provider.of<notifi.Notifi>(context, listen: false).cameras) {
         toggles.add(
           SizedBox(
             width: 90.0,
@@ -678,21 +687,21 @@ class _CameraHomeState extends State<CameraHome>
     } on CameraException catch (e) {
       switch (e.code) {
         case 'CameraAccessDenied':
-          showInSnackBar('You have denied camera access.');
+          showInSnackBar(nt.t.camera_denied);
         case 'CameraAccessDeniedWithoutPrompt':
           // iOS only
-          showInSnackBar('Please go to Settings app to enable camera access.');
+          showInSnackBar(nt.t.camera_access_denied_without_prompt);
         case 'CameraAccessRestricted':
           // iOS only
-          showInSnackBar('Camera access is restricted.');
+          showInSnackBar(nt.t.camera_access_restricted);
         case 'AudioAccessDenied':
-          showInSnackBar('You have denied audio access.');
+          showInSnackBar(nt.t.audio_access_denied);
         case 'AudioAccessDeniedWithoutPrompt':
           // iOS only
-          showInSnackBar('Please go to Settings app to enable audio access.');
+          showInSnackBar(nt.t.audio_access_denied_without_prompt);
         case 'AudioAccessRestricted':
           // iOS only
-          showInSnackBar('Audio access is restricted.');
+          showInSnackBar(nt.t.audio_access_restricted);
         default:
           _showCameraException(e);
       }
@@ -1049,4 +1058,3 @@ class CameraApp extends StatelessWidget {
     );
   }
 }
-

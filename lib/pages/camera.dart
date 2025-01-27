@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:video_player/video_player.dart';
+import '../i18n/strings.g.dart' as nt; // Importing localization strings
 
 class CameraPage extends StatefulWidget {
   const CameraPage({super.key});
@@ -128,6 +130,15 @@ class CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
     if (_isCameraInitialized) {
       return SafeArea(
         child: Scaffold(
+          appBar: AppBar(
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () {
+                  context.pop();
+                },
+              ),
+                      title: Text(nt.t.camera_title),
+          ),
           body: Column(
             children: [
               CameraPreview(_controller!),
