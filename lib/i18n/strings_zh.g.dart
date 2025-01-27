@@ -66,6 +66,7 @@ class TranslationsZh extends Translations {
 	@override String get resetting_exposure_point => '重置曝光点';
 	@override String get resetting_focus_point => '重置焦点';
 	@override String get still => '固定的';
+	@override String get test_page => '测试页';
 	@override String get home => '家';
 	@override String get favourite => '最喜欢的';
 	@override String get settings => '设置';
@@ -111,6 +112,7 @@ extension on TranslationsZh {
 			case 'resetting_exposure_point': return '重置曝光点';
 			case 'resetting_focus_point': return '重置焦点';
 			case 'still': return '固定的';
+			case 'test_page': return '测试页';
 			case 'home': return '家';
 			case 'favourite': return '最喜欢的';
 			case 'settings': return '设置';

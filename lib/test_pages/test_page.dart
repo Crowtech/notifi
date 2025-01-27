@@ -1,3 +1,5 @@
+import 'package:go_router/go_router.dart';
+
 import '../providers/bottom_nav_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,8 +17,8 @@ var logNoStack = logger.Logger(
   level: logger.Level.info,
 );
 
-class MainPage extends ConsumerWidget {
-  const MainPage({super.key});
+class TestPage extends ConsumerWidget {
+  const TestPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -33,6 +35,15 @@ class MainPage extends ConsumerWidget {
     ];
     final indexBottomNavbar = ref.watch(indexBottomNavbarProvider);
     return Scaffold(
+            appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            context.pop();
+          },
+        ),
+        title: Text(nt.t.test_page),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: indexBottomNavbar,
         onTap: (value) {

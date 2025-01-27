@@ -69,6 +69,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get resetting_exposure_point => 'Resetting exposure point';
 	String get resetting_focus_point => 'Resetting focus point';
 	String get still => 'Still';
+	String get test_page => 'Test Page';
 	String get home => 'Home';
 	String get favourite => 'Favourite';
 	String get settings => 'Settings';
@@ -115,6 +116,7 @@ extension on Translations {
 			case 'resetting_exposure_point': return 'Resetting exposure point';
 			case 'resetting_focus_point': return 'Resetting focus point';
 			case 'still': return 'Still';
+			case 'test_page': return 'Test Page';
 			case 'home': return 'Home';
 			case 'favourite': return 'Favourite';
 			case 'settings': return 'Settings';
