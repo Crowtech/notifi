@@ -1,7 +1,7 @@
 name: notifi
 description: "Notification Package."
 
-version: 0.0.36
+version: 0.0.37
 #homepage:
 
 environment:
@@ -58,6 +58,7 @@ dependencies:
   uuid: any 
   camera: ^0.11.1
   video_player: ^2.9.2
+  image_picker: ^1.1.2
   #riverpod: ^2.6.1
   #hooks_riverpod: ^2.6.1
   #flutter_riverpod: ^2.6.1
