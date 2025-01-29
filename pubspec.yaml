@@ -103,11 +103,11 @@ flutter:
           weight: 700
         - asset: assets/fonts/AvenirLTStd-Book.otf
           weight: 200
-    - family: Schyler
-      fonts:
-        - asset: fonts/Schyler-Regular.ttf
-        - asset: fonts/Schyler-Italic.ttf
-          style : italic
+    # - family: Schyler
+    #   fonts:
+    #     - asset: fonts/Schyler-Regular.ttf
+    #     - asset: fonts/Schyler-Italic.ttf
+    #       style : italic
 
 assets:
     - assets/
