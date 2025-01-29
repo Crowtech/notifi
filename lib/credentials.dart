@@ -47,8 +47,8 @@ const _testPassword = String.fromEnvironment('TEST_PASSWORD', defaultValue: "pas
 const _defaultEncryptionKey = String.fromEnvironment('ENCRYPTION_KEY',
     defaultValue: "crowtech123456789");
 
-const _seedColourHex = String.fromEnvironment('SEED_COLOUR_HEX', defaultValue: "0xFF370883");
-const _hoverColourHex = String.fromEnvironment('HOVER_COLOUR_HEX', defaultValue: "0xFF087F83");
+const _seedColourHex = String.fromEnvironment('SEED_COLOUR_HEX', defaultValue: "#FF370883");
+const _hoverColourHex = String.fromEnvironment('HOVER_COLOUR_HEX', defaultValue: "#FF087F83");
 
 const _defaultAudience = ["fieldservice"];
 
