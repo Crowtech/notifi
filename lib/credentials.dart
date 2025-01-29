@@ -1,3 +1,6 @@
+import 'dart:ui';
+import 'package:flutter/material.dart';
+
 const _defaultRealm =
      String.fromEnvironment('AUTH_REALM', defaultValue: "crowtech");
 
@@ -44,6 +47,7 @@ const _testPassword = String.fromEnvironment('TEST_PASSWORD', defaultValue: "pas
 const _defaultEncryptionKey = String.fromEnvironment('ENCRYPTION_KEY',
     defaultValue: "crowtech123456789");
 
+const _seedColourHex = int.fromEnvironment('SEED_COLOUR_HEX', defaultValue: 0xffb74093);
 
 const _defaultAudience = ["fieldservice"];
 
@@ -72,6 +76,9 @@ bool get enableCamera => _enableCamera;
 String get testUsername => _testUsername;
 String get testPassword => _testPassword;
 String get defaultEncryptionKey => _defaultEncryptionKey;
+
+int get seedColourHex => _seedColourHex;
+
 List<String> get defaultAudience => _defaultAudience;
 List<String> get defaultscopes => _defaultscopes;
 String get defaultApiPrefixPath => _defaultApiPrefixPath;
