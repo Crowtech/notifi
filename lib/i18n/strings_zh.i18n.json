@@ -15,6 +15,7 @@
   "exposure_offset": "曝光偏移",
   "firstname": "给定的名称",
   "focus_mode": "专注模式",
+  "home": "家",
   "intro_title": "欢迎使用 Crowtech",
   "intro_description": "出行即服务",
   "locked": "已锁定",
@@ -30,11 +31,11 @@
   "reset_offset": "重置偏移",
   "resetting_exposure_point": "重置曝光点",
   "resetting_focus_point": "重置焦点",
+  "settings": "设置",
   "still": "固定的",
   "test_page": "测试页",
-  "home": "家",
   "favourite": "最喜欢的",
-  "settings": "设置",
+
   "locales(map)": {
     "en": "英文",
     "zh": "中文"

@@ -13,8 +13,10 @@
   "email": "Email",
   "exposure_mode": "Exposure Mode",
   "exposure_offset": "Exposure Offset",
+  "favourite": "Favourite",
   "firstname": "Firstname",
   "focus_mode": "Focus Mode",
+  "home": "Home",
   "intro_title": "Welcome to Crowtech",
   "intro_description": "Advanced Design",
   "locked": "Locked",
@@ -30,11 +32,10 @@
   "reset_offset": "Reset Offset",
   "resetting_exposure_point": "Resetting exposure point",
   "resetting_focus_point": "Resetting focus point",
+  "settings": "Settings",
   "still": "Still",
   "test_page": "Test Page",
-  "home": "Home",
-  "favourite": "Favourite",
-  "settings": "Settings",
+
   "locales(map)": {
     "en": "English",
     "zh": "Chinese"
