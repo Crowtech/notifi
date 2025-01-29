@@ -41,6 +41,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get audio_access_denied => 'You have denied audio access';
 	String get audio_access_denied_without_prompt => 'Please go to Settings app to enable audio access';
 	String get audio_access_restricted => 'Audio access is restricted';
+	String get authored_by => 'by：{name}';
 	String get auto => 'Auto';
 	String get camera_title => 'Camera';
 	String get camera_access_denied_without_prompt => 'Please go to Settings app to enable camera access.';
@@ -48,11 +49,14 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get camera_denied => 'Camera access denied by user.';
 	String get camera_not_found => 'No camera found.';
 	String get deviceid => 'DeviceID';
+	String get edit => 'Edit';
 	String get email => 'Email';
 	String get exposure_mode => 'Exposure Mode';
 	String get exposure_offset => 'Exposure Offset';
+	String get favourite => 'Favourite';
 	String get firstname => 'Firstname';
 	String get focus_mode => 'Focus Mode';
+	String get home => 'Home';
 	String get intro_title => 'Welcome to Crowtech';
 	String get intro_description => 'Advanced Design';
 	String get locked => 'Locked';
@@ -68,11 +72,9 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get reset_offset => 'Reset Offset';
 	String get resetting_exposure_point => 'Resetting exposure point';
 	String get resetting_focus_point => 'Resetting focus point';
+	String get settings => 'Settings';
 	String get still => 'Still';
 	String get test_page => 'Test Page';
-	String get home => 'Home';
-	String get favourite => 'Favourite';
-	String get settings => 'Settings';
 	Map<String, String> get locales => {
 		'en': 'English',
 		'zh': 'Chinese',
@@ -88,6 +90,7 @@ extension on Translations {
 			case 'audio_access_denied': return 'You have denied audio access';
 			case 'audio_access_denied_without_prompt': return 'Please go to Settings app to enable audio access';
 			case 'audio_access_restricted': return 'Audio access is restricted';
+			case 'authored_by': return 'by：{name}';
 			case 'auto': return 'Auto';
 			case 'camera_title': return 'Camera';
 			case 'camera_access_denied_without_prompt': return 'Please go to Settings app to enable camera access.';
@@ -95,11 +98,14 @@ extension on Translations {
 			case 'camera_denied': return 'Camera access denied by user.';
 			case 'camera_not_found': return 'No camera found.';
 			case 'deviceid': return 'DeviceID';
+			case 'edit': return 'Edit';
 			case 'email': return 'Email';
 			case 'exposure_mode': return 'Exposure Mode';
 			case 'exposure_offset': return 'Exposure Offset';
+			case 'favourite': return 'Favourite';
 			case 'firstname': return 'Firstname';
 			case 'focus_mode': return 'Focus Mode';
+			case 'home': return 'Home';
 			case 'intro_title': return 'Welcome to Crowtech';
 			case 'intro_description': return 'Advanced Design';
 			case 'locked': return 'Locked';
@@ -115,11 +121,9 @@ extension on Translations {
 			case 'reset_offset': return 'Reset Offset';
 			case 'resetting_exposure_point': return 'Resetting exposure point';
 			case 'resetting_focus_point': return 'Resetting focus point';
+			case 'settings': return 'Settings';
 			case 'still': return 'Still';
 			case 'test_page': return 'Test Page';
-			case 'home': return 'Home';
-			case 'favourite': return 'Favourite';
-			case 'settings': return 'Settings';
 			case 'locales.en': return 'English';
 			case 'locales.zh': return 'Chinese';
 			default: return null;

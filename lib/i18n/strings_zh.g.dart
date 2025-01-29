@@ -39,6 +39,7 @@ class TranslationsZh extends Translations {
 	@override String get audio_access_denied => '您已拒绝音频访问';
 	@override String get audio_access_denied_without_prompt => '请前往“设置”应用启用音频访问';
 	@override String get audio_access_restricted => '音频访问受到限制';
+	@override String get authored_by => '作者：{name}';
 	@override String get auto => '自动的';
 	@override String get camera_title => '相机';
 	@override String get camera_access_denied_without_prompt => '请前往“设置”应用启用相机访问权限';
@@ -46,11 +47,13 @@ class TranslationsZh extends Translations {
 	@override String get camera_denied => '您已拒绝相机访问';
 	@override String get camera_not_found => '未找到相机';
 	@override String get deviceid => '设备标识符';
+	@override String get edit => '编辑';
 	@override String get email => '电子邮件';
 	@override String get exposure_mode => '曝光模式';
 	@override String get exposure_offset => '曝光偏移';
 	@override String get firstname => '给定的名称';
 	@override String get focus_mode => '专注模式';
+	@override String get home => '家';
 	@override String get intro_title => '欢迎使用 Crowtech';
 	@override String get intro_description => '出行即服务';
 	@override String get locked => '已锁定';
@@ -66,11 +69,10 @@ class TranslationsZh extends Translations {
 	@override String get reset_offset => '重置偏移';
 	@override String get resetting_exposure_point => '重置曝光点';
 	@override String get resetting_focus_point => '重置焦点';
+	@override String get settings => '设置';
 	@override String get still => '固定的';
 	@override String get test_page => '测试页';
-	@override String get home => '家';
 	@override String get favourite => '最喜欢的';
-	@override String get settings => '设置';
 	@override Map<String, String> get locales => {
 		'en': '英文',
 		'zh': '中文',
@@ -86,6 +88,7 @@ extension on TranslationsZh {
 			case 'audio_access_denied': return '您已拒绝音频访问';
 			case 'audio_access_denied_without_prompt': return '请前往“设置”应用启用音频访问';
 			case 'audio_access_restricted': return '音频访问受到限制';
+			case 'authored_by': return '作者：{name}';
 			case 'auto': return '自动的';
 			case 'camera_title': return '相机';
 			case 'camera_access_denied_without_prompt': return '请前往“设置”应用启用相机访问权限';
@@ -93,11 +96,13 @@ extension on TranslationsZh {
 			case 'camera_denied': return '您已拒绝相机访问';
 			case 'camera_not_found': return '未找到相机';
 			case 'deviceid': return '设备标识符';
+			case 'edit': return '编辑';
 			case 'email': return '电子邮件';
 			case 'exposure_mode': return '曝光模式';
 			case 'exposure_offset': return '曝光偏移';
 			case 'firstname': return '给定的名称';
 			case 'focus_mode': return '专注模式';
+			case 'home': return '家';
 			case 'intro_title': return '欢迎使用 Crowtech';
 			case 'intro_description': return '出行即服务';
 			case 'locked': return '已锁定';
@@ -113,11 +118,10 @@ extension on TranslationsZh {
 			case 'reset_offset': return '重置偏移';
 			case 'resetting_exposure_point': return '重置曝光点';
 			case 'resetting_focus_point': return '重置焦点';
+			case 'settings': return '设置';
 			case 'still': return '固定的';
 			case 'test_page': return '测试页';
-			case 'home': return '家';
 			case 'favourite': return '最喜欢的';
-			case 'settings': return '设置';
 			case 'locales.en': return '英文';
 			case 'locales.zh': return '中文';
 			default: return null;
