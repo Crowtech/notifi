@@ -47,7 +47,8 @@ const _testPassword = String.fromEnvironment('TEST_PASSWORD', defaultValue: "pas
 const _defaultEncryptionKey = String.fromEnvironment('ENCRYPTION_KEY',
     defaultValue: "crowtech123456789");
 
-const _seedColourHex = int.fromEnvironment('SEED_COLOUR_HEX', defaultValue: 0xffb74093);
+const _seedColourHex = String.fromEnvironment('SEED_COLOUR_HEX', defaultValue: "0xFF370883");
+const _hoverColourHex = String.fromEnvironment('HOVER_COLOUR_HEX', defaultValue: "0xFF087F83");
 
 const _defaultAudience = ["fieldservice"];
 
@@ -77,8 +78,6 @@ String get testUsername => _testUsername;
 String get testPassword => _testPassword;
 String get defaultEncryptionKey => _defaultEncryptionKey;
 
-int get seedColourHex => _seedColourHex;
-
 List<String> get defaultAudience => _defaultAudience;
 List<String> get defaultscopes => _defaultscopes;
 String get defaultApiPrefixPath => _defaultApiPrefixPath;
@@ -86,3 +85,7 @@ String get posthogKey => _posthogKey;
 String get transistorsoftKey => _transistorsoftKey;
 String get vapidKey => _vapidKey;
 String get displayName => _displayName;
+
+
+Color get colorSeed => Color(int.parse(_seedColourHex.substring(1,9),radix: 16));
+Color get colorHover => Color(int.parse(_hoverColourHex.substring(1,9),radix: 16));
