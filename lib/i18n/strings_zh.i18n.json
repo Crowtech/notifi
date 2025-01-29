@@ -6,6 +6,7 @@
   "auto": "自动的",
   "camera_title": "相机",
   "camera_access_denied_without_prompt": "请前往“设置”应用启用相机访问权限",
+  "camera_access_restricted": "相机访问受到限制",
   "camera_denied": "您已拒绝相机访问",
   "camera_not_found": "未找到相机",
   "deviceid": "设备标识符",

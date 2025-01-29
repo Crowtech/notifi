@@ -10,7 +10,7 @@ import 'package:slang/generated.dart';
 import 'strings.g.dart';
 
 // Path: <root>
-class TranslationsZh implements Translations {
+class TranslationsZh extends Translations {
 	/// You can call this constructor and build your own translation instance of this locale.
 	/// Constructing via the enum [AppLocale.build] is preferred.
 	TranslationsZh({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver})
@@ -20,7 +20,9 @@ class TranslationsZh implements Translations {
 		    overrides: overrides ?? {},
 		    cardinalResolver: cardinalResolver,
 		    ordinalResolver: ordinalResolver,
-		  ) {
+		  ),
+		  super(cardinalResolver: cardinalResolver, ordinalResolver: ordinalResolver) {
+		super.$meta.setFlatMapFunction($meta.getTranslation); // copy base translations to super.$meta
 		$meta.setFlatMapFunction(_flatMapFunction);
 	}
 
@@ -28,7 +30,7 @@ class TranslationsZh implements Translations {
 	@override final TranslationMetadata<AppLocale, Translations> $meta;
 
 	/// Access flat map
-	@override dynamic operator[](String key) => $meta.getTranslation(key);
+	@override dynamic operator[](String key) => $meta.getTranslation(key) ?? super.$meta.getTranslation(key);
 
 	late final TranslationsZh _root = this; // ignore: unused_field
 
@@ -40,6 +42,7 @@ class TranslationsZh implements Translations {
 	@override String get auto => '自动的';
 	@override String get camera_title => '相机';
 	@override String get camera_access_denied_without_prompt => '请前往“设置”应用启用相机访问权限';
+	@override String get camera_access_restricted => '相机访问受到限制';
 	@override String get camera_denied => '您已拒绝相机访问';
 	@override String get camera_not_found => '未找到相机';
 	@override String get deviceid => '设备标识符';
@@ -86,6 +89,7 @@ extension on TranslationsZh {
 			case 'auto': return '自动的';
 			case 'camera_title': return '相机';
 			case 'camera_access_denied_without_prompt': return '请前往“设置”应用启用相机访问权限';
+			case 'camera_access_restricted': return '相机访问受到限制';
 			case 'camera_denied': return '您已拒绝相机访问';
 			case 'camera_not_found': return '未找到相机';
 			case 'deviceid': return '设备标识符';
