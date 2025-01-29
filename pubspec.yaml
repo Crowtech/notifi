@@ -1,7 +1,7 @@
 name: notifi
 description: "Crowtech Common Library."
 
-version: 0.0.44
+version: 0.0.45
 #homepage:
 
 environment:
@@ -54,7 +54,7 @@ dependencies:
   rxdart: any 
   session_storage: any
   slang: ^4.4.1
-  slang_flutter: ^4.2.0
+  slang_flutter: ^4.4.0
   url_strategy: ^0.3.0
   uuid: any 
   camera: ^0.11.1
@@ -75,7 +75,7 @@ dev_dependencies:
 
   build_runner: ^2.4.14
   json_serializable: ^6.9.0
-  slang_build_runner: ^4.4.0 # ONLY if you use build_runner (2/2)
+  slang_build_runner: ^4.4.2 # ONLY if you use build_runner (2/2)
   # Localization
   slang_gpt: ^0.11.0
 
