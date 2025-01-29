@@ -41,7 +41,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get audio_access_denied => 'You have denied audio access';
 	String get audio_access_denied_without_prompt => 'Please go to Settings app to enable audio access';
 	String get audio_access_restricted => 'Audio access is restricted';
-	String get authored_by => 'by：{name}';
+	String get authored_by => 'by: {name}';
 	String get auto => 'Auto';
 	String get camera_title => 'Camera';
 	String get camera_access_denied_without_prompt => 'Please go to Settings app to enable camera access.';
@@ -90,7 +90,7 @@ extension on Translations {
 			case 'audio_access_denied': return 'You have denied audio access';
 			case 'audio_access_denied_without_prompt': return 'Please go to Settings app to enable audio access';
 			case 'audio_access_restricted': return 'Audio access is restricted';
-			case 'authored_by': return 'by：{name}';
+			case 'authored_by': return 'by: {name}';
 			case 'auto': return 'Auto';
 			case 'camera_title': return 'Camera';
 			case 'camera_access_denied_without_prompt': return 'Please go to Settings app to enable camera access.';
