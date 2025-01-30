@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:notifi/credentials.dart';
+import 'package:notifi/jwt_utils.dart';
 
 import 'package:notifi/notifi.dart';
 import 'package:notifi/riverpod/current_user.dart';
@@ -91,17 +92,17 @@ class _AuthPageState extends ConsumerState<AuthPage> {
     try {
       OidcUser? result;
       if (skipLogin && (!prov.Provider.of<Notifi>(context,listen:false).preventAutoLogin)) {
-        logNoStack.i("Skipping Login!");
+        logNoStack.i("Skipping Login!!!!!");
         // final messenger = ScaffoldMessenger.of(context);
         try {
           result = await app_state.currentManager.loginPassword(
             username: testUsername,
             password: testPassword,
           );
-          logNoStack.i("Result is ${result.toString()}");
-            if (result != null) {
+          logNoStack.i("Result is ${getEmail(result!)}!!!!!");
+         
           ref.read(currentUserProvider.notifier).setOidc(result);
-        }
+    
           // messenger.showSnackBar(
           //   SnackBar(
           //     content: Text(
@@ -132,7 +133,7 @@ class _AuthPageState extends ConsumerState<AuthPage> {
           ref.read(currentUserProvider.notifier).setOidc(result);
         }
       }
-      log.d("AUTH RESULT is ${result!.userInfo.toString()}");
+      log.i("AUTH RESULT is ${result!.userInfo['email']}");
 
       logNoStack
           .i("gotoLogin accessToken = ${result.userInfo['access_token']}");
