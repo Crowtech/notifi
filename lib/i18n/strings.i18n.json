@@ -3,7 +3,7 @@
   "audio_access_denied": "You have denied audio access",
   "audio_access_denied_without_prompt": "Please go to Settings app to enable audio access",
   "audio_access_restricted": "Audio access is restricted",
-  "authored_by": "by: ${name}" ,
+  "authored_by": "by ${name}" ,
   "auto": "Auto",
   "camera_title": "Camera",
   "camera_access_denied_without_prompt": "Please go to Settings app to enable camera access.",

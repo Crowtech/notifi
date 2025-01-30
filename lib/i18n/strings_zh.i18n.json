@@ -4,7 +4,7 @@
   "audio_access_denied": "您已拒绝音频访问",
   "audio_access_denied_without_prompt": "请前往“设置”应用启用音频访问",
   "audio_access_restricted": "音频访问受到限制",
-  "authored_by": "作者：${name}" ,
+  "authored_by": "作者 ${name}" ,
   "auto": "自动的",
   "camera_title": "相机",
   "camera_access_denied_without_prompt": "请前往“设置”应用启用相机访问权限",
