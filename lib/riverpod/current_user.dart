@@ -55,8 +55,11 @@ class CurrentUserFetcher extends Notifier<Person> {
 
   void logout(BuildContext context) async {
     print("LOGOUT");
+    if (oidcUser == null) {
+      print("LOGOUT OIDC USER IS NULL!!");
+    }
+    print("Logout token=${getAccessToken(oidcUser!)}");
    
-    prov.Provider.of<Notifi>(context, listen: false).preventAutoLogin = true;
 
 // Let the backend know of the logout
     logNoStack.i("Logout token=${oidcUser!.token.accessToken!}");
@@ -73,6 +76,7 @@ class CurrentUserFetcher extends Notifier<Person> {
       log.e("Register logout error");
     });
 
+ prov.Provider.of<Notifi>(context, listen: false).preventAutoLogin = true;
     // let the oidc package know
     await app_state.currentManager.logout(
       //after logout, go back to home
