@@ -4,7 +4,12 @@ import 'package:logger/logger.dart' as logger;
 import 'package:notifi/api_utils.dart';
 import 'package:notifi/credentials.dart';
 import 'package:notifi/jwt_utils.dart';
+import 'package:notifi/notifi.dart';
 import 'package:oidc/oidc.dart';
+import 'package:provider/provider.dart' as prov;
+import 'package:flutter_background_geolocation/flutter_background_geolocation.dart'
+    as bg;
+import 'package:notifi/app_state.dart' as app_state;
 
 import '../models/person.dart';
 
@@ -21,6 +26,8 @@ var logNoStack = logger.Logger(
 class CurrentUserFetcher extends Notifier<Person> {
   OidcUser? oidcUser; // this stores tokens etc
   Locale locale = const Locale('en');
+  OidcPlatformSpecificOptions_Web_NavigationMode webNavigationMode =
+      OidcPlatformSpecificOptions_Web_NavigationMode.newPage;
 
   @override
   Person build() {
@@ -46,7 +53,11 @@ class CurrentUserFetcher extends Notifier<Person> {
     state = user;
   }
 
-  void logout() async {
+  void logout(BuildContext context) async {
+    bg.BackgroundGeolocation.stop();
+    prov.Provider.of<Notifi>(context, listen: false).preventAutoLogin = true;
+
+// Let the backend know of the logout
     apiPost(locale, oidcUser!.token.accessToken!,
             "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout")
         .then((result) {
@@ -55,10 +66,20 @@ class CurrentUserFetcher extends Notifier<Person> {
     }).catchError((error) {
       log.e("Register logout error");
     });
+
+  // let the oidc package know
+    await app_state.currentManager.logout(
+      //after logout, go back to home
+      originalUri: Uri.parse('/'),
+      options: OidcPlatformSpecificOptions(
+        web: OidcPlatformSpecificOptions_Web(
+          navigationMode: webNavigationMode,
+        ),
+      ),
+    );
   }
 
-  void setLocale(Locale locale)
-  {
+  void setLocale(Locale locale) {
     this.locale = locale;
   }
 }

@@ -7,10 +7,13 @@ import 'package:notifi/api_utils.dart';
 import 'package:notifi/credentials.dart';
 import 'package:notifi/jwt_utils.dart';
 import 'package:notifi/notifi.dart';
+import 'package:notifi/riverpod/current_user.dart';
 
 import 'package:oidc/oidc.dart';
 import 'package:notifi/app_state.dart' as app_state;
-import 'package:provider/provider.dart';
+
+import 'package:provider/provider.dart' as prov;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:logger/logger.dart' as logger;
 import 'package:flutter_background_geolocation/flutter_background_geolocation.dart'
@@ -27,17 +30,22 @@ var logNoStack = logger.Logger(
   level: logger.Level.info,
 );
 
-class GeoPage extends StatefulWidget {
-  const GeoPage({super.key});
+class GeoPage extends ConsumerStatefulWidget with WidgetsBindingObserver {
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
+  GeoPage({super.key});
+
+ OidcPlatformSpecificOptions_Web_NavigationMode webNavigationMode =
+      OidcPlatformSpecificOptions_Web_NavigationMode.newPage;
 
   @override
-  State<GeoPage> createState() => _GeoPageState();
+  ConsumerState<GeoPage> createState() => _GeoPageState();
 }
 
-class _GeoPageState extends State<GeoPage>
+class _GeoPageState extends ConsumerState<GeoPage> 
     with TickerProviderStateMixin<GeoPage>, WidgetsBindingObserver {
-  OidcPlatformSpecificOptions_Web_NavigationMode webNavigationMode =
-      OidcPlatformSpecificOptions_Web_NavigationMode.newPage;
+
+      
 
   bool _loggedin = false;
   OidcUser? _user;
@@ -120,7 +128,7 @@ class _GeoPageState extends State<GeoPage>
                 "resourcecode":
                     getResourceCode(app_state.cachedAuthedUser.of(context)!),
                 "resourceid": 0,
-                "deviceid": Provider.of<Notifi>(context).deviceId,
+                "deviceid": prov.Provider.of<Notifi>(context).deviceId,
               },
               method: "POST",
               url: "$defaultAPIBaseUrl$defaultApiPrefixPath/gps/location",
@@ -283,7 +291,7 @@ class _GeoPageState extends State<GeoPage>
             children: [
               Center(
                 child: Text(
-                  "Crowtech  ${Provider.of<Notifi>(context, listen: false).packageInfo!.version}",
+                  "Crowtech  ${prov.Provider.of<Notifi>(context, listen: false).packageInfo!.version}",
                   style: Theme.of(context).textTheme.displayLarge,
                 ),
               ),
@@ -355,13 +363,13 @@ class _GeoPageState extends State<GeoPage>
                           ),
                         )
                         .toList(),
-                    value: webNavigationMode,
+                    value: widget.webNavigationMode,
                     onChanged: (value) {
                       if (value == null) {
                         return;
                       }
                       setState(() {
-                        webNavigationMode = value;
+                        widget.webNavigationMode = value;
                       });
                     },
                   ),
@@ -369,26 +377,7 @@ class _GeoPageState extends State<GeoPage>
               ],
               ElevatedButton(
                 onPressed: () async {
-                  setState(() {
-                    _loggedin = false;
-                  });
-                  bg.BackgroundGeolocation.stop();
-                  Locale locale = Localizations.localeOf(context);
-                  await registerLogout(
-                      locale,
-                      app_state.cachedAuthedUser
-                          .of(context)!
-                          .token
-                          .accessToken!);
-                  await app_state.currentManager.logout(
-                    //after logout, go back to home
-                    originalUri: Uri.parse('/'),
-                    options: OidcPlatformSpecificOptions(
-                      web: OidcPlatformSpecificOptions_Web(
-                        navigationMode: webNavigationMode,
-                      ),
-                    ),
-                  );
+                 ref.read(currentUserProvider.notifier).logout(context);
                 },
                 child: const Text('Logout'),
               ),
@@ -471,7 +460,7 @@ class _GeoPageState extends State<GeoPage>
               // Text('userInfo endpoint response: ${user.userInfo}'),
               // const Divider(),
               Text(
-                  'DeviceId: ${Provider.of<Notifi>(context, listen: false).deviceId}'),
+                  'DeviceId: ${prov.Provider.of<Notifi>(context, listen: false).deviceId}'),
               const Divider(),
               // Text('userInfo endpoint response: ${user.userInfo}'),
               // const Divider(),
