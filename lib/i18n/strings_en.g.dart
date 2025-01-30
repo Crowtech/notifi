@@ -38,7 +38,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 	// Translations
 	String get app_title => 'Crowtech';
-	late final TranslationsMenuEn menu = TranslationsMenuEn.internal(_root);
+	late final TranslationsMenuEn menu = TranslationsMenuEn._(_root);
 	String get audio_access_denied => 'You have denied audio access';
 	String get audio_access_denied_without_prompt => 'Please go to Settings app to enable audio access';
 	String get audio_access_restricted => 'Audio access is restricted';
@@ -84,7 +84,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 // Path: menu
 class TranslationsMenuEn {
-	TranslationsMenuEn.internal(this._root);
+	TranslationsMenuEn._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
