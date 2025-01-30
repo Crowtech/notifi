@@ -32,6 +32,7 @@ const _defaultMinioEndpointUrl = String.fromEnvironment(
 const _defaultImageProxyUrl = String.fromEnvironment(
     'IMAGE_PROXY_URL');
 
+const _enablePosthog = bool.fromEnvironment('ENABLE_POSTHOG');
 const _posthogKey = String.fromEnvironment('POSTHOG_KEY');
 const _transistorsoftKey=String.fromEnvironment('TRANSISTORSOFT_KEY');
 const _vapidKey=String.fromEnvironment('VAPID_KEY');
@@ -84,6 +85,7 @@ String get defaultEncryptionKey => _defaultEncryptionKey;
 List<String> get defaultAudience => _defaultAudience;
 List<String> get defaultscopes => _defaultscopes;
 String get defaultApiPrefixPath => _defaultApiPrefixPath;
+bool get enablePosthog => _enablePosthog;
 String get posthogKey => _posthogKey;
 String get transistorsoftKey => _transistorsoftKey;
 String get vapidKey => _vapidKey;
