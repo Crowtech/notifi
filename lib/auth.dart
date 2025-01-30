@@ -29,6 +29,7 @@ var logNoStack = logger.Logger(
   level: logger.Level.info,
 );
 
+// ignore: must_be_immutable
 class AuthPage extends ConsumerStatefulWidget with WidgetsBindingObserver {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   String title;
@@ -99,7 +100,7 @@ class _AuthPageState extends ConsumerState<AuthPage> {
             username: testUsername,
             password: testPassword,
           );
-          logNoStack.i("Result is ${getEmail(result!)}!!!!!");
+          logNoStack.i("Result is ${result!.claims.toJson()['email']}!!!!!");
          
           ref.read(currentUserProvider.notifier).setOidc(result);
     
@@ -133,10 +134,10 @@ class _AuthPageState extends ConsumerState<AuthPage> {
           ref.read(currentUserProvider.notifier).setOidc(result);
         }
       }
-      log.i("AUTH RESULT is ${result!.userInfo['email']}");
+      log.i("AUTH RESULT is ${getEmail(result!)}");
 
       logNoStack
-          .i("gotoLogin accessToken = ${result.userInfo['access_token']}");
+          .i("gotoLogin accessToken = ${getAccessToken(result)}");
 
      // initNotifi(result.userInfo['access_token'], "", defaultRealm);
 

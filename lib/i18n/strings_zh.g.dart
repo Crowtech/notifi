@@ -10,7 +10,7 @@ import 'package:slang/generated.dart';
 import 'strings.g.dart';
 
 // Path: <root>
-class TranslationsZh extends Translations {
+class TranslationsZh implements Translations {
 	/// You can call this constructor and build your own translation instance of this locale.
 	/// Constructing via the enum [AppLocale.build] is preferred.
 	TranslationsZh({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver})
@@ -20,9 +20,7 @@ class TranslationsZh extends Translations {
 		    overrides: overrides ?? {},
 		    cardinalResolver: cardinalResolver,
 		    ordinalResolver: ordinalResolver,
-		  ),
-		  super(cardinalResolver: cardinalResolver, ordinalResolver: ordinalResolver) {
-		super.$meta.setFlatMapFunction($meta.getTranslation); // copy base translations to super.$meta
+		  ) {
 		$meta.setFlatMapFunction(_flatMapFunction);
 	}
 
@@ -30,7 +28,7 @@ class TranslationsZh extends Translations {
 	@override final TranslationMetadata<AppLocale, Translations> $meta;
 
 	/// Access flat map
-	@override dynamic operator[](String key) => $meta.getTranslation(key) ?? super.$meta.getTranslation(key);
+	@override dynamic operator[](String key) => $meta.getTranslation(key);
 
 	late final TranslationsZh _root = this; // ignore: unused_field
 
@@ -39,7 +37,7 @@ class TranslationsZh extends Translations {
 	@override String get audio_access_denied => '您已拒绝音频访问';
 	@override String get audio_access_denied_without_prompt => '请前往“设置”应用启用音频访问';
 	@override String get audio_access_restricted => '音频访问受到限制';
-	@override String authored_by({required Object name}) => '作者：${name}';
+	@override String authored_by({required Object name}) => '作者 ${name}';
 	@override String get auto => '自动的';
 	@override String get camera_title => '相机';
 	@override String get camera_access_denied_without_prompt => '请前往“设置”应用启用相机访问权限';
@@ -88,7 +86,7 @@ extension on TranslationsZh {
 			case 'audio_access_denied': return '您已拒绝音频访问';
 			case 'audio_access_denied_without_prompt': return '请前往“设置”应用启用音频访问';
 			case 'audio_access_restricted': return '音频访问受到限制';
-			case 'authored_by': return ({required Object name}) => '作者：${name}';
+			case 'authored_by': return ({required Object name}) => '作者 ${name}';
 			case 'auto': return '自动的';
 			case 'camera_title': return '相机';
 			case 'camera_access_denied_without_prompt': return '请前往“设置”应用启用相机访问权限';
