@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart' as logger;
@@ -59,7 +60,10 @@ class CurrentUserFetcher extends Notifier<Person> {
       print("LOGOUT OIDC USER IS NULL!!");
     }
     print("Logout token=${getAccessToken(oidcUser!)}");
-   
+
+    if (!kIsWeb) {
+      bg.BackgroundGeolocation.stop();
+    }
 
 // Let the backend know of the logout
     logNoStack.i("Logout token=${oidcUser!.token.accessToken!}");
@@ -76,7 +80,7 @@ class CurrentUserFetcher extends Notifier<Person> {
       log.e("Register logout error");
     });
 
- prov.Provider.of<Notifi>(context, listen: false).preventAutoLogin = true;
+    prov.Provider.of<Notifi>(context, listen: false).preventAutoLogin = true;
     // let the oidc package know
     await app_state.currentManager.logout(
       //after logout, go back to home
