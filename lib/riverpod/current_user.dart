@@ -35,8 +35,11 @@ class CurrentUserFetcher extends Notifier<Person> {
     return defaultPerson; // from Person.java
   }
 
-  void setOidc(OidcUser user) async {
+  void setOidc(OidcUser ?user) async {
     logNoStack.i("Setting currentUser with Oidc user");
+    if (user == null) { // if null then don't bother
+      return;
+    }
     oidcUser = user;
 
     Person person = state;
@@ -55,11 +58,11 @@ class CurrentUserFetcher extends Notifier<Person> {
   }
 
   void logout(BuildContext context) async {
-    print("LOGOUT");
+   // print("LOGOUT");
     if (oidcUser == null) {
-      print("LOGOUT OIDC USER IS NULL!!");
+     // print("LOGOUT OIDC USER IS NULL!!");
     }
-    print("Logout token=${getAccessToken(oidcUser!)}");
+    //print("Logout token=${getAccessToken(oidcUser!)}");
 
     if (!kIsWeb) {
       bg.BackgroundGeolocation.stop();
@@ -76,6 +79,7 @@ class CurrentUserFetcher extends Notifier<Person> {
         .then((result) {
       log.i("logout result $result");
       state = defaultPerson;
+      oidcUser = null;
     }).catchError((error) {
       log.e("Register logout error");
     });

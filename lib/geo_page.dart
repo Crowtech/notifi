@@ -390,6 +390,7 @@ class _GeoPageState extends ConsumerState<GeoPage>
                       try {
                         final res =
                             await app_state.currentManager.refreshToken();
+
                         if (res == null && context.mounted) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
@@ -399,6 +400,8 @@ class _GeoPageState extends ConsumerState<GeoPage>
                             ),
                           );
                           return;
+                        } else {
+                          ref.read(currentUserProvider.notifier).setOidc(res!);
                         }
                         if (context.mounted) {
                           ScaffoldMessenger.of(context).showSnackBar(

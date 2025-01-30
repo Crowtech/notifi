@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
+
 import 'package:http/http.dart' as http;
-import 'package:image_picker/image_picker.dart';
 import 'package:notifi/credentials.dart';
 import 'package:riverpod/riverpod.dart';
-import 'dart:io';
 
 class MinIOUploadNotifier extends StateNotifier<AsyncValue<String>> {
   MinIOUploadNotifier() : super(const AsyncValue.loading());

@@ -75,7 +75,8 @@ void headlessTask(bg.HeadlessEvent headlessEvent) async {
       bg.HttpEvent response = headlessEvent.event;
       logNoStack.i('HttpEvent: $response');
       if (response.success == false) {
-        await app_state.currentManager.refreshToken();
+       var oidcUser = await app_state.currentManager.refreshToken();
+       ref.read(currentUserProvider.notifier).setOidc(oidcUser);
       }
       break;
     case bg.Event.POWERSAVECHANGE:
