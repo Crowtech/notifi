@@ -32,7 +32,7 @@ class UserAvatar extends ConsumerWidget {
     String avatarUrl = "$defaultImageProxyUrl/${diameter}x/$personUrl";
 
   
-    return getAvatar((diameter<<1).toDouble(),avatarUrl,backgroundColour,initials);
+    return getAvatar((diameter>>1).toDouble(),avatarUrl,backgroundColour,initials);
   }
 
   Widget getAvatar(
