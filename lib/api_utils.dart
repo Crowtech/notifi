@@ -124,13 +124,13 @@ Future<http.Response> apiPostDataStr(
 //   throw "Register Login error";
 // }
 
-Future<void> registerLogout(Locale locale, String token) async {
-  apiPost(locale, token, "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout").then((result) {
-    log.d("logout result $result");
-  }).catchError((error) {
-    log.e("Register logout error");
-  });
-}
+// Future<void> registerLogout(Locale locale, String token) async {
+//   apiPost(locale, token, "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout").then((result) {
+//     log.d("logout result $result");
+//   }).catchError((error) {
+//     log.e("Register logout error");
+//   });
+// }
 
 Future<Map> registerFCM(
     Locale locale, String token, String deviceid, String fcm) async {
