@@ -18,7 +18,6 @@ import 'package:logger/logger.dart' as logger;
 
 import 'credentials.dart';
 
-
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
   level: logger.Level.info,
@@ -98,7 +97,6 @@ class Notifi extends ChangeNotifier {
 
   FirebaseOptions? options;
 
-
   bool get userReady => _userReady;
   set userReady(bool value) {
     _userReady = value;
@@ -123,7 +121,7 @@ class Notifi extends ChangeNotifier {
     _preventAutoLogin = value;
   }
 
- Person.Person? get currentUser => _user;
+  Person.Person? get currentUser => _user;
 
   set currentUser(Person.Person? user) {
     _user = user;
@@ -187,9 +185,6 @@ class Notifi extends ChangeNotifier {
     // log.d("PACKAGE ${packageInfo!.version} ${deviceId} ");
   }
 
-  
-
-
   ChangeNotifier initialise() {
     init();
     return this;
@@ -202,7 +197,7 @@ class Notifi extends ChangeNotifier {
 
     WidgetsFlutterBinding.ensureInitialized();
 
-logNoStack.i("Camera is ${enableCamera?"ENABLED":"DISABLED"}");
+    logNoStack.i("Camera is ${enableCamera ? "ENABLED" : "DISABLED"}");
     if (enableCamera) {
       initialiseCamera();
     }
@@ -334,13 +329,12 @@ logNoStack.i("Camera is ${enableCamera?"ENABLED":"DISABLED"}");
     }
   }
 
-  void initialiseCamera() async 
-  {
-      // Fetch the available cameras before initializing the app.
-  try {
-    _cameras = await availableCameras();
-  } on CameraException catch (e) {
-    logNoStack.e("${e.code} ${e..description}");
-  }
+  void initialiseCamera() async {
+    // Fetch the available cameras before initializing the app.
+    try {
+      _cameras = await availableCameras();
+    } on CameraException catch (e) {
+      logNoStack.e("${e.code} ${e..description}");
+    }
   }
 }

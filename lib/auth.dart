@@ -99,6 +99,9 @@ class _AuthPageState extends ConsumerState<AuthPage> {
             password: testPassword,
           );
           logNoStack.i("Result is ${result.toString()}");
+            if (result != null) {
+          ref.read(currentUserProvider.notifier).setOidc(result);
+        }
           // messenger.showSnackBar(
           //   SnackBar(
           //     content: Text(

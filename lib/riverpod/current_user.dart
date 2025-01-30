@@ -35,7 +35,7 @@ class CurrentUserFetcher extends Notifier<Person> {
   }
 
   void setOidc(OidcUser user) async {
-    logNoStack.i("Setting ucurrentUser with Oidc user");
+    logNoStack.i("Setting currentUser with Oidc user");
     oidcUser = user;
 
     Person person = state;
