@@ -54,13 +54,16 @@ class CurrentUserFetcher extends Notifier<Person> {
   }
 
   void logout(BuildContext context) async {
-    bg.BackgroundGeolocation.stop();
+    print("LOGOUT");
+   
     prov.Provider.of<Notifi>(context, listen: false).preventAutoLogin = true;
 
 // Let the backend know of the logout
-logNoStack.i("Logout token=${oidcUser!.token.accessToken!}");
-logNoStack.i("Logout locale=${locale}");
-logNoStack.i("logout api=${"$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout"}");
+    logNoStack.i("Logout token=${oidcUser!.token.accessToken!}");
+    logNoStack.i("Logout locale=${locale}");
+    logNoStack.i(
+        "logout api=${"$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout"}");
+
     apiPost(locale, oidcUser!.token.accessToken!,
             "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout")
         .then((result) {
