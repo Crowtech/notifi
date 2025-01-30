@@ -10,7 +10,7 @@ import 'package:slang/generated.dart';
 import 'strings.g.dart';
 
 // Path: <root>
-class TranslationsZh implements Translations {
+class TranslationsZh extends Translations {
 	/// You can call this constructor and build your own translation instance of this locale.
 	/// Constructing via the enum [AppLocale.build] is preferred.
 	TranslationsZh({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver})
@@ -20,7 +20,9 @@ class TranslationsZh implements Translations {
 		    overrides: overrides ?? {},
 		    cardinalResolver: cardinalResolver,
 		    ordinalResolver: ordinalResolver,
-		  ) {
+		  ),
+		  super(cardinalResolver: cardinalResolver, ordinalResolver: ordinalResolver) {
+		super.$meta.setFlatMapFunction($meta.getTranslation); // copy base translations to super.$meta
 		$meta.setFlatMapFunction(_flatMapFunction);
 	}
 
@@ -28,12 +30,13 @@ class TranslationsZh implements Translations {
 	@override final TranslationMetadata<AppLocale, Translations> $meta;
 
 	/// Access flat map
-	@override dynamic operator[](String key) => $meta.getTranslation(key);
+	@override dynamic operator[](String key) => $meta.getTranslation(key) ?? super.$meta.getTranslation(key);
 
 	late final TranslationsZh _root = this; // ignore: unused_field
 
 	// Translations
 	@override String get app_title => 'Crowtech';
+	@override late final _TranslationsMenuZh menu = _TranslationsMenuZh._(_root);
 	@override String get audio_access_denied => '您已拒绝音频访问';
 	@override String get audio_access_denied_without_prompt => '请前往“设置”应用启用音频访问';
 	@override String get audio_access_restricted => '音频访问受到限制';
@@ -77,12 +80,25 @@ class TranslationsZh implements Translations {
 	};
 }
 
+// Path: menu
+class _TranslationsMenuZh extends TranslationsMenuEn {
+	_TranslationsMenuZh._(TranslationsZh root) : this._root = root, super.internal(root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get account => '帐户菜单';
+	@override String get product => '产品菜单';
+}
+
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
 extension on TranslationsZh {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
 			case 'app_title': return 'Crowtech';
+			case 'menu.account': return '帐户菜单';
+			case 'menu.product': return '产品菜单';
 			case 'audio_access_denied': return '您已拒绝音频访问';
 			case 'audio_access_denied_without_prompt': return '请前往“设置”应用启用音频访问';
 			case 'audio_access_restricted': return '音频访问受到限制';

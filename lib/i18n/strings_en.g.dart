@@ -38,6 +38,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 	// Translations
 	String get app_title => 'Crowtech';
+	late final TranslationsMenuEn menu = TranslationsMenuEn.internal(_root);
 	String get audio_access_denied => 'You have denied audio access';
 	String get audio_access_denied_without_prompt => 'Please go to Settings app to enable audio access';
 	String get audio_access_restricted => 'Audio access is restricted';
@@ -81,12 +82,25 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	};
 }
 
+// Path: menu
+class TranslationsMenuEn {
+	TranslationsMenuEn.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get account => 'Account Menu';
+	String get product => 'Product Menu';
+}
+
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
 extension on Translations {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
 			case 'app_title': return 'Crowtech';
+			case 'menu.account': return 'Account Menu';
+			case 'menu.product': return 'Product Menu';
 			case 'audio_access_denied': return 'You have denied audio access';
 			case 'audio_access_denied_without_prompt': return 'Please go to Settings app to enable audio access';
 			case 'audio_access_restricted': return 'Audio access is restricted';

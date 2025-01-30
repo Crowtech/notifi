@@ -154,6 +154,10 @@ class _AuthPageState extends ConsumerState<AuthPage> {
 
   @override
   Widget build(BuildContext context) {
+            if (skipLogin &&
+        (!prov.Provider.of<Notifi>(context, listen: false).preventAutoLogin)) {
+          return const SizedBox.shrink();
+        }
     //remember, you can only enter this route if there is no user.
     final currentRoute = GoRouterState.of(context);
     final originalUri =
