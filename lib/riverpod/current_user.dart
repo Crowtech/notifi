@@ -59,7 +59,7 @@ class CurrentUserFetcher extends Notifier<Person> {
       print("LOGOUT OIDC USER IS NULL!!");
     }
     print("Logout token=${getAccessToken(oidcUser!)}");
-    bg.BackgroundGeolocation.stop();
+   
 
 // Let the backend know of the logout
     logNoStack.i("Logout token=${oidcUser!.token.accessToken!}");
