@@ -63,7 +63,7 @@ class CurrentUserFetcher extends Notifier<Person> {
    print("LOGOUT!");
     if (oidcUser == null) {
      print("LOGOUT OIDC USER IS NULL!!");
-     oidcUser = app_state.cachedAuthedUser.of(context);
+     //oidcUser = app_state.cachedAuthedUser.of(context);
     } else {
        print("LOGOUT OIDC USER IS NOT NULL!!");
     }
