@@ -86,3 +86,24 @@ class Person extends Resource {
     return "${firstname.substring(0,1).toUpperCase()}${lastname.substring(0,1).toUpperCase()}";
   }
 }
+
+Person defaultPerson = new Person(id: 0,
+      code: "PER_DEFAULT", // code
+      created: DateTime.now(), // created
+      updated: DateTime.now(), // updated
+      name: "Default Person",  // name
+      description: "This is a default Person",  // description
+      location: "", // location
+      devicecode: "DEVICE-CODE", // device code
+      username: "USERNAME",  // username
+      email: "user@email.com", // email
+      firstname: "", // firstname
+      lastname: "",  // lastname
+      nickname: "",//nickname,
+      gender: GenderType.UNDEFINED,//gender,
+      i18n: "en",//i18n,
+      country: "Australia",//country,
+      longitude: 0.0,//longitude,
+      latitude: 0.0,//latitude,
+      birthyear: 0,//birthyear,
+      fcm: "FCM"); //fcm

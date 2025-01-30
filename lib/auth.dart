@@ -7,10 +7,11 @@ import 'package:go_router/go_router.dart';
 import 'package:notifi/credentials.dart';
 
 import 'package:notifi/notifi.dart';
+import 'package:notifi/riverpod/current_user.dart';
 import 'package:oidc/oidc.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notifi/app_state.dart' as app_state;
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart' as prov;
 
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/i18n/strings.g.dart' as nt;
@@ -27,16 +28,20 @@ var logNoStack = logger.Logger(
   level: logger.Level.info,
 );
 
-class AuthPage extends StatefulWidget {
-  const AuthPage({super.key, required this.title});
+class AuthPage extends ConsumerStatefulWidget with WidgetsBindingObserver {
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  String title;
+  AuthPage({super.key, this.title = "Crowtech"});
 
-  final String title;
+  OidcPlatformSpecificOptions_Web_NavigationMode webNavigationMode =
+      OidcPlatformSpecificOptions_Web_NavigationMode.newPage;
 
   @override
-  State<AuthPage> createState() => _AuthPageState();
+  ConsumerState<AuthPage> createState() => _AuthPageState();
 }
 
-class _AuthPageState extends State<AuthPage> {
+class _AuthPageState extends ConsumerState<AuthPage> {
+
   final userNameController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -85,7 +90,7 @@ class _AuthPageState extends State<AuthPage> {
         originalUri == null ? null : Uri.tryParse(originalUri);
     try {
       OidcUser? result;
-      if (skipLogin && (!Provider.of<Notifi>(context,listen:false).preventAutoLogin)) {
+      if (skipLogin && (!prov.Provider.of<Notifi>(context,listen:false).preventAutoLogin)) {
         logNoStack.i("Skipping Login!");
         // final messenger = ScaffoldMessenger.of(context);
         try {
@@ -120,6 +125,9 @@ class _AuthPageState extends State<AuthPage> {
           options: _getOptions(),
           //NOTE: you can pass more parameters here.
         );
+        if (result != null) {
+          ref.read(currentUserProvider.notifier).setOidc(result);
+        }
       }
       log.d("AUTH RESULT is ${result!.userInfo.toString()}");
 
@@ -149,11 +157,11 @@ class _AuthPageState extends State<AuthPage> {
         originalUri == null ? null : Uri.tryParse(originalUri);
 
 logNoStack.i("parsedOriginalUri=$parsedOriginalUri");
-    return Consumer<Notifi>(builder: (context, notifi, child) {
+    return prov.Consumer<Notifi>(builder: (context, notifi, child) {
       return Scaffold(
         appBar: AppBar(
           title: Text(
-            "${widget.title} !!! ${Provider.of<Notifi>(context, listen: false).packageInfo!.version}",
+            "${widget.title} !!! ${prov.Provider.of<Notifi>(context, listen: false).packageInfo!.version}",
             style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -164,76 +172,7 @@ logNoStack.i("parsedOriginalUri=$parsedOriginalUri");
           padding: const EdgeInsets.all(8),
           child: ListView(
             children: [
-              //   const Text('Resource owner grant'),
-              //   TextField(
-              //     controller: userNameController,
-              //     decoration: const InputDecoration(
-              //       labelText: 'username',
-              //     ),
-              //   ),
-              //   TextField(
-              //     controller: passwordController,
-              //     decoration: const InputDecoration(
-              //       labelText: 'password',
-              //     ),
-              //   ),
-              //   const SizedBox(height: 8),
-              //   ElevatedButton(
-              //     onPressed: () async {
-              //       final messenger = ScaffoldMessenger.of(context);
-              //       try {
-              //         final result = await app_state.currentManager.loginPassword(
-              //           username: userNameController.text,
-              //           password: passwordController.text,
-              //         );
-
-              //         messenger.showSnackBar(
-              //           SnackBar(
-              //             content: Text(
-              //               'loginPassword returned user id: ${result?.uid}',
-              //             ),
-              //           ),
-              //         );
-              //       } catch (e) {
-              //         app_state.exampleLogger.severe(e.toString());
-              //         messenger.showSnackBar(
-              //           const SnackBar(
-              //             content: Text(
-              //               'loginPassword failed!',
-              //             ),
-              //           ),
-              //         );
-              //       }
-              //     },
-              //     child: const Text('login with Resource owner grant'),
-              //   ),
-              //   const Divider(),
-              // if (kIsWeb) ...[
-              //   Text(
-              //     'Login Web Navigation Mode',
-              //     style: Theme.of(context).textTheme.headlineSmall,
-              //   ),
-              //   DropdownButton<OidcPlatformSpecificOptions_Web_NavigationMode>(
-              //     items: OidcPlatformSpecificOptions_Web_NavigationMode.values
-              //         .map(
-              //           (e) => DropdownMenuItem(
-              //             value: e,
-              //             child: Text(e.name),
-              //           ),
-              //         )
-              //         .toList(),
-              //     value: webNavigationMode,
-              //     onChanged: (value) {
-              //       if (value == null) {
-              //         return;
-              //       }
-              //       setState(() {
-              //         webNavigationMode = value;
-              //       });
-              //     },
-              //   ),
-              //   const Divider(),
-              // ],
+           
               ElevatedButton(
                 onPressed: () async {
                   final messenger = ScaffoldMessenger.of(context);
@@ -274,37 +213,7 @@ logNoStack.i("parsedOriginalUri=$parsedOriginalUri");
                 },
                 child: Text(nt.t.login),
               ),
-              // const Divider(),
-              // ElevatedButton(
-              //   onPressed: () async {
-              //     final messenger = ScaffoldMessenger.of(context);
-
-              //     // ignore: deprecated_member_use
-              //     final result = await app_state.currentManager.loginImplicitFlow(
-              //       responseType: OidcConstants_AuthorizationEndpoint_ResponseType
-              //           .idToken_Token,
-              //       originalUri: parsedOriginalUri ?? Uri.parse('/'),
-              //       //store any arbitrary data, here we store the authorization
-              //       //start time.
-              //       extraStateData: DateTime.now().toIso8601String(),
-              //     );
-              //     if (kIsWeb &&
-              //         webNavigationMode ==
-              //             OidcPlatformSpecificOptions_Web_NavigationMode
-              //                 .samePage) {
-              //       //in samePage navigation, you can't know the result here.
-              //       return;
-              //     }
-              //     messenger.showSnackBar(
-              //       SnackBar(
-              //         content: Text(
-              //           'loginImplicitFlow returned user id: ${result?.uid}',
-              //         ),
-              //       ),
-              //     );
-              //   },
-              //   child: const Text('Start Implicit flow'),
-              // ),
+             
             ],
           ),
         ),

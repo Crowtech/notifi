@@ -29,6 +29,8 @@ const _defaultAuthEndpointUrl = String.fromEnvironment(
 
 const _defaultMinioEndpointUrl = String.fromEnvironment(
     'MINIO_ENDPOINT_URL');
+const _defaultImageProxyUrl = String.fromEnvironment(
+    'IMAGE_PROXY_URL');
 
 const _posthogKey = String.fromEnvironment('POSTHOG_KEY');
 const _transistorsoftKey=String.fromEnvironment('TRANSISTORSOFT_KEY');
@@ -71,6 +73,7 @@ String get defaultRealmBaseUrl => _defaultRealmBaseUrl;
 String get defaultAuthEndpointUrl => _defaultAuthEndpointUrl;
 String get defaultAPIBaseUrl => _defaultAPIBaseUrl;
 String get defaultMinioEndpointUrl => _defaultMinioEndpointUrl;
+String get defaultImageProxyUrl => _defaultImageProxyUrl;
 
 bool get skipLogin => _skipLogin;
 bool get enableCamera => _enableCamera;

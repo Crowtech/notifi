@@ -12,9 +12,12 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/notifi.dart';
 import 'package:notifi/models/person.dart' as person;
+import 'package:notifi/riverpod/avatar.dart';
+import 'package:notifi/riverpod/current_user.dart';
 import 'package:oidc/oidc.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' as prov;
 
 import 'api_utils.dart';
 import 'credentials.dart';
@@ -70,30 +73,16 @@ String getUsername(OidcUser user) {
   return user.claims.toJson()['preferred_username'];
 }
 
-Future<bool> loginUser(BuildContext context, String token) async {
+Future<bool> loginUser(
+    BuildContext context, prov.WidgetRef ref, String token) async {
   Locale myLocale = Localizations.localeOf(context);
   logNoStack.d("token used is $token");
   logNoStack.d("locale used is $myLocale");
   String deviceid = await fetchDeviceId();
-  // var url =
-  //     Uri.parse("$defaultAPIBaseUrl$defaultApiPrefixPath/persons/register?deviceid=$deviceid");
-  // var fcm;
-  // final response = await http.post(url,
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       "Accept": "application/json",
-  //       "Authorization": "Bearer $token",
-  //       "Accept-Language": "$myLocale",
-  //     },
-  //     body: jsonEncode({
-  //       fcm,
-  //     })
-  //     );
-String url = "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/login?devicecode=$deviceid";
-logNoStack.i("login api url = $url");
-  apiPost(myLocale, token,url
-          )
-      .then((resultMap) {
+  String url =
+      "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/login?devicecode=$deviceid";
+  logNoStack.i("login api url = $url");
+  apiPost(myLocale, token, url).then((resultMap) {
     logNoStack.i("Register login Post created successfully!");
 
     person.Person user = person.Person.fromJson(resultMap);
@@ -102,6 +91,7 @@ logNoStack.i("login api url = $url");
     logNoStack.i(
         "logged in notifi user: ${Provider.of<Notifi>(context, listen: false).currentUser}");
 
+    ref.read(currentUserProvider.notifier).setPerson(user);
     return true;
   }).catchError((error) {
     log.e("login api error $error");
