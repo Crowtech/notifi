@@ -58,16 +58,19 @@ class CurrentUserFetcher extends Notifier<Person> {
     prov.Provider.of<Notifi>(context, listen: false).preventAutoLogin = true;
 
 // Let the backend know of the logout
+logNoStack.i("Logout token=${oidcUser!.token.accessToken!}");
+logNoStack.i("Logout locale=${locale}");
+logNoStack.i("logout api=${"$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout"}");
     apiPost(locale, oidcUser!.token.accessToken!,
             "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout")
         .then((result) {
-      log.d("logout result $result");
+      log.i("logout result $result");
       state = defaultPerson;
     }).catchError((error) {
       log.e("Register logout error");
     });
 
-  // let the oidc package know
+    // let the oidc package know
     await app_state.currentManager.logout(
       //after logout, go back to home
       originalUri: Uri.parse('/'),
