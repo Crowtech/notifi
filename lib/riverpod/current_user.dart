@@ -62,6 +62,8 @@ class CurrentUserFetcher extends Notifier<Person> {
     if (oidcUser == null) {
      print("LOGOUT OIDC USER IS NULL!!");
      oidcUser = app_state.cachedAuthedUser.of(context);
+    } else {
+       print("LOGOUT OIDC USER IS NOT NULL!!");
     }
     //print("Logout token=${getAccessToken(oidcUser!)}");
 
@@ -70,10 +72,11 @@ class CurrentUserFetcher extends Notifier<Person> {
     }
 
 // Let the backend know of the logout
-    logNoStack.i("Logout token=${oidcUser!.token.accessToken!}");
     logNoStack.i("Logout locale=${locale}");
     logNoStack.i(
         "logout api=${"$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout"}");
+    logNoStack.i("Logout token=${oidcUser!.token.accessToken!}");
+
 
     apiPost(locale, oidcUser!.token.accessToken!,
             "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout")
