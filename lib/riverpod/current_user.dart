@@ -63,7 +63,7 @@ class CurrentUserFetcher extends Notifier<Person> {
    print("LOGOUT!");
     if (oidcUser == null) {
      print("LOGOUT OIDC USER IS NULL!!");
-     //oidcUser = app_state.cachedAuthedUser.of(context);
+     oidcUser = app_state.cachedAuthedUser.of(context);
     } else {
        print("LOGOUT OIDC USER IS NOT NULL!!");
     }
@@ -79,17 +79,8 @@ class CurrentUserFetcher extends Notifier<Person> {
         "logout api=${"$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout"}");
     logNoStack.i("Logout token=${oidcUser!.token.accessToken!}");
 
- prov.Provider.of<Notifi>(context, listen: false).preventAutoLogin = true;
-    // let the oidc package know
-    await app_state.currentManager.logout(
-      //after logout, go back to home
-      originalUri: Uri.parse('/'),
-      options: OidcPlatformSpecificOptions(
-        web: OidcPlatformSpecificOptions_Web(
-          navigationMode: webNavigationMode,
-        ),
-      ),
-    );
+ 
+   
 
     apiPost(locale, oidcUser!.token.accessToken!,
             "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout")
@@ -101,6 +92,17 @@ class CurrentUserFetcher extends Notifier<Person> {
       log.e("Register logout error");
     });
 
+prov.Provider.of<Notifi>(context, listen: false).preventAutoLogin = true;
+ // let the oidc package know
+    await app_state.currentManager.logout(
+      //after logout, go back to home
+      originalUri: Uri.parse('/'),
+      options: OidcPlatformSpecificOptions(
+        web: OidcPlatformSpecificOptions_Web(
+          navigationMode: webNavigationMode,
+        ),
+      ),
+    );
    
   }
 
