@@ -90,7 +90,7 @@ final initMemoizer = AsyncMemoizer<void>();
 Future<void> initApp() {
   return initMemoizer.runOnce(() async {
     currentManager.userChanges().listen((event) async {
-      cachedAuthedUser.$ = event;
+      // TODO: cachedAuthedUser.$ = event;
       if (event?.userInfo != null) {
         var exp = event?.claims['exp'];
         var name = event?.claims['name'];
