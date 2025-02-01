@@ -22,6 +22,53 @@ var logNoStack = logger.Logger(
 
 final String defaultLocale = Platform.localeName;
 
+Future<dynamic> apiPostNoLocale(String token, String apiPath) async {
+  return apiPostDataNoLocale(token, apiPath, null, null);
+}
+
+Future<dynamic> apiPostDataNoLocale(String token, String apiPath,
+    String? dataName, Object? data) async {
+      logNoStack.i("APIPath -> $apiPath");
+  var url = Uri.parse(apiPath);
+  String jsonData;
+  final http.Response response;
+  if (dataName != null) {
+    jsonData = jsonEncode({
+      dataName: data,
+    });
+
+    response = await http.post(url,
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Authorization": "Bearer $token",
+        },
+        body: jsonData);
+  } else {
+    // No data
+    response = await http.post(url, headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "Bearer $token",
+    });
+  }
+
+  logNoStack.d(response.statusCode);
+  if (response.statusCode == 202 ||
+      response.statusCode == 201 ||
+      response.statusCode == 200) {
+    logNoStack
+        .i("$apiPath created successfully! with status ${response.statusCode}");
+    final resultMap = jsonDecode(response.body);
+    return resultMap;
+  } else {
+    logNoStack.e(
+        "$apiPath created unsuccessfully! with status ${response.statusCode}");
+    return Future.error(
+        "$apiPath created unsuccessfully! with status ${response.statusCode}");
+  }
+}
+
 Future<dynamic> apiPost(Locale locale, String token, String apiPath) async {
   return apiPostData(locale, token, apiPath, null, null);
 }
@@ -71,6 +118,38 @@ Future<dynamic> apiPostData(Locale locale, String token, String apiPath,
   }
 }
 
+Future<http.Response> apiPostDataStrNoLocale(
+    String token, String apiPath, String? jsonDataStr) async {
+  var url = Uri.parse("$defaultAPIBaseUrl$apiPath");
+
+  final http.Response response;
+  if (jsonDataStr != null) {
+    response = await http.post(url,
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Authorization": "Bearer $token",
+        },
+        body: jsonDataStr);
+  } else {
+    // No data
+    response = await http.post(url, headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "Bearer $token",
+    });
+  }
+
+  log.d(response.statusCode);
+  if (response.statusCode == 202 ||
+      response.statusCode == 201 ||
+      response.statusCode == 200) {
+    return response;
+  } else {
+    log.d("apiPost created unsuccessfully!");
+    throw "api Post created unsuccessfully!";
+  }
+}
 Future<http.Response> apiPostDataStr(
     Locale locale, String token, String apiPath, String? jsonDataStr) async {
   var url = Uri.parse("$defaultAPIBaseUrl$apiPath");

@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
+import 'package:notifi/api_utils.dart';
 import 'package:notifi/credentials.dart';
 import 'package:notifi/jwt_utils.dart';
 import 'package:notifi/notifi.dart';
@@ -17,6 +19,8 @@ import '../entities/auth.dart';
 import 'package:logger/logger.dart' as logger;
 import '../i18n/strings.g.dart';
 import 'package:provider/provider.dart' as prov;
+import 'package:flutter_background_geolocation/flutter_background_geolocation.dart'
+    as bg;
 
 part 'auth_controller.g.dart';
 
@@ -128,10 +132,29 @@ class AuthController extends _$AuthController {
   }
 
   /// Mock of a request performed on logout (might be common, or not, whatevs).
-  Future<void> logout() async {
-    await Future<void>.delayed(networkRoundTripTime);
-    //await keycloakWrapper.logout();
-    //prov.Provider.of<Notifi>(context, listen: false).preventAutoLogin = true;
+  Future<void> logout(BuildContext context) async {
+    final savedToken = _sharedPreferences.getString(_sharedPrefsKey);
+
+  
+   // await Future<void>.delayed(networkRoundTripTime);
+ if (!kIsWeb) {
+      bg.BackgroundGeolocation.stop();
+    }
+
+  AsyncValue<Auth> currentUser = state;
+  apiPostNoLocale(savedToken! ,
+            "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout")
+        .then((result) {
+      log.i("logout result $result");
+     
+    }).catchError((error) {
+      log.e("Register logout error");
+    });
+
+  _sharedPreferences.remove(_sharedPrefsKey).ignore();
+
+prov.Provider.of<Notifi>(context, listen: false).preventAutoLogin = true;
+    prov.Provider.of<Notifi>(context, listen: false).preventAutoLogin = true;
     // let the oidc package know
     await app_state.currentManager.logout(
       //after logout, go back to home
