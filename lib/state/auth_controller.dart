@@ -140,8 +140,6 @@ class AuthController extends _$AuthController {
  if (!kIsWeb) {
       bg.BackgroundGeolocation.stop();
     }
-
-  AsyncValue<Auth> currentUser = state;
   apiPostNoLocale(savedToken! ,
             "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout")
         .then((result) {
@@ -152,6 +150,7 @@ class AuthController extends _$AuthController {
     });
 
   _sharedPreferences.remove(_sharedPrefsKey).ignore();
+  state = const AsyncData(Auth.signedOut());
 
 prov.Provider.of<Notifi>(context, listen: false).preventAutoLogin = true;
     prov.Provider.of<Notifi>(context, listen: false).preventAutoLogin = true;
@@ -166,7 +165,7 @@ prov.Provider.of<Notifi>(context, listen: false).preventAutoLogin = true;
       ),
     );
 
-    state = const AsyncData(Auth.signedOut());
+    
   }
 
   Future<void> loginOidc(OidcUser? oidcUser) async {
