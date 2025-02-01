@@ -102,7 +102,7 @@ class _AuthPageState extends ConsumerState<AuthPage> {
           );
           logNoStack.i("Result is ${result!.claims.toJson()['email']}!!!!!");
          
-          ref.read(currentUserProvider.notifier).setOidc(result);
+          //ref.read(currentUserProvider.notifier).setOidc(result);
     
           // messenger.showSnackBar(
           //   SnackBar(
