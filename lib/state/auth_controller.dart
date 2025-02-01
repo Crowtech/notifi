@@ -76,7 +76,9 @@ class AuthController extends _$AuthController {
   @override
   Future<Auth> build() async {
     _sharedPreferences = await SharedPreferences.getInstance();
+    logNoStack.i("AUTH_CONTROLLER Build!");
 
+ 
      // listen for cachedAuthUser then call auth_controller login
     //ref.read(authControllerProvider.notifier).loginOidc( event );
     app_state.currentManager.userChanges().listen((event) async {
