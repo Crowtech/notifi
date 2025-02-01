@@ -100,7 +100,7 @@ Future<void> initApp() {
         // );
         var deviceId = await fetchDeviceId();
         logNoStack.i(
-          'NOTIFI User changed: exp:$exp, $username, $name $deviceId',
+          'App State User changed (notifi lib): exp:$exp, $username, $name $deviceId',
         );
       }
     });
