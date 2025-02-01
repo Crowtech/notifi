@@ -131,7 +131,7 @@ class _AuthPageState extends ConsumerState<AuthPage> {
           //NOTE: you can pass more parameters here.
         );
         if (result != null) {
-          ref.read(currentUserProvider.notifier).setOidc(result);
+          //ref.read(currentUserProvider.notifier).setOidc(result);
         }
       }
       log.i("AUTH RESULT is ${getEmail(result!)}");
