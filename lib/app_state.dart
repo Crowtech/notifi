@@ -90,18 +90,17 @@ final initMemoizer = AsyncMemoizer<void>();
 Future<void> initApp() {
   return initMemoizer.runOnce(() async {
     currentManager.userChanges().listen((event) async {
-      // TODO: cachedAuthedUser.$ = event;
+      cachedAuthedUser.$ = event;
       if (event?.userInfo != null) {
         var exp = event?.claims['exp'];
         var name = event?.claims['name'];
         var username = event?.claims['preferred_username'];
-        // logNoStack.i(
-        //   'NOTIFI User changed: ${event?.claims.toJson()}',
-        // );
+      
         var deviceId = await fetchDeviceId();
         logNoStack.i(
           'App State User changed (notifi lib): exp:$exp, $username, $name $deviceId',
         );
+        
       }
     });
 
