@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:notifi/widgets/menus/account.dart';
 import 'package:notifi/widgets/menus/topleft_menu.dart';
 
 import 'menus/header.dart';

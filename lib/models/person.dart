@@ -87,7 +87,7 @@ class Person extends Resource {
   }
 }
 
-Person defaultPerson = new Person(id: 0,
+Person defaultPerson = Person(id: 0,
       code: "PER_DEFAULT", // code
       created: DateTime.now(), // created
       updated: DateTime.now(), // updated

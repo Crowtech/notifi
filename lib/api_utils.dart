@@ -7,7 +7,6 @@ import 'package:logger/logger.dart' as logger;
 import 'package:notifi/credentials.dart';
 import 'package:notifi/models/gps.dart';
 import 'package:notifi/models/nestfilter.dart';
-import 'package:minio/minio.dart';
 
 import 'models/crowtech_basepage.dart';
 

@@ -74,7 +74,7 @@ class CurrentUserFetcher extends Notifier<Person> {
     }
 
 // Let the backend know of the logout
-    logNoStack.i("Logout locale=${locale}");
+    logNoStack.i("Logout locale=$locale");
     logNoStack.i(
         "logout api=${"$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout"}");
     logNoStack.i("Logout token=${oidcUser!.token.accessToken!}");

@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class AccountMenu extends StatelessWidget {
   const AccountMenu({super.key});

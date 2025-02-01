@@ -18,7 +18,7 @@ class MinIOUploadNotifier extends StateNotifier<AsyncValue<String>> {
     try {
       final streamedResponse = await request.send();
       if (streamedResponse.statusCode == 200) {
-        state = AsyncValue.data("Image uploaded successfully");
+        state = const AsyncValue.data("Image uploaded successfully");
       } else {
         throw Exception('Failed to upload image');
       }

@@ -155,7 +155,7 @@ class Notifi extends ChangeNotifier {
       required String deviceId,
       this.secondsToast = 2,
       List<String>? topics}) {
-    logNoStack.d("notifi constructor");
+    logNoStack.i("notifi constructor");
     _vapidKey = vapidKey;
     _packageInfo = packageInfo;
     _deviceId = deviceId;
@@ -186,6 +186,7 @@ class Notifi extends ChangeNotifier {
   }
 
   ChangeNotifier initialise() {
+    log.i("Initialising Notifi");
     init();
     return this;
   }

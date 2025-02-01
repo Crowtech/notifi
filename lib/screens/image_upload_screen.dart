@@ -7,6 +7,8 @@ import 'package:riverpod/riverpod.dart';
 import 'dart:io';
 
 class ImageUploadScreen extends ConsumerStatefulWidget {
+  const ImageUploadScreen({super.key});
+
   @override
   _ImageUploadScreenState createState() => _ImageUploadScreenState();
 }
@@ -31,14 +33,14 @@ class _ImageUploadScreenState extends ConsumerState<ImageUploadScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Upload Image to MinIO')),
+      appBar: AppBar(title: const Text('Upload Image to MinIO')),
       body: Center(
-        child: _image == null ? Text('No image selected.') : Image.file(_image!),
+        child: _image == null ? const Text('No image selected.') : Image.file(_image!),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _pickImage,
         tooltip: 'Pick Image',
-        child: Icon(Icons.add_a_photo),
+        child: const Icon(Icons.add_a_photo),
       ),
     );
   }
