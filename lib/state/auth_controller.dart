@@ -18,7 +18,6 @@ import 'package:logger/logger.dart' as logger;
 import '../i18n/strings.g.dart';
 import 'package:provider/provider.dart' as prov;
 
-
 part 'auth_controller.g.dart';
 
 var log = logger.Logger(
@@ -73,9 +72,28 @@ class AuthController extends _$AuthController {
     );
   }
 
+
   @override
   Future<Auth> build() async {
     _sharedPreferences = await SharedPreferences.getInstance();
+
+     // listen for cachedAuthUser then call auth_controller login
+    //ref.read(authControllerProvider.notifier).loginOidc( event );
+    app_state.currentManager.userChanges().listen((event) async {
+      logNoStack.i("Detected OIDC USER!!!!!");
+      if (event?.userInfo != null) {
+        var exp = event?.claims['exp'];
+        var name = event?.claims['name'];
+        var username = event?.claims['preferred_username'];
+      
+        var deviceId = await fetchDeviceId();
+        logNoStack.i(
+          'App State User changed (login): exp:$exp, $username, $name $deviceId',
+        );
+        logNoStack.i("token = ${event?.token.accessToken}");
+        ref.read(authControllerProvider.notifier).loginOidc( event );
+      }
+    });
 
     _persistenceRefreshLogic();
 
@@ -85,11 +103,11 @@ class AuthController extends _$AuthController {
   /// Tries to perform a login with the saved token on the persistent storage.
   /// If _anything_ goes wrong, deletes the internal token and returns a [User.signedOut].
   Future<Auth> _loginRecoveryAttempt() async {
-      logNoStack.i("In AuthControllerLogin:loginRecoveryAttempt");
+    logNoStack.i("In AuthControllerLogin:loginRecoveryAttempt");
     try {
       final savedToken = _sharedPreferences.getString(_sharedPrefsKey);
       if (savedToken == null) {
-       throw const UnauthorizedException('No auth token found');
+        throw const UnauthorizedException('No auth token found');
 //       login("adam","crow");
 // _sharedPreferences.remove(_sharedPrefsKey).ignore();
 //       return Future.value(const Auth.signedOut());
@@ -98,9 +116,10 @@ class AuthController extends _$AuthController {
 //          logNoStack.i("In AuthControllerLogin:loginRecoveryAttempt-> savedToken NOT NULL");
 //       }
       }
-       return _loginWithToken(savedToken);
+      return _loginWithToken(savedToken);
     } catch (_, __) {
-       logNoStack.i("In AuthControllerLogin:loginRecoveryAttempt-> Exception -> clearing key");
+      logNoStack.i(
+          "In AuthControllerLogin:loginRecoveryAttempt-> Exception -> clearing key");
       _sharedPreferences.remove(_sharedPrefsKey).ignore();
       return Future.value(const Auth.signedOut());
     }
@@ -125,13 +144,31 @@ class AuthController extends _$AuthController {
     state = const AsyncData(Auth.signedOut());
   }
 
+  Future<void> loginOidc(OidcUser? oidcUser) async {
+    logNoStack.i("In AuthControllerLogin: LOGIN to oidc");
+
+    if (oidcUser != null) {
+      logNoStack.i(
+          "In AuthControllerLogin: oidcUser is ${oidcUser.userInfo['email']}");
+      var authResult = Auth.signedIn(
+          id: 32,
+          displayName: getFirstname(oidcUser),
+          email: getEmail(oidcUser),
+          token: getAccessToken(oidcUser));
+      logNoStack.i("In AuthControllerLogin: auth user is $authResult");
+      state = AsyncData(authResult);
+    } else {
+      logNoStack.i("In AuthControllerLogin: oidcUser is NULL");
+    }
+  }
+
   /// Mock of a successful login attempt, which results come from the network.
   Future<void> login(String email, String password) async {
     //     final currentRoute = GoRouterState.of(context);
     // final originalUri =
     //     currentRoute.uri.queryParameters[OidcConstants_Store.originalUri];
- logNoStack.i("In AuthControllerLogin: LOGIN to oidc");
-   // await app_state.currentManager.clearUnusedStates() ;
+    logNoStack.i("In AuthControllerLogin: LOGIN to oidc");
+    // await app_state.currentManager.clearUnusedStates() ;
 
     const parsedOriginalUri = null;
     //   originalUri == null ? null : Uri.tryParse(originalUri);
@@ -167,19 +204,19 @@ class AuthController extends _$AuthController {
 //      originalUri: parsedOriginalUri ?? Uri.parse('/'),
 //     //       //store any arbitrary data, here we store the authorization
 //     //       //start time.
- //      extraStateData: DateTime.now().toIso8601String(),
- //      options: _getOptions(),
+    //      extraStateData: DateTime.now().toIso8601String(),
+    //      options: _getOptions(),
 //     //       //NOTE: you can pass more parameters here.
- //    );
+    //    );
 //         if (oidcUser != null) {
-        //   logNoStack.i("In AuthControllerLogin: oidcUser is ${oidcUser.userInfo['email']}");
-        //   // ref.read(currentUserProvider.notifier).setOidc(oidcUser);
-        //    var authResult = Auth.signedIn(id:32,displayName: getFirstname(oidcUser),email: getEmail(oidcUser),token: getAccessToken(oidcUser));
-        //   logNoStack.i("In AuthControllerLogin: auth user is $authResult");
-        // state = AsyncData(authResult);
-        // } else {
-        //   logNoStack.i("In AuthControllerLogin: oidcUser is NULL");
-        // }
+    //   logNoStack.i("In AuthControllerLogin: oidcUser is ${oidcUser.userInfo['email']}");
+    //   // ref.read(currentUserProvider.notifier).setOidc(oidcUser);
+    //    var authResult = Auth.signedIn(id:32,displayName: getFirstname(oidcUser),email: getEmail(oidcUser),token: getAccessToken(oidcUser));
+    //   logNoStack.i("In AuthControllerLogin: auth user is $authResult");
+    // state = AsyncData(authResult);
+    // } else {
+    //   logNoStack.i("In AuthControllerLogin: oidcUser is NULL");
+    // }
   }
 
   /// Mock of a login request performed with a saved token.
