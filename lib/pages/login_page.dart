@@ -38,6 +38,7 @@ class LoginPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+      logNoStack.i( 'LOGINPAGE: ',);
     Future<void> login2() async  {
          var result = await app_state.currentManager.loginAuthorizationCodeFlow(
           originalUri:  Uri.parse('/'),
