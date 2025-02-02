@@ -36,22 +36,21 @@ class CurrentUserFetcher extends Notifier<Person> {
   }
 
   void fetchCurrentUser(OidcUser currentUser) async {
-    logNoStack.i("CurrentUser: fetch currentUser from backend API");
-    String deviceId = await fetchDeviceId();
-    log.i("registerLogin: deviceid=$deviceId");
+     String deviceId = await fetchDeviceId();
+    log.i("CURRENT_USER: deviceid=$deviceId fetch currentUser from backend API");
     apiPostDataNoLocale(getAccessToken(currentUser),
             "$defaultApiPrefixPath/persons/register", "deviceid", deviceId)
         .then((currentUser) {
-      log.i("Registered user returned $currentUser");
+      log.i("CURRENT_USER: Registered user returned $currentUser");
       state = currentUser;
     }).catchError((error) {
-      log.d("Register login error");
+      log.d("CURRENT_USER: Register login error");
     });
-    throw "Register Login error";
+    throw "CURRENT_USER: Register Login error";
   }
 
   void setOidc(OidcUser? user) async {
-    logNoStack.i("Setting currentUser with Oidc user");
+    logNoStack.i("CURRENT_USER: SET_OIDC, Setting currentUser with Oidc user");
     if (user == null) {
       // if null then don't bother
       return;
@@ -69,17 +68,17 @@ class CurrentUserFetcher extends Notifier<Person> {
   }
 
   void setPerson(Person user) async {
-    logNoStack.i("Setting currentUser with Person user");
+    logNoStack.i("CURRENT_USER: Setting currentUser with Person user");
     state = user;
   }
 
   void logout(BuildContext context) async {
-    print("LOGOUT!");
+    logNoStack.i("CURRENT_USER: LOGOUT!");
     if (oidcUser == null) {
-      print("LOGOUT OIDC USER IS NULL!!");
+      logNoStack.i("CURRENT_USER: LOGOUT OIDC USER IS NULL!!");
       oidcUser = app_state.cachedAuthedUser.of(context);
     } else {
-      print("LOGOUT OIDC USER IS NOT NULL!!");
+      logNoStack.i("CURRENT_USER: LOGOUT OIDC USER IS NOT NULL!!");
     }
     //print("Logout token=${getAccessToken(oidcUser!)}");
 
@@ -88,19 +87,19 @@ class CurrentUserFetcher extends Notifier<Person> {
     }
 
 // Let the backend know of the logout
-    logNoStack.i("Logout locale=$locale");
+    logNoStack.i("CURRENT_USER: Logout locale=$locale");
     logNoStack.i(
-        "logout api=${"$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout"}");
-    logNoStack.i("Logout token=${oidcUser!.token.accessToken!}");
+        "CURRENT_USER: logout api=${"$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout"}");
+    logNoStack.i("CURRENT_USER: Logout token=${oidcUser!.token.accessToken!}");
 
     apiPost(locale, oidcUser!.token.accessToken!,
             "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout")
         .then((result) {
-      log.i("logout result $result");
+      log.i("CURRENT_USER: logout result $result");
       state = defaultPerson;
       oidcUser = null;
     }).catchError((error) {
-      log.e("Register logout error");
+      log.e("CURRENT_USER: Register logout error");
     });
 
     prov.Provider.of<Notifi>(context, listen: false).preventAutoLogin = true;

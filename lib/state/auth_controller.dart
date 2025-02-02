@@ -116,11 +116,11 @@ class AuthController extends _$AuthController {
         throw const UnauthorizedException('No auth token found');
       }
       logNoStack
-          .i("In AuthControllerLogin:loginRecoveryAttempt-> Auth Token found!");
+          .i("AUTH_CONTROLLER loginRecoveryAttempt-> Auth Token found!");
       return _loginWithToken(savedToken);
     } catch (_, __) {
       logNoStack.i(
-          "In AuthControllerLogin:loginRecoveryAttempt-> Exception -> clearing key");
+          "AUTH_CONTROLLER loginRecoveryAttempt-> Exception -> clearing key");
       _sharedPreferences.remove(_sharedPrefsKey).ignore();
       return Future.value(const Auth.signedOut());
     }
@@ -128,19 +128,19 @@ class AuthController extends _$AuthController {
 
   /// Mock of a request performed on logout (might be common, or not, whatevs).
   Future<void> logout(BuildContext context) async {
-    logNoStack.i("logout called in auth");
+    logNoStack.i("AUTH_CONTROLLER LOGOUT called in auth");
     final savedToken = _sharedPreferences.getString(_sharedPrefsKey);
 
     if (!kIsWeb) {
       bg.BackgroundGeolocation.stop();
     }
-    logNoStack.i("logout token is $savedToken");
+    logNoStack.i("AUTH_CONTROLLER LOGOUT , token is $savedToken");
     apiPostNoLocale(savedToken!,
             "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout")
         .then((result) {
-      log.i("logout result $result");
+      log.i("AUTH_CONTROLLER LOGOUT result $result");
     }).catchError((error) {
-      log.e("Register logout error ${error.toString()}");
+      log.e("AUTH_CONTROLLER LOGOUT  Register logout error ${error.toString()}");
     });
 
     _sharedPreferences.remove(_sharedPrefsKey).ignore();
@@ -163,7 +163,7 @@ class AuthController extends _$AuthController {
   Future<void> loginOidc(OidcUser? oidcUser) async {
     if (oidcUser != null) {
       logNoStack.i(
-          "LOGIN_OIDC: In AuthControllerLogin: oidcUser is ${oidcUser.userInfo['email']} creating user with temp id 32");
+          "AUTH_CONTROLLER  LOGIN_OIDC: In AuthControllerLogin: oidcUser is ${oidcUser.userInfo['email']} creating user with temp id 32");
 
       var authResult = Auth.signedIn(
           id: 32,
@@ -171,19 +171,17 @@ class AuthController extends _$AuthController {
           email: getEmail(oidcUser),
           resourcecode: getResourceCode(oidcUser),
           token: getAccessToken(oidcUser));
-      logNoStack.i("In AuthControllerLogin: auth user is $authResult");
+      logNoStack.i("AUTH_CONTROLLER  LOGIN_OIDC: auth user is $authResult");
       state = AsyncData(authResult);
 
       ref.read(currentUserProvider.notifier).fetchCurrentUser(oidcUser);
     } else {
-      logNoStack.i("LOGIN_OIDC: In AuthControllerLogin: oidcUser was NULL");
+      logNoStack.i("AUTH_CONTROLLER LOGIN_OIDC: In AuthControllerLogin: oidcUser was NULL");
     }
   }
 
   Future<void> loginPerson(Person currentPerson) async {
-    logNoStack.i("In AuthControllerLogin: LOGIN person! from backend");
-
-    logNoStack.i("In AuthControllerLogin: personis ${currentPerson}");
+    logNoStack.i("AUTH_CONTROLLER  LOGIN person! from backend person is ${currentPerson}");
     if (state.hasValue) {
 // var authUser = (Auth)state.value;
 
@@ -207,7 +205,7 @@ class AuthController extends _$AuthController {
     //     final currentRoute = GoRouterState.of(context);
     // final originalUri =
     //     currentRoute.uri.queryParameters[OidcConstants_Store.originalUri];
-    logNoStack.i("In AuthControllerLogin: LOGIN to oidc");
+    logNoStack.i("AUTH_CONTROLLER  LOGIN EMAIL/PASSWORD ");
     // await app_state.currentManager.clearUnusedStates() ;
 
     const parsedOriginalUri = null;
@@ -262,7 +260,7 @@ class AuthController extends _$AuthController {
   /// Mock of a login request performed with a saved token.
   /// If such request fails, this method will throw an [UnauthorizedException].
   Future<Auth> _loginWithToken(String token) async {
-    logNoStack.i("In AuthControllerLoginWithToken: start");
+    logNoStack.i("AUTH_CONTROLLER  LOGIN WITH TOKEN");
     final logInAttempt = await Future.delayed(
       networkRoundTripTime,
       () => true, // edit this if you wanna play around
