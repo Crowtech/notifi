@@ -170,6 +170,9 @@ class AuthController extends _$AuthController {
     if (oidcUser != null) {
       logNoStack.i(
           "In AuthControllerLogin: oidcUser is ${oidcUser.userInfo['email']}");
+
+
+
       var authResult = Auth.signedIn(
           id: 32,
           displayName: getFirstname(oidcUser),

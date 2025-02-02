@@ -10,6 +10,7 @@ sealed class Auth with _$Auth {
     required int id,
     required String displayName,
     required String email,
+    required String resourcecode,
     required String token,
   }) = SignedIn;
   const Auth._();
