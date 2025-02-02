@@ -35,9 +35,24 @@ class CurrentUserFetcher extends Notifier<Person> {
     return defaultPerson; // from Person.java
   }
 
-  void setOidc(OidcUser ?user) async {
+  void fetchCurrentUser(OidcUser currentUser) async {
+    String deviceId = await fetchDeviceId();
+    log.i("registerLogin: deviceid=$deviceId");
+    apiPostDataNoLocale(getAccessToken(currentUser),
+            "$defaultApiPrefixPath/persons/register", "deviceid", deviceId)
+        .then((currentUser) {
+      log.d("Registered user $currentUser");
+      state = currentUser;
+    }).catchError((error) {
+      log.d("Register login error");
+    });
+    throw "Register Login error";
+  }
+
+  void setOidc(OidcUser? user) async {
     logNoStack.i("Setting currentUser with Oidc user");
-    if (user == null) { // if null then don't bother
+    if (user == null) {
+      // if null then don't bother
       return;
     }
     oidcUser = user;
@@ -57,15 +72,13 @@ class CurrentUserFetcher extends Notifier<Person> {
     state = user;
   }
 
-
-
   void logout(BuildContext context) async {
-   print("LOGOUT!");
+    print("LOGOUT!");
     if (oidcUser == null) {
-     print("LOGOUT OIDC USER IS NULL!!");
-     oidcUser = app_state.cachedAuthedUser.of(context);
+      print("LOGOUT OIDC USER IS NULL!!");
+      oidcUser = app_state.cachedAuthedUser.of(context);
     } else {
-       print("LOGOUT OIDC USER IS NOT NULL!!");
+      print("LOGOUT OIDC USER IS NOT NULL!!");
     }
     //print("Logout token=${getAccessToken(oidcUser!)}");
 
@@ -79,9 +92,6 @@ class CurrentUserFetcher extends Notifier<Person> {
         "logout api=${"$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout"}");
     logNoStack.i("Logout token=${oidcUser!.token.accessToken!}");
 
- 
-   
-
     apiPost(locale, oidcUser!.token.accessToken!,
             "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout")
         .then((result) {
@@ -92,8 +102,8 @@ class CurrentUserFetcher extends Notifier<Person> {
       log.e("Register logout error");
     });
 
-prov.Provider.of<Notifi>(context, listen: false).preventAutoLogin = true;
- // let the oidc package know
+    prov.Provider.of<Notifi>(context, listen: false).preventAutoLogin = true;
+    // let the oidc package know
     await app_state.currentManager.logout(
       //after logout, go back to home
       originalUri: Uri.parse('/'),
@@ -103,7 +113,6 @@ prov.Provider.of<Notifi>(context, listen: false).preventAutoLogin = true;
         ),
       ),
     );
-   
   }
 
   void setLocale(Locale locale) {

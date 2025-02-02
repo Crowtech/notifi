@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/credentials.dart';
+import 'package:notifi/jwt_utils.dart';
 import 'package:notifi/models/gps.dart';
 import 'package:notifi/models/nestfilter.dart';
+import 'package:notifi/models/person.dart';
 
 import 'models/crowtech_basepage.dart';
 
@@ -26,9 +28,9 @@ Future<dynamic> apiPostNoLocale(String token, String apiPath) async {
   return apiPostDataNoLocale(token, apiPath, null, null);
 }
 
-Future<dynamic> apiPostDataNoLocale(String token, String apiPath,
-    String? dataName, Object? data) async {
-      logNoStack.i("APIPath -> $apiPath");
+Future<dynamic> apiPostDataNoLocale(
+    String token, String apiPath, String? dataName, Object? data) async {
+  logNoStack.i("APIPath -> $apiPath");
   var url = Uri.parse(apiPath);
   String jsonData;
   final http.Response response;
@@ -75,7 +77,7 @@ Future<dynamic> apiPost(Locale locale, String token, String apiPath) async {
 
 Future<dynamic> apiPostData(Locale locale, String token, String apiPath,
     String? dataName, Object? data) async {
-      logNoStack.i("APIPath -> $apiPath");
+  logNoStack.i("APIPath -> $apiPath");
   var url = Uri.parse(apiPath);
   String jsonData;
   final http.Response response;
@@ -150,6 +152,7 @@ Future<http.Response> apiPostDataStrNoLocale(
     throw "api Post created unsuccessfully!";
   }
 }
+
 Future<http.Response> apiPostDataStr(
     Locale locale, String token, String apiPath, String? jsonDataStr) async {
   var url = Uri.parse("$defaultAPIBaseUrl$apiPath");
@@ -183,6 +186,22 @@ Future<http.Response> apiPostDataStr(
     log.d("apiPost created unsuccessfully!");
     throw "api Post created unsuccessfully!";
   }
+}
+
+Future<Person> registerLogin(
+  String token,
+) async {
+  String deviceId = await fetchDeviceId();
+  log.i("registerLogin: deviceid=$deviceId");
+  apiPostDataNoLocale(token, "$defaultApiPrefixPath/persons/register",
+          "deviceid", deviceId)
+      .then((user) {
+    log.d("Registered user $user");
+    return user;
+  }).catchError((error) {
+    log.d("Register login error");
+  });
+  throw "Register Login error";
 }
 
 // Future<Person> registerLogin(
@@ -228,10 +247,7 @@ Future<Map> registerFCM(
   return <dynamic, dynamic>{};
 }
 
-Future<void> uploadMinio(String file)
-async {
-  
-}
+Future<void> uploadMinio(String file) async {}
 
 //Future<CrowtechBasePage<GPS>> fetchGPS(
 Future<CrowtechBasePage<GPS>> fetchGPS(
@@ -254,40 +270,41 @@ Future<CrowtechBasePage<GPS>> fetchGPS(
   String jsonDataStr = jsonEncode(nestfilter);
   logNoStack.i("Sending NestFilter gps $nestfilter with json as $jsonDataStr");
 
-  var response = await apiPostDataStr(locale, token, "$defaultApiPrefixPath/gps/fetch", jsonDataStr);
-     // .then((response) {
-    logNoStack.d("result ${response.body.toString()}");
-    final map = jsonDecode(response.body);
+  var response = await apiPostDataStr(
+      locale, token, "$defaultApiPrefixPath/gps/fetch", jsonDataStr);
+  // .then((response) {
+  logNoStack.d("result ${response.body.toString()}");
+  final map = jsonDecode(response.body);
 
-    if (map["totalItems"] == 0) {
-      logNoStack.i("Empty List");
-      CrowtechBasePage<GPS> page =
-          CrowtechBasePage<GPS>(itemFromJson: GPS.fromJson).fromJson(map);
-     // page.processingTime = map['processingTime'];
-     // page.startIndex = map['startIndex'];
-     // page.totalItems = map['totalItems'];
-      return page;
-    } else {
-      logNoStack.d("map = $map");
+  if (map["totalItems"] == 0) {
+    logNoStack.i("Empty List");
+    CrowtechBasePage<GPS> page =
+        CrowtechBasePage<GPS>(itemFromJson: GPS.fromJson).fromJson(map);
+    // page.processingTime = map['processingTime'];
+    // page.startIndex = map['startIndex'];
+    // page.totalItems = map['totalItems'];
+    return page;
+  } else {
+    logNoStack.d("map = $map");
 
-      CrowtechBasePage<GPS> page =
-          CrowtechBasePage<GPS>(itemFromJson: GPS.fromJson).fromJson(map);
-      //page.processingTime = map['processingTime'];
-      //page.startIndex = map['startIndex'];
-     // page.totalItems = map['totalItems'];
+    CrowtechBasePage<GPS> page =
+        CrowtechBasePage<GPS>(itemFromJson: GPS.fromJson).fromJson(map);
+    //page.processingTime = map['processingTime'];
+    //page.startIndex = map['startIndex'];
+    // page.totalItems = map['totalItems'];
 
-      //String pageJson = page.toString();
-      //logNoStack.i("page is ${page.toString()}");
-      // logNoStack.i("Number of items returned = ${page.items!.length}");
-      // logNoStack.i("Processing Time = ${page.processingTime}");
-      // logNoStack.i("Total Number of items available = ${page.totalItems}");
-      // for (int i = 0; i < page.items!.length; i++) {
-      //   logNoStack.i("item $i = ${page.items!.elementAt(i)}");
-      // }
+    //String pageJson = page.toString();
+    //logNoStack.i("page is ${page.toString()}");
+    // logNoStack.i("Number of items returned = ${page.items!.length}");
+    // logNoStack.i("Processing Time = ${page.processingTime}");
+    // logNoStack.i("Total Number of items available = ${page.totalItems}");
+    // for (int i = 0; i < page.items!.length; i++) {
+    //   logNoStack.i("item $i = ${page.items!.elementAt(i)}");
+    // }
 
-      //logNoStack.i(page);
-      return page;
-    }
+    //logNoStack.i(page);
+    return page;
+  }
   // }).catchError((error) {
   //   log.e("Fetch GPS Page error");
   //  // return CrowtechBasePage<GPS>();

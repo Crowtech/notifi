@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:notifi/api_utils.dart';
 import 'package:notifi/credentials.dart';
 import 'package:notifi/jwt_utils.dart';
+import 'package:notifi/models/person.dart';
 import 'package:notifi/notifi.dart';
 import 'package:notifi/riverpod/current_user.dart';
 import 'package:oidc/oidc.dart';
@@ -135,7 +136,6 @@ class AuthController extends _$AuthController {
     logNoStack.i("logout called in auth");
     final savedToken = _sharedPreferences.getString(_sharedPrefsKey);
 
-
     if (!kIsWeb) {
       bg.BackgroundGeolocation.stop();
     }
@@ -172,8 +172,6 @@ class AuthController extends _$AuthController {
       logNoStack.i(
           "In AuthControllerLogin: oidcUser is ${oidcUser.userInfo['email']}");
 
-
-
       var authResult = Auth.signedIn(
           id: 32,
           displayName: getFirstname(oidcUser),
@@ -182,6 +180,8 @@ class AuthController extends _$AuthController {
           token: getAccessToken(oidcUser));
       logNoStack.i("In AuthControllerLogin: auth user is $authResult");
       state = AsyncData(authResult);
+
+      ref.read(currentUserProvider.notifier).fetchCurrentUser(oidcUser);
     } else {
       logNoStack.i("In AuthControllerLogin: oidcUser is NULL");
     }
