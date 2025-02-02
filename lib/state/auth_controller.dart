@@ -39,6 +39,7 @@ const _dummyUser = Auth.signedIn(
   id: -1,
   displayName: 'My Name',
   email: 'My Email',
+  resourcecode: 'PER_DUMMY',
   token: 'some-updated-secret-auth-token',
 );
 
