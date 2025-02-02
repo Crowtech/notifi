@@ -177,6 +177,7 @@ class AuthController extends _$AuthController {
           id: 32,
           displayName: getFirstname(oidcUser),
           email: getEmail(oidcUser),
+          resourcecode: getResourceCode(oidcUser),
           token: getAccessToken(oidcUser));
       logNoStack.i("In AuthControllerLogin: auth user is $authResult");
       state = AsyncData(authResult);
