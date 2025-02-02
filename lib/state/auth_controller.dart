@@ -187,6 +187,32 @@ class AuthController extends _$AuthController {
     }
   }
 
+Future<void> loginPerson(Person currentPerson) async {
+    logNoStack.i("In AuthControllerLogin: LOGIN person! from backend");
+
+    if (currentPerson != null) {
+      logNoStack.i(
+          "In AuthControllerLogin: personis ${currentPerson}");
+// if (state.hasValue) {
+// var authUser = (Auth)state.value;
+
+//       var authResult = Auth.signedIn(
+//           id: currentPerson.id!,
+//           displayName: currentPerson.firstname,
+//           email: currentPerson.email,
+//           resourcecode: currentPerson.code!,
+//           token: authUser.token;
+//       logNoStack.i("In AuthControllerLogin: auth user is $authResult");
+//       state = AsyncData(authResult);
+
+//     } else {
+//       logNoStack.i("In AuthControllerLogin: person is NULL");
+//     }
+    }
+  }
+
+
+
   /// Mock of a successful login attempt, which results come from the network.
   Future<void> login(String email, String password) async {
     //     final currentRoute = GoRouterState.of(context);
