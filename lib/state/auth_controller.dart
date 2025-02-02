@@ -86,7 +86,6 @@ class AuthController extends _$AuthController {
     // listen for cachedAuthUser then call auth_controller login
     //ref.read(authControllerProvider.notifier).loginOidc( event );
     app_state.currentManager.userChanges().listen((event) async {
-      
       if (event?.userInfo != null) {
         var exp = event?.claims['exp'];
         var name = event?.claims['name'];
@@ -111,13 +110,13 @@ class AuthController extends _$AuthController {
   /// Tries to perform a login with the saved token on the persistent storage.
   /// If _anything_ goes wrong, deletes the internal token and returns a [User.signedOut].
   Future<Auth> _loginRecoveryAttempt() async {
-    
     try {
       final savedToken = _sharedPreferences.getString(_sharedPrefsKey);
       if (savedToken == null) {
         throw const UnauthorizedException('No auth token found');
       }
-      logNoStack.i("In AuthControllerLogin:loginRecoveryAttempt-> Auth Token found!");
+      logNoStack
+          .i("In AuthControllerLogin:loginRecoveryAttempt-> Auth Token found!");
       return _loginWithToken(savedToken);
     } catch (_, __) {
       logNoStack.i(
@@ -162,7 +161,6 @@ class AuthController extends _$AuthController {
   }
 
   Future<void> loginOidc(OidcUser? oidcUser) async {
-
     if (oidcUser != null) {
       logNoStack.i(
           "LOGIN_OIDC: In AuthControllerLogin: oidcUser is ${oidcUser.userInfo['email']} creating user with temp id 32");
@@ -182,14 +180,11 @@ class AuthController extends _$AuthController {
     }
   }
 
-Future<void> loginPerson(Person currentPerson) async {
+  Future<void> loginPerson(Person currentPerson) async {
     logNoStack.i("In AuthControllerLogin: LOGIN person! from backend");
 
-    if (currentPerson != null) {
-      logNoStack.i(
-          "In AuthControllerLogin: personis ${currentPerson}");
-if (state.hasValue) {
-  
+    logNoStack.i("In AuthControllerLogin: personis ${currentPerson}");
+    if (state.hasValue) {
 // var authUser = (Auth)state.value;
 
 //       var authResult = Auth.signedIn(
@@ -206,8 +201,6 @@ if (state.hasValue) {
 //     }
     }
   }
-
-
 
   /// Mock of a successful login attempt, which results come from the network.
   Future<void> login(String email, String password) async {
