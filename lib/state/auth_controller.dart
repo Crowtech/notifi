@@ -86,7 +86,7 @@ class AuthController extends _$AuthController {
     // listen for cachedAuthUser then call auth_controller login
     //ref.read(authControllerProvider.notifier).loginOidc( event );
     app_state.currentManager.userChanges().listen((event) async {
-      logNoStack.i("Detected OIDC USER!!!!!");
+      
       if (event?.userInfo != null) {
         var exp = event?.claims['exp'];
         var name = event?.claims['name'];
@@ -94,10 +94,12 @@ class AuthController extends _$AuthController {
 
         var deviceId = await fetchDeviceId();
         logNoStack.i(
-          'App State User changed (login): exp:$exp, $username, $name $deviceId',
+          'AUTH CONT BUILD: App State User changed (login): exp:$exp, $username, $name $deviceId',
         );
         logNoStack.i("token = ${event?.token.accessToken}");
         ref.read(authControllerProvider.notifier).loginOidc(event);
+      } else {
+        logNoStack.i("AUTH CONT BUILD: App State User changed to NULL:");
       }
     });
 
@@ -109,19 +111,13 @@ class AuthController extends _$AuthController {
   /// Tries to perform a login with the saved token on the persistent storage.
   /// If _anything_ goes wrong, deletes the internal token and returns a [User.signedOut].
   Future<Auth> _loginRecoveryAttempt() async {
-    logNoStack.i("In AuthControllerLogin:loginRecoveryAttempt");
+    
     try {
       final savedToken = _sharedPreferences.getString(_sharedPrefsKey);
       if (savedToken == null) {
         throw const UnauthorizedException('No auth token found');
-//       login("adam","crow");
-// _sharedPreferences.remove(_sharedPrefsKey).ignore();
-//       return Future.value(const Auth.signedOut());
-
-//       } else {
-//          logNoStack.i("In AuthControllerLogin:loginRecoveryAttempt-> savedToken NOT NULL");
-//       }
       }
+      logNoStack.i("In AuthControllerLogin:loginRecoveryAttempt-> Auth Token found!");
       return _loginWithToken(savedToken);
     } catch (_, __) {
       logNoStack.i(
