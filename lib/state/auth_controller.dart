@@ -94,12 +94,12 @@ class AuthController extends _$AuthController {
 
         var deviceId = await fetchDeviceId();
         logNoStack.i(
-          'AUTH CONT BUILD: App State User changed (login): exp:$exp, $username, $name $deviceId',
+          'AUTH CONTROLLER BUILD: App State User changed (login): exp:$exp, $username, $name $deviceId',
         );
         logNoStack.i("token = ${event?.token.accessToken}");
         ref.read(authControllerProvider.notifier).loginOidc(event);
       } else {
-        logNoStack.i("AUTH CONT BUILD: App State User changed to NULL:");
+        logNoStack.i("AUTH CONTROLLER BUILD: App State User changed to NULL:");
       }
     });
 
@@ -162,11 +162,10 @@ class AuthController extends _$AuthController {
   }
 
   Future<void> loginOidc(OidcUser? oidcUser) async {
-    logNoStack.i("In AuthControllerLogin: LOGIN to oidc");
 
     if (oidcUser != null) {
       logNoStack.i(
-          "In AuthControllerLogin: oidcUser is ${oidcUser.userInfo['email']}");
+          "LOGIN_OIDC: In AuthControllerLogin: oidcUser is ${oidcUser.userInfo['email']} creating user with temp id 32");
 
       var authResult = Auth.signedIn(
           id: 32,
@@ -179,7 +178,7 @@ class AuthController extends _$AuthController {
 
       ref.read(currentUserProvider.notifier).fetchCurrentUser(oidcUser);
     } else {
-      logNoStack.i("In AuthControllerLogin: oidcUser is NULL");
+      logNoStack.i("LOGIN_OIDC: In AuthControllerLogin: oidcUser was NULL");
     }
   }
 
@@ -189,7 +188,8 @@ Future<void> loginPerson(Person currentPerson) async {
     if (currentPerson != null) {
       logNoStack.i(
           "In AuthControllerLogin: personis ${currentPerson}");
-// if (state.hasValue) {
+if (state.hasValue) {
+  
 // var authUser = (Auth)state.value;
 
 //       var authResult = Auth.signedIn(

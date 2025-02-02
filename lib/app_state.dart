@@ -100,9 +100,9 @@ Future<void> initApp() {
       
         var deviceId = await fetchDeviceId();
         logNoStack.i(
-          'App State User changed (notifi lib): exp:$exp, $username, $name $deviceId',
+          'App State (OIDC) User changed: exp:$exp, $username, $name $deviceId',
         );
-        logNoStack.i("token = ${event?.token.accessToken}");
+       // logNoStack.i("token = ${event?.token.accessToken}");
           //ref.read(authControllerProvider.notifier).loginOidc( event );
       }
     });

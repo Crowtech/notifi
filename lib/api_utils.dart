@@ -30,7 +30,7 @@ Future<dynamic> apiPostNoLocale(String token, String apiPath) async {
 
 Future<dynamic> apiPostDataNoLocale(
     String token, String apiPath, String? dataName, Object? data) async {
-  logNoStack.i("APIPath -> $apiPath");
+  logNoStack.i("API POST : APIPath -> $apiPath");
   var url = Uri.parse(apiPath);
   String jsonData;
   final http.Response response;
