@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_secure_token_manager/flutter_secure_token_manager.dart';
 import 'package:notifi/api_utils.dart';
 import 'package:notifi/credentials.dart';
 import 'package:notifi/jwt_utils.dart';
@@ -113,8 +114,17 @@ class AuthController extends _$AuthController {
     try {
       final savedToken = _sharedPreferences.getString(_sharedPrefsKey);
       if (savedToken == null) {
-        throw const UnauthorizedException('No auth token found');
+        throw const UnauthorizedException('AUTH_CONTROLLER loginRecoveryAttempt: No auth token found');
       }
+      // Try and work out if token valid
+      logNoStack.i("AUTH_CONTROLLER loginRecoveryAttempt: savedToken is ${savedToken}");
+      bool isExpired = await FlutterSecureTokenManager().isTokenExpired(savedToken);
+      if (isExpired) {
+         throw const UnauthorizedException('AUTH_CONTROLLER loginRecoveryAttempt: Auth Token expired');
+      }  else {
+         logNoStack.i("AUTH_CONTROLLER loginRecoveryAttempt: savedToken is not expired ");
+      }
+      
       logNoStack
           .i("AUTH_CONTROLLER loginRecoveryAttempt-> Auth Token found!");
       return _loginWithToken(savedToken);
