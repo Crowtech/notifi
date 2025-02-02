@@ -118,16 +118,16 @@ class AuthController extends _$AuthController {
       }
       // Try and work out if token valid
       logNoStack.i("AUTH_CONTROLLER loginRecoveryAttempt: savedToken is ${savedToken}");
-      bool isExpired = await FlutterSecureTokenManager().isTokenExpired(savedToken);
-      if (isExpired) {
-         throw const UnauthorizedException('AUTH_CONTROLLER loginRecoveryAttempt: Auth Token expired');
+      bool isValid = await verifyToken(savedToken);
+
+
+      if (!isValid) {
+         throw const UnauthorizedException('AUTH_CONTROLLER loginRecoveryAttempt: Auth Token logged out or expired');
       }  else {
-         logNoStack.i("AUTH_CONTROLLER loginRecoveryAttempt: savedToken is not expired ");
+         logNoStack.i("AUTH_CONTROLLER loginRecoveryAttempt: savedToken is good ");
+           return _loginWithToken(savedToken);
       }
       
-      logNoStack
-          .i("AUTH_CONTROLLER loginRecoveryAttempt-> Auth Token found!");
-      return _loginWithToken(savedToken);
     } catch (_, __) {
       logNoStack.i(
           "AUTH_CONTROLLER loginRecoveryAttempt-> Exception -> clearing key");

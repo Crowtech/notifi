@@ -193,8 +193,8 @@ Future<Person> registerLogin(
 ) async {
   String deviceId = await fetchDeviceId();
   log.i("registerLogin: deviceid=$deviceId");
-  apiPostDataNoLocale(token, "$defaultApiPrefixPath/persons/register",
-          "deviceid", deviceId)
+  apiPostDataNoLocale(
+          token, "$defaultApiPrefixPath/persons/register", "deviceid", deviceId)
       .then((user) {
     log.d("Registered user $user");
     return user;
@@ -204,6 +204,27 @@ Future<Person> registerLogin(
   throw "Register Login error";
 }
 
+Future<bool> verifyToken(String token) async {
+  log.i("API_UTILS: Verify Token:");
+  var url = Uri.parse(
+      "$defaultAuthBaseUrl/auth/realms/${defaultRealm}/protocol/openid-connect/token/introspect");
+
+  final http.Response response;
+
+  response = await http.get(url, headers: {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer $token",
+  });
+  logNoStack.i("API_UTILS: VERIFY TOKEN: ${response.statusCode}");
+  if (response.statusCode == 202 ||
+      response.statusCode == 201 ||
+      response.statusCode == 200) {
+    return true; // verified
+  } else {
+    return false;
+  }
+}
 // Future<Person> registerLogin(
 //   String token,
 // ) async {
