@@ -140,13 +140,14 @@ class AuthController extends _$AuthController {
  if (!kIsWeb) {
       bg.BackgroundGeolocation.stop();
     }
-  apiPostNoLocale(savedToken! ,
+    logNoStack.i("logout token is $savedToken");
+    apiPostNoLocale(savedToken! ,
             "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout")
         .then((result) {
       log.i("logout result $result");
      
     }).catchError((error) {
-      log.e("Register logout error");
+      log.e("Register logout error ${error.toString()}");
     });
 
   _sharedPreferences.remove(_sharedPrefsKey).ignore();
