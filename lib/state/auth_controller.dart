@@ -76,14 +76,12 @@ class AuthController extends _$AuthController {
     );
   }
 
-
   @override
   Future<Auth> build() async {
     _sharedPreferences = await SharedPreferences.getInstance();
     logNoStack.i("AUTH_CONTROLLER Build!");
 
- 
-     // listen for cachedAuthUser then call auth_controller login
+    // listen for cachedAuthUser then call auth_controller login
     //ref.read(authControllerProvider.notifier).loginOidc( event );
     app_state.currentManager.userChanges().listen((event) async {
       logNoStack.i("Detected OIDC USER!!!!!");
@@ -91,13 +89,13 @@ class AuthController extends _$AuthController {
         var exp = event?.claims['exp'];
         var name = event?.claims['name'];
         var username = event?.claims['preferred_username'];
-      
+
         var deviceId = await fetchDeviceId();
         logNoStack.i(
           'App State User changed (login): exp:$exp, $username, $name $deviceId',
         );
         logNoStack.i("token = ${event?.token.accessToken}");
-        ref.read(authControllerProvider.notifier).loginOidc( event );
+        ref.read(authControllerProvider.notifier).loginOidc(event);
       }
     });
 
@@ -133,28 +131,27 @@ class AuthController extends _$AuthController {
 
   /// Mock of a request performed on logout (might be common, or not, whatevs).
   Future<void> logout(BuildContext context) async {
+    logNoStack.i("logout called in auth");
     final savedToken = _sharedPreferences.getString(_sharedPrefsKey);
 
-  
-   // await Future<void>.delayed(networkRoundTripTime);
- if (!kIsWeb) {
+
+    if (!kIsWeb) {
       bg.BackgroundGeolocation.stop();
     }
     logNoStack.i("logout token is $savedToken");
-    apiPostNoLocale(savedToken! ,
+    apiPostNoLocale(savedToken!,
             "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout")
         .then((result) {
       log.i("logout result $result");
-     
     }).catchError((error) {
       log.e("Register logout error ${error.toString()}");
     });
 
-  _sharedPreferences.remove(_sharedPrefsKey).ignore();
-  state = const AsyncData(Auth.signedOut());
+    _sharedPreferences.remove(_sharedPrefsKey).ignore();
+    state = const AsyncData(Auth.signedOut());
 
-prov.Provider.of<Notifi>(context, listen: false).preventAutoLogin = true;
     prov.Provider.of<Notifi>(context, listen: false).preventAutoLogin = true;
+
     // let the oidc package know
     await app_state.currentManager.logout(
       //after logout, go back to home
@@ -165,8 +162,6 @@ prov.Provider.of<Notifi>(context, listen: false).preventAutoLogin = true;
         ),
       ),
     );
-
-    
   }
 
   Future<void> loginOidc(OidcUser? oidcUser) async {
