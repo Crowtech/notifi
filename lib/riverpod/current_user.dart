@@ -36,12 +36,13 @@ class CurrentUserFetcher extends Notifier<Person> {
   }
 
   void fetchCurrentUser(OidcUser currentUser) async {
+    logNoStack.i("CurrentUser: fetch currentUser from backend API");
     String deviceId = await fetchDeviceId();
     log.i("registerLogin: deviceid=$deviceId");
     apiPostDataNoLocale(getAccessToken(currentUser),
             "$defaultApiPrefixPath/persons/register", "deviceid", deviceId)
         .then((currentUser) {
-      log.d("Registered user $currentUser");
+      log.i("Registered user returned $currentUser");
       state = currentUser;
     }).catchError((error) {
       log.d("Register login error");

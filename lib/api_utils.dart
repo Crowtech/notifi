@@ -65,9 +65,9 @@ Future<dynamic> apiPostDataNoLocale(
     return resultMap;
   } else {
     logNoStack.e(
-        "$apiPath created unsuccessfully! with status ${response.statusCode}");
+        "$apiPath created unsuccessfully! with status ${response.statusCode} and error: ${response.reasonPhrase}");
     return Future.error(
-        "$apiPath created unsuccessfully! with status ${response.statusCode}");
+        "$apiPath created unsuccessfully! with status ${response.statusCode} and error: ${response.reasonPhrase}");
   }
 }
 
