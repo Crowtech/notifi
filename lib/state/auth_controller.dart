@@ -136,6 +136,7 @@ class AuthController extends _$AuthController {
       logNoStack.i(
           "AUTH_CONTROLLER loginRecoveryAttempt-> Exception -> clearing key");
       _sharedPreferences.remove(_sharedPrefsKey).ignore();
+      ref.read(currentUserProvider.notifier).setPerson(defaultPerson);
       return Future.value(const Auth.signedOut());
     }
     return Future.value(const Auth.signedOut());
@@ -147,7 +148,7 @@ class AuthController extends _$AuthController {
     Auth user = await  _loginRecoveryAttempt();
 
    if ( !user.isAuth) {
-    
+
   var result = await app_state.currentManager.loginAuthorizationCodeFlow(
           originalUri:  Uri.parse('/'),
           //store any arbitrary data, here we store the authorization
@@ -183,6 +184,7 @@ class AuthController extends _$AuthController {
     });
 
     _sharedPreferences.remove(_sharedPrefsKey).ignore();
+    ref.read(currentUserProvider.notifier).setPerson(defaultPerson);
     state = const AsyncData(Auth.signedOut());
 
     prov.Provider.of<Notifi>(context, listen: false).preventAutoLogin = true;
@@ -328,6 +330,7 @@ class AuthController extends _$AuthController {
 
       logNoStack.i("AUTH_CONTROLLER  LOGIN_TOKEN: auth user is $authResult");
       state = AsyncData(authResult);
+      ref.read(currentUserProvider.notifier).setPerson(currentPerson);
     } on Exception catch (_) {
       Future.value(const Auth.signedOut());
     }
