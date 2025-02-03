@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/credentials.dart';
 import 'package:notifi/jwt_utils.dart';
@@ -210,6 +211,22 @@ Future<Person> registerLogin(
 }
 
 Future<bool> verifyToken(String token) async {
+  bool hasExpired = JwtDecoder.isExpired(token);
+
+DateTime expirationDate = JwtDecoder.getExpirationDate(token);
+
+  // 2025-01-13 13:04:18.000
+  logNoStack.i("Expiry Token: $expirationDate");
+
+  Duration tokenTime = JwtDecoder.getTokenTime(token);
+
+  // 15
+  logNoStack.i("Duration of Token: ${tokenTime.inMinutes}");
+
+  if (hasExpired) {
+    return false;
+  }
+  
   var url = Uri.parse("$defaultAPIBaseUrl$defaultApiPrefixPath/persons/login");
 
   final http.Response response;
