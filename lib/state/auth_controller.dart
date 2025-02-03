@@ -181,42 +181,53 @@ class AuthController extends _$AuthController {
       logNoStack.i(
           "AUTH_CONTROLLER  LOGIN_OIDC: In AuthControllerLogin: oidcUser is ${oidcUser.userInfo['email']} creating user with temp id 32");
 
+// Now fetch the actual user from the backend
+
+      var currentPerson = await registerLogin(oidcUser.token.accessToken!);
+
       var authResult = Auth.signedIn(
-          id: 32,
-          displayName: getFirstname(oidcUser),
-          email: getEmail(oidcUser),
-          resourcecode: getResourceCode(oidcUser),
-          token: getAccessToken(oidcUser));
+          id: currentPerson.id!,
+          displayName: currentPerson.firstname,
+          email: currentPerson.email,
+          resourcecode: currentPerson.code!,
+          token: oidcUser.token.accessToken!);
+
+      // var authResult = Auth.signedIn(
+      //     id: 32,
+      //     displayName: getFirstname(oidcUser),
+      //     email: getEmail(oidcUser),
+      //     resourcecode: getResourceCode(oidcUser),
+      //     token: getAccessToken(oidcUser));
       logNoStack.i("AUTH_CONTROLLER  LOGIN_OIDC: auth user is $authResult");
       state = AsyncData(authResult);
 
-      ref.read(currentUserProvider.notifier).fetchCurrentUser(oidcUser);
+      //ref.read(currentUserProvider.notifier).fetchCurrentUser(oidcUser);
     } else {
       logNoStack.i(
           "AUTH_CONTROLLER LOGIN_OIDC: In AuthControllerLogin: oidcUser was NULL");
     }
   }
 
-  Future<void> loginPerson(Person currentPerson) async {
-    logNoStack.i(
-        "AUTH_CONTROLLER  LOGIN person! from backend person is ${currentPerson}");
-    if (state.hasValue) {
-// var authUser = (Auth)state.value;
+//   Future<void> loginPerson(Person currentPerson) async {
+//     logNoStack.i(
+//         "AUTH_CONTROLLER  LOGIN person! from backend person is ${currentPerson}");
+//     if (state.hasValue) {
+// // var authUser = (Auth)state.value;
 
-//       var authResult = Auth.signedIn(
-//           id: currentPerson.id!,
-//           displayName: currentPerson.firstname,
-//           email: currentPerson.email,
-//           resourcecode: currentPerson.code!,
-//           token: authUser.token;
-//       logNoStack.i("In AuthControllerLogin: auth user is $authResult");
-//       state = AsyncData(authResult);
+// //       var authResult = Auth.signedIn(
+// //           id: currentPerson.id!,
+// //           displayName: currentPerson.firstname,
+// //           email: currentPerson.email,
+// //           resourcecode: currentPerson.code!,
+// //           token: authUser.token;
+// //       logNoStack.i("In AuthControllerLogin: auth user is $authResult");
+// //       state = AsyncData(authResult);
 
-//     } else {
-//       logNoStack.i("In AuthControllerLogin: person is NULL");
+// //     } else {
+// //       logNoStack.i("In AuthControllerLogin: person is NULL");
+// //     }
 //     }
-    }
-  }
+//   }
 
   /// Mock of a successful login attempt, which results come from the network.
   Future<void> login(String email, String password) async {
@@ -278,15 +289,26 @@ class AuthController extends _$AuthController {
   /// Mock of a login request performed with a saved token.
   /// If such request fails, this method will throw an [UnauthorizedException].
   Future<Auth> _loginWithToken(String token) async {
-    logNoStack.i("AUTH_CONTROLLER  LOGIN WITH TOKEN");
-    final logInAttempt = await Future.delayed(
-      networkRoundTripTime,
-      () => true, // edit this if you wanna play around
-    );
+    logNoStack.i("AUTH_CONTROLLER  LOGIN_TOKEN: In AuthController");
 
-    if (logInAttempt) return _dummyUser;
+// Now fetch the actual user from the backend
 
-    throw const UnauthorizedException('401 Unauthorized or something');
+    try {
+      var currentPerson = await registerLogin(token);
+
+      var authResult = Auth.signedIn(
+          id: currentPerson.id!,
+          displayName: currentPerson.firstname,
+          email: currentPerson.email,
+          resourcecode: currentPerson.code!,
+          token: token);
+
+      logNoStack.i("AUTH_CONTROLLER  LOGIN_TOKEN: auth user is $authResult");
+      state = AsyncData(authResult);
+    } on Exception catch (_) {
+      Future.value(const Auth.signedOut());
+    }
+    return Future.value(const Auth.signedOut()); // dummy
   }
 
   /// Internal method used to listen authentication state changes.
