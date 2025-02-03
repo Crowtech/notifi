@@ -51,7 +51,7 @@ class CurrentUserFetcher extends Notifier<Person> {
     }).catchError((error) {
       log.d("CURRENT_USER: Login API  error");
     });
-    throw "CURRENT_USER: Login API  error";
+    
   }
 
   void setOidc(OidcUser? user) async {
