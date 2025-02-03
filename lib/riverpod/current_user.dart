@@ -77,11 +77,11 @@ class CurrentUserFetcher extends Notifier<Person> {
     state = user;
   }
 
-  void logout(BuildContext context) async {
+  void logout(/*BuildContext context*/) async {
     logNoStack.i("CURRENT_USER: LOGOUT!");
     if (oidcUser == null) {
       logNoStack.i("CURRENT_USER: LOGOUT OIDC USER IS NULL!!");
-      oidcUser = app_state.cachedAuthedUser.of(context);
+      //oidcUser = app_state.cachedAuthedUser.of(context);
     } else {
       logNoStack.i("CURRENT_USER: LOGOUT OIDC USER IS NOT NULL!!");
     }
@@ -107,7 +107,7 @@ class CurrentUserFetcher extends Notifier<Person> {
       log.e("CURRENT_USER: Register logout error");
     });
 
-    prov.Provider.of<Notifi>(context, listen: false).preventAutoLogin = true;
+    //prov.Provider.of<Notifi>(context, listen: false).preventAutoLogin = true;
     // let the oidc package know
     await app_state.currentManager.logout(
       //after logout, go back to home

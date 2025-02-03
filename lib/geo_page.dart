@@ -377,7 +377,7 @@ class _GeoPageState extends ConsumerState<GeoPage>
               ],
               ElevatedButton(
                 onPressed: () async {
-                 ref.read(currentUserProvider.notifier).logout(context);
+                 ref.read(currentUserProvider.notifier).logout();
                 },
                 child: const Text('Logout'),
               ),

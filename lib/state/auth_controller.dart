@@ -137,6 +137,7 @@ class AuthController extends _$AuthController {
           "AUTH_CONTROLLER loginRecoveryAttempt-> Exception -> clearing key");
       _sharedPreferences.remove(_sharedPrefsKey).ignore();
       ref.read(currentUserProvider.notifier).setPerson(defaultPerson);
+      ref.read(currentUserProvider.notifier).logout();
       return Future.value(const Auth.signedOut());
     }
     return Future.value(const Auth.signedOut());
