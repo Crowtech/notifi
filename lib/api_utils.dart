@@ -200,29 +200,33 @@ Future<Person> registerLogin(
         "deviceid",
         deviceId);
 
-  var currentUser = Person.fromJson(currentUserMap);
-  
+    var currentUser = Person.fromJson(currentUserMap);
+
     log.i("API_UTILS: Logged in user $currentUser");
     return currentUser;
   } on Exception catch (error) {
     throw ("API_UTILS: Register login error $error");
-   
   }
-  
 }
 
 Future<bool> verifyToken(String token) async {
-  var deviceId = "DUMMY-DEVICE";
-  try {
-    await apiPostDataNoLocale(
-        token,
-        "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/login",
-        "deviceid",
-        deviceId);
-    logNoStack.i("API_UTILS: Verify Token: TRUE");
+  var url = Uri.parse("$defaultAPIBaseUrl$defaultApiPrefixPath/persons/login");
+
+  final http.Response response;
+
+  // No data
+  response = await http.post(url, headers: {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer $token",
+  });
+
+  logNoStack.d(response.statusCode);
+  if (response.statusCode == 202 ||
+      response.statusCode == 201 ||
+      response.statusCode == 200) {
     return true;
-  } on Exception catch (_) {
-    logNoStack.i("API_UTILS: Verify Token: FALSE");
+  } else {
     return false;
   }
 }
