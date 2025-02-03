@@ -39,12 +39,16 @@ class UserAvatar extends ConsumerWidget {
 
   Widget getAvatar(
       final double radius, final String imageUrl, Color backgroundColour, String initials) {
+    String imgUrl = "https://imageproxy.react123.io/200x/http://minio.react123.io:9400/react123/adam51casual.png";
+     if (imageUrl != null){
+      imgUrl = imageUrl;
+     }
     return CircleAvatar(
       radius: radius,
       backgroundColor: backgroundColour,
       child: CircleAvatar(
         radius: radius - 2,
-        backgroundImage: NetworkImage(imageUrl),
+        backgroundImage: NetworkImage(imgUrl),
 
       ),
     );
