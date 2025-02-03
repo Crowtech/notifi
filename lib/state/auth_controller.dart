@@ -114,26 +114,31 @@ class AuthController extends _$AuthController {
     try {
       final savedToken = _sharedPreferences.getString(_sharedPrefsKey);
       if (savedToken == null) {
-        throw const UnauthorizedException('AUTH_CONTROLLER loginRecoveryAttempt: No auth token found');
+        throw const UnauthorizedException(
+            'AUTH_CONTROLLER loginRecoveryAttempt: No auth token found');
       }
       // Try and work out if token valid
-      logNoStack.i("AUTH_CONTROLLER loginRecoveryAttempt: savedToken is ${savedToken}");
-      bool isValid = await verifyToken(savedToken);
-
- logNoStack.i("AUTH_CONTROLLER loginRecoveryAttempt: token validity is ${isValid?'true':'false'}");
-      if (!isValid) {
-         throw const UnauthorizedException('AUTH_CONTROLLER loginRecoveryAttempt: Auth Token logged out or expired');
-      }  else {
-         logNoStack.i("AUTH_CONTROLLER loginRecoveryAttempt: savedToken is good ");
-           return _loginWithToken(savedToken);
-      }
-      
+      logNoStack.i(
+          "AUTH_CONTROLLER loginRecoveryAttempt: savedToken is ${savedToken}");
+      verifyToken(savedToken).then((isValid) {
+        logNoStack.i(
+            "AUTH_CONTROLLER loginRecoveryAttempt: token validity is ${isValid ? 'true' : 'false'}");
+        if (!isValid) {
+          throw const UnauthorizedException(
+              'AUTH_CONTROLLER loginRecoveryAttempt: Auth Token logged out or expired');
+        } else {
+          logNoStack
+              .i("AUTH_CONTROLLER loginRecoveryAttempt: savedToken is good ");
+          return _loginWithToken(savedToken);
+        }
+      });
     } catch (_, __) {
       logNoStack.i(
           "AUTH_CONTROLLER loginRecoveryAttempt-> Exception -> clearing key");
       _sharedPreferences.remove(_sharedPrefsKey).ignore();
       return Future.value(const Auth.signedOut());
     }
+    return Future.value(const Auth.signedOut());
   }
 
   /// Mock of a request performed on logout (might be common, or not, whatevs).
@@ -150,7 +155,8 @@ class AuthController extends _$AuthController {
         .then((result) {
       log.i("AUTH_CONTROLLER LOGOUT result $result");
     }).catchError((error) {
-      log.e("AUTH_CONTROLLER LOGOUT  Register logout error ${error.toString()}");
+      log.e(
+          "AUTH_CONTROLLER LOGOUT  Register logout error ${error.toString()}");
     });
 
     _sharedPreferences.remove(_sharedPrefsKey).ignore();
@@ -186,12 +192,14 @@ class AuthController extends _$AuthController {
 
       ref.read(currentUserProvider.notifier).fetchCurrentUser(oidcUser);
     } else {
-      logNoStack.i("AUTH_CONTROLLER LOGIN_OIDC: In AuthControllerLogin: oidcUser was NULL");
+      logNoStack.i(
+          "AUTH_CONTROLLER LOGIN_OIDC: In AuthControllerLogin: oidcUser was NULL");
     }
   }
 
   Future<void> loginPerson(Person currentPerson) async {
-    logNoStack.i("AUTH_CONTROLLER  LOGIN person! from backend person is ${currentPerson}");
+    logNoStack.i(
+        "AUTH_CONTROLLER  LOGIN person! from backend person is ${currentPerson}");
     if (state.hasValue) {
 // var authUser = (Auth)state.value;
 

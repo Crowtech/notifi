@@ -205,7 +205,7 @@ Future<Person> registerLogin(
 }
 
 Future<bool> verifyToken(String token) async {
-  log.i("API_UTILS: Verify Token:");
+
   var deviceId = "DUMMY-DEVICE";
   try {
   await apiPostDataNoLocale(
@@ -213,8 +213,10 @@ Future<bool> verifyToken(String token) async {
             "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/login",
             "deviceid",
             deviceId);
+              logNoStack.i("API_UTILS: Verify Token: TRUE");
             return true;
   } on Exception catch (_) {
+     logNoStack.i("API_UTILS: Verify Token: FALSE");
   return false;
 }
 
