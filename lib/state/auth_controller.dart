@@ -146,9 +146,8 @@ class AuthController extends _$AuthController {
 
     Auth user = await  _loginRecoveryAttempt();
 
-final isAuth = ValueNotifier<AsyncValue<bool>>(const AsyncLoading());
-    final auth = isAuth.value.requireValue;
-   if ( !auth) {
+   if ( !user.isAuth) {
+    
   var result = await app_state.currentManager.loginAuthorizationCodeFlow(
           originalUri:  Uri.parse('/'),
           //store any arbitrary data, here we store the authorization
