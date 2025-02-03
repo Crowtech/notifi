@@ -193,34 +193,36 @@ Future<Person> registerLogin(
 ) async {
   String deviceId = await fetchDeviceId();
   log.i("API_UTILS: registerLogin: deviceid=$deviceId");
-  apiPostDataNoLocale(
-          token, "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/login", "deviceid", deviceId)
-      .then((user) {
-    log.d("API_UTILS: Logged in user $user");
-    return user;
-  }).catchError((error) {
-    log.d("API_UTILS: Register login error");
-  });
-  throw "API_UTILS: Register Login error";
+  try {
+    Person currentUser = await apiPostDataNoLocale(
+        token,
+        "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/login",
+        "deviceid",
+        deviceId);
+
+    log.d("API_UTILS: Logged in user $currentUser");
+    return currentUser;
+  } on Exception catch (error) {
+    log.d("API_UTILS: Register login error $error");
+    rethrow;
+  }
+  
 }
 
 Future<bool> verifyToken(String token) async {
-
   var deviceId = "DUMMY-DEVICE";
   try {
-  await apiPostDataNoLocale(
-            token,
-            "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/login",
-            "deviceid",
-            deviceId);
-              logNoStack.i("API_UTILS: Verify Token: TRUE");
-            return true;
+    await apiPostDataNoLocale(
+        token,
+        "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/login",
+        "deviceid",
+        deviceId);
+    logNoStack.i("API_UTILS: Verify Token: TRUE");
+    return true;
   } on Exception catch (_) {
-     logNoStack.i("API_UTILS: Verify Token: FALSE");
-  return false;
-}
-
-  
+    logNoStack.i("API_UTILS: Verify Token: FALSE");
+    return false;
+  }
 }
 // Future<Person> registerLogin(
 //   String token,
