@@ -79,7 +79,7 @@ class AuthController extends _$AuthController {
     );
   }
 
-  
+
 
   @override
   Future<Auth> build() async {
@@ -206,7 +206,7 @@ class AuthController extends _$AuthController {
 
   Future<void> loginOidc(OidcUser? oidcUser) async {
     if (oidcUser != null) {
-      logNoStack.i(
+      log.i(
           "AUTH_CONTROLLER  LOGIN_OIDC: In AuthControllerLogin: oidcUser is ${oidcUser.userInfo['email']} fetching user ");
 
 // Now fetch the actual user from the backend
@@ -226,10 +226,10 @@ class AuthController extends _$AuthController {
       //     email: getEmail(oidcUser),
       //     resourcecode: getResourceCode(oidcUser),
       //     token: getAccessToken(oidcUser));
-      logNoStack.i("AUTH_CONTROLLER  LOGIN_OIDC fetched Person: auth user is $authResult");
+      log.i("AUTH_CONTROLLER  LOGIN_OIDC fetched Person: auth user is $authResult");
       state = AsyncData(authResult);
-
-      //ref.read(currentUserProvider.notifier).fetchCurrentUser(oidcUser);
+      
+      ref.read(currentUserProvider.notifier).setPerson(currentPerson);
     } else {
       logNoStack.i(
           "AUTH_CONTROLLER LOGIN_OIDC: In AuthControllerLogin: oidcUser was NULL");
