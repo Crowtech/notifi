@@ -16,6 +16,7 @@ var logNoStack = logger.Logger(
   level: logger.Level.info,
 );
 
+const String defaultUrl = "https://imageproxy.react123.io/200x/http://minio.react123.io:9400/react123/adam51casual.png";
 class UserAvatar extends ConsumerWidget {
   int diameter;
   Color backgroundColour;
@@ -26,29 +27,29 @@ class UserAvatar extends ConsumerWidget {
   @override
    Widget build(BuildContext context, WidgetRef ref) {
     Person user = ref.watch(currentUserProvider);
-
-     String personUrl = user.getAvatarUrl();
-
-
-    String initials =  user.getInitials();
+    String personUrl = defaultUrl;
+    String initials = defaultInitials;
+logNoStack.i("avatarUrl=${user.avatarUrl} diameter = $diameter initials = $initials");
+   if (user.avatarUrl != null) {
+     personUrl = user.getAvatarUrl();
+    initials =  user.getInitials();
+   }
     String avatarUrl = "$defaultImageProxyUrl/${diameter}x/$personUrl";
-
-  
+   
+   
     return getAvatar((diameter>>1).toDouble(),avatarUrl,backgroundColour,initials);
   }
 
   Widget getAvatar(
       final double radius, final String imageUrl, Color backgroundColour, String initials) {
-    String imgUrl = "https://imageproxy.react123.io/200x/http://minio.react123.io:9400/react123/adam51casual.png";
-     if (imageUrl != null){
-      imgUrl = imageUrl;
-     }
+    String imgUrl = defaultUrl;
+
     return CircleAvatar(
       radius: radius,
       backgroundColor: backgroundColour,
       child: CircleAvatar(
         radius: radius - 2,
-        backgroundImage: NetworkImage(imgUrl),
+        backgroundImage: NetworkImage(imageUrl),
 
       ),
     );
