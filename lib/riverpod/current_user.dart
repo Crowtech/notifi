@@ -35,18 +35,23 @@ class CurrentUserFetcher extends Notifier<Person> {
     return defaultPerson; // from Person.java
   }
 
-  void fetchCurrentUser(OidcUser currentUser) async {
-     String deviceId = await fetchDeviceId();
-    log.i("CURRENT_USER: deviceid=$deviceId fetch currentUser from backend API");
-    apiPostDataNoLocale(getAccessToken(currentUser),
-            "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/login", "deviceid", deviceId)
+  void fetchCurrentUser(OidcUser currentOidcUser) async {
+    String deviceId = await fetchDeviceId();
+    log.i(
+        "CURRENT_USER: deviceid=$deviceId fetch currentUser from backend API using ${currentOidcUser.userInfo['email']}");
+    apiPostDataNoLocale(
+            getAccessToken(currentOidcUser),
+            "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/login",
+            "deviceid",
+            deviceId)
         .then((currentUser) {
-      log.i("CURRENT_USER: Registered user returned $currentUser");
+      log.i("CURRENT_USER: Logged in api user returned $currentUser");
       state = currentUser;
+      return;
     }).catchError((error) {
-      log.d("CURRENT_USER: Register login error");
+      log.d("CURRENT_USER: Login API  error");
     });
-    throw "CURRENT_USER: Register Login error";
+    throw "CURRENT_USER: Login API  error";
   }
 
   void setOidc(OidcUser? user) async {
