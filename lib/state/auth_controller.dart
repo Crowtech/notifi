@@ -79,6 +79,8 @@ class AuthController extends _$AuthController {
     );
   }
 
+  
+
   @override
   Future<Auth> build() async {
     _sharedPreferences = await SharedPreferences.getInstance();

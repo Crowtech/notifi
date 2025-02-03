@@ -4,8 +4,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/api_utils.dart';
 import 'package:notifi/credentials.dart';
+import 'package:notifi/entities/auth.dart';
 import 'package:notifi/jwt_utils.dart';
 import 'package:notifi/notifi.dart';
+import 'package:notifi/state/auth_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:oidc/oidc.dart';
 import 'package:provider/provider.dart' as prov;
 import 'package:flutter_background_geolocation/flutter_background_geolocation.dart'
@@ -25,6 +28,9 @@ var logNoStack = logger.Logger(
 );
 
 class CurrentUserFetcher extends Notifier<Person> {
+  late SharedPreferences _sharedPreferences;
+  static const _sharedPrefsKey = 'token';
+
   OidcUser? oidcUser; // this stores tokens etc
   Locale locale = const Locale('en');
   OidcPlatformSpecificOptions_Web_NavigationMode webNavigationMode =
@@ -51,7 +57,6 @@ class CurrentUserFetcher extends Notifier<Person> {
     }).catchError((error) {
       log.d("CURRENT_USER: Login API  error");
     });
-    
   }
 
   void setOidc(OidcUser? user) async {
@@ -92,21 +97,20 @@ class CurrentUserFetcher extends Notifier<Person> {
     }
 
 // Let the backend know of the logout
-    logNoStack.i("CURRENT_USER: Logout locale=$locale");
-    logNoStack.i(
-        "CURRENT_USER: logout api=${"$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout"}");
-    logNoStack.i("CURRENT_USER: Logout token=${oidcUser!.token.accessToken!}");
-
-    apiPost(locale, oidcUser!.token.accessToken!,
-            "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout")
-        .then((result) {
-      log.i("CURRENT_USER: logout result $result");
-      state = defaultPerson;
-      oidcUser = null;
-    }).catchError((error) {
-      log.e("CURRENT_USER: Register logout error");
-    });
-
+    logNoStack.i("CURRENT_USER: Logout");
+    _sharedPreferences = await SharedPreferences.getInstance();
+    final savedToken = _sharedPreferences.getString(_sharedPrefsKey);
+    if (savedToken != null) {
+      apiPostNoLocale(savedToken,
+              "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout")
+          .then((result) {
+        log.i("CURRENT_USER: logout result $result");
+        state = defaultPerson;
+        oidcUser = null;
+      }).catchError((error) {
+        log.e("CURRENT_USER: Register logout error");
+      });
+    }
     //prov.Provider.of<Notifi>(context, listen: false).preventAutoLogin = true;
     // let the oidc package know
     await app_state.currentManager.logout(
