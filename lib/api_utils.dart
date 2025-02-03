@@ -192,16 +192,16 @@ Future<Person> registerLogin(
   String token,
 ) async {
   String deviceId = await fetchDeviceId();
-  log.i("registerLogin: deviceid=$deviceId");
+  log.i("API_UTILS: registerLogin: deviceid=$deviceId");
   apiPostDataNoLocale(
-          token, "$defaultApiPrefixPath/persons/register", "deviceid", deviceId)
+          token, "$defaultApiPrefixPath/persons/login", "deviceid", deviceId)
       .then((user) {
-    log.d("Registered user $user");
+    log.d("API_UTILS: Logged in user $user");
     return user;
   }).catchError((error) {
-    log.d("Register login error");
+    log.d("API_UTILS: Register login error");
   });
-  throw "Register Login error";
+  throw "API_UTILS: Register Login error";
 }
 
 Future<bool> verifyToken(String token) async {
