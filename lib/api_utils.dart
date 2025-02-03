@@ -194,7 +194,7 @@ Future<Person> registerLogin(
   String deviceId = await fetchDeviceId();
   log.i("API_UTILS: registerLogin: deviceid=$deviceId");
   apiPostDataNoLocale(
-          token, "$defaultApiPrefixPath/persons/login", "deviceid", deviceId)
+          token, "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/login", "deviceid", deviceId)
       .then((user) {
     log.d("API_UTILS: Logged in user $user");
     return user;
