@@ -108,4 +108,4 @@ Person defaultPerson = Person(id: 0,
       latitude: 0.0,//latitude,
       birthyear: 0,//birthyear,
       fcm: "FCM",
-      avatarUrl: "https://gravatar.com/avatar/${generateMd5(email)}"); //fcm
+      avatarUrl: "https://gravatar.com/avatar/${generateMd5("user@email.com")}",); //fcm
