@@ -207,10 +207,10 @@ Future<Person> registerLogin(
 Future<bool> verifyToken(String token) async {
   log.i("API_UTILS: Verify Token:");
   var url = Uri.parse(
-      "$defaultAuthBaseUrl/realms/${defaultRealm}/protocol/openid-connect/token/introspect");
+      "$defaultAuthBaseUrl/realms/$defaultRealm/protocol/openid-connect/token/introspect");
 
   final http.Response response;
-
+  logNoStack.i("API_UTILS: VERIFY TOKEN: about to call $url");
   response = await http.get(url, headers: {
     "Content-Type": "application/json",
     "Accept": "application/json",

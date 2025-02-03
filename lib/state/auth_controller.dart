@@ -120,7 +120,7 @@ class AuthController extends _$AuthController {
       logNoStack.i("AUTH_CONTROLLER loginRecoveryAttempt: savedToken is ${savedToken}");
       bool isValid = await verifyToken(savedToken);
 
-
+ logNoStack.i("AUTH_CONTROLLER loginRecoveryAttempt: token validity is ${isValid?'true':'false'}");
       if (!isValid) {
          throw const UnauthorizedException('AUTH_CONTROLLER loginRecoveryAttempt: Auth Token logged out or expired');
       }  else {
