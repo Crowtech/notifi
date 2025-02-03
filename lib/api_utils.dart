@@ -206,24 +206,19 @@ Future<Person> registerLogin(
 
 Future<bool> verifyToken(String token) async {
   log.i("API_UTILS: Verify Token:");
-  var url = Uri.parse(
-      "$defaultAuthBaseUrl/realms/$defaultRealm/protocol/openid-connect/token/introspect");
+  var deviceId = await fetchDeviceId();
+  try {
+  await apiPostDataNoLocale(
+            token,
+            "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/login",
+            "deviceid",
+            deviceId);
+            return true;
+  } on Exception catch (_) {
+  return false;
+}
 
-  final http.Response response;
-  logNoStack.i("API_UTILS: VERIFY TOKEN: about to call $url");
-  response = await http.get(url, headers: {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-    "Authorization": "Bearer $token",
-  });
-  logNoStack.i("API_UTILS: VERIFY TOKEN: ${response.statusCode}");
-  if (response.statusCode == 202 ||
-      response.statusCode == 201 ||
-      response.statusCode == 200) {
-    return true; // verified
-  } else {
-    return false;
-  }
+  
 }
 // Future<Person> registerLogin(
 //   String token,
