@@ -194,12 +194,14 @@ Future<Person> registerLogin(
   String deviceId = await fetchDeviceId();
   log.i("API_UTILS: registerLogin: deviceid=$deviceId");
   try {
-    Person currentUser = await apiPostDataNoLocale(
+    var currentUserMap = await apiPostDataNoLocale(
         token,
         "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/login",
         "deviceid",
         deviceId);
 
+  var currentUser = Person.fromJson(currentUserMap);
+  
     log.i("API_UTILS: Logged in user $currentUser");
     return currentUser;
   } on Exception catch (error) {
