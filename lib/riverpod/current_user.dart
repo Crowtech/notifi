@@ -39,7 +39,7 @@ class CurrentUserFetcher extends Notifier<Person> {
      String deviceId = await fetchDeviceId();
     log.i("CURRENT_USER: deviceid=$deviceId fetch currentUser from backend API");
     apiPostDataNoLocale(getAccessToken(currentUser),
-            "$defaultApiPrefixPath/persons/register", "deviceid", deviceId)
+            "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/register", "deviceid", deviceId)
         .then((currentUser) {
       log.i("CURRENT_USER: Registered user returned $currentUser");
       state = currentUser;
@@ -113,6 +113,8 @@ class CurrentUserFetcher extends Notifier<Person> {
         ),
       ),
     );
+
+    await app_state.currentManager.forgetUser();
   }
 
   void setLocale(Locale locale) {
