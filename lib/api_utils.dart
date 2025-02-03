@@ -200,11 +200,11 @@ Future<Person> registerLogin(
         "deviceid",
         deviceId);
 
-    log.d("API_UTILS: Logged in user $currentUser");
+    log.i("API_UTILS: Logged in user $currentUser");
     return currentUser;
   } on Exception catch (error) {
-    log.d("API_UTILS: Register login error $error");
-    rethrow;
+    throw ("API_UTILS: Register login error $error");
+   
   }
   
 }
