@@ -39,6 +39,7 @@ class Person extends Resource {
       super.description,
       super.location,
       super.devicecode,
+      super.avatarUrl,
       required this.username,
       required this.email,
       required this.firstname,
@@ -106,4 +107,5 @@ Person defaultPerson = Person(id: 0,
       longitude: 0.0,//longitude,
       latitude: 0.0,//latitude,
       birthyear: 0,//birthyear,
-      fcm: "FCM"); //fcm
+      fcm: "FCM",
+      avatarUrl: "https://gravatar.com/avatar/${generateMd5(email)}"); //fcm

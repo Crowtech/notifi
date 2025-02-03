@@ -26,7 +26,10 @@ class UserAvatar extends ConsumerWidget {
   @override
    Widget build(BuildContext context, WidgetRef ref) {
     Person user = ref.watch(currentUserProvider);
+
      String personUrl = user.getAvatarUrl();
+
+
     String initials =  user.getInitials();
     String avatarUrl = "$defaultImageProxyUrl/${diameter}x/$personUrl";
 

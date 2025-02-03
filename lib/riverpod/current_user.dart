@@ -78,7 +78,7 @@ class CurrentUserFetcher extends Notifier<Person> {
   }
 
   void setPerson(Person user) async {
-    logNoStack.i("CURRENT_USER: Setting currentUser with Person user");
+    logNoStack.i("CURRENT_USER: Setting currentUser with Person user ${user.email}");
     state = user;
   }
 
