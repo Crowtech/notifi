@@ -141,6 +141,30 @@ class AuthController extends _$AuthController {
     return Future.value(const Auth.signedOut());
   }
 
+  Future<void> login() async {
+   logNoStack.i("AUTH_CONTROLLER LOGIN called.");
+
+    Auth user = await  _loginRecoveryAttempt();
+
+final isAuth = ValueNotifier<AsyncValue<bool>>(const AsyncLoading());
+    final auth = isAuth.value.requireValue;
+   if ( !auth) {
+  var result = await app_state.currentManager.loginAuthorizationCodeFlow(
+          originalUri:  Uri.parse('/'),
+          //store any arbitrary data, here we store the authorization
+          //start time.
+          extraStateData: DateTime.now().toIso8601String(),
+          options: _getOptions(),
+          //NOTE: you can pass more parameters here.
+        );
+        if (result != null) {
+          //ref.read(currentUserProvider.notifier).setOidc(result);
+        } else {
+          print("************* result is ${result!.userInfo['email']}");
+        }
+   }
+  }
+
   /// Mock of a request performed on logout (might be common, or not, whatevs).
   Future<void> logout(BuildContext context) async {
     logNoStack.i("AUTH_CONTROLLER LOGOUT called in auth");
@@ -230,7 +254,7 @@ class AuthController extends _$AuthController {
 //   }
 
   /// Mock of a successful login attempt, which results come from the network.
-  Future<void> login(String email, String password) async {
+  Future<void> loginUsernamePassword(String email, String password) async {
     //     final currentRoute = GoRouterState.of(context);
     // final originalUri =
     //     currentRoute.uri.queryParameters[OidcConstants_Store.originalUri];

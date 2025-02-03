@@ -7,12 +7,12 @@ import '../widgets/action_button.dart';
 import 'package:notifi/app_state.dart' as app_state;
 
 class LoginPage extends HookConsumerWidget {
-   LoginPage({super.key});
+  LoginPage({super.key});
 
-   OidcPlatformSpecificOptions_Web_NavigationMode webNavigationMode =
+  OidcPlatformSpecificOptions_Web_NavigationMode webNavigationMode =
       OidcPlatformSpecificOptions_Web_NavigationMode.newPage;
 
-        bool allowInsecureConnections = false;
+  bool allowInsecureConnections = false;
   bool preferEphemeralSession = false;
 
   OidcPlatformSpecificOptions _getOptions() {
@@ -38,27 +38,18 @@ class LoginPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-      logNoStack.i( 'LOGINPAGE: ',);
-    Future<void> login2() async  {
-         var result = await app_state.currentManager.loginAuthorizationCodeFlow(
-          originalUri:  Uri.parse('/'),
-          //store any arbitrary data, here we store the authorization
-          //start time.
-          extraStateData: DateTime.now().toIso8601String(),
-          options: _getOptions(),
-          //NOTE: you can pass more parameters here.
-        );
-        if (result != null) {
-          //ref.read(currentUserProvider.notifier).setOidc(result);
-        } else {
-          print("************* result is ${result!.userInfo['email']}");
-        }
+    logNoStack.i(
+      'LOGINPAGE: ',
+    );
+    Future<void> login2() async {
+      ref.read(authControllerProvider.notifier).login();
     }
 
-    Future<void> login() => ref.read(authControllerProvider.notifier).login(
-          'myEmail',
-          'myPassword',
-        );
+    Future<void> login() =>
+        ref.read(authControllerProvider.notifier).loginUsernamePassword(
+              'myEmail',
+              'myPassword',
+            );
 
     return Scaffold(
       body: Center(
