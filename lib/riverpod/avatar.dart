@@ -16,7 +16,7 @@ var logNoStack = logger.Logger(
   level: logger.Level.info,
 );
 
-const String defaultUrl = "https://imageproxy.react123.io/200x/http://minio.react123.io:9400/react123/adam51casual.png";
+const String defaultUrl = "$defaultMinioEndpointUrl/$defaultRealm/adam51casual.png";
 class UserAvatar extends ConsumerWidget {
   int diameter;
   Color backgroundColour;
