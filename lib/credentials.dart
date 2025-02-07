@@ -116,8 +116,8 @@ void showDefaultSettings()
   logNoStack.i("Main:default ClientId = $defaultClientId");
   logNoStack.i("Main:default Client Secret = $defaultClientSecret");
   logNoStack.i("Main:default Redirect URL = $defaultRedirectUrl");
-  logNoStack.i("Main:default API Base URL = $_defaultAPIBaseUrl");
   logNoStack.i("Main:default API Base URL = $defaultAPIBaseUrl");
+  logNoStack.i("Main:default API path prefix = $defaultApiPrefixPath");
   logNoStack.i("Main:default Mobile Path = $defaultMobilePath");
   logNoStack.i("Main:default Auth Endpoint URL = $defaultAuthEndpointUrl");
   logNoStack.i("Main:defaultMinio URL = $defaultMinioEndpointUrl");
