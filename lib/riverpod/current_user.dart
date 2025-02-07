@@ -101,6 +101,8 @@ class CurrentUserFetcher extends Notifier<Person> {
     _sharedPreferences = await SharedPreferences.getInstance();
     final savedToken = _sharedPreferences.getString(_sharedPrefsKey);
     if (savedToken != null) {
+      logNoStack.i("CURRENT_USER: Logout,About to call logout API ");
+      logNoStack.i("CURRENT_USER: Logout,calling $defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout");
       apiPostNoLocale(savedToken,
               "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout")
           .then((result) {
@@ -113,6 +115,7 @@ class CurrentUserFetcher extends Notifier<Person> {
 
       //prov.Provider.of<Notifi>(context, listen: false).preventAutoLogin = true;
       // let the oidc package know
+      logNoStack.i("CURRENT_USER: Logout,About to call oidc logout");
       await app_state.currentManager.logout(
         //after logout, go back to home
         originalUri: Uri.parse('/'),
@@ -124,6 +127,7 @@ class CurrentUserFetcher extends Notifier<Person> {
       );
     }
 
+  logNoStack.i("Finally , forgetting user");
     await app_state.currentManager.forgetUser();
   }
 
