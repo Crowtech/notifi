@@ -108,18 +108,18 @@ Color get colorHover => Color(int.parse(_hoverColourHex.substring(1,9),radix: 16
 
 void showDefaultSettings()
 {
-  logNoStack.d("Main:Entering State 0 , Running main.dart");
-  logNoStack.d("Main:default Realm = $defaultRealm");
-  logNoStack.d("Main:default Auth Base URL = $defaultAuthBaseUrl");
-  logNoStack.d("Main:default Discovery URL = $defaultDiscoveryUrl");
-  logNoStack.d("Main:default ClientId = $defaultClientId");
-  logNoStack.d("Main:default Client Secret = $defaultClientSecret");
-  logNoStack.d("Main:default Redirect URL = $defaultRedirectUrl");
-  logNoStack.d("Main:default API Base URL = $defaultAPIBaseUrl");
-  logNoStack.d("Main:default Mobile Path = $defaultMobilePath");
-  logNoStack.d("Main:default Auth Endpoint URL = $defaultAuthEndpointUrl");
-  logNoStack.d("Main:defaultMinio URL = $defaultMinioEndpointUrl");
-  logNoStack.d("Main:defaultImageProxy URL = $defaultImageProxyUrl");
-  logNoStack.d("");
+  logNoStack.i("Main:Entering State 0 , Running main.dart");
+  logNoStack.i("Main:default Realm = $defaultRealm");
+  logNoStack.i("Main:default Auth Base URL = $defaultAuthBaseUrl");
+  logNoStack.i("Main:default Discovery URL = $defaultDiscoveryUrl");
+  logNoStack.i("Main:default ClientId = $defaultClientId");
+  logNoStack.i("Main:default Client Secret = $defaultClientSecret");
+  logNoStack.i("Main:default Redirect URL = $defaultRedirectUrl");
+  logNoStack.i("Main:default API Base URL = $defaultAPIBaseUrl");
+  logNoStack.i("Main:default Mobile Path = $defaultMobilePath");
+  logNoStack.i("Main:default Auth Endpoint URL = $defaultAuthEndpointUrl");
+  logNoStack.i("Main:defaultMinio URL = $defaultMinioEndpointUrl");
+  logNoStack.i("Main:defaultImageProxy URL = $defaultImageProxyUrl");
+  logNoStack.i("");
 
 }
