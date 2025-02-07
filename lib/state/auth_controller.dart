@@ -121,7 +121,7 @@ class AuthController extends _$AuthController {
       }
       // Try and work out if token valid
       logNoStack.i(
-          "AUTH_CONTROLLER loginRecoveryAttempt: savedToken is ${savedToken}");
+          "AUTH_CONTROLLER loginRecoveryAttempt: savedToken is $savedToken");
       verifyToken(savedToken).then((isValid) {
         logNoStack.i(
             "AUTH_CONTROLLER loginRecoveryAttempt: token validity is ${isValid ? 'true' : 'false'}");

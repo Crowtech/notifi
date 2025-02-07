@@ -12,7 +12,6 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/notifi.dart';
 import 'package:notifi/models/person.dart' as person;
-import 'package:notifi/riverpod/avatar.dart';
 import 'package:notifi/riverpod/current_user.dart';
 import 'package:oidc/oidc.dart';
 import 'package:package_info_plus/package_info_plus.dart';

@@ -4,7 +4,6 @@ import 'package:oidc/oidc.dart';
 
 import '../state/auth_controller.dart';
 import '../widgets/action_button.dart';
-import 'package:notifi/app_state.dart' as app_state;
 
 class LoginPage extends HookConsumerWidget {
   LoginPage({super.key});

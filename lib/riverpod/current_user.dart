@@ -73,7 +73,7 @@ class CurrentUserFetcher extends Notifier<Person> {
     person.lastname = getLastname(user);
     person.code = getResourceCode(user);
     person.username = getUsername(user);
-    person.name = person.firstname + " " + person.lastname;
+    person.name = "${person.firstname} ${person.lastname}";
     state = person;
   }
 

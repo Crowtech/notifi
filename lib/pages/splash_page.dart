@@ -39,8 +39,8 @@ class SplashPage extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text('Splash Page: $userName'),
-            SizedBox(height: 16),
-            LoadingSpinner(),
+            const SizedBox(height: 16),
+            const LoadingSpinner(),
           ],
         ),
       ),

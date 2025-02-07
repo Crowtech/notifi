@@ -9,13 +9,13 @@ class Dashboard extends StatelessWidget {
  Widget header;
 
  
-  Dashboard({super.key, this.header =  const Header.new()});
+  Dashboard({super.key, this.header =  const Header()});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Dashboard"),
-        leading: const TopLeftMenu.new(),
+        leading: const TopLeftMenu(),
         actions: [
           PopupMenuButton<String>(
             icon: const Icon(Icons.settings),

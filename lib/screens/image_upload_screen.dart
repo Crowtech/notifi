@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:notifi/riverpod/minio_uploader.dart';
-import 'package:riverpod/riverpod.dart';
 
 import 'dart:io';
 

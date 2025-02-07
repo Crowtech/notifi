@@ -70,7 +70,7 @@ class LocationsFetcher extends Notifier<List<Marker>> {
     final map = jsonDecode(response.body);
 
 List<String> colours = ['red', 'green', 'blue', 'amber'];
-    final List<Marker> _userlocations = [];
+    final List<Marker> userlocations = [];
     if (map["totalItems"] == 0) {
       logNoStack.i("Empty List");
       CrowtechBasePage<GPS> page =
@@ -85,7 +85,7 @@ List<String> colours = ['red', 'green', 'blue', 'amber'];
           logNoStack.i('GPS $gps');
           LatLng ll = LatLng(gps.latitude, gps.longitude);
           double heading = gps.heading.round().toDouble();
-          _userlocations.add(Marker(
+          userlocations.add(Marker(
               point: ll,
               width: 24,
               height: 24,
@@ -99,7 +99,7 @@ List<String> colours = ['red', 'green', 'blue', 'amber'];
         }
       }
 
-      state = _userlocations;
+      state = userlocations;
     } else {
       logNoStack.d("map = $map");
 
@@ -113,7 +113,7 @@ List<String> colours = ['red', 'green', 'blue', 'amber'];
           logNoStack.i('GPS $gps');
           LatLng ll = LatLng(gps.latitude, gps.longitude);
           double heading = gps.heading.round().toDouble();
-          _userlocations.add(Marker(
+          userlocations.add(Marker(
               point: ll,
               width: 24,
               height: 24,
@@ -126,7 +126,7 @@ List<String> colours = ['red', 'green', 'blue', 'amber'];
               }));
         }
       }
-      state = _userlocations;
+      state = userlocations;
     }
   }
 }

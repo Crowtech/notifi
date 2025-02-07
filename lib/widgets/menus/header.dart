@@ -13,13 +13,13 @@ class Header extends StatelessWidget {
  String get dashboardtitle => headertitle;
  
   const Header({super.key, this.headertitle="Desktop",
-  this.topLeftMenu = const TopLeftMenu.new(), this.topRightMenu = const AccountMenu.new()});
+  this.topLeftMenu = const TopLeftMenu(), this.topRightMenu = const AccountMenu()});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Dashboard"),
-        leading: const TopLeftMenu.new(),
+        leading: const TopLeftMenu(),
         actions: [
           PopupMenuButton<String>(
             icon: const Icon(Icons.settings),

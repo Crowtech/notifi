@@ -230,8 +230,7 @@ class PreviewPage extends StatefulWidget {
   final String? imagePath;
   final String? videoPath;
 
-  const PreviewPage({Key? key, this.imagePath, this.videoPath})
-      : super(key: key);
+  const PreviewPage({super.key, this.imagePath, this.videoPath});
 
   @override
   State<PreviewPage> createState() => _PreviewPageState();

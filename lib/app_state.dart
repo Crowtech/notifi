@@ -7,9 +7,7 @@ import 'package:bdaya_shared_value/bdaya_shared_value.dart';
 import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/credentials.dart';
-import 'package:notifi/entities/auth.dart';
 import 'package:notifi/jwt_utils.dart';
-import 'package:notifi/state/auth_controller.dart';
 import 'package:oidc/oidc.dart';
 import 'package:oidc_default_store/oidc_default_store.dart';
 
