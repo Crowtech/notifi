@@ -116,7 +116,7 @@ class CurrentUserFetcher extends Notifier<Person> {
       //prov.Provider.of<Notifi>(context, listen: false).preventAutoLogin = true;
       // let the oidc package know
 
-        logNoStack.i("Finally , forgetting user");
+    //    logNoStack.i("Finally , forgetting user");
     //await app_state.currentManager.forgetUser();
 
       logNoStack.i("CURRENT_USER: Logout,About to call oidc logout");
@@ -129,6 +129,7 @@ class CurrentUserFetcher extends Notifier<Person> {
           ),
         ),
       );
+      logNoStack.i("CURRENT_USER: Logout,Called oidc logout");
     }
 
 
