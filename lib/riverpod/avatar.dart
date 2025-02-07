@@ -16,7 +16,7 @@ var logNoStack = logger.Logger(
   level: logger.Level.info,
 );
 
-const String defaultUrl = "$defaultMinioEndpointUrl/$defaultRealm/adam51casual.png";
+String defaultUrl = "$defaultMinioEndpointUrl/$defaultRealm/adam51casual.png";
 class UserAvatar extends ConsumerWidget {
   int diameter;
   Color backgroundColour;
