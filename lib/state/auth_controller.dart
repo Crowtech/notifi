@@ -113,6 +113,7 @@ class AuthController extends _$AuthController {
   /// Tries to perform a login with the saved token on the persistent storage.
   /// If _anything_ goes wrong, deletes the internal token and returns a [User.signedOut].
   Future<Auth> _loginRecoveryAttempt() async {
+    log.i("AUTH_CONTROLLER  LOGIN_RECOVERY ATTEMPT: START");
     try {
       final savedToken = _sharedPreferences.getString(_sharedPrefsKey);
       if (savedToken == null) {
@@ -205,12 +206,14 @@ class AuthController extends _$AuthController {
   }
 
   Future<void> loginOidc(OidcUser? oidcUser) async {
+    log.i("AUTH_CONTROLLER  LOGIN_OIDC: START");
     if (oidcUser != null) {
       log.i(
           "AUTH_CONTROLLER  LOGIN_OIDC: In AuthControllerLogin: oidcUser is ${oidcUser.userInfo['email']} fetching user ");
 
 // Now fetch the actual user from the backend
 
+      log.i("AUTH_CONTROLLER  LOGIN_OIDC: SAbout to register Token");
       var currentPerson = await registerLogin(oidcUser.token.accessToken!);
 
       var authResult = Auth.signedIn(
