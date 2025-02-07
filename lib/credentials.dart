@@ -18,6 +18,7 @@ const _defaultRealm =
 const _defaultAuthBaseUrl = String.fromEnvironment('AUTH_BASE_URL',
     defaultValue: 'https://auth.crowtech.com.au');
 
+const _defaultAPIBaseUrl = String.fromEnvironment('API_BASE_URL');
 const _defaultDiscoveryUrl = String.fromEnvironment('AUTH_OPENID_URL');
 
 const _defaultClientId = String.fromEnvironment('AUTH_OPENID_CLIENT_ID');
@@ -49,7 +50,7 @@ const _transistorsoftKey=String.fromEnvironment('TRANSISTORSOFT_KEY');
 const _vapidKey=String.fromEnvironment('VAPID_KEY');
 const _displayName=String.fromEnvironment('DISPLAY_NAME');
 
-const _defaultAPIBaseUrl = String.fromEnvironment('API_BASE_URL');
+
 
 const _defaultApiPrefixPath = String.fromEnvironment('API_PREFIX_PATH');
 
@@ -83,7 +84,7 @@ String get defaultMobilePath => _defaultMobilePath;
 String get defaultRedirectUrl => _defaultRedirectUrl;
 String get defaultRealmBaseUrl => _defaultRealmBaseUrl;
 String get defaultAuthEndpointUrl => _defaultAuthEndpointUrl;
-String get defaultAPIBaseUrl => _defaultAPIBaseUrl;
+String get defaultAPIBaseUrl  => _defaultAPIBaseUrl ;
 String get defaultMinioEndpointUrl => _defaultMinioEndpointUrl;
 String get defaultImageProxyUrl => _defaultImageProxyUrl;
 
@@ -115,6 +116,7 @@ void showDefaultSettings()
   logNoStack.i("Main:default ClientId = $defaultClientId");
   logNoStack.i("Main:default Client Secret = $defaultClientSecret");
   logNoStack.i("Main:default Redirect URL = $defaultRedirectUrl");
+  logNoStack.i("Main:default API Base URL = $_defaultAPIBaseUrl");
   logNoStack.i("Main:default API Base URL = $defaultAPIBaseUrl");
   logNoStack.i("Main:default Mobile Path = $defaultMobilePath");
   logNoStack.i("Main:default Auth Endpoint URL = $defaultAuthEndpointUrl");
