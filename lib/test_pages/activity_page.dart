@@ -46,7 +46,10 @@ class ActivityView extends ConsumerWidget {
 @riverpod
 Future<Activity> activity(Ref ref) async {
   final response = await http.get(
-    Uri.https('www.boredapi.com', '/api/activity'),
+    Uri.https('hapi.api-ninjas.com', '/v1/quotes'),
+    headers: {
+          "X-Api-Key": "4BGRGnGs+MFqwoRx3u7qKg==TTayv0GbzWurQIIw",
+        },
   );
 
   final json = jsonDecode(response.body) as Map;
