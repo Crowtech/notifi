@@ -19,7 +19,7 @@ class ActivityView extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(t.pulltorefresh),
+        title: const Text("Pull To Refresh"),
          leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
