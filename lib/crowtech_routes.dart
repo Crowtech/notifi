@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:notifi/auth.dart';
 import 'package:notifi/screens/splash_screen.dart';
+import 'package:notifi/test_pages/test_page.dart';
 import 'package:oidc/oidc.dart';
 import 'package:posthog_flutter/posthog_flutter.dart';
 
@@ -9,7 +10,7 @@ import 'package:notifi/app_state.dart' as app_state;
 
 import 'package:logger/logger.dart';
 import '../i18n/strings.g.dart';
-import 'pages/crow_home_page.dart';
+//import 'pages/crow_home_page.dart';
 
 var logger = Logger(
   printer: PrettyPrinter(),
@@ -56,7 +57,7 @@ final GoRouter router = GoRouter(
         }
         return null;
       },
-      builder: (context, state) => const CrowtechHomePage(),
+      builder: (context, state) => TestPage(),
     ),
     GoRoute(
       path: CrowtechRoutes.auth,

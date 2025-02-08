@@ -32,7 +32,7 @@ Person _$PersonFromJson(Map<String, dynamic> json) => Person(
       latitude: (json['latitude'] as num?)?.toDouble(),
       birthyear: (json['birthyear'] as num?)?.toInt(),
       fcm: json['fcm'] as String?,
-    );
+    )..token = json['token'] as String?;
 
 Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{
       'id': instance.id,
@@ -56,6 +56,7 @@ Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{
       'latitude': instance.latitude,
       'birthyear': instance.birthyear,
       'fcm': instance.fcm,
+      'token': instance.token,
     };
 
 const _$GenderTypeEnumMap = {

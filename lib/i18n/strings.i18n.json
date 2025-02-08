@@ -5,6 +5,7 @@
     "account": "Account Menu",
     "product": "Product Menu"
   },
+  "activity": "Activity",
   "audio_access_denied": "You have denied audio access",
   "audio_access_denied_without_prompt": "Please go to Settings app to enable audio access",
   "audio_access_restricted": "Audio access is restricted",
@@ -36,6 +37,7 @@
   "logout": "Logout",
   "moving": "Moving",
   "odometer": "Odometer",
+  "pulltorefresh": "Pull to refresh",
   "reset_offset": "Reset Offset",
   "resetting_exposure_point": "Resetting exposure point",
   "resetting_focus_point": "Resetting focus point",
