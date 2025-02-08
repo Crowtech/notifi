@@ -289,20 +289,22 @@ class Notifi extends ChangeNotifier {
       final notification = message.notification;
       if (notification == null) return;
 
+
+logNoStack.i("Incoming Notification!\nTITLE: ${notification.title}\nBODY: ${notification.body}");
       logNoStack
           .d("NOTIFI: Foreground msg:${notification.title!}::${notification.body!}");
-      flutterLocalNotificationsPlugin.show(
-        notification.hashCode,
-        notification.title,
-        notification.body,
-        NotificationDetails(
-          android: AndroidNotificationDetails(
-              _androidChannel.id, _androidChannel.name,
-              channelDescription: _androidChannel.description,
-              icon: '@drawable/ic_launcher'),
-        ),
-        payload: jsonEncode(message.toMap()),
-      );
+      // flutterLocalNotificationsPlugin.show(
+      //   notification.hashCode,
+      //   notification.title,
+      //   notification.body,
+      //   NotificationDetails(
+      //     android: AndroidNotificationDetails(
+      //         _androidChannel.id, _androidChannel.name,
+      //         channelDescription: _androidChannel.description,
+      //         icon: '@drawable/ic_launcher'),
+      //   ),
+      //   payload: jsonEncode(message.toMap()),
+      // );
 
       Fluttertoast.showToast(
           msg: "${notification.title!}::${notification.body!}",
