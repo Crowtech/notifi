@@ -26,16 +26,17 @@ var logNoStack = logger.Logger(
 /// Otherwise, it mocks a network request and gives out some [UserRole].
 @riverpod
 Future<UserRole> permissions(PermissionsRef ref) async {
-  // final userId = await ref.watch(
-  //   authControllerProvider.selectAsync(
-  //     (value) => value.map(
-  //       signedIn: (signedIn) => signedIn.id,
-  //       signedOut: (signedOut) => null,
-  //     ),
-  //   ),
-  // );
+  final userId = await ref.watch(
+    authControllerProvider.selectAsync(
+      (value) => value.map(
+        signedIn: (signedIn) => signedIn.id,
+        signedOut: (signedOut) => null,
+      ),
+    ),
+  );
 
-final user= ref.watch(currentUserProvider);
+if (userId == null) return const UserRole.none();
+final user= ref.read(currentUserProvider);
 
 
 logNoStack.i("Permissions: User is ${user.toString()}");
@@ -62,7 +63,7 @@ Map<String,dynamic> jwtMap = JwtDecoder.decode(user.token!);
   for (var i=0; i<rolesList.length; i++) {
     rolesStr += "${rolesList[i]}\n";
 }
-  logNoStack.i("Roles for ${user.email}");
+  logNoStack.i("Roles for ${user.email} are $rolesStr");
 
   return _requestMock();
 }
