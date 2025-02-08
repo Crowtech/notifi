@@ -61,7 +61,7 @@ Future<dynamic> apiPostDataNoLocale(
       response.statusCode == 201 ||
       response.statusCode == 200) {
     logNoStack
-        .i("$apiPath created successfully! with status ${response.statusCode}");
+        .i("API POST No LOCALE: $apiPath created successfully! with status ${response.statusCode}");
     final resultMap = jsonDecode(response.body);
     return resultMap;
   } else {
@@ -110,14 +110,14 @@ Future<dynamic> apiPostData(Locale locale, String token, String apiPath,
       response.statusCode == 201 ||
       response.statusCode == 200) {
     logNoStack
-        .i("$apiPath created successfully! with status ${response.statusCode}");
+        .i("API POST DATA: $apiPath created successfully! with status ${response.statusCode}");
     final resultMap = jsonDecode(response.body);
     return resultMap;
   } else {
     logNoStack.e(
-        "$apiPath created unsuccessfully! with status ${response.statusCode}");
+        "API POST DATA: $apiPath created unsuccessfully! with status ${response.statusCode}");
     return Future.error(
-        "$apiPath created unsuccessfully! with status ${response.statusCode}");
+        "API POST DATA: $apiPath created unsuccessfully! with status ${response.statusCode}");
   }
 }
 
@@ -149,7 +149,7 @@ Future<http.Response> apiPostDataStrNoLocale(
       response.statusCode == 200) {
     return response;
   } else {
-    log.d("apiPost created unsuccessfully!");
+    log.d("API POST DATA: apiPostDataStrNoLocaleapiPost created unsuccessfully!");
     throw "api Post created unsuccessfully!";
   }
 }
@@ -275,15 +275,15 @@ DateTime expirationDate = JwtDecoder.getExpirationDate(token);
 Future<Map> registerFCM(
     Locale locale, String token, String deviceid, String fcm) async {
   logNoStack.i(
-      "About to send FCM and deviceid to api $defaultAPIBaseUrl$defaultApiPrefixPath/persons/devicefcm/$deviceid/$fcm");
+      "REGISTER FCM: About to send FCM and deviceid to api $defaultAPIBaseUrl$defaultApiPrefixPath/persons/devicefcm/$deviceid/$fcm");
   apiPost(locale, token,
           "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/devicefcm/$deviceid/$fcm")
       .then((response) {
-    logNoStack.i("back from send FCM sending $deviceid");
-    logNoStack.i("result ${response.toString()}");
+    logNoStack.i("REGISTER FCM: back from send FCM sending $deviceid");
+    logNoStack.i("REGISTER FCM: result ${response.toString()}");
     return response;
   }).catchError((error) {
-    log.d("Register FCM error");
+    log.d("REGISTER FCM: Register FCM error");
     // ignore: invalid_return_type_for_catch_error
     return Map;
   });

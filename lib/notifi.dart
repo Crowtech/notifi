@@ -203,7 +203,7 @@ class Notifi extends ChangeNotifier {
 
     WidgetsFlutterBinding.ensureInitialized();
 
-    logNoStack.i("Camera is ${enableCamera ? "ENABLED" : "DISABLED"}");
+    logNoStack.i("NOTIFI: Camera setting is ${enableCamera ? "ENABLED" : "DISABLED"}");
     if (enableCamera) {
       initialiseCamera();
     }
@@ -221,21 +221,21 @@ class Notifi extends ChangeNotifier {
     );
 
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      logNoStack.i('User granted permission');
+      logNoStack.i('NOTIFI: User granted notifications permission');
     } else if (settings.authorizationStatus ==
         AuthorizationStatus.provisional) {
-      logNoStack.i('User granted provisional permission');
+      logNoStack.i('NOTIFI: User granted provisional messaging permission');
     } else {
-      logNoStack.i('User declined or has not accepted permission');
+      logNoStack.i('NOTIFI: User declined or has not accepted messaging permission');
     }
-    logNoStack.i('User granted permission: ${settings.authorizationStatus}');
+    logNoStack.i('NOTIFI: User granted permission: ${settings.authorizationStatus}');
 
     FirebaseMessaging.instance.onTokenRefresh.listen((fcmToken) async {
       // TODO: If necessary send token to application server.
 
       // Note: This callback is fired at each app startup and whenever a new
       // token is generated.
-      log.d("Refresh Notifi FCM TOKEN = $fcmToken");
+      log.i("NOTIFI: Refresh Notifi FCM TOKEN = $fcmToken");
       fcmToken = fcmToken;
       fcm = fcmToken;
       notifyListeners();
@@ -244,14 +244,14 @@ class Notifi extends ChangeNotifier {
     });
 
     if (kIsWeb) {
-      log.d("Got to here: WEB detected");
+      log.i("Got to here: WEB detected");
     } else {
       logNoStack.i("Got to here: WEB not detected");
     }
     if (kIsWeb) {
-      logNoStack.i("vapidKey is $vapidKey");
+      logNoStack.i("NOTIFI: vapidKey is $vapidKey");
       FirebaseMessaging.instance.getToken(vapidKey: vapidKey).then((token) {
-        logNoStack.d("Web fcm token is $token");
+        logNoStack.i("NOTIFI: Web fcm token is $token");
         _fcmToken = token;
         fcm = token!;
         notifyListeners();
@@ -259,7 +259,7 @@ class Notifi extends ChangeNotifier {
     }
 
     if (isIOS) {
-      logNoStack.i("Fetching Mobile Apple fcm token ");
+      logNoStack.i("NOTIFI: Fetching Mobile Apple fcm token ");
       FirebaseMessaging.instance.getAPNSToken().then((apnsToken) {
         if (apnsToken != null) {
           // APNS token is available, make FCM plugin API requests...
@@ -267,7 +267,7 @@ class Notifi extends ChangeNotifier {
             _fcmToken = token;
             fcm = token!;
             notifyListeners();
-            logNoStack.i("Mobile Apple fcm token is $_fcmToken");
+            logNoStack.i("NOTIFI: Mobile Apple fcm token is $_fcmToken");
             subscribeToTopics();
           });
         }
@@ -278,19 +278,19 @@ class Notifi extends ChangeNotifier {
         _fcmToken = token;
         fcm = token!;
         notifyListeners();
-        logNoStack.d("Mobile Android fcm token is $_fcmToken");
+        logNoStack.d("NOTIFI: Mobile Android fcm token is $_fcmToken");
         subscribeToTopics();
       });
     }
 
-    logNoStack.d("Got to here before setup Flutter Notifications");
+    logNoStack.d("NOTIFI: Got to here before setup Flutter Notifications");
     await setupFlutterNotifications();
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       final notification = message.notification;
       if (notification == null) return;
 
       logNoStack
-          .d("Foreground msg:${notification.title!}::${notification.body!}");
+          .d("NOTIFI: Foreground msg:${notification.title!}::${notification.body!}");
       flutterLocalNotificationsPlugin.show(
         notification.hashCode,
         notification.title,
@@ -319,19 +319,19 @@ class Notifi extends ChangeNotifier {
 
   void subscribeToTopics() {
     if (!kIsWeb) {
-      logNoStack.i("Subscribing to topics");
+      logNoStack.i("NOTIFI: Subscribing to topics");
 
       for (final topic in _topics) {
         try {
           FirebaseMessaging.instance.subscribeToTopic(topic).then((_) {
-            logNoStack.i("Subscribed to topic: $topic");
+            logNoStack.i("NOTIFI: Subscribed to topic: $topic");
           });
         } on Exception catch (_) {
-          log.e("Firebase error");
+          log.e("NOTIFI: Firebase error");
         }
       }
     } else {
-      logNoStack.i("Not subscribing to topics");
+      logNoStack.i("NOTIFI: Not subscribing to topics");
     }
   }
 
