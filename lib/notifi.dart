@@ -12,9 +12,14 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:notifi/geo_page.dart';
+import 'package:notifi/jwt_utils.dart';
 import 'package:notifi/models/person.dart' as Person;
+import 'package:notifi/riverpod/fcm.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:logger/logger.dart' as logger;
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:notifi/app_state.dart' as app_state;
 
 import 'credentials.dart';
 
@@ -28,65 +33,12 @@ var logNoStack = logger.Logger(
   level: logger.Level.info,
 );
 
-bool get isAndroid => !kIsWeb && Platform.isAndroid;
-bool get isIOS => !kIsWeb && Platform.isIOS;
-bool get isWindows => !kIsWeb && Platform.isWindows;
 
-String? _fcmToken = '';
-String? get fcmToken => _fcmToken;
 
-late AndroidNotificationChannel _androidChannel;
+@riverpod
+class Notifi extends _$Notifi {
+  late SharedPreferences _sharedPreferences;
 
-bool isFlutterLocalNotificationsInitialized = false;
-
-// /// Initialize the [FlutterLocalNotificationsPlugin] package.
-late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
-
-@pragma('vm:entry-point')
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  // If you're going to use other Firebase services in the background, such as Firestore,
-  // make sure you call `initializeApp` before using other Firebase services.
-  await Firebase.initializeApp();
-
-  log.d("Handling a background message: ${message.messageId}");
-}
-
-Future<void> setupFlutterNotifications() async {
-  if (isFlutterLocalNotificationsInitialized) {
-    log.d("Flutter Local Notifications not initialised, exiting");
-    return;
-  }
-  _androidChannel = const AndroidNotificationChannel(
-    'high_importance_channel', // id
-    'High Importance Notifications', // title
-    description:
-        'This channel is used for important notifications.', // description
-    importance: Importance.high,
-  );
-
-  flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-
-  /// Create an Android Notification Channel.
-  ///
-  /// We use this channel in the `AndroidManifest.xml` file to override the
-  /// default FCM channel to enable heads up notifications.
-  await flutterLocalNotificationsPlugin
-      .resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin>()
-      ?.createNotificationChannel(_androidChannel);
-
-  /// Update the iOS foreground notification presentation options to allow
-  /// heads up notifications.
-  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
-    alert: true,
-    badge: true,
-    sound: true,
-  );
-
-  isFlutterLocalNotificationsInitialized = true;
-}
-
-class Notifi extends ChangeNotifier {
   String? _vapidKey;
   int secondsToast = 2;
   final List<String> _topics = [];
@@ -126,34 +78,35 @@ class Notifi extends ChangeNotifier {
     _preventAutoLogin = value;
   }
 
-  Person.Person? get currentUser => _user;
+@override
+  Future<String> build() async {
+    _sharedPreferences = await SharedPreferences.getInstance();
+    logNoStack.i("NOTIFI Build!");
 
-  set currentUser(Person.Person? user) {
-    _user = user;
-    _userReady = true;
-    notifyListeners();
+    // listen for cachedAuthUser then call auth_controller login
+    //ref.read(authControllerProvider.notifier).loginOidc( event );
+    app_state.currentManager.userChanges().listen((event) async {
+      if (event?.userInfo != null) {
+        var exp = event?.claims['exp'];
+        var name = event?.claims['name'];
+        var username = event?.claims['preferred_username'];
+
+        var deviceId = await fetchDeviceId();
+        logNoStack.i(
+          'AUTH CONTROLLER BUILD: App State User changed (login): exp:$exp, $username, $name $deviceId',
+        );
+        logNoStack.i("token = ${event?.token.accessToken}");
+        ref.read(fcmProvider.notifier).init();
+      } else {
+        logNoStack.i("NOTIFI BUILD: App State User changed to NULL:");
+      }
+    });
+
+
+    return "";
   }
 
-  set fcm(String newFcm) {
-    _fcm = newFcm;
-    notifyListeners();
-  }
-
-  void addTopic(String topic) {
-    _topics.add(topic);
-    // This line tells [Model] that it should rebuild the widgets that
-    // depend on it.
-    notifyListeners();
-  }
-
-  void removeTopic(String topic) {
-    _topics.remove(topic);
-    // This line tells [Model] that it should rebuild the widgets that
-    // depend on it.
-    notifyListeners();
-  }
-
-  Notifi(
+  init(
       {this.options,
       String? vapidKey,
       required PackageInfo packageInfo,
@@ -161,34 +114,13 @@ class Notifi extends ChangeNotifier {
       this.secondsToast = 2,
       List<String>? topics}) {
     log.i("notifi constructor");
+
+
     _vapidKey = vapidKey;
     _packageInfo = packageInfo;
     _deviceId = deviceId;
 
-    if (kIsWeb) {
-      topics = [];
-    }
-    if (topics != null && topics.isNotEmpty) {
-      _topics.addAll(topics);
-    }
-    if (defaultTargetPlatform == TargetPlatform.android) {
-      _topics.add('android');
-    } else if (defaultTargetPlatform == TargetPlatform.iOS) {
-      _topics.add('ios');
-    } else if (defaultTargetPlatform == TargetPlatform.linux) {
-      _topics.add('linux');
-    } else if (defaultTargetPlatform == TargetPlatform.windows) {
-      _topics.add('windows');
-    } else if (defaultTargetPlatform == TargetPlatform.macOS) {
-      _topics.add('macos');
-    } else if (defaultTargetPlatform == TargetPlatform.fuchsia) {
-      _topics.add('fuchsia');
-    } else {
-      // We use 'web' as the default platform for unknown platforms.
-      _topics.add('web');
-    }
-    // log.d("PACKAGE ${packageInfo!.version} ${deviceId} ");
-  }
+      }
 
   ChangeNotifier initialise() {
     log.i("Initialising Notifi");
@@ -199,9 +131,12 @@ class Notifi extends ChangeNotifier {
   Future<ChangeNotifier> init() async {
     logNoStack.i("Notifi initing!");
     await GetStorage.init();
-    await Firebase.initializeApp(options: options);
+   // await Firebase.initializeApp(options: options);
 
     WidgetsFlutterBinding.ensureInitialized();
+
+    //String? vapidKey, List<String>? topics, FirebaseOptions? options}
+    fcmProvider.read<.init(vapidKey,topics,);
 
     logNoStack.i(
         "NOTIFI: Camera setting is ${enableCamera ? "ENABLED" : "DISABLED"}");

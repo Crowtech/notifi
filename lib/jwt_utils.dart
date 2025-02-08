@@ -86,9 +86,9 @@ Future<bool> loginUser(
 
     person.Person user = person.Person.fromJson(resultMap);
     logNoStack.i("logged in user: $user");
-    Provider.of<Notifi>(context, listen: false).currentUser = user;
-    logNoStack.i(
-        "logged in notifi user: ${Provider.of<Notifi>(context, listen: false).currentUser}");
+    // Provider.of<Notifi>(context, listen: false).currentUser = user;
+    // logNoStack.i(
+    //     "logged in notifi user: ${Provider.of<Notifi>(context, listen: false).currentUser}");
 
     ref.read(currentUserProvider.notifier).setPerson(user);
     return true;
