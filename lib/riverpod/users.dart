@@ -39,10 +39,11 @@ class UsersFetcher extends Notifier<CrowtechBasePage<Person>> {
 
     CrowtechBasePage<Person> page =
         CrowtechBasePage<Person>(itemFromJson: Person.fromJson).fromJson(map);
-
+    String usersStr = "--- Users ----\n";
     for (int i = 0; i < page.itemCount(); i++) {
-      logNoStack.i("User $i  ${page.items![i]}");
+      usersStr += "User $i  ${page.items![i]}\n";
     }
+    logNoStack.i(usersStr);
     state = page;
   }
 }

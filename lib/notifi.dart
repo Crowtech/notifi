@@ -292,7 +292,7 @@ class Notifi extends ChangeNotifier {
 
 logNoStack.i("Incoming Notification!\nTITLE: ${notification.title}\nBODY: ${notification.body}");
       logNoStack
-          .d("NOTIFI: Foreground msg:${notification.title!}::${notification.body!}");
+          .i("NOTIFI: Foreground msg:${notification.title!}::${notification.body!}");
       // flutterLocalNotificationsPlugin.show(
       //   notification.hashCode,
       //   notification.title,
