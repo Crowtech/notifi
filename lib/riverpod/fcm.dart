@@ -107,13 +107,11 @@ class FcmFetcher extends Notifier<String> {
   @override
   String build() {
   
-
-
     return ""; 
   }
 
 
-void init({String? vapidKey, List<String>? topics, FirebaseOptions? options}) async
+void init({ List<String>? topics, FirebaseOptions? options}) async
 {
 
     if (topics != null && topics.isNotEmpty) {

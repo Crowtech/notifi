@@ -17,6 +17,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:logger/logger.dart' as logger;
 
 import 'credentials.dart';
+import 'firebase/firebase_api.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -209,117 +210,134 @@ class Notifi extends ChangeNotifier {
       initialiseCamera();
     }
 
-    FirebaseMessaging messaging = FirebaseMessaging.instance;
+  //if (Constants.notificationsEnabled) {
+  await Firebase.initializeApp(options: options);
 
-    NotificationSettings settings = await messaging.requestPermission(
-      alert: true,
-      announcement: true,
-      badge: true,
-      carPlay: false,
-      criticalAlert: false,
-      provisional: true,
-      sound: true,
-    );
+  // Set the background messaging handler early on, as a named top-level function
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      logNoStack.i('NOTIFI: User granted notifications permission');
-    } else if (settings.authorizationStatus ==
-        AuthorizationStatus.provisional) {
-      logNoStack.i('NOTIFI: User granted provisional messaging permission');
-    } else {
-      logNoStack
-          .i('NOTIFI: User declined or has not accepted messaging permission');
-    }
-    logNoStack
-        .i('NOTIFI: User granted permission: ${settings.authorizationStatus}');
-
-    FirebaseMessaging.instance.onTokenRefresh.listen((fcmToken) async {
-      // TODO: If necessary send token to application server.
-
-      // Note: This callback is fired at each app startup and whenever a new
-      // token is generated.
-      log.i("NOTIFI: Refresh Notifi FCM TOKEN = $fcmToken");
-      fcmToken = fcmToken;
-      fcm = fcmToken;
-      notifyListeners();
-    }).onError((err) {
-      // Error getting token.
-    });
-
-    if (kIsWeb) {
-      log.i("Got to here: WEB detected");
-    } else {
-      logNoStack.i("Got to here: WEB not detected");
-    }
-    if (kIsWeb) {
-      logNoStack.i("NOTIFI: vapidKey is $vapidKey");
-      FirebaseMessaging.instance.getToken(vapidKey: vapidKey).then((token) {
-        logNoStack.i("NOTIFI: Web fcm token is $token");
-        _fcmToken = token;
-        fcm = token!;
-        notifyListeners();
-      });
-    }
-
-    if (isIOS) {
-      logNoStack.i("NOTIFI: Fetching Mobile Apple fcm token ");
-      FirebaseMessaging.instance.getAPNSToken().then((apnsToken) {
-        if (apnsToken != null) {
-          // APNS token is available, make FCM plugin API requests...
-          FirebaseMessaging.instance.getToken().then((token) {
-            _fcmToken = token;
-            fcm = token!;
-            notifyListeners();
-            logNoStack.i("NOTIFI: Mobile Apple fcm token is $_fcmToken");
-            subscribeToTopics();
-          });
-        }
-      });
-    }
-    if (isAndroid) {
-      FirebaseMessaging.instance.getToken().then((token) {
-        _fcmToken = token;
-        fcm = token!;
-        notifyListeners();
-        logNoStack.d("NOTIFI: Mobile Android fcm token is $_fcmToken");
-        subscribeToTopics();
-      });
-    }
-
-    logNoStack.d("NOTIFI: Got to here before setup Flutter Notifications");
+  if (!kIsWeb) {
+    // await setupFlutterNotifications();  <--- using the web example
+    await FirebaseApi().initNotifications();
+  } else {
     await setupFlutterNotifications();
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      final notification = message.notification;
-      if (notification == null) return;
+  }
 
-      logNoStack.i(
-          "NOTIFI: INCOMING NOTIFICATION:!nTITLE: ${notification.title}\nBODY: ${notification.body}");
-      flutterLocalNotificationsPlugin.show(
-        notification.hashCode,
-        notification.title,
-        notification.body,
-        NotificationDetails(
-          android: AndroidNotificationDetails(
-              _androidChannel.id, _androidChannel.name,
-              channelDescription: _androidChannel.description,
-              icon: '@drawable/ic_launcher'),
-        ),
-        payload: jsonEncode(message.toMap()),
-      );
-      logNoStack
-          .i("NOTIFI: INCOMING NOTIFICATION: AFter flutterLocalnotifixaiotn");
-      Fluttertoast.showToast(
-          msg: "${notification.title!}::${notification.body!}",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: secondsToast,
-          backgroundColor: Colors.red,
-        textColor: Colors.white,
-          fontSize: 16.0);
-      logNoStack.i("NOTIFI: INCOMING NOTIFICATION: AFter toast");
-    });
 
-    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+
+///////////////////
+    // FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+    // NotificationSettings settings = await messaging.requestPermission(
+    //   alert: true,
+    //   announcement: true,
+    //   badge: true,
+    //   carPlay: false,
+    //   criticalAlert: false,
+    //   provisional: true,
+    //   sound: true,
+    // );
+
+    // if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+    //   logNoStack.i('NOTIFI: User granted notifications permission');
+    // } else if (settings.authorizationStatus ==
+    //     AuthorizationStatus.provisional) {
+    //   logNoStack.i('NOTIFI: User granted provisional messaging permission');
+    // } else {
+    //   logNoStack
+    //       .i('NOTIFI: User declined or has not accepted messaging permission');
+    // }
+    // logNoStack
+    //     .i('NOTIFI: User granted permission: ${settings.authorizationStatus}');
+
+    // FirebaseMessaging.instance.onTokenRefresh.listen((fcmToken) async {
+    //   // TODO: If necessary send token to application server.
+
+    //   // Note: This callback is fired at each app startup and whenever a new
+    //   // token is generated.
+    //   log.i("NOTIFI: Refresh Notifi FCM TOKEN = $fcmToken");
+    //   fcmToken = fcmToken;
+    //   fcm = fcmToken;
+    //   notifyListeners();
+    // }).onError((err) {
+    //   // Error getting token.
+    // });
+
+    // if (kIsWeb) {
+    //   log.i("Got to here: WEB detected");
+    // } else {
+    //   logNoStack.i("Got to here: WEB not detected");
+    // }
+    // if (kIsWeb) {
+    //   logNoStack.i("NOTIFI: vapidKey is $vapidKey");
+    //   FirebaseMessaging.instance.getToken(vapidKey: vapidKey).then((token) {
+    //     logNoStack.i("NOTIFI: Web fcm token is $token");
+    //     _fcmToken = token;
+    //     fcm = token!;
+    //     notifyListeners();
+    //   });
+    // }
+
+    // if (isIOS) {
+    //   logNoStack.i("NOTIFI: Fetching Mobile Apple fcm token ");
+    //   FirebaseMessaging.instance.getAPNSToken().then((apnsToken) {
+    //     if (apnsToken != null) {
+    //       // APNS token is available, make FCM plugin API requests...
+    //       FirebaseMessaging.instance.getToken().then((token) {
+    //         _fcmToken = token;
+    //         fcm = token!;
+    //         notifyListeners();
+    //         logNoStack.i("NOTIFI: Mobile Apple fcm token is $_fcmToken");
+    //         subscribeToTopics();
+    //       });
+    //     }
+    //   });
+    // }
+    // if (isAndroid) {
+    //   FirebaseMessaging.instance.getToken().then((token) {
+    //     _fcmToken = token;
+    //     fcm = token!;
+    //     notifyListeners();
+    //     logNoStack.d("NOTIFI: Mobile Android fcm token is $_fcmToken");
+    //     subscribeToTopics();
+    //   });
+    // }
+
+    // logNoStack.d("NOTIFI: Got to here before setup Flutter Notifications");
+    // await setupFlutterNotifications();
+    // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    //   final notification = message.notification;
+    //   if (notification == null) return;
+
+    //   logNoStack.i(
+    //       "NOTIFI: INCOMING NOTIFICATION:!nTITLE: ${notification.title}\nBODY: ${notification.body}");
+    //   flutterLocalNotificationsPlugin.show(
+    //     notification.hashCode,
+    //     notification.title,
+    //     notification.body,
+    //     NotificationDetails(
+    //       android: AndroidNotificationDetails(
+    //           _androidChannel.id, _androidChannel.name,
+    //           channelDescription: _androidChannel.description,
+    //           icon: '@drawable/ic_launcher'),
+    //     ),
+    //     payload: jsonEncode(message.toMap()),
+    //   );
+    //   logNoStack
+    //       .i("NOTIFI: INCOMING NOTIFICATION: AFter flutterLocalnotifixaiotn");
+    //   Fluttertoast.showToast(
+    //       msg: "${notification.title!}::${notification.body!}",
+    //       toastLength: Toast.LENGTH_SHORT,
+    //       gravity: ToastGravity.CENTER,
+    //       timeInSecForIosWeb: secondsToast,
+    //       backgroundColor: Colors.red,
+    //     textColor: Colors.white,
+    //       fontSize: 16.0);
+    //   logNoStack.i("NOTIFI: INCOMING NOTIFICATION: AFter toast");
+    // });
+
+    // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
     return this;
   }
