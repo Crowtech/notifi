@@ -152,6 +152,7 @@ class _CameraHomeState extends State<CameraHome>
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
+            dispose();
             context.pop(false);
           },
         ),
