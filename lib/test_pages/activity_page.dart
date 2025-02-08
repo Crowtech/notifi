@@ -6,7 +6,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../i18n/strings.g.dart' as nt;
+import '../i18n/strings.g.dart' ;
 
 part 'activity_page.g.dart';
 part 'activity_page.freezed.dart';
@@ -19,7 +19,7 @@ class ActivityView extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(nt.t.pulltorefresh),
+        title: const Text(t.pulltorefresh),
          leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
