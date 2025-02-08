@@ -290,28 +290,27 @@ class Notifi extends ChangeNotifier {
       if (notification == null) return;
 
 
-logNoStack.i("Incoming Notification!\nTITLE: ${notification.title}\nBODY: ${notification.body}");
-      logNoStack
-          .i("NOTIFI: Foreground msg:${notification.title!}::${notification.body!}");
-      // flutterLocalNotificationsPlugin.show(
-      //   notification.hashCode,
-      //   notification.title,
-      //   notification.body,
-      //   NotificationDetails(
-      //     android: AndroidNotificationDetails(
-      //         _androidChannel.id, _androidChannel.name,
-      //         channelDescription: _androidChannel.description,
-      //         icon: '@drawable/ic_launcher'),
-      //   ),
-      //   payload: jsonEncode(message.toMap()),
-      // );
-
+logNoStack.i("NOTIFI: INCOMING NOTIFICATION:!nTITLE: ${notification.title}\nBODY: ${notification.body}");
+       flutterLocalNotificationsPlugin.show(
+        notification.hashCode,
+        notification.title,
+        notification.body,
+        NotificationDetails(
+          android: AndroidNotificationDetails(
+              _androidChannel.id, _androidChannel.name,
+              channelDescription: _androidChannel.description,
+              icon: '@drawable/ic_launcher'),
+        ),
+        payload: jsonEncode(message.toMap()),
+      );
+logNoStack.i("NOTIFI: INCOMING NOTIFICATION: AFter flutterLocalnotifixaiotn");
       Fluttertoast.showToast(
           msg: "${notification.title!}::${notification.body!}",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: secondsToast,
           fontSize: 16.0);
+          logNoStack.i("NOTIFI: INCOMING NOTIFICATION: AFter toast");
     });
 
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
