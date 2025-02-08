@@ -203,7 +203,8 @@ class Notifi extends ChangeNotifier {
 
     WidgetsFlutterBinding.ensureInitialized();
 
-    logNoStack.i("NOTIFI: Camera setting is ${enableCamera ? "ENABLED" : "DISABLED"}");
+    logNoStack.i(
+        "NOTIFI: Camera setting is ${enableCamera ? "ENABLED" : "DISABLED"}");
     if (enableCamera) {
       initialiseCamera();
     }
@@ -226,9 +227,11 @@ class Notifi extends ChangeNotifier {
         AuthorizationStatus.provisional) {
       logNoStack.i('NOTIFI: User granted provisional messaging permission');
     } else {
-      logNoStack.i('NOTIFI: User declined or has not accepted messaging permission');
+      logNoStack
+          .i('NOTIFI: User declined or has not accepted messaging permission');
     }
-    logNoStack.i('NOTIFI: User granted permission: ${settings.authorizationStatus}');
+    logNoStack
+        .i('NOTIFI: User granted permission: ${settings.authorizationStatus}');
 
     FirebaseMessaging.instance.onTokenRefresh.listen((fcmToken) async {
       // TODO: If necessary send token to application server.
@@ -289,9 +292,9 @@ class Notifi extends ChangeNotifier {
       final notification = message.notification;
       if (notification == null) return;
 
-
-logNoStack.i("NOTIFI: INCOMING NOTIFICATION:!nTITLE: ${notification.title}\nBODY: ${notification.body}");
-       flutterLocalNotificationsPlugin.show(
+      logNoStack.i(
+          "NOTIFI: INCOMING NOTIFICATION:!nTITLE: ${notification.title}\nBODY: ${notification.body}");
+      flutterLocalNotificationsPlugin.show(
         notification.hashCode,
         notification.title,
         notification.body,
@@ -303,15 +306,18 @@ logNoStack.i("NOTIFI: INCOMING NOTIFICATION:!nTITLE: ${notification.title}\nBODY
         ),
         payload: jsonEncode(message.toMap()),
       );
-logNoStack.i("NOTIFI: INCOMING NOTIFICATION: AFter flutterLocalnotifixaiotn");
-    //   Fluttertoast.showToast(
-    //       msg: "${notification.title!}::${notification.body!}",
-    //       toastLength: Toast.LENGTH_SHORT,
-    //       gravity: ToastGravity.CENTER,
-    //       timeInSecForIosWeb: secondsToast,
-    //       fontSize: 16.0);
-    //       logNoStack.i("NOTIFI: INCOMING NOTIFICATION: AFter toast");
-    // });
+      logNoStack
+          .i("NOTIFI: INCOMING NOTIFICATION: AFter flutterLocalnotifixaiotn");
+      Fluttertoast.showToast(
+          msg: "${notification.title!}::${notification.body!}",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: secondsToast,
+          backgroundColor: Colors.red,
+        textColor: Colors.white,
+          fontSize: 16.0);
+      logNoStack.i("NOTIFI: INCOMING NOTIFICATION: AFter toast");
+    });
 
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
