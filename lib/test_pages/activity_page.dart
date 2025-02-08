@@ -46,7 +46,7 @@ class ActivityView extends ConsumerWidget {
 @riverpod
 Future<Activity> activity(Ref ref) async {
   final response = await http.get(
-    Uri.https('hapi.api-ninjas.com', '/v1/quotes'),
+    Uri.https('api.api-ninjas.com', '/v1/quotes'),
     headers: {
           "X-Api-Key": "4BGRGnGs+MFqwoRx3u7qKg==TTayv0GbzWurQIIw",
         },
