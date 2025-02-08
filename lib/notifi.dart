@@ -304,14 +304,14 @@ logNoStack.i("NOTIFI: INCOMING NOTIFICATION:!nTITLE: ${notification.title}\nBODY
         payload: jsonEncode(message.toMap()),
       );
 logNoStack.i("NOTIFI: INCOMING NOTIFICATION: AFter flutterLocalnotifixaiotn");
-      Fluttertoast.showToast(
-          msg: "${notification.title!}::${notification.body!}",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: secondsToast,
-          fontSize: 16.0);
-          logNoStack.i("NOTIFI: INCOMING NOTIFICATION: AFter toast");
-    });
+    //   Fluttertoast.showToast(
+    //       msg: "${notification.title!}::${notification.body!}",
+    //       toastLength: Toast.LENGTH_SHORT,
+    //       gravity: ToastGravity.CENTER,
+    //       timeInSecForIosWeb: secondsToast,
+    //       fontSize: 16.0);
+    //       logNoStack.i("NOTIFI: INCOMING NOTIFICATION: AFter toast");
+    // });
 
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
