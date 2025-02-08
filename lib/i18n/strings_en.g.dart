@@ -38,7 +38,8 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 	// Translations
 	String get app_title => 'Crowtech';
-	late final TranslationsMenuEn menu = TranslationsMenuEn._(_root);
+	late final TranslationsMenuEn menu = TranslationsMenuEn.internal(_root);
+	String get activity => 'Activity';
 	String get audio_access_denied => 'You have denied audio access';
 	String get audio_access_denied_without_prompt => 'Please go to Settings app to enable audio access';
 	String get audio_access_restricted => 'Audio access is restricted';
@@ -70,6 +71,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get logout => 'Logout';
 	String get moving => 'Moving';
 	String get odometer => 'Odometer';
+	String get pulltorefresh => 'Pull to refresh';
 	String get reset_offset => 'Reset Offset';
 	String get resetting_exposure_point => 'Resetting exposure point';
 	String get resetting_focus_point => 'Resetting focus point';
@@ -84,7 +86,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 // Path: menu
 class TranslationsMenuEn {
-	TranslationsMenuEn._(this._root);
+	TranslationsMenuEn.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -101,6 +103,7 @@ extension on Translations {
 			case 'app_title': return 'Crowtech';
 			case 'menu.account': return 'Account Menu';
 			case 'menu.product': return 'Product Menu';
+			case 'activity': return 'Activity';
 			case 'audio_access_denied': return 'You have denied audio access';
 			case 'audio_access_denied_without_prompt': return 'Please go to Settings app to enable audio access';
 			case 'audio_access_restricted': return 'Audio access is restricted';
@@ -132,6 +135,7 @@ extension on Translations {
 			case 'logout': return 'Logout';
 			case 'moving': return 'Moving';
 			case 'odometer': return 'Odometer';
+			case 'pulltorefresh': return 'Pull to refresh';
 			case 'reset_offset': return 'Reset Offset';
 			case 'resetting_exposure_point': return 'Resetting exposure point';
 			case 'resetting_focus_point': return 'Resetting focus point';

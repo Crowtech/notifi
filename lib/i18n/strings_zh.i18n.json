@@ -4,6 +4,7 @@
     "account": "帐户菜单",
     "product": "产品菜单"
   },
+  "activity": "活动",
   "audio_access_denied": "您已拒绝音频访问",
   "audio_access_denied_without_prompt": "请前往“设置”应用启用音频访问",
   "audio_access_restricted": "音频访问受到限制",
@@ -34,6 +35,7 @@
   "logout": "登出",
   "moving": "动人",
   "odometer": "里程表",
+  "pulltorefresh": "下拉刷新",
   "reset_offset": "重置偏移",
   "resetting_exposure_point": "重置曝光点",
   "resetting_focus_point": "重置焦点",
