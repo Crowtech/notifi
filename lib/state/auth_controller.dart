@@ -19,7 +19,6 @@ import 'package:notifi/app_state.dart' as app_state;
 
 import '../entities/auth.dart';
 import 'package:logger/logger.dart' as logger;
-import '../i18n/strings.g.dart';
 import 'package:provider/provider.dart' as prov;
 import 'package:flutter_background_geolocation/flutter_background_geolocation.dart'
     as bg;

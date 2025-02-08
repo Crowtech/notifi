@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
 import 'package:video_player/video_player.dart';
 import '../i18n/strings.g.dart' as nt; // Importing localization strings
 
@@ -134,7 +135,7 @@ class CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back),
                 onPressed: () {
-                  context.pop();
+                  context.pop(false);
                 },
               ),
                       title: Text(nt.t.camera_title),

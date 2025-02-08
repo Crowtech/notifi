@@ -29,6 +29,7 @@ class Person extends Resource {
   double? latitude;
   int? birthyear;
   String? fcm;
+  String? token;  // used to get roles
 
   Person(
       {super.id,
@@ -108,4 +109,5 @@ Person defaultPerson = Person(id: 0,
       latitude: 0.0,//latitude,
       birthyear: 0,//birthyear,
       fcm: "FCM",
-      avatarUrl: "https://gravatar.com/avatar/${generateMd5("user@email.com")}",); //fcm
+      avatarUrl: "https://gravatar.com/avatar/${generateMd5("user@email.com")}",
+     ); //fcm
