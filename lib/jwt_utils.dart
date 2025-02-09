@@ -107,17 +107,17 @@ void initNotifi(BuildContext context, String token, String topic) async {
 
   logNoStack.i("NOTIFI INIT ");
 
-  var notifi = Provider.of<Notifi>(context, listen: false);
+  // var notifi = Provider.of<Notifi>(context, listen: false);
   await Provider.of<Notifi>(context, listen: false).init();
 
-  void notifiListener() {
-    if (!context.mounted) return;
-    logNoStack.d("Main:NotifiListener triggered , fcm is ${notifi.fcm}");
-    Locale locale = Localizations.localeOf(context);
-    registerFCM(locale, token, notifi.deviceId!, notifi.fcm);
-  }
+  // void notifiListener() {
+  //   if (!context.mounted) return;
+  //   logNoStack.d("Main:NotifiListener triggered , fcm is ${notifi.fcm}");
+  //   Locale locale = Localizations.localeOf(context);
+  //   registerFCM(locale, token, notifi.deviceId!, notifi.fcm);
+  // }
 
-  Provider.of<Notifi>(context, listen: false).addListener(notifiListener);
+  // Provider.of<Notifi>(context, listen: false).addListener(notifiListener);
 }
 
 Future<PackageInfo> fetchPackageInfo() async {
