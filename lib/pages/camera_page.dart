@@ -27,7 +27,6 @@ var logNoStack = logger.Logger(
   level: logger.Level.info,
 );
 
-
 /// Camera example home widget.
 class CameraHome extends StatefulWidget {
   /// Default Constructor
@@ -85,7 +84,7 @@ class _CameraHomeState extends State<CameraHome>
   // Counting pointers (number of user fingers on screen)
   int _pointers = 0;
 
-    List<CameraDescription> _cameras = <CameraDescription>[];
+  List<CameraDescription> _cameras = <CameraDescription>[];
 
   @override
   void initState() {
@@ -116,6 +115,8 @@ class _CameraHomeState extends State<CameraHome>
       parent: _focusModeControlRowAnimationController,
       curve: Curves.easeInCubic,
     );
+
+
   }
 
   @override
@@ -140,6 +141,12 @@ class _CameraHomeState extends State<CameraHome>
       return;
     }
 
+        logNoStack.i(
+        "NOTIFI: Camera setting is ${enableCamera ? "ENABLED" : "DISABLED"}");
+    if (enableCamera) {
+      initialiseCamera();
+    }
+
     if (state == AppLifecycleState.inactive) {
       cameraController.dispose();
     } else if (state == AppLifecycleState.resumed) {
@@ -148,7 +155,7 @@ class _CameraHomeState extends State<CameraHome>
   }
   // #enddocregion AppLifecycle
 
- void initialiseCamera() async {
+  void initialiseCamera() async {
     // Fetch the available cameras before initializing the app.
     try {
       _cameras = await availableCameras();
@@ -159,11 +166,6 @@ class _CameraHomeState extends State<CameraHome>
 
   @override
   Widget build(BuildContext context) {
-      logNoStack.i(
-        "NOTIFI: Camera setting is ${enableCamera ? "ENABLED" : "DISABLED"}");
-    if (enableCamera) {
-      initialiseCamera();
-    }
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -623,8 +625,7 @@ class _CameraHomeState extends State<CameraHome>
       });
       return Text(nt.t.none);
     } else {
-      for (final CameraDescription cameraDescription
-          in _cameras) {
+      for (final CameraDescription cameraDescription in _cameras) {
         toggles.add(
           SizedBox(
             width: 90.0,
@@ -753,7 +754,6 @@ class _CameraHomeState extends State<CameraHome>
         if (file != null) {
           showInSnackBar('Picture saved to ${file.path}');
           log.i("The file is ${file.toString()}");
-          
         }
       }
     });
