@@ -43,6 +43,7 @@ const _posthogKey = String.fromEnvironment('POSTHOG_KEY');
 const _transistorsoftKey = String.fromEnvironment('TRANSISTORSOFT_KEY');
 const _vapidKey = String.fromEnvironment('VAPID_KEY');
 const _displayName = String.fromEnvironment('DISPLAY_NAME');
+const _iosAppStoreId = String.fromEnvironment('IO_APPSTORE_ID');
 
 const _defaultApiPrefixPath = String.fromEnvironment('API_PREFIX_PATH');
 
@@ -84,6 +85,7 @@ String get defaultAuthEndpointUrl => _defaultAuthEndpointUrl;
 String get defaultAPIBaseUrl => _defaultAPIBaseUrl;
 String get defaultMinioEndpointUrl => _defaultMinioEndpointUrl;
 String get defaultImageProxyUrl => _defaultImageProxyUrl;
+String get iosAppStoreId => _iosAppStoreId;
 
 bool get skipLogin => _skipLogin;
 bool get enableCamera => _enableCamera;
@@ -118,5 +120,6 @@ void showDefaultSettings() {
       "Main:default Mobile Path = $defaultMobilePath\n" +
       "Main:default Auth Endpoint URL = $defaultAuthEndpointUrl\n" +
       "Main:defaultMinio URL = $defaultMinioEndpointUrl\n" +
-      "Main:defaultImageProxy URL = $defaultImageProxyUrl\n");
+      "Main:defaultImageProxy URL = $defaultImageProxyUrl\n" +
+      "Main:appStoreId = $iosAppStoreId\n");
 }
