@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/state/fcm_controller.dart';
 
+import '../entities/fcm.dart';
+
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
   level: logger.Level.info,
@@ -23,16 +25,17 @@ class FirebaseFcm extends ConsumerWidget {
   FirebaseFcm({super.key,required this.options});
 
   @override
-   Widget build(BuildContext context, WidgetRef ref) {
+   Widget build(BuildContext context, WidgetRef ref)  {
   return Consumer(
       builder: (context, ref, child) {
-        final fcm = ref.watch(fcmProvider(options)).value;
-
+        final fcm = ref.watch(fcmProvider(options));
+      
+      
         // We can then render both activities.
         // Both requests will happen in parallel and correctly be cached.
         return Column(
           children: [
-            Text(fcm?.isFcm ? ),
+            Text(fcm.hasValue ? '${fcm.value!}':'' ),
           ],
         );
       },
