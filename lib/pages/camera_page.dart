@@ -9,6 +9,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:notifi/credentials.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 import 'package:go_router/go_router.dart';
@@ -84,6 +85,8 @@ class _CameraHomeState extends State<CameraHome>
   // Counting pointers (number of user fingers on screen)
   int _pointers = 0;
 
+    List<CameraDescription> _cameras = <CameraDescription>[];
+
   @override
   void initState() {
     super.initState();
@@ -145,8 +148,22 @@ class _CameraHomeState extends State<CameraHome>
   }
   // #enddocregion AppLifecycle
 
+ void initialiseCamera() async {
+    // Fetch the available cameras before initializing the app.
+    try {
+      _cameras = await availableCameras();
+    } on CameraException catch (e) {
+      logNoStack.e("${e.code} ${e..description}");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+      logNoStack.i(
+        "NOTIFI: Camera setting is ${enableCamera ? "ENABLED" : "DISABLED"}");
+    if (enableCamera) {
+      initialiseCamera();
+    }
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(

@@ -96,7 +96,7 @@ class Notifi extends ChangeNotifier {
 
   late PackageInfo _packageInfo;
   late String _deviceId;
-  List<CameraDescription> _cameras = <CameraDescription>[];
+  // List<CameraDescription> _cameras = <CameraDescription>[];
 
   Person.Person? _user;
   bool _userReady = false;
@@ -117,7 +117,7 @@ class Notifi extends ChangeNotifier {
   List<String> get topics => _topics;
 
   String get fcm => _fcm;
-  List<CameraDescription> get cameras => _cameras;
+  //List<CameraDescription> get cameras => _cameras;
 
   Notifi get notifi => this;
 
@@ -204,11 +204,11 @@ class Notifi extends ChangeNotifier {
 
     WidgetsFlutterBinding.ensureInitialized();
 
-    logNoStack.i(
-        "NOTIFI: Camera setting is ${enableCamera ? "ENABLED" : "DISABLED"}");
-    if (enableCamera) {
-      initialiseCamera();
-    }
+    // logNoStack.i(
+    //     "NOTIFI: Camera setting is ${enableCamera ? "ENABLED" : "DISABLED"}");
+    // if (enableCamera) {
+    //   initialiseCamera();
+    // }
 
 
   //if (Constants.notificationsEnabled) {
@@ -361,12 +361,12 @@ class Notifi extends ChangeNotifier {
     }
   }
 
-  void initialiseCamera() async {
-    // Fetch the available cameras before initializing the app.
-    try {
-      _cameras = await availableCameras();
-    } on CameraException catch (e) {
-      logNoStack.e("${e.code} ${e..description}");
-    }
-  }
+  // void initialiseCamera() async {
+  //   // Fetch the available cameras before initializing the app.
+  //   try {
+  //     _cameras = await availableCameras();
+  //   } on CameraException catch (e) {
+  //     logNoStack.e("${e.code} ${e..description}");
+  //   }
+  // }
 }
