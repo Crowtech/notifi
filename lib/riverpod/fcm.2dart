@@ -89,10 +89,10 @@ Future<void> setupFlutterNotifications() async {
   isFlutterLocalNotificationsInitialized = true;
 }
 
-class FcmFetcher extends Notifier<String> {
+class Fcm2Fetcher extends Notifier<String> {
   late SharedPreferences _sharedPreferences;
   static const _sharedPrefsKey = 'token';
-    String? _vapidKey;
+  String? _vapidKey;
   int secondsToast = 2;
   final List<String> _topics = [];
   String _fcm = "Loading ...";
@@ -103,17 +103,12 @@ class FcmFetcher extends Notifier<String> {
 
   FirebaseOptions? options;
 
-  
   @override
   String build() {
-  
-    return ""; 
+    return "";
   }
 
-
-void init({ List<String>? topics, FirebaseOptions? options}) async
-{
-
+  void init({List<String>? topics, FirebaseOptions? options}) async {
     if (topics != null && topics.isNotEmpty) {
       _topics.addAll(topics);
     }
@@ -153,11 +148,11 @@ void init({ List<String>? topics, FirebaseOptions? options}) async
         AuthorizationStatus.provisional) {
       logNoStack.i('FIREBASE: User granted provisional messaging permission');
     } else {
-      logNoStack
-          .i('FIREBASE: User declined or has not accepted messaging permission');
+      logNoStack.i(
+          'FIREBASE: User declined or has not accepted messaging permission');
     }
-    logNoStack
-        .i('FIREBASE: User granted permission: ${settings.authorizationStatus}');
+    logNoStack.i(
+        'FIREBASE: User granted permission: ${settings.authorizationStatus}');
 
     FirebaseMessaging.instance.onTokenRefresh.listen((fcmToken) async {
       // TODO: If necessary send token to application server.
@@ -180,8 +175,6 @@ void init({ List<String>? topics, FirebaseOptions? options}) async
       FirebaseMessaging.instance.getToken(vapidKey: vapidKey).then((token) {
         logNoStack.i("FIREBASE: Web fcm token is $token");
         state = token!;
-        
-        
       });
     }
 
@@ -214,7 +207,7 @@ void init({ List<String>? topics, FirebaseOptions? options}) async
       if (notification == null) return;
 
       logNoStack.i(
-          "FIREBASE: INCOMING NOTIFICATION:!nTITLE: ${notification.title}\nBODY: ${notification.body}");
+          "FIREBASE: INCOMING NOTIFICATION:\nTITLE: ${notification.title}\nBODY: ${notification.body}");
       flutterLocalNotificationsPlugin.show(
         notification.hashCode,
         notification.title,
@@ -235,13 +228,13 @@ void init({ List<String>? topics, FirebaseOptions? options}) async
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: secondsToast,
           backgroundColor: Colors.red,
-        textColor: Colors.white,
+          textColor: Colors.white,
           fontSize: 16.0);
       logNoStack.i("FIREBASE: INCOMING NOTIFICATION: AFter toast");
     });
 
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-}
+  }
 
   void subscribeToTopics() {
     if (!kIsWeb) {
@@ -260,23 +253,19 @@ void init({ List<String>? topics, FirebaseOptions? options}) async
       logNoStack.i("FIREBASE: Not subscribing to topics");
     }
   }
-    set fcm(String newFcm) {
-    state= newFcm;
 
+  set fcm(String newFcm) {
+    state = newFcm;
   }
 
   void addTopic(String topic) {
     _topics.add(topic);
-
   }
 
   void removeTopic(String topic) {
     _topics.remove(topic);
- 
   }
-
 }
 
 // Notifier provider holding the state
-final fcmProvider =
-    NotifierProvider<FcmFetcher, String>(FcmFetcher.new);
+final fcmProvider = NotifierProvider<Fcm2Fetcher, String>(Fcm2Fetcher.new);

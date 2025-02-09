@@ -49,6 +49,10 @@ class CurrentUserFetcher extends Notifier<Person> {
         .then((currentUser) {
       log.i("CURRENT_USER: Logged in api user returned $currentUser");
       state = currentUser;
+
+  // Start the FCM process
+      
+
       return;
     }).catchError((error) {
       log.d("CURRENT_USER: Login API  error");

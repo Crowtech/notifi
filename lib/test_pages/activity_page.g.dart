@@ -26,7 +26,7 @@ Map<String, dynamic> _$$ActivityImplToJson(_$ActivityImpl instance) =>
 // RiverpodGenerator
 // **************************************************************************
 
-String _$activityHash() => r'609ac1c1d8008d8109ea5869c7aa88013032917c';
+String _$activityHash() => r'cceb885eff416017c7be326ccd39bc66e5b6c325';
 
 /// See also [activity].
 @ProviderFor(activity)

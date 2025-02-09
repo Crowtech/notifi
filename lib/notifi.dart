@@ -210,6 +210,7 @@ class Notifi extends ChangeNotifier {
       initialiseCamera();
     }
 
+
   //if (Constants.notificationsEnabled) {
   await Firebase.initializeApp(options: options);
 
