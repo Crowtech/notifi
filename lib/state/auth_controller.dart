@@ -112,10 +112,12 @@ class AuthController extends _$AuthController {
   /// Tries to perform a login with the saved token on the persistent storage.
   /// If _anything_ goes wrong, deletes the internal token and returns a [User.signedOut].
   Future<Auth> _loginRecoveryAttempt() async {
-    log.i("AUTH_CONTROLLER  LOGIN_RECOVERY ATTEMPT: START");
+    log.i("AUTH_CONTROLLER  LOGIN_RECOVERY ATTEMPT: START with sharedPrefsKey -> ${_sharedPrefsKey}");
     try {
       final savedToken = _sharedPreferences.getString(_sharedPrefsKey);
+      logNoStack.i('AUTH_CONTROLLER loginRecoveryAttempt: savedToken got.. $savedToken');
       if (savedToken == null) {
+        logNoStack.i('AUTH_CONTROLLER loginRecoveryAttempt: savedTokenwas null ');
         throw const UnauthorizedException(
             'AUTH_CONTROLLER loginRecoveryAttempt: No auth token found');
       }
@@ -138,8 +140,11 @@ class AuthController extends _$AuthController {
       logNoStack.i(
           "AUTH_CONTROLLER loginRecoveryAttempt-> Exception -> clearing key");
       _sharedPreferences.remove(_sharedPrefsKey).ignore();
+       logNoStack.i(
+          "AUTH_CONTROLLER loginRecoveryAttempt-> removed shared key ${_sharedPrefsKey}");
       ref.read(currentUserProvider.notifier).setPerson(defaultPerson);
-      ref.read(currentUserProvider.notifier).logout();
+      state = const AsyncData(Auth.signedOut());
+      //ref.read(currentUserProvider.notifier).logout();
       return Future.value(const Auth.signedOut());
     }
     return Future.value(const Auth.signedOut());
