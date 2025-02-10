@@ -210,11 +210,15 @@ Future<Person> registerLogin(
   }
 }
 
-Future<bool> verifyToken(String token) async {
+Future<bool> verifyToken(String token) async  {
   bool hasExpired = JwtDecoder.isExpired(token);
 
-DateTime expirationDate = JwtDecoder.getExpirationDate(token);
-
+DateTime? expirationDate = null;
+try {
+expirationDate = JwtDecoder.getExpirationDate(token);
+} on Exception {
+  return false;
+}
   // 2025-01-13 13:04:18.000
   logNoStack.i("Expiry Token: $expirationDate");
 
