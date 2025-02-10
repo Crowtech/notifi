@@ -148,9 +148,9 @@ class AuthController extends _$AuthController {
   Future<void> login() async {
    logNoStack.i("AUTH_CONTROLLER LOGIN called.");
 
-    Auth user = await  _loginRecoveryAttempt();
+  //  Auth user = await  _loginRecoveryAttempt();
 
-   if ( !user.isAuth) {
+  // if ( !user.isAuth) {
 
   var result = await app_state.currentManager.loginAuthorizationCodeFlow(
           originalUri:  Uri.parse('/'),
@@ -165,7 +165,7 @@ class AuthController extends _$AuthController {
         } else {
           print("************* result is ${result!.userInfo['email']}");
         }
-   }
+  // }
   }
 
 /// Mock of a request performed on logout (might be common, or not, whatevs).
