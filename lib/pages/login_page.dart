@@ -116,7 +116,7 @@ class LoginPage extends HookConsumerWidget {
           children: [
             const Text('Login Page'),
             ActionButton(
-              onPressed: login3,
+              onPressed: login2,
               icon: const SizedBox.shrink(),
               label: const Text('Login'),
             ),
