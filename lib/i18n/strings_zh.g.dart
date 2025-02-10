@@ -10,7 +10,7 @@ import 'package:slang/generated.dart';
 import 'strings.g.dart';
 
 // Path: <root>
-class TranslationsZh implements Translations {
+class TranslationsZh extends Translations {
 	/// You can call this constructor and build your own translation instance of this locale.
 	/// Constructing via the enum [AppLocale.build] is preferred.
 	TranslationsZh({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver})
@@ -20,7 +20,9 @@ class TranslationsZh implements Translations {
 		    overrides: overrides ?? {},
 		    cardinalResolver: cardinalResolver,
 		    ordinalResolver: ordinalResolver,
-		  ) {
+		  ),
+		  super(cardinalResolver: cardinalResolver, ordinalResolver: ordinalResolver) {
+		super.$meta.setFlatMapFunction($meta.getTranslation); // copy base translations to super.$meta
 		$meta.setFlatMapFunction(_flatMapFunction);
 	}
 
@@ -28,13 +30,14 @@ class TranslationsZh implements Translations {
 	@override final TranslationMetadata<AppLocale, Translations> $meta;
 
 	/// Access flat map
-	@override dynamic operator[](String key) => $meta.getTranslation(key);
+	@override dynamic operator[](String key) => $meta.getTranslation(key) ?? super.$meta.getTranslation(key);
 
 	late final TranslationsZh _root = this; // ignore: unused_field
 
 	// Translations
 	@override String get app_title => 'Crowtech';
 	@override late final _TranslationsMenuZh menu = _TranslationsMenuZh._(_root);
+	@override String get account => '帐户';
 	@override String get activity => '活动';
 	@override String get audio_access_denied => '您已拒绝音频访问';
 	@override String get audio_access_denied_without_prompt => '请前往“设置”应用启用音频访问';
@@ -81,8 +84,8 @@ class TranslationsZh implements Translations {
 }
 
 // Path: menu
-class _TranslationsMenuZh implements TranslationsMenuEn {
-	_TranslationsMenuZh._(this._root);
+class _TranslationsMenuZh extends TranslationsMenuEn {
+	_TranslationsMenuZh._(TranslationsZh root) : this._root = root, super.internal(root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -99,6 +102,7 @@ extension on TranslationsZh {
 			case 'app_title': return 'Crowtech';
 			case 'menu.account': return '帐户菜单';
 			case 'menu.product': return '产品菜单';
+			case 'account': return '帐户';
 			case 'activity': return '活动';
 			case 'audio_access_denied': return '您已拒绝音频访问';
 			case 'audio_access_denied_without_prompt': return '请前往“设置”应用启用音频访问';
