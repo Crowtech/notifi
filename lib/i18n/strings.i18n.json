@@ -5,6 +5,7 @@
     "account": "Account Menu",
     "product": "Product Menu"
   },
+  "account": "Account",
   "activity": "Activity",
   "audio_access_denied": "You have denied audio access",
   "audio_access_denied_without_prompt": "Please go to Settings app to enable audio access",
