@@ -12,7 +12,7 @@ class LogoutButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
      Future<void> logout() => ref.read(authControllerProvider.notifier).logout(
-         context
+         //context
         );
         
     return ActionButton(
