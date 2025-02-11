@@ -39,7 +39,7 @@ var logNoStack = logger.Logger(
 const _dummyUser = Auth.signedIn(
   id: -1,
   displayName: 'My Name',
-  email: 'My Email',
+  email: 'user@email.com',
   resourcecode: 'PER_DUMMY',
   token: 'some-updated-secret-auth-token',
 );
@@ -388,7 +388,7 @@ class AuthController extends _$AuthController {
     log.i("AUTH_CONTROLLER LOGOUT setting Person to default $defaultPerson");
     ref.read(currentUserProvider.notifier).setPerson(defaultPerson);
    
- state = const AsyncData(Auth.signedOut());
+ 
 
     // let the oidc package know
     await app_state.currentManager.logout(
@@ -400,7 +400,7 @@ class AuthController extends _$AuthController {
         ),
       ),
     );
-    
+    state = const AsyncData(Auth.signedOut());
   }
   /// Internal method used to listen authentication state changes.
   /// When the auth object is in a loading state, nothing happens.
