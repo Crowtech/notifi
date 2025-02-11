@@ -90,7 +90,7 @@ class LoginPage extends HookConsumerWidget {
         if (result != null) {
           //ref.read(currentUserProvider.notifier).setOidc(result);
             logNoStack
-          .i("gloginPage accessToken = ${getAccessToken(result)}");
+          .i("loginPage accessToken = ${getAccessToken(result)}");
         } else {
             logNoStack
           .i("loginPage accessToken is null");
