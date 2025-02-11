@@ -290,9 +290,10 @@ class AuthController extends _$AuthController {
       //     token: getAccessToken(oidcUser));
       log.i(
           "AUTH_CONTROLLER  LOGIN_OIDC fetched Person: auth user is $authResult");
-      state = AsyncData(authResult);
+     
 
       ref.read(currentUserProvider.notifier).setPerson(currentPerson);
+       state = AsyncData(authResult);
     } else {
       logNoStack.i(
           "AUTH_CONTROLLER LOGIN_OIDC: In AuthControllerLogin: oidcUser was NULL");
