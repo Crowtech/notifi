@@ -78,8 +78,6 @@ class AuthController extends _$AuthController {
     );
   }
 
-
-
   @override
   Future<Auth> build() async {
     _sharedPreferences = await SharedPreferences.getInstance();
@@ -112,18 +110,21 @@ class AuthController extends _$AuthController {
   /// Tries to perform a login with the saved token on the persistent storage.
   /// If _anything_ goes wrong, deletes the internal token and returns a [User.signedOut].
   Future<Auth> _loginRecoveryAttempt() async {
-    log.i("AUTH_CONTROLLER  LOGIN_RECOVERY ATTEMPT: START with sharedPrefsKey -> ${_sharedPrefsKey}");
+    log.i(
+        "AUTH_CONTROLLER  LOGIN_RECOVERY ATTEMPT: START with sharedPrefsKey -> ${_sharedPrefsKey}");
     try {
       final savedToken = _sharedPreferences.getString(_sharedPrefsKey);
-      logNoStack.i('AUTH_CONTROLLER loginRecoveryAttempt: savedToken got.. $savedToken');
+      logNoStack.i(
+          'AUTH_CONTROLLER loginRecoveryAttempt: savedToken got.. $savedToken');
       if (savedToken == null) {
-        logNoStack.i('AUTH_CONTROLLER loginRecoveryAttempt: savedTokenwas null ');
+        logNoStack
+            .i('AUTH_CONTROLLER loginRecoveryAttempt: savedTokenwas null ');
         throw const UnauthorizedException(
             'AUTH_CONTROLLER loginRecoveryAttempt: No auth token found');
       }
       // Try and work out if token valid
-      logNoStack.i(
-          "AUTH_CONTROLLER loginRecoveryAttempt: savedToken is $savedToken");
+      logNoStack
+          .i("AUTH_CONTROLLER loginRecoveryAttempt: savedToken is $savedToken");
       verifyToken(savedToken).then((isValid) {
         logNoStack.i(
             "AUTH_CONTROLLER loginRecoveryAttempt: token validity is ${isValid ? 'true' : 'false'}");
@@ -140,7 +141,7 @@ class AuthController extends _$AuthController {
       logNoStack.i(
           "AUTH_CONTROLLER loginRecoveryAttempt-> Exception -> clearing key");
       _sharedPreferences.remove(_sharedPrefsKey).ignore();
-       logNoStack.i(
+      logNoStack.i(
           "AUTH_CONTROLLER loginRecoveryAttempt-> removed shared key ${_sharedPrefsKey}");
       ref.read(currentUserProvider.notifier).setPerson(defaultPerson);
       state = const AsyncData(Auth.signedOut());
@@ -151,29 +152,35 @@ class AuthController extends _$AuthController {
   }
 
   Future<void> login() async {
-   logNoStack.i("AUTH_CONTROLLER LOGIN called.");
+    logNoStack.i("AUTH_CONTROLLER LOGIN called.");
 
-  //  Auth user = await  _loginRecoveryAttempt();
+    //  Auth user = await  _loginRecoveryAttempt();
 
-   //if ( !user.isAuth) {
+    //if ( !user.isAuth) {
 
-  var result = await app_state.currentManager.loginAuthorizationCodeFlow(
-          originalUri:  Uri.parse('/'),
-          //store any arbitrary data, here we store the authorization
-          //start time.
-          extraStateData: DateTime.now().toIso8601String(),
-          options: _getOptions(),
-          //NOTE: you can pass more parameters here.
-        );
-        if (result != null) {
-          ref.read(currentUserProvider.notifier).setOidc(result);
-        } else {
-          print("************* result is ${result!.userInfo['email']}");
-        }
-  // }
+    app_state.currentManager
+        .loginAuthorizationCodeFlow(
+      originalUri: Uri.parse('/'),
+      //store any arbitrary data, here we store the authorization
+      //start time.
+      extraStateData: DateTime.now().toIso8601String(),
+      options: _getOptions(),
+      //NOTE: you can pass more parameters here.
+    )
+        .then((result) {
+           logNoStack.i("AUTH_CONTROLLER LOGIN called and RESULT provided");
+      if (result != null) {
+        logNoStack.i("AUTH_CONTROLLER LOGIN called and RESULT provided IS NOT NULL, setting oidc ${result.userInfo['email']}");
+        ref.read(currentUserProvider.notifier).setOidc(result);
+      } else {
+         logNoStack.i("AUTH_CONTROLLER LOGIN called and RESULT provided IS  NULL");
+      }
+    });
+
+
   }
 
-/// Mock of a request performed on logout (might be common, or not, whatevs).
+  /// Mock of a request performed on logout (might be common, or not, whatevs).
   Future<void> logoutContext(BuildContext context) async {
     logNoStack.i("AUTH_CONTROLLER LOGOUT called in auth");
     final savedToken = _sharedPreferences.getString(_sharedPrefsKey);
@@ -231,7 +238,6 @@ class AuthController extends _$AuthController {
     ref.read(currentUserProvider.notifier).setPerson(defaultPerson);
     state = const AsyncData(Auth.signedOut());
 
-    
     // let the oidc package know
     await app_state.currentManager.logout(
       //after logout, go back to home
@@ -268,9 +274,10 @@ class AuthController extends _$AuthController {
       //     email: getEmail(oidcUser),
       //     resourcecode: getResourceCode(oidcUser),
       //     token: getAccessToken(oidcUser));
-      log.i("AUTH_CONTROLLER  LOGIN_OIDC fetched Person: auth user is $authResult");
+      log.i(
+          "AUTH_CONTROLLER  LOGIN_OIDC fetched Person: auth user is $authResult");
       state = AsyncData(authResult);
-      
+
       ref.read(currentUserProvider.notifier).setPerson(currentPerson);
     } else {
       logNoStack.i(
