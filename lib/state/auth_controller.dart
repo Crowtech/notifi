@@ -194,75 +194,6 @@ class AuthController extends _$AuthController {
     });
   }
 
-  /// Mock of a request performed on logout (might be common, or not, whatevs).
-  Future<void> logoutContext(BuildContext context) async {
-    logNoStack.i("AUTH_CONTROLLER LOGOUT called in auth");
-    final savedToken = _sharedPreferences.getString(_sharedPrefsKey);
-
-    if (!kIsWeb) {
-      bg.BackgroundGeolocation.stop();
-    }
-    logNoStack.i("AUTH_CONTROLLER LOGOUT , token is $savedToken");
-    apiPostNoLocale(savedToken!,
-            "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout")
-        .then((result) {
-      log.i("AUTH_CONTROLLER LOGOUT result $result");
-    }).catchError((error) {
-      log.e(
-          "AUTH_CONTROLLER LOGOUT  Register logout error ${error.toString()}");
-    });
-
-    _sharedPreferences.remove(_sharedPrefsKey).ignore();
-    ref.read(currentUserProvider.notifier).setPerson(defaultPerson);
-    state = const AsyncData(Auth.signedOut());
-
-    prov.Provider.of<Notifi>(context, listen: false).preventAutoLogin = true;
-
-    // let the oidc package know
-    await app_state.currentManager.logout(
-      //after logout, go back to home
-      originalUri: Uri.parse('/login'),
-      options: OidcPlatformSpecificOptions(
-        web: OidcPlatformSpecificOptions_Web(
-          navigationMode: webNavigationMode,
-        ),
-      ),
-    );
-  }
-
-  /// Mock of a request performed on logout (might be common, or not, whatevs).
-  Future<void> logout() async {
-    logNoStack.i("AUTH_CONTROLLER LOGOUT called in auth");
-    final savedToken = _sharedPreferences.getString(_sharedPrefsKey);
-
-    if (!kIsWeb) {
-      bg.BackgroundGeolocation.stop();
-    }
-    logNoStack.i("AUTH_CONTROLLER LOGOUT , token is $savedToken");
-    apiPostNoLocale(savedToken!,
-            "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout")
-        .then((result) {
-      log.i("AUTH_CONTROLLER LOGOUT result $result");
-    }).catchError((error) {
-      log.e(
-          "AUTH_CONTROLLER LOGOUT  Register logout error ${error.toString()}");
-    });
-
-    _sharedPreferences.remove(_sharedPrefsKey).ignore();
-    ref.read(currentUserProvider.notifier).setPerson(defaultPerson);
-    state = const AsyncData(Auth.signedOut());
-
-    // let the oidc package know
-    await app_state.currentManager.logout(
-      //after logout, go back to home
-      originalUri: Uri.parse('/login'),
-      options: OidcPlatformSpecificOptions(
-        web: OidcPlatformSpecificOptions_Web(
-          navigationMode: webNavigationMode,
-        ),
-      ),
-    );
-  }
 
   Future<void> loginOidc(OidcUser? oidcUser) async {
     log.i("AUTH_CONTROLLER  LOGIN_OIDC: START");
@@ -404,6 +335,73 @@ class AuthController extends _$AuthController {
     return Future.value(const Auth.signedOut()); // dummy
   }
 
+
+  /// Mock of a request performed on logout (might be common, or not, whatevs).
+  Future<void> logoutContext(BuildContext context) async {
+    logNoStack.i("AUTH_CONTROLLER LOGOUT called in auth");
+    final savedToken = _sharedPreferences.getString(_sharedPrefsKey);
+
+    if (!kIsWeb) {
+      bg.BackgroundGeolocation.stop();
+    }
+    logNoStack.i("AUTH_CONTROLLER LOGOUT , token is $savedToken");
+    apiPostNoLocale(savedToken!,
+            "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout")
+        .then((result) {
+      log.i("AUTH_CONTROLLER LOGOUT result $result");
+    }).catchError((error) {
+      log.e(
+          "AUTH_CONTROLLER LOGOUT  Register logout error ${error.toString()}");
+    });
+
+    _sharedPreferences.remove(_sharedPrefsKey).ignore();
+    ref.read(currentUserProvider.notifier).setPerson(defaultPerson);
+    state = const AsyncData(Auth.signedOut());
+
+    prov.Provider.of<Notifi>(context, listen: false).preventAutoLogin = true;
+
+    // let the oidc package know
+    await app_state.currentManager.logout(
+      //after logout, go back to home
+      originalUri: Uri.parse('/login'),
+      options: OidcPlatformSpecificOptions(
+        web: OidcPlatformSpecificOptions_Web(
+          navigationMode: webNavigationMode,
+        ),
+      ),
+    );
+  }
+
+  /// Mock of a request performed on logout (might be common, or not, whatevs).
+  Future<void> logout() async {
+    logNoStack.i("AUTH_CONTROLLER LOGOUT called ");
+    final savedToken = _sharedPreferences.getString(_sharedPrefsKey);
+    _sharedPreferences.remove(_sharedPrefsKey).ignore();
+    if (!kIsWeb) {
+     // bg.BackgroundGeolocation.stop();
+    }
+    logNoStack.i("AUTH_CONTROLLER LOGOUT , token is $savedToken");
+    var result = await apiPostNoLocale(savedToken!,
+            "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout");
+       
+      log.i("AUTH_CONTROLLER LOGOUT back from api result $result");
+    log.i("AUTH_CONTROLLER LOGOUT setting Person to default $defaultPerson");
+    ref.read(currentUserProvider.notifier).setPerson(defaultPerson);
+   
+ state = const AsyncData(Auth.signedOut());
+
+    // let the oidc package know
+    await app_state.currentManager.logout(
+      //after logout, go back to home
+      originalUri: Uri.parse('/login'),
+      options: OidcPlatformSpecificOptions(
+        web: OidcPlatformSpecificOptions_Web(
+          navigationMode: webNavigationMode,
+        ),
+      ),
+    );
+    
+  }
   /// Internal method used to listen authentication state changes.
   /// When the auth object is in a loading state, nothing happens.
   /// When the auth object is in an error state, we choose to remove the token
