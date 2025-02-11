@@ -14,7 +14,7 @@ class LogoutButton extends ConsumerWidget {
     return ActionButton(
       onPressed: ref.read(authControllerProvider.notifier).logout,
       icon: const Icon(Icons.logout),
-      label: const Text(nt.t.logout),
+      label:  Text(nt.t.logout),
     );
   }
 
