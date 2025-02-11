@@ -1,4 +1,4 @@
-import 'package:notifi/utils/shared_preferences_provider.dart';
+import '../../../utils/shared_preferences_provider.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
