@@ -385,6 +385,8 @@ class AuthController extends _$AuthController {
             "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout");
        
       log.i("AUTH_CONTROLLER LOGOUT back from api result $result");
+      defaultPerson.email = "user@email.com";
+      defaultPerson.token = null;
     log.i("AUTH_CONTROLLER LOGOUT setting Person to default $defaultPerson");
     ref.read(currentUserProvider.notifier).setPerson(defaultPerson);
    
