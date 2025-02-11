@@ -1,28 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'auth_controller.dart';
+part of 'onboarding_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$authControllerHash() => r'c8d25b2e1d58334524bf5047039ceedaddeb8dde';
+String _$onboardingControllerHash() =>
+    r'232966a6326a75bb5f5166c8b76bbbb15087adaf';
 
-/// This controller is an [AsyncNotifier] that holds and handles our authentication state
-///
-/// Copied from [AuthController].
-@ProviderFor(AuthController)
-final authControllerProvider =
-    AutoDisposeAsyncNotifierProvider<AuthController, Auth>.internal(
-  AuthController.new,
-  name: r'authControllerProvider',
+/// See also [OnboardingController].
+@ProviderFor(OnboardingController)
+final onboardingControllerProvider =
+    AutoDisposeAsyncNotifierProvider<OnboardingController, void>.internal(
+  OnboardingController.new,
+  name: r'onboardingControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$authControllerHash,
+      : _$onboardingControllerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$AuthController = AutoDisposeAsyncNotifier<Auth>;
+typedef _$OnboardingController = AutoDisposeAsyncNotifier<void>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
