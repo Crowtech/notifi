@@ -95,8 +95,22 @@ class AuthController extends _$AuthController {
         logNoStack.i(
           'AUTH CONTROLLER BUILD: App State User changed (login): exp:$exp, $username, $name $deviceId',
         );
-        logNoStack.i("token = ${event?.token.accessToken}");
-        ref.read(authControllerProvider.notifier).loginOidc(event);
+        // logNoStack.i("token = ${event?.token.accessToken}");
+        //   var authResult = Auth.signedIn(
+        //   id: currentPerson.id!,
+        //   displayName: currentPerson.firstname,
+        //   email: currentPerson.email,
+        //   resourcecode: currentPerson.code!,
+        //   token: oidcUser.token.accessToken!);
+
+        // var authResult = Auth.signedIn(
+        //     id: 32,
+        //     displayName: getFirstname(oidcUser),
+        //     email: getEmail(oidcUser),
+        //     resourcecode: getResourceCode(oidcUser),
+        //     token: getAccessToken(oidcUser));
+
+        await loginOidc(event);
       } else {
         logNoStack.i("AUTH CONTROLLER BUILD: App State User changed to NULL:");
       }
@@ -168,16 +182,16 @@ class AuthController extends _$AuthController {
       //NOTE: you can pass more parameters here.
     )
         .then((result) {
-           logNoStack.i("AUTH_CONTROLLER LOGIN called and RESULT provided");
+      logNoStack.i("AUTH_CONTROLLER LOGIN called and RESULT provided");
       if (result != null) {
-        logNoStack.i("AUTH_CONTROLLER LOGIN called and RESULT provided IS NOT NULL, setting oidc ${result.userInfo['email']}");
+        logNoStack.i(
+            "AUTH_CONTROLLER LOGIN called and RESULT provided IS NOT NULL, setting oidc ${result.userInfo['email']}");
         ref.read(currentUserProvider.notifier).setOidc(result);
       } else {
-         logNoStack.i("AUTH_CONTROLLER LOGIN called and RESULT provided IS  NULL");
+        logNoStack
+            .i("AUTH_CONTROLLER LOGIN called and RESULT provided IS  NULL");
       }
     });
-
-
   }
 
   /// Mock of a request performed on logout (might be common, or not, whatevs).
