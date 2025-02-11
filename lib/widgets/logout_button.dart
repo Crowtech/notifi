@@ -17,6 +17,7 @@ class LogoutButton extends ConsumerWidget {
          //context
         );
         context.go("/login");
+        return;
      }
         
     return ActionButton(
