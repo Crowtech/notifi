@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -11,6 +12,8 @@ import 'package:notifi/models/nestfilter.dart';
 import '../api_utils.dart';
 import '../models/crowtech_basepage.dart';
 import 'dart:math' as math;
+
+import '../state/auth_controller.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -28,12 +31,52 @@ var logNoStack = logger.Logger(
 // Notifier for generating a random number exposed by a state notifier
 // provider
 class LocationsFetcher extends Notifier<List<Marker>> {
-
-    static const LOCATION_ARROW_IMAGE_PATH =
+  static const LOCATION_ARROW_IMAGE_PATH =
       "assets/images/markers/location-arrow-green.png";
+
+  late Timer _timer;
+  late Locale _locale;
+  int _periodSec = 10;
+
+  NestFilter nestfilter = NestFilter(
+      orgIdList: [],
+      resourceCodeList: [],
+      resourceIdList: [],
+      deviceCodeList: [],
+      query: '',
+      offset: 0,
+      limit: 20,
+      sortby: 'id DESC',
+      caseinsensitive: true,
+      distinctField: 'resourcecode');
+
+  void setPeriod(int period) {
+    stopTimer();
+    _periodSec = period;
+    startTimer();
+  }
+
+  void startTimer() {
+    fetchGPS(); // get an initial fetch
+    _timer = Timer.periodic(
+      Duration(seconds: _periodSec),
+      (Timer timer) {
+        fetchGPS();
+      },
+    );
+  }
+
+  void setLocale(Locale locale) {
+    _locale = locale;
+  }
+
+  void stopTimer() {
+    _timer.cancel();
+  }
 
   @override
   List<Marker> build() {
+    startTimer();
     return [];
   }
 
@@ -42,34 +85,25 @@ class LocationsFetcher extends Notifier<List<Marker>> {
   // }
 
   //Future<CrowtechBasePage<GPS>> fetchGPS(
-  void fetchGPS(
-      Locale locale, String token, int orgid, int offset, int limit) async {
-    List<int> orgIdList = [];
-    orgIdList.add(orgid);
-
-    var nestfilter = NestFilter(
-        orgIdList: orgIdList,
-        resourceCodeList: [],
-        resourceIdList: [],
-        deviceCodeList: [],
-        query: '',
-        offset: offset,
-        limit: limit,
-        sortby: 'id DESC',
-        caseinsensitive: true,
-        distinctField: 'resourcecode');
-
+  void fetchGPS() async {
     String jsonDataStr = jsonEncode(nestfilter);
     logNoStack
-        .i("Sending NestFilter gps $nestfilter with json as $jsonDataStr");
-
+        .d("Sending NestFilter gps $nestfilter with json as $jsonDataStr");
+    final userToken = await ref.watch(
+      authControllerProvider.selectAsync(
+        (value) => value.map(
+          signedIn: (signedIn) => signedIn.token,
+          signedOut: (signedOut) => null,
+        ),
+      ),
+    );
     var response = await apiPostDataStr(
-        locale, token, "$defaultApiPrefixPath/gps/fetch", jsonDataStr);
+        _locale, userToken!, "$defaultApiPrefixPath/gps/fetch", jsonDataStr);
     // .then((response) {
     logNoStack.d("result ${response.body.toString()}");
     final map = jsonDecode(response.body);
 
-List<String> colours = ['red', 'green', 'blue', 'amber'];
+    List<String> colours = ['red', 'green', 'blue', 'amber'];
     final List<Marker> userlocations = [];
     if (map["totalItems"] == 0) {
       logNoStack.i("Empty List");
@@ -81,7 +115,7 @@ List<String> colours = ['red', 'green', 'blue', 'amber'];
       if (page.items != null) {
         for (var i = 0; i < page.items!.length; i++) {
           String colour = colours[i % colours.length];
-           GPS gps = page.items![i];
+          GPS gps = page.items![i];
           logNoStack.i('GPS $gps');
           LatLng ll = LatLng(gps.latitude, gps.longitude);
           double heading = gps.heading.round().toDouble();
@@ -109,7 +143,7 @@ List<String> colours = ['red', 'green', 'blue', 'amber'];
       if (page.items != null) {
         for (var i = 0; i < page.items!.length; i++) {
           String colour = colours[i % colours.length];
-           GPS gps = page.items![i];
+          GPS gps = page.items![i];
           logNoStack.i('GPS $gps');
           LatLng ll = LatLng(gps.latitude, gps.longitude);
           double heading = gps.heading.round().toDouble();

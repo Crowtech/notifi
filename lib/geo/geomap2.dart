@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
@@ -27,14 +29,14 @@ var logNoStack = logger.Logger(
   level: logger.Level.info,
 );
 
-class GeoMap2 extends StatefulWidget {
+class GeoMap2 extends ConsumerStatefulWidget  with WidgetsBindingObserver {
   const GeoMap2({super.key});
 
   @override
-  State createState() => GeoMap2State();
+  ConsumerState createState() => GeoMap2State();
 }
 
-class GeoMap2State extends State<GeoMap2>
+class GeoMap2State extends ConsumerState<GeoMap2>
     with AutomaticKeepAliveClientMixin<GeoMap2> {
   static const LOCATION_ARROW_IMAGE_PATH =
       "assets/images/markers/location-arrow-blue.png";
@@ -75,6 +77,8 @@ class GeoMap2State extends State<GeoMap2>
     return true;
   }
 
+  
+
   getInitialPos() async {
     LatLng pos = await _getCurrentPosition();
     logNoStack.d("initState: got local position $pos");
@@ -88,9 +92,16 @@ class GeoMap2State extends State<GeoMap2>
     _mapController = MapController();
   }
 
+@override
+void dispose() {
+  super.dispose();
+  ref.read(locationsProvider.notifier).stopTimer();
+}
+
   @override
   void initState() {
     super.initState();
+    
     getInitialPos();
     // logNoStack.d("initState: got local position $_center");
     // _mapOptions = MapOptions(
@@ -455,7 +466,8 @@ class GeoMap2State extends State<GeoMap2>
     if (_mapController == null) {
       return const SizedBox.shrink();
     }
-
+    ref.read(locationsProvider.notifier).setLocale(Localizations.localeOf(context)); // trigger the location getching every 10 sec
+ 
     return Column(children: [
       // Container(
       //     color: const Color.fromARGB(255, 165, 240, 255),

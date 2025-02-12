@@ -21,7 +21,6 @@ var logNoStack = logger.Logger(
   level: logger.Level.info,
 );
 
-
 /// If our user is signed out, this provider returns [UserRole.none]
 /// Otherwise, it mocks a network request and gives out some [UserRole].
 @riverpod
@@ -35,11 +34,10 @@ Future<UserRole> permissions(PermissionsRef ref) async {
     ),
   );
 
-if (userId == null) return const UserRole.none();
-final user= ref.read(currentUserProvider);
+  if (userId == null) return const UserRole.none();
+  final user = ref.read(currentUserProvider);
 
-
-logNoStack.i("Permissions: User is ${user.toString()}");
+  logNoStack.i("Permissions: User is ${user.toString()}");
 
   if (user.token == null) return const UserRole.none();
 
@@ -53,16 +51,15 @@ logNoStack.i("Permissions: User is ${user.toString()}");
   // 2025-01-13 13:04:18.000
   logNoStack.i("${user.email} token expiry datetime is $expirationDate");
   // use token to extract roles
-   Duration tokenTime = JwtDecoder.getTokenTime(user.token!);
+  Duration tokenTime = JwtDecoder.getTokenTime(user.token!);
   logNoStack.i("${user.email} token duration is ${tokenTime.inMinutes}");
- 
 
-Map<String,dynamic> jwtMap = JwtDecoder.decode(user.token!);
+  Map<String, dynamic> jwtMap = JwtDecoder.decode(user.token!);
   List rolesList = jwtMap['roles'];
   String rolesStr = "";
-  for (var i=0; i<rolesList.length; i++) {
+  for (var i = 0; i < rolesList.length; i++) {
     rolesStr += "${rolesList[i]}\n";
-}
+  }
   logNoStack.i("Roles for ${user.email} are $rolesStr");
 
   return _requestMock();
