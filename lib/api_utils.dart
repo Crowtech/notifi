@@ -11,6 +11,7 @@ import 'package:notifi/models/gps.dart';
 import 'package:notifi/models/nestfilter.dart';
 import 'package:notifi/models/person.dart';
 
+import 'models/AppVersion.dart';
 import 'models/crowtech_basepage.dart';
 
 var log = logger.Logger(
@@ -60,8 +61,8 @@ Future<dynamic> apiPostDataNoLocale(
   if (response.statusCode == 202 ||
       response.statusCode == 201 ||
       response.statusCode == 200) {
-    logNoStack
-        .i("API POST No LOCALE: $apiPath created successfully! with status ${response.statusCode}");
+    logNoStack.i(
+        "API POST No LOCALE: $apiPath created successfully! with status ${response.statusCode}");
     final resultMap = jsonDecode(response.body);
     return resultMap;
   } else {
@@ -109,8 +110,8 @@ Future<dynamic> apiPostData(Locale locale, String token, String apiPath,
   if (response.statusCode == 202 ||
       response.statusCode == 201 ||
       response.statusCode == 200) {
-    logNoStack
-        .i("API POST DATA: $apiPath created successfully! with status ${response.statusCode}");
+    logNoStack.i(
+        "API POST DATA: $apiPath created successfully! with status ${response.statusCode}");
     final resultMap = jsonDecode(response.body);
     return resultMap;
   } else {
@@ -149,7 +150,8 @@ Future<http.Response> apiPostDataStrNoLocale(
       response.statusCode == 200) {
     return response;
   } else {
-    log.d("API POST DATA: apiPostDataStrNoLocaleapiPost created unsuccessfully!");
+    log.d(
+        "API POST DATA: apiPostDataStrNoLocaleapiPost created unsuccessfully!");
     throw "api Post created unsuccessfully!";
   }
 }
@@ -159,14 +161,13 @@ Future<http.Response> apiGetDataStrNoLocale(
   var url = Uri.parse("$defaultAPIBaseUrl$apiPath");
 
   final http.Response response;
- 
-    // No data
-    response = await http.get(url, headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json",
-      "Authorization": "Bearer $token",
-    });
 
+  // No data
+  response = await http.get(url, headers: {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer $token",
+  });
 
   log.d(response.statusCode);
   if (response.statusCode == 202 ||
@@ -235,15 +236,15 @@ Future<Person> registerLogin(
   }
 }
 
-Future<bool> verifyToken(String token) async  {
+Future<bool> verifyToken(String token) async {
   bool hasExpired = JwtDecoder.isExpired(token);
 
-DateTime? expirationDate = null;
-try {
-expirationDate = JwtDecoder.getExpirationDate(token);
-} on Exception {
-  return false;
-}
+  DateTime? expirationDate = null;
+  try {
+    expirationDate = JwtDecoder.getExpirationDate(token);
+  } on Exception {
+    return false;
+  }
   // 2025-01-13 13:04:18.000
   logNoStack.i("Expiry Token: $expirationDate");
 
@@ -255,7 +256,7 @@ expirationDate = JwtDecoder.getExpirationDate(token);
   if (hasExpired) {
     return false;
   }
-  
+
   var url = Uri.parse("$defaultAPIBaseUrl$defaultApiPrefixPath/persons/login");
 
   final http.Response response;
@@ -319,20 +320,20 @@ Future<Map> registerFCM(
   return <dynamic, dynamic>{};
 }
 
-Future<String?> fetchLatestAppVersion(String token) async {
-var apiPath = "$defaultAPIBaseUrl$defaultApiPrefixPath/appversionss/version";
-  apiGetDataStrNoLocale(
-    token, apiPath).then((response) {
+Future<AppVersion?> fetchLatestAppVersion(String token) async {
+  var apiPath = "$defaultAPIBaseUrl$defaultApiPrefixPath/appversionss/version";
+  apiGetDataStrNoLocale(token, apiPath).then((response) {
     logNoStack.i("FETCH LATEST APP VERSION: result ${response.toString()}");
-    return response;
+    final map = jsonDecode(response.body);
+    AppVersion appVersion = AppVersion.fromJson(map);
+
+    return appVersion;
   }).catchError((error) {
-    log.d("REGISTER FCM: Register FCM error");
-    // ignore: invalid_return_type_for_catch_error
-    return Map;
+    log.d("FETCH LATEST APP VERSION error");
+    throw "fetch latest version was unsuccessful";
   });
   return null;
 }
-
 
 Future<void> uploadMinio(String file) async {}
 
