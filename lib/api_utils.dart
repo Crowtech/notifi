@@ -154,6 +154,31 @@ Future<http.Response> apiPostDataStrNoLocale(
   }
 }
 
+Future<http.Response> apiGetDataStrNoLocale(
+    String token, String apiPath) async {
+  var url = Uri.parse("$defaultAPIBaseUrl$apiPath");
+
+  final http.Response response;
+ 
+    // No data
+    response = await http.get(url, headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "Bearer $token",
+    });
+
+
+  log.d(response.statusCode);
+  if (response.statusCode == 202 ||
+      response.statusCode == 201 ||
+      response.statusCode == 200) {
+    return response;
+  } else {
+    log.d("API GET DATA: apiPGetDataStrNoLocalecreated unsuccessfully!");
+    throw "api Pet created unsuccessfully!";
+  }
+}
+
 Future<http.Response> apiPostDataStr(
     Locale locale, String token, String apiPath, String? jsonDataStr) async {
   var url = Uri.parse("$defaultAPIBaseUrl$apiPath");
@@ -293,6 +318,21 @@ Future<Map> registerFCM(
   });
   return <dynamic, dynamic>{};
 }
+
+Future<String?> fetchLatestAppVersion(String token) async {
+var apiPath = "$defaultAPIBaseUrl$defaultApiPrefixPath/appversionss/version";
+  apiGetDataStrNoLocale(
+    token, apiPath).then((response) {
+    logNoStack.i("FETCH LATEST APP VERSION: result ${response.toString()}");
+    return response;
+  }).catchError((error) {
+    log.d("REGISTER FCM: Register FCM error");
+    // ignore: invalid_return_type_for_catch_error
+    return Map;
+  });
+  return null;
+}
+
 
 Future<void> uploadMinio(String file) async {}
 
