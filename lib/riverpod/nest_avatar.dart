@@ -50,16 +50,17 @@ class NestAvatar extends ConsumerWidget {
     String imgUrl = defaultUrl;
 logNoStack.i(
         "GET avatarInfo=${imageUrl} radius= $radius initials = $initials, backgroundColour is ${backgroundColour.toString()}");
-   return Container(
+   //return Container(
     //  decoration: _borderDecoration(),
 
-      child: CircleAvatar(
+      //child: 
+     return CircleAvatar(
         radius: radius - borderWidth!,
         backgroundColor: backgroundColour,
          backgroundImage: NetworkImage(imageUrl) ,
        // child: imageUrl == null ? Icon(Icons.camera_alt, size: radius) : null,
-      ),
-    );
+      );
+    //);
 
   
   }
