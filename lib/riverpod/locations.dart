@@ -76,6 +76,7 @@ class LocationsFetcher extends Notifier<List<Marker>> {
 
   @override
   List<Marker> build() {
+    logNoStack.i("LOCATIONS: BUILD");
     startTimer();
     return [];
   }
@@ -88,7 +89,7 @@ class LocationsFetcher extends Notifier<List<Marker>> {
   void fetchGPS() async {
     String jsonDataStr = jsonEncode(nestfilter);
     logNoStack
-        .d("Sending NestFilter gps $nestfilter with json as $jsonDataStr");
+        .i("Sending NestFilter gps $nestfilter with json as $jsonDataStr");
     final userToken = await ref.watch(
       authControllerProvider.selectAsync(
         (value) => value.map(
