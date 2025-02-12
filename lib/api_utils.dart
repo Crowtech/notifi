@@ -156,8 +156,8 @@ Future<http.Response> apiPostDataStrNoLocale(
   }
 }
 
-Future<http.Response> apiGetDataStrNoLocale(
-    String token, String apiPath) async {
+Future<http.Response> apiGetData(
+    String apiPath) async {
   var url = Uri.parse("$defaultAPIBaseUrl$apiPath");
 
   final http.Response response;
@@ -166,7 +166,6 @@ Future<http.Response> apiGetDataStrNoLocale(
   response = await http.get(url, headers: {
     "Content-Type": "application/json",
     "Accept": "application/json",
-    "Authorization": "Bearer $token",
   });
 
   log.d(response.statusCode);
@@ -175,8 +174,8 @@ Future<http.Response> apiGetDataStrNoLocale(
       response.statusCode == 200) {
     return response;
   } else {
-    log.d("API GET DATA: apiPGetDataStrNoLocalecreated unsuccessfully!");
-    throw "api Pet created unsuccessfully!";
+    log.e("API GET DATA: apiPGetData created unsuccessfully!");
+    throw "api Get created unsuccessfully!";
   }
 }
 
@@ -320,9 +319,9 @@ Future<Map> registerFCM(
   return <dynamic, dynamic>{};
 }
 
-Future<AppVersion?> fetchLatestAppVersion(String token) async {
+Future<AppVersion?> fetchLatestAppVersion() async {
   var apiPath = "$defaultAPIBaseUrl$defaultApiPrefixPath/appversionss/version";
-  apiGetDataStrNoLocale(token, apiPath).then((response) {
+  apiGetData(apiPath).then((response) {
     logNoStack.i("FETCH LATEST APP VERSION: result ${response.toString()}");
     final map = jsonDecode(response.body);
     AppVersion appVersion = AppVersion.fromJson(map);
