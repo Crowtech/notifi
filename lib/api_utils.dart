@@ -7,11 +7,11 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/credentials.dart';
 import 'package:notifi/jwt_utils.dart';
+import 'package:notifi/models/appversion.dart';
 import 'package:notifi/models/gps.dart';
 import 'package:notifi/models/nestfilter.dart';
 import 'package:notifi/models/person.dart';
 
-import 'models/AppVersion.dart';
 import 'models/crowtech_basepage.dart';
 
 var log = logger.Logger(
