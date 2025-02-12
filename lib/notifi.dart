@@ -9,8 +9,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get_storage/get_storage.dart';
+
+
 import 'package:notifi/geo_page.dart';
 import 'package:notifi/models/person.dart' as Person;
 import 'package:package_info_plus/package_info_plus.dart';
@@ -199,7 +199,7 @@ class Notifi extends ChangeNotifier {
 
   Future<ChangeNotifier> init() async {
     logNoStack.i("Notifi initing!");
-    await GetStorage.init();
+
     await Firebase.initializeApp(options: options);
 
     WidgetsFlutterBinding.ensureInitialized();
