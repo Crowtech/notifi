@@ -26,7 +26,7 @@ class UserAvatar extends ConsumerWidget {
   final double? borderWidth = 2;
 
   UserAvatar(
-      {super.key, this.diameter = 68, this.backgroundColour = Colors.red});
+      {super.key, this.diameter = 68, this.backgroundColour = Colors.yellow});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -34,7 +34,7 @@ class UserAvatar extends ConsumerWidget {
     String personUrl = defaultUrl;
     String initials = defaultInitials;
     logNoStack.i(
-        "avatarUrl=${user.avatarUrl} diameter = $diameter initials = $initials");
+        "avatarUrl=${user.avatarUrl} diameter = $diameter initials = $initials, backgroundColour is ${backgroundColour.toString()}");
     if (user.avatarUrl != null) {
       personUrl = user.getAvatarUrl();
       initials = user.getInitials();
@@ -48,7 +48,8 @@ class UserAvatar extends ConsumerWidget {
   Widget getAvatar(final double radius, final String imageUrl,
       Color backgroundColour, String initials) {
     String imgUrl = defaultUrl;
-
+logNoStack.i(
+        "avatarInfo=${imageUrl} radius= $radius initials = $initials, backgroundColour is ${backgroundColour.toString()}");
    return Container(
     //  decoration: _borderDecoration(),
 
