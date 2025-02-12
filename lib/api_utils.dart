@@ -319,19 +319,19 @@ Future<Map> registerFCM(
   return <dynamic, dynamic>{};
 }
 
-Future<AppVersion?> fetchLatestAppVersion() async {
+Future<AppVersion> fetchLatestAppVersion() async {
   var apiPath = "$defaultAPIBaseUrl$defaultApiPrefixPath/appversionss/version";
-  apiGetData(apiPath).then((response) {
+  try {
+  var response = await apiGetData(apiPath);
     logNoStack.i("FETCH LATEST APP VERSION: result ${response.toString()}");
     final map = jsonDecode(response.body);
     AppVersion appVersion = AppVersion.fromJson(map);
 
     return appVersion;
-  }).catchError((error) {
-    log.d("FETCH LATEST APP VERSION error");
-    throw "fetch latest version was unsuccessful";
-  });
-  return null;
+
+    } on Exception catch (error) {
+    throw ("API_UTILS: Register login error $error");
+  }
 }
 
 Future<void> uploadMinio(String file) async {}
