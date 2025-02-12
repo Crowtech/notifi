@@ -50,7 +50,7 @@ class UserAvatar extends ConsumerWidget {
     String imgUrl = defaultUrl;
 
    return Container(
-      decoration: _borderDecoration(),
+    //  decoration: _borderDecoration(),
 
       child: CircleAvatar(
         radius: radius - borderWidth!,
