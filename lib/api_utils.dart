@@ -319,7 +319,7 @@ Future<Map> registerFCM(
   return <dynamic, dynamic>{};
 }
 
-Future<AppVersion> fetchLatestAppVersion() async {
+Future<String> fetchLatestAppVersion() async {
   var apiPath = "$defaultAPIBaseUrl$defaultApiPrefixPath/appversionss/version";
   try {
   var response = await apiGetData(apiPath);
@@ -327,7 +327,7 @@ Future<AppVersion> fetchLatestAppVersion() async {
     final map = jsonDecode(response.body);
     AppVersion appVersion = AppVersion.fromJson(map);
 
-    return appVersion;
+    return appVersion.version!;
 
     } on Exception catch (error) {
     throw ("API_UTILS: Register login error $error");
