@@ -17,64 +17,41 @@ var logNoStack = logger.Logger(
 );
 
 String defaultUrl = "$defaultMinioEndpointUrl/$defaultRealm/adam51casual.png";
-
 class NestAvatar extends ConsumerWidget {
   int diameter;
   Color backgroundColour;
   static const String defaultInitials = "?";
-  final Color? borderColor = Colors.red;
-  final double? borderWidth = 2;
 
-  NestAvatar(
-      {super.key, this.diameter = 68, this.backgroundColour = Colors.yellow});
+  NestAvatar({super.key, this.diameter = 68, this.backgroundColour = Colors.red});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+   Widget build(BuildContext context, WidgetRef ref) {
     Person user = ref.watch(currentUserProvider);
     String personUrl = defaultUrl;
     String initials = defaultInitials;
-    log.i(
-        "avatarUrl=${user.avatarUrl} diameter = $diameter initials = $initials, backgroundColour is ${backgroundColour.toString()}");
-    if (user.avatarUrl != null) {
-      personUrl = user.getAvatarUrl();
-      initials = user.getInitials();
-    }
+logNoStack.i("avatarUrl=${user.avatarUrl} diameter = $diameter initials = $initials");
+   if (user.avatarUrl != null) {
+     personUrl = user.getAvatarUrl();
+    initials =  user.getInitials();
+   }
     String avatarUrl = "$defaultImageProxyUrl/${diameter}x/$personUrl";
-
-    return getAvatar(
-        (diameter >> 1).toDouble(), avatarUrl, backgroundColour, initials);
+   
+   
+    return getAvatar((diameter>>1).toDouble(),avatarUrl,backgroundColour,initials);
   }
 
-  Widget getAvatar(final double radius, final String imageUrl,
-      Color backgroundColour, String initials) {
+  Widget getAvatar(
+      final double radius, final String imageUrl, Color backgroundColour, String initials) {
     String imgUrl = defaultUrl;
-logNoStack.i(
-        "GET avatarInfo=${imageUrl} radius= $radius initials = $initials, backgroundColour is ${backgroundColour.toString()}");
-   //return Container(
-    //  decoration: _borderDecoration(),
 
-      //child: 
-     return CircleAvatar(
-        radius: radius - borderWidth!,
-        backgroundColor: backgroundColour,
-         backgroundImage: NetworkImage(imageUrl) ,
-       // child: imageUrl == null ? Icon(Icons.camera_alt, size: radius) : null,
-      );
-    //);
+    return CircleAvatar(
+      radius: radius,
+      backgroundColor: backgroundColour,
+      child: CircleAvatar(
+        radius: radius - 2,
+        backgroundImage: NetworkImage(imageUrl),
 
-  
-  }
-
-  Decoration? _borderDecoration() {
-    if (borderColor != null && borderWidth != null) {
-      return BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(
-          color: borderColor!,
-          width: borderWidth!,
-        ),
-      );
-    }
-    return null;
+      ),
+    );
   }
 }
