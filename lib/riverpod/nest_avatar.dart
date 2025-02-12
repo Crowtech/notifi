@@ -18,14 +18,14 @@ var logNoStack = logger.Logger(
 
 String defaultUrl = "$defaultMinioEndpointUrl/$defaultRealm/adam51casual.png";
 
-class UserAvatar extends ConsumerWidget {
+class NestAvatar extends ConsumerWidget {
   int diameter;
   Color backgroundColour;
   static const String defaultInitials = "?";
   final Color? borderColor = Colors.red;
   final double? borderWidth = 2;
 
-  UserAvatar(
+  NestAvatar(
       {super.key, this.diameter = 68, this.backgroundColour = Colors.yellow});
 
   @override
@@ -33,7 +33,7 @@ class UserAvatar extends ConsumerWidget {
     Person user = ref.watch(currentUserProvider);
     String personUrl = defaultUrl;
     String initials = defaultInitials;
-    logNoStack.i(
+    log.i(
         "avatarUrl=${user.avatarUrl} diameter = $diameter initials = $initials, backgroundColour is ${backgroundColour.toString()}");
     if (user.avatarUrl != null) {
       personUrl = user.getAvatarUrl();
@@ -49,7 +49,7 @@ class UserAvatar extends ConsumerWidget {
       Color backgroundColour, String initials) {
     String imgUrl = defaultUrl;
 logNoStack.i(
-        "avatarInfo=${imageUrl} radius= $radius initials = $initials, backgroundColour is ${backgroundColour.toString()}");
+        "GET avatarInfo=${imageUrl} radius= $radius initials = $initials, backgroundColour is ${backgroundColour.toString()}");
    return Container(
     //  decoration: _borderDecoration(),
 
