@@ -29,15 +29,15 @@ var logNoStack = logger.Logger(
   level: logger.Level.info,
 );
 
-class GeoMap2 extends ConsumerStatefulWidget  with WidgetsBindingObserver {
-  const GeoMap2({super.key});
+class GeoMap3 extends ConsumerStatefulWidget  with WidgetsBindingObserver {
+  const GeoMap3({super.key});
 
   @override
   ConsumerState createState() => GeoMap2State();
 }
 
-class GeoMap2State extends ConsumerState<GeoMap2>
-    with AutomaticKeepAliveClientMixin<GeoMap2> {
+class GeoMap2State extends ConsumerState<GeoMap3>
+    with AutomaticKeepAliveClientMixin<GeoMap3> {
   static const LOCATION_ARROW_IMAGE_PATH =
       "assets/images/markers/location-arrow-blue.png";
 
@@ -95,6 +95,7 @@ class GeoMap2State extends ConsumerState<GeoMap2>
 @override
 void dispose() {
   super.dispose();
+  logNoStack.i("GEOMAP3: DISPOSE");
   ref.read(locationsProvider.notifier).stopTimer();
 }
 
@@ -466,6 +467,7 @@ void dispose() {
     if (_mapController == null) {
       return const SizedBox.shrink();
     }
+    logNoStack.i("GEOMAP3: trigger locale");
     ref.read(locationsProvider.notifier).setLocale(Localizations.localeOf(context)); // trigger the location getching every 10 sec
  
     return Column(children: [
