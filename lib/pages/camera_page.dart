@@ -12,7 +12,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:notifi/credentials.dart';
 import 'package:notifi/notifi.dart';
 import 'package:provider/provider.dart';
-import 'package:video_player/video_player.dart';
+//import 'package:video_player/video_player.dart';
 import 'package:go_router/go_router.dart';
 import 'package:notifi/notifi.dart' as notifi;
 import '../i18n/strings.g.dart' as nt; // Importing localization strings

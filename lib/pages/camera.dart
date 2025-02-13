@@ -4,7 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:video_player/video_player.dart';
+//import 'package:video_player/video_player.dart';
 import '../i18n/strings.g.dart' as nt; // Importing localization strings
 
 class CameraPage extends StatefulWidget {
