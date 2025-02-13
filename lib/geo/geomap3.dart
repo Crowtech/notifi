@@ -94,6 +94,7 @@ class GeoMap2State extends ConsumerState<GeoMap3>
 
 @override
 void deactivate() {
+  if (!mounted) return;
  ref.read(locationsProvider.notifier).stopTimer();
  super.deactivate();
  logNoStack.i("GEOMAP3: DEACTIVATED");
