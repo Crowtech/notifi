@@ -94,6 +94,7 @@ class GeoMap2State extends ConsumerState<GeoMap3>
 
 @override
 void dispose() {
+  if (!mounted) return;
    ref.read(locationsProvider.notifier).stopTimer();
   super.dispose();
   logNoStack.i("GEOMAP3: DISPOSE");
