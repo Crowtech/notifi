@@ -71,8 +71,10 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get lastname => 'Lastname';
 	String get login => 'Login';
 	String get logout => 'Logout';
+	String get messages => 'Messages';
 	String get moving => 'Moving';
 	String get odometer => 'Odometer';
+	String get profile => 'Profile';
 	String get pulltorefresh => 'Pull to refresh';
 	String get reset_offset => 'Reset Offset';
 	String get resetting_exposure_point => 'Resetting exposure point';
@@ -137,8 +139,10 @@ extension on Translations {
 			case 'lastname': return 'Lastname';
 			case 'login': return 'Login';
 			case 'logout': return 'Logout';
+			case 'messages': return 'Messages';
 			case 'moving': return 'Moving';
 			case 'odometer': return 'Odometer';
+			case 'profile': return 'Profile';
 			case 'pulltorefresh': return 'Pull to refresh';
 			case 'reset_offset': return 'Reset Offset';
 			case 'resetting_exposure_point': return 'Resetting exposure point';

@@ -68,8 +68,10 @@ class TranslationsZh extends Translations {
 	@override String get lastname => '姓';
 	@override String get login => '登录';
 	@override String get logout => '登出';
+	@override String get messages => '消息';
 	@override String get moving => '动人';
 	@override String get odometer => '里程表';
+	@override String get profile => '轮廓';
 	@override String get pulltorefresh => '下拉刷新';
 	@override String get reset_offset => '重置偏移';
 	@override String get resetting_exposure_point => '重置曝光点';
@@ -134,8 +136,10 @@ extension on TranslationsZh {
 			case 'lastname': return '姓';
 			case 'login': return '登录';
 			case 'logout': return '登出';
+			case 'messages': return '消息';
 			case 'moving': return '动人';
 			case 'odometer': return '里程表';
+			case 'profile': return '轮廓';
 			case 'pulltorefresh': return '下拉刷新';
 			case 'reset_offset': return '重置偏移';
 			case 'resetting_exposure_point': return '重置曝光点';
