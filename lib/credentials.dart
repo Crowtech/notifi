@@ -50,6 +50,10 @@ const _defaultApiPrefixPath = String.fromEnvironment('API_PREFIX_PATH');
 const _skipLogin = bool.fromEnvironment('SKIP_LOGIN', defaultValue: false);
 const _enableCamera =
     bool.fromEnvironment('ENABLE_CAMERA', defaultValue: false);
+const _enableLocation =
+    bool.fromEnvironment('ENABLE_LOCATION', defaultValue: false);
+const _enableNotifications =
+    bool.fromEnvironment('ENABLE_NOTIFICATIONS', defaultValue: false);
 const _testUsername =
     String.fromEnvironment('TEST_USERNAME', defaultValue: "crowtech");
 const _testPassword =
@@ -89,6 +93,9 @@ String get iosAppStoreId => _iosAppStoreId;
 
 bool get skipLogin => _skipLogin;
 bool get enableCamera => _enableCamera;
+bool get enableLocation => _enableLocation;
+bool get enableNotifications => _enableNotifications;
+
 String get testUsername => _testUsername;
 String get testPassword => _testPassword;
 String get defaultEncryptionKey => _defaultEncryptionKey;
@@ -108,8 +115,9 @@ Color get colorHover =>
     Color(int.parse(_hoverColourHex.substring(1, 9), radix: 16));
 
 void showDefaultSettings() {
+
   logNoStack.i(
-    "Main:default Realm = $defaultRealm\n" +
+      "Main:default Realm = $defaultRealm\n" +
       "Main:default Auth Base URL = $defaultAuthBaseUrl\n" +
       "Main:default Discovery URL = $defaultDiscoveryUrl\n" +
       "Main:default ClientId = $defaultClientId\n" +
@@ -121,5 +129,10 @@ void showDefaultSettings() {
       "Main:default Auth Endpoint URL = $defaultAuthEndpointUrl\n" +
       "Main:defaultMinio URL = $defaultMinioEndpointUrl\n" +
       "Main:defaultImageProxy URL = $defaultImageProxyUrl\n" +
-      "Main:appStoreId = $iosAppStoreId\n");
-}
+      "Main:appStoreId = $iosAppStoreId\n" +
+      "Main: emable Camera = ${enableCamera?'ON':'OFF'}\n" +
+      "Main: emable Location = ${enableLocation?'ON':'OFF'}\n" +
+      "Main: emable Location = ${enableNotifications?'ON':'OFF'}\n" +
+      "");
+    
+  }

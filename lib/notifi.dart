@@ -10,7 +10,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-
 import 'package:notifi/geo_page.dart';
 import 'package:notifi/models/person.dart' as Person;
 import 'package:package_info_plus/package_info_plus.dart';
@@ -96,7 +95,7 @@ class Notifi extends ChangeNotifier {
 
   late PackageInfo _packageInfo;
   late String _deviceId;
-   List<CameraDescription> _cameras = <CameraDescription>[];
+  List<CameraDescription> _cameras = <CameraDescription>[];
 
   Person.Person? _user;
   bool _userReady = false;
@@ -200,7 +199,9 @@ class Notifi extends ChangeNotifier {
   Future<ChangeNotifier> init() async {
     logNoStack.i("Notifi initing!");
 
-    await Firebase.initializeApp(options: options);
+    if (enableNotifications) {
+      await Firebase.initializeApp(options: options);
+    }
 
     WidgetsFlutterBinding.ensureInitialized();
 
@@ -210,22 +211,21 @@ class Notifi extends ChangeNotifier {
       initialiseCamera();
     }
 
+    //if (Constants.notificationsEnabled) {
+    if (enableNotifications) {
+      await Firebase.initializeApp(options: options);
 
-  //if (Constants.notificationsEnabled) {
-  await Firebase.initializeApp(options: options);
+      // Set the background messaging handler early on, as a named top-level function
+      FirebaseMessaging.onBackgroundMessage(
+          _firebaseMessagingBackgroundHandler);
 
-  // Set the background messaging handler early on, as a named top-level function
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-
-  if (!kIsWeb) {
-    // await setupFlutterNotifications();  <--- using the web example
-    await FirebaseApi().initNotifications();
-  } else {
-    await setupFlutterNotifications();
-  }
-
-
-
+      if (!kIsWeb) {
+        // await setupFlutterNotifications();  <--- using the web example
+        await FirebaseApi().initNotifications();
+      } else {
+        await setupFlutterNotifications();
+      }
+    }
 
 ///////////////////
     // FirebaseMessaging messaging = FirebaseMessaging.instance;
@@ -344,20 +344,22 @@ class Notifi extends ChangeNotifier {
   }
 
   void subscribeToTopics() {
-    if (!kIsWeb) {
-      logNoStack.i("NOTIFI: Subscribing to topics");
+    if (enableNotifications) {
+      if (!kIsWeb) {
+        logNoStack.i("NOTIFI: Subscribing to topics");
 
-      for (final topic in _topics) {
-        try {
-          FirebaseMessaging.instance.subscribeToTopic(topic).then((_) {
-            logNoStack.i("NOTIFI: Subscribed to topic: $topic");
-          });
-        } on Exception catch (_) {
-          log.e("NOTIFI: Firebase error");
+        for (final topic in _topics) {
+          try {
+            FirebaseMessaging.instance.subscribeToTopic(topic).then((_) {
+              logNoStack.i("NOTIFI: Subscribed to topic: $topic");
+            });
+          } on Exception catch (_) {
+            log.e("NOTIFI: Firebase error");
+          }
         }
+      } else {
+        logNoStack.i("NOTIFI: Not subscribing to topics");
       }
-    } else {
-      logNoStack.i("NOTIFI: Not subscribing to topics");
     }
   }
 
