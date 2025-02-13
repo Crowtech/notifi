@@ -34,6 +34,7 @@
   "highlight_description": "使用 GPT 生成上下文感知的翻译",
   "lastname": "姓",
   "login": "登录",
+  "login_page": "登录页面",
   "logout": "登出",
   "messages": "消息",
   "moving": "动人",

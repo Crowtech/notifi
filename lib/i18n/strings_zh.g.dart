@@ -10,7 +10,7 @@ import 'package:slang/generated.dart';
 import 'strings.g.dart';
 
 // Path: <root>
-class TranslationsZh implements Translations {
+class TranslationsZh extends Translations {
 	/// You can call this constructor and build your own translation instance of this locale.
 	/// Constructing via the enum [AppLocale.build] is preferred.
 	TranslationsZh({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver})
@@ -20,7 +20,9 @@ class TranslationsZh implements Translations {
 		    overrides: overrides ?? {},
 		    cardinalResolver: cardinalResolver,
 		    ordinalResolver: ordinalResolver,
-		  ) {
+		  ),
+		  super(cardinalResolver: cardinalResolver, ordinalResolver: ordinalResolver) {
+		super.$meta.setFlatMapFunction($meta.getTranslation); // copy base translations to super.$meta
 		$meta.setFlatMapFunction(_flatMapFunction);
 	}
 
@@ -28,7 +30,7 @@ class TranslationsZh implements Translations {
 	@override final TranslationMetadata<AppLocale, Translations> $meta;
 
 	/// Access flat map
-	@override dynamic operator[](String key) => $meta.getTranslation(key);
+	@override dynamic operator[](String key) => $meta.getTranslation(key) ?? super.$meta.getTranslation(key);
 
 	late final TranslationsZh _root = this; // ignore: unused_field
 
@@ -65,6 +67,7 @@ class TranslationsZh implements Translations {
 	@override String get highlight_description => '使用 GPT 生成上下文感知的翻译';
 	@override String get lastname => '姓';
 	@override String get login => '登录';
+	@override String get login_page => '登录页面';
 	@override String get logout => '登出';
 	@override String get messages => '消息';
 	@override String get moving => '动人';
@@ -85,8 +88,8 @@ class TranslationsZh implements Translations {
 }
 
 // Path: menu
-class _TranslationsMenuZh implements TranslationsMenuEn {
-	_TranslationsMenuZh._(this._root);
+class _TranslationsMenuZh extends TranslationsMenuEn {
+	_TranslationsMenuZh._(TranslationsZh root) : this._root = root, super.internal(root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -133,6 +136,7 @@ extension on TranslationsZh {
 			case 'highlight_description': return '使用 GPT 生成上下文感知的翻译';
 			case 'lastname': return '姓';
 			case 'login': return '登录';
+			case 'login_page': return '登录页面';
 			case 'logout': return '登出';
 			case 'messages': return '消息';
 			case 'moving': return '动人';

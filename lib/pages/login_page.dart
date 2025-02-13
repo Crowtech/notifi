@@ -11,6 +11,7 @@ import '../widgets/action_button.dart';
 import 'package:notifi/app_state.dart' as app_state;
 import 'package:logger/logger.dart' as logger;
 import 'package:provider/provider.dart' as prov;
+import '../i18n/strings.g.dart' as nt; // Importing localization strings
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -114,11 +115,11 @@ class LoginPage extends HookConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('Login Page'),
+            Text(nt.t.login_page),
             ActionButton(
               onPressed: login2,
               icon: const SizedBox.shrink(),
-              label: const Text('Login'),
+              label:  Text(nt.t.login),
             ),
           ],
         ),

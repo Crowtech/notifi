@@ -38,7 +38,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 	// Translations
 	String get app_title => 'Crowtech';
-	late final TranslationsMenuEn menu = TranslationsMenuEn._(_root);
+	late final TranslationsMenuEn menu = TranslationsMenuEn.internal(_root);
 	String get account => 'Account';
 	String get activity => 'Activity';
 	String get audio_access_denied => 'You have denied audio access';
@@ -70,6 +70,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get highlight_description => 'Generate context-aware aware translatinons with GPT';
 	String get lastname => 'Lastname';
 	String get login => 'Login';
+	String get login_page => 'Login Page';
 	String get logout => 'Logout';
 	String get messages => 'Messages';
 	String get moving => 'Moving';
@@ -90,7 +91,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 // Path: menu
 class TranslationsMenuEn {
-	TranslationsMenuEn._(this._root);
+	TranslationsMenuEn.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -138,6 +139,7 @@ extension on Translations {
 			case 'highlight_description': return 'Generate context-aware aware translatinons with GPT';
 			case 'lastname': return 'Lastname';
 			case 'login': return 'Login';
+			case 'login_page': return 'Login Page';
 			case 'logout': return 'Logout';
 			case 'messages': return 'Messages';
 			case 'moving': return 'Moving';

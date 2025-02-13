@@ -36,6 +36,7 @@
   "highlight_description": "Generate context-aware aware translatinons with GPT",
   "lastname": "Lastname",
   "login": "Login",
+  "login_page": "Login Page",
   "logout": "Logout",
   "messages": "Messages",
   "moving": "Moving",
