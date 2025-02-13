@@ -38,7 +38,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 	// Translations
 	String get app_title => 'Crowtech';
-	late final TranslationsMenuEn menu = TranslationsMenuEn._(_root);
+	late final TranslationsMenuEn menu = TranslationsMenuEn.internal(_root);
 	String get account => 'Account';
 	String get activity => 'Activity';
 	String get audio_access_denied => 'You have denied audio access';
@@ -51,6 +51,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get camera_access_restricted => 'Camera access is restricted';
 	String get camera_denied => 'Camera access denied by user.';
 	String get camera_not_found => 'No camera found.';
+	String get dashboard => 'Dashboard';
 	String get deviceid => 'DeviceID';
 	String get edit => 'Edit';
 	String get email => 'Email';
@@ -87,7 +88,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 // Path: menu
 class TranslationsMenuEn {
-	TranslationsMenuEn._(this._root);
+	TranslationsMenuEn.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -116,6 +117,7 @@ extension on Translations {
 			case 'camera_access_restricted': return 'Camera access is restricted';
 			case 'camera_denied': return 'Camera access denied by user.';
 			case 'camera_not_found': return 'No camera found.';
+			case 'dashboard': return 'Dashboard';
 			case 'deviceid': return 'DeviceID';
 			case 'edit': return 'Edit';
 			case 'email': return 'Email';

@@ -10,7 +10,7 @@ import 'package:slang/generated.dart';
 import 'strings.g.dart';
 
 // Path: <root>
-class TranslationsZh implements Translations {
+class TranslationsZh extends Translations {
 	/// You can call this constructor and build your own translation instance of this locale.
 	/// Constructing via the enum [AppLocale.build] is preferred.
 	TranslationsZh({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver})
@@ -20,7 +20,9 @@ class TranslationsZh implements Translations {
 		    overrides: overrides ?? {},
 		    cardinalResolver: cardinalResolver,
 		    ordinalResolver: ordinalResolver,
-		  ) {
+		  ),
+		  super(cardinalResolver: cardinalResolver, ordinalResolver: ordinalResolver) {
+		super.$meta.setFlatMapFunction($meta.getTranslation); // copy base translations to super.$meta
 		$meta.setFlatMapFunction(_flatMapFunction);
 	}
 
@@ -28,7 +30,7 @@ class TranslationsZh implements Translations {
 	@override final TranslationMetadata<AppLocale, Translations> $meta;
 
 	/// Access flat map
-	@override dynamic operator[](String key) => $meta.getTranslation(key);
+	@override dynamic operator[](String key) => $meta.getTranslation(key) ?? super.$meta.getTranslation(key);
 
 	late final TranslationsZh _root = this; // ignore: unused_field
 
@@ -47,6 +49,7 @@ class TranslationsZh implements Translations {
 	@override String get camera_access_restricted => '相机访问受到限制';
 	@override String get camera_denied => '您已拒绝相机访问';
 	@override String get camera_not_found => '未找到相机';
+	@override String get dashboard => '仪表板';
 	@override String get deviceid => '设备标识符';
 	@override String get edit => '编辑';
 	@override String get email => '电子邮件';
@@ -82,8 +85,8 @@ class TranslationsZh implements Translations {
 }
 
 // Path: menu
-class _TranslationsMenuZh implements TranslationsMenuEn {
-	_TranslationsMenuZh._(this._root);
+class _TranslationsMenuZh extends TranslationsMenuEn {
+	_TranslationsMenuZh._(TranslationsZh root) : this._root = root, super.internal(root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -112,6 +115,7 @@ extension on TranslationsZh {
 			case 'camera_access_restricted': return '相机访问受到限制';
 			case 'camera_denied': return '您已拒绝相机访问';
 			case 'camera_not_found': return '未找到相机';
+			case 'dashboard': return '仪表板';
 			case 'deviceid': return '设备标识符';
 			case 'edit': return '编辑';
 			case 'email': return '电子邮件';
