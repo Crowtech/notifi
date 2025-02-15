@@ -136,6 +136,9 @@ void showDefaultSettings() {
       "Main:defaultMinio URL = $defaultMinioEndpointUrl\n" +
       "Main:defaultImageProxy URL = $defaultImageProxyUrl\n" +
       "Main:appStoreId = $iosAppStoreId\n" +
+      "Main: skip Login = ${skipLogin ? 'ON' : 'OFF'}\n" +
+      "Main: skip Login  username = ${testUsername}\n" +
+      "Main: skip Login  password = ${testPassword}\n" +
       "Main: enable Camera = ${enableCamera ? 'ON' : 'OFF'}\n" +
       "Main: enable Location = ${enableLocation ? 'ON' : 'OFF'}\n" +
       "Main: enable Notifications = ${enableNotifications ? 'ON' : 'OFF'}\n" +
