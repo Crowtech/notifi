@@ -266,35 +266,21 @@ class AuthController extends _$AuthController {
     // );
 
     try {
-      app_state.currentManager
+     var result = await  app_state.currentManager
           .loginPassword(
         username: testUsername,
         password: testPassword,
-      )
-          .then((result) {
+      );
+       //   .then((result) {
         logNoStack.i(
             "AUTH_CONTROLLER  LOGIN EMAIL/PASSWORD :Result is ${result!.claims.toJson()['email']}!!!!!");
         loginOidc(result);
-      });
+    //  });
 
-      //ref.read(currentUserProvider.notifier).setOidc(result);
-
-      // messenger.showSnackBar(
-      //   SnackBar(
-      //     content: Text(
-      //       'loginPassword returned user id: ${result?.uid}',
-      //     ),
-      //   ),
-      // );
+     
     } catch (e) {
       logNoStack.e("AUTH_CONTROLLER  LOGIN EMAIL/PASSWORD  ${e.toString()}");
-      // messenger.showSnackBar(
-      //   const SnackBar(
-      //     content: Text(
-      //       'loginPassword failed!',
-      //     ),
-      //   ),
-      // );
+    
     }
 
     // final isLoggedIn = await keycloakWrapper.login();
