@@ -152,9 +152,18 @@ class LocationsFetcher extends Notifier<List<Marker>> {
 
       if (page.items != null) {
         for (var i = 0; i < page.items!.length; i++) {
-          String colour = colours[i % colours.length];
+       String colour ;
+  
           GPS gps = page.items![i];
-          logNoStack.i('GPS $gps');
+          
+          if (gps.person != null) {
+              colour = gps.person!.gender == GenderType.MALE? "blue":"red";   
+              logNoStack.i('GPS $gps with person colour $colour' );
+          }  else {
+            colour = colours[i % colours.length];
+            logNoStack.i('GPS $gps with NO person colour $colour' );
+          }
+   
           LatLng ll = LatLng(gps.latitude, gps.longitude);
           double heading = gps.heading.round().toDouble();
           userlocations.add(Marker(
