@@ -1,6 +1,5 @@
 library notifi;
 
-import 'dart:convert';
 import 'dart:io' show Platform;
 
 import 'package:camera/camera.dart';
@@ -10,7 +9,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-import 'package:notifi/geo_page.dart';
 import 'package:notifi/models/person.dart' as Person;
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:logger/logger.dart' as logger;

@@ -1,11 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:logger/logger.dart' as logger;
-import 'package:provider/provider.dart' as prov;
-import '../i18n/strings.g.dart' as nt; // Importing localization strings
+// Importing localization strings
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),

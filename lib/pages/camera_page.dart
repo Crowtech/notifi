@@ -9,12 +9,10 @@ import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:notifi/credentials.dart';
 import 'package:notifi/notifi.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 import 'package:go_router/go_router.dart';
-import 'package:notifi/notifi.dart' as notifi;
 import '../i18n/strings.g.dart' as nt; // Importing localization strings
 import 'package:logger/logger.dart' as logger;
 

@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/state/fcm_controller.dart';
 
-import '../entities/fcm.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),

@@ -125,7 +125,7 @@ class AuthController extends _$AuthController {
   /// If _anything_ goes wrong, deletes the internal token and returns a [User.signedOut].
   Future<Auth> _loginRecoveryAttempt() async {
     log.i(
-        "AUTH_CONTROLLER  LOGIN_RECOVERY ATTEMPT: START with sharedPrefsKey -> ${_sharedPrefsKey}");
+        "AUTH_CONTROLLER  LOGIN_RECOVERY ATTEMPT: START with sharedPrefsKey -> $_sharedPrefsKey");
     try {
       final savedToken = _sharedPreferences.getString(_sharedPrefsKey);
       logNoStack.i(
@@ -156,7 +156,7 @@ class AuthController extends _$AuthController {
           "AUTH_CONTROLLER loginRecoveryAttempt-> Exception -> clearing key");
       _sharedPreferences.remove(_sharedPrefsKey).ignore();
       logNoStack.i(
-          "AUTH_CONTROLLER loginRecoveryAttempt-> removed shared key ${_sharedPrefsKey}");
+          "AUTH_CONTROLLER loginRecoveryAttempt-> removed shared key $_sharedPrefsKey");
       ref.read(currentUserProvider.notifier).setPerson(defaultPerson);
       state = const AsyncData(Auth.signedOut());
       //ref.read(currentUserProvider.notifier).logout();

@@ -1,8 +1,6 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
-import 'package:notifi/entities/auth.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../entities/user_role.dart';

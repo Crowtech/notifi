@@ -45,7 +45,7 @@ class LocationsFetcher extends Notifier<List<Marker>> {
       deviceCodeList: [],
       query: '',
       offset: 0,
-      limit: 20,
+      limit: 30,
       sortby: 'id DESC',
       caseinsensitive: true,
       distinctField: 'resourcecode');

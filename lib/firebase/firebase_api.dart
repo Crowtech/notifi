@@ -23,12 +23,12 @@ class FirebaseApi {
   );
 
   final _localNotifications = FlutterLocalNotificationsPlugin();
-  final FlutterSecureStorage _storage = FlutterSecureStorage();
+  final FlutterSecureStorage _storage = const FlutterSecureStorage();
 
   Future initLocalNotifications() async {
     print("LocalNotifs INitialiazed");
     const android = AndroidInitializationSettings('@drawable/ic_launcher');
-    var ios = DarwinInitializationSettings(
+    var ios = const DarwinInitializationSettings(
       requestAlertPermission: true,
       requestBadgePermission: true,
       requestSoundPermission: true,
@@ -61,8 +61,7 @@ class FirebaseApi {
       showFlutterNotification(message);
 
       Fluttertoast.showToast(
-          msg: "Incoming Data Message Received at firebase api.dart" +
-              message.data.toString(),
+          msg: "Incoming Data Message Received at firebase api.dart${message.data}",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 5,
@@ -94,7 +93,7 @@ class FirebaseApi {
       );
 
       Fluttertoast.showToast(
-          msg: notification.title! + "::" + notification.body!,
+          msg: "${notification.title!}::${notification.body!}",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 1,
@@ -111,7 +110,7 @@ class FirebaseApi {
         vapidKey:
             vapidKey);
 
-    print('token: ' + fCMToken.toString());
+    print('token: $fCMToken');
 
     if (kIsWeb) {
       final session = SessionStorage();
@@ -124,8 +123,8 @@ class FirebaseApi {
       // box.write('fcm', fCMToken.toString());
 
       await _storage.write(key: 'fcm', value: fCMToken.toString());
-      String? fcm_token = await _storage.read(key: 'fcm');
-      print("FCM Token: " + fcm_token.toString() + "Saved Securely");
+      String? fcmToken = await _storage.read(key: 'fcm');
+      print("FCM Token: " + fcmToken.toString() + "Saved Securely");
 
       initPushNotifications();
       initLocalNotifications();
@@ -145,7 +144,7 @@ class FirebaseApi {
 
   //function to handle received messages
   void showFlutterNotification(RemoteMessage message) {
-    print("Incoming message: ${message}");
+    print("Incoming message: $message");
     RemoteNotification? notification = message.notification;
     AndroidNotification? android = message.notification?.android;
 
@@ -167,13 +166,10 @@ class FirebaseApi {
       );
     }
     if (notification != null && kIsWeb) {
-      print("Notification detected!-> " +
-          notification.title! +
-          ": " +
-          notification.body!);
+      print("Notification detected!-> ${notification.title!}: ${notification.body!}");
 
       Fluttertoast.showToast(
-          msg: notification.title! + "::" + notification.body!,
+          msg: "${notification.title!}::${notification.body!}",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 5,

@@ -57,7 +57,7 @@ final GoRouter router = GoRouter(
         }
         return null;
       },
-      builder: (context, state) => TestPage(),
+      builder: (context, state) => const TestPage(),
     ),
     GoRoute(
       path: CrowtechRoutes.auth,

@@ -13,6 +13,8 @@ part 'activity_page.freezed.dart';
 
 
 class ActivityView extends ConsumerWidget {
+  const ActivityView({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final activity = ref.watch(activityProvider);

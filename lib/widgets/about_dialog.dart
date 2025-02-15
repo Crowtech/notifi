@@ -16,9 +16,7 @@ void showAboutDialog({
   required String linkText,
   required String urlLink,
 }) {
-  if (name == null) {
-    name = defaultRealm.capitalise();
-  }
+  name ??= defaultRealm.capitalise();
   showDialog<void>(
     context: context,
     builder: (context) {
@@ -56,7 +54,7 @@ class _AboutDialog extends ConsumerWidget {
     final seeSourceSecond = dialogText.substring(repoLinkIndexEnd);
 
     return AlertDialog(
-      backgroundColor: colorScheme.background,
+      backgroundColor: colorScheme.surface,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       content: Container(
         constraints: const BoxConstraints(maxWidth: 400),
@@ -122,7 +120,7 @@ class _AboutDialog extends ConsumerWidget {
                   cardColor: Colors.white,
                 ),
                 child: LicensePage(
-                  applicationName: name!,
+                  applicationName: name,
                   applicationLegalese: legalese,
                 ),
               ),

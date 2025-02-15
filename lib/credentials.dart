@@ -117,8 +117,7 @@ Color get colorHover =>
 void showDefaultSettings() {
 
   logNoStack.i(
-      "Main:default Realm = $defaultRealm\n" +
-      "Main:default Auth Base URL = $defaultAuthBaseUrl\n" +
+      "Main:default Realm = $defaultRealm\n" "Main:default Auth Base URL = $defaultAuthBaseUrl\n" +
       "Main:default Discovery URL = $defaultDiscoveryUrl\n" +
       "Main:default ClientId = $defaultClientId\n" +
       "Main:default Client Secret = $defaultClientSecret\n" +
@@ -130,9 +129,9 @@ void showDefaultSettings() {
       "Main:defaultMinio URL = $defaultMinioEndpointUrl\n" +
       "Main:defaultImageProxy URL = $defaultImageProxyUrl\n" +
       "Main:appStoreId = $iosAppStoreId\n" +
-      "Main: emable Camera = ${enableCamera?'ON':'OFF'}\n" +
-      "Main: emable Location = ${enableLocation?'ON':'OFF'}\n" +
-      "Main: emable Location = ${enableNotifications?'ON':'OFF'}\n" +
+      "Main: enable Camera = ${enableCamera?'ON':'OFF'}\n" +
+      "Main: enable Location = ${enableLocation?'ON':'OFF'}\n" +
+      "Main: enable Notifications = ${enableNotifications?'ON':'OFF'}\n" +
       "");
     
   }

@@ -1,32 +1,14 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:notifi/api_utils.dart';
-import 'package:notifi/credentials.dart';
 import 'package:notifi/entities/fcm.dart';
-import 'package:notifi/jwt_utils.dart';
-import 'package:notifi/models/person.dart';
-import 'package:notifi/notifi.dart';
-import 'package:notifi/riverpod/current_user.dart';
-import 'package:oidc/oidc.dart';
-import 'package:http/http.dart' as http;
 
-import '../entities/user_role.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:notifi/app_state.dart' as app_state;
 
-import '../entities/auth.dart';
 import 'package:logger/logger.dart' as logger;
-import 'package:provider/provider.dart' as prov;
-import 'package:flutter_background_geolocation/flutter_background_geolocation.dart'
-    as bg;
 
 part 'fcm_controller.g.dart';
 

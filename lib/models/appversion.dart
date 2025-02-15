@@ -2,7 +2,6 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'package:logger/logger.dart';
 
-import '../jwt_utils.dart';
 import 'crowtech_object.dart';
 part 'appversion.g.dart';
 

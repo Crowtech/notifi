@@ -193,6 +193,6 @@ void registerErrorHandlers() {
 
 extension StringExtensions on String { 
   String capitalise() { 
-    return "${this[0].toUpperCase()}${this.substring(1)}"; 
+    return "${this[0].toUpperCase()}${substring(1)}"; 
   } 
 }

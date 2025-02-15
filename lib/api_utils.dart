@@ -238,7 +238,7 @@ Future<Person> registerLogin(
 Future<bool> verifyToken(String token) async {
   bool hasExpired = JwtDecoder.isExpired(token);
 
-  DateTime? expirationDate = null;
+  DateTime? expirationDate;
   try {
     expirationDate = JwtDecoder.getExpirationDate(token);
   } on Exception {

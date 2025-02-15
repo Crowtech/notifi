@@ -3,14 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:notifi/jwt_utils.dart';
-import 'package:notifi/notifi.dart';
 import 'package:oidc/oidc.dart';
 
 import '../state/auth_controller.dart';
 import '../widgets/action_button.dart';
 import 'package:notifi/app_state.dart' as app_state;
 import 'package:logger/logger.dart' as logger;
-import 'package:provider/provider.dart' as prov;
 import '../i18n/strings.g.dart' as nt; // Importing localization strings
 
 var log = logger.Logger(
