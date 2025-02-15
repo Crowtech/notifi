@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
 import 'package:logger/logger.dart';
+import 'package:notifi/models/gendertype.dart';
 import 'package:notifi/models/person.dart';
 
 import 'crowtech_base.dart';
@@ -90,6 +91,10 @@ class GPS extends CrowtechBase<GPS> {
 
   @override
   String toString() {
-    return "GPS=>$id $created $code $orgid  $resourcecode $latitude $longitude $speed $heading";
+    String personStr= "";
+    if (this.person != null) {
+      personStr = "${person!.email} ${person!.gender == GenderType.MALE ? 'MALE':'FEMALE'} ";
+    }
+    return "GPS=>$id $created $code $orgid  $resourcecode $latitude $longitude $speed $heading $personStr";
   }
 }
