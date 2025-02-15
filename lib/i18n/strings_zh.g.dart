@@ -37,6 +37,7 @@ class TranslationsZh extends Translations {
 	// Translations
 	@override String get app_title => 'Crowtech';
 	@override late final _TranslationsMenuZh menu = _TranslationsMenuZh._(_root);
+	@override String get about_us => '关于我们';
 	@override String get account => '帐户';
 	@override String get activity => '活动';
 	@override String get audio_access_denied => '您已拒绝音频访问';
@@ -44,6 +45,7 @@ class TranslationsZh extends Translations {
 	@override String get audio_access_restricted => '音频访问受到限制';
 	@override String authored_by({required Object name}) => '作者 ${name}';
 	@override String get auto => '自动的';
+	@override String get billing => '计费';
 	@override String get camera_title => '相机';
 	@override String get camera_access_denied_without_prompt => '请前往“设置”应用启用相机访问权限';
 	@override String get camera_access_restricted => '相机访问受到限制';
@@ -57,6 +59,8 @@ class TranslationsZh extends Translations {
 	@override String get exposure_offset => '曝光偏移';
 	@override String get firstname => '给定的名称';
 	@override String get focus_mode => '专注模式';
+	@override String get groups => '群组';
+	@override String get help => '帮助';
 	@override String get home => '家';
 	@override String get intro_title => '欢迎使用 Crowtech';
 	@override String get intro_description => '出行即服务';
@@ -72,6 +76,7 @@ class TranslationsZh extends Translations {
 	@override String get messages => '消息';
 	@override String get moving => '动人';
 	@override String get odometer => '里程表';
+	@override String get privacy_policy => '隐私政策';
 	@override String get profile => '轮廓';
 	@override String get pulltorefresh => '下拉刷新';
 	@override String get reset_offset => '重置偏移';
@@ -79,6 +84,7 @@ class TranslationsZh extends Translations {
 	@override String get resetting_focus_point => '重置焦点';
 	@override String get settings => '设置';
 	@override String get still => '固定的';
+	@override String get terms_and_conditions => '条款和条件';
 	@override String get test_page => '测试页';
 	@override String get favourite => '最喜欢的';
 	@override Map<String, String> get locales => {
@@ -106,6 +112,7 @@ extension on TranslationsZh {
 			case 'app_title': return 'Crowtech';
 			case 'menu.account': return '帐户菜单';
 			case 'menu.product': return '产品菜单';
+			case 'about_us': return '关于我们';
 			case 'account': return '帐户';
 			case 'activity': return '活动';
 			case 'audio_access_denied': return '您已拒绝音频访问';
@@ -113,6 +120,7 @@ extension on TranslationsZh {
 			case 'audio_access_restricted': return '音频访问受到限制';
 			case 'authored_by': return ({required Object name}) => '作者 ${name}';
 			case 'auto': return '自动的';
+			case 'billing': return '计费';
 			case 'camera_title': return '相机';
 			case 'camera_access_denied_without_prompt': return '请前往“设置”应用启用相机访问权限';
 			case 'camera_access_restricted': return '相机访问受到限制';
@@ -126,6 +134,8 @@ extension on TranslationsZh {
 			case 'exposure_offset': return '曝光偏移';
 			case 'firstname': return '给定的名称';
 			case 'focus_mode': return '专注模式';
+			case 'groups': return '群组';
+			case 'help': return '帮助';
 			case 'home': return '家';
 			case 'intro_title': return '欢迎使用 Crowtech';
 			case 'intro_description': return '出行即服务';
@@ -141,6 +151,7 @@ extension on TranslationsZh {
 			case 'messages': return '消息';
 			case 'moving': return '动人';
 			case 'odometer': return '里程表';
+			case 'privacy_policy': return '隐私政策';
 			case 'profile': return '轮廓';
 			case 'pulltorefresh': return '下拉刷新';
 			case 'reset_offset': return '重置偏移';
@@ -148,6 +159,7 @@ extension on TranslationsZh {
 			case 'resetting_focus_point': return '重置焦点';
 			case 'settings': return '设置';
 			case 'still': return '固定的';
+			case 'terms_and_conditions': return '条款和条件';
 			case 'test_page': return '测试页';
 			case 'favourite': return '最喜欢的';
 			case 'locales.en': return '英文';

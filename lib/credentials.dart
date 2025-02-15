@@ -69,6 +69,11 @@ const _hoverColourHex =
 
 const _defaultAudience = ["fieldservice"];
 
+const _defaultPrivacyPolicyUrl = String.fromEnvironment('PRIVACY_POLICY_URL');
+
+const _defaultTermsAndConditionsUrl =
+    String.fromEnvironment('TERMS_AND_CONDITIONS_URL');
+
 const _defaultscopes = [
   "openid",
   "profile",
@@ -109,15 +114,17 @@ String get transistorsoftKey => _transistorsoftKey;
 String get vapidKey => _vapidKey;
 String get displayName => _displayName;
 
+String get defaultPrivacyPolicyUrl => _defaultPrivacyPolicyUrl;
+String get defaultTermsAndConditionsUrl => _defaultTermsAndConditionsUrl;
+
 Color get colorSeed =>
     Color(int.parse(_seedColourHex.substring(1, 9), radix: 16));
 Color get colorHover =>
     Color(int.parse(_hoverColourHex.substring(1, 9), radix: 16));
 
 void showDefaultSettings() {
-
-  logNoStack.i(
-      "Main:default Realm = $defaultRealm\n" "Main:default Auth Base URL = $defaultAuthBaseUrl\n" +
+  logNoStack.i("Main:default Realm = $defaultRealm\n"
+          "Main:default Auth Base URL = $defaultAuthBaseUrl\n" +
       "Main:default Discovery URL = $defaultDiscoveryUrl\n" +
       "Main:default ClientId = $defaultClientId\n" +
       "Main:default Client Secret = $defaultClientSecret\n" +
@@ -129,9 +136,10 @@ void showDefaultSettings() {
       "Main:defaultMinio URL = $defaultMinioEndpointUrl\n" +
       "Main:defaultImageProxy URL = $defaultImageProxyUrl\n" +
       "Main:appStoreId = $iosAppStoreId\n" +
-      "Main: enable Camera = ${enableCamera?'ON':'OFF'}\n" +
-      "Main: enable Location = ${enableLocation?'ON':'OFF'}\n" +
-      "Main: enable Notifications = ${enableNotifications?'ON':'OFF'}\n" +
+      "Main: enable Camera = ${enableCamera ? 'ON' : 'OFF'}\n" +
+      "Main: enable Location = ${enableLocation ? 'ON' : 'OFF'}\n" +
+      "Main: enable Notifications = ${enableNotifications ? 'ON' : 'OFF'}\n" +
+      "Main: Ts & C url = ${defaultTermsAndConditionsUrl}\n" +
+      "Main: Privacy url = ${defaultPrivacyPolicyUrl}\n" +
       "");
-    
-  }
+}

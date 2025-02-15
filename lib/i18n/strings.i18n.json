@@ -5,6 +5,7 @@
     "account": "Account Menu",
     "product": "Product Menu"
   },
+  "about_us": "About Us",
   "account": "Account",
   "activity": "Activity",
   "audio_access_denied": "You have denied audio access",
@@ -12,6 +13,7 @@
   "audio_access_restricted": "Audio access is restricted",
   "authored_by": "by ${name}" ,
   "auto": "Auto",
+  "billing": "Billing",
   "camera_title": "Camera",
   "camera_access_denied_without_prompt": "Please go to Settings app to enable camera access.",
   "camera_access_restricted": "Camera access is restricted",
@@ -26,6 +28,8 @@
   "favourite": "Favourite",
   "firstname": "Firstname",
   "focus_mode": "Focus Mode",
+  "groups": "Groups",
+  "help": "Help",
   "home": "Home",
   "intro_title": "Welcome to Crowtech",
   "intro_description": "Advanced Design",
@@ -41,6 +45,7 @@
   "messages": "Messages",
   "moving": "Moving",
   "odometer": "Odometer",
+  "privacy_policy": "Privacy Policy",
   "profile": "Profile",
   "pulltorefresh": "Pull to refresh",
   "reset_offset": "Reset Offset",
@@ -48,6 +53,7 @@
   "resetting_focus_point": "Resetting focus point",
   "settings": "Settings",
   "still": "Still",
+  "terms_and_conditions": "Terms & Conditions",
   "test_page": "Test Page",
 
   "locales(map)": {
