@@ -260,14 +260,40 @@ class AuthController extends _$AuthController {
     logNoStack.i("AUTH_CONTROLLER  LOGIN EMAIL/PASSWORD ");
     // await app_state.currentManager.clearUnusedStates() ;
 
-    const parsedOriginalUri = null;
-    //   originalUri == null ? null : Uri.tryParse(originalUri);
-    var result = await Future.delayed(
-      networkRoundTripTime,
-      () => _dummyUser,
-    );
-
-    state = AsyncData(result);
+    // const parsedOriginalUri = null;
+    // //   originalUri == null ? null : Uri.tryParse(originalUri);
+    // var result = await Future.delayed(
+    //   networkRoundTripTime,
+    //   () => _dummyUser,
+    // );
+    OidcUser? result;
+   try {
+          result = await app_state.currentManager.loginPassword(
+            username: testUsername,
+            password: testPassword,
+          );
+          logNoStack.i("Result is ${result!.claims.toJson()['email']}!!!!!");
+         
+          //ref.read(currentUserProvider.notifier).setOidc(result);
+    
+          // messenger.showSnackBar(
+          //   SnackBar(
+          //     content: Text(
+          //       'loginPassword returned user id: ${result?.uid}',
+          //     ),
+          //   ),
+          // );
+        } catch (e) {
+          logNoStack.e(e.toString());
+          // messenger.showSnackBar(
+          //   const SnackBar(
+          //     content: Text(
+          //       'loginPassword failed!',
+          //     ),
+          //   ),
+          // );
+        }
+    loginOidc(result);
 
     // final isLoggedIn = await keycloakWrapper.login();
     // if (isLoggedIn) {
