@@ -73,6 +73,8 @@ class TranslationsZh extends Translations {
 	@override String get login => '登录';
 	@override String get login_page => '登录页面';
 	@override String get logout => '登出';
+	@override String get map => '地图';
+	@override String get members => '成员';
 	@override String get messages => '消息';
 	@override String get moving => '动人';
 	@override String get odometer => '里程表';
@@ -148,6 +150,8 @@ extension on TranslationsZh {
 			case 'login': return '登录';
 			case 'login_page': return '登录页面';
 			case 'logout': return '登出';
+			case 'map': return '地图';
+			case 'members': return '成员';
 			case 'messages': return '消息';
 			case 'moving': return '动人';
 			case 'odometer': return '里程表';

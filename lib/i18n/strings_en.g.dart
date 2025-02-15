@@ -68,6 +68,8 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get intro_title => 'Welcome to Crowtech';
 	String get intro_description => 'Advanced Design';
 	String get locked => 'Locked';
+	String get map => 'Map';
+	String get members => 'Members';
 	String get movement_status => 'Is Moving?';
 	String get none => 'None';
 	String get highlight_title => 'Generate Context-Aware Translations';
@@ -143,6 +145,8 @@ extension on Translations {
 			case 'intro_title': return 'Welcome to Crowtech';
 			case 'intro_description': return 'Advanced Design';
 			case 'locked': return 'Locked';
+			case 'map': return 'Map';
+			case 'members': return 'Members';
 			case 'movement_status': return 'Is Moving?';
 			case 'none': return 'None';
 			case 'highlight_title': return 'Generate Context-Aware Translations';

@@ -34,6 +34,8 @@
   "intro_title": "Welcome to Crowtech",
   "intro_description": "Advanced Design",
   "locked": "Locked",
+  "map": "Map",
+  "members": "Members",
   "movement_status": "Is Moving?",
   "none": "None",
   "highlight_title": "Generate Context-Aware Translations",
