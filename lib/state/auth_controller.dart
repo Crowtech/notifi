@@ -255,7 +255,7 @@ class AuthController extends _$AuthController {
     //     final currentRoute = GoRouterState.of(context);
     // final originalUri =
     //     currentRoute.uri.queryParameters[OidcConstants_Store.originalUri];
-    logNoStack.i("AUTH_CONTROLLER  LOGIN EMAIL/PASSWORD $email ");
+    logNoStack.i("AUTH_CONTROLLER  LOGIN EMAIL/PASSWORD $email $password ");
     // await app_state.currentManager.clearUnusedStates() ;
 
     // const parsedOriginalUri = null;
@@ -271,6 +271,7 @@ class AuthController extends _$AuthController {
         username: testUsername,
         password: testPassword,
       );
+      logNoStack.i("AUTH_CONTROLLER  LOGIN EMAIL/PASSWORD : result is $result");
        //   .then((result) {
         logNoStack.i(
             "AUTH_CONTROLLER  LOGIN EMAIL/PASSWORD :Result is ${result!.claims.toJson()['email']}!!!!!");
