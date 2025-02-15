@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/credentials.dart';
+import 'package:notifi/models/gendertype.dart';
 import 'package:notifi/models/gps.dart';
 import 'package:notifi/models/nestfilter.dart';
 import '../api_utils.dart';
@@ -115,9 +116,15 @@ class LocationsFetcher extends Notifier<List<Marker>> {
 
       if (page.items != null) {
         for (var i = 0; i < page.items!.length; i++) {
-          String colour = colours[i % colours.length];
+          String colour ;
+  
           GPS gps = page.items![i];
           logNoStack.i('GPS $gps');
+          if (gps.person != null) {
+              colour = gps.person!.gender == GenderType.MALE? "blue":"pink";   
+          }  else {
+            colour = colours[i % colours.length];
+          }
           LatLng ll = LatLng(gps.latitude, gps.longitude);
           double heading = gps.heading.round().toDouble();
           userlocations.add(Marker(
