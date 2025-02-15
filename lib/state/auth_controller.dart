@@ -268,8 +268,8 @@ class AuthController extends _$AuthController {
     try {
      var result = await  app_state.currentManager
           .loginPassword(
-        username: testUsername,
-        password: testPassword,
+        username: email,
+        password: password,
       );
       logNoStack.i("AUTH_CONTROLLER  LOGIN EMAIL/PASSWORD : result is $result");
        //   .then((result) {
