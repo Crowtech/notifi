@@ -194,7 +194,6 @@ class AuthController extends _$AuthController {
     });
   }
 
-
   Future<void> loginOidc(OidcUser? oidcUser) async {
     log.i("AUTH_CONTROLLER  LOGIN_OIDC: START");
     if (oidcUser != null) {
@@ -221,10 +220,9 @@ class AuthController extends _$AuthController {
       //     token: getAccessToken(oidcUser));
       log.i(
           "AUTH_CONTROLLER  LOGIN_OIDC fetched Person: auth user is $authResult");
-     
 
       ref.read(currentUserProvider.notifier).setPerson(currentPerson);
-       state = AsyncData(authResult);
+      state = AsyncData(authResult);
     } else {
       logNoStack.i(
           "AUTH_CONTROLLER LOGIN_OIDC: In AuthControllerLogin: oidcUser was NULL");
@@ -257,7 +255,7 @@ class AuthController extends _$AuthController {
     //     final currentRoute = GoRouterState.of(context);
     // final originalUri =
     //     currentRoute.uri.queryParameters[OidcConstants_Store.originalUri];
-    logNoStack.i("AUTH_CONTROLLER  LOGIN EMAIL/PASSWORD ");
+    logNoStack.i("AUTH_CONTROLLER  LOGIN EMAIL/PASSWORD $email ");
     // await app_state.currentManager.clearUnusedStates() ;
 
     // const parsedOriginalUri = null;
@@ -266,34 +264,38 @@ class AuthController extends _$AuthController {
     //   networkRoundTripTime,
     //   () => _dummyUser,
     // );
-    OidcUser? result;
-   try {
-          result = await app_state.currentManager.loginPassword(
-            username: testUsername,
-            password: testPassword,
-          );
-          logNoStack.i("Result is ${result!.claims.toJson()['email']}!!!!!");
-         
-          //ref.read(currentUserProvider.notifier).setOidc(result);
-    
-          // messenger.showSnackBar(
-          //   SnackBar(
-          //     content: Text(
-          //       'loginPassword returned user id: ${result?.uid}',
-          //     ),
-          //   ),
-          // );
-        } catch (e) {
-          logNoStack.e(e.toString());
-          // messenger.showSnackBar(
-          //   const SnackBar(
-          //     content: Text(
-          //       'loginPassword failed!',
-          //     ),
-          //   ),
-          // );
-        }
-    loginOidc(result);
+
+    try {
+      app_state.currentManager
+          .loginPassword(
+        username: testUsername,
+        password: testPassword,
+      )
+          .then((result) {
+        logNoStack.i(
+            "AUTH_CONTROLLER  LOGIN EMAIL/PASSWORD :Result is ${result!.claims.toJson()['email']}!!!!!");
+        loginOidc(result);
+      });
+
+      //ref.read(currentUserProvider.notifier).setOidc(result);
+
+      // messenger.showSnackBar(
+      //   SnackBar(
+      //     content: Text(
+      //       'loginPassword returned user id: ${result?.uid}',
+      //     ),
+      //   ),
+      // );
+    } catch (e) {
+      logNoStack.e("AUTH_CONTROLLER  LOGIN EMAIL/PASSWORD  ${e.toString()}");
+      // messenger.showSnackBar(
+      //   const SnackBar(
+      //     content: Text(
+      //       'loginPassword failed!',
+      //     ),
+      //   ),
+      // );
+    }
 
     // final isLoggedIn = await keycloakWrapper.login();
     // if (isLoggedIn) {
@@ -361,7 +363,6 @@ class AuthController extends _$AuthController {
     return Future.value(const Auth.signedOut()); // dummy
   }
 
-
   /// Mock of a request performed on logout (might be common, or not, whatevs).
   Future<void> logoutContext(BuildContext context) async {
     logNoStack.i("AUTH_CONTROLLER LOGOUT called in auth");
@@ -404,19 +405,17 @@ class AuthController extends _$AuthController {
     final savedToken = _sharedPreferences.getString(_sharedPrefsKey);
     _sharedPreferences.remove(_sharedPrefsKey).ignore();
     if (!kIsWeb) {
-     // bg.BackgroundGeolocation.stop();
+      // bg.BackgroundGeolocation.stop();
     }
     logNoStack.i("AUTH_CONTROLLER LOGOUT , token is $savedToken");
-    var result = await apiPostNoLocale(savedToken!,
-            "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout");
-       
-      log.i("AUTH_CONTROLLER LOGOUT back from api result $result");
-      defaultPerson.email = "user@email.com";
-      defaultPerson.token = null;
+    var result = await apiPostNoLocale(
+        savedToken!, "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout");
+
+    log.i("AUTH_CONTROLLER LOGOUT back from api result $result");
+    defaultPerson.email = "user@email.com";
+    defaultPerson.token = null;
     log.i("AUTH_CONTROLLER LOGOUT setting Person to default $defaultPerson");
     ref.read(currentUserProvider.notifier).setPerson(defaultPerson);
-   
- 
 
     // let the oidc package know
     await app_state.currentManager.logout(
@@ -430,6 +429,7 @@ class AuthController extends _$AuthController {
     );
     state = const AsyncData(Auth.signedOut());
   }
+
   /// Internal method used to listen authentication state changes.
   /// When the auth object is in a loading state, nothing happens.
   /// When the auth object is in an error state, we choose to remove the token
