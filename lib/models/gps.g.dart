@@ -23,6 +23,9 @@ GPS _$GPSFromJson(Map<String, dynamic> json) => GPS(
       battery: (json['battery'] as num?)?.toDouble() ?? 0.0,
       charging: json['charging'] as bool? ?? false,
       moving: json['moving'] as bool? ?? false,
+      person: json['person'] == null
+          ? null
+          : Person.fromJson(json['person'] as Map<String, dynamic>),
     )..timestamp = (json['timestamp'] as num).toInt();
 
 Map<String, dynamic> _$GPSToJson(GPS instance) => <String, dynamic>{
@@ -41,4 +44,5 @@ Map<String, dynamic> _$GPSToJson(GPS instance) => <String, dynamic>{
       'battery': instance.battery,
       'charging': instance.charging,
       'moving': instance.moving,
+      'person': instance.person?.toJson(),
     };

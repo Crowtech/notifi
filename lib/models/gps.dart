@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
 import 'package:logger/logger.dart';
+import 'package:notifi/models/person.dart';
 
 import 'crowtech_base.dart';
 part 'gps.g.dart';
@@ -27,6 +28,7 @@ class GPS extends CrowtechBase<GPS> {
   double battery;
   bool charging;
   bool moving;
+  Person? person;
 
   GPS({
     int? id,
@@ -45,10 +47,12 @@ class GPS extends CrowtechBase<GPS> {
     this.battery = 0.0,
     this.charging = false,
     this.moving = false,
+    Person? person,
   }) {
     this.id = id;
     this.code = code;
     this.created = created;
+    this.person = person;
     
     if (timestampStr.isEmpty) {
       timestamp = DateTime.now().millisecondsSinceEpoch;
