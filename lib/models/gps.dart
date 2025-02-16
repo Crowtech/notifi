@@ -47,7 +47,7 @@ class GPS extends CrowtechBase<GPS> {
     this.battery = 0.0,
     this.charging = false,
     this.moving = false,
-    this.person,
+    this.person = null,
   }) {
     this.orgid = orgid;
     this.id = id;
@@ -55,10 +55,10 @@ class GPS extends CrowtechBase<GPS> {
     this.created = created;
   
 
-    if (person != null) {
-      resourceid = person!.id!;
-      resourcecode = person!.code!;
-    }
+    // if (person != null) {
+    //   resourceid = person!.id!;
+    //   resourcecode = person!.code!;
+    // }
     
     if (timestampStr.isEmpty) {
       timestamp = DateTime.now().millisecondsSinceEpoch;
@@ -66,23 +66,23 @@ class GPS extends CrowtechBase<GPS> {
       DateTime ts = DateTime.parse(timestampStr);
       timestamp = ts.millisecondsSinceEpoch; // TODO watch for errors
     }
-    if (resourcecode.isNotEmpty) {
-      resourcecode = resourcecode.toUpperCase();
-      resourcecode =
-          resourcecode.replaceAll("[^\\p{IsAlphabetic}\\p{IsDigit}]", "_");
-      if (!resourcecode.startsWith("PER_")) {
-        resourcecode = "PER_$resourcecode";
-      }
-      // logger.d("Direct Usercode in GPS is $resourcecode");
-    } else if (jwt != null && jwt.isNotEmpty) {
-      Map<String, dynamic> decodedToken = JwtDecoder.decode(jwt);
-      resourcecode = decodedToken['sub'];
-      // convert to backend format
-      resourcecode =
-          resourcecode.replaceAll("[^\\p{IsAlphabetic}\\p{IsDigit}]", "_");
-      resourcecode = "PER_${resourcecode.toUpperCase()}";
-      logger.d("JWT Usercode in GPS is $resourcecode");
-    }
+    // if (resourcecode.isNotEmpty) {
+    //   resourcecode = resourcecode.toUpperCase();
+    //   resourcecode =
+    //       resourcecode.replaceAll("[^\\p{IsAlphabetic}\\p{IsDigit}]", "_");
+    //   if (!resourcecode.startsWith("PER_")) {
+    //     resourcecode = "PER_$resourcecode";
+    //   }
+    //   // logger.d("Direct Usercode in GPS is $resourcecode");
+    // } else if (jwt != null && jwt.isNotEmpty) {
+    //   Map<String, dynamic> decodedToken = JwtDecoder.decode(jwt);
+    //   resourcecode = decodedToken['sub'];
+    //   // convert to backend format
+    //   resourcecode =
+    //       resourcecode.replaceAll("[^\\p{IsAlphabetic}\\p{IsDigit}]", "_");
+    //   resourcecode = "PER_${resourcecode.toUpperCase()}";
+    //   logger.d("JWT Usercode in GPS is $resourcecode");
+    // }
   }
 
   factory GPS.fromJson(Map<String, dynamic> json) => _$GPSFromJson(json);
