@@ -157,15 +157,16 @@ Future<http.Response> apiPostDataStrNoLocale(
 }
 
 Future<http.Response> apiGetData(
-    String apiPath) async {
+    String apiPath, String accept) async {
   var url = Uri.parse(apiPath);
+  
 
   final http.Response response;
 
   // No data
   response = await http.get(url, headers: {
     "Content-Type": "application/json",
-    "Accept": "application/json",
+    "Accept": "${accept}",
   });
 
   log.i("Response code for apiGeData is ${response.statusCode} for $apiPath");
@@ -324,7 +325,7 @@ Future<Map> registerFCM(
 Future<String> fetchLatestAppVersion() async {
   var apiPath = "$defaultAPIBaseUrl$defaultApiPrefixPath/appversionss/latest";
   try {
-  var response = await apiGetData(apiPath);
+  var response = await apiGetData(apiPath,"application/text");
     logNoStack.i("FETCH LATEST APP VERSION: result ${response.toString()}");
     final map = jsonDecode(response.body);
     AppVersion appVersion = AppVersion.fromJson(map);
