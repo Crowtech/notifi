@@ -483,10 +483,10 @@ void dispose() {
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    //if (_mapController == null) {
+    if (_mapController == null) {
       
-    //  return const SizedBox.shrink();
-    //}
+      return const SizedBox.shrink();
+    }
     logNoStack.i("GEOMAP3: trigger locale");
     //ref.read(locationsProvider.notifier).setLocale(Localizations.localeOf(context)); // trigger the location getching every 10 sec
  
