@@ -35,18 +35,15 @@ class GeoPage extends ConsumerStatefulWidget with WidgetsBindingObserver {
 
   GeoPage({super.key});
 
- OidcPlatformSpecificOptions_Web_NavigationMode webNavigationMode =
+  OidcPlatformSpecificOptions_Web_NavigationMode webNavigationMode =
       OidcPlatformSpecificOptions_Web_NavigationMode.newPage;
 
   @override
   ConsumerState<GeoPage> createState() => _GeoPageState();
 }
 
-class _GeoPageState extends ConsumerState<GeoPage> 
+class _GeoPageState extends ConsumerState<GeoPage>
     with TickerProviderStateMixin<GeoPage>, WidgetsBindingObserver {
-
-      
-
   bool _loggedin = false;
   OidcUser? _user;
   late Person _currentUser;
@@ -73,8 +70,8 @@ class _GeoPageState extends ConsumerState<GeoPage>
     final user = app_state.cachedAuthedUser.of(context);
     if ((user != null) && (!_loggedin)) {
       log.i("home page didChangeDependencies: initNotifi");
-     // initNotifi(context, user.token.accessToken.toString(), defaultRealm);
-     // loginUser(context, user.token.accessToken!);
+      // initNotifi(context, user.token.accessToken.toString(), defaultRealm);
+      // loginUser(context, user.token.accessToken!);
       setState(() {
         _loggedin = true;
         token = user.token.accessToken!;
@@ -110,11 +107,11 @@ class _GeoPageState extends ConsumerState<GeoPage>
                   positiveAction:
                       'Change to "{backgroundPermissionOptionLabel}"',
                   negativeAction: 'Cancel'),
-            //    notification: bg.Notification(
-            // sticky: false,
-            // layout: 'notification_layout',
-            // channelId: 'my_channel_id',
-            // actions: ["notificationButtonFoo", "notificationButtonBar"]),
+              //    notification: bg.Notification(
+              // sticky: false,
+              // layout: 'notification_layout',
+              // channelId: 'my_channel_id',
+              // actions: ["notificationButtonFoo", "notificationButtonBar"]),
               debug: false,
               heartbeatInterval: 250,
               preventSuspend: true,
@@ -169,7 +166,7 @@ class _GeoPageState extends ConsumerState<GeoPage>
   }
 
   void _onHeartbeat(bg.HeartbeatEvent event) {
-     if (!context.mounted) {
+    if (!context.mounted) {
       return;
     }
     logNoStack.i("[heartbeat] sending gps ${event.toString()}");
@@ -206,7 +203,6 @@ class _GeoPageState extends ConsumerState<GeoPage>
       int expiry = decodedToken['exp'];
       logNoStack.e(
           "- Authorization error: ${event.error} , ${event.response.toString()} , accessTokenExpiry=$expiry");
-
     }
   }
 
@@ -222,7 +218,6 @@ class _GeoPageState extends ConsumerState<GeoPage>
       return;
     }
     log.d('[${bg.Event.LOCATION}] ERROR - $error');
-
   }
 
   void _onMotionChange(bg.Location location) {
@@ -235,31 +230,34 @@ class _GeoPageState extends ConsumerState<GeoPage>
     });
   }
 
-  OidcUser? processUser()
-  {
-    _currentUser = ref.watch(currentUserProvider);
-     OidcUser? oldUser;
+  OidcUser? processUser() {
+    logNoStack.i(
+        "GeoPage -> ProcessUser , geostarted is ${_geoStarted ? 'on' : 'off'}");
+    _currentUser = ref.read(currentUserProvider);
+    OidcUser? oldUser;
     final user = app_state.cachedAuthedUser.of(context);
     if (user == null) {
       // put a guard here as well, just in case
       // the redirect doesn't fire up in time.
+      logNoStack.i("GeoPage -> ProcessUser , user is null");
       return user;
     } else {
       if (user != oldUser) {
-        logNoStack.i("GeoMap user detcted change, resetting auth token");
+        logNoStack.i("GeoPage -> ProcessUser ,GeoMap user detected change, resetting auth token");
         bg.BackgroundGeolocation.setConfig(bg.Config(
-      headers: {
-        "Authorization":
-            "Bearer ${app_state.cachedAuthedUser.of(context)!.token.accessToken}"
-      },
-      url: "$defaultAPIBaseUrl$defaultApiPrefixPath/gps/location",
-    ));
+          headers: {
+            "Authorization":
+                "Bearer ${app_state.cachedAuthedUser.of(context)!.token.accessToken}"
+          },
+          url: "$defaultAPIBaseUrl$defaultApiPrefixPath/gps/location",
+        ));
       }
 
       if (!_geoStarted) {
         setState(() {
           _geoStarted = true;
         });
+        logNoStack.i("GeoPage -> ProcessUser initGeoLocation");
         initGeolocation();
       }
     }
@@ -268,11 +266,10 @@ class _GeoPageState extends ConsumerState<GeoPage>
 
   @override
   Widget build(BuildContext context) {
-   
-   OidcUser? user = processUser();
-   if (user == null) {
+    OidcUser? user = processUser();
+    if (user == null) {
       return const SizedBox.shrink();
-   }
+    }
 
     final platform = Theme.of(context).platform;
     final mobilePlatforms = [
@@ -381,7 +378,7 @@ class _GeoPageState extends ConsumerState<GeoPage>
               ],
               ElevatedButton(
                 onPressed: () async {
-                 ref.read(currentUserProvider.notifier).logout();
+                  ref.read(currentUserProvider.notifier).logout();
                 },
                 child: const Text('Logout'),
               ),
