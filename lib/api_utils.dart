@@ -329,7 +329,8 @@ Future<String> fetchLatestAppVersion() async {
     logNoStack.i("FETCH LATEST APP VERSION: result ${response.toString()}");
     final map = jsonDecode(response.body);
     AppVersion appVersion = AppVersion.fromJson(map);
-
+    log.i("AppVersion is $appVersion");
+  //return response.body;
     return appVersion.version!;
 
     } on Exception catch (error) {
