@@ -17,7 +17,6 @@ class GPS extends CrowtechBase<GPS> {
   static String className = "GPS";
   static String tablename = className.toLowerCase();
   // static String typename = "gps";
-  int orgid;
   String resourcecode;
   int resourceid;
   String? devicecode;
@@ -32,10 +31,10 @@ class GPS extends CrowtechBase<GPS> {
   Person? person;
 
   GPS({
+    int? orgId,
     int? id,
     String? code,
     DateTime? created,
-    this.orgid = 2, // default org
     String? jwt,
     this.resourcecode = "",
     this.resourceid = 0,
@@ -48,12 +47,18 @@ class GPS extends CrowtechBase<GPS> {
     this.battery = 0.0,
     this.charging = false,
     this.moving = false,
-    Person? person,
+    this.person,
   }) {
+    this.orgId = orgId;
     this.id = id;
     this.code = code;
     this.created = created;
-    this.person = person;
+  
+
+    if (person != null) {
+      resourceid = person!.id!;
+      resourcecode = person!.code!;
+    }
     
     if (timestampStr.isEmpty) {
       timestamp = DateTime.now().millisecondsSinceEpoch;
@@ -92,9 +97,9 @@ class GPS extends CrowtechBase<GPS> {
   @override
   String toString() {
     String personStr= "";
-    if (this.person != null) {
+    if (person != null) {
       personStr = "${person!.email} ${person!.gender == GenderType.MALE ? 'MALE':'FEMALE'} ";
     }
-    return "GPS=>$id $created $code $orgid  $resourcecode $latitude $longitude $speed $heading $personStr";
+    return "GPS=>$id $created  $orgId  $resourcecode $latitude $longitude $speed $heading $personStr";
   }
 }

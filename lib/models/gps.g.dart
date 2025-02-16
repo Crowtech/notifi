@@ -7,12 +7,12 @@ part of 'gps.dart';
 // **************************************************************************
 
 GPS _$GPSFromJson(Map<String, dynamic> json) => GPS(
+      orgId: (json['orgId'] as num?)?.toInt(),
       id: (json['id'] as num?)?.toInt(),
       code: json['code'] as String?,
       created: json['created'] == null
           ? null
           : DateTime.parse(json['created'] as String),
-      orgid: (json['orgid'] as num?)?.toInt() ?? 2,
       resourcecode: json['resourcecode'] as String? ?? "",
       resourceid: (json['resourceid'] as num?)?.toInt() ?? 0,
       devicecode: json['devicecode'] as String?,
@@ -29,10 +29,10 @@ GPS _$GPSFromJson(Map<String, dynamic> json) => GPS(
     )..timestamp = (json['timestamp'] as num).toInt();
 
 Map<String, dynamic> _$GPSToJson(GPS instance) => <String, dynamic>{
+      'orgId': instance.orgId,
       'id': instance.id,
       'created': instance.created?.toIso8601String(),
       'code': instance.code,
-      'orgid': instance.orgid,
       'resourcecode': instance.resourcecode,
       'resourceid': instance.resourceid,
       'devicecode': instance.devicecode,

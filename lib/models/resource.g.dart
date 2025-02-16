@@ -7,6 +7,7 @@ part of 'resource.dart';
 // **************************************************************************
 
 Resource _$ResourceFromJson(Map<String, dynamic> json) => Resource(
+      orgId: (json['orgId'] as num?)?.toInt(),
       id: (json['id'] as num?)?.toInt(),
       code: json['code'] as String?,
       created: json['created'] == null
@@ -23,6 +24,7 @@ Resource _$ResourceFromJson(Map<String, dynamic> json) => Resource(
     );
 
 Map<String, dynamic> _$ResourceToJson(Resource instance) => <String, dynamic>{
+      'orgId': instance.orgId,
       'id': instance.id,
       'created': instance.created?.toIso8601String(),
       'code': instance.code,

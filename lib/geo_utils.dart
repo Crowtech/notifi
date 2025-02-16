@@ -125,7 +125,7 @@ logNoStack.d("RESOURCECODE in sendGPS IS $resourcecode");
     //logNoStack.d('JsonObject: $json');
     var url = Uri.parse(
         "$defaultAPIBaseUrl$defaultApiPrefixPath/gps?resourcecode=$resourcecode");
-    logNoStack.d("SEND GPS to $url $gpsJson using jwt $token");
+    logNoStack.i("SEND GPS to $url $gpsJson using jwt $token");
     try {
       final response = await http.post(
         url,

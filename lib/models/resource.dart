@@ -21,7 +21,8 @@ class Resource extends CrowtechObject {
   String? avatarUrl;
 
   Resource(
-      {super.id,
+      {super.orgId,
+      super.id,
       super.code,
       super.created,
       super.updated,

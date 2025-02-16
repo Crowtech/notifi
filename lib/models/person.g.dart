@@ -7,6 +7,7 @@ part of 'person.dart';
 // **************************************************************************
 
 Person _$PersonFromJson(Map<String, dynamic> json) => Person(
+      orgId: (json['orgId'] as num?)?.toInt(),
       id: (json['id'] as num?)?.toInt(),
       code: json['code'] as String?,
       created: json['created'] == null
@@ -35,6 +36,7 @@ Person _$PersonFromJson(Map<String, dynamic> json) => Person(
     )..token = json['token'] as String?;
 
 Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{
+      'orgId': instance.orgId,
       'id': instance.id,
       'created': instance.created?.toIso8601String(),
       'code': instance.code,

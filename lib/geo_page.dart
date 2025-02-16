@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:notifi/credentials.dart';
 import 'package:notifi/jwt_utils.dart';
+import 'package:notifi/models/person.dart';
 import 'package:notifi/notifi.dart';
 import 'package:notifi/riverpod/current_user.dart';
 
@@ -48,6 +49,8 @@ class _GeoPageState extends ConsumerState<GeoPage>
 
   bool _loggedin = false;
   OidcUser? _user;
+  late Person _currentUser;
+
   bool? _isMoving = false;
   double _odometer = 0.0;
   bool _enabled = true;
@@ -123,7 +126,7 @@ class _GeoPageState extends ConsumerState<GeoPage>
                     "Bearer ${app_state.cachedAuthedUser.of(context)!.token.accessToken}"
               },
               extras: {
-                "orgid": 2,
+                "orgid": _currentUser.orgId,
                 "resourcecode":
                     getResourceCode(app_state.cachedAuthedUser.of(context)!),
                 "resourceid": 0,
@@ -169,7 +172,7 @@ class _GeoPageState extends ConsumerState<GeoPage>
      if (!context.mounted) {
       return;
     }
-    logNoStack.d("[heartbeat] ${event.toString()}");
+    logNoStack.i("[heartbeat] sending gps ${event.toString()}");
     bg.BackgroundGeolocation.setConfig(bg.Config(
       headers: {
         "Authorization":
@@ -234,6 +237,7 @@ class _GeoPageState extends ConsumerState<GeoPage>
 
   OidcUser? processUser()
   {
+    _currentUser = ref.watch(currentUserProvider);
      OidcUser? oldUser;
     final user = app_state.cachedAuthedUser.of(context);
     if (user == null) {
@@ -242,6 +246,7 @@ class _GeoPageState extends ConsumerState<GeoPage>
       return user;
     } else {
       if (user != oldUser) {
+        logNoStack.i("GeoMap user detcted change, resetting auth token");
         bg.BackgroundGeolocation.setConfig(bg.Config(
       headers: {
         "Authorization":
