@@ -113,10 +113,10 @@ logNoStack.d("RESOURCECODE in sendGPS IS $resourcecode");
       moving: location.isMoving,
       resourcecode: resourcecode,
       devicecode: deviceId,
-      orgid: orgId,
+      orgId: orgId,
     );
 
-  logNoStack.d("Sending GPS gps $gps");
+  logNoStack.i("Sending GPS gps $gps");
 
     String gpsJson;
     gpsJson = jsonEncode(gps);

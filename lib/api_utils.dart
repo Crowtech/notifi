@@ -218,11 +218,11 @@ Future<Person> registerLogin(
   String token,
 ) async {
   String deviceId = await fetchDeviceId();
-  log.i("API_UTILS: registerLogin: deviceid=$deviceId");
+  log.i("API_UTILS: Login: deviceid=$deviceId");
   try {
     var currentUserMap = await apiPostDataNoLocale(
         token,
-        "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/login",
+        "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/login?devicecode=${deviceId}",
         "deviceid",
         deviceId);
 
