@@ -80,7 +80,7 @@ class _CrowtechBasePageWidgetState<T extends CrowtechBase<T>> extends State<Crow
 
 String? jsonDataStr;
  Locale locale = Localizations.localeOf(context);
-apiPostDataStr(locale, token!, "$defaultApiPrefixPath/gps/fetch", jsonDataStr)
+apiPostDataStr(locale, token!, "$defaultAPIBaseUrl$defaultApiPrefixPath/gps/fetch", jsonDataStr)
       .then((response) {
     logNoStack.d("result $response");
         final map = jsonDecode(response.body);

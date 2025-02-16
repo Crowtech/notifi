@@ -100,7 +100,7 @@ class LocationsFetcher extends Notifier<List<Marker>> {
       ),
     );
     var response = await apiPostDataStr(
-        _locale, userToken!, "$defaultApiPrefixPath/gps/fetch", jsonDataStr);
+        _locale, userToken!, "$defaultAPIBaseUrl$defaultApiPrefixPath/gps/fetch", jsonDataStr);
     // .then((response) {
     logNoStack.d("result ${response.body.toString()}");
     final map = jsonDecode(response.body);

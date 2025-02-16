@@ -219,10 +219,12 @@ Future<Person> registerLogin(
 ) async {
   String deviceId = await fetchDeviceId();
   log.i("API_UTILS: Login: deviceid=$deviceId");
+  String url =  "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/login?devicecode=${deviceId}";
   try {
+    
     var currentUserMap = await apiPostDataNoLocale(
         token,
-        "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/login?devicecode=${deviceId}",
+       url,
         "deviceid",
         deviceId);
 
@@ -231,7 +233,7 @@ Future<Person> registerLogin(
     log.i("API_UTILS: Logged in user $currentUser");
     return currentUser;
   } on Exception catch (error) {
-    throw ("API_UTILS: Register login error $error");
+    throw ("API_UTILS: login error $error for $url");
   }
 }
 
@@ -358,7 +360,7 @@ Future<CrowtechBasePage<GPS>> fetchGPS(
   logNoStack.i("Sending NestFilter gps $nestfilter with json as $jsonDataStr");
 
   var response = await apiPostDataStr(
-      locale, token, "$defaultApiPrefixPath/gps/fetch", jsonDataStr);
+      locale, token, "$defaultAPIBaseUrl$defaultApiPrefixPath/gps/fetch", jsonDataStr);
   // .then((response) {
   logNoStack.d("result ${response.body.toString()}");
   final map = jsonDecode(response.body);
