@@ -326,7 +326,7 @@ Future<String> fetchLatestAppVersion() async {
   var apiPath = "$defaultAPIBaseUrl$defaultApiPrefixPath/appversionss/latest";
   try {
   var response = await apiGetData(apiPath,"application/json");
-    logNoStack.i("FETCH LATEST APP VERSION: result ${response.toString()}");
+    logNoStack.i("FETCH LATEST APP VERSION: result ${response.body}");
     final map = jsonDecode(response.body);
     AppVersion appVersion = AppVersion.fromJson(map);
     log.i("AppVersion is $appVersion");
