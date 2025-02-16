@@ -72,7 +72,7 @@ Future<String> sendGPS(Person currentUser,String token, bg.Location location) as
 
  //   String jwtType = "UNKNOWN";
 
-      logNoStack.i("sendGPS, currentUser is  orgid:  ${currentUser.orgid} ${currentUser.email} id=${currentUser.id} resourcecode=${currentUser.code}");
+      logNoStack.d("sendGPS, currentUser is  orgid:  ${currentUser.orgid} ${currentUser.email} id=${currentUser.id} resourcecode=${currentUser.code}");
       // if (token != null) {
       //   Map<String, dynamic> decodedToken = JwtDecoder.decode(token);
       //   resourcecode = decodedToken['sub'];
@@ -138,7 +138,7 @@ Future<String> sendGPS(Person currentUser,String token, bg.Location location) as
     //logNoStack.d('JsonObject: $json');
     var url = Uri.parse(
         "$defaultAPIBaseUrl$defaultApiPrefixPath/gps?resourcecode=${currentUser.code}");
-    logNoStack.i("SEND GPS to $url $gpsJson using jwt $token");
+    logNoStack.d("SEND GPS to $url $gpsJson using jwt $token");
     try {
       final response = await http.post(
         url,
