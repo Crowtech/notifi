@@ -165,7 +165,7 @@ Future<http.Response> apiGetData(
 
   // No data
   response = await http.get(url, headers: {
-    "Content-Type": "application/json",
+    "Content-Type": "$accept",
     "Accept": "${accept}",
   });
 
@@ -325,7 +325,7 @@ Future<Map> registerFCM(
 Future<String> fetchLatestAppVersion() async {
   var apiPath = "$defaultAPIBaseUrl$defaultApiPrefixPath/appversionss/latest";
   try {
-  var response = await apiGetData(apiPath,"application/text");
+  var response = await apiGetData(apiPath,"text/plain");
     logNoStack.i("FETCH LATEST APP VERSION: result ${response.toString()}");
     final map = jsonDecode(response.body);
     AppVersion appVersion = AppVersion.fromJson(map);
