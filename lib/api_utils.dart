@@ -124,7 +124,7 @@ Future<dynamic> apiPostData(Locale locale, String token, String apiPath,
 
 Future<http.Response> apiPostDataStrNoLocale(
     String token, String apiPath, String? jsonDataStr) async {
-  var url = Uri.parse("$defaultAPIBaseUrl$apiPath");
+  var url = Uri.parse("$apiPath");
 
   final http.Response response;
   if (jsonDataStr != null) {
@@ -158,7 +158,7 @@ Future<http.Response> apiPostDataStrNoLocale(
 
 Future<http.Response> apiGetData(
     String apiPath) async {
-  var url = Uri.parse("$defaultAPIBaseUrl$apiPath");
+  var url = Uri.parse("$apiPath");
 
   final http.Response response;
 
@@ -181,7 +181,7 @@ Future<http.Response> apiGetData(
 
 Future<http.Response> apiPostDataStr(
     Locale locale, String token, String apiPath, String? jsonDataStr) async {
-  var url = Uri.parse("$defaultAPIBaseUrl$apiPath");
+  var url = Uri.parse("$apiPath");
 
   final http.Response response;
   if (jsonDataStr != null) {

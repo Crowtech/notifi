@@ -129,7 +129,7 @@ class _GeoPageState extends ConsumerState<GeoPage>
                 "orgid": _currentUser.orgid,
                 "resourcecode":
                     getResourceCode(app_state.cachedAuthedUser.of(context)!),
-                "resourceid": 0,
+                "resourceid": _currentUser.id,
                 "deviceid": prov.Provider.of<Notifi>(context).deviceId,
               },
               method: "POST",

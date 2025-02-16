@@ -100,6 +100,6 @@ class GPS extends CrowtechBase<GPS> {
     if (person != null) {
       personStr = "${person!.email} ${person!.gender == GenderType.MALE ? 'MALE':'FEMALE'} ";
     }
-    return "GPS=>$id $created  $orgid  $resourcecode $latitude $longitude $speed $heading $personStr";
+    return "GPS=> $created  $orgid  $resourcecode $latitude $longitude $speed $heading $personStr";
   }
 }
