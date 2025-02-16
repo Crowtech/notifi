@@ -31,10 +31,10 @@ class GPS extends CrowtechBase<GPS> {
   Person? person;
 
   GPS({
-    int? orgid = 0,
-    int? id = 0,
-    String? code,
-    DateTime? created,
+    super.orgid = 0,
+    super.id = 0,
+    super.code,
+    super.created,
     String? jwt,
     this.resourcecode = "",
     this.resourceid = 0,
@@ -49,10 +49,7 @@ class GPS extends CrowtechBase<GPS> {
     this.moving = false,
     this.person = null,
   }) {
-    this.orgid = orgid;
-    this.id = id;
-    this.code = code;
-    this.created = created;
+   
   
 
     // if (person != null) {

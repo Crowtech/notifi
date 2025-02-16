@@ -72,7 +72,7 @@ Future<String> sendGPS(Person currentUser,String token, bg.Location location) as
 
  //   String jwtType = "UNKNOWN";
 
-      logNoStack.i("sendGPS, currentUser is ${currentUser.email} id=${currentUser.id} resourcecode=${currentUser.code}");
+      logNoStack.i("sendGPS, currentUser is  orgid:  ${currentUser.orgid} ${currentUser.email} id=${currentUser.id} resourcecode=${currentUser.code}");
       // if (token != null) {
       //   Map<String, dynamic> decodedToken = JwtDecoder.decode(token);
       //   resourcecode = decodedToken['sub'];
