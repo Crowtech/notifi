@@ -11,6 +11,7 @@ import 'package:notifi/models/appversion.dart';
 import 'package:notifi/models/gps.dart';
 import 'package:notifi/models/nestfilter.dart';
 import 'package:notifi/models/person.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import 'models/crowtech_basepage.dart';
 
@@ -326,10 +327,10 @@ Future<String> fetchLatestAppVersion() async {
   var apiPath = "$defaultAPIBaseUrl$defaultApiPrefixPath/appversionss/latest";
   try {
   var response = await apiGetData(apiPath,"application/json");
-    logNoStack.i("FETCH LATEST APP VERSION: result ${response.body}");
+    logNoStack.d("FETCH LATEST APP VERSION: result ${response.body}");
     final map = jsonDecode(response.body);
     AppVersion appVersion = AppVersion.fromJson(map);
-    log.i("AppVersion is $appVersion");
+    log.i("Latest AppVersion is $appVersion , current version is $appVersion");
   //return response.body;
     return appVersion.version!;
 

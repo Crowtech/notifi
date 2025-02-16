@@ -109,6 +109,7 @@ class Notifi extends ChangeNotifier {
   String? get deviceId => _deviceId;
 
   PackageInfo? get packageInfo => _packageInfo;
+  String get appVersion => _packageInfo.version;
 
   /// List of items in the cart.
   List<String> get topics => _topics;
