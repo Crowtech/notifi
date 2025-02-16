@@ -122,6 +122,13 @@ Future<String> sendGPS(Person currentUser,String token, bg.Location location) as
       orgid: currentUser.orgid,
     );
 
+// this is because the class inheritance doesn't seem to want to set the fields from the constructor
+    gps.orgid = currentUser.orgid;
+    gps.resourcecode = currentUser.code!;
+    gps.resourceid = currentUser.id!;
+
+
+
   logNoStack.i("Sending GPS gps $gps");
 
     String gpsJson;
