@@ -33,10 +33,10 @@ class GeoMap3 extends ConsumerStatefulWidget  with WidgetsBindingObserver {
   const GeoMap3({super.key});
 
   @override
-  ConsumerState createState() => GeoMap2State();
+  ConsumerState createState() => GeoMap3State();
 }
 
-class GeoMap2State extends ConsumerState<GeoMap3>
+class GeoMap3State extends ConsumerState<GeoMap3>
     with AutomaticKeepAliveClientMixin<GeoMap3> {
   static const LOCATION_ARROW_IMAGE_PATH =
       "assets/images/markers/location-arrow-blue.png";
@@ -116,6 +116,7 @@ void dispose() {
     logNoStack.i("GEOMAP3: INIT STATE");
       WidgetsBinding.instance.addPostFrameCallback((_) {
       logNoStack.i("homepage: STARTING GEOLOCATION!!!");
+      getInitialPos();
        ref.read(locationsProvider.notifier).setLocale(Localizations.localeOf(context)); // trigger the location getching every 10 sec
     });
 
@@ -483,7 +484,7 @@ void dispose() {
   Widget build(BuildContext context) {
     super.build(context);
     //if (_mapController == null) {
-      getInitialPos();
+      
     //  return const SizedBox.shrink();
     //}
     logNoStack.i("GEOMAP3: trigger locale");
