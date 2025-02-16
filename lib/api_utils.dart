@@ -322,7 +322,7 @@ Future<Map> registerFCM(
 }
 
 Future<String> fetchLatestAppVersion() async {
-  var apiPath = "$defaultAPIBaseUrl$defaultApiPrefixPath/appversionss/version";
+  var apiPath = "$defaultAPIBaseUrl$defaultApiPrefixPath/appversionss/latest";
   try {
   var response = await apiGetData(apiPath);
     logNoStack.i("FETCH LATEST APP VERSION: result ${response.toString()}");
