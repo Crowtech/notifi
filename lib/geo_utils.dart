@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/credentials.dart';
+import 'package:notifi/jwt_utils.dart';
 import 'package:notifi/models/gps.dart';
 //import 'package:logger/printart';
 import 'package:flutter_background_geolocation/flutter_background_geolocation.dart'
@@ -11,6 +12,8 @@ import 'package:flutter_background_geolocation/flutter_background_geolocation.da
 import 'dart:collection' as collection;
 
 import 'package:uuid/uuid.dart';
+
+import 'models/person.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -61,31 +64,34 @@ String isoDate = now.toIso8601String();
 }
 
 
-Future<String> sendGPS(int orgid, deviceId,token,bg.Location location) async {
+Future<String> sendGPS(Person currentUser,String token, bg.Location location) async {
     // Create a Map
+
+  String deviceId = await fetchDeviceId();
+
     String resourcecode = "";
-    String jwtType = "UNKNOWN";
+ //   String jwtType = "UNKNOWN";
 
       logNoStack.d("Resourcecode is NULL! ");
-      if (token != null) {
-        Map<String, dynamic> decodedToken = JwtDecoder.decode(token);
-        resourcecode = decodedToken['sub'];
-        logNoStack.d("resource sub code is $resourcecode");
-        jwtType = decodedToken['typ'];
-        // convert to backend format
-        final RegExp pattern = RegExp(r'[^a-zA-Z0-9]');
-        resourcecode = resourcecode.replaceAll(pattern, "_");
-        resourcecode = "PER_${resourcecode.toUpperCase()}";
+      // if (token != null) {
+      //   Map<String, dynamic> decodedToken = JwtDecoder.decode(token);
+      //   resourcecode = decodedToken['sub'];
+      //   logNoStack.d("resource sub code is $resourcecode");
+      //   jwtType = decodedToken['typ'];
+      //   // convert to backend format
+      //   final RegExp pattern = RegExp(r'[^a-zA-Z0-9]');
+      //   resourcecode = resourcecode.replaceAll(pattern, "_");
+      //   resourcecode = "PER_${resourcecode.toUpperCase()}";
 
 
-        logNoStack.d(
-            "sendGPS Constructor resourcecode is $resourcecode from JWT:$jwtType");
-      } else {
-        logNoStack.e("SendGPS TOKEN is null");
-      }
+      //   logNoStack.d(
+      //       "sendGPS Constructor resourcecode is $resourcecode from JWT:$jwtType");
+      // } else {
+      //   logNoStack.e("SendGPS TOKEN is null");
+      // }
 
 
-logNoStack.d("RESOURCECODE in sendGPS IS $resourcecode");
+//logNoStack.d("RESOURCECODE in sendGPS IS $resourcecode");
     // if (JwtDecoder.isExpired(token!)) {
     //   logNoStack.d("JWT has EXPIRED!");
     //   widget.jwt = "sadfsadf";//Provider.of<OgAuthProvider>(context, listen: false)
@@ -111,9 +117,9 @@ logNoStack.d("RESOURCECODE in sendGPS IS $resourcecode");
       charging: location.battery.isCharging,
       timestampStr: location.timestamp,
       moving: location.isMoving,
-      resourcecode: resourcecode,
+      resourcecode: currentUser.code!,
       devicecode: deviceId,
-      orgid: orgid,
+      orgid: currentUser.orgid,
     );
 
   logNoStack.i("Sending GPS gps $gps");
