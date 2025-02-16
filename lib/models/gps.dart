@@ -31,8 +31,8 @@ class GPS extends CrowtechBase<GPS> {
   Person? person;
 
   GPS({
-    int? orgid,
-    int? id,
+    int? orgid = 0,
+    int? id = 0,
     String? code,
     DateTime? created,
     String? jwt,
@@ -100,6 +100,6 @@ class GPS extends CrowtechBase<GPS> {
     if (person != null) {
       personStr = "${person!.email} ${person!.gender == GenderType.MALE ? 'MALE':'FEMALE'} ";
     }
-    return "GPS=> $created  $orgid  $resourcecode $latitude $longitude $speed $heading $personStr";
+    return "GPS==> ${super.toString()} $resourcecode $latitude $longitude $speed $heading $personStr";
   }
 }
