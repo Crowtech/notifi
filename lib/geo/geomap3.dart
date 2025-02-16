@@ -33,10 +33,10 @@ class GeoMap3 extends ConsumerStatefulWidget  with WidgetsBindingObserver {
   const GeoMap3({super.key});
 
   @override
-  ConsumerState createState() => GeoMap3State();
+  ConsumerState createState() => GeoMap2State();
 }
 
-class GeoMap3State extends ConsumerState<GeoMap3>
+class GeoMap2State extends ConsumerState<GeoMap3>
     with AutomaticKeepAliveClientMixin<GeoMap3> {
   static const LOCATION_ARROW_IMAGE_PATH =
       "assets/images/markers/location-arrow-blue.png";
@@ -81,7 +81,7 @@ class GeoMap3State extends ConsumerState<GeoMap3>
 
   getInitialPos() async {
     LatLng pos = await _getCurrentPosition();
-    logNoStack.d("GeoMap3: initState: got local position $pos");
+    logNoStack.d("initState: got local position $pos");
     _mapOptions = MapOptions(
       onPositionChanged: _onPositionChanged,
       center: _center,
@@ -94,7 +94,6 @@ class GeoMap3State extends ConsumerState<GeoMap3>
 
 @override
 void deactivate() {
-  logNoStack.i("GEOMAP3: START OF DEACTIVATION");
   if (!mounted) return;
  ref.read(locationsProvider.notifier).stopTimer();
  super.deactivate();
@@ -113,16 +112,8 @@ void dispose() {
   @override
   void initState() {
     super.initState();
-    logNoStack.i("GEOMAP3: INIT STATE");
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-      logNoStack.i("homepage: STARTING GEOLOCATION!!!");
-      getInitialPos();
-       ref.read(locationsProvider.notifier).setLocale(Localizations.localeOf(context)); // trigger the location getching every 10 sec
-    });
-
     
- 
-
+    getInitialPos();
     // logNoStack.d("initState: got local position $_center");
     // _mapOptions = MapOptions(
     //     onPositionChanged: _onPositionChanged,
@@ -484,11 +475,11 @@ void dispose() {
   Widget build(BuildContext context) {
     super.build(context);
     if (_mapController == null) {
-      
+      getInitialPos();
       return const SizedBox.shrink();
     }
     logNoStack.i("GEOMAP3: trigger locale");
-    //ref.read(locationsProvider.notifier).setLocale(Localizations.localeOf(context)); // trigger the location getching every 10 sec
+    ref.read(locationsProvider.notifier).setLocale(Localizations.localeOf(context)); // trigger the location getching every 10 sec
  
     return Column(children: [
       // Container(
