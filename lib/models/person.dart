@@ -32,7 +32,7 @@ class Person extends Resource {
   String? token; // used to get roles
 
   Person(
-      {super.orgId,
+      {super.orgid,
       super.id,
       super.code,
       super.created,

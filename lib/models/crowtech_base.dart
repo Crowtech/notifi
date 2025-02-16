@@ -7,12 +7,12 @@ abstract class CrowtechBase<T> {
   static String className = "CrowtechBase";
   static String tablename = className.toLowerCase();
 
-  int? orgId;
+  int? orgid;
   int? id;
   DateTime? created = DateTime.now().toUtc();
   String? code;
 
-  CrowtechBase({this.orgId,this.id, this.created, this.code}); 
+  CrowtechBase({this.orgid,this.id, this.created, this.code}); 
 
   //CrowtechBase.namedConstructor({this.id, required this.created, this.code});
 

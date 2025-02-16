@@ -31,7 +31,7 @@ class GPS extends CrowtechBase<GPS> {
   Person? person;
 
   GPS({
-    int? orgId,
+    int? orgid,
     int? id,
     String? code,
     DateTime? created,
@@ -49,7 +49,7 @@ class GPS extends CrowtechBase<GPS> {
     this.moving = false,
     this.person,
   }) {
-    this.orgId = orgId;
+    this.orgid = orgid;
     this.id = id;
     this.code = code;
     this.created = created;
@@ -100,6 +100,6 @@ class GPS extends CrowtechBase<GPS> {
     if (person != null) {
       personStr = "${person!.email} ${person!.gender == GenderType.MALE ? 'MALE':'FEMALE'} ";
     }
-    return "GPS=>$id $created  $orgId  $resourcecode $latitude $longitude $speed $heading $personStr";
+    return "GPS=>$id $created  $orgid  $resourcecode $latitude $longitude $speed $heading $personStr";
   }
 }
