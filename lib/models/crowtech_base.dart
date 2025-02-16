@@ -23,6 +23,6 @@ abstract class CrowtechBase<T> {
 
   @override
   String toString() {
-    return "$orgid $id $created $code ";
+    return "$orgid, $id, $created, $code ";
   }
 }
