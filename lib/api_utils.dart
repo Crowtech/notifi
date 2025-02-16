@@ -158,7 +158,7 @@ Future<http.Response> apiPostDataStrNoLocale(
 
 Future<http.Response> apiGetData(
     String apiPath) async {
-  var url = Uri.parse("$apiPath");
+  var url = Uri.parse(apiPath);
 
   final http.Response response;
 
@@ -168,13 +168,13 @@ Future<http.Response> apiGetData(
     "Accept": "application/json",
   });
 
-  log.d(response.statusCode);
+  log.i("Response code for apiGeData is ${response.statusCode} for $apiPath");
   if (response.statusCode == 202 ||
       response.statusCode == 201 ||
       response.statusCode == 200) {
     return response;
   } else {
-    log.e("API GET DATA: apiPGetData created unsuccessfully!");
+    log.e("API GET DATA: apiGetData created unsuccessfully! ${response.statusCode}");
     throw "api Get created unsuccessfully!";
   }
 }
