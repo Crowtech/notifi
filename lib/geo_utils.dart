@@ -61,7 +61,7 @@ String isoDate = now.toIso8601String();
 }
 
 
-Future<String> sendGPS(int orgId, deviceId,token,bg.Location location) async {
+Future<String> sendGPS(int orgid, deviceId,token,bg.Location location) async {
     // Create a Map
     String resourcecode = "";
     String jwtType = "UNKNOWN";
@@ -113,7 +113,7 @@ logNoStack.d("RESOURCECODE in sendGPS IS $resourcecode");
       moving: location.isMoving,
       resourcecode: resourcecode,
       devicecode: deviceId,
-      orgId: orgId,
+      orgid: orgid,
     );
 
   logNoStack.i("Sending GPS gps $gps");

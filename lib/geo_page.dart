@@ -126,7 +126,7 @@ class _GeoPageState extends ConsumerState<GeoPage>
                     "Bearer ${app_state.cachedAuthedUser.of(context)!.token.accessToken}"
               },
               extras: {
-                "orgid": _currentUser.orgId,
+                "orgid": _currentUser.orgid,
                 "resourcecode":
                     getResourceCode(app_state.cachedAuthedUser.of(context)!),
                 "resourceid": 0,
