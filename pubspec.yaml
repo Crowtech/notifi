@@ -79,6 +79,7 @@ dependencies:
   flutter_animate: ^4.5.2
   flutter_native_splash: ^2.4.4
   flutter_svg: ^2.0.17
+  flutter_map_animations: ^0.9.0
 
 
 
