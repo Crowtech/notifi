@@ -42,12 +42,12 @@ class StateLogger extends ProviderObserver {
   newValue: $newValue
 }
 ''');
-if (provider.name == "authControllerProvider") {
-  int startPos = newValue.toString().indexOf("Auth.signedIn");
-  String authStr = newValue.toString().substring(startPos);
-  int endPos = authStr.toString().indexOf("))");
-  authStr = authStr.substring(0,endPos);
-    logNoStack.i("Auth is signed in :$authStr");
-}
+// if (provider.name == "authControllerProvider") {
+//   int startPos = newValue.toString().indexOf("Auth.signedIn");
+//   String authStr = newValue.toString().substring(startPos);
+//   int endPos = authStr.toString().indexOf("))");
+//   authStr = authStr.substring(0,endPos);
+//     logNoStack.i("Auth is signed in :$authStr");
+// }
   }
 }
