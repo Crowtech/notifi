@@ -59,14 +59,16 @@ var logNoStack = logger.Logger(
  bool isLoggedIn = false;
 
   void signIn() {
-    state.isSignedIn = true;
+   
     isLoggedIn = true;
+    state.isSignedIn = true;
     notifyListeners();
   }
 
   void signOut() {
-    state.isSignedIn = false;
+  
     isLoggedIn = false;
+    state.isSignedIn = false;
     notifyListeners();
   }
 }
