@@ -59,13 +59,7 @@ class NestAuthController extends Notifier<Person> with ChangeNotifier {
 //Within this section, you can integrate authentication methods
 //such as Firebase, SharedPreferences, and more.
 
-  void signIn() {
-    logNoStack.i("NEST_AUTH_CONTROLLER : SIGN_IN");
-    currentUser.isSignedIn = true;
-    isLoggedIn = true;
-    // state = user;
-    notifyListeners();
-  }
+  
 
   void signOut() {
     logNoStack.i("NEST_AUTH_CONTROLLER : SIGN_OUT");
@@ -73,6 +67,14 @@ class NestAuthController extends Notifier<Person> with ChangeNotifier {
     isLoggedIn = false;
     notifyListeners();
     state = defaultPerson;
+  }
+
+  void signIn() {
+    logNoStack.i("NEST_AUTH_CONTROLLER : SIGN_IN");
+    currentUser.isSignedIn = true;
+    isLoggedIn = true;
+    // state = user;
+    notifyListeners();
   }
 }
 
