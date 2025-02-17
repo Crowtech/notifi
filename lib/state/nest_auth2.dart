@@ -56,20 +56,18 @@ class NestAuthController extends Notifier<Person> with ChangeNotifier {
 //such as Firebase, SharedPreferences, and more.
 
   bool isLoggedIn = false;
+  Person currentUser = defaultPerson;
 
   void signIn() {
-    Person user = defaultPerson;
-    user.isSignedIn = true;
+    currentUser.isSignedIn = true;
     isLoggedIn = true;
    // state = user;
     notifyListeners();
   }
 
   void signOut() {
-    Person nouser = defaultPerson;
-    nouser.isSignedIn = false;
+   currentUser.isSignedIn = false;
     isLoggedIn = false;
-    state = nouser;
     notifyListeners();
   }
 }
