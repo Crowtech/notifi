@@ -196,6 +196,19 @@ class AuthController extends _$AuthController {
 
   Future<void> loginOidc(OidcUser? oidcUser) async {
     log.i("AUTH_CONTROLLER  LOGIN_OIDC: START");
+    
+     final userId = await ref.watch(
+    authControllerProvider.selectAsync(
+      (value) => value.map(
+        signedIn: (signedIn) => signedIn.id,
+        signedOut: (signedOut) => null,
+      ),
+    ),
+  );
+
+  if (userId != null) return;
+
+
     if (oidcUser != null) {
       log.i(
           "AUTH_CONTROLLER  LOGIN_OIDC: In AuthControllerLogin: oidcUser is ${oidcUser.userInfo['email']} fetching user ");
