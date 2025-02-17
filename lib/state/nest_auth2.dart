@@ -18,8 +18,7 @@ var logNoStack = logger.Logger(
 );
 
 //class NestAuthController with ChangeNotifier {
- class NestAuthController  extends Notifier<Person> with ChangeNotifier  {
-
+class NestAuthController extends Notifier<Person> with ChangeNotifier {
   OidcPlatformSpecificOptions_Web_NavigationMode webNavigationMode = (kIsWeb
       ? OidcPlatformSpecificOptions_Web_NavigationMode.samePage
       : OidcPlatformSpecificOptions_Web_NavigationMode.newPage); // was newPage
@@ -47,28 +46,28 @@ var logNoStack = logger.Logger(
       windows: const OidcPlatformSpecificOptions_Native(),
     );
   }
-  
+
   @override
   Person build() => defaultPerson;
 
+//Within this section, you can integrate authentication methods
+//such as Firebase, SharedPreferences, and more.
 
-
-//Within this section, you can integrate authentication methods 
-//such as Firebase, SharedPreferences, and more. 
-
- bool isLoggedIn = false;
+  bool isLoggedIn = false;
 
   void signIn() {
-   
+    Person user = defaultPerson;
+    user.isSignedIn = true;
     isLoggedIn = true;
-    state.isSignedIn = true;
+    state = user;
     notifyListeners();
   }
 
   void signOut() {
-  
+    Person nouser = defaultPerson;
+    nouser.isSignedIn = false;
     isLoggedIn = false;
-    state.isSignedIn = false;
+    state = nouser;
     notifyListeners();
   }
 }
