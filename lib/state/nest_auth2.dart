@@ -22,8 +22,8 @@ var logNoStack = logger.Logger(
   level: logger.Level.info,
 );
 
-//class NestAuthController with ChangeNotifier {
-class NestAuthController extends Notifier<Person> with ChangeNotifier {
+class NestAuthController with ChangeNotifier {
+//class NestAuthController extends Notifier<Person> with ChangeNotifier {
   OidcPlatformSpecificOptions_Web_NavigationMode webNavigationMode = (kIsWeb
       ? OidcPlatformSpecificOptions_Web_NavigationMode.samePage
       : OidcPlatformSpecificOptions_Web_NavigationMode.newPage); // was newPage
@@ -69,7 +69,7 @@ class NestAuthController extends Notifier<Person> with ChangeNotifier {
     currentUser.isSignedIn = false;
     isLoggedIn = false;
     notifyListeners();
-    state = defaultPerson;
+    //state = defaultPerson;
     // Person(
     //   isSignedIn: false,
     //   orgid: 0,
@@ -108,37 +108,37 @@ class NestAuthController extends Notifier<Person> with ChangeNotifier {
    
 
 
-    state = Person(
-      isSignedIn: true,
-      orgid: 0,
-      id: 0,
-      code: "PER_DEFAULT", // code
-      created: DateTime.now(), // created
-      updated: DateTime.now(), // updated
-      name: "Logged In Person", // name
-      description: "This is a default Person", // description
-      location: "", // location
-      devicecode: "DEVICE-CODE", // device code
-      username: "USERNAME", // username
-      email: "user+loggedin@email.com", // email
-      firstname: "", // firstname
-      lastname: "", // lastname
-      nickname: "", //nickname,
-      gender: GenderType.UNDEFINED, //gender,
-      i18n: "en", //i18n,
-      country: "Australia", //country,
-      longitude: 0.0, //longitude,
-      latitude: 0.0, //latitude,
-      birthyear: 0, //birthyear,
-      fcm: "FCM",
-      avatarUrl: "https://gravatar.com/avatar/${generateMd5("user@email.com")}",
-    ); //fcm
+    // state = Person(
+    //   isSignedIn: true,
+    //   orgid: 0,
+    //   id: 0,
+    //   code: "PER_DEFAULT", // code
+    //   created: DateTime.now(), // created
+    //   updated: DateTime.now(), // updated
+    //   name: "Logged In Person", // name
+    //   description: "This is a default Person", // description
+    //   location: "", // location
+    //   devicecode: "DEVICE-CODE", // device code
+    //   username: "USERNAME", // username
+    //   email: "user+loggedin@email.com", // email
+    //   firstname: "", // firstname
+    //   lastname: "", // lastname
+    //   nickname: "", //nickname,
+    //   gender: GenderType.UNDEFINED, //gender,
+    //   i18n: "en", //i18n,
+    //   country: "Australia", //country,
+    //   longitude: 0.0, //longitude,
+    //   latitude: 0.0, //latitude,
+    //   birthyear: 0, //birthyear,
+    //   fcm: "FCM",
+    //   avatarUrl: "https://gravatar.com/avatar/${generateMd5("user@email.com")}",
+    // ); //fcm
      notifyListeners();
   }
 }
 
 final nestAuthProvider2 = ChangeNotifierProvider((ref) => NestAuthController());
 
-final nestAuthProvider = NotifierProvider<NestAuthController, Person>(
-  () => NestAuthController(),
-);
+// final nestAuthProvider = NotifierProvider<NestAuthController, Person>(
+//   () => NestAuthController(),
+// );
