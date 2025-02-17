@@ -102,7 +102,7 @@ class NestAuthController with ChangeNotifier {
 
   void signIn() {
     logNoStack.i("NEST_AUTH_CONTROLLER : SIGN_IN");
-    // currentUser.isSignedIn = true;
+    currentUser.isSignedIn = true;
     isLoggedIn = true;
 
    
@@ -137,7 +137,7 @@ class NestAuthController with ChangeNotifier {
   }
 }
 
-final nestAuthProvider2 = ChangeNotifierProvider((ref) => NestAuthController());
+final nestAuthProvider = ChangeNotifierProvider((ref) => NestAuthController());
 
 // final nestAuthProvider = NotifierProvider<NestAuthController, Person>(
 //   () => NestAuthController(),
