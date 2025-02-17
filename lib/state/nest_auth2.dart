@@ -7,6 +7,8 @@ import 'package:oidc/oidc.dart';
 import 'package:notifi/app_state.dart' as app_state;
 import 'package:logger/logger.dart' as logger;
 
+part 'nest_auth2.g.dart';
+
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
   level: logger.Level.info,
@@ -57,7 +59,6 @@ class NestAuthController extends Notifier<Person> with ChangeNotifier {
 
 //Within this section, you can integrate authentication methods
 //such as Firebase, SharedPreferences, and more.
-
 
 
   void signIn() {
