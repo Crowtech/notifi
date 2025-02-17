@@ -91,6 +91,8 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get still => 'Still';
 	String get terms_and_conditions => 'Terms & Conditions';
 	String get test_page => 'Test Page';
+	String get zoom_in => 'Zoom In';
+	String get zoom_out => 'Zoom out';
 	Map<String, String> get locales => {
 		'en': 'English',
 		'zh': 'Chinese',
@@ -168,6 +170,8 @@ extension on Translations {
 			case 'still': return 'Still';
 			case 'terms_and_conditions': return 'Terms & Conditions';
 			case 'test_page': return 'Test Page';
+			case 'zoom_in': return 'Zoom In';
+			case 'zoom_out': return 'Zoom out';
 			case 'locales.en': return 'English';
 			case 'locales.zh': return 'Chinese';
 			default: return null;

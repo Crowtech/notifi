@@ -24,6 +24,7 @@
   "email": "电子邮件",
   "exposure_mode": "曝光模式",
   "exposure_offset": "曝光偏移",
+  "favourite": "最喜欢的",
   "firstname": "给定的名称",
   "focus_mode": "专注模式",
   "groups": "群组", 
@@ -55,7 +56,9 @@
   "still": "固定的",
   "terms_and_conditions": "条款和条件",
   "test_page": "测试页",
-  "favourite": "最喜欢的",
+  "zoom_in": "放大",
+  "zoom_out": "缩小",
+
 
   "locales(map)": {
     "en": "英文",

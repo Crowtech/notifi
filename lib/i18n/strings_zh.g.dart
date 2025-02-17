@@ -55,6 +55,7 @@ class TranslationsZh implements Translations {
 	@override String get email => '电子邮件';
 	@override String get exposure_mode => '曝光模式';
 	@override String get exposure_offset => '曝光偏移';
+	@override String get favourite => '最喜欢的';
 	@override String get firstname => '给定的名称';
 	@override String get focus_mode => '专注模式';
 	@override String get groups => '群组';
@@ -86,7 +87,8 @@ class TranslationsZh implements Translations {
 	@override String get still => '固定的';
 	@override String get terms_and_conditions => '条款和条件';
 	@override String get test_page => '测试页';
-	@override String get favourite => '最喜欢的';
+	@override String get zoom_in => '放大';
+	@override String get zoom_out => '缩小';
 	@override Map<String, String> get locales => {
 		'en': '英文',
 		'zh': '中文',
@@ -132,6 +134,7 @@ extension on TranslationsZh {
 			case 'email': return '电子邮件';
 			case 'exposure_mode': return '曝光模式';
 			case 'exposure_offset': return '曝光偏移';
+			case 'favourite': return '最喜欢的';
 			case 'firstname': return '给定的名称';
 			case 'focus_mode': return '专注模式';
 			case 'groups': return '群组';
@@ -163,7 +166,8 @@ extension on TranslationsZh {
 			case 'still': return '固定的';
 			case 'terms_and_conditions': return '条款和条件';
 			case 'test_page': return '测试页';
-			case 'favourite': return '最喜欢的';
+			case 'zoom_in': return '放大';
+			case 'zoom_out': return '缩小';
 			case 'locales.en': return '英文';
 			case 'locales.zh': return '中文';
 			default: return null;
