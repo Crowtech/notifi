@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -54,7 +56,7 @@ class NestAuthController extends Notifier<Person> with ChangeNotifier {
   }
 
   @override
-  Person build() {
+  Person build()  {
     logNoStack.i("NEST_AUTH_CONTROLLER : BUILD");
     return defaultPerson;
   }
