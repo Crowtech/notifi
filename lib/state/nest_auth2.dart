@@ -26,6 +26,9 @@ class NestAuthController extends Notifier<Person> with ChangeNotifier {
   bool allowInsecureConnections = false;
   bool preferEphemeralSession = false;
 
+    bool isLoggedIn = false;
+  Person currentUser = defaultPerson;
+
   OidcPlatformSpecificOptions _getOptions() {
     return OidcPlatformSpecificOptions(
       web: OidcPlatformSpecificOptions_Web(
@@ -55,8 +58,7 @@ class NestAuthController extends Notifier<Person> with ChangeNotifier {
 //Within this section, you can integrate authentication methods
 //such as Firebase, SharedPreferences, and more.
 
-  bool isLoggedIn = false;
-  Person currentUser = defaultPerson;
+
 
   void signIn() {
     currentUser.isSignedIn = true;
@@ -69,6 +71,7 @@ class NestAuthController extends Notifier<Person> with ChangeNotifier {
    currentUser.isSignedIn = false;
     isLoggedIn = false;
     notifyListeners();
+    state = defaultPerson;
   }
 }
 
