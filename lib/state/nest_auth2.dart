@@ -102,7 +102,7 @@ class NestAuthController extends Notifier<Person> with ChangeNotifier {
     logNoStack.i("NEST_AUTH_CONTROLLER : SIGN_IN");
     currentUser.isSignedIn = true;
     isLoggedIn = true;
-    state = state = Person(
+    state  = Person(
   isSignedIn: true,
   orgid: 0,
   id: 0,
