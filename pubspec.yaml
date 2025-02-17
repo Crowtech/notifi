@@ -1,7 +1,7 @@
 name: notifi
 description: "Crowtech Common Library."
 
-version: 0.0.67
+version: 0.0.68
 #homepage:
 
 environment:
@@ -81,6 +81,7 @@ dependencies:
   flutter_svg: ^2.0.17
   flutter_map_animations: ^0.9.0
   flutter_map_cancellable_tile_provider: ^3.1.0
+
 
 
 

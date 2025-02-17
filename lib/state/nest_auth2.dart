@@ -64,34 +64,35 @@ class NestAuthController extends Notifier<Person> with ChangeNotifier {
 
   void signOut() {
     logNoStack.i("NEST_AUTH_CONTROLLER : SIGN_OUT");
-    //currentUser.isSignedIn = false;
+    currentUser.isSignedIn = false;
     isLoggedIn = false;
     notifyListeners();
-    state = Person(
-      isSignedIn: false,
-      orgid: 0,
-      id: 0,
-      code: "PER_DEFAULT", // code
-      created: DateTime.now(), // created
-      updated: DateTime.now(), // updated
-      name: "Default Person", // name
-      description: "This is a default Person", // description
-      location: "", // location
-      devicecode: "DEVICE-CODE", // device code
-      username: "USERNAME", // username
-      email: "user@email.com", // email
-      firstname: "", // firstname
-      lastname: "", // lastname
-      nickname: "", //nickname,
-      gender: GenderType.UNDEFINED, //gender,
-      i18n: "en", //i18n,
-      country: "Australia", //country,
-      longitude: 0.0, //longitude,
-      latitude: 0.0, //latitude,
-      birthyear: 0, //birthyear,
-      fcm: "FCM",
-      avatarUrl: "https://gravatar.com/avatar/${generateMd5("user@email.com")}",
-    ); //fcm
+    state = defaultPerson;
+    // Person(
+    //   isSignedIn: false,
+    //   orgid: 0,
+    //   id: 0,
+    //   code: "PER_DEFAULT", // code
+    //   created: DateTime.now(), // created
+    //   updated: DateTime.now(), // updated
+    //   name: "Default Person", // name
+    //   description: "This is a default Person", // description
+    //   location: "", // location
+    //   devicecode: "DEVICE-CODE", // device code
+    //   username: "USERNAME", // username
+    //   email: "user@email.com", // email
+    //   firstname: "", // firstname
+    //   lastname: "", // lastname
+    //   nickname: "", //nickname,
+    //   gender: GenderType.UNDEFINED, //gender,
+    //   i18n: "en", //i18n,
+    //   country: "Australia", //country,
+    //   longitude: 0.0, //longitude,
+    //   latitude: 0.0, //latitude,
+    //   birthyear: 0, //birthyear,
+    //   fcm: "FCM",
+    //   avatarUrl: "https://gravatar.com/avatar/${generateMd5("user@email.com")}",
+    // ); //fcm
   }
 
 
@@ -102,6 +103,8 @@ class NestAuthController extends Notifier<Person> with ChangeNotifier {
     // currentUser.isSignedIn = true;
     isLoggedIn = true;
     notifyListeners();
+
+    
     state = Person(
       isSignedIn: true,
       orgid: 0,
