@@ -7,8 +7,6 @@ import 'package:oidc/oidc.dart';
 import 'package:notifi/app_state.dart' as app_state;
 import 'package:logger/logger.dart' as logger;
 
-part 'nest_auth2.g.dart';
-
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
   level: logger.Level.info,
@@ -28,7 +26,7 @@ class NestAuthController extends Notifier<Person> with ChangeNotifier {
   bool allowInsecureConnections = false;
   bool preferEphemeralSession = false;
 
-    bool isLoggedIn = false;
+  bool isLoggedIn = false;
   Person currentUser = defaultPerson;
 
   OidcPlatformSpecificOptions _getOptions() {
@@ -54,22 +52,24 @@ class NestAuthController extends Notifier<Person> with ChangeNotifier {
 
   @override
   Person build() {
+    logNoStack.i("NEST_AUTH_CONTROLLER : BUILD");
     return defaultPerson;
   }
 
 //Within this section, you can integrate authentication methods
 //such as Firebase, SharedPreferences, and more.
 
-
   void signIn() {
+    logNoStack.i("NEST_AUTH_CONTROLLER : SIGN_IN");
     currentUser.isSignedIn = true;
     isLoggedIn = true;
-   // state = user;
+    // state = user;
     notifyListeners();
   }
 
   void signOut() {
-   currentUser.isSignedIn = false;
+    logNoStack.i("NEST_AUTH_CONTROLLER : SIGN_OUT");
+    currentUser.isSignedIn = false;
     isLoggedIn = false;
     notifyListeners();
     state = defaultPerson;
