@@ -18,7 +18,7 @@ var logNoStack = logger.Logger(
 );
 
 //class NestAuthController with ChangeNotifier {
- class NestAuthController  extends Notifier<Person>  {
+ class NestAuthController  extends Notifier<Person> with ChangeNotifier  {
 
   OidcPlatformSpecificOptions_Web_NavigationMode webNavigationMode = (kIsWeb
       ? OidcPlatformSpecificOptions_Web_NavigationMode.samePage
@@ -61,17 +61,17 @@ var logNoStack = logger.Logger(
   void signIn() {
     state.isSignedIn = true;
     isLoggedIn = true;
-   // notifyListeners();
+    notifyListeners();
   }
 
   void signOut() {
     state.isSignedIn = false;
     isLoggedIn = false;
-   // notifyListeners();
+    notifyListeners();
   }
 }
 
-//final nestAuthProvider = ChangeNotifierProvider((ref) => NestAuthController());
+final nestAuthProvider2 = ChangeNotifierProvider((ref) => NestAuthController());
 
 final nestAuthProvider = NotifierProvider<NestAuthController, Person>(
   () => NestAuthController(),
