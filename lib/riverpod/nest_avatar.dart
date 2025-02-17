@@ -5,6 +5,7 @@ import 'package:notifi/credentials.dart';
 import 'package:notifi/riverpod/current_user.dart';
 
 import '../models/person.dart';
+import '../state/nest_auth2.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -26,7 +27,7 @@ class NestAvatar extends ConsumerWidget {
 
   @override
    Widget build(BuildContext context, WidgetRef ref) {
-    Person user = ref.watch(currentUserProvider);
+    Person user = ref.read(nestAuthProvider.notifier).currentUser;
     String personUrl = defaultUrl;
     String initials = defaultInitials;
 logNoStack.i("avatarUrl=${user.avatarUrl} diameter = $diameter initials = $initials");
