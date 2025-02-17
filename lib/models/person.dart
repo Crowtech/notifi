@@ -17,6 +17,8 @@ class Person extends Resource {
   static String className = "Person";
   static String tablename = className.toLowerCase();
 
+  bool isSignedIn;
+
   String username;
   String email;
   String firstname;
@@ -33,6 +35,7 @@ class Person extends Resource {
 
   Person(
       {
+      this.isSignedIn=false,
       super.orgid,
       super.id,
       super.code,
@@ -91,6 +94,8 @@ class Person extends Resource {
 }
 
 Person defaultPerson = Person(
+  isSignedIn: false,
+  orgid: 0,
   id: 0,
   code: "PER_DEFAULT", // code
   created: DateTime.now(), // created
