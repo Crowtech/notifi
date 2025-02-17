@@ -4,11 +4,15 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notifi/api_utils.dart';
+import 'package:notifi/credentials.dart';
 import 'package:notifi/jwt_utils.dart';
 import 'package:notifi/models/person.dart';
+import 'package:notifi/notifi.dart';
 import 'package:oidc/oidc.dart';
 import 'package:notifi/app_state.dart' as app_state;
 import 'package:logger/logger.dart' as logger;
+import 'package:flutter_background_geolocation/flutter_background_geolocation.dart'
+    as bg;
 
 import '../models/gendertype.dart';
 
@@ -128,74 +132,51 @@ Future<void> login() async {
 //Within this section, you can integrate authentication methods
 //such as Firebase, SharedPreferences, and more.
 
-  void signOut() {
+  void signOut() async {
     logNoStack.i("NEST_AUTH_CONTROLLER : SIGN_OUT");
     currentUser.isSignedIn = false;
-    token = null;
+
     isLoggedIn = false;
-    notifyListeners();
-    //state = defaultPerson;
-    // Person(
-    //   isSignedIn: false,
-    //   orgid: 0,
-    //   id: 0,
-    //   code: "PER_DEFAULT", // code
-    //   created: DateTime.now(), // created
-    //   updated: DateTime.now(), // updated
-    //   name: "Default Person", // name
-    //   description: "This is a default Person", // description
-    //   location: "", // location
-    //   devicecode: "DEVICE-CODE", // device code
-    //   username: "USERNAME", // username
-    //   email: "user@email.com", // email
-    //   firstname: "", // firstname
-    //   lastname: "", // lastname
-    //   nickname: "", //nickname,
-    //   gender: GenderType.UNDEFINED, //gender,
-    //   i18n: "en", //i18n,
-    //   country: "Australia", //country,
-    //   longitude: 0.0, //longitude,
-    //   latitude: 0.0, //latitude,
-    //   birthyear: 0, //birthyear,
-    //   fcm: "FCM",
-    //   avatarUrl: "https://gravatar.com/avatar/${generateMd5("user@email.com")}",
-    // ); //fcm
+   
+    if (!kIsWeb) {
+      bg.BackgroundGeolocation.stop();
+    }
+
+    logNoStack.i("NEST_AUTH LOGOUT , token is $token");
+    apiPostNoLocale(token!,
+            "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout")
+        .then((result) {
+      log.i("NEST_AUTHLOGOUT result $result");
+    }).catchError((error) {
+      log.e(
+          "NEST_AUTH LOGOUT  api logout error ${error.toString()}");
+    });
+
+    token = null;
+   
+  
+    // let the oidc package know
+    await app_state.currentManager.logout(
+      //after logout, go back to home
+      originalUri: Uri.parse('/login'),
+      options: OidcPlatformSpecificOptions(
+        web: OidcPlatformSpecificOptions_Web(
+          navigationMode: webNavigationMode,
+        ),
+      ),
+    );
+  
+    //notifyListeners();
+    
     state = false;
   }
 
-  void signIn() {
-    logNoStack.i("NEST_AUTH_CONTROLLER : SIGN_IN");
-    currentUser.isSignedIn = true;
-    isLoggedIn = true;
+  // void signIn() {
+  //   logNoStack.i("NEST_AUTH_CONTROLLER : SIGN_IN");
+  //   currentUser.isSignedIn = true;
+  //   isLoggedIn = true;
 
-    // state = Person(
-    //   isSignedIn: true,
-    //   orgid: 0,
-    //   id: 0,
-    //   code: "PER_DEFAULT", // code
-    //   created: DateTime.now(), // created
-    //   updated: DateTime.now(), // updated
-    //   name: "Logged In Person", // name
-    //   description: "This is a default Person", // description
-    //   location: "", // location
-    //   devicecode: "DEVICE-CODE", // device code
-    //   username: "USERNAME", // username
-    //   email: "user+loggedin@email.com", // email
-    //   firstname: "", // firstname
-    //   lastname: "", // lastname
-    //   nickname: "", //nickname,
-    //   gender: GenderType.UNDEFINED, //gender,
-    //   i18n: "en", //i18n,
-    //   country: "Australia", //country,
-    //   longitude: 0.0, //longitude,
-    //   latitude: 0.0, //latitude,
-    //   birthyear: 0, //birthyear,
-    //   fcm: "FCM",
-    //   avatarUrl: "https://gravatar.com/avatar/${generateMd5("user@email.com")}",
-    // ); //fcm
-    // notifyListeners();
-    // state = true;
-  }
+  // }
 }
 
 //final nestAuthProvider = ChangeNotifierProvider((ref) => NestAuthController());
