@@ -48,7 +48,9 @@ class NestAuthController extends Notifier<Person> with ChangeNotifier {
   }
 
   @override
-  Person build() => defaultPerson;
+  Person build() {
+    return defaultPerson;
+  }
 
 //Within this section, you can integrate authentication methods
 //such as Firebase, SharedPreferences, and more.
@@ -59,7 +61,7 @@ class NestAuthController extends Notifier<Person> with ChangeNotifier {
     Person user = defaultPerson;
     user.isSignedIn = true;
     isLoggedIn = true;
-    state = user;
+   // state = user;
     notifyListeners();
   }
 
