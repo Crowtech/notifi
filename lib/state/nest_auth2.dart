@@ -22,8 +22,8 @@ var logNoStack = logger.Logger(
   level: logger.Level.info,
 );
 
-class NestAuthController with ChangeNotifier {
-//class NestAuthController extends Notifier<Person> with ChangeNotifier {
+//class NestAuthController with ChangeNotifier {
+class NestAuthController extends Notifier<bool> with ChangeNotifier {
   OidcPlatformSpecificOptions_Web_NavigationMode webNavigationMode = (kIsWeb
       ? OidcPlatformSpecificOptions_Web_NavigationMode.samePage
       : OidcPlatformSpecificOptions_Web_NavigationMode.newPage); // was newPage
@@ -33,6 +33,7 @@ class NestAuthController with ChangeNotifier {
 
   bool isLoggedIn = false;
   Person currentUser = defaultPerson;
+  String? token = null;
 
   OidcPlatformSpecificOptions _getOptions() {
     return OidcPlatformSpecificOptions(
@@ -56,9 +57,72 @@ class NestAuthController with ChangeNotifier {
   }
 
   @override
-  Person build()  {
+  bool build() {
+    app_state.currentManager.userChanges().listen((event) async {
+      if (event?.userInfo != null) {
+        var exp = event?.claims['exp'];
+        var name = event?.claims['name'];
+        var username = event?.claims['preferred_username'];
+
+        var deviceId = await fetchDeviceId();
+        logNoStack.i(
+          'NEST_AUTH2: BUILD: App State User changed (login): exp:$exp, $username, $name $deviceId',
+        );
+
+        await loginOidc(event);
+      } else {
+        logNoStack.i("AUTH CONTROLLER BUILD: App State User changed to NULL:");
+      }
+    });
+
     logNoStack.i("NEST_AUTH_CONTROLLER : BUILD");
-    return defaultPerson;
+    return false;
+  }
+
+
+Future<void> login() async {
+    logNoStack.i("NEST_AUTH LOGIN called.");
+
+    app_state.currentManager
+        .loginAuthorizationCodeFlow(
+      originalUri: Uri.parse('/'),
+      //store any arbitrary data, here we store the authorization
+      //start time.
+      extraStateData: DateTime.now().toIso8601String(),
+      options: _getOptions(),
+      //NOTE: you can pass more parameters here.
+    )
+        .then((oidcUser) {
+      logNoStack.i("AUTH_CONTROLLER LOGIN called and RESULT provided");
+      if (oidcUser != null) {
+        logNoStack.i(
+            "AUTH_CONTROLLER LOGIN called and RESULT provided IS NOT NULL, setting oidc ${oidcUser.userInfo['email']}");
+        loginOidc(oidcUser);
+      } else {
+        logNoStack
+            .i("AUTH_CONTROLLER LOGIN called and RESULT provided IS  NULL");
+      }
+    });
+  }
+
+
+  Future<void> loginOidc(OidcUser? oidcUser) async {
+    log.i("NEST_AUTH: LOGIN_OIDC: START");
+
+    if (oidcUser != null) {
+      log.i(
+          "NEST_AUTH LOGIN_OIDC: In AuthControllerLogin: oidcUser is ${oidcUser.userInfo['email']} fetching user ");
+
+// Now fetch the actual user from the backend
+
+      log.i("NEST_AUTH  LOGIN_OIDC: SAbout to loginToken");
+      token = oidcUser.token.accessToken!;
+      currentUser = await registerLogin(oidcUser.token.accessToken!);
+      currentUser.isSignedIn = true;
+      isLoggedIn = true;
+      state = true;
+      // notifyListeners();
+    }
   }
 
 //Within this section, you can integrate authentication methods
@@ -67,6 +131,7 @@ class NestAuthController with ChangeNotifier {
   void signOut() {
     logNoStack.i("NEST_AUTH_CONTROLLER : SIGN_OUT");
     currentUser.isSignedIn = false;
+    token = null;
     isLoggedIn = false;
     notifyListeners();
     //state = defaultPerson;
@@ -95,18 +160,13 @@ class NestAuthController with ChangeNotifier {
     //   fcm: "FCM",
     //   avatarUrl: "https://gravatar.com/avatar/${generateMd5("user@email.com")}",
     // ); //fcm
+    state = false;
   }
-
-
-
 
   void signIn() {
     logNoStack.i("NEST_AUTH_CONTROLLER : SIGN_IN");
     currentUser.isSignedIn = true;
     isLoggedIn = true;
-
-   
-
 
     // state = Person(
     //   isSignedIn: true,
@@ -133,12 +193,13 @@ class NestAuthController with ChangeNotifier {
     //   fcm: "FCM",
     //   avatarUrl: "https://gravatar.com/avatar/${generateMd5("user@email.com")}",
     // ); //fcm
-     notifyListeners();
+    // notifyListeners();
+    // state = true;
   }
 }
 
-final nestAuthProvider = ChangeNotifierProvider((ref) => NestAuthController());
+//final nestAuthProvider = ChangeNotifierProvider((ref) => NestAuthController());
 
-// final nestAuthProvider = NotifierProvider<NestAuthController, Person>(
-//   () => NestAuthController(),
-// );
+final nestAuthProvider = NotifierProvider<NestAuthController, bool>(
+  () => NestAuthController(),
+);
