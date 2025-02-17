@@ -67,7 +67,7 @@ class NestAuthController extends Notifier<bool> with ChangeNotifier {
         var exp = event?.claims['exp'];
         var name = event?.claims['name'];
         var username = event?.claims['preferred_username'];
-
+        token = event?.token.accessToken;
         var deviceId = await fetchDeviceId();
         logNoStack.i(
           'NEST_AUTH2: BUILD: App State User changed (login): exp:$exp, $username, $name $deviceId',
