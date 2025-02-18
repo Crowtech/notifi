@@ -18,41 +18,50 @@ var logNoStack = logger.Logger(
 );
 
 String defaultUrl = "$defaultMinioEndpointUrl/$defaultRealm/adam51casual.png";
+
 class NestAvatar extends ConsumerWidget {
   int diameter;
   Color backgroundColour;
   static const String defaultInitials = "?";
+  Person person;
 
-  NestAvatar({super.key, this.diameter = 68, this.backgroundColour = Colors.red});
+  NestAvatar(
+      {super.key,
+      this.diameter = 68,
+      this.backgroundColour = Colors.red,
+      required this.person});
 
   @override
-   Widget build(BuildContext context, WidgetRef ref) {
-    Person user = ref.read(nestAuthProvider.notifier).currentUser;
-    String personUrl = defaultUrl;
+  Widget build(BuildContext context, WidgetRef ref) {
     String initials = defaultInitials;
-logNoStack.i("avatarUrl=${user.avatarUrl} diameter = $diameter initials = $initials");
-   if (user.avatarUrl != null) {
-     personUrl = user.getAvatarUrl();
-    initials =  user.getInitials();
-   }
-    String avatarUrl = "$defaultImageProxyUrl/${diameter}x/$personUrl";
-   
-   
-    return getAvatar((diameter>>1).toDouble(),avatarUrl,backgroundColour,initials);
+    logNoStack.i(
+        "avatarUrl=${person.avatarUrl} diameter = $diameter initials = $initials");
+    String? avatarUrl;
+    if (person.avatarUrl != null) {
+      avatarUrl = "$defaultImageProxyUrl/${diameter}x/${person.getAvatarUrl()}";
+      initials = person.getInitials();
+    }
+
+    return getAvatar(
+        (diameter >> 1).toDouble(), avatarUrl, backgroundColour, initials);
   }
 
-  Widget getAvatar(
-      final double radius, final String imageUrl, Color backgroundColour, String initials) {
-    String imgUrl = defaultUrl;
+  Widget getAvatar(final double radius, final String? imageUrl,
+      Color backgroundColour, String initials) {
+    Widget displayWidget;
+    if (imageUrl != null && imageUrl.isNotEmpty) {
+      displayWidget = CircleAvatar(
+        radius: radius - 2,
+        backgroundImage: NetworkImage(imageUrl),
+      );
+    } else {
+      displayWidget = Text(initials);
+    }
 
     return CircleAvatar(
       radius: radius,
       backgroundColor: backgroundColour,
-      child: CircleAvatar(
-        radius: radius - 2,
-        backgroundImage: NetworkImage(imageUrl),
-
-      ),
+      child: displayWidget,
     );
   }
 }
