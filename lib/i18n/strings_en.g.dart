@@ -38,7 +38,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 	// Translations
 	String get app_title => 'Crowtech';
-	late final TranslationsMenuEn menu = TranslationsMenuEn._(_root);
+	late final TranslationsMenuEn menu = TranslationsMenuEn.internal(_root);
 	String get about_us => 'About Us';
 	String get account => 'Account';
 	String get activity => 'Activity';
@@ -81,7 +81,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get messages => 'Messages';
 	String get moving => 'Moving';
 	String get odometer => 'Odometer';
-	late final TranslationsResponseEn response = TranslationsResponseEn._(_root);
+	late final TranslationsResponseEn response = TranslationsResponseEn.internal(_root);
 	String get privacy_policy => 'Privacy Policy';
 	String get profile => 'Profile';
 	String get pulltorefresh => 'Pull to refresh';
@@ -102,7 +102,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 // Path: menu
 class TranslationsMenuEn {
-	TranslationsMenuEn._(this._root);
+	TranslationsMenuEn.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -113,7 +113,7 @@ class TranslationsMenuEn {
 
 // Path: response
 class TranslationsResponseEn {
-	TranslationsResponseEn._(this._root);
+	TranslationsResponseEn.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
