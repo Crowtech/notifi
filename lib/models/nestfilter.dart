@@ -12,7 +12,7 @@ class NestFilter {
   static String className = "NestFilter";
   static String tablename = className.toLowerCase();
 
-  List<int> orgIdList =<int>[];
+  List<int> orgIdList = <int>[];
   List<String> resourceCodeList = [];
   List<int> resourceIdList = [];
   List<String> deviceCodeList = [];
@@ -24,14 +24,13 @@ class NestFilter {
   String distinctField;
 
   NestFilter(
-      {
-      this.orgIdList = const [],
-      this.resourceCodeList  = const [],
-      this.resourceIdList  = const [],
+      {this.orgIdList = const [],
+      this.resourceCodeList = const [],
+      this.resourceIdList = const [],
       this.deviceCodeList = const [],
       this.query = "",
-      this.offset=0,
-      this.limit=10,
+      this.offset = 0,
+      this.limit = 10,
       this.sortby = "",
       this.caseinsensitive = true,
       this.distinctField = ""});
@@ -45,8 +44,21 @@ class NestFilter {
     return NestFilter.fromJson(json);
   }
 
-    @override
+  @override
   String toString() {
     return "Filter:$orgIdList $resourceCodeList $deviceCodeList $query $offset $limit $sortby $caseinsensitive ";
   }
 }
+
+NestFilter defaultNestFilter = NestFilter(
+  orgIdList: [],
+  resourceCodeList: [],
+  resourceIdList: [],
+  deviceCodeList: [],
+  query: "",
+  offset: 0,
+  limit: 10,
+  sortby: "",
+  caseinsensitive: true,
+  distinctField: "",
+); //fcm
