@@ -51,6 +51,7 @@ class Resource extends CrowtechObject {
     if (avatarUrl == null) {
       return "https://gravatar.com/avatar/${generateMd5("unknown@unknown.com")}";
     } else {
+      print("avatarUrl for $code is $avatarUrl");
       return avatarUrl!;
     }
   }
