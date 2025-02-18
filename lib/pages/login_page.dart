@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:notifi/jwt_utils.dart';
+import 'package:notifi/state/nest_auth2.dart';
 import 'package:oidc/oidc.dart';
 
 import '../state/auth_controller.dart';
@@ -57,14 +58,14 @@ class LoginPage extends HookConsumerWidget {
       'LOGINPAGE: ',
     );
     Future<void> login2() async {
-      ref.read(authControllerProvider.notifier).login();
+      ref.read(nestAuthProvider.notifier).login();
     }
 
-    Future<void> login() =>
-        ref.read(authControllerProvider.notifier).loginUsernamePassword(
-              'myEmail',
-              'myPassword',
-            );
+    // Future<void> login() =>
+    //     ref.read(nestAuthProvider.notifier).loginUsernamePassword(
+    //           'myEmail',
+    //           'myPassword',
+    //         );
 
       Future<void> login3() async {
 

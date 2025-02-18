@@ -6,7 +6,7 @@ part of 'permissions.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$permissionsHash() => r'f857be5a8c77ce94bbacccd5fdb9ea6ebb91b978';
+String _$permissionsHash() => r'6d297cc152ab67d5d76731515a1fa4110566fca8';
 
 /// If our user is signed out, this provider returns [UserRole.none]
 /// Otherwise, it mocks a network request and gives out some [UserRole].

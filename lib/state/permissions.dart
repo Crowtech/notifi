@@ -1,12 +1,15 @@
 import 'dart:math';
 
 import 'package:jwt_decoder/jwt_decoder.dart';
+
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../entities/user_role.dart';
 import '../riverpod/current_user.dart';
 import 'auth_controller.dart';
 import 'package:logger/logger.dart' as logger;
+
+import 'nest_auth2.dart';
 part 'permissions.g.dart';
 
 var log = logger.Logger(
@@ -23,17 +26,18 @@ var logNoStack = logger.Logger(
 /// Otherwise, it mocks a network request and gives out some [UserRole].
 @riverpod
 Future<UserRole> permissions(PermissionsRef ref) async {
-  final userId = await ref.watch(
-    authControllerProvider.selectAsync(
-      (value) => value.map(
-        signedIn: (signedIn) => signedIn.id,
-        signedOut: (signedOut) => null,
-      ),
-    ),
-  );
+  final isAuth = ref.watch(nestAuthProvider);
+  // final userId = await ref.watch(
+  //   authControllerProvider.selectAsync(
+  //     (value) => value.map(
+  //       signedIn: (signedIn) => signedIn.id,
+  //       signedOut: (signedOut) => null,
+  //     ),
+  //   ),
+  // );
 
-  if (userId == null) return const UserRole.none();
-  final user = ref.read(currentUserProvider);
+  if (isAuth == false) return const UserRole.none();
+  final user = ref.read(nestAuthProvider.notifier).currentUser;
 
   logNoStack.i("Permissions: User is ${user.toString()}");
 
@@ -58,7 +62,7 @@ Future<UserRole> permissions(PermissionsRef ref) async {
   for (var i = 0; i < rolesList.length; i++) {
     rolesStr += "${rolesList[i]}\n";
   }
-  logNoStack.i("Roles for ${user.email} are $rolesStr");
+  logNoStack.i("PERMISSIONS: Roles for ${user.email} are $rolesStr");
 
   return _requestMock();
 }

@@ -91,7 +91,7 @@ Future<bool> loginUser(
     // logNoStack.i(
     //     "logged in notifi user: ${Provider.of<Notifi>(context, listen: false).currentUser}");
 
-    ref.read(currentUserProvider.notifier).setPerson(user);
+   // ref.read(currentUserProvider.notifier).setPerson(user);
     return true;
   }).catchError((error) {
     log.e("login api error $error");

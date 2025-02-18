@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:notifi/riverpod/current_user.dart';
 
 import '../constants/app_sizes.dart';
+import '../state/nest_auth2.dart';
 import 'primary_button.dart';
 
 /// Placeholder widget showing a message and CTA to go back to the home screen.
@@ -32,7 +33,7 @@ class EmptyPlaceholderWidget extends ConsumerWidget {
             PrimaryButton(
               onPressed: () {
                 final isLoggedIn =
-                    ref.watch(currentUserProvider).code != "PER_DEFAULT";
+                    ref.read(nestAuthProvider);
                 context.goNamed(
                     isLoggedIn ? homeRoute : loginRoute);
               },

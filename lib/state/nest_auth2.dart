@@ -132,7 +132,7 @@ Future<void> login() async {
 //Within this section, you can integrate authentication methods
 //such as Firebase, SharedPreferences, and more.
 
-  void signOut() async {
+  Future<void> signOut() async {
     logNoStack.i("NEST_AUTH_CONTROLLER : SIGN_OUT");
     currentUser.isSignedIn = false;
 
