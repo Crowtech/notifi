@@ -77,6 +77,7 @@ class TranslationsZh implements Translations {
 	@override String get messages => '消息';
 	@override String get moving => '动人';
 	@override String get odometer => '里程表';
+	@override late final _TranslationsResponseZh response = _TranslationsResponseZh._(_root);
 	@override String get privacy_policy => '隐私政策';
 	@override String get profile => '轮廓';
 	@override String get pulltorefresh => '下拉刷新';
@@ -104,6 +105,18 @@ class _TranslationsMenuZh implements TranslationsMenuEn {
 	// Translations
 	@override String get account => '帐户菜单';
 	@override String get product => '产品菜单';
+}
+
+// Path: response
+class _TranslationsResponseZh implements TranslationsResponseEn {
+	_TranslationsResponseZh._(this._root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get ok => '好的';
+	@override String get cancel => '取消';
+	@override String get reset => '重置';
 }
 
 /// Flat map(s) containing all translations.
@@ -156,6 +169,9 @@ extension on TranslationsZh {
 			case 'messages': return '消息';
 			case 'moving': return '动人';
 			case 'odometer': return '里程表';
+			case 'response.ok': return '好的';
+			case 'response.cancel': return '取消';
+			case 'response.reset': return '重置';
 			case 'privacy_policy': return '隐私政策';
 			case 'profile': return '轮廓';
 			case 'pulltorefresh': return '下拉刷新';

@@ -81,6 +81,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get messages => 'Messages';
 	String get moving => 'Moving';
 	String get odometer => 'Odometer';
+	late final TranslationsResponseEn response = TranslationsResponseEn._(_root);
 	String get privacy_policy => 'Privacy Policy';
 	String get profile => 'Profile';
 	String get pulltorefresh => 'Pull to refresh';
@@ -108,6 +109,18 @@ class TranslationsMenuEn {
 	// Translations
 	String get account => 'Account Menu';
 	String get product => 'Product Menu';
+}
+
+// Path: response
+class TranslationsResponseEn {
+	TranslationsResponseEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get ok => 'OK';
+	String get cancel => 'Cancel';
+	String get reset => 'Reset';
 }
 
 /// Flat map(s) containing all translations.
@@ -160,6 +173,9 @@ extension on Translations {
 			case 'messages': return 'Messages';
 			case 'moving': return 'Moving';
 			case 'odometer': return 'Odometer';
+			case 'response.ok': return 'OK';
+			case 'response.cancel': return 'Cancel';
+			case 'response.reset': return 'Reset';
 			case 'privacy_policy': return 'Privacy Policy';
 			case 'profile': return 'Profile';
 			case 'pulltorefresh': return 'Pull to refresh';

@@ -47,6 +47,13 @@
   "messages": "Messages",
   "moving": "Moving",
   "odometer": "Odometer",
+
+  "response": {
+    "ok": "OK",
+    "cancel": "Cancel",
+    "reset": "Reset"
+  },
+
   "privacy_policy": "Privacy Policy",
   "profile": "Profile",
   "pulltorefresh": "Pull to refresh",
