@@ -196,3 +196,11 @@ extension StringExtensions on String {
     return "${this[0].toUpperCase()}${substring(1)}"; 
   } 
 }
+
+
+String getImageUrl({String? url, int diameter=64, String defaultUrl="https://gravatar.com/avatar/E9BC1D1E7E57D73ACC1682C0AD66CA4F"}) {
+  if (url == null || url.isEmpty) {
+    url = defaultUrl;
+  }
+  return  "$defaultImageProxyUrl/${diameter}x/$url";
+}
