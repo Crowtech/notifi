@@ -30,6 +30,7 @@ dependencies:
   firebase_messaging: ^15.1.3
   flutter_local_notifications: ^18.0.1
   flutter_riverpod:
+  #flutter_rotation_sensor: ^0.1.0
   fluttertoast: ^8.2.11
   flutter_secure_storage: any
   flutter_dotenv: ^5.2.1
