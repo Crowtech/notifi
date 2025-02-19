@@ -48,6 +48,14 @@ class NestFilter {
   String toString() {
     return "Filter:$orgIdList $resourceCodeList $deviceCodeList $query $offset $limit $sortby $caseinsensitive ";
   }
+
+  NestFilter copyWith({
+    final String? query,
+  }) {
+    return NestFilter(
+      query: query ?? this.query,
+    );
+  }
 }
 
 NestFilter defaultNestFilter = NestFilter(
