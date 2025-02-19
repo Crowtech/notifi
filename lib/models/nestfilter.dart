@@ -4,7 +4,6 @@ import 'package:logger/logger.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'nestfilter.freezed.dart';
-part 'nestfilter.g.dart';
 
 var logger = Logger(
   printer: PrettyPrinter(),
