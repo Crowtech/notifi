@@ -14,25 +14,28 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-NestFilter _$NestFilterFromJson(Map<String, dynamic> json) {
-  return _NestFilter.fromJson(json);
-}
-
 /// @nodoc
 mixin _$NestFilter {
+  @JsonKey(name: 'orgIdList')
   List<int> get orgIdList => throw _privateConstructorUsedError;
+  @JsonKey(name: 'resourceCodeList')
   List<String> get resourceCodeList => throw _privateConstructorUsedError;
+  @JsonKey(name: 'resourceIdList')
   List<int> get resourceIdList => throw _privateConstructorUsedError;
+  @JsonKey(name: 'deviceCodeList')
   List<String> get deviceCodeList => throw _privateConstructorUsedError;
+  @JsonKey(name: 'query')
   String get query => throw _privateConstructorUsedError;
+  @JsonKey(name: 'limit')
   int get limit => throw _privateConstructorUsedError;
+  @JsonKey(name: 'offset')
   int get offset => throw _privateConstructorUsedError;
+  @JsonKey(name: 'sortby')
   String get sortby => throw _privateConstructorUsedError;
+  @JsonKey(name: 'caseinsensitive')
   bool get caseinsensitive => throw _privateConstructorUsedError;
+  @JsonKey(name: 'distinctField')
   String get distinctField => throw _privateConstructorUsedError;
-
-  /// Serializes this NestFilter to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of NestFilter
   /// with the given fields replaced by the non-null parameter values.
@@ -48,16 +51,16 @@ abstract class $NestFilterCopyWith<$Res> {
       _$NestFilterCopyWithImpl<$Res, NestFilter>;
   @useResult
   $Res call(
-      {List<int> orgIdList,
-      List<String> resourceCodeList,
-      List<int> resourceIdList,
-      List<String> deviceCodeList,
-      String query,
-      int limit,
-      int offset,
-      String sortby,
-      bool caseinsensitive,
-      String distinctField});
+      {@JsonKey(name: 'orgIdList') List<int> orgIdList,
+      @JsonKey(name: 'resourceCodeList') List<String> resourceCodeList,
+      @JsonKey(name: 'resourceIdList') List<int> resourceIdList,
+      @JsonKey(name: 'deviceCodeList') List<String> deviceCodeList,
+      @JsonKey(name: 'query') String query,
+      @JsonKey(name: 'limit') int limit,
+      @JsonKey(name: 'offset') int offset,
+      @JsonKey(name: 'sortby') String sortby,
+      @JsonKey(name: 'caseinsensitive') bool caseinsensitive,
+      @JsonKey(name: 'distinctField') String distinctField});
 }
 
 /// @nodoc
@@ -140,16 +143,16 @@ abstract class _$$NestFilterImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<int> orgIdList,
-      List<String> resourceCodeList,
-      List<int> resourceIdList,
-      List<String> deviceCodeList,
-      String query,
-      int limit,
-      int offset,
-      String sortby,
-      bool caseinsensitive,
-      String distinctField});
+      {@JsonKey(name: 'orgIdList') List<int> orgIdList,
+      @JsonKey(name: 'resourceCodeList') List<String> resourceCodeList,
+      @JsonKey(name: 'resourceIdList') List<int> resourceIdList,
+      @JsonKey(name: 'deviceCodeList') List<String> deviceCodeList,
+      @JsonKey(name: 'query') String query,
+      @JsonKey(name: 'limit') int limit,
+      @JsonKey(name: 'offset') int offset,
+      @JsonKey(name: 'sortby') String sortby,
+      @JsonKey(name: 'caseinsensitive') bool caseinsensitive,
+      @JsonKey(name: 'distinctField') String distinctField});
 }
 
 /// @nodoc
@@ -222,31 +225,31 @@ class __$$NestFilterImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$NestFilterImpl extends _NestFilter {
   const _$NestFilterImpl(
-      {final List<int> orgIdList = const [],
+      {@JsonKey(name: 'orgIdList') final List<int> orgIdList = const [],
+      @JsonKey(name: 'resourceCodeList')
       final List<String> resourceCodeList = const [],
+      @JsonKey(name: 'resourceIdList')
       final List<int> resourceIdList = const [],
+      @JsonKey(name: 'deviceCodeList')
       final List<String> deviceCodeList = const [],
-      this.query = '',
-      this.limit = 10,
-      this.offset = 0,
-      this.sortby = '',
-      this.caseinsensitive = true,
-      this.distinctField = ''})
+      @JsonKey(name: 'query') this.query = '',
+      @JsonKey(name: 'limit') this.limit = 10,
+      @JsonKey(name: 'offset') this.offset = 0,
+      @JsonKey(name: 'sortby') this.sortby = '',
+      @JsonKey(name: 'caseinsensitive') this.caseinsensitive = true,
+      @JsonKey(name: 'distinctField') this.distinctField = ''})
       : _orgIdList = orgIdList,
         _resourceCodeList = resourceCodeList,
         _resourceIdList = resourceIdList,
         _deviceCodeList = deviceCodeList,
         super._();
 
-  factory _$NestFilterImpl.fromJson(Map<String, dynamic> json) =>
-      _$$NestFilterImplFromJson(json);
-
   final List<int> _orgIdList;
   @override
-  @JsonKey()
+  @JsonKey(name: 'orgIdList')
   List<int> get orgIdList {
     if (_orgIdList is EqualUnmodifiableListView) return _orgIdList;
     // ignore: implicit_dynamic_type
@@ -255,7 +258,7 @@ class _$NestFilterImpl extends _NestFilter {
 
   final List<String> _resourceCodeList;
   @override
-  @JsonKey()
+  @JsonKey(name: 'resourceCodeList')
   List<String> get resourceCodeList {
     if (_resourceCodeList is EqualUnmodifiableListView)
       return _resourceCodeList;
@@ -265,7 +268,7 @@ class _$NestFilterImpl extends _NestFilter {
 
   final List<int> _resourceIdList;
   @override
-  @JsonKey()
+  @JsonKey(name: 'resourceIdList')
   List<int> get resourceIdList {
     if (_resourceIdList is EqualUnmodifiableListView) return _resourceIdList;
     // ignore: implicit_dynamic_type
@@ -274,7 +277,7 @@ class _$NestFilterImpl extends _NestFilter {
 
   final List<String> _deviceCodeList;
   @override
-  @JsonKey()
+  @JsonKey(name: 'deviceCodeList')
   List<String> get deviceCodeList {
     if (_deviceCodeList is EqualUnmodifiableListView) return _deviceCodeList;
     // ignore: implicit_dynamic_type
@@ -282,22 +285,22 @@ class _$NestFilterImpl extends _NestFilter {
   }
 
   @override
-  @JsonKey()
+  @JsonKey(name: 'query')
   final String query;
   @override
-  @JsonKey()
+  @JsonKey(name: 'limit')
   final int limit;
   @override
-  @JsonKey()
+  @JsonKey(name: 'offset')
   final int offset;
   @override
-  @JsonKey()
+  @JsonKey(name: 'sortby')
   final String sortby;
   @override
-  @JsonKey()
+  @JsonKey(name: 'caseinsensitive')
   final bool caseinsensitive;
   @override
-  @JsonKey()
+  @JsonKey(name: 'distinctField')
   final String distinctField;
 
   @override
@@ -323,7 +326,6 @@ class _$NestFilterImpl extends _NestFilter {
                 other.distinctField == distinctField));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -345,51 +347,52 @@ class _$NestFilterImpl extends _NestFilter {
   @pragma('vm:prefer-inline')
   _$$NestFilterImplCopyWith<_$NestFilterImpl> get copyWith =>
       __$$NestFilterImplCopyWithImpl<_$NestFilterImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$NestFilterImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class _NestFilter extends NestFilter {
   const factory _NestFilter(
-      {final List<int> orgIdList,
-      final List<String> resourceCodeList,
-      final List<int> resourceIdList,
-      final List<String> deviceCodeList,
-      final String query,
-      final int limit,
-      final int offset,
-      final String sortby,
-      final bool caseinsensitive,
+      {@JsonKey(name: 'orgIdList') final List<int> orgIdList,
+      @JsonKey(name: 'resourceCodeList') final List<String> resourceCodeList,
+      @JsonKey(name: 'resourceIdList') final List<int> resourceIdList,
+      @JsonKey(name: 'deviceCodeList') final List<String> deviceCodeList,
+      @JsonKey(name: 'query') final String query,
+      @JsonKey(name: 'limit') final int limit,
+      @JsonKey(name: 'offset') final int offset,
+      @JsonKey(name: 'sortby') final String sortby,
+      @JsonKey(name: 'caseinsensitive') final bool caseinsensitive,
+      @JsonKey(name: 'distinctField')
       final String distinctField}) = _$NestFilterImpl;
   const _NestFilter._() : super._();
 
-  factory _NestFilter.fromJson(Map<String, dynamic> json) =
-      _$NestFilterImpl.fromJson;
-
   @override
+  @JsonKey(name: 'orgIdList')
   List<int> get orgIdList;
   @override
+  @JsonKey(name: 'resourceCodeList')
   List<String> get resourceCodeList;
   @override
+  @JsonKey(name: 'resourceIdList')
   List<int> get resourceIdList;
   @override
+  @JsonKey(name: 'deviceCodeList')
   List<String> get deviceCodeList;
   @override
+  @JsonKey(name: 'query')
   String get query;
   @override
+  @JsonKey(name: 'limit')
   int get limit;
   @override
+  @JsonKey(name: 'offset')
   int get offset;
   @override
+  @JsonKey(name: 'sortby')
   String get sortby;
   @override
+  @JsonKey(name: 'caseinsensitive')
   bool get caseinsensitive;
   @override
+  @JsonKey(name: 'distinctField')
   String get distinctField;
 
   /// Create a copy of NestFilter

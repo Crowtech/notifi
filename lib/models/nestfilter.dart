@@ -4,6 +4,7 @@ import 'package:logger/logger.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'nestfilter.freezed.dart';
+part 'nestfilter.g.dart';
 
 var logger = Logger(
   printer: PrettyPrinter(),
@@ -27,29 +28,34 @@ class NestFilter with _$NestFilter {
   const NestFilter._();
 
   const factory NestFilter({
-    @Default([]) List<int> orgIdList,
-    @Default([]) List<String> resourceCodeList,
-    @Default([]) List<int> resourceIdList,
-    @Default([]) List<String> deviceCodeList,
-    @Default('') String query,
-    @Default(10) int limit,
-    @Default(0) int offset,
-    @Default('') String sortby,
-    @Default(true) bool caseinsensitive,
-    @Default('') String distinctField,
+    @JsonKey(name: 'orgIdList')  @Default([]) List<int> orgIdList,
+    @JsonKey(name: 'resourceCodeList') @Default([]) List<String> resourceCodeList,
+    @JsonKey(name: 'resourceIdList') @Default([]) List<int> resourceIdList,
+    @JsonKey(name: 'deviceCodeList') @Default([]) List<String> deviceCodeList,
+    @JsonKey(name: 'query') @Default('') String query,
+    @JsonKey(name: 'limit') @Default(10) int limit,
+    @JsonKey(name: 'offset') @Default(0) int offset,
+    @JsonKey(name: 'sortby') @Default('') String sortby,
+    @JsonKey(name: 'caseinsensitive') @Default(true) bool caseinsensitive,
+    @JsonKey(name: 'distinctField') @Default('') String distinctField,
   }) = _NestFilter;
+
+   //factory NestFilter.fromJson(Map<String, dynamic> json) => _$NestFilterFromJson(json);
 
   // factory NestFilter.fromJson(Map<String, dynamic> json) =>
   //     _$NestFilterFromJson(json);
   //Map<String, dynamic> toJson() => _$NestFilterToJson(this);
 
 
-  factory NestFilter.fromJson(Map<String, dynamic> json) => _$NestFilterFromJson(json);
+  // factory NestFilter.fromJson(Map<String, dynamic> json) => _$NestFilterFromJson(json);
 
-  @override
-  NestFilter fromJson(Map<String, dynamic> json) {
-    return NestFilter.fromJson(json);
-  }
+  // @override
+  // NestFilter fromJson(Map<String, dynamic> json) {
+  //   return NestFilter.fromJson(json);
+  // }
+
+  //  factory NestFilter.fromJson(Map<String, Object?> json)
+  //     => _$NestFilterFromJson(json);
 
   @override
   String toString() {
