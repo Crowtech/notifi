@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'package:logger/logger.dart';
+import 'package:notifi/models/gps.dart';
 
 import '../jwt_utils.dart';
 import 'gendertype.dart';
@@ -33,6 +34,8 @@ class Person extends Resource {
   String? fcm;
   String? token; // used to get roles
 
+    GPS? gps;
+
   Person(
       {
       this.isSignedIn=false,
@@ -57,7 +60,9 @@ class Person extends Resource {
       required this.longitude,
       required this.latitude,
       required this.birthyear,
-      required this.fcm});
+      required this.fcm,
+       this.gps = null,
+      });
 
   factory Person.fromJson(Map<String, dynamic> json) => _$PersonFromJson(json);
   @override
@@ -70,7 +75,11 @@ class Person extends Resource {
 
   @override
   String toString() {
-    return "Person=>${super.toString()} $username $email $firstname $lastname $nickname $gender $i18n";
+    String gpsStr = "";
+    if (gps != null) {
+      gpsStr = "${gps!.latitude},${gps!.longitude}";
+    }
+    return "Person=>${super.toString()} $username $email $firstname $lastname $nickname $gender $i18n $gpsStr";
   }
 
   String toShortString() {
