@@ -56,6 +56,8 @@ class NestFilter {
       query: query ?? this.query,
     );
   }
+
+ 
 }
 
 NestFilter defaultNestFilter = NestFilter(

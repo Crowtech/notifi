@@ -88,6 +88,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get reset_offset => 'Reset Offset';
 	String get resetting_exposure_point => 'Resetting exposure point';
 	String get resetting_focus_point => 'Resetting focus point';
+	String get search => 'Search by name or email...';
 	String get settings => 'Settings';
 	String get still => 'Still';
 	String get terms_and_conditions => 'Terms & Conditions';
@@ -182,6 +183,7 @@ extension on Translations {
 			case 'reset_offset': return 'Reset Offset';
 			case 'resetting_exposure_point': return 'Resetting exposure point';
 			case 'resetting_focus_point': return 'Resetting focus point';
+			case 'search': return 'Search by name or email...';
 			case 'settings': return 'Settings';
 			case 'still': return 'Still';
 			case 'terms_and_conditions': return 'Terms & Conditions';
