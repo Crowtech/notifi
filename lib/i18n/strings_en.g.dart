@@ -121,7 +121,7 @@ class TranslationsAccountEn {
 
 	// Translations
 	String get title => 'Account';
-	String get Change password => 'Change password';
+	String get change_password => 'Change password';
 	String get email_taken => 'Email already taken.';
 	String get organisation_name_taken => 'Organisation already taken';
 	String get username_taken => 'Username already taken.';
@@ -149,7 +149,7 @@ extension on Translations {
 			case 'menu.product': return 'Product Menu';
 			case 'about_us': return 'About Us';
 			case 'account.title': return 'Account';
-			case 'account.Change password': return 'Change password';
+			case 'account.change_password': return 'Change password';
 			case 'account.email_taken': return 'Email already taken.';
 			case 'account.organisation_name_taken': return 'Organisation already taken';
 			case 'account.username_taken': return 'Username already taken.';

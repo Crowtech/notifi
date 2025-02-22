@@ -8,7 +8,7 @@
   "about_us": "About Us",
   "account": {
     "title": "Account",
-    "Change password": "Change password",
+    "change_password": "Change password",
     "email_taken": "Email already taken.",
     "organisation_name_taken": "Organisation already taken",
     "username_taken": "Username already taken."

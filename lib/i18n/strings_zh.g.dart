@@ -117,7 +117,7 @@ class _TranslationsAccountZh implements TranslationsAccountEn {
 
 	// Translations
 	@override String get title => '帐户';
-	@override String get Change password => '更改密码';
+	@override String get change_password => '更改密码';
 	@override String get email_taken => '电子邮件已被占用';
 	@override String get organisation_name_taken => '组织已被占用';
 	@override String get username_taken => '用户名已被使用。';
@@ -145,7 +145,7 @@ extension on TranslationsZh {
 			case 'menu.product': return '产品菜单';
 			case 'about_us': return '关于我们';
 			case 'account.title': return '帐户';
-			case 'account.Change password': return '更改密码';
+			case 'account.change_password': return '更改密码';
 			case 'account.email_taken': return '电子邮件已被占用';
 			case 'account.organisation_name_taken': return '组织已被占用';
 			case 'account.username_taken': return '用户名已被使用。';

@@ -7,7 +7,7 @@
   "about_us": "关于我们",
   "account": {
     "title": "帐户",
-    "Change password": "更改密码",
+    "change_password": "更改密码",
     "email_taken": "电子邮件已被占用",
     "organisation_name_taken": "组织已被占用",
     "username_taken": "用户名已被使用。"
