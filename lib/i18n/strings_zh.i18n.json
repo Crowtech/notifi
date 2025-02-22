@@ -10,6 +10,7 @@
     "change_password": "更改密码",
     "email_taken": "电子邮件已被占用",
     "organisation_name_taken": "组织已被占用",
+    "update": "更新用户帐户",
     "username_taken": "用户名已被使用。"
   },
   "activity": "活动",

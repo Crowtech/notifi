@@ -11,6 +11,7 @@
     "change_password": "Change password",
     "email_taken": "Email already taken.",
     "organisation_name_taken": "Organisation already taken",
+    "update": "Update User Account",
     "username_taken": "Username already taken."
   },
   "activity": "Activity",

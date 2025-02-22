@@ -124,6 +124,7 @@ class TranslationsAccountEn {
 	String get change_password => 'Change password';
 	String get email_taken => 'Email already taken.';
 	String get organisation_name_taken => 'Organisation already taken';
+	String get update => 'Update User Account';
 	String get username_taken => 'Username already taken.';
 }
 
@@ -152,6 +153,7 @@ extension on Translations {
 			case 'account.change_password': return 'Change password';
 			case 'account.email_taken': return 'Email already taken.';
 			case 'account.organisation_name_taken': return 'Organisation already taken';
+			case 'account.update': return 'Update User Account';
 			case 'account.username_taken': return 'Username already taken.';
 			case 'activity': return 'Activity';
 			case 'audio_access_denied': return 'You have denied audio access';
