@@ -422,3 +422,36 @@ Future<CrowtechBasePage<GPS>> fetchGPS(
 //     //   return retOne;
 //  throw Future.error("Nothing");
 }
+
+Future<bool> updateKeycloakUserInfo(String token,String id, String email, String firstname, String lastname)  async {
+//PUT /{realm}/users/{id}
+
+  var url = Uri.parse("$defaultAuthBaseUrl/$defaultRealm/users/$id");
+
+  final http.Response response;
+
+  // No data
+  response = await http.put(url, 
+  headers: {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer $token",
+  },
+  body: jsonEncode(<String, dynamic>{
+          'username': email,
+          'firstName': firstname,
+          'lastName': lastname,
+          'email': email,
+          // Add any other data you want to send in the body
+        })
+  );
+
+  logNoStack.i(response.statusCode);
+  if (response.statusCode == 202 ||
+      response.statusCode == 201 ||
+      response.statusCode == 200) {
+    return true;
+  } else {
+    return false;
+  }
+}
