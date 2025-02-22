@@ -36,7 +36,7 @@ class TranslationsZh implements Translations {
 	@override String get app_title => 'Crowtech';
 	@override late final _TranslationsMenuZh menu = _TranslationsMenuZh._(_root);
 	@override String get about_us => '关于我们';
-	@override String get account => '帐户';
+	@override late final _TranslationsAccountZh account = _TranslationsAccountZh._(_root);
 	@override String get activity => '活动';
 	@override String get audio_access_denied => '您已拒绝音频访问';
 	@override String get audio_access_denied_without_prompt => '请前往“设置”应用启用音频访问';
@@ -109,6 +109,20 @@ class _TranslationsMenuZh implements TranslationsMenuEn {
 	@override String get product => '产品菜单';
 }
 
+// Path: account
+class _TranslationsAccountZh implements TranslationsAccountEn {
+	_TranslationsAccountZh._(this._root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '帐户';
+	@override String get Change password => '更改密码';
+	@override String get email_taken => '电子邮件已被占用';
+	@override String get organisation_name_taken => '组织已被占用';
+	@override String get username_taken => '用户名已被使用。';
+}
+
 // Path: response
 class _TranslationsResponseZh implements TranslationsResponseEn {
 	_TranslationsResponseZh._(this._root);
@@ -130,7 +144,11 @@ extension on TranslationsZh {
 			case 'menu.account': return '帐户菜单';
 			case 'menu.product': return '产品菜单';
 			case 'about_us': return '关于我们';
-			case 'account': return '帐户';
+			case 'account.title': return '帐户';
+			case 'account.Change password': return '更改密码';
+			case 'account.email_taken': return '电子邮件已被占用';
+			case 'account.organisation_name_taken': return '组织已被占用';
+			case 'account.username_taken': return '用户名已被使用。';
 			case 'activity': return '活动';
 			case 'audio_access_denied': return '您已拒绝音频访问';
 			case 'audio_access_denied_without_prompt': return '请前往“设置”应用启用音频访问';

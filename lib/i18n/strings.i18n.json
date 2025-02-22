@@ -6,7 +6,13 @@
     "product": "Product Menu"
   },
   "about_us": "About Us",
-  "account": "Account",
+  "account": {
+    "title": "Account",
+    "Change password": "Change password",
+    "email_taken": "Email already taken.",
+    "organisation_name_taken": "Organisation already taken",
+    "username_taken": "Username already taken."
+  },
   "activity": "Activity",
   "audio_access_denied": "You have denied audio access",
   "audio_access_denied_without_prompt": "Please go to Settings app to enable audio access",

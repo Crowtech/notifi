@@ -40,7 +40,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get app_title => 'Crowtech';
 	late final TranslationsMenuEn menu = TranslationsMenuEn._(_root);
 	String get about_us => 'About Us';
-	String get account => 'Account';
+	late final TranslationsAccountEn account = TranslationsAccountEn._(_root);
 	String get activity => 'Activity';
 	String get audio_access_denied => 'You have denied audio access';
 	String get audio_access_denied_without_prompt => 'Please go to Settings app to enable audio access';
@@ -113,6 +113,20 @@ class TranslationsMenuEn {
 	String get product => 'Product Menu';
 }
 
+// Path: account
+class TranslationsAccountEn {
+	TranslationsAccountEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => 'Account';
+	String get Change password => 'Change password';
+	String get email_taken => 'Email already taken.';
+	String get organisation_name_taken => 'Organisation already taken';
+	String get username_taken => 'Username already taken.';
+}
+
 // Path: response
 class TranslationsResponseEn {
 	TranslationsResponseEn._(this._root);
@@ -134,7 +148,11 @@ extension on Translations {
 			case 'menu.account': return 'Account Menu';
 			case 'menu.product': return 'Product Menu';
 			case 'about_us': return 'About Us';
-			case 'account': return 'Account';
+			case 'account.title': return 'Account';
+			case 'account.Change password': return 'Change password';
+			case 'account.email_taken': return 'Email already taken.';
+			case 'account.organisation_name_taken': return 'Organisation already taken';
+			case 'account.username_taken': return 'Username already taken.';
 			case 'activity': return 'Activity';
 			case 'audio_access_denied': return 'You have denied audio access';
 			case 'audio_access_denied_without_prompt': return 'Please go to Settings app to enable audio access';
