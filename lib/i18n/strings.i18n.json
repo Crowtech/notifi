@@ -10,6 +10,9 @@
     "title": "Account",
     "change_password": "Change password",
     "email_taken": "Email already taken.",
+    "firstname_characters_bad": "Firstname must not contain non Alphabetic characters",
+    "lastname_characters_bad": "Lastname must only contain Alphabetic characters, spaces, or dashes",
+
     "organisation_name_taken": "Organisation already taken",
     "update": "Update User Account",
     "username_taken": "Username already taken."

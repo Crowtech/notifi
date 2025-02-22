@@ -123,6 +123,8 @@ class TranslationsAccountEn {
 	String get title => 'Account';
 	String get change_password => 'Change password';
 	String get email_taken => 'Email already taken.';
+	String get firstname_characters_bad => 'Firstname must not contain non Alphabetic characters';
+	String get lastname_characters_bad => 'Lastname must only contain Alphabetic characters, spaces, or dashes';
 	String get organisation_name_taken => 'Organisation already taken';
 	String get update => 'Update User Account';
 	String get username_taken => 'Username already taken.';
@@ -152,6 +154,8 @@ extension on Translations {
 			case 'account.title': return 'Account';
 			case 'account.change_password': return 'Change password';
 			case 'account.email_taken': return 'Email already taken.';
+			case 'account.firstname_characters_bad': return 'Firstname must not contain non Alphabetic characters';
+			case 'account.lastname_characters_bad': return 'Lastname must only contain Alphabetic characters, spaces, or dashes';
 			case 'account.organisation_name_taken': return 'Organisation already taken';
 			case 'account.update': return 'Update User Account';
 			case 'account.username_taken': return 'Username already taken.';

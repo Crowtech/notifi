@@ -119,6 +119,8 @@ class _TranslationsAccountZh implements TranslationsAccountEn {
 	@override String get title => '帐户';
 	@override String get change_password => '更改密码';
 	@override String get email_taken => '电子邮件已被占用';
+	@override String get firstname_characters_bad => '名字不得包含非字母字符';
+	@override String get lastname_characters_bad => '姓氏只能包含字母字符、空格或破折号';
 	@override String get organisation_name_taken => '组织已被占用';
 	@override String get update => '更新用户帐户';
 	@override String get username_taken => '用户名已被使用。';
@@ -148,6 +150,8 @@ extension on TranslationsZh {
 			case 'account.title': return '帐户';
 			case 'account.change_password': return '更改密码';
 			case 'account.email_taken': return '电子邮件已被占用';
+			case 'account.firstname_characters_bad': return '名字不得包含非字母字符';
+			case 'account.lastname_characters_bad': return '姓氏只能包含字母字符、空格或破折号';
 			case 'account.organisation_name_taken': return '组织已被占用';
 			case 'account.update': return '更新用户帐户';
 			case 'account.username_taken': return '用户名已被使用。';
