@@ -38,7 +38,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 	// Translations
 	String get app_title => 'Crowtech';
-	late final TranslationsMenuEn menu = TranslationsMenuEn.internal(_root);
+	late final TranslationsMenuEn menu = TranslationsMenuEn._(_root);
 	String get about_us => 'About Us';
 	String get account => 'Account';
 	String get activity => 'Activity';
@@ -81,7 +81,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get messages => 'Messages';
 	String get moving => 'Moving';
 	String get odometer => 'Odometer';
-	late final TranslationsResponseEn response = TranslationsResponseEn.internal(_root);
+	late final TranslationsResponseEn response = TranslationsResponseEn._(_root);
 	String get privacy_policy => 'Privacy Policy';
 	String get profile => 'Profile';
 	String get pulltorefresh => 'Pull to refresh';
@@ -93,6 +93,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get still => 'Still';
 	String get terms_and_conditions => 'Terms & Conditions';
 	String get test_page => 'Test Page';
+	String get update_account => 'Update Account';
 	String get zoom_in => 'Zoom In';
 	String get zoom_out => 'Zoom out';
 	Map<String, String> get locales => {
@@ -103,7 +104,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 // Path: menu
 class TranslationsMenuEn {
-	TranslationsMenuEn.internal(this._root);
+	TranslationsMenuEn._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -114,7 +115,7 @@ class TranslationsMenuEn {
 
 // Path: response
 class TranslationsResponseEn {
-	TranslationsResponseEn.internal(this._root);
+	TranslationsResponseEn._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -188,6 +189,7 @@ extension on Translations {
 			case 'still': return 'Still';
 			case 'terms_and_conditions': return 'Terms & Conditions';
 			case 'test_page': return 'Test Page';
+			case 'update_account': return 'Update Account';
 			case 'zoom_in': return 'Zoom In';
 			case 'zoom_out': return 'Zoom out';
 			case 'locales.en': return 'English';
