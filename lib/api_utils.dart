@@ -426,7 +426,7 @@ Future<CrowtechBasePage<GPS>> fetchGPS(
 Future<bool> updateKeycloakUserInfo(String token,String id, String email, String firstname, String lastname)  async {
 //PUT /{realm}/users/{id}
 
-  var url = Uri.parse("$defaultAuthBaseUrl/$defaultRealm/users/$id");
+  var url = Uri.parse("$defaultAPIBaseUrl$defaultApiPrefixPath/persons/update/$id");
 
   final http.Response response;
 
@@ -447,7 +447,36 @@ Future<bool> updateKeycloakUserInfo(String token,String id, String email, String
   );
 
   logNoStack.i(response.statusCode);
-  if (response.statusCode == 202 ||
+  if (response.statusCode == 204 ||
+    response.statusCode == 202 ||
+      response.statusCode == 201 ||
+      response.statusCode == 200) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+Future<bool> updateKeycloakPassword(String token,String id, String password)  async {
+//PUT /{realm}/users/{id}
+
+  var url = Uri.parse("$defaultAPIBaseUrl$defaultApiPrefixPath/persons/password/$id");
+
+  final http.Response response;
+
+  // No data
+  response = await http.put(url, 
+  headers: {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer $token",
+  },
+  body: jsonEncode(password)
+  );
+
+  logNoStack.i(response.statusCode);
+  if (response.statusCode == 204 ||
+    response.statusCode == 202 ||
       response.statusCode == 201 ||
       response.statusCode == 200) {
     return true;
