@@ -35,11 +35,13 @@ class NestAvatar extends ConsumerWidget {
     logNoStack.i(
         "avatarUrl=${person.avatarUrl} diameter = $diameter initials = $initials");
     String? avatarUrl;
-    if (person.avatarUrl != null) {
-      avatarUrl = "$defaultImageProxyUrl/${diameter}x/${person.getAvatarUrl()}";
-      initials = person.getInitials();
+    if (person.avatarUrl?.isEmpty ?? true) {
+     
+    } else {
+       avatarUrl = "$defaultImageProxyUrl/${diameter}x/${person.getAvatarUrl()}";
+    
     }
-
+    initials = person.getInitials();
     return getAvatar(
         (diameter >> 1).toDouble(), avatarUrl, backgroundColour, initials);
   }
@@ -47,10 +49,10 @@ class NestAvatar extends ConsumerWidget {
   Widget getAvatar(final double radius, final String? imageUrl,
       Color backgroundColour, String initials) {
     Widget displayWidget;
-    if (imageUrl != null && imageUrl.isNotEmpty) {
+    if (!(imageUrl?.isEmpty ?? true)) {
       displayWidget = CircleAvatar(
         radius: radius - 2,
-        backgroundImage: NetworkImage(imageUrl),
+        backgroundImage: NetworkImage(imageUrl!),
       );
     } else {
       displayWidget = Text(initials);

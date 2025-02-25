@@ -429,21 +429,24 @@ Future<bool> updateKeycloakUserInfo(String token,String id, String email, String
   var url = Uri.parse("$defaultAPIBaseUrl$defaultApiPrefixPath/persons/update/$id");
 
   final http.Response response;
-
+logNoStack.i("API_UTILS: update user: $lastname");
   // No data
   response = await http.put(url, 
   headers: {
-    "Content-Type": "application/x-www-form-urlencoded",
+    "Content-Type": "application/json",
     "Accept": "application/json",
     "Authorization": "Bearer $token",
   },
-  body: jsonEncode(<String, dynamic>{
-          'username': email,
-          'firstName': firstname,
-          'lastName': lastname,
-          'email': email,
-          // Add any other data you want to send in the body
-        })
+  body: {
+    "lastName": lastname,
+  }
+  // body: jsonEncode(<String, dynamic>{
+  //        // 'username': email,
+  //       //  'firstName': firstname,
+  //         'lastName': lastname,
+  //       //  'email': email,
+  //         // Add any other data you want to send in the body
+  //       })
   );
 
   logNoStack.i(response.statusCode);
