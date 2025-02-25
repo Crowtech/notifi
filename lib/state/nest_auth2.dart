@@ -62,22 +62,23 @@ class NestAuthController extends Notifier<bool> with ChangeNotifier {
 
   @override
   bool build() {
-    app_state.currentManager.userChanges().listen((event) async {
-      if (event?.userInfo != null) {
-        var exp = event?.claims['exp'];
-        var name = event?.claims['name'];
-        var username = event?.claims['preferred_username'];
-        token = event?.token.accessToken;
-        var deviceId = await fetchDeviceId();
-        logNoStack.i(
-          'NEST_AUTH2: BUILD: App State User changed (login): exp:$exp, $username, $name $deviceId',
-        );
+    // app_state.currentManager.userChanges().listen((event) async {
+    //   if (event?.userInfo != null) {
+    //     var exp = event?.claims['exp'];
+    //     var name = event?.claims['name'];
+    //     var username = event?.claims['preferred_username'];
+    //     token = event?.token.accessToken;
+    //     var deviceId = await fetchDeviceId();
+    //     logNoStack.i(
+    //       'NEST_AUTH2: BUILD: App State User changed (login): exp:$exp, $username, $name $deviceId',
+    //     );
 
-        await loginOidc(event);
-      } else {
-        logNoStack.i("AUTH CONTROLLER BUILD: App State User changed to NULL:");
-      }
-    });
+    //     await loginOidc(event);
+        
+    //   } else {
+    //     logNoStack.i("AUTH CONTROLLER BUILD: App State User changed to NULL:");
+    //   }
+    // });
 
     logNoStack.i("NEST_AUTH_CONTROLLER : BUILD");
     return false;
