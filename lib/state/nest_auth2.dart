@@ -37,7 +37,7 @@ class NestAuthController extends Notifier<bool> with ChangeNotifier {
 
   bool isLoggedIn = false;
   Person currentUser = defaultPerson;
-  String? token = null;
+  String? token;
 
   OidcPlatformSpecificOptions _getOptions() {
     return OidcPlatformSpecificOptions(

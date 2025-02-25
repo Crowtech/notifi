@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/credentials.dart';
-import 'package:notifi/riverpod/current_user.dart';
 
 import '../models/person.dart';
-import '../state/nest_auth2.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),

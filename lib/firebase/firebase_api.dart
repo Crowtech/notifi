@@ -124,7 +124,7 @@ class FirebaseApi {
 
       await _storage.write(key: 'fcm', value: fCMToken.toString());
       String? fcmToken = await _storage.read(key: 'fcm');
-      print("FCM Token: " + fcmToken.toString() + "Saved Securely");
+      print("FCM Token: ${fcmToken}Saved Securely");
 
       initPushNotifications();
       initLocalNotifications();

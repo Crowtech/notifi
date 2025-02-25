@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:notifi/riverpod/current_user.dart';
 
 import '../constants/app_sizes.dart';
 import '../state/nest_auth2.dart';

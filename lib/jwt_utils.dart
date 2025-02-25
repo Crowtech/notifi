@@ -13,7 +13,6 @@ import 'package:logger/logger.dart' as logger;
 import 'package:notifi/i18n/string_hardcoded.dart';
 import 'package:notifi/notifi.dart';
 import 'package:notifi/models/person.dart' as person;
-import 'package:notifi/riverpod/current_user.dart';
 import 'package:oidc/oidc.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/credentials.dart';
 import 'package:notifi/jwt_utils.dart';

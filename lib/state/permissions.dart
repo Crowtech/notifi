@@ -5,8 +5,6 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../entities/user_role.dart';
-import '../riverpod/current_user.dart';
-import 'auth_controller.dart';
 import 'package:logger/logger.dart' as logger;
 
 import 'nest_auth2.dart';

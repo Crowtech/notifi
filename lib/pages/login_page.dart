@@ -6,7 +6,6 @@ import 'package:notifi/jwt_utils.dart';
 import 'package:notifi/state/nest_auth2.dart';
 import 'package:oidc/oidc.dart';
 
-import '../state/auth_controller.dart';
 import '../widgets/action_button.dart';
 import 'package:notifi/app_state.dart' as app_state;
 import 'package:logger/logger.dart' as logger;

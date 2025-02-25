@@ -6,7 +6,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../i18n/strings.g.dart' ;
 
 part 'activity_page.g.dart';
 part 'activity_page.freezed.dart';

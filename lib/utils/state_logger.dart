@@ -3,7 +3,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../entities/auth.dart';
 import 'package:logger/logger.dart' as logger;
 
 var log = logger.Logger(

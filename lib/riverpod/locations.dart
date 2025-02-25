@@ -15,7 +15,6 @@ import '../api_utils.dart';
 import '../models/crowtech_basepage.dart';
 import 'dart:math' as math;
 
-import '../state/auth_controller.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),

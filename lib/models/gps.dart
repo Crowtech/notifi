@@ -47,7 +47,7 @@ class GPS extends CrowtechBase<GPS> {
     this.battery = 0.0,
     this.charging = false,
     this.moving = false,
-    this.person = null,
+    this.person,
   }) {
    
   

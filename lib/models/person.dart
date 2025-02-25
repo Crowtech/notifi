@@ -61,7 +61,7 @@ class Person extends Resource {
       required this.latitude,
       required this.birthyear,
       required this.fcm,
-       this.gps = null,
+       this.gps,
       });
 
   factory Person.fromJson(Map<String, dynamic> json) => _$PersonFromJson(json);

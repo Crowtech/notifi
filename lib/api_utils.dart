@@ -125,7 +125,7 @@ Future<dynamic> apiPostData(Locale locale, String token, String apiPath,
 
 Future<http.Response> apiPostDataStrNoLocale(
     String token, String apiPath, String? jsonDataStr) async {
-  var url = Uri.parse("$apiPath");
+  var url = Uri.parse(apiPath);
 
   final http.Response response;
   if (jsonDataStr != null) {
@@ -163,11 +163,11 @@ Future<http.Response> apiGetData(
   
 
   final http.Response response;
-  log.i("Response code for apiGeData is ${apiPath} for \"Content-Type\" and \"Accept\" $accept");
+  log.i("Response code for apiGeData is $apiPath for \"Content-Type\" and \"Accept\" $accept");
   // No data
   response = await http.get(url, headers: {
-    "Content-Type": "$accept",
-    "Accept": "${accept}",
+    "Content-Type": accept,
+    "Accept": accept,
   });
 
   log.i("Response code for apiGeData is ${response.statusCode} for $apiPath");
@@ -183,7 +183,7 @@ Future<http.Response> apiGetData(
 
 Future<http.Response> apiPostDataStr(
     Locale locale, String token, String apiPath, String? jsonDataStr) async {
-  var url = Uri.parse("$apiPath");
+  var url = Uri.parse(apiPath);
 
   final http.Response response;
   if (jsonDataStr != null) {
@@ -221,7 +221,7 @@ Future<Person> registerLogin(
 ) async {
   String deviceId = await fetchDeviceId();
   log.i("API_UTILS: Login: deviceid=$deviceId");
-  String url =  "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/login?devicecode=${deviceId}";
+  String url =  "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/login?devicecode=$deviceId";
   try {
     
     var currentUserMap = await apiPostDataNoLocale(
@@ -433,7 +433,7 @@ Future<bool> updateKeycloakUserInfo(String token,String id, String email, String
   // No data
   response = await http.put(url, 
   headers: {
-    "Content-Type": "application/json",
+    "Content-Type": "application/x-www-form-urlencoded",
     "Accept": "application/json",
     "Authorization": "Bearer $token",
   },

@@ -124,8 +124,7 @@ Color get colorHover =>
 
 void showDefaultSettings() {
   logNoStack.i("Main:default Realm = $defaultRealm\n"
-          "Main:default Auth Base URL = $defaultAuthBaseUrl\n" +
-      "Main:default Discovery URL = $defaultDiscoveryUrl\n" +
+          "Main:default Auth Base URL = $defaultAuthBaseUrl\n" "Main:default Discovery URL = $defaultDiscoveryUrl\n" +
       "Main:default ClientId = $defaultClientId\n" +
       "Main:default Client Secret = $defaultClientSecret\n" +
       "Main:default Redirect URL = $defaultRedirectUrl\n" +
@@ -137,12 +136,12 @@ void showDefaultSettings() {
       "Main:defaultImageProxy URL = $defaultImageProxyUrl\n" +
       "Main:appStoreId = $iosAppStoreId\n" +
       "Main: skip Login = ${skipLogin ? 'ON' : 'OFF'}\n" +
-      "Main: skip Login  username = ${testUsername}\n" +
-      "Main: skip Login  password = ${testPassword}\n" +
+      "Main: skip Login  username = $testUsername\n" +
+      "Main: skip Login  password = $testPassword\n" +
       "Main: enable Camera = ${enableCamera ? 'ON' : 'OFF'}\n" +
       "Main: enable Location = ${enableLocation ? 'ON' : 'OFF'}\n" +
       "Main: enable Notifications = ${enableNotifications ? 'ON' : 'OFF'}\n" +
-      "Main: Ts & C url = ${defaultTermsAndConditionsUrl}\n" +
-      "Main: Privacy url = ${defaultPrivacyPolicyUrl}\n" +
+      "Main: Ts & C url = $defaultTermsAndConditionsUrl\n" +
+      "Main: Privacy url = $defaultPrivacyPolicyUrl\n" +
       "");
 }
