@@ -110,6 +110,18 @@ Future<void> login() async {
     });
   }
 
+  Future<void> refreshPerson() async
+  {
+    var oidcUser = await app_state.currentManager.refreshToken();
+     loginOidc(oidcUser);
+  }
+
+  Future<void> refreshToken() async 
+  {
+     var oidcUser = await app_state.currentManager.refreshToken();
+     loginOidc(oidcUser);
+  }
+
 Future<void> loggedIn() async 
 {
   state = true;
