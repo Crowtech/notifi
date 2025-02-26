@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/credentials.dart';
+import 'package:notifi/riverpod/refresh_widget.dart';
 import 'package:notifi/state/nest_auth2.dart';
 
 import '../models/person.dart';
@@ -32,7 +33,7 @@ class NestAvatar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final status = ref.watch(nestAvatarStatusProvider(person.code));
+    final status = ref.watch(RefreshWidgetProvider(person.code!));
    
     Person currentUser = ref.read(nestAuthProvider.notifier).currentUser;
     if (currentUser.email == person.email) {
@@ -41,7 +42,7 @@ class NestAvatar extends ConsumerWidget {
     }
     String initials = defaultInitials;
     logNoStack.i(
-        "avatarUrl=${person.avatarUrl} diameter = $diameter initials = $initials");
+        "avatarUrl=${person.avatarUrl} diameter = $diameter initials = $initials with code $status");
     String? avatarUrl;
     if (person.avatarUrl?.isEmpty ?? true) {
      
