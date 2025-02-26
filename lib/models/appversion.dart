@@ -21,7 +21,7 @@ class AppVersion extends CrowtechObject {
 
   AppVersion(
       {super.id,
-      super.code,
+      required super.code,
       super.created,
       super.updated,
       super.name,
