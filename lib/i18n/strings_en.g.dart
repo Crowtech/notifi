@@ -65,6 +65,8 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get groups => 'Groups';
 	String get help => 'Help';
 	String get home => 'Home';
+	String get image_uploaded_success => 'Image uploaded successfully';
+	String get image_uploaded_failure => 'Image failed to upload';
 	String get intro_title => 'Welcome to Crowtech';
 	String get intro_description => 'Advanced Design';
 	String get locked => 'Locked';
@@ -191,6 +193,8 @@ extension on Translations {
 			case 'groups': return 'Groups';
 			case 'help': return 'Help';
 			case 'home': return 'Home';
+			case 'image_uploaded_success': return 'Image uploaded successfully';
+			case 'image_uploaded_failure': return 'Image failed to upload';
 			case 'intro_title': return 'Welcome to Crowtech';
 			case 'intro_description': return 'Advanced Design';
 			case 'locked': return 'Locked';

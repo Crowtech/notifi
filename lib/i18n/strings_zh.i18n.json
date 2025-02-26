@@ -43,6 +43,8 @@
   "groups": "群组", 
   "help": "帮助",
   "home": "家",
+  "image_uploaded_success": "图片上传成功",
+  "image_uploaded_failure": "图片上传失败",
   "intro_title": "欢迎使用 Crowtech",
   "intro_description": "出行即服务",
   "locked": "已锁定",

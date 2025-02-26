@@ -63,6 +63,8 @@ class TranslationsZh extends Translations {
 	@override String get groups => '群组';
 	@override String get help => '帮助';
 	@override String get home => '家';
+	@override String get image_uploaded_success => '图片上传成功';
+	@override String get image_uploaded_failure => '图片上传失败';
 	@override String get intro_title => '欢迎使用 Crowtech';
 	@override String get intro_description => '出行即服务';
 	@override String get locked => '已锁定';
@@ -189,6 +191,8 @@ extension on TranslationsZh {
 			case 'groups': return '群组';
 			case 'help': return '帮助';
 			case 'home': return '家';
+			case 'image_uploaded_success': return '图片上传成功';
+			case 'image_uploaded_failure': return '图片上传失败';
 			case 'intro_title': return '欢迎使用 Crowtech';
 			case 'intro_description': return '出行即服务';
 			case 'locked': return '已锁定';

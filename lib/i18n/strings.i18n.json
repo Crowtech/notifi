@@ -44,6 +44,8 @@
   "groups": "Groups",
   "help": "Help",
   "home": "Home",
+  "image_uploaded_success": "Image uploaded successfully",
+  "image_uploaded_failure": "Image failed to upload",
   "intro_title": "Welcome to Crowtech",
   "intro_description": "Advanced Design",
   "locked": "Locked",
