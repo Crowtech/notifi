@@ -10,7 +10,7 @@ import 'package:slang/generated.dart';
 import 'strings.g.dart';
 
 // Path: <root>
-class TranslationsZh extends Translations {
+class TranslationsZh implements Translations {
 	/// You can call this constructor and build your own translation instance of this locale.
 	/// Constructing via the enum [AppLocale.build] is preferred.
 	TranslationsZh({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver})
@@ -20,9 +20,7 @@ class TranslationsZh extends Translations {
 		    overrides: overrides ?? {},
 		    cardinalResolver: cardinalResolver,
 		    ordinalResolver: ordinalResolver,
-		  ),
-		  super(cardinalResolver: cardinalResolver, ordinalResolver: ordinalResolver) {
-		super.$meta.setFlatMapFunction($meta.getTranslation); // copy base translations to super.$meta
+		  ) {
 		$meta.setFlatMapFunction(_flatMapFunction);
 	}
 
@@ -30,7 +28,7 @@ class TranslationsZh extends Translations {
 	@override final TranslationMetadata<AppLocale, Translations> $meta;
 
 	/// Access flat map
-	@override dynamic operator[](String key) => $meta.getTranslation(key) ?? super.$meta.getTranslation(key);
+	@override dynamic operator[](String key) => $meta.getTranslation(key);
 
 	late final TranslationsZh _root = this; // ignore: unused_field
 
@@ -101,8 +99,8 @@ class TranslationsZh extends Translations {
 }
 
 // Path: menu
-class _TranslationsMenuZh extends TranslationsMenuEn {
-	_TranslationsMenuZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsMenuZh implements TranslationsMenuEn {
+	_TranslationsMenuZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -112,8 +110,8 @@ class _TranslationsMenuZh extends TranslationsMenuEn {
 }
 
 // Path: account
-class _TranslationsAccountZh extends TranslationsAccountEn {
-	_TranslationsAccountZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsAccountZh implements TranslationsAccountEn {
+	_TranslationsAccountZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -125,12 +123,14 @@ class _TranslationsAccountZh extends TranslationsAccountEn {
 	@override String get lastname_characters_bad => '姓氏只能包含字母字符、空格或破折号';
 	@override String get organisation_name_taken => '组织已被占用';
 	@override String get update => '更新用户帐户';
+	@override String get update_failure => '更新失败';
+	@override String get update_success => '更新成功';
 	@override String get username_taken => '用户名已被使用。';
 }
 
 // Path: response
-class _TranslationsResponseZh extends TranslationsResponseEn {
-	_TranslationsResponseZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsResponseZh implements TranslationsResponseEn {
+	_TranslationsResponseZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -156,6 +156,8 @@ extension on TranslationsZh {
 			case 'account.lastname_characters_bad': return '姓氏只能包含字母字符、空格或破折号';
 			case 'account.organisation_name_taken': return '组织已被占用';
 			case 'account.update': return '更新用户帐户';
+			case 'account.update_failure': return '更新失败';
+			case 'account.update_success': return '更新成功';
 			case 'account.username_taken': return '用户名已被使用。';
 			case 'activity': return '活动';
 			case 'audio_access_denied': return '您已拒绝音频访问';

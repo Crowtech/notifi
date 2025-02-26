@@ -14,6 +14,8 @@
 
     "organisation_name_taken": "组织已被占用",
     "update": "更新用户帐户",
+    "update_failure": "更新失败",
+    "update_success": "更新成功",
     "username_taken": "用户名已被使用。"
   },
   "activity": "活动",
