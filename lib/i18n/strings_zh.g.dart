@@ -10,7 +10,7 @@ import 'package:slang/generated.dart';
 import 'strings.g.dart';
 
 // Path: <root>
-class TranslationsZh extends Translations {
+class TranslationsZh implements Translations {
 	/// You can call this constructor and build your own translation instance of this locale.
 	/// Constructing via the enum [AppLocale.build] is preferred.
 	TranslationsZh({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver})
@@ -20,9 +20,7 @@ class TranslationsZh extends Translations {
 		    overrides: overrides ?? {},
 		    cardinalResolver: cardinalResolver,
 		    ordinalResolver: ordinalResolver,
-		  ),
-		  super(cardinalResolver: cardinalResolver, ordinalResolver: ordinalResolver) {
-		super.$meta.setFlatMapFunction($meta.getTranslation); // copy base translations to super.$meta
+		  ) {
 		$meta.setFlatMapFunction(_flatMapFunction);
 	}
 
@@ -30,7 +28,7 @@ class TranslationsZh extends Translations {
 	@override final TranslationMetadata<AppLocale, Translations> $meta;
 
 	/// Access flat map
-	@override dynamic operator[](String key) => $meta.getTranslation(key) ?? super.$meta.getTranslation(key);
+	@override dynamic operator[](String key) => $meta.getTranslation(key);
 
 	late final TranslationsZh _root = this; // ignore: unused_field
 
@@ -103,8 +101,8 @@ class TranslationsZh extends Translations {
 }
 
 // Path: menu
-class _TranslationsMenuZh extends TranslationsMenuEn {
-	_TranslationsMenuZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsMenuZh implements TranslationsMenuEn {
+	_TranslationsMenuZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -114,8 +112,8 @@ class _TranslationsMenuZh extends TranslationsMenuEn {
 }
 
 // Path: account
-class _TranslationsAccountZh extends TranslationsAccountEn {
-	_TranslationsAccountZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsAccountZh implements TranslationsAccountEn {
+	_TranslationsAccountZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -135,8 +133,8 @@ class _TranslationsAccountZh extends TranslationsAccountEn {
 }
 
 // Path: response
-class _TranslationsResponseZh extends TranslationsResponseEn {
-	_TranslationsResponseZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsResponseZh implements TranslationsResponseEn {
+	_TranslationsResponseZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 

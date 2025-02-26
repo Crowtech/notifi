@@ -33,16 +33,16 @@ class NestAvatar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final status = ref.watch(RefreshWidgetProvider(person.code));
-    logNoStack.i("NEST_AVATAR: BUILD! status is $status");
+    //final status = ref.watch(RefreshWidgetProvider(person.code));
+    //logNoStack.i("NEST_AVATAR: BUILD! status is $status");
     Person currentUser = ref.read(nestAuthProvider.notifier).currentUser;
-    if (currentUser.email == person.email) {
+    //if (currentUser.email == person.email) {
       // update person with latest currentUser to ensure updates flow through
-      person = currentUser;
-    }
+    //  person = currentUser;
+    //}
     String initials = defaultInitials;
     logNoStack.i(
-        "avatarUrl=${person.avatarUrl} diameter = $diameter initials = $initials with code $status");
+        "avatarUrl=${person.avatarUrl} diameter = $diameter initials = $initials ");
     String? avatarUrl;
     if (person.avatarUrl?.isEmpty ?? true) {
      
