@@ -32,7 +32,8 @@ class NestAvatar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var isAuth = ref.watch(nestAuthProvider);
+    final status = ref.watch(nestAvatarStatusProvider(person.code));
+   
     Person currentUser = ref.read(nestAuthProvider.notifier).currentUser;
     if (currentUser.email == person.email) {
       // update person with latest currentUser to ensure updates flow through
