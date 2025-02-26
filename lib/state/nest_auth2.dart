@@ -112,6 +112,7 @@ Future<void> login() async {
 
   Future<void> refreshPerson() async
   {
+    logNoStack.i("NEST_AUTH: Refreshing Person");
     var oidcUser = await app_state.currentManager.refreshToken();
      loginOidc(oidcUser);
   }
