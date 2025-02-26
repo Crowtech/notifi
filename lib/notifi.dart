@@ -161,7 +161,7 @@ class Notifi extends ChangeNotifier {
       required String deviceId,
       this.secondsToast = 2,
       List<String>? topics}) {
-    log.i("notifi constructor");
+    logNoStack.i("notifi constructor");
     _vapidKey = vapidKey;
     _packageInfo = packageInfo;
     _deviceId = deviceId;
@@ -258,7 +258,7 @@ class Notifi extends ChangeNotifier {
 
       // Note: This callback is fired at each app startup and whenever a new
       // token is generated.
-      log.i("NOTIFI: Refresh Notifi FCM TOKEN = $fcmToken");
+      logNoStack.i("NOTIFI: Refresh Notifi FCM TOKEN = $fcmToken");
       fcmToken = fcmToken;
       fcm = fcmToken;
       notifyListeners();
@@ -267,7 +267,7 @@ class Notifi extends ChangeNotifier {
     });
 
     if (kIsWeb) {
-      log.i("Got to here: WEB detected");
+      logNoStack.i("Got to here: WEB detected");
     } else {
       logNoStack.i("Got to here: WEB not detected");
     }

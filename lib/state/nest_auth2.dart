@@ -129,7 +129,7 @@ Future<void> loggedIn() async
 }
 
   Future<void> loginOidc(OidcUser? oidcUser) async {
-    log.i("NEST_AUTH: LOGIN_OIDC: START");
+    logNoStack.i("NEST_AUTH: LOGIN_OIDC: START");
 
     if (oidcUser != null) {
       log.i(
@@ -137,7 +137,7 @@ Future<void> loggedIn() async
 
 // Now fetch the actual user from the backend
 
-      log.i("NEST_AUTH  LOGIN_OIDC: SAbout to loginToken");
+      logNoStack.i("NEST_AUTH  LOGIN_OIDC: SAbout to loginToken");
       token = oidcUser.token.accessToken!;
       currentUser = await registerLogin(oidcUser.token.accessToken!);
       currentUser.isSignedIn = true;

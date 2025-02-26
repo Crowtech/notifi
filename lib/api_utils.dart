@@ -33,7 +33,7 @@ Future<dynamic> apiPostNoLocale(String token, String apiPath) async {
 
 Future<dynamic> apiPostDataNoLocale(
     String token, String apiPath, String? dataName, Object? data) async {
-  log.i("API POST : APIPath -> $apiPath");
+  logNoStack.i("API POST : APIPath -> $apiPath");
   var url = Uri.parse(apiPath);
   String jsonData;
   final http.Response response;
@@ -127,6 +127,9 @@ Future<http.Response> apiPostDataStrNoLocale(
     String token, String apiPath, String? jsonDataStr) async {
   var url = Uri.parse(apiPath);
 
+  logNoStack.i("API_UTILS:apiPostDataStrNoLocale: $url $jsonDataStr");
+
+
   final http.Response response;
   if (jsonDataStr != null) {
     response = await http.post(url,
@@ -145,13 +148,14 @@ Future<http.Response> apiPostDataStrNoLocale(
     });
   }
 
-  log.d(response.statusCode);
-  if (response.statusCode == 202 ||
+  log.i("API_UTILS:apiPostDataStrNoLocale: ${response.statusCode}");
+  if (response.statusCode == 204 ||
+    response.statusCode == 202 ||
       response.statusCode == 201 ||
       response.statusCode == 200) {
     return response;
   } else {
-    log.d(
+    log.i(
         "API POST DATA: apiPostDataStrNoLocaleapiPost created unsuccessfully!");
     throw "api Post created unsuccessfully!";
   }
@@ -163,20 +167,20 @@ Future<http.Response> apiGetData(
   
 
   final http.Response response;
-  log.i("Response code for apiGeData is $apiPath for \"Content-Type\" and \"Accept\" $accept");
+  logNoStack.i("Response code for apiGeData is $apiPath for \"Content-Type\" and \"Accept\" $accept");
   // No data
   response = await http.get(url, headers: {
     "Content-Type": accept,
     "Accept": accept,
   });
 
-  log.i("Response code for apiGeData is ${response.statusCode} for $apiPath");
+  logNoStack.i("Response code for apiGeData is ${response.statusCode} for $apiPath");
   if (response.statusCode == 202 ||
       response.statusCode == 201 ||
       response.statusCode == 200) {
     return response;
   } else {
-    log.e("API GET DATA: apiGetData created unsuccessfully! ${response.statusCode}");
+    logNoStack.e("API GET DATA: apiGetData created unsuccessfully! ${response.statusCode}");
     throw "api Get created unsuccessfully!";
   }
 }
@@ -220,7 +224,7 @@ Future<Person> registerLogin(
   String token,
 ) async {
   String deviceId = await fetchDeviceId();
-  log.i("API_UTILS: Login: deviceid=$deviceId");
+  logNoStack.i("API_UTILS: Login: deviceid=$deviceId");
   String url =  "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/login?devicecode=$deviceId";
   try {
     
@@ -232,7 +236,7 @@ Future<Person> registerLogin(
 
     var currentUser = Person.fromJson(currentUserMap);
 
-    log.i("API_UTILS: Logged in user $currentUser");
+    logNoStack.i("API_UTILS: Logged in user $currentUser");
     return currentUser;
   } on Exception catch (error) {
     throw ("API_UTILS: login error $error for $url");
@@ -330,7 +334,7 @@ Future<String> fetchLatestAppVersion() async {
     logNoStack.d("FETCH LATEST APP VERSION: result ${response.body}");
     final map = jsonDecode(response.body);
     AppVersion appVersion = AppVersion.fromJson(map);
-    log.i("Latest AppVersion is $appVersion , current version is $appVersion");
+    logNoStack.i("Latest AppVersion is $appVersion , current version is $appVersion");
   //return response.body;
     return appVersion.version!;
 
