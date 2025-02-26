@@ -1,6 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:notifi/auth.dart';
-import 'package:notifi/screens/splash_screen.dart';
+
 import 'package:notifi/test_pages/test_page.dart';
 import 'package:oidc/oidc.dart';
 import 'package:posthog_flutter/posthog_flutter.dart';
@@ -76,10 +76,10 @@ final GoRouter router = GoRouter(
       },
       builder: (context, state) =>  AuthPage(title:t.app_title),
     ),
-    GoRoute(
-      path: CrowtechRoutes.splash,
-      builder: (context, state) => SplashScreen(nextScreenRoute:CrowtechRoutes.home),
-    ),
+    // GoRoute(
+    //   path: CrowtechRoutes.splash,
+    //   builder: (context, state) => SplashScreen(nextScreenRoute:CrowtechRoutes.home),
+    // ),
   
   
     // GoRoute(

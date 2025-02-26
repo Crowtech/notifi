@@ -107,6 +107,7 @@ Future<String> sendGPS(Person currentUser,String token, bg.Location location) as
     //       , widget.jwt!);
 
     var gps = GPS(
+      code: 'GPS_00',
       jwt: token,
       longitude: location.coords.longitude,
       latitude: location.coords.latitude,
