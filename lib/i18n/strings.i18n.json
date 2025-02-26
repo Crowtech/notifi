@@ -12,8 +12,9 @@
     "email_taken": "Email already taken.",
     "firstname_characters_bad": "Firstname must not contain non Alphabetic characters",
     "lastname_characters_bad": "Lastname must only contain Alphabetic characters, spaces, or dashes",
-
+    "avatar_url": "Choose from gallery",
     "organisation_name_taken": "Organisation already taken",
+    "take_a_picture": "Take a picture",
     "update": "Update User Account",
     "update_failure": "Update failed",
     "update_success": "Update successful",

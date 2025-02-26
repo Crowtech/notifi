@@ -11,8 +11,9 @@
     "email_taken": "电子邮件已被占用",
     "firstname_characters_bad": "名字不得包含非字母字符",
     "lastname_characters_bad": "姓氏只能包含字母字符、空格或破折号",
-
+    "avatar_url": "从图库中选择",
     "organisation_name_taken": "组织已被占用",
+    "take_a_picture": "拍照",
     "update": "更新用户帐户",
     "update_failure": "更新失败",
     "update_success": "更新成功",

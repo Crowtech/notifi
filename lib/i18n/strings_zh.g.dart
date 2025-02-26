@@ -123,7 +123,9 @@ class _TranslationsAccountZh extends TranslationsAccountEn {
 	@override String get email_taken => '电子邮件已被占用';
 	@override String get firstname_characters_bad => '名字不得包含非字母字符';
 	@override String get lastname_characters_bad => '姓氏只能包含字母字符、空格或破折号';
+	@override String get avatar_url => '从图库中选择';
 	@override String get organisation_name_taken => '组织已被占用';
+	@override String get take_a_picture => '拍照';
 	@override String get update => '更新用户帐户';
 	@override String get update_failure => '更新失败';
 	@override String get update_success => '更新成功';
@@ -156,7 +158,9 @@ extension on TranslationsZh {
 			case 'account.email_taken': return '电子邮件已被占用';
 			case 'account.firstname_characters_bad': return '名字不得包含非字母字符';
 			case 'account.lastname_characters_bad': return '姓氏只能包含字母字符、空格或破折号';
+			case 'account.avatar_url': return '从图库中选择';
 			case 'account.organisation_name_taken': return '组织已被占用';
+			case 'account.take_a_picture': return '拍照';
 			case 'account.update': return '更新用户帐户';
 			case 'account.update_failure': return '更新失败';
 			case 'account.update_success': return '更新成功';

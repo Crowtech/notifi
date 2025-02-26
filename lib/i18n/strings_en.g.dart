@@ -125,7 +125,9 @@ class TranslationsAccountEn {
 	String get email_taken => 'Email already taken.';
 	String get firstname_characters_bad => 'Firstname must not contain non Alphabetic characters';
 	String get lastname_characters_bad => 'Lastname must only contain Alphabetic characters, spaces, or dashes';
+	String get avatar_url => 'Choose from gallery';
 	String get organisation_name_taken => 'Organisation already taken';
+	String get take_a_picture => 'Take a picture';
 	String get update => 'Update User Account';
 	String get update_failure => 'Update failed';
 	String get update_success => 'Update successful';
@@ -158,7 +160,9 @@ extension on Translations {
 			case 'account.email_taken': return 'Email already taken.';
 			case 'account.firstname_characters_bad': return 'Firstname must not contain non Alphabetic characters';
 			case 'account.lastname_characters_bad': return 'Lastname must only contain Alphabetic characters, spaces, or dashes';
+			case 'account.avatar_url': return 'Choose from gallery';
 			case 'account.organisation_name_taken': return 'Organisation already taken';
+			case 'account.take_a_picture': return 'Take a picture';
 			case 'account.update': return 'Update User Account';
 			case 'account.update_failure': return 'Update failed';
 			case 'account.update_success': return 'Update successful';
