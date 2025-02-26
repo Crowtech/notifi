@@ -10,7 +10,7 @@ abstract class CrowtechBase<T> {
   int? orgid;
   int? id;
   DateTime? created = DateTime.now().toUtc();
-  String code;
+  String? code;
 
   CrowtechBase({this.orgid,this.id, this.created, required this.code}); 
 

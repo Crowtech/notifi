@@ -23,7 +23,7 @@ class Resource extends CrowtechObject {
   Resource(
       {super.orgid,
       super.id,
-      required super.code,
+      super.code,
       super.created,
       super.updated,
       super.name,

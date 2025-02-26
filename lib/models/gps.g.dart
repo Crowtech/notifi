@@ -9,7 +9,7 @@ part of 'gps.dart';
 GPS _$GPSFromJson(Map<String, dynamic> json) => GPS(
       orgid: (json['orgid'] as num?)?.toInt() ?? 0,
       id: (json['id'] as num?)?.toInt() ?? 0,
-      code: json['code'] as String,
+      code: json['code'] as String?,
       created: json['created'] == null
           ? null
           : DateTime.parse(json['created'] as String),

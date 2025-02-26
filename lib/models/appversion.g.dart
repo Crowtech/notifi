@@ -8,7 +8,7 @@ part of 'appversion.dart';
 
 AppVersion _$AppVersionFromJson(Map<String, dynamic> json) => AppVersion(
       id: (json['id'] as num?)?.toInt(),
-      code: json['code'] as String,
+      code: json['code'] as String?,
       created: json['created'] == null
           ? null
           : DateTime.parse(json['created'] as String),

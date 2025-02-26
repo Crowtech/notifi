@@ -33,7 +33,7 @@ class GPS extends CrowtechBase<GPS> {
   GPS({
     super.orgid = 0,
     super.id = 0,
-    required super.code,
+    super.code,
     super.created,
     String? jwt,
     this.resourcecode = "",
