@@ -41,7 +41,7 @@ class Person extends Resource {
       this.isSignedIn=false,
       super.orgid,
       super.id,
-      super.code,
+      required super.code,
       super.created,
       super.updated,
       super.name,

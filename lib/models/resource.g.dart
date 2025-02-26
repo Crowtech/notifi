@@ -9,7 +9,7 @@ part of 'resource.dart';
 Resource _$ResourceFromJson(Map<String, dynamic> json) => Resource(
       orgid: (json['orgid'] as num?)?.toInt(),
       id: (json['id'] as num?)?.toInt(),
-      code: json['code'] as String?,
+      code: json['code'] as String,
       created: json['created'] == null
           ? null
           : DateTime.parse(json['created'] as String),
