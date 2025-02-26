@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:notifi/credentials.dart';
 import 'package:riverpod/riverpod.dart';
+import 'package:notifi/i18n/strings.g.dart' as nt;
 
 class MinIOUploadNotifier extends StateNotifier<AsyncValue<String>> {
   MinIOUploadNotifier() : super(const AsyncValue.loading());
@@ -18,9 +19,9 @@ class MinIOUploadNotifier extends StateNotifier<AsyncValue<String>> {
     try {
       final streamedResponse = await request.send();
       if (streamedResponse.statusCode == 200) {
-        state = const AsyncValue.data("Image uploaded successfully");
+        state = AsyncValue.data(nt.t.image_uploaded_success);
       } else {
-        throw Exception('Failed to upload image');
+        throw Exception(nt.t.image_uploaded_failure);
       }
     } catch (e) {
       state = AsyncValue.error(e, StackTrace.current);
