@@ -14,7 +14,7 @@ class MinioTokenRequest {
 
   String Action = 'AssumeRoleWithWebIdentity';
   String Version = '2011-06-15';
-  int DurationSeconds = 86000;
+  String DurationSeconds = "86000";
   String WebIdentityToken;
 
   MinioTokenRequest({required this.WebIdentityToken});

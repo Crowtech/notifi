@@ -12,7 +12,7 @@ MinioTokenRequest _$MinioTokenRequestFromJson(Map<String, dynamic> json) =>
     )
       ..Action = json['Action'] as String
       ..Version = json['Version'] as String
-      ..DurationSeconds = (json['DurationSeconds'] as num).toInt();
+      ..DurationSeconds = json['DurationSeconds'] as String;
 
 Map<String, dynamic> _$MinioTokenRequestToJson(MinioTokenRequest instance) =>
     <String, dynamic>{
