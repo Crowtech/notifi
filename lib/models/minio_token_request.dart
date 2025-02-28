@@ -12,16 +12,12 @@ class MinioTokenRequest {
   static String className = "MinioTokenRequest";
   static String tablename = className.toLowerCase();
 
-
-  String Action='AssumeRoleWithWebIdentity';
+  String Action = 'AssumeRoleWithWebIdentity';
   String Version = '2011-06-15';
-  int Duration = 86000;
-  String WebidentityToken;
+  int DurationSeconds = 86000;
+  String WebIdentityToken;
 
-
-  MinioTokenRequest(
-      {required this.WebidentityToken
-});
+  MinioTokenRequest({required this.WebIdentityToken});
 
   factory MinioTokenRequest.fromJson(Map<String, dynamic> json) =>
       _$MinioTokenRequestFromJson(json);
@@ -34,17 +30,14 @@ class MinioTokenRequest {
 
   @override
   String toString() {
-    return "MinioTokenRequest:$Action $Version $Duration $WebidentityToken";
+    return "MinioTokenRequest:$Action $Version $DurationSeconds $WebIdentityToken";
   }
 
   MinioTokenRequest copyWith({
     final String? query,
   }) {
     return MinioTokenRequest(
-      WebidentityToken: WebidentityToken ?? this.WebidentityToken,
+      WebIdentityToken: WebIdentityToken ?? this.WebIdentityToken,
     );
   }
-
- 
 }
-
