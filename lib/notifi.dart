@@ -87,7 +87,6 @@ Future<void> setupFlutterNotifications() async {
 }
 
 class Notifi extends ChangeNotifier {
-  String? _vapidKey;
   int secondsToast = 2;
   final List<String> _topics = [];
   String _fcm = "Loading ...";
@@ -107,7 +106,6 @@ class Notifi extends ChangeNotifier {
     _userReady = value;
   }
 
-  String? get vapidKey => _vapidKey;
   String? get deviceId => _deviceId;
 
   PackageInfo? get packageInfo => _packageInfo;
@@ -156,13 +154,11 @@ class Notifi extends ChangeNotifier {
 
   Notifi(
       {this.options,
-      String? vapidKey,
       required PackageInfo packageInfo,
       required String deviceId,
       this.secondsToast = 2,
       List<String>? topics}) {
     logNoStack.i("notifi constructor");
-    _vapidKey = vapidKey;
     _packageInfo = packageInfo;
     _deviceId = deviceId;
 
