@@ -134,6 +134,7 @@ void showDefaultSettings() {
       "Main:default Auth Endpoint URL = $defaultAuthEndpointUrl\n" +
       "Main:defaultMinio URL = $defaultMinioEndpointUrl\n" +
       "Main:defaultImageProxy URL = $defaultImageProxyUrl\n" +
+      "Main:vapidKey = $vapidKey\n" +
       "Main:appStoreId = $iosAppStoreId\n" +
       "Main: skip Login = ${skipLogin ? 'ON' : 'OFF'}\n" +
       "Main: skip Login  username = $testUsername\n" +
