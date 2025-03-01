@@ -161,6 +161,44 @@ Future<http.Response> apiPostDataStrNoLocale(
   }
 }
 
+
+Future<http.Response> apiPutDataStrNoLocale(
+    String token, String apiPath, String? jsonDataStr) async {
+  var url = Uri.parse(apiPath);
+
+  logNoStack.i("API_UTILS:apiPostDataStrNoLocale: $url $jsonDataStr");
+
+
+  final http.Response response;
+  if (jsonDataStr != null) {
+    response = await http.put(url,
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Authorization": "Bearer $token",
+        },
+        body: jsonDataStr);
+  } else {
+    // No data
+    response = await http.post(url, headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "Bearer $token",
+    });
+  }
+
+  log.i("API_UTILS:apiPutDataStrNoLocale: ${response.statusCode}");
+  if (response.statusCode == 204 ||
+    response.statusCode == 202 ||
+      response.statusCode == 201 ||
+      response.statusCode == 200) {
+    return response;
+  } else {
+    log.i(
+        "API POST DATA: apiPutDataStrNoLocaleapiPost created unsuccessfully!");
+    throw "api Post created unsuccessfully!";
+  }
+}
 Future<http.Response> apiGetData(
     String apiPath, String accept) async {
   var url = Uri.parse(apiPath);
