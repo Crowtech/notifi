@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/credentials.dart';
-import 'package:notifi/riverpod/refresh_widget.dart';
-import 'package:notifi/state/nest_auth2.dart';
 
 import '../models/person.dart';
 
@@ -17,7 +15,7 @@ var logNoStack = logger.Logger(
   level: logger.Level.info,
 );
 
-String defaultUrl = "$defaultMinioEndpointUrl/$defaultRealm/adam51casual.png";
+//String defaultUrl = "$defaultMinioEndpointUrl/$defaultRealm/adam51casual.png";
 
 class NestAvatar extends ConsumerWidget {
   int diameter;
@@ -45,7 +43,7 @@ class NestAvatar extends ConsumerWidget {
         "avatarUrl=${person.avatarUrl} diameter = $diameter initials = $initials ");
     String? avatarUrl;
     if (person.avatarUrl?.isEmpty ?? true) {
-      avatarUrl = defaultUrl;
+      avatarUrl = null;
     } else {
        avatarUrl = "$defaultImageProxyUrl/${diameter}x/${person.getAvatarUrl()}";
     

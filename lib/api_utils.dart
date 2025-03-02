@@ -166,7 +166,7 @@ Future<http.Response> apiPutDataStrNoLocale(
     String token, String apiPath, String? jsonDataStr) async {
   var url = Uri.parse(apiPath);
 
-  logNoStack.i("API_UTILS:apiPostDataStrNoLocale: $url $jsonDataStr");
+  logNoStack.i("API_UTILS:apiPutDataStrNoLocale: $url $jsonDataStr");
 
 
   final http.Response response;
