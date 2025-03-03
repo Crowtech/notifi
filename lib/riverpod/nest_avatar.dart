@@ -4,6 +4,7 @@ import 'package:logger/logger.dart' as logger;
 import 'package:notifi/credentials.dart';
 
 import '../models/person.dart';
+import 'refresh_widget.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -31,7 +32,7 @@ class NestAvatar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    //final status = ref.watch(RefreshWidgetProvider(person.code));
+    final status = ref.watch(RefreshWidgetProvider(person.code!));
     //logNoStack.i("NEST_AVATAR: BUILD! status is $status");
    // Person currentUser = ref.read(nestAuthProvider.notifier).currentUser;
     //if (currentUser.email == person.email) {
@@ -40,7 +41,7 @@ class NestAvatar extends ConsumerWidget {
     //}
     String initials = defaultInitials;
     logNoStack.i(
-        "avatarUrl=${person.avatarUrl} diameter = $diameter initials = $initials ");
+        "avatarUrl=${person.avatarUrl} diameter = $diameter initials = $initials status =$status");
     String? avatarUrl;
     if (person.avatarUrl?.isEmpty ?? true) {
       avatarUrl = null;
