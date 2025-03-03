@@ -18,14 +18,14 @@ var logNoStack = logger.Logger(
 
 //String defaultUrl = "$defaultMinioEndpointUrl/$defaultRealm/adam51casual.png";
 
-class NestAvatar extends ConsumerWidget {
+class NestUserAvatar extends ConsumerWidget {
   int diameter;
   Color backgroundColour;
   static const String defaultInitials = "?";
   Person person;
   String lastUUID = "";
 
-  NestAvatar(
+  NestUserAvatar(
       {super.key,
       this.diameter = 68,
       this.backgroundColour = Colors.red,
@@ -47,7 +47,7 @@ class NestAvatar extends ConsumerWidget {
     //}
     String initials = defaultInitials;
     logNoStack.i(
-        "NEST_AVATAR: avatarUrl=${person.avatarUrl} diameter = $diameter initials = $initials status =$latestUUID");
+        "NEST_AVATAR: avatarUrl=${person.avatarUrl} diameter = $diameter initials = $initials status =latestUUID");
     String? avatarUrl;
     if (person.avatarUrl?.isEmpty ?? true) {
       avatarUrl = null;
@@ -86,4 +86,63 @@ class NestAvatar extends ConsumerWidget {
   }
   (context as Element).visitChildren(rebuild);
 }
+}
+
+
+class NestAvatar extends ConsumerWidget {
+  int diameter;
+  Color backgroundColour;
+  static const String defaultInitials = "?";
+  Person person;
+
+  NestAvatar(
+      {super.key,
+      this.diameter = 68,
+      this.backgroundColour = Colors.red,
+      required this.person});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+  
+    //logNoStack.i("NEST_AVATAR: BUILD! status is $status");
+   // Person currentUser = ref.read(nestAuthProvider.notifier).currentUser;
+    //if (currentUser.email == person.email) {
+      // update person with latest currentUser to ensure updates flow through
+    //  person = currentUser;
+    //}
+    String initials = defaultInitials;
+    logNoStack.i(
+        "NEST_AVATAR: avatarUrl=${person.avatarUrl} diameter = $diameter initials = $initials status =latestUUID");
+    String? avatarUrl;
+    if (person.avatarUrl?.isEmpty ?? true) {
+      avatarUrl = null;
+    } else {
+       avatarUrl = "$defaultImageProxyUrl/${diameter}x/${person.getAvatarUrl()}";
+    
+    }
+    initials = person.getInitials();
+    return getAvatar(
+        (diameter >> 1).toDouble(), avatarUrl, backgroundColour, initials);
+  }
+
+  Widget getAvatar(final double radius, final String? imageUrl,
+      Color backgroundColour, String initials) {
+    Widget displayWidget;
+    if (!(imageUrl?.isEmpty ?? true)) {
+      displayWidget = CircleAvatar(
+        radius: radius - 2,
+        backgroundImage: NetworkImage(imageUrl!),
+      );
+    } else {
+      displayWidget = Text(initials);
+    }
+
+    return CircleAvatar(
+      radius: radius,
+      backgroundColor: backgroundColour,
+      child: displayWidget,
+    );
+  }
+
+  
 }
