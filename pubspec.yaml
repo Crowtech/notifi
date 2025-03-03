@@ -64,7 +64,7 @@ dependencies:
   slang: ^4.4.1
   slang_flutter: ^4.4.0
   url_strategy: ^0.3.0
-  uuid: any 
+  uuid: ^4.5.1 
   camera: ^0.11.1
   video_player: ^2.9.2
   image_picker: ^1.1.2

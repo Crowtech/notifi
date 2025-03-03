@@ -6,7 +6,7 @@ part of 'refresh_widget.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$refreshWidgetHash() => r'd2dd5f696da12026ee16cb437f1c541d2f7dc6a5';
+String _$refreshWidgetHash() => r'bfe447281557730fe024d89d498a3dccba5704fd';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,10 +29,10 @@ class _SystemHash {
   }
 }
 
-abstract class _$RefreshWidget extends BuildlessAutoDisposeNotifier<bool> {
+abstract class _$RefreshWidget extends BuildlessAutoDisposeNotifier<String> {
   late final String code;
 
-  bool build(
+  String build(
     String code,
   );
 }
@@ -42,7 +42,7 @@ abstract class _$RefreshWidget extends BuildlessAutoDisposeNotifier<bool> {
 const refreshWidgetProvider = RefreshWidgetFamily();
 
 /// See also [RefreshWidget].
-class RefreshWidgetFamily extends Family<bool> {
+class RefreshWidgetFamily extends Family<String> {
   /// See also [RefreshWidget].
   const RefreshWidgetFamily();
 
@@ -81,7 +81,7 @@ class RefreshWidgetFamily extends Family<bool> {
 
 /// See also [RefreshWidget].
 class RefreshWidgetProvider
-    extends AutoDisposeNotifierProviderImpl<RefreshWidget, bool> {
+    extends AutoDisposeNotifierProviderImpl<RefreshWidget, String> {
   /// See also [RefreshWidget].
   RefreshWidgetProvider(
     String code,
@@ -112,7 +112,7 @@ class RefreshWidgetProvider
   final String code;
 
   @override
-  bool runNotifierBuild(
+  String runNotifierBuild(
     covariant RefreshWidget notifier,
   ) {
     return notifier.build(
@@ -137,7 +137,7 @@ class RefreshWidgetProvider
   }
 
   @override
-  AutoDisposeNotifierProviderElement<RefreshWidget, bool> createElement() {
+  AutoDisposeNotifierProviderElement<RefreshWidget, String> createElement() {
     return _RefreshWidgetProviderElement(this);
   }
 
@@ -157,13 +157,13 @@ class RefreshWidgetProvider
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin RefreshWidgetRef on AutoDisposeNotifierProviderRef<bool> {
+mixin RefreshWidgetRef on AutoDisposeNotifierProviderRef<String> {
   /// The parameter `code` of this provider.
   String get code;
 }
 
 class _RefreshWidgetProviderElement
-    extends AutoDisposeNotifierProviderElement<RefreshWidget, bool>
+    extends AutoDisposeNotifierProviderElement<RefreshWidget, String>
     with RefreshWidgetRef {
   _RefreshWidgetProviderElement(super.provider);
 
