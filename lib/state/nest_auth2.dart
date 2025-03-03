@@ -84,6 +84,11 @@ class NestAuthController extends Notifier<bool> with ChangeNotifier {
     return false;
   }
 
+void updateCurrentUser(Person person)
+{
+  currentUser = person;
+  return;
+} 
 
 Future<void> login() async {
     logNoStack.i("NEST_AUTH LOGIN called.");
