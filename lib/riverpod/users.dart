@@ -26,13 +26,18 @@ class UsersFetcher extends Notifier<CrowtechBasePage<Person>> {
     return CrowtechBasePage<Person>();
   }
 
-  void fetch(Locale locale, String token, NestFilter nestfilter) async {
+  void fetch(String token, NestFilter nestfilter) async {
+   
+    state = await fetchPage(token, nestfilter);
+  }
+
+   Future<CrowtechBasePage<Person>>  fetchPage(String token, NestFilter nestfilter) async {
     String jsonDataStr = jsonEncode(nestfilter);
     logNoStack
         .i("Sending NestFilter gps $nestfilter with json as $jsonDataStr");
 
-    var response = await apiPostDataStr(
-        locale, token, "$defaultApiPrefixPath/persons/get", jsonDataStr);
+    var response = await apiPostDataStrNoLocale(
+        token, "$defaultApiPrefixPath/persons/get", jsonDataStr);
     // .then((response) {
     logNoStack.d("result ${response.body.toString()}");
     final map = jsonDecode(response.body);
@@ -44,7 +49,7 @@ class UsersFetcher extends Notifier<CrowtechBasePage<Person>> {
       usersStr += "User $i  ${page.items![i]}\n";
     }
     logNoStack.i(usersStr);
-    state = page;
+    return page;
   }
 }
 
