@@ -23,6 +23,7 @@ class NestAvatar extends ConsumerWidget {
   Color backgroundColour;
   static const String defaultInitials = "?";
   Person person;
+  String lastUUID = "";
 
   NestAvatar(
       {super.key,
@@ -32,7 +33,12 @@ class NestAvatar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final status = ref.watch(RefreshWidgetProvider(person.code!));
+    var latestUUID = ref.watch(RefreshWidgetProvider(person.code!));
+    if (lastUUID != latestUUID) {
+
+      lastUUID = latestUUID;
+      rebuildAllChildren(context);
+    }
     //logNoStack.i("NEST_AVATAR: BUILD! status is $status");
    // Person currentUser = ref.read(nestAuthProvider.notifier).currentUser;
     //if (currentUser.email == person.email) {
@@ -41,7 +47,7 @@ class NestAvatar extends ConsumerWidget {
     //}
     String initials = defaultInitials;
     logNoStack.i(
-        "avatarUrl=${person.avatarUrl} diameter = $diameter initials = $initials status =$status");
+        "NEST_AVATAR: avatarUrl=${person.avatarUrl} diameter = $diameter initials = $initials status =$status");
     String? avatarUrl;
     if (person.avatarUrl?.isEmpty ?? true) {
       avatarUrl = null;
@@ -72,4 +78,12 @@ class NestAvatar extends ConsumerWidget {
       child: displayWidget,
     );
   }
+
+  void rebuildAllChildren(BuildContext context) {
+  void rebuild(Element el) {
+    el.markNeedsBuild();
+    el.visitChildren(rebuild);
+  }
+  (context as Element).visitChildren(rebuild);
+}
 }
