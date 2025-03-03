@@ -47,7 +47,7 @@ class NestAvatar extends ConsumerWidget {
     //}
     String initials = defaultInitials;
     logNoStack.i(
-        "NEST_AVATAR: avatarUrl=${person.avatarUrl} diameter = $diameter initials = $initials status =$status");
+        "NEST_AVATAR: avatarUrl=${person.avatarUrl} diameter = $diameter initials = $initials status =$latestUUID");
     String? avatarUrl;
     if (person.avatarUrl?.isEmpty ?? true) {
       avatarUrl = null;
