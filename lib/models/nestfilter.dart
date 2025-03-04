@@ -75,7 +75,7 @@ NestFilter defaultNestFilter = NestFilter(
   deviceCodeList: [],
   query: "",
   offset: 0,
-  limit: 10,
+  limit: 20,
   sortby: "",
   caseinsensitive: true,
   distinctField: "",
