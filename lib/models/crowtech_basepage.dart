@@ -60,7 +60,7 @@ class CrowtechBasePage<T extends CrowtechBase> {
         "${T.toString()}  i:$startIndex s:${items != null ? items!.length : 0} total:$totalItems ns:$processingTime \n";
     if ((items != null) && (items!.isNotEmpty)) {
       for (int i = 0; i < items!.length; i++) {
-        ret += "${items![i].toString()}\n";
+        ret += "Item $i=> ${items![i].code}\n";
       }
     }
     return ret;
