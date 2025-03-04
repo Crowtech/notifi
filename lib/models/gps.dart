@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
 
 import 'package:logger/logger.dart';
 import 'package:notifi/models/gendertype.dart';

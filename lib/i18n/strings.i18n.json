@@ -48,6 +48,7 @@
   "image_uploaded_failure": "Image failed to upload",
   "intro_title": "Welcome to Crowtech",
   "intro_description": "Advanced Design",
+  "location_permission_denied": "Location permissions are permanently denied, we cannot request permissions.",
   "locked": "Locked",
   "map": "Map",
   "members": "Members",

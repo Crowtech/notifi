@@ -9,9 +9,9 @@ part 'refresh_widget.g.dart';
 @riverpod
 class RefreshWidget extends _$RefreshWidget {
   @override
-  String build(String code) => Uuid().v4().toUpperCase();
+  String build(String code) => const Uuid().v4().toUpperCase();
 
   void refresh() {
-    state = Uuid().v4().toUpperCase();
+    state = const Uuid().v4().toUpperCase();
   }
 }

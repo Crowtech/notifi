@@ -38,9 +38,9 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 	// Translations
 	String get app_title => 'Crowtech';
-	late final TranslationsMenuEn menu = TranslationsMenuEn._(_root);
+	late final TranslationsMenuEn menu = TranslationsMenuEn.internal(_root);
 	String get about_us => 'About Us';
-	late final TranslationsAccountEn account = TranslationsAccountEn._(_root);
+	late final TranslationsAccountEn account = TranslationsAccountEn.internal(_root);
 	String get activity => 'Activity';
 	String get audio_access_denied => 'You have denied audio access';
 	String get audio_access_denied_without_prompt => 'Please go to Settings app to enable audio access';
@@ -69,6 +69,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get image_uploaded_failure => 'Image failed to upload';
 	String get intro_title => 'Welcome to Crowtech';
 	String get intro_description => 'Advanced Design';
+	String get location_permission_denied => 'Location permissions are permanently denied, we cannot request permissions.';
 	String get locked => 'Locked';
 	String get map => 'Map';
 	String get members => 'Members';
@@ -83,7 +84,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get messages => 'Messages';
 	String get moving => 'Moving';
 	String get odometer => 'Odometer';
-	late final TranslationsResponseEn response = TranslationsResponseEn._(_root);
+	late final TranslationsResponseEn response = TranslationsResponseEn.internal(_root);
 	String get privacy_policy => 'Privacy Policy';
 	String get profile => 'Profile';
 	String get pulltorefresh => 'Pull to refresh';
@@ -106,7 +107,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 // Path: menu
 class TranslationsMenuEn {
-	TranslationsMenuEn._(this._root);
+	TranslationsMenuEn.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -117,7 +118,7 @@ class TranslationsMenuEn {
 
 // Path: account
 class TranslationsAccountEn {
-	TranslationsAccountEn._(this._root);
+	TranslationsAccountEn.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -138,7 +139,7 @@ class TranslationsAccountEn {
 
 // Path: response
 class TranslationsResponseEn {
-	TranslationsResponseEn._(this._root);
+	TranslationsResponseEn.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -197,6 +198,7 @@ extension on Translations {
 			case 'image_uploaded_failure': return 'Image failed to upload';
 			case 'intro_title': return 'Welcome to Crowtech';
 			case 'intro_description': return 'Advanced Design';
+			case 'location_permission_denied': return 'Location permissions are permanently denied, we cannot request permissions.';
 			case 'locked': return 'Locked';
 			case 'map': return 'Map';
 			case 'members': return 'Members';

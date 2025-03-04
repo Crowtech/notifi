@@ -47,6 +47,7 @@
   "image_uploaded_failure": "图片上传失败",
   "intro_title": "欢迎使用 Crowtech",
   "intro_description": "出行即服务",
+  "location_permission_denied": "位置权限被永久拒绝，我们无法请求权限。",
   "locked": "已锁定",
   "movement_status": "是移動的嗎",
   "none": "没有任何",

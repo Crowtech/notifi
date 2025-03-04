@@ -1,13 +1,8 @@
-import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
 
 import 'package:logger/logger.dart' as logger;
 
-import '../api_utils.dart';
-import '../credentials.dart';
-import 'crowtech_basepage.dart';
-import 'person.dart';
 part 'nestfilter.g.dart';
 
 var log = logger.Logger(
@@ -70,27 +65,7 @@ class NestFilter {
     );
   }
 
-  Future<CrowtechBasePage<Person>> fetchPage(
-      String token, NestFilter nestfilter) async {
-    String jsonDataStr = jsonEncode(nestfilter);
-    logNoStack
-        .i("Sending NestFilter gps $nestfilter with json as $jsonDataStr");
-
-    var response = await apiPostDataStrNoLocale(
-        token, "$defaultApiPrefixPath/persons/get", jsonDataStr);
-    // .then((response) {
-    logNoStack.d("result ${response.body.toString()}");
-    final map = jsonDecode(response.body);
-
-    CrowtechBasePage<Person> page =
-        CrowtechBasePage<Person>(itemFromJson: Person.fromJson).fromJson(map);
-    String usersStr = "--- Users ----\n";
-    for (int i = 0; i < page.itemCount(); i++) {
-      usersStr += "User $i  ${page.items![i]}\n";
-    }
-    logNoStack.i(usersStr);
-    return page;
-  }
+  
 }
 
 NestFilter defaultNestFilter = NestFilter(

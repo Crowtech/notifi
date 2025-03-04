@@ -127,7 +127,7 @@ Future<String> sendGPS(Person currentUser,String token, bg.Location location) as
     gps.resourcecode = currentUser.code!;
     gps.resourceid = currentUser.id!;
 
-    if (gps.orgid == null) {gps.orgid = 2;}  // HACK
+    gps.orgid ??= 2;  // HACK
 
   logNoStack.i("Sending GPS gps $gps");
 

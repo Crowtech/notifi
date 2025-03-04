@@ -37,7 +37,7 @@ class MinioTokenRequest {
     final String? query,
   }) {
     return MinioTokenRequest(
-      WebIdentityToken: WebIdentityToken ?? this.WebIdentityToken,
+      WebIdentityToken: WebIdentityToken ?? WebIdentityToken,
     );
   }
 }

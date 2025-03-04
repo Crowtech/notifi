@@ -11,7 +11,6 @@ import 'package:notifi/models/appversion.dart';
 import 'package:notifi/models/gps.dart';
 import 'package:notifi/models/nestfilter.dart';
 import 'package:notifi/models/person.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 
 import 'models/crowtech_basepage.dart';
 

@@ -10,7 +10,7 @@ import 'package:slang/generated.dart';
 import 'strings.g.dart';
 
 // Path: <root>
-class TranslationsZh implements Translations {
+class TranslationsZh extends Translations {
 	/// You can call this constructor and build your own translation instance of this locale.
 	/// Constructing via the enum [AppLocale.build] is preferred.
 	TranslationsZh({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver})
@@ -20,7 +20,9 @@ class TranslationsZh implements Translations {
 		    overrides: overrides ?? {},
 		    cardinalResolver: cardinalResolver,
 		    ordinalResolver: ordinalResolver,
-		  ) {
+		  ),
+		  super(cardinalResolver: cardinalResolver, ordinalResolver: ordinalResolver) {
+		super.$meta.setFlatMapFunction($meta.getTranslation); // copy base translations to super.$meta
 		$meta.setFlatMapFunction(_flatMapFunction);
 	}
 
@@ -28,7 +30,7 @@ class TranslationsZh implements Translations {
 	@override final TranslationMetadata<AppLocale, Translations> $meta;
 
 	/// Access flat map
-	@override dynamic operator[](String key) => $meta.getTranslation(key);
+	@override dynamic operator[](String key) => $meta.getTranslation(key) ?? super.$meta.getTranslation(key);
 
 	late final TranslationsZh _root = this; // ignore: unused_field
 
@@ -65,6 +67,7 @@ class TranslationsZh implements Translations {
 	@override String get image_uploaded_failure => '图片上传失败';
 	@override String get intro_title => '欢迎使用 Crowtech';
 	@override String get intro_description => '出行即服务';
+	@override String get location_permission_denied => '位置权限被永久拒绝，我们无法请求权限。';
 	@override String get locked => '已锁定';
 	@override String get movement_status => '是移動的嗎';
 	@override String get none => '没有任何';
@@ -101,8 +104,8 @@ class TranslationsZh implements Translations {
 }
 
 // Path: menu
-class _TranslationsMenuZh implements TranslationsMenuEn {
-	_TranslationsMenuZh._(this._root);
+class _TranslationsMenuZh extends TranslationsMenuEn {
+	_TranslationsMenuZh._(TranslationsZh root) : this._root = root, super.internal(root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -112,8 +115,8 @@ class _TranslationsMenuZh implements TranslationsMenuEn {
 }
 
 // Path: account
-class _TranslationsAccountZh implements TranslationsAccountEn {
-	_TranslationsAccountZh._(this._root);
+class _TranslationsAccountZh extends TranslationsAccountEn {
+	_TranslationsAccountZh._(TranslationsZh root) : this._root = root, super.internal(root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -133,8 +136,8 @@ class _TranslationsAccountZh implements TranslationsAccountEn {
 }
 
 // Path: response
-class _TranslationsResponseZh implements TranslationsResponseEn {
-	_TranslationsResponseZh._(this._root);
+class _TranslationsResponseZh extends TranslationsResponseEn {
+	_TranslationsResponseZh._(TranslationsZh root) : this._root = root, super.internal(root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -193,6 +196,7 @@ extension on TranslationsZh {
 			case 'image_uploaded_failure': return '图片上传失败';
 			case 'intro_title': return '欢迎使用 Crowtech';
 			case 'intro_description': return '出行即服务';
+			case 'location_permission_denied': return '位置权限被永久拒绝，我们无法请求权限。';
 			case 'locked': return '已锁定';
 			case 'movement_status': return '是移動的嗎';
 			case 'none': return '没有任何';

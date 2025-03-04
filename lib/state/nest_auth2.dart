@@ -1,20 +1,17 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notifi/api_utils.dart';
 import 'package:notifi/credentials.dart';
 import 'package:notifi/jwt_utils.dart';
 import 'package:notifi/models/person.dart';
-import 'package:notifi/notifi.dart';
 import 'package:oidc/oidc.dart';
 import 'package:notifi/app_state.dart' as app_state;
 import 'package:logger/logger.dart' as logger;
 import 'package:flutter_background_geolocation/flutter_background_geolocation.dart'
     as bg;
 
-import '../models/gendertype.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
