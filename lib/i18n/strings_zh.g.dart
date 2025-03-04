@@ -67,7 +67,9 @@ class TranslationsZh extends Translations {
 	@override String get image_uploaded_failure => '图片上传失败';
 	@override String get intro_title => '欢迎使用 Crowtech';
 	@override String get intro_description => '出行即服务';
-	@override String get location_permission_denied => '位置权限被永久拒绝，我们无法请求权限。';
+	@override String get location_permission_denied => '位置权限被拒绝';
+	@override String get location_services_disabled => '定位服务已禁用。请启用该服务';
+	@override String get location_permission_permanent_denied => '位置权限被永久拒绝，我们无法请求权限。';
 	@override String get locked => '已锁定';
 	@override String get movement_status => '是移動的嗎';
 	@override String get none => '没有任何';
@@ -196,7 +198,9 @@ extension on TranslationsZh {
 			case 'image_uploaded_failure': return '图片上传失败';
 			case 'intro_title': return '欢迎使用 Crowtech';
 			case 'intro_description': return '出行即服务';
-			case 'location_permission_denied': return '位置权限被永久拒绝，我们无法请求权限。';
+			case 'location_permission_denied': return '位置权限被拒绝';
+			case 'location_services_disabled': return '定位服务已禁用。请启用该服务';
+			case 'location_permission_permanent_denied': return '位置权限被永久拒绝，我们无法请求权限。';
 			case 'locked': return '已锁定';
 			case 'movement_status': return '是移動的嗎';
 			case 'none': return '没有任何';

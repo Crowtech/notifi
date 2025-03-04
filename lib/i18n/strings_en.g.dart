@@ -69,7 +69,9 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get image_uploaded_failure => 'Image failed to upload';
 	String get intro_title => 'Welcome to Crowtech';
 	String get intro_description => 'Advanced Design';
-	String get location_permission_denied => 'Location permissions are permanently denied, we cannot request permissions.';
+	String get location_permission_denied => 'Location permissions are denied';
+	String get location_services_disabled => 'Location services are disabled. Please enable the services';
+	String get location_permission_permanent_denied => 'Location permissions are permanently denied, we cannot request permissions.';
 	String get locked => 'Locked';
 	String get map => 'Map';
 	String get members => 'Members';
@@ -198,7 +200,9 @@ extension on Translations {
 			case 'image_uploaded_failure': return 'Image failed to upload';
 			case 'intro_title': return 'Welcome to Crowtech';
 			case 'intro_description': return 'Advanced Design';
-			case 'location_permission_denied': return 'Location permissions are permanently denied, we cannot request permissions.';
+			case 'location_permission_denied': return 'Location permissions are denied';
+			case 'location_services_disabled': return 'Location services are disabled. Please enable the services';
+			case 'location_permission_permanent_denied': return 'Location permissions are permanently denied, we cannot request permissions.';
 			case 'locked': return 'Locked';
 			case 'map': return 'Map';
 			case 'members': return 'Members';
