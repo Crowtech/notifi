@@ -42,7 +42,7 @@ class OrganizationsFetcher extends Notifier<CrowtechBasePage<Organization>> {
    
     var response = await apiPostDataStrNoLocale(
         token,
-        "$defaultApiPrefixPath/resources/sources/${currentUser.id}",
+        "$defaultAPIBaseUrl$defaultApiPrefixPath/resources/sources/${currentUser.id}",
         jsonDataStr);
     // .then((response) {
     logNoStack.i("result ${response.body.toString()}");
