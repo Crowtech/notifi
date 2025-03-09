@@ -33,6 +33,7 @@ class OrganizationsFetcher extends Notifier<CrowtechBasePage<Organization>> {
 
   Future<CrowtechBasePage<Organization>> fetchPage(
       NestFilter nestfilter) async {
+        nestfilter.offset = 0;
     String jsonDataStr = jsonEncode(nestfilter);
  Person currentUser = ref.read(nestAuthProvider.notifier).currentUser;
     String token = ref.read(nestAuthProvider.notifier).token!;
