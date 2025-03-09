@@ -62,7 +62,7 @@ String url;
   String getAvatarUrl() {
 
     if (avatarUrl == null) {
-      return "https://gravatar.com/avatar/${generateMd5(email)}?s=64";
+      return "https://gravatar.com/avatar/${generateMd5("user@gmail.com")}?s=64";
     } else {
       return avatarUrl!;
     }
