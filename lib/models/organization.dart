@@ -61,7 +61,6 @@ String url;
   @override
   String getAvatarUrl() {
 
-
     if (avatarUrl == null) {
       return "https://gravatar.com/avatar/${generateMd5(email)}?s=64";
     } else {
@@ -77,7 +76,7 @@ String url;
 Organization defaultOrganization = Organization(
   orgid: 0,
   id: 0,
-  code: "PER_DEFAULT", // code
+  code: "ORG_DEFAULT", // code
   created: DateTime.now(), // created
   updated: DateTime.now(), // updated
   name: "Default Organization", // name

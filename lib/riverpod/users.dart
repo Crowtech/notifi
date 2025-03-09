@@ -36,7 +36,7 @@ class UsersFetcher extends Notifier<CrowtechBasePage<Person>> {
         .i("Sending NestFilter gps $nestfilter with json as $jsonDataStr");
 
     var response = await apiPostDataStrNoLocale(
-        token, "$defaultApiPrefixPath/persons/get", jsonDataStr);
+        token, "$defaultApiPrefixPath/persons/fetch", jsonDataStr);
     // .then((response) {
     logNoStack.d("result ${response.body.toString()}");
     final map = jsonDecode(response.body);

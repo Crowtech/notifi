@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/credentials.dart';
 import 'package:notifi/models/nestfilter.dart';
+import 'package:notifi/models/organization.dart';
+import 'package:notifi/state/nest_auth2.dart';
 
 import '../api_utils.dart';
 import '../models/crowtech_basepage.dart';
@@ -21,31 +23,36 @@ var logNoStack = logger.Logger(
 
 class OrganizationsFetcher extends Notifier<CrowtechBasePage<Organization>> {
   @override
-  CrowtechBasePage<Person> build() {
-    return CrowtechBasePage<Person>();
+  CrowtechBasePage<Organization> build() {
+    return CrowtechBasePage<Organization>();
   }
 
-  void fetch(String token, NestFilter nestfilter) async {
-   
-    state = await fetchPage(token, nestfilter);
+  void fetch(NestFilter nestfilter) async {
+    state = await fetchPage(nestfilter);
   }
 
-   Future<CrowtechBasePage<Person>>  fetchPage(String token, NestFilter nestfilter) async {
+  Future<CrowtechBasePage<Organization>> fetchPage(
+      NestFilter nestfilter) async {
     String jsonDataStr = jsonEncode(nestfilter);
+
+    String token = ref.read(nestAuthProvider.notifier).token!;
     logNoStack
         .i("Sending NestFilter gps $nestfilter with json as $jsonDataStr");
-
+    Person currentUser = ref.read(nestAuthProvider.notifier).currentUser;
     var response = await apiPostDataStrNoLocale(
-        token, "$defaultApiPrefixPath/persons/get", jsonDataStr);
+        token,
+        "$defaultApiPrefixPath/resources/sources/${currentUser.id}",
+        jsonDataStr);
     // .then((response) {
     logNoStack.d("result ${response.body.toString()}");
     final map = jsonDecode(response.body);
 
-    CrowtechBasePage<Person> page =
-        CrowtechBasePage<Person>(itemFromJson: Person.fromJson).fromJson(map);
-    String usersStr = "--- Users ----\n";
+    CrowtechBasePage<Organization> page =
+        CrowtechBasePage<Organization>(itemFromJson: Organization.fromJson)
+            .fromJson(map);
+    String usersStr = "--- Organizations ----\n";
     for (int i = 0; i < page.itemCount(); i++) {
-      usersStr += "User $i  ${page.items![i]}\n";
+      usersStr += "Org$i  ${page.items![i]}\n";
     }
     logNoStack.i(usersStr);
     return page;
@@ -53,5 +60,6 @@ class OrganizationsFetcher extends Notifier<CrowtechBasePage<Organization>> {
 }
 
 // Notifier provider holding the state
-final usersProvider =
-    NotifierProvider<UsersFetcher, CrowtechBasePage<Person>>(UsersFetcher.new);
+final organizationsProvider =
+    NotifierProvider<OrganizationsFetcher, CrowtechBasePage<Organization>>(
+        OrganizationsFetcher.new);
