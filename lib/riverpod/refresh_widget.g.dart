@@ -6,7 +6,7 @@ part of 'refresh_widget.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$refreshWidgetHash() => r'bfe447281557730fe024d89d498a3dccba5704fd';
+String _$refreshWidgetHash() => r'de76807f6f6ee025c67d06d6f66205af050a80cb';
 
 /// Copied from Dart SDK
 class _SystemHash {

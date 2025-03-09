@@ -23,6 +23,7 @@ class NestFilter {
   List<int> orgIdList = <int>[];
   List<String> resourceCodeList = [];
   List<int> resourceIdList = [];
+  List<int> targetIdList = [];
   List<String> deviceCodeList = [];
   String query;
   int limit;
@@ -35,6 +36,7 @@ class NestFilter {
       {this.orgIdList = const [],
       this.resourceCodeList = const [],
       this.resourceIdList = const [],
+      this.targetIdList = const [],
       this.deviceCodeList = const [],
       this.query = "",
       this.offset = 0,
@@ -72,6 +74,7 @@ NestFilter defaultNestFilter = NestFilter(
   orgIdList: [],
   resourceCodeList: [],
   resourceIdList: [],
+  targetIdList: [],
   deviceCodeList: [],
   query: "",
   offset: 0,

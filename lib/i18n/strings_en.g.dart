@@ -38,9 +38,9 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 	// Translations
 	String get app_title => 'Crowtech';
-	late final TranslationsMenuEn menu = TranslationsMenuEn.internal(_root);
+	late final TranslationsMenuEn menu = TranslationsMenuEn._(_root);
 	String get about_us => 'About Us';
-	late final TranslationsAccountEn account = TranslationsAccountEn.internal(_root);
+	late final TranslationsAccountEn account = TranslationsAccountEn._(_root);
 	String get activity => 'Activity';
 	String get audio_access_denied => 'You have denied audio access';
 	String get audio_access_denied_without_prompt => 'Please go to Settings app to enable audio access';
@@ -86,7 +86,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get messages => 'Messages';
 	String get moving => 'Moving';
 	String get odometer => 'Odometer';
-	late final TranslationsResponseEn response = TranslationsResponseEn.internal(_root);
+	late final TranslationsResponseEn response = TranslationsResponseEn._(_root);
 	String get privacy_policy => 'Privacy Policy';
 	String get profile => 'Profile';
 	String get pulltorefresh => 'Pull to refresh';
@@ -109,7 +109,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 // Path: menu
 class TranslationsMenuEn {
-	TranslationsMenuEn.internal(this._root);
+	TranslationsMenuEn._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -120,7 +120,7 @@ class TranslationsMenuEn {
 
 // Path: account
 class TranslationsAccountEn {
-	TranslationsAccountEn.internal(this._root);
+	TranslationsAccountEn._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -141,7 +141,7 @@ class TranslationsAccountEn {
 
 // Path: response
 class TranslationsResponseEn {
-	TranslationsResponseEn.internal(this._root);
+	TranslationsResponseEn._(this._root);
 
 	final Translations _root; // ignore: unused_field
 

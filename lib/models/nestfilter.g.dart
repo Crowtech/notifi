@@ -19,6 +19,10 @@ NestFilter _$NestFilterFromJson(Map<String, dynamic> json) => NestFilter(
               ?.map((e) => (e as num).toInt())
               .toList() ??
           const [],
+      targetIdList: (json['targetIdList'] as List<dynamic>?)
+              ?.map((e) => (e as num).toInt())
+              .toList() ??
+          const [],
       deviceCodeList: (json['deviceCodeList'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -36,6 +40,7 @@ Map<String, dynamic> _$NestFilterToJson(NestFilter instance) =>
       'orgIdList': instance.orgIdList,
       'resourceCodeList': instance.resourceCodeList,
       'resourceIdList': instance.resourceIdList,
+      'targetIdList': instance.targetIdList,
       'deviceCodeList': instance.deviceCodeList,
       'query': instance.query,
       'limit': instance.limit,
