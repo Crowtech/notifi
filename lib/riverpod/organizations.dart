@@ -34,17 +34,17 @@ class OrganizationsFetcher extends Notifier<CrowtechBasePage<Organization>> {
   Future<CrowtechBasePage<Organization>> fetchPage(
       NestFilter nestfilter) async {
     String jsonDataStr = jsonEncode(nestfilter);
-
+ Person currentUser = ref.read(nestAuthProvider.notifier).currentUser;
     String token = ref.read(nestAuthProvider.notifier).token!;
     logNoStack
-        .i("Sending NestFilter gps $nestfilter with json as $jsonDataStr");
-    Person currentUser = ref.read(nestAuthProvider.notifier).currentUser;
+        .i("Sending NestFilter org for ${currentUser.id} $nestfilter with json as $jsonDataStr");
+   
     var response = await apiPostDataStrNoLocale(
         token,
         "$defaultApiPrefixPath/resources/sources/${currentUser.id}",
         jsonDataStr);
     // .then((response) {
-    logNoStack.d("result ${response.body.toString()}");
+    logNoStack.i("result ${response.body.toString()}");
     final map = jsonDecode(response.body);
 
     CrowtechBasePage<Organization> page =
