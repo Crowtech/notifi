@@ -98,4 +98,8 @@ class GPS extends CrowtechBase<GPS> {
     }
     return "GPS==> ${super.toString()} $resourcecode $latitude $longitude $speed $heading $personStr";
   }
+
+
 }
+
+GPS defaultGPS = GPS(latitude: 0.0,longitude: 0.0);

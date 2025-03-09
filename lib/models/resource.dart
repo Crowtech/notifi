@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'package:logger/logger.dart';
+import 'package:notifi/models/gps.dart';
 
 import '../jwt_utils.dart';
 import 'crowtech_object.dart';
@@ -19,6 +20,7 @@ class Resource extends CrowtechObject {
   String? location;
   String? devicecode;
   String? avatarUrl;
+  GPS? gps;
 
   Resource(
       {super.orgid,
@@ -30,7 +32,8 @@ class Resource extends CrowtechObject {
       this.description,
       this.location,
       this.devicecode,
-      this.avatarUrl});
+      this.avatarUrl,
+      this.gps});
 
   factory Resource.fromJson(Map<String, dynamic> json) =>
       _$ResourceFromJson(json);
@@ -44,7 +47,7 @@ class Resource extends CrowtechObject {
 
   @override
   String toString() {
-    return "Resource=>${super.toString()} $description, $location, $devicecode";
+    return "Resource=>${super.toString()} $description, $location, $devicecode $gps";
   }
 
   String getAvatarUrl() {

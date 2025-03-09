@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'resource.dart';
+part of 'organization.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Resource _$ResourceFromJson(Map<String, dynamic> json) => Resource(
+Organization _$OrganizationFromJson(Map<String, dynamic> json) => Organization(
       orgid: (json['orgid'] as num?)?.toInt(),
       id: (json['id'] as num?)?.toInt(),
       code: json['code'] as String?,
@@ -24,9 +24,12 @@ Resource _$ResourceFromJson(Map<String, dynamic> json) => Resource(
       gps: json['gps'] == null
           ? null
           : GPS.fromJson(json['gps'] as Map<String, dynamic>),
+      orgType: json['orgType'] as String,
+      url: json['url'] as String,
     );
 
-Map<String, dynamic> _$ResourceToJson(Resource instance) => <String, dynamic>{
+Map<String, dynamic> _$OrganizationToJson(Organization instance) =>
+    <String, dynamic>{
       'orgid': instance.orgid,
       'id': instance.id,
       'created': instance.created?.toIso8601String(),
@@ -38,4 +41,6 @@ Map<String, dynamic> _$ResourceToJson(Resource instance) => <String, dynamic>{
       'devicecode': instance.devicecode,
       'avatarUrl': instance.avatarUrl,
       'gps': instance.gps?.toJson(),
+      'orgType': instance.orgType,
+      'url': instance.url,
     };
