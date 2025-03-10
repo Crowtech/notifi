@@ -44,7 +44,7 @@ Map<String, dynamic> _$$OrgImplToJson(_$OrgImpl instance) => <String, dynamic>{
 // RiverpodGenerator
 // **************************************************************************
 
-String _$asyncOrgsHash() => r'da3889a1d1cc02dfc379dbf7159d33e30ce2abe2';
+String _$asyncOrgsHash() => r'7608f9ce40cb780ccd3197ecc3d0853d72f61a38';
 
 /// See also [AsyncOrgs].
 @ProviderFor(AsyncOrgs)

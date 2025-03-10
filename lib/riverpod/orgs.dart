@@ -67,20 +67,20 @@ class AsyncOrgs extends _$AsyncOrgs {
     Person currentUser = ref.read(nestAuthProvider.notifier).currentUser;
     String token = ref.read(nestAuthProvider.notifier).token!;
     logNoStack.i(
-        "Sending NestFilter org for ${currentUser.id} $nestFilter with json as $jsonDataStr");
+        "ORGS: Sending NestFilter org for ${currentUser.id} $nestFilter with json as $jsonDataStr");
 
     var response = await apiPostDataStrNoLocale(
         token,
         "$defaultAPIBaseUrl$defaultApiPrefixPath/resources/sources/${currentUser.id}",
         jsonDataStr);
     // .then((response) {
-    logNoStack.i("result ${response.body.toString()}");
+    logNoStack.i("ORGS: result ${response.body.toString()}");
     final map = jsonDecode(response.body);
 
     CrowtechBasePage<Organization> page =
         CrowtechBasePage<Organization>(itemFromJson: Organization.fromJson)
             .fromJson(map);
-    String usersStr = "--- Organizations ----\n";
+    String usersStr = "ORGS: --- Organizations ----\n";
     for (int i = 0; i < page.itemCount(); i++) {
       usersStr += "Org$i  ${page.items![i]}\n";
     }
@@ -92,9 +92,9 @@ class AsyncOrgs extends _$AsyncOrgs {
           final todos = jsonDecode(map['items']) as List<Map<Org, dynamic>>;
     //return todos.map(Org.fromJson).toList();
 
-
-     
-    final todos2 = jsonDecode(map['items']) as List<Map<String, dynamic>>;
+    String itemsJson = map['items'];
+     logNoStack.i("ORGS: itemsJson=${itemsJson}");
+    final todos2 = jsonDecode(itemsJson);// as List<Map<Org, dynamic>>;
     return todos2.map(Org.fromJson).toList();
     }
   }
