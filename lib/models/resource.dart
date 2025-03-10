@@ -36,7 +36,7 @@ class Resource extends CrowtechObject {
       this.devicecode,
       this.avatarUrl,
       this.gps,
-      required this.selected,});
+      });
 
   factory Resource.fromJson(Map<String, dynamic> json) =>
       _$ResourceFromJson(json);
