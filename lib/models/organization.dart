@@ -18,28 +18,28 @@ class Organization extends Resource {
   static String className = "Organization";
   static String tablename = className.toLowerCase();
 
-
   String orgType;
-String url;
+  String url;
 
-  Organization(
-      {
-      super.orgid,
-      super.id,
-      super.code,
-      super.created,
-      super.updated,
-      super.name,
-      super.description,
-      super.location,
-      super.devicecode,
-      super.avatarUrl,
-      super.gps,
-      required this.orgType,
-      required this.url,
-      });
+  Organization({
+    super.orgid,
+    super.id,
+    super.code,
+    super.created,
+    super.updated,
+    super.name,
+    super.description,
+    super.location,
+    super.devicecode,
+    super.avatarUrl,
+    super.gps,
+    super.selected,
+    required this.orgType,
+    required this.url,
+  });
 
-  factory Organization.fromJson(Map<String, dynamic> json) => _$OrganizationFromJson(json);
+  factory Organization.fromJson(Map<String, dynamic> json) =>
+      _$OrganizationFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$OrganizationToJson(this);
 
@@ -50,7 +50,6 @@ String url;
 
   @override
   String toString() {
-  
     return "Organization=>${super.toString()} $orgType $url ";
   }
 
@@ -60,7 +59,6 @@ String url;
 
   @override
   String getAvatarUrl() {
-
     if (avatarUrl == null) {
       return "https://gravatar.com/avatar/${generateMd5("user@gmail.com")}?s=64";
     } else {
@@ -70,6 +68,40 @@ String url;
 
   String getInitials() {
     return "${name!.substring(0, 2).toUpperCase()}}";
+  }
+
+
+  Organization copyWith({
+    int? orgid,
+    int? id,
+    String? code,
+    DateTime? created,
+    DateTime? updated,
+    String? name,
+    String? description,
+    String? location,
+    String? devicecode,
+    String? avatarUrl,
+    GPS? gps,
+    String? orgType,
+    String? url,
+    bool? selected,
+  }) {
+    return Organization(
+      id: id ?? this.id,
+      code: code ?? this.code,
+      created: created ?? this.created,
+      updated: updated ?? this.updated,
+      name: name ?? this.name,
+      description: description ?? this.description,
+      location: location ?? this.location,
+      devicecode: devicecode ?? this.devicecode,
+      avatarUrl: avatarUrl ?? this.avatarUrl,
+      gps: gps ?? this.gps,
+      orgType: orgType ?? this.orgType,
+      url: url ?? this.url,
+      selected: selected ?? this.selected,
+    );
   }
 }
 
