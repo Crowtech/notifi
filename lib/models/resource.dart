@@ -22,7 +22,7 @@ class Resource extends CrowtechObject {
   String? avatarUrl;
   GPS? gps;
   @JsonKey(includeFromJson: false, includeToJson: false)
-  bool? selected = false;
+  bool selected = false;
 
   Resource(
       {super.orgid,
@@ -36,7 +36,7 @@ class Resource extends CrowtechObject {
       this.devicecode,
       this.avatarUrl,
       this.gps,
-      this.selected,});
+      required this.selected,});
 
   factory Resource.fromJson(Map<String, dynamic> json) =>
       _$ResourceFromJson(json);
