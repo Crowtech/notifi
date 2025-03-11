@@ -26,7 +26,7 @@ Organization _$OrganizationFromJson(Map<String, dynamic> json) => Organization(
           : GPS.fromJson(json['gps'] as Map<String, dynamic>),
       orgType: json['orgType'] as String,
       url: json['url'] as String,
-    );
+    )..pageId = (json['pageId'] as num).toInt();
 
 Map<String, dynamic> _$OrganizationToJson(Organization instance) =>
     <String, dynamic>{
@@ -36,6 +36,7 @@ Map<String, dynamic> _$OrganizationToJson(Organization instance) =>
       'code': instance.code,
       'updated': instance.updated?.toIso8601String(),
       'name': instance.name,
+      'pageId': instance.pageId,
       'description': instance.description,
       'location': instance.location,
       'devicecode': instance.devicecode,

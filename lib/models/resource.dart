@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'package:logger/logger.dart';
+import 'package:notifi/entities/paging_data_item.dart';
 import 'package:notifi/models/gps.dart';
 import 'package:notifi/models/resource_type.dart';
 
@@ -13,10 +14,11 @@ var logger = Logger(
 );
 
 @JsonSerializable(explicitToJson: true)
-class Resource extends CrowtechObject {
+class Resource extends CrowtechObject implements PagingDataItem  {
   static String className = "Resource";
   static String tablename = className.toLowerCase();
 
+  int pageId=0;
   String? description;
   String? location;
   String? devicecode;
@@ -67,4 +69,7 @@ class Resource extends CrowtechObject {
       return avatarUrl!;
     }
   }
+  
+  @override
+  int get idd => pageId;
 }
