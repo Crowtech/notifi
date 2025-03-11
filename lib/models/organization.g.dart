@@ -36,12 +36,12 @@ Map<String, dynamic> _$OrganizationToJson(Organization instance) =>
       'code': instance.code,
       'updated': instance.updated?.toIso8601String(),
       'name': instance.name,
-      'pageId': instance.pageId,
       'description': instance.description,
       'location': instance.location,
       'devicecode': instance.devicecode,
       'avatarUrl': instance.avatarUrl,
       'gps': instance.gps?.toJson(),
+      'pageId': instance.pageId,
       'orgType': instance.orgType,
       'url': instance.url,
     };

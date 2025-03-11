@@ -71,5 +71,5 @@ class Resource extends CrowtechObject implements PagingDataItem  {
   }
   
   @override
-  int get idd => pageId;
+  int get pageId => pageId;
 }
