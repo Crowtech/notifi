@@ -89,7 +89,7 @@ class TranslationsZh implements Translations {
 	@override String get reset_offset => '重置偏移';
 	@override String get resetting_exposure_point => '重置曝光点';
 	@override String get resetting_focus_point => '重置焦点';
-	@override String get search => '按姓名或电子邮件搜索...';
+	@override late final _TranslationsSearchZh search = _TranslationsSearchZh._(_root);
 	@override String get settings => '设置';
 	@override String get still => '固定的';
 	@override String get terms_and_conditions => '条款和条件';
@@ -145,6 +145,18 @@ class _TranslationsResponseZh implements TranslationsResponseEn {
 	@override String get ok => '好的';
 	@override String get cancel => '取消';
 	@override String get reset => '重置';
+}
+
+// Path: search
+class _TranslationsSearchZh implements TranslationsSearchEn {
+	_TranslationsSearchZh._(this._root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get equipment => '按名称或型号搜索...';
+	@override String get organization => '按名称或网址搜索...';
+	@override String get person => '按姓名或电子邮件搜索...';
 }
 
 /// Flat map(s) containing all translations.
@@ -222,7 +234,9 @@ extension on TranslationsZh {
 			case 'reset_offset': return '重置偏移';
 			case 'resetting_exposure_point': return '重置曝光点';
 			case 'resetting_focus_point': return '重置焦点';
-			case 'search': return '按姓名或电子邮件搜索...';
+			case 'search.equipment': return '按名称或型号搜索...';
+			case 'search.organization': return '按名称或网址搜索...';
+			case 'search.person': return '按姓名或电子邮件搜索...';
 			case 'settings': return '设置';
 			case 'still': return '固定的';
 			case 'terms_and_conditions': return '条款和条件';

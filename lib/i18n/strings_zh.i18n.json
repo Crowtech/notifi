@@ -23,7 +23,7 @@
   "audio_access_denied": "您已拒绝音频访问",
   "audio_access_denied_without_prompt": "请前往“设置”应用启用音频访问",
   "audio_access_restricted": "音频访问受到限制",
-  "authored_by": "作者 ${name}" ,
+  "authored_by": "作者 ${name}",
   "auto": "自动的",
   "billing": "计费",
   "camera_title": "相机",
@@ -40,7 +40,7 @@
   "favourite": "最喜欢的",
   "firstname": "给定的名称",
   "focus_mode": "专注模式",
-  "groups": "群组", 
+  "groups": "群组",
   "help": "帮助",
   "home": "家",
   "image_uploaded_success": "图片上传成功",
@@ -75,7 +75,11 @@
   "reset_offset": "重置偏移",
   "resetting_exposure_point": "重置曝光点",
   "resetting_focus_point": "重置焦点",
-  "search": "按姓名或电子邮件搜索...",
+  "search": {
+    "equipment": "按名称或型号搜索...",
+    "organization": "按名称或网址搜索...",
+    "person": "按姓名或电子邮件搜索..."
+  },
   "settings": "设置",
   "still": "固定的",
   "terms_and_conditions": "条款和条件",
@@ -83,11 +87,8 @@
   "update_account": "更新账户",
   "zoom_in": "放大",
   "zoom_out": "缩小",
-
-
   "locales(map)": {
     "en": "英文",
     "zh": "中文"
   }
-  
 }

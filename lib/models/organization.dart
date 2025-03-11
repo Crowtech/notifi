@@ -1,7 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'package:logger/logger.dart';
+import 'package:notifi/credentials.dart';
 import 'package:notifi/models/gps.dart';
+import 'package:notifi/models/resource_type.dart';
 
 import '../jwt_utils.dart';
 import 'gendertype.dart';
@@ -36,7 +38,9 @@ class Organization extends Resource {
     super.selected,
     required this.orgType,
     required this.url,
-  });
+  }) {
+    super.resourceType = ResourceType.organization;
+  }
 
   factory Organization.fromJson(Map<String, dynamic> json) =>
       _$OrganizationFromJson(json);
@@ -60,7 +64,7 @@ class Organization extends Resource {
   @override
   String getAvatarUrl() {
     if (avatarUrl == null) {
-      return "https://gravatar.com/avatar/${generateMd5("user@gmail.com")}?s=64";
+      return "$defaultMinioEndpointUrl/$defaultRealm/organization.png";
     } else {
       return avatarUrl!;
     }
@@ -115,7 +119,7 @@ Organization defaultOrganization = Organization(
   description: "This is a default Organization", // description
   location: "", // location
   devicecode: "DEVICE-CODE", // device code
-  avatarUrl: "https://gravatar.com/avatar/${generateMd5("user@email.com")}",
+  avatarUrl: "$defaultMinioEndpointUrl/$defaultRealm/organization.png",
   gps: defaultGPS,
   orgType: "group",
   url: "https://www.crowtech.com.au",

@@ -93,7 +93,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get reset_offset => 'Reset Offset';
 	String get resetting_exposure_point => 'Resetting exposure point';
 	String get resetting_focus_point => 'Resetting focus point';
-	String get search => 'Search by name or email...';
+	late final TranslationsSearchEn search = TranslationsSearchEn._(_root);
 	String get settings => 'Settings';
 	String get still => 'Still';
 	String get terms_and_conditions => 'Terms & Conditions';
@@ -149,6 +149,18 @@ class TranslationsResponseEn {
 	String get ok => 'OK';
 	String get cancel => 'Cancel';
 	String get reset => 'Reset';
+}
+
+// Path: search
+class TranslationsSearchEn {
+	TranslationsSearchEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get equipment => 'Search by name or model...';
+	String get organization => 'Search by name or web address...';
+	String get person => 'Search by name or email...';
 }
 
 /// Flat map(s) containing all translations.
@@ -226,7 +238,9 @@ extension on Translations {
 			case 'reset_offset': return 'Reset Offset';
 			case 'resetting_exposure_point': return 'Resetting exposure point';
 			case 'resetting_focus_point': return 'Resetting focus point';
-			case 'search': return 'Search by name or email...';
+			case 'search.equipment': return 'Search by name or model...';
+			case 'search.organization': return 'Search by name or web address...';
+			case 'search.person': return 'Search by name or email...';
 			case 'settings': return 'Settings';
 			case 'still': return 'Still';
 			case 'terms_and_conditions': return 'Terms & Conditions';
