@@ -84,6 +84,8 @@ class TranslationsZh extends Translations {
 	@override String get messages => '消息';
 	@override String get moving => '动人';
 	@override String get odometer => '里程表';
+	@override late final _TranslationsResourceZh resource = _TranslationsResourceZh._(_root);
+	@override late final _TranslationsResourcesZh resources = _TranslationsResourcesZh._(_root);
 	@override late final _TranslationsResponseZh response = _TranslationsResponseZh._(_root);
 	@override String get privacy_policy => '隐私政策';
 	@override String get profile => '轮廓';
@@ -136,6 +138,38 @@ class _TranslationsAccountZh extends TranslationsAccountEn {
 	@override String get update_failure => '更新失败';
 	@override String get update_success => '更新成功';
 	@override String get username_taken => '用户名已被使用。';
+}
+
+// Path: resource
+class _TranslationsResourceZh extends TranslationsResourceEn {
+	_TranslationsResourceZh._(TranslationsZh root) : this._root = root, super.internal(root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get artifact => '人工制品';
+	@override String get equipment => '设备';
+	@override String get location => '地点';
+	@override String get organization => '组织';
+	@override String get person => '人';
+	@override String get unknown => '未知';
+	@override String get vehicle => '车辆';
+}
+
+// Path: resources
+class _TranslationsResourcesZh extends TranslationsResourcesEn {
+	_TranslationsResourcesZh._(TranslationsZh root) : this._root = root, super.internal(root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get artifact => '工件';
+	@override String get equipment => '设备';
+	@override String get location => '位置';
+	@override String get organization => '组织';
+	@override String get person => '人们';
+	@override String get unknown => '未知';
+	@override String get vehicle => '车辆';
 }
 
 // Path: response
@@ -249,6 +283,20 @@ extension on TranslationsZh {
 			case 'messages': return '消息';
 			case 'moving': return '动人';
 			case 'odometer': return '里程表';
+			case 'resource.artifact': return '人工制品';
+			case 'resource.equipment': return '设备';
+			case 'resource.location': return '地点';
+			case 'resource.organization': return '组织';
+			case 'resource.person': return '人';
+			case 'resource.unknown': return '未知';
+			case 'resource.vehicle': return '车辆';
+			case 'resources.artifact': return '工件';
+			case 'resources.equipment': return '设备';
+			case 'resources.location': return '位置';
+			case 'resources.organization': return '组织';
+			case 'resources.person': return '人们';
+			case 'resources.unknown': return '未知';
+			case 'resources.vehicle': return '车辆';
 			case 'response.ok': return '好的';
 			case 'response.cancel': return '取消';
 			case 'response.reset': return '重置';

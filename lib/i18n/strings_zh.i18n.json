@@ -64,6 +64,24 @@
   "messages": "消息",
   "moving": "动人",
   "odometer": "里程表",
+  "resource": {
+    "artifact": "人工制品",
+    "equipment": "设备",
+    "location": "地点",
+    "organization": "组织",
+    "person": "人",
+    "unknown": "未知",
+    "vehicle": "车辆"
+  },
+  "resources": {
+    "artifact": "工件",
+    "equipment": "设备",
+    "location": "位置",
+    "organization": "组织",
+    "person": "人们",
+    "unknown": "未知",
+    "vehicle": "车辆"
+  },
   "response": {
     "ok": "好的",
     "cancel": "取消",

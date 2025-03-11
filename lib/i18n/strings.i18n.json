@@ -65,7 +65,24 @@
   "messages": "Messages",
   "moving": "Moving",
   "odometer": "Odometer",
-
+  "resource": {
+    "artifact": "Artifact",
+    "equipment": "Equipment",
+    "location": "Location",
+    "organization": "Organization",
+    "person": "Person",
+    "unknown": "Unknown",
+    "vehicle": "Vehicle"
+  },
+  "resources": {
+    "artifact": "Artifacts",
+    "equipment": "Equipment",
+    "location": "Locations",
+    "organization": "Organizations",
+    "person": "People",
+    "unknown": "Unknown",
+    "vehicle": "Vehicles"
+  },
   "response": {
     "ok": "OK",
     "cancel": "Cancel",

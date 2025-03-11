@@ -86,6 +86,8 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get messages => 'Messages';
 	String get moving => 'Moving';
 	String get odometer => 'Odometer';
+	late final TranslationsResourceEn resource = TranslationsResourceEn.internal(_root);
+	late final TranslationsResourcesEn resources = TranslationsResourcesEn.internal(_root);
 	late final TranslationsResponseEn response = TranslationsResponseEn.internal(_root);
 	String get privacy_policy => 'Privacy Policy';
 	String get profile => 'Profile';
@@ -138,6 +140,38 @@ class TranslationsAccountEn {
 	String get update_failure => 'Update failed';
 	String get update_success => 'Update successful';
 	String get username_taken => 'Username already taken.';
+}
+
+// Path: resource
+class TranslationsResourceEn {
+	TranslationsResourceEn.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get artifact => 'Artifact';
+	String get equipment => 'Equipment';
+	String get location => 'Location';
+	String get organization => 'Organization';
+	String get person => 'Person';
+	String get unknown => 'Unknown';
+	String get vehicle => 'Vehicle';
+}
+
+// Path: resources
+class TranslationsResourcesEn {
+	TranslationsResourcesEn.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get artifact => 'Artifacts';
+	String get equipment => 'Equipment';
+	String get location => 'Locations';
+	String get organization => 'Organizations';
+	String get person => 'People';
+	String get unknown => 'Unknown';
+	String get vehicle => 'Vehicles';
 }
 
 // Path: response
@@ -251,6 +285,20 @@ extension on Translations {
 			case 'messages': return 'Messages';
 			case 'moving': return 'Moving';
 			case 'odometer': return 'Odometer';
+			case 'resource.artifact': return 'Artifact';
+			case 'resource.equipment': return 'Equipment';
+			case 'resource.location': return 'Location';
+			case 'resource.organization': return 'Organization';
+			case 'resource.person': return 'Person';
+			case 'resource.unknown': return 'Unknown';
+			case 'resource.vehicle': return 'Vehicle';
+			case 'resources.artifact': return 'Artifacts';
+			case 'resources.equipment': return 'Equipment';
+			case 'resources.location': return 'Locations';
+			case 'resources.organization': return 'Organizations';
+			case 'resources.person': return 'People';
+			case 'resources.unknown': return 'Unknown';
+			case 'resources.vehicle': return 'Vehicles';
 			case 'response.ok': return 'OK';
 			case 'response.cancel': return 'Cancel';
 			case 'response.reset': return 'Reset';
