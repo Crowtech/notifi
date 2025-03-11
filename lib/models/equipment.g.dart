@@ -29,7 +29,7 @@ Equipment _$EquipmentFromJson(Map<String, dynamic> json) => Equipment(
       gps: json['gps'] == null
           ? null
           : GPS.fromJson(json['gps'] as Map<String, dynamic>),
-    )..pageId = (json['pageId'] as num).toInt();
+    );
 
 Map<String, dynamic> _$EquipmentToJson(Equipment instance) => <String, dynamic>{
       'orgid': instance.orgid,
@@ -42,7 +42,6 @@ Map<String, dynamic> _$EquipmentToJson(Equipment instance) => <String, dynamic>{
       'location': instance.location,
       'devicecode': instance.devicecode,
       'avatarUrl': instance.avatarUrl,
-      'pageId': instance.pageId,
       'etype': instance.etype,
       'model': instance.model,
       'brand': instance.brand,

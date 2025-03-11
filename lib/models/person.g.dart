@@ -37,9 +37,7 @@ Person _$PersonFromJson(Map<String, dynamic> json) => Person(
       gps: json['gps'] == null
           ? null
           : GPS.fromJson(json['gps'] as Map<String, dynamic>),
-    )
-      ..pageId = (json['pageId'] as num).toInt()
-      ..token = json['token'] as String?;
+    )..token = json['token'] as String?;
 
 Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{
       'orgid': instance.orgid,
@@ -52,7 +50,6 @@ Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{
       'location': instance.location,
       'devicecode': instance.devicecode,
       'avatarUrl': instance.avatarUrl,
-      'pageId': instance.pageId,
       'isSignedIn': instance.isSignedIn,
       'username': instance.username,
       'email': instance.email,
