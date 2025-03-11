@@ -91,6 +91,16 @@
   "still": "Still",
   "terms_and_conditions": "Terms & Conditions",
   "test_page": "Test Page",
+  "unknown": {
+    "person": "Unnamed User",
+    "organization": "Unnamed Organization",
+    "group": "Unnamed Group",
+    "equipment": "Unnamed Equipment",
+    "artifact": "Unnamed Artifact",
+    "location": "Unnamed Location",
+    "resource": "Unnamed Resource",
+    "unknown": "Unknown"
+  },
   "update_account": "Update Account",
   "zoom_in": "Zoom In",
   "zoom_out": "Zoom out",

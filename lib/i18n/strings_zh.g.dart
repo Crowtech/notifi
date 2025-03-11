@@ -96,6 +96,7 @@ class TranslationsZh extends Translations {
 	@override String get still => '固定的';
 	@override String get terms_and_conditions => '条款和条件';
 	@override String get test_page => '测试页';
+	@override late final _TranslationsUnknownZh unknown = _TranslationsUnknownZh._(_root);
 	@override String get update_account => '更新账户';
 	@override String get zoom_in => '放大';
 	@override String get zoom_out => '缩小';
@@ -163,6 +164,23 @@ class _TranslationsSearchZh extends TranslationsSearchEn {
 	@override String get person => '按姓名或电子邮件搜索...';
 	@override String get unknown => '按名称搜索...';
 	@override String get vehicle => '按车辆名称或代码搜索...';
+}
+
+// Path: unknown
+class _TranslationsUnknownZh extends TranslationsUnknownEn {
+	_TranslationsUnknownZh._(TranslationsZh root) : this._root = root, super.internal(root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get person => '匿名用户';
+	@override String get organization => '匿名组织';
+	@override String get group => '未命名的组';
+	@override String get equipment => '未命名的设备';
+	@override String get artifact => '未命名文物';
+	@override String get location => '未命名的地点';
+	@override String get resource => '未命名资源';
+	@override String get unknown => '未知';
 }
 
 /// Flat map(s) containing all translations.
@@ -251,6 +269,14 @@ extension on TranslationsZh {
 			case 'still': return '固定的';
 			case 'terms_and_conditions': return '条款和条件';
 			case 'test_page': return '测试页';
+			case 'unknown.person': return '匿名用户';
+			case 'unknown.organization': return '匿名组织';
+			case 'unknown.group': return '未命名的组';
+			case 'unknown.equipment': return '未命名的设备';
+			case 'unknown.artifact': return '未命名文物';
+			case 'unknown.location': return '未命名的地点';
+			case 'unknown.resource': return '未命名资源';
+			case 'unknown.unknown': return '未知';
 			case 'update_account': return '更新账户';
 			case 'zoom_in': return '放大';
 			case 'zoom_out': return '缩小';

@@ -98,6 +98,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get still => 'Still';
 	String get terms_and_conditions => 'Terms & Conditions';
 	String get test_page => 'Test Page';
+	late final TranslationsUnknownEn unknown = TranslationsUnknownEn.internal(_root);
 	String get update_account => 'Update Account';
 	String get zoom_in => 'Zoom In';
 	String get zoom_out => 'Zoom out';
@@ -165,6 +166,23 @@ class TranslationsSearchEn {
 	String get person => 'Search by name or email...';
 	String get unknown => 'Search by name';
 	String get vehicle => 'Search by vehicle name or code...';
+}
+
+// Path: unknown
+class TranslationsUnknownEn {
+	TranslationsUnknownEn.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get person => 'Unnamed User';
+	String get organization => 'Unnamed Organization';
+	String get group => 'Unnamed Group';
+	String get equipment => 'Unnamed Equipment';
+	String get artifact => 'Unnamed Artifact';
+	String get location => 'Unnamed Location';
+	String get resource => 'Unnamed Resource';
+	String get unknown => 'Unknown';
 }
 
 /// Flat map(s) containing all translations.
@@ -253,6 +271,14 @@ extension on Translations {
 			case 'still': return 'Still';
 			case 'terms_and_conditions': return 'Terms & Conditions';
 			case 'test_page': return 'Test Page';
+			case 'unknown.person': return 'Unnamed User';
+			case 'unknown.organization': return 'Unnamed Organization';
+			case 'unknown.group': return 'Unnamed Group';
+			case 'unknown.equipment': return 'Unnamed Equipment';
+			case 'unknown.artifact': return 'Unnamed Artifact';
+			case 'unknown.location': return 'Unnamed Location';
+			case 'unknown.resource': return 'Unnamed Resource';
+			case 'unknown.unknown': return 'Unknown';
 			case 'update_account': return 'Update Account';
 			case 'zoom_in': return 'Zoom In';
 			case 'zoom_out': return 'Zoom out';
