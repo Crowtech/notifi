@@ -1,3 +1,3 @@
 abstract class PagingDataItem {
-  int get idd;
+  int get pageId;
 }
