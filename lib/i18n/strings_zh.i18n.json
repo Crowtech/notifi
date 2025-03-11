@@ -76,9 +76,13 @@
   "resetting_exposure_point": "重置曝光点",
   "resetting_focus_point": "重置焦点",
   "search": {
+    "artifact": "按名称搜索...",
     "equipment": "按名称或型号搜索...",
+    "location": "按地点名称搜索...",
     "organization": "按名称或网址搜索...",
-    "person": "按姓名或电子邮件搜索..."
+    "person": "按姓名或电子邮件搜索...",
+    "unknown": "按名称搜索...",
+    "vehicle": "按车辆名称或代码搜索..."
   },
   "settings": "设置",
   "still": "固定的",

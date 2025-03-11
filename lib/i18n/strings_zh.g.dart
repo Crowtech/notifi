@@ -10,7 +10,7 @@ import 'package:slang/generated.dart';
 import 'strings.g.dart';
 
 // Path: <root>
-class TranslationsZh implements Translations {
+class TranslationsZh extends Translations {
 	/// You can call this constructor and build your own translation instance of this locale.
 	/// Constructing via the enum [AppLocale.build] is preferred.
 	TranslationsZh({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver})
@@ -20,7 +20,9 @@ class TranslationsZh implements Translations {
 		    overrides: overrides ?? {},
 		    cardinalResolver: cardinalResolver,
 		    ordinalResolver: ordinalResolver,
-		  ) {
+		  ),
+		  super(cardinalResolver: cardinalResolver, ordinalResolver: ordinalResolver) {
+		super.$meta.setFlatMapFunction($meta.getTranslation); // copy base translations to super.$meta
 		$meta.setFlatMapFunction(_flatMapFunction);
 	}
 
@@ -28,7 +30,7 @@ class TranslationsZh implements Translations {
 	@override final TranslationMetadata<AppLocale, Translations> $meta;
 
 	/// Access flat map
-	@override dynamic operator[](String key) => $meta.getTranslation(key);
+	@override dynamic operator[](String key) => $meta.getTranslation(key) ?? super.$meta.getTranslation(key);
 
 	late final TranslationsZh _root = this; // ignore: unused_field
 
@@ -104,8 +106,8 @@ class TranslationsZh implements Translations {
 }
 
 // Path: menu
-class _TranslationsMenuZh implements TranslationsMenuEn {
-	_TranslationsMenuZh._(this._root);
+class _TranslationsMenuZh extends TranslationsMenuEn {
+	_TranslationsMenuZh._(TranslationsZh root) : this._root = root, super.internal(root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -115,8 +117,8 @@ class _TranslationsMenuZh implements TranslationsMenuEn {
 }
 
 // Path: account
-class _TranslationsAccountZh implements TranslationsAccountEn {
-	_TranslationsAccountZh._(this._root);
+class _TranslationsAccountZh extends TranslationsAccountEn {
+	_TranslationsAccountZh._(TranslationsZh root) : this._root = root, super.internal(root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -136,8 +138,8 @@ class _TranslationsAccountZh implements TranslationsAccountEn {
 }
 
 // Path: response
-class _TranslationsResponseZh implements TranslationsResponseEn {
-	_TranslationsResponseZh._(this._root);
+class _TranslationsResponseZh extends TranslationsResponseEn {
+	_TranslationsResponseZh._(TranslationsZh root) : this._root = root, super.internal(root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -148,15 +150,19 @@ class _TranslationsResponseZh implements TranslationsResponseEn {
 }
 
 // Path: search
-class _TranslationsSearchZh implements TranslationsSearchEn {
-	_TranslationsSearchZh._(this._root);
+class _TranslationsSearchZh extends TranslationsSearchEn {
+	_TranslationsSearchZh._(TranslationsZh root) : this._root = root, super.internal(root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
 	// Translations
+	@override String get artifact => '按名称搜索...';
 	@override String get equipment => '按名称或型号搜索...';
+	@override String get location => '按地点名称搜索...';
 	@override String get organization => '按名称或网址搜索...';
 	@override String get person => '按姓名或电子邮件搜索...';
+	@override String get unknown => '按名称搜索...';
+	@override String get vehicle => '按车辆名称或代码搜索...';
 }
 
 /// Flat map(s) containing all translations.
@@ -234,9 +240,13 @@ extension on TranslationsZh {
 			case 'reset_offset': return '重置偏移';
 			case 'resetting_exposure_point': return '重置曝光点';
 			case 'resetting_focus_point': return '重置焦点';
+			case 'search.artifact': return '按名称搜索...';
 			case 'search.equipment': return '按名称或型号搜索...';
+			case 'search.location': return '按地点名称搜索...';
 			case 'search.organization': return '按名称或网址搜索...';
 			case 'search.person': return '按姓名或电子邮件搜索...';
+			case 'search.unknown': return '按名称搜索...';
+			case 'search.vehicle': return '按车辆名称或代码搜索...';
 			case 'settings': return '设置';
 			case 'still': return '固定的';
 			case 'terms_and_conditions': return '条款和条件';

@@ -79,9 +79,13 @@
   "resetting_exposure_point": "Resetting exposure point",
   "resetting_focus_point": "Resetting focus point",
   "search": {
+    "artifact": "Search by name",
     "equipment": "Search by name or model...",
+    "location": "Search by location name...",
     "organization": "Search by name or web address...",
-    "person": "Search by name or email..."
+    "person": "Search by name or email...",
+    "unknown": "Search by name",
+    "vehicle": "Search by vehicle name or code..."
   },
   "settings": "Settings",
   "still": "Still",

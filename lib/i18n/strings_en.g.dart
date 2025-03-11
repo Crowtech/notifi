@@ -38,9 +38,9 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 	// Translations
 	String get app_title => 'Crowtech';
-	late final TranslationsMenuEn menu = TranslationsMenuEn._(_root);
+	late final TranslationsMenuEn menu = TranslationsMenuEn.internal(_root);
 	String get about_us => 'About Us';
-	late final TranslationsAccountEn account = TranslationsAccountEn._(_root);
+	late final TranslationsAccountEn account = TranslationsAccountEn.internal(_root);
 	String get activity => 'Activity';
 	String get audio_access_denied => 'You have denied audio access';
 	String get audio_access_denied_without_prompt => 'Please go to Settings app to enable audio access';
@@ -86,14 +86,14 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get messages => 'Messages';
 	String get moving => 'Moving';
 	String get odometer => 'Odometer';
-	late final TranslationsResponseEn response = TranslationsResponseEn._(_root);
+	late final TranslationsResponseEn response = TranslationsResponseEn.internal(_root);
 	String get privacy_policy => 'Privacy Policy';
 	String get profile => 'Profile';
 	String get pulltorefresh => 'Pull to refresh';
 	String get reset_offset => 'Reset Offset';
 	String get resetting_exposure_point => 'Resetting exposure point';
 	String get resetting_focus_point => 'Resetting focus point';
-	late final TranslationsSearchEn search = TranslationsSearchEn._(_root);
+	late final TranslationsSearchEn search = TranslationsSearchEn.internal(_root);
 	String get settings => 'Settings';
 	String get still => 'Still';
 	String get terms_and_conditions => 'Terms & Conditions';
@@ -109,7 +109,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 // Path: menu
 class TranslationsMenuEn {
-	TranslationsMenuEn._(this._root);
+	TranslationsMenuEn.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -120,7 +120,7 @@ class TranslationsMenuEn {
 
 // Path: account
 class TranslationsAccountEn {
-	TranslationsAccountEn._(this._root);
+	TranslationsAccountEn.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -141,7 +141,7 @@ class TranslationsAccountEn {
 
 // Path: response
 class TranslationsResponseEn {
-	TranslationsResponseEn._(this._root);
+	TranslationsResponseEn.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -153,14 +153,18 @@ class TranslationsResponseEn {
 
 // Path: search
 class TranslationsSearchEn {
-	TranslationsSearchEn._(this._root);
+	TranslationsSearchEn.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
+	String get artifact => 'Search by name';
 	String get equipment => 'Search by name or model...';
+	String get location => 'Search by location name...';
 	String get organization => 'Search by name or web address...';
 	String get person => 'Search by name or email...';
+	String get unknown => 'Search by name';
+	String get vehicle => 'Search by vehicle name or code...';
 }
 
 /// Flat map(s) containing all translations.
@@ -238,9 +242,13 @@ extension on Translations {
 			case 'reset_offset': return 'Reset Offset';
 			case 'resetting_exposure_point': return 'Resetting exposure point';
 			case 'resetting_focus_point': return 'Resetting focus point';
+			case 'search.artifact': return 'Search by name';
 			case 'search.equipment': return 'Search by name or model...';
+			case 'search.location': return 'Search by location name...';
 			case 'search.organization': return 'Search by name or web address...';
 			case 'search.person': return 'Search by name or email...';
+			case 'search.unknown': return 'Search by name';
+			case 'search.vehicle': return 'Search by vehicle name or code...';
 			case 'settings': return 'Settings';
 			case 'still': return 'Still';
 			case 'terms_and_conditions': return 'Terms & Conditions';
