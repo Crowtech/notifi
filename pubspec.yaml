@@ -89,8 +89,8 @@ dependencies:
   cached_network_image: ^3.0.0
 #  rxdart: ^0.27.7
   #infinite_scroll_pagination: 5.0.0
-  infinite_scroll_pagination: 
-   path:  ../infinite_scroll_pagination
+  #infinite_scroll_pagination: 
+ #  path:  ../infinite_scroll_pagination
 
 
 
