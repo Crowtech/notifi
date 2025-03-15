@@ -25,9 +25,9 @@ class Person extends Resource {
   String email;
   String firstname;
   String lastname;
-  String nickname;
+  String? nickname;
   GenderType gender;
-  String i18n;
+  String? i18n;
   String? country;
   double? longitude;
   double? latitude;

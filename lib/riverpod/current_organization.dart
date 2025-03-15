@@ -10,6 +10,7 @@ part 'current_organization.g.dart';
 class CurrentOrganization extends _$CurrentOrganization {
   @override
   Organization build() => defaultOrganization;
+  
 
   // void refresh() {
   //   state = const Uuid().v4().toUpperCase();
