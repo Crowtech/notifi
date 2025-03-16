@@ -12,7 +12,6 @@ import 'package:logger/logger.dart' as logger;
 import 'package:flutter_background_geolocation/flutter_background_geolocation.dart'
     as bg;
 
-
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
   level: logger.Level.info,
@@ -33,6 +32,7 @@ class NestAuthController extends Notifier<bool> with ChangeNotifier {
   bool preferEphemeralSession = false;
 
   bool isLoggedIn = false;
+  bool preventAutoLogin = false;
   Person currentUser = defaultPerson;
   String? token;
 
@@ -71,23 +71,41 @@ class NestAuthController extends Notifier<bool> with ChangeNotifier {
         );
 
         await loginOidc(event);
-        
       } else {
         logNoStack.i("AUTH CONTROLLER BUILD: App State User changed to NULL:");
       }
     });
 
     logNoStack.i("NEST_AUTH_CONTROLLER : BUILD");
+    if (skipLogin && (!preventAutoLogin)) {
+      loginUsernamePassword(testUsername, testPassword);
+      preventAutoLogin = true; // stop it from happening.
+    }
     return false;
   }
 
-void updateCurrentUser(Person person)
-{
-  currentUser = person;
-  return;
-} 
+  void updateCurrentUser(Person person) {
+    currentUser = person;
+    return;
+  }
 
-Future<void> login() async {
+  Future<void> loginUsernamePassword(String username, String password) async {
+    logNoStack.i("Skipping Login!!!!!");
+    // final messenger = ScaffoldMessenger.of(context);
+    try {
+      var result = await app_state.currentManager.loginPassword(
+        username: username,
+        password: password,
+      );
+      logNoStack.i("Result is ${result!.claims.toJson()['email']}!!!!!");
+      await loginOidc(result);
+      // ref.read(currentUserProvider.notifier).setOidc(result);
+    } catch (e) {
+      logNoStack.e(e.toString());
+    }
+  }
+
+  Future<void> login() async {
     logNoStack.i("NEST_AUTH LOGIN called.");
 
     app_state.currentManager
@@ -112,23 +130,20 @@ Future<void> login() async {
     });
   }
 
-  Future<void> refreshPerson() async
-  {
+  Future<void> refreshPerson() async {
     logNoStack.i("NEST_AUTH: Refreshing Person");
     var oidcUser = await app_state.currentManager.refreshToken();
-     loginOidc(oidcUser);
+    loginOidc(oidcUser);
   }
 
-  Future<void> refreshToken() async 
-  {
-     var oidcUser = await app_state.currentManager.refreshToken();
-     loginOidc(oidcUser);
+  Future<void> refreshToken() async {
+    var oidcUser = await app_state.currentManager.refreshToken();
+    loginOidc(oidcUser);
   }
 
-Future<void> loggedIn() async 
-{
-  state = true;
-}
+  Future<void> loggedIn() async {
+    state = true;
+  }
 
   Future<void> loginOidc(OidcUser? oidcUser) async {
     logNoStack.i("NEST_AUTH: LOGIN_OIDC: START");
@@ -157,24 +172,22 @@ Future<void> loggedIn() async
     currentUser.isSignedIn = false;
 
     isLoggedIn = false;
-   
+
     if (!kIsWeb) {
       bg.BackgroundGeolocation.stop();
     }
 
     logNoStack.i("NEST_AUTH LOGOUT , token is $token");
-    apiPostNoLocale(token!,
-            "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout")
+    apiPostNoLocale(
+            token!, "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout")
         .then((result) {
       log.i("NEST_AUTHLOGOUT result $result");
     }).catchError((error) {
-      log.e(
-          "NEST_AUTH LOGOUT  api logout error ${error.toString()}");
+      log.e("NEST_AUTH LOGOUT  api logout error ${error.toString()}");
     });
 
     token = null;
-   
-  
+
     // let the oidc package know
     await app_state.currentManager.logout(
       //after logout, go back to home
@@ -185,9 +198,9 @@ Future<void> loggedIn() async
         ),
       ),
     );
-  
+
     //notifyListeners();
-    
+
     state = false;
   }
 
