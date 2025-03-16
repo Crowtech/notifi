@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -50,21 +51,24 @@ class _EditableAvatarState extends ConsumerState<EditableAvatar> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      logNoStack.i("AVATAR_EDIT: initState Setting image from [${widget.imageUrl}]");
-       currentPerson = ref.read(nestAuthProvider.notifier).currentUser;
-      if (widget.imageUrl==null || widget.imageUrl!.isEmpty || widget.imageUrl == 'null') {
+      logNoStack
+          .i("AVATAR_EDIT: initState Setting image from [${widget.imageUrl}]");
+      currentPerson = ref.read(nestAuthProvider.notifier).currentUser;
+      if (widget.imageUrl == null ||
+          widget.imageUrl!.isEmpty ||
+          widget.imageUrl == 'null') {
         var image = await getImageFileFromAssets('images/default-avatar.webp');
-        bool fileExists = await  image.exists();
+        bool fileExists = await image.exists();
         setState(() {
           _image = image;
           _imageUrl = null;
           _fileExists = fileExists;
         });
       } else {
-         setState(() {
+        setState(() {
           _image = null;
           _imageUrl =
-            "$defaultImageProxyUrl/${widget.diameter}x/${widget.imageUrl}";
+              "$defaultImageProxyUrl/${widget.diameter}x/${widget.imageUrl}";
           _fileExists = false;
         });
       }
@@ -73,7 +77,8 @@ class _EditableAvatarState extends ConsumerState<EditableAvatar> {
 
   Future<dynamic> getMinioTokenResponse() async {
     token = ref.read(nestAuthProvider.notifier).token!;
-    final Uri uri = Uri.parse("$defaultMinioEndpointUrl?Action=AssumeRoleWithWebIdentity&Version=2011-06-15&WebIdentityToken=$token");
+    final Uri uri = Uri.parse(
+        "$defaultMinioEndpointUrl?Action=AssumeRoleWithWebIdentity&Version=2011-06-15&WebIdentityToken=$token");
     final response = await http.post(
       uri,
       headers: {
@@ -84,12 +89,9 @@ class _EditableAvatarState extends ConsumerState<EditableAvatar> {
     return response.body;
   }
 
-
-
   void saveFileToMinio(File? file) async {
- 
     var response = await getMinioTokenResponse();
-   
+
     debugPrint("AVATAR_EDIT: Minio reponse=> $response");
     final document = XmlDocument.parse(response);
 
@@ -112,11 +114,10 @@ class _EditableAvatarState extends ConsumerState<EditableAvatar> {
         .getElement('SessionToken')!
         .innerText;
 
-
     logNoStack
         .i("accessKeyId=$accessKeyId , secretAccessKey = $secretAccessKey");
 
-final minioUri = defaultMinioEndpointUrl.substring('https://'.length);
+    final minioUri = defaultMinioEndpointUrl.substring('https://'.length);
     final minio = Minio(
       endPoint: minioUri,
       port: 443,
@@ -145,7 +146,8 @@ final minioUri = defaultMinioEndpointUrl.substring('https://'.length);
 
     ref.read(nestAuthProvider.notifier).updateCurrentUser(currentPerson!);
     var jsonDataStr = jsonEncode(currentPerson!);
-    logNoStack.i("AVATAR_EDIT: put url = $defaultAPIBaseUrl$defaultApiPrefixPath/persons");
+    logNoStack.i(
+        "AVATAR_EDIT: put url = $defaultAPIBaseUrl$defaultApiPrefixPath/persons");
 
     var responsePut = apiPutDataStrNoLocale(
         token!,
@@ -155,12 +157,11 @@ final minioUri = defaultMinioEndpointUrl.substring('https://'.length);
         "AVATAR_EDIT put person is $responsePut saving ${currentPerson!.avatarUrl}");
 
 // now refresh nestAvatar
-   // ref.read(RefreshWidgetProvider(currentPerson!.code!).notifier).refresh();
+    // ref.read(RefreshWidgetProvider(currentPerson!.code!).notifier).refresh();
     ref.read(RefreshWidgetProvider(currentPerson!.code!).notifier).refresh();
   }
 
   Future<void> _pickImage(ImageSource source) async {
-
     final pickedFile = await ImagePicker().pickImage(
       maxWidth: 800,
       imageQuality: 50,
@@ -171,22 +172,37 @@ final minioUri = defaultMinioEndpointUrl.substring('https://'.length);
 
     if (pickedFile != null) {
       final extension = pickedFile.path.split('.').last;
-     
-     var filecode =  DateTime.now().toIso8601String();
-      final newFile = File(
-          '${Directory.systemTemp.path}/${currentPerson!.code}-avatar-$filecode.$extension');
-           final showFile = File(pickedFile.path);
 
-      await pickedFile.saveTo(newFile.path);
-      logNoStack.i("AVATAR_EDIT: New path: ${newFile.path}");
+      var filecode = DateTime.now().toIso8601String();
+      if (!kIsWeb) {
+        logNoStack.i("DirectorySystemPath=${Directory.systemTemp.path}");
+        logNoStack.i("CurrentPersonCode=${currentPerson!.code}");
+        logNoStack.i("FileCode+ext $filecode.$extension");
 
+        final newFile = File(
+            '${Directory.systemTemp.path}/${currentPerson!.code}-avatar-$filecode.$extension');
+        final showFile = File(pickedFile.path);
+
+        await pickedFile.saveTo(newFile.path);
+        logNoStack.i("AVATAR_EDIT: New path: ${newFile.path}");
+      
       setState(() {
         _image = showFile;
         _fileExists = true;
       });
+      
       // ref.read(minIOUploadProvider.notifier).uploadImageToMinIO(_image!);
 
       saveFileToMinio(newFile);
+      } else {
+                final showFile = File(pickedFile.path);
+        logNoStack.i("AVATAR_EDIT: New path: ${showFile}");
+      
+      setState(() {
+        _image = showFile;
+        _fileExists = true;
+      });
+      }
     }
   }
 
@@ -218,15 +234,14 @@ final minioUri = defaultMinioEndpointUrl.substring('https://'.length);
 
   @override
   Widget build(BuildContext context) {
-    logNoStack.i("AVATAR_EDIT: BUILD: url=[${widget.imageUrl==null?'IS NULL':'NOT NULL'}] _image=[$_image]");
+    logNoStack.i(
+        "AVATAR_EDIT: BUILD: url=[${widget.imageUrl == null ? 'IS NULL' : 'NOT NULL'}] _image=[$_image]");
     if (!_fileExists) {
       logNoStack.i("AVATAR_EDIT: BUILD:_image is NULL");
     } else {
       logNoStack.i("AVATAR_EDIT: BUILD:_image is NOT NULL");
     }
-    
-   
-    
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -234,13 +249,12 @@ final minioUri = defaultMinioEndpointUrl.substring('https://'.length);
           onTap: () => _showImageSourceActionSheet(context),
           child: CircleAvatar(
             radius: widget.diameter,
-            backgroundImage: _fileExists 
+            backgroundImage: _fileExists
                 ? FileImage(_image!)
                 : (_imageUrl != null
                         ? NetworkImage(_imageUrl!)
                         : const AssetImage('assets/images/default-avatar.webp'))
                     as ImageProvider,
-
             child: const Align(
               alignment: Alignment.bottomRight,
               child: CircleAvatar(
