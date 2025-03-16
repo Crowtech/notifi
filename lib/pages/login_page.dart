@@ -1,15 +1,16 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:notifi/jwt_utils.dart';
+import 'package:notifi/credentials.dart';
 import 'package:notifi/state/nest_auth2.dart';
+import 'package:notifi/widgets/action_button.dart';
 import 'package:oidc/oidc.dart';
 
-import '../widgets/action_button.dart';
-import 'package:notifi/app_state.dart' as app_state;
+
+import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
-import '../i18n/strings.g.dart' as nt; // Importing localization strings
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -24,8 +25,9 @@ var logNoStack = logger.Logger(
 class LoginPage extends HookConsumerWidget {
   LoginPage({super.key});
 
-  OidcPlatformSpecificOptions_Web_NavigationMode webNavigationMode =
-      OidcPlatformSpecificOptions_Web_NavigationMode.newPage;
+  OidcPlatformSpecificOptions_Web_NavigationMode webNavigationMode = (kIsWeb
+      ? OidcPlatformSpecificOptions_Web_NavigationMode.samePage
+      : OidcPlatformSpecificOptions_Web_NavigationMode.newPage); // was newPage
 
   bool allowInsecureConnections = false;
   bool preferEphemeralSession = false;
@@ -53,61 +55,38 @@ class LoginPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    logNoStack.i(
-      'LOGINPAGE: ',
-    );
-    Future<void> login2() async {
+    if (skipLogin) {
+      logNoStack.i("LOGIN_PAGE LOCAL: skipping login");
+
+      if (context.mounted) {
+        logNoStack.i("LOGIN_PAGE LOCAL: skipping login context mounted ");
+        // go to sign in page after completing onboarding
+        // ref
+        //     .read(nestAuthProvider.notifier)
+        //     .loginUsernamePassword(testUsername, testPassword);
+
+        //context.goNamed(AppRoute.login.name);
+      }
+      return const SizedBox.shrink();
+      // };
+    } 
+      final isAuth = ref.read(nestAuthProvider.notifier);
+
+
+ if (isAuth==true) {
+      context.goNamed("home");
+    } 
+
+    Future<void> login() async {
+
       ref.read(nestAuthProvider.notifier).login();
     }
 
-    // Future<void> login() =>
-    //     ref.read(nestAuthProvider.notifier).loginUsernamePassword(
-    //           'myEmail',
-    //           'myPassword',
-    //         );
 
-      Future<void> login3() async {
+    FlutterNativeSplash.remove();
+    logNoStack.i("LOGIN_PAGE: show page ");
 
-  
-
-    final currentRoute = GoRouterState.of(context);
-    final originalUri =
-        currentRoute.uri.queryParameters[OidcConstants_Store.originalUri];
-    final parsedOriginalUri =
-        originalUri == null ? null : Uri.tryParse(originalUri);
-    try {
-      OidcUser? result;
-    
-        result = await app_state.currentManager.loginAuthorizationCodeFlow(
-          originalUri: parsedOriginalUri ?? Uri.parse('/'),
-          //store any arbitrary data, here we store the authorization
-          //start time.
-          extraStateData: DateTime.now().toIso8601String(),
-          options: _getOptions(),
-          //NOTE: you can pass more parameters here.
-        );
-        if (result != null) {
-          //ref.read(currentUserProvider.notifier).setOidc(result);
-            logNoStack
-          .i("loginPage accessToken = ${getAccessToken(result)}");
-        } else {
-            logNoStack
-          .i("loginPage accessToken is null");
-        }
-   
-  
-      if (kIsWeb &&
-          webNavigationMode ==
-              OidcPlatformSpecificOptions_Web_NavigationMode.samePage) {
-        //in samePage navigation, you can't know the result here.
-        return;
-      } 
-    } catch (e) {
-      app_state.log.e(e.toString());
-    }
-  }
-
-
+    //return const SizedBox.shrink();
     return Scaffold(
       body: Center(
         child: Column(
@@ -115,9 +94,9 @@ class LoginPage extends HookConsumerWidget {
           children: [
             Text(nt.t.login_page),
             ActionButton(
-              onPressed: login2,
+              onPressed: login,
               icon: const SizedBox.shrink(),
-              label:  Text(nt.t.login),
+              label: Text(nt.t.login),
             ),
           ],
         ),
