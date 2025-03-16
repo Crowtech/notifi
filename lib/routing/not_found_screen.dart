@@ -11,7 +11,7 @@ class NotFoundScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: EmptyPlaceholderWidget(
-        message: nt.t.404_notfound,
+        message: nt.t.notfound_404,
         homeRoute: "home",
         loginRoute: "login",
       ),
