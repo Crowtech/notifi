@@ -34,6 +34,7 @@ class TranslationsZh implements Translations {
 
 	// Translations
 	@override String get app_title => 'Crowtech';
+	@override String get k404Notfound => '404-页面未找到！';
 	@override late final _TranslationsMenuZh menu = _TranslationsMenuZh._(_root);
 	@override String get about_us => '关于我们';
 	@override late final _TranslationsAccountZh account = _TranslationsAccountZh._(_root);
@@ -221,6 +222,7 @@ extension on TranslationsZh {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
 			case 'app_title': return 'Crowtech';
+			case 'k404Notfound': return '404-页面未找到！';
 			case 'menu.account': return '帐户菜单';
 			case 'menu.product': return '产品菜单';
 			case 'about_us': return '关于我们';

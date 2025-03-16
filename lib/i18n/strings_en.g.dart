@@ -38,6 +38,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 	// Translations
 	String get app_title => 'Crowtech';
+	String get k404Notfound => '404 - Page not found!';
 	late final TranslationsMenuEn menu = TranslationsMenuEn._(_root);
 	String get about_us => 'About Us';
 	late final TranslationsAccountEn account = TranslationsAccountEn._(_root);
@@ -225,6 +226,7 @@ extension on Translations {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
 			case 'app_title': return 'Crowtech';
+			case 'k404Notfound': return '404 - Page not found!';
 			case 'menu.account': return 'Account Menu';
 			case 'menu.product': return 'Product Menu';
 			case 'about_us': return 'About Us';

@@ -1,6 +1,6 @@
 {
   "app_title(ignoreGpt)": "Crowtech", 
-
+  "404_notfound": "404 - Page not found!",
   "menu": {
     "account": "Account Menu",
     "product": "Product Menu"
