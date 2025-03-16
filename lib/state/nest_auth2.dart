@@ -76,8 +76,9 @@ class NestAuthController extends Notifier<bool> with ChangeNotifier {
       }
     });
 
-    logNoStack.i("NEST_AUTH_CONTROLLER : BUILD");
+    logNoStack.i("NEST_AUTH_CONTROLLER : BUILD, skipLogin is ${skipLogin?'ON':'OFF'} preventLogn is ${preventAutoLogin?'ON':'OFF'}");
     if (skipLogin && (!preventAutoLogin)) {
+       logNoStack.i("AUTH CONTROLLER BUILD: SKIP LOGIN DETECTED !");
       loginUsernamePassword(testUsername, testPassword);
       preventAutoLogin = true; // stop it from happening.
     }
@@ -90,14 +91,14 @@ class NestAuthController extends Notifier<bool> with ChangeNotifier {
   }
 
   Future<void> loginUsernamePassword(String username, String password) async {
-    logNoStack.i("Skipping Login!!!!!");
+    logNoStack.i("AUTH CONTROLLER: Skipping Login!!!!!");
     // final messenger = ScaffoldMessenger.of(context);
     try {
       var result = await app_state.currentManager.loginPassword(
         username: username,
         password: password,
       );
-      logNoStack.i("Result is ${result!.claims.toJson()['email']}!!!!!");
+      logNoStack.i("AUTH CONTROLLER: Result is ${result!.claims.toJson()['email']}!!!!!");
       await loginOidc(result);
       // ref.read(currentUserProvider.notifier).setOidc(result);
     } catch (e) {
