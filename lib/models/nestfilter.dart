@@ -1,4 +1,3 @@
-
 import 'package:json_annotation/json_annotation.dart';
 
 import 'package:logger/logger.dart' as logger;
@@ -61,13 +60,15 @@ class NestFilter {
 
   NestFilter copyWith({
     final String? query,
+    final List<int>? orgIdList,
+    final String? sortby,
   }) {
     return NestFilter(
       query: query ?? this.query,
+      orgIdList: orgIdList ?? this.orgIdList,
+      sortby: sortby ?? this.sortby,
     );
   }
-
-  
 }
 
 NestFilter defaultNestFilter = NestFilter(
