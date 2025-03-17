@@ -37,6 +37,7 @@ const _defaultAuthEndpointUrl =
 
 const _defaultMinioEndpointUrl = String.fromEnvironment('MINIO_ENDPOINT_URL');
 const _defaultImageProxyUrl = String.fromEnvironment('IMAGE_PROXY_URL');
+const _defaultTileServerUrl = String.fromEnvironment('TILE_SERVER_URL');
 
 const _enablePosthog = bool.fromEnvironment('ENABLE_POSTHOG');
 const _posthogKey = String.fromEnvironment('POSTHOG_KEY');
@@ -94,6 +95,7 @@ String get defaultAuthEndpointUrl => _defaultAuthEndpointUrl;
 String get defaultAPIBaseUrl => _defaultAPIBaseUrl;
 String get defaultMinioEndpointUrl => _defaultMinioEndpointUrl;
 String get defaultImageProxyUrl => _defaultImageProxyUrl;
+String get defaultTileServerUrl => _defaultTileServerUrl;
 String get iosAppStoreId => _iosAppStoreId;
 
 bool get skipLogin => _skipLogin;
@@ -133,6 +135,7 @@ void showDefaultSettings() {
       "Main:default Auth Endpoint URL = $defaultAuthEndpointUrl\n" +
       "Main:defaultMinio URL = $defaultMinioEndpointUrl\n" +
       "Main:defaultImageProxy URL = $defaultImageProxyUrl\n" +
+      "Main:defaultTileServer URL = $defaultTileServerUrl\n" +
       "Main:vapidKey = $vapidKey\n" +
       "Main:appStoreId = $iosAppStoreId\n" +
       "Main: skip Login = ${skipLogin ? 'ON' : 'OFF'}\n" +
