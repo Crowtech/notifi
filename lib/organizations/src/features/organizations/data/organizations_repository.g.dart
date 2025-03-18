@@ -192,7 +192,7 @@ class _OrganizationProviderElement
 }
 
 String _$fetchOrganizationsHash() =>
-    r'dec90a3a10bc345344eca266f28d547f09b0411b';
+    r'7365f1749d1c2afcfa710d3024c6d538aadb1851';
 
 /// Provider to fetch paginated organizations data
 ///
@@ -204,7 +204,7 @@ const fetchOrganizationsProvider = FetchOrganizationsFamily();
 ///
 /// Copied from [fetchOrganizations].
 class FetchOrganizationsFamily
-    extends Family<AsyncValue<NOrganizationsResponse>> {
+    extends Family<AsyncValue<OrganizationsResponse>> {
   /// Provider to fetch paginated organizations data
   ///
   /// Copied from [fetchOrganizations].
@@ -249,7 +249,7 @@ class FetchOrganizationsFamily
 ///
 /// Copied from [fetchOrganizations].
 class FetchOrganizationsProvider
-    extends AutoDisposeFutureProvider<NOrganizationsResponse> {
+    extends AutoDisposeFutureProvider<OrganizationsResponse> {
   /// Provider to fetch paginated organizations data
   ///
   /// Copied from [fetchOrganizations].
@@ -286,7 +286,7 @@ class FetchOrganizationsProvider
 
   @override
   Override overrideWith(
-    FutureOr<NOrganizationsResponse> Function(FetchOrganizationsRef provider)
+    FutureOr<OrganizationsResponse> Function(FetchOrganizationsRef provider)
         create,
   ) {
     return ProviderOverride(
@@ -304,7 +304,7 @@ class FetchOrganizationsProvider
   }
 
   @override
-  AutoDisposeFutureProviderElement<NOrganizationsResponse> createElement() {
+  AutoDisposeFutureProviderElement<OrganizationsResponse> createElement() {
     return _FetchOrganizationsProviderElement(this);
   }
 
@@ -325,13 +325,13 @@ class FetchOrganizationsProvider
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin FetchOrganizationsRef
-    on AutoDisposeFutureProviderRef<NOrganizationsResponse> {
+    on AutoDisposeFutureProviderRef<OrganizationsResponse> {
   /// The parameter `queryData` of this provider.
   ({int page, String query}) get queryData;
 }
 
 class _FetchOrganizationsProviderElement
-    extends AutoDisposeFutureProviderElement<NOrganizationsResponse>
+    extends AutoDisposeFutureProviderElement<OrganizationsResponse>
     with FetchOrganizationsRef {
   _FetchOrganizationsProviderElement(super.provider);
 

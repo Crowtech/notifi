@@ -37,7 +37,7 @@ class OrganizationsRepository {
   final String token;
   final Person currentUser;
 
-  Future<NOrganizationsResponse> searchOrganizations(
+  Future<OrganizationsResponse> searchOrganizations(
       {required NestQueryData queryData, CancelToken? cancelToken}) async {
     NestFilter nf = NestFilter(offset: queryData.page);
     var data = jsonEncode(nf);
@@ -62,10 +62,10 @@ class OrganizationsRepository {
     final response = await client.postUri(uri,
         options: options, data: data, cancelToken: cancelToken);
 
-    return NOrganizationsResponse.fromJson(response.data);
+    return OrganizationsResponse.fromJson(response.data);
   }
 
-  Future<NOrganizationsResponse> nowPlayingOrganizations(
+  Future<OrganizationsResponse> nowPlayingOrganizations(
       {required int page, CancelToken? cancelToken}) async {
     NestFilter nf = NestFilter(offset: 0);
     var data = jsonEncode(nf);
@@ -94,7 +94,7 @@ class OrganizationsRepository {
 
     logNoStack
         .i("ORGANIZATIONS_REPOSITORY: now Playing , responseData=${response.data}");
-    return NOrganizationsResponse.fromJson(response.data);
+    return OrganizationsResponse.fromJson(response.data);
   }
 
   Future<NOrganization> organization(
@@ -145,7 +145,7 @@ Future<NOrganization> organization(
 
 /// Provider to fetch paginated organizations data
 @riverpod
-Future<NOrganizationsResponse> fetchOrganizations(
+Future<OrganizationsResponse> fetchOrganizations(
   FetchOrganizationsRef ref, {
   required NestQueryData queryData,
 }) async {
