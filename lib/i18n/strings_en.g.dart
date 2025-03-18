@@ -205,6 +205,7 @@ class TranslationsSelectEn {
 	String get equipment => 'Select Equipment ..';
 	String get locations => 'Select Locations ..';
 	String get members => 'Select Members';
+	String get member_groups => 'Member Groups ..';
 	String get people => 'Select People ..';
 	String get resources => 'Select Resources ..';
 	String get teams => 'Select Teams ..';
@@ -337,6 +338,7 @@ extension on Translations {
 			case 'select.equipment': return 'Select Equipment ..';
 			case 'select.locations': return 'Select Locations ..';
 			case 'select.members': return 'Select Members';
+			case 'select.member_groups': return 'Member Groups ..';
 			case 'select.people': return 'Select People ..';
 			case 'select.resources': return 'Select Resources ..';
 			case 'select.teams': return 'Select Teams ..';

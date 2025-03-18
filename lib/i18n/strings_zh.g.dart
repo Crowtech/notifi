@@ -200,6 +200,7 @@ class _TranslationsSelectZh implements TranslationsSelectEn {
 	@override String get organizations => '选择组织 ..';
 	@override String get equipment => '选择设备 ..';
 	@override String get locations => '选择位置 ..';
+	@override String get member_groups => '会员团体 ..';
 	@override String get members => '选择成员 ..';
 	@override String get people => '选择人员 ..';
 	@override String get resources => '选择资源 ..';
@@ -332,6 +333,7 @@ extension on TranslationsZh {
 			case 'select.organizations': return '选择组织 ..';
 			case 'select.equipment': return '选择设备 ..';
 			case 'select.locations': return '选择位置 ..';
+			case 'select.member_groups': return '会员团体 ..';
 			case 'select.members': return '选择成员 ..';
 			case 'select.people': return '选择人员 ..';
 			case 'select.resources': return '选择资源 ..';
