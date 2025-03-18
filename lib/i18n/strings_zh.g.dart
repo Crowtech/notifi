@@ -86,6 +86,7 @@ class TranslationsZh implements Translations {
 	@override late final _TranslationsResourceZh resource = _TranslationsResourceZh._(_root);
 	@override late final _TranslationsResourcesZh resources = _TranslationsResourcesZh._(_root);
 	@override late final _TranslationsResponseZh response = _TranslationsResponseZh._(_root);
+	@override late final _TranslationsSelectZh select = _TranslationsSelectZh._(_root);
 	@override String get privacy_policy => '隐私政策';
 	@override String get profile => '轮廓';
 	@override String get pulltorefresh => '下拉刷新';
@@ -182,6 +183,27 @@ class _TranslationsResponseZh implements TranslationsResponseEn {
 	@override String get ok => '好的';
 	@override String get cancel => '取消';
 	@override String get reset => '重置';
+}
+
+// Path: select
+class _TranslationsSelectZh implements TranslationsSelectEn {
+	_TranslationsSelectZh._(this._root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get departments => '选择部门 ..';
+	@override String get drivers => '选择驱动程序 ..';
+	@override String get groups => '选择组 ..';
+	@override String get items => '选择项目 ..';
+	@override String get organizations => '选择组织 ..';
+	@override String get equipment => '选择设备 ..';
+	@override String get locations => '选择位置 ..';
+	@override String get members => '选择成员 ..';
+	@override String get people => '选择人员 ..';
+	@override String get resources => '选择资源 ..';
+	@override String get teams => '选择团队s ..';
+	@override String get vehicles => '选择车辆 ..';
 }
 
 // Path: search
@@ -301,6 +323,18 @@ extension on TranslationsZh {
 			case 'response.ok': return '好的';
 			case 'response.cancel': return '取消';
 			case 'response.reset': return '重置';
+			case 'select.departments': return '选择部门 ..';
+			case 'select.drivers': return '选择驱动程序 ..';
+			case 'select.groups': return '选择组 ..';
+			case 'select.items': return '选择项目 ..';
+			case 'select.organizations': return '选择组织 ..';
+			case 'select.equipment': return '选择设备 ..';
+			case 'select.locations': return '选择位置 ..';
+			case 'select.members': return '选择成员 ..';
+			case 'select.people': return '选择人员 ..';
+			case 'select.resources': return '选择资源 ..';
+			case 'select.teams': return '选择团队s ..';
+			case 'select.vehicles': return '选择车辆 ..';
 			case 'privacy_policy': return '隐私政策';
 			case 'profile': return '轮廓';
 			case 'pulltorefresh': return '下拉刷新';

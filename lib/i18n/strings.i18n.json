@@ -88,7 +88,20 @@
     "cancel": "Cancel",
     "reset": "Reset"
   },
-
+  "select": {
+    "departments": "Select Departments ..",
+    "drivers": "Select Drivers ..",
+    "groups": "Select Groups ..",
+    "items": "Select Items ..",
+    "organizations": "Select Organizations ..",
+    "equipment": "Select Equipment ..",
+    "locations": "Select Locations ..",
+    "members": "Select Members",
+    "people": "Select People ..",
+    "resources": "Select Resources ..",
+    "teams": "Select Teams ..",
+    "vehicles": "Select Vehicles .."
+  },
   "privacy_policy": "Privacy Policy",
   "profile": "Profile",
   "pulltorefresh": "Pull to refresh",

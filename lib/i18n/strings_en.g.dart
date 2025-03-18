@@ -90,6 +90,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final TranslationsResourceEn resource = TranslationsResourceEn._(_root);
 	late final TranslationsResourcesEn resources = TranslationsResourcesEn._(_root);
 	late final TranslationsResponseEn response = TranslationsResponseEn._(_root);
+	late final TranslationsSelectEn select = TranslationsSelectEn._(_root);
 	String get privacy_policy => 'Privacy Policy';
 	String get profile => 'Profile';
 	String get pulltorefresh => 'Pull to refresh';
@@ -186,6 +187,27 @@ class TranslationsResponseEn {
 	String get ok => 'OK';
 	String get cancel => 'Cancel';
 	String get reset => 'Reset';
+}
+
+// Path: select
+class TranslationsSelectEn {
+	TranslationsSelectEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get departments => 'Select Departments ..';
+	String get drivers => 'Select Drivers ..';
+	String get groups => 'Select Groups ..';
+	String get items => 'Select Items ..';
+	String get organizations => 'Select Organizations ..';
+	String get equipment => 'Select Equipment ..';
+	String get locations => 'Select Locations ..';
+	String get members => 'Select Members';
+	String get people => 'Select People ..';
+	String get resources => 'Select Resources ..';
+	String get teams => 'Select Teams ..';
+	String get vehicles => 'Select Vehicles ..';
 }
 
 // Path: search
@@ -305,6 +327,18 @@ extension on Translations {
 			case 'response.ok': return 'OK';
 			case 'response.cancel': return 'Cancel';
 			case 'response.reset': return 'Reset';
+			case 'select.departments': return 'Select Departments ..';
+			case 'select.drivers': return 'Select Drivers ..';
+			case 'select.groups': return 'Select Groups ..';
+			case 'select.items': return 'Select Items ..';
+			case 'select.organizations': return 'Select Organizations ..';
+			case 'select.equipment': return 'Select Equipment ..';
+			case 'select.locations': return 'Select Locations ..';
+			case 'select.members': return 'Select Members';
+			case 'select.people': return 'Select People ..';
+			case 'select.resources': return 'Select Resources ..';
+			case 'select.teams': return 'Select Teams ..';
+			case 'select.vehicles': return 'Select Vehicles ..';
 			case 'privacy_policy': return 'Privacy Policy';
 			case 'profile': return 'Profile';
 			case 'pulltorefresh': return 'Pull to refresh';
