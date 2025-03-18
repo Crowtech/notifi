@@ -87,6 +87,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get messages => 'Messages';
 	String get moving => 'Moving';
 	String get odometer => 'Odometer';
+	String get openstreetmap => 'OpenStreetMap contributors';
 	late final TranslationsResourceEn resource = TranslationsResourceEn._(_root);
 	late final TranslationsResourcesEn resources = TranslationsResourcesEn._(_root);
 	late final TranslationsResponseEn response = TranslationsResponseEn._(_root);
@@ -310,6 +311,7 @@ extension on Translations {
 			case 'messages': return 'Messages';
 			case 'moving': return 'Moving';
 			case 'odometer': return 'Odometer';
+			case 'openstreetmap': return 'OpenStreetMap contributors';
 			case 'resource.artifact': return 'Artifact';
 			case 'resource.equipment': return 'Equipment';
 			case 'resource.location': return 'Location';

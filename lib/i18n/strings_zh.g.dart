@@ -83,6 +83,7 @@ class TranslationsZh implements Translations {
 	@override String get messages => '消息';
 	@override String get moving => '动人';
 	@override String get odometer => '里程表';
+	@override String get openstreetmap => 'OpenStreetMap 贡献者';
 	@override late final _TranslationsResourceZh resource = _TranslationsResourceZh._(_root);
 	@override late final _TranslationsResourcesZh resources = _TranslationsResourcesZh._(_root);
 	@override late final _TranslationsResponseZh response = _TranslationsResponseZh._(_root);
@@ -306,6 +307,7 @@ extension on TranslationsZh {
 			case 'messages': return '消息';
 			case 'moving': return '动人';
 			case 'odometer': return '里程表';
+			case 'openstreetmap': return 'OpenStreetMap 贡献者';
 			case 'resource.artifact': return '人工制品';
 			case 'resource.equipment': return '设备';
 			case 'resource.location': return '地点';
