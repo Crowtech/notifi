@@ -26,7 +26,7 @@ final organizationsRepositoryProvider =
 // ignore: unused_element
 typedef OrganizationsRepositoryRef
     = AutoDisposeProviderRef<OrganizationsRepository>;
-String _$organizationHash() => r'ec2e28115bf886b9369600845ab291e89ed54381';
+String _$organizationHash() => r'ac1ce429719564007ea917adba987105f5e5bcf3';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -58,7 +58,7 @@ const organizationProvider = OrganizationFamily();
 /// Provider to fetch a organization by ID
 ///
 /// Copied from [organization].
-class OrganizationFamily extends Family<AsyncValue<NOrganization>> {
+class OrganizationFamily extends Family<AsyncValue<Organization>> {
   /// Provider to fetch a organization by ID
   ///
   /// Copied from [organization].
@@ -102,7 +102,7 @@ class OrganizationFamily extends Family<AsyncValue<NOrganization>> {
 /// Provider to fetch a organization by ID
 ///
 /// Copied from [organization].
-class OrganizationProvider extends AutoDisposeFutureProvider<NOrganization> {
+class OrganizationProvider extends AutoDisposeFutureProvider<Organization> {
   /// Provider to fetch a organization by ID
   ///
   /// Copied from [organization].
@@ -139,7 +139,7 @@ class OrganizationProvider extends AutoDisposeFutureProvider<NOrganization> {
 
   @override
   Override overrideWith(
-    FutureOr<NOrganization> Function(OrganizationRef provider) create,
+    FutureOr<Organization> Function(OrganizationRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -156,7 +156,7 @@ class OrganizationProvider extends AutoDisposeFutureProvider<NOrganization> {
   }
 
   @override
-  AutoDisposeFutureProviderElement<NOrganization> createElement() {
+  AutoDisposeFutureProviderElement<Organization> createElement() {
     return _OrganizationProviderElement(this);
   }
 
@@ -177,13 +177,13 @@ class OrganizationProvider extends AutoDisposeFutureProvider<NOrganization> {
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin OrganizationRef on AutoDisposeFutureProviderRef<NOrganization> {
+mixin OrganizationRef on AutoDisposeFutureProviderRef<Organization> {
   /// The parameter `organizationId` of this provider.
   int get organizationId;
 }
 
 class _OrganizationProviderElement
-    extends AutoDisposeFutureProviderElement<NOrganization>
+    extends AutoDisposeFutureProviderElement<Organization>
     with OrganizationRef {
   _OrganizationProviderElement(super.provider);
 

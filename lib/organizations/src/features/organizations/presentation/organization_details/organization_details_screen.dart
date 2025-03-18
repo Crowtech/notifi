@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:notifi/models/organization.dart';
 
 import '../../data/organizations_repository.dart';
 import '../../domain/norganization.dart';
@@ -11,7 +12,7 @@ class OrganizationDetailsScreen extends ConsumerWidget {
   const OrganizationDetailsScreen(
       {super.key, required this.organizationId, required this.organization});
   final int organizationId;
-  final NOrganization? organization;
+  final Organization? organization;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

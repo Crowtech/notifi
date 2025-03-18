@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notifi/models/organization.dart';
 import 'package:notifi/organizations/src/common_widgets/nest_poster.dart';
 import 'package:notifi/organizations/src/common_widgets/top_gradient.dart';
 
@@ -12,7 +13,7 @@ class OrganizationListTile extends StatelessWidget {
     this.debugIndex,
     this.onPressed,
   });
-  final NOrganization organization;
+  final Organization organization;
   final int? debugIndex;
   final VoidCallback? onPressed;
 

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:notifi/credentials.dart';
 import 'package:notifi/models/nestfilter.dart';
+import 'package:notifi/models/organization.dart';
 import 'package:notifi/models/person.dart';
 import 'package:notifi/persons/src/utils/cancel_token_ref.dart';
 import 'package:notifi/state/nest_auth2.dart';
@@ -97,7 +98,7 @@ class OrganizationsRepository {
     return OrganizationsResponse.fromJson(response.data);
   }
 
-  Future<NOrganization> organization(
+  Future<Organization> organization(
       {required int orgId, CancelToken? cancelToken}) async {
     logNoStack.i(
         "ORGANIZATIONS_REPOSITORY: organization currentUserId=${currentUser.id} token=${token.substring(0, 10)}");
@@ -118,7 +119,7 @@ class OrganizationsRepository {
 
     final response =
         await client.get(url, options: options, cancelToken: cancelToken);
-    return NOrganization.fromJson(response.data);
+    return Organization.fromJson(response.data);
   }
 }
 
@@ -133,7 +134,7 @@ class AbortedException implements Exception {}
 
 /// Provider to fetch a organization by ID
 @riverpod
-Future<NOrganization> organization(
+Future<Organization> organization(
   OrganizationRef ref, {
   required int organizationId,
 }) {
