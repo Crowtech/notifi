@@ -49,8 +49,8 @@ class SelectedOrganizations extends _$SelectedOrganizations {
   List<int> getIdList() {
     List<int> orgIntList = [];
     if (state.isEmpty) {
-      Person currentUser = ref.read(nestAuthProvider.notifier).currentUser;
-      orgIntList.add(currentUser.orgid!); // set default
+    //  Person currentUser = ref.read(nestAuthProvider.notifier).currentUser;
+     // orgIntList.add(currentUser.orgid!); // set default
     } else {
       for (Organization org in state) {
         orgIntList.add(org.id!);

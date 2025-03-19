@@ -7,7 +7,7 @@ part of 'selected_organizations.dart';
 // **************************************************************************
 
 String _$selectedOrganizationsHash() =>
-    r'0efa2455de633e664992d4866e18b5c0a6ff08e4';
+    r'0dcf87d38925169f5b83aa4a1df7cac28204549a';
 
 /// See also [SelectedOrganizations].
 @ProviderFor(SelectedOrganizations)
