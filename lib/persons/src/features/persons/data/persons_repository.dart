@@ -5,6 +5,7 @@ import 'package:notifi/credentials.dart';
 import 'package:notifi/models/nestfilter.dart';
 import 'package:notifi/models/organization.dart';
 import 'package:notifi/models/person.dart';
+import 'package:notifi/organizations/src/features/organizations/presentation/organizations/selected_organizations.dart';
 import 'package:notifi/state/nest_auth2.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -12,7 +13,6 @@ import 'package:notifi/persons/src/utils/cancel_token_ref.dart';
 import 'package:notifi/persons/src/utils/dio_provider.dart';
 import 'package:logger/logger.dart' as logger;
 
-import '../../../../../riverpod/selected_organizations.dart';
 import '../domain/nperson.dart';
 import '../domain/nperson_response.dart';
 
