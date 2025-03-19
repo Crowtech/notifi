@@ -22,11 +22,10 @@ var logNoStack = logger.Logger(
 
 @Riverpod(keepAlive: true)
 class SelectedOrganizations extends _$SelectedOrganizations {
-   
   @override
   List<Organization> build() {
     logNoStack.i("SELECTED ORGS BUILD");
-    return  [];
+    return [];
   }
 
   void addOrg(Organization organization) {
@@ -35,7 +34,7 @@ class SelectedOrganizations extends _$SelectedOrganizations {
   }
 
   void removeOrg(Organization organization) {
-        logNoStack.i("SELECTED_ORGS: remove ${organization.url}");
+    logNoStack.i("SELECTED_ORGS: remove ${organization.url}");
     state = [...state]..remove(organization);
   }
 
@@ -45,6 +44,18 @@ class SelectedOrganizations extends _$SelectedOrganizations {
     } else {
       removeOrg(organization);
     }
-    
+  }
+
+  List<int> getIdList() {
+    List<int> orgIntList = [];
+    if (state.isEmpty) {
+      Person currentUser = ref.read(nestAuthProvider.notifier).currentUser;
+      orgIntList.add(currentUser.orgid!); // set default
+    } else {
+      for (Organization org in state) {
+        orgIntList.add(org.id!);
+      }
+    }
+    return orgIntList;
   }
 }
