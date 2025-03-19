@@ -48,14 +48,11 @@ class GPS extends CrowtechBase<GPS> {
     this.moving = false,
     this.person,
   }) {
-   
-  
-
     // if (person != null) {
     //   resourceid = person!.id!;
     //   resourcecode = person!.code!;
     // }
-    
+
     if (timestampStr.isEmpty) {
       timestamp = DateTime.now().millisecondsSinceEpoch;
     } else {
@@ -92,14 +89,16 @@ class GPS extends CrowtechBase<GPS> {
 
   @override
   String toString() {
-    String personStr= "";
+    String personStr = "";
     if (person != null) {
-      personStr = "${person!.email} ${person!.gender == GenderType.MALE ? 'MALE':'FEMALE'} ";
+      personStr =
+          "${person!.email} ${person!.gender == GenderType.MALE ? 'MALE' : 'FEMALE'} ";
     }
     return "GPS==> ${super.toString()} $resourcecode $latitude $longitude $speed $heading $personStr";
   }
 
-
+  @override
+  int get hashCode => id.hashCode;
 }
 
-GPS defaultGPS = GPS(latitude: 0.0,longitude: 0.0);
+GPS defaultGPS = GPS(latitude: 0.0, longitude: 0.0);

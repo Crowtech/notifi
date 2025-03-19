@@ -20,37 +20,37 @@ class Equipment extends Resource {
   static String className = "Equipment";
   static String tablename = className.toLowerCase();
 
-    String etype;
-    String model;
-    String brand;
-    String serialNumber;
-    String mac;
+  String etype;
+  String model;
+  String brand;
+  String serialNumber;
+  String mac;
 
-    GPS? gps;
+  GPS? gps;
 
-  Equipment(
-      {
-      super.orgid,
-      super.id,
-      super.code,
-      super.created,
-      super.updated,
-      super.name,
-      super.description,
-      super.location,
-      super.devicecode,
-      super.avatarUrl,
-      required this.etype,
-      required this.model,
-      required this.brand,
-      required this.serialNumber,
-      required this.mac,
-       this.gps,
-      }) {
+  Equipment({
+    super.orgid,
+    super.id,
+    super.code,
+    super.created,
+    super.updated,
+    super.name,
+    super.description,
+    super.location,
+    super.devicecode,
+    super.avatarUrl,
+    required this.etype,
+    required this.model,
+    required this.brand,
+    required this.serialNumber,
+    required this.mac,
+    this.gps,
+  }) {
     super.resourceType = ResourceType.equipment;
   }
 
-  factory Equipment.fromJson(Map<String, dynamic> json) => _$EquipmentFromJson(json);
+  factory Equipment.fromJson(Map<String, dynamic> json) =>
+      _$EquipmentFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$EquipmentToJson(this);
 
@@ -86,6 +86,9 @@ class Equipment extends Resource {
   String getInitials() {
     return "${brand.substring(0, 1).toUpperCase()}${model.substring(0, 1).toUpperCase()}";
   }
+
+  @override
+  int get hashCode => id.hashCode;
 }
 
 Equipment defaultEquipment = Equipment(

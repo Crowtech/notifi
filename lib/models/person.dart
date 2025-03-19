@@ -35,35 +35,34 @@ class Person extends Resource {
   String? fcm;
   String? token; // used to get roles
 
-    GPS? gps;
+  GPS? gps;
 
-  Person(
-      {
-      this.isSignedIn=false,
-      super.orgid,
-      super.id,
-      super.code,
-      super.created,
-      super.updated,
-      super.name,
-      super.description,
-      super.location,
-      super.devicecode,
-      super.avatarUrl,
-      required this.username,
-      required this.email,
-      required this.firstname,
-      required this.lastname,
-      required this.nickname,
-      required this.gender,
-      required this.i18n,
-      required this.country,
-      required this.longitude,
-      required this.latitude,
-      required this.birthyear,
-      required this.fcm,
-       this.gps,
-      }) {
+  Person({
+    this.isSignedIn = false,
+    super.orgid,
+    super.id,
+    super.code,
+    super.created,
+    super.updated,
+    super.name,
+    super.description,
+    super.location,
+    super.devicecode,
+    super.avatarUrl,
+    required this.username,
+    required this.email,
+    required this.firstname,
+    required this.lastname,
+    required this.nickname,
+    required this.gender,
+    required this.i18n,
+    required this.country,
+    required this.longitude,
+    required this.latitude,
+    required this.birthyear,
+    required this.fcm,
+    this.gps,
+  }) {
     super.resourceType = ResourceType.person;
   }
 
@@ -103,6 +102,9 @@ class Person extends Resource {
   String getInitials() {
     return "${firstname.substring(0, 1).toUpperCase()}${lastname.substring(0, 1).toUpperCase()}";
   }
+
+  @override
+  int get hashCode => id.hashCode;
 }
 
 Person defaultPerson = Person(

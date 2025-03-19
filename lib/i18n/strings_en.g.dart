@@ -39,9 +39,9 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	// Translations
 	String get app_title => 'Crowtech';
 	String get notfound_404 => '404 - Page not found!';
-	late final TranslationsMenuEn menu = TranslationsMenuEn._(_root);
+	late final TranslationsMenuEn menu = TranslationsMenuEn.internal(_root);
 	String get about_us => 'About Us';
-	late final TranslationsAccountEn account = TranslationsAccountEn._(_root);
+	late final TranslationsAccountEn account = TranslationsAccountEn.internal(_root);
 	String get activity => 'Activity';
 	String get audio_access_denied => 'You have denied audio access';
 	String get audio_access_denied_without_prompt => 'Please go to Settings app to enable audio access';
@@ -88,23 +88,23 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get moving => 'Moving';
 	String get odometer => 'Odometer';
 	String get openstreetmap => 'OpenStreetMap contributors';
-	late final TranslationsResourceEn resource = TranslationsResourceEn._(_root);
-	late final TranslationsResourcesEn resources = TranslationsResourcesEn._(_root);
-	late final TranslationsResponseEn response = TranslationsResponseEn._(_root);
-	late final TranslationsSelectEn select = TranslationsSelectEn._(_root);
+	late final TranslationsResourceEn resource = TranslationsResourceEn.internal(_root);
+	late final TranslationsResourcesEn resources = TranslationsResourcesEn.internal(_root);
+	late final TranslationsResponseEn response = TranslationsResponseEn.internal(_root);
+	late final TranslationsSelectEn select = TranslationsSelectEn.internal(_root);
 	String get privacy_policy => 'Privacy Policy';
 	String get profile => 'Profile';
 	String get pulltorefresh => 'Pull to refresh';
 	String get reset_offset => 'Reset Offset';
 	String get resetting_exposure_point => 'Resetting exposure point';
 	String get resetting_focus_point => 'Resetting focus point';
-	late final TranslationsSearchEn search = TranslationsSearchEn._(_root);
+	late final TranslationsSearchEn search = TranslationsSearchEn.internal(_root);
 	String get settings => 'Settings';
 	String get splash_text => 'Splash Screen';
 	String get still => 'Still';
 	String get terms_and_conditions => 'Terms & Conditions';
 	String get test_page => 'Test Page';
-	late final TranslationsUnknownEn unknown = TranslationsUnknownEn._(_root);
+	late final TranslationsUnknownEn unknown = TranslationsUnknownEn.internal(_root);
 	String get update_account => 'Update Account';
 	String get zoom_in => 'Zoom In';
 	String get zoom_out => 'Zoom out';
@@ -116,7 +116,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 // Path: menu
 class TranslationsMenuEn {
-	TranslationsMenuEn._(this._root);
+	TranslationsMenuEn.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -127,7 +127,7 @@ class TranslationsMenuEn {
 
 // Path: account
 class TranslationsAccountEn {
-	TranslationsAccountEn._(this._root);
+	TranslationsAccountEn.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -148,7 +148,7 @@ class TranslationsAccountEn {
 
 // Path: resource
 class TranslationsResourceEn {
-	TranslationsResourceEn._(this._root);
+	TranslationsResourceEn.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -164,7 +164,7 @@ class TranslationsResourceEn {
 
 // Path: resources
 class TranslationsResourcesEn {
-	TranslationsResourcesEn._(this._root);
+	TranslationsResourcesEn.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -180,7 +180,7 @@ class TranslationsResourcesEn {
 
 // Path: response
 class TranslationsResponseEn {
-	TranslationsResponseEn._(this._root);
+	TranslationsResponseEn.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -192,7 +192,7 @@ class TranslationsResponseEn {
 
 // Path: select
 class TranslationsSelectEn {
-	TranslationsSelectEn._(this._root);
+	TranslationsSelectEn.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -214,7 +214,7 @@ class TranslationsSelectEn {
 
 // Path: search
 class TranslationsSearchEn {
-	TranslationsSearchEn._(this._root);
+	TranslationsSearchEn.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -230,7 +230,7 @@ class TranslationsSearchEn {
 
 // Path: unknown
 class TranslationsUnknownEn {
-	TranslationsUnknownEn._(this._root);
+	TranslationsUnknownEn.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 

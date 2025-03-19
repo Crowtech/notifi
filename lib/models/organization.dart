@@ -107,6 +107,9 @@ class Organization extends Resource {
       selected: selected ?? this.selected,
     );
   }
+
+    @override
+  int get hashCode => id.hashCode;
 }
 
 Organization defaultOrganization = Organization(

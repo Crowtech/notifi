@@ -14,11 +14,11 @@ var logger = Logger(
 );
 
 @JsonSerializable(explicitToJson: true)
-class Resource extends CrowtechObject implements PagingDataItem  {
+class Resource extends CrowtechObject implements PagingDataItem {
   static String className = "Resource";
   static String tablename = className.toLowerCase();
 
-  int _pageId=0;
+  int _pageId = 0;
   String? description;
   String? location;
   String? devicecode;
@@ -30,21 +30,21 @@ class Resource extends CrowtechObject implements PagingDataItem  {
   @JsonKey(includeFromJson: false, includeToJson: false)
   ResourceType resourceType;
 
-  Resource(
-      {super.orgid,
-      super.id,
-      super.code,
-      super.created,
-      super.updated,
-      super.name,
-      this.description,
-      this.location,
-      this.devicecode,
-      this.avatarUrl,
-      this.gps,
-      this.selected=false,
-      this.resourceType=ResourceType.unknown,
-      });
+  Resource({
+    super.orgid,
+    super.id,
+    super.code,
+    super.created,
+    super.updated,
+    super.name,
+    this.description,
+    this.location,
+    this.devicecode,
+    this.avatarUrl,
+    this.gps,
+    this.selected = false,
+    this.resourceType = ResourceType.unknown,
+  });
 
   factory Resource.fromJson(Map<String, dynamic> json) =>
       _$ResourceFromJson(json);
@@ -69,7 +69,10 @@ class Resource extends CrowtechObject implements PagingDataItem  {
       return avatarUrl!;
     }
   }
-  
+
   @override
   int get pageId => _pageId;
+
+  @override
+  int get hashCode => id.hashCode;
 }

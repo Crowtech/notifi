@@ -20,37 +20,37 @@ class Vehicle extends Resource {
   static String className = "Vehicle";
   static String tablename = className.toLowerCase();
 
-    String etype;
-    String model;
-    String brand;
-    String serialNumber;
-    String mac;
+  String etype;
+  String model;
+  String brand;
+  String serialNumber;
+  String mac;
 
-    GPS? gps;
+  GPS? gps;
 
-  Vehicle(
-      {
-      super.orgid,
-      super.id,
-      super.code,
-      super.created,
-      super.updated,
-      super.name,
-      super.description,
-      super.location,
-      super.devicecode,
-      super.avatarUrl,
-      required this.etype,
-      required this.model,
-      required this.brand,
-      required this.serialNumber,
-      required this.mac,
-       this.gps,
-      }) {
+  Vehicle({
+    super.orgid,
+    super.id,
+    super.code,
+    super.created,
+    super.updated,
+    super.name,
+    super.description,
+    super.location,
+    super.devicecode,
+    super.avatarUrl,
+    required this.etype,
+    required this.model,
+    required this.brand,
+    required this.serialNumber,
+    required this.mac,
+    this.gps,
+  }) {
     super.resourceType = ResourceType.person;
   }
 
-  factory Vehicle.fromJson(Map<String, dynamic> json) => _$VehicleFromJson(json);
+  factory Vehicle.fromJson(Map<String, dynamic> json) =>
+      _$VehicleFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$VehicleToJson(this);
 
@@ -86,6 +86,9 @@ class Vehicle extends Resource {
   String getInitials() {
     return "${brand.substring(0, 1).toUpperCase()}${model.substring(0, 1).toUpperCase()}";
   }
+
+  @override
+  int get hashCode => id.hashCode;
 }
 
 Vehicle defaultVehicle = Vehicle(
