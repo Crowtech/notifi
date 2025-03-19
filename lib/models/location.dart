@@ -80,6 +80,15 @@ class Location extends Resource {
   String getInitials() {
     return "${name!.substring(0, 0)}";
   }
+
+    @override
+  bool operator ==(Object other) =>
+      other is Location &&
+      other.runtimeType == runtimeType &&
+      other.id == id;
+      
+  @override
+  int get hashCode => id.hashCode;
 }
 
 Location defaultLocation = Location(

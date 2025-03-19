@@ -98,7 +98,14 @@ class GPS extends CrowtechBase<GPS> {
   }
 
   @override
+  bool operator ==(Object other) =>
+      other is GPS &&
+      other.runtimeType == runtimeType &&
+      other.id == id;
+      
+  @override
   int get hashCode => id.hashCode;
+
 }
 
 GPS defaultGPS = GPS(latitude: 0.0, longitude: 0.0);

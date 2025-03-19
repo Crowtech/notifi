@@ -104,6 +104,12 @@ class Person extends Resource {
   }
 
   @override
+  bool operator ==(Object other) =>
+      other is Person &&
+      other.runtimeType == runtimeType &&
+      other.id == id;
+
+  @override
   int get hashCode => id.hashCode;
 }
 

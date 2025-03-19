@@ -88,6 +88,12 @@ class Vehicle extends Resource {
   }
 
   @override
+  bool operator ==(Object other) =>
+      other is Vehicle &&
+      other.runtimeType == runtimeType &&
+      other.id == id;
+      
+  @override
   int get hashCode => id.hashCode;
 }
 

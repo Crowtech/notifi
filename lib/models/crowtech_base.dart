@@ -25,4 +25,13 @@ abstract class CrowtechBase<T> {
   String toString() {
     return "$orgid, $id, $created, $code ";
   }
+
+    @override
+  bool operator ==(Object other) =>
+      other is CrowtechBase &&
+      other.runtimeType == runtimeType &&
+      other.id == id;
+      
+  @override
+  int get hashCode => id.hashCode;
 }

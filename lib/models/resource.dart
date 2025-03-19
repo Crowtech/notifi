@@ -74,5 +74,11 @@ class Resource extends CrowtechObject implements PagingDataItem {
   int get pageId => _pageId;
 
   @override
+  bool operator ==(Object other) =>
+      other is Resource &&
+      other.runtimeType == runtimeType &&
+      other.id == id;
+
+  @override
   int get hashCode => id.hashCode;
 }

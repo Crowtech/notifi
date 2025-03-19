@@ -74,7 +74,6 @@ class Organization extends Resource {
     return "${name!.substring(0, 2).toUpperCase()}}";
   }
 
-
   Organization copyWith({
     int? orgid,
     int? id,
@@ -108,7 +107,13 @@ class Organization extends Resource {
     );
   }
 
-    @override
+  @override
+  bool operator ==(Object other) =>
+      other is Organization &&
+      other.runtimeType == runtimeType &&
+      other.id == id;
+
+  @override
   int get hashCode => id.hashCode;
 }
 
