@@ -33,6 +33,7 @@ NestFilter _$NestFilterFromJson(Map<String, dynamic> json) => NestFilter(
       sortby: json['sortby'] as String? ?? "",
       caseinsensitive: json['caseinsensitive'] as bool? ?? true,
       distinctField: json['distinctField'] as String? ?? "",
+      includeGPS: json['includeGPS'] as bool? ?? true,
     );
 
 Map<String, dynamic> _$NestFilterToJson(NestFilter instance) =>
@@ -48,4 +49,5 @@ Map<String, dynamic> _$NestFilterToJson(NestFilter instance) =>
       'sortby': instance.sortby,
       'caseinsensitive': instance.caseinsensitive,
       'distinctField': instance.distinctField,
+      'includeGPS': instance.includeGPS,
     };

@@ -30,6 +30,7 @@ class NestFilter {
   String sortby;
   bool caseinsensitive;
   String distinctField;
+  bool includeGPS;
 
   NestFilter(
       {this.orgIdList = const [],
@@ -42,7 +43,9 @@ class NestFilter {
       this.limit = 10,
       this.sortby = "",
       this.caseinsensitive = true,
-      this.distinctField = ""});
+      this.distinctField = "",
+      this.includeGPS = true
+      });
 
   factory NestFilter.fromJson(Map<String, dynamic> json) =>
       _$NestFilterFromJson(json);
