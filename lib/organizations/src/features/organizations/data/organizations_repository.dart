@@ -43,9 +43,9 @@ class OrganizationsRepository {
     NestFilter nf = NestFilter(offset: queryData.page);
     var data = jsonEncode(nf);
     logNoStack.i(
-        "ORGANIZATIONS_REPOSITORY: search currentUserId=${currentUser.id} token=${token.substring(0, 10)}");
+        "ORGANIZATIONS_REPOSITORY: search currentUserId=${currentUser.id} token=${token.substring(0, 10)} netfilter=$NestFilter");
     final uri = Uri(
-      scheme: 'https',
+      scheme: defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf(":")),
       host: defaultAPIBaseUrl.substring("https://".length),
       path: "$defaultApiPrefixPath/resources/sources/${currentUser.id}",
       // queryParameters: {
@@ -71,10 +71,14 @@ class OrganizationsRepository {
     NestFilter nf = NestFilter(offset: 0);
     var data = jsonEncode(nf);
     logNoStack.i(
-        "ORGANIZATIONS_REPOSITORY: now Playing currentUserId=${currentUser.id} token=${token.substring(0, 10)}");
+        "ORGANIZATIONS_REPOSITORY: now Playing currentUserId=${currentUser.id} token=${token.substring(0, 10)} $nf");
+    logNoStack.i("ORGANIZATIONS: nowPlayingOrgs: scheme:${defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf(":"))}");
+    logNoStack.i("ORGANIZATIONS: nowPlayingOrgs: host:${defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf(":")+3)}");
+logNoStack.i("ORGANIZATIONS: nowPlayingOrgs: path:${defaultApiPrefixPath}/resources/sources/${currentUser.id}}");
+
     final uri = Uri(
-      scheme: 'https',
-      host: defaultAPIBaseUrl.substring("https://".length),
+      scheme: defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf(":")),
+      host: defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf(":")+3),
       path: "$defaultApiPrefixPath/resources/sources/${currentUser.id}",
       // queryParameters: {
       //   'api_key': token,
@@ -103,8 +107,8 @@ class OrganizationsRepository {
     logNoStack.i(
         "ORGANIZATIONS_REPOSITORY: organization currentUserId=${currentUser.id} token=${token.substring(0, 10)}");
     final url = Uri(
-      scheme: 'https',
-      host: defaultAPIBaseUrl.substring("https://".length),
+      scheme: defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf(":")),
+      host: defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf(":")+3),
       path: "$defaultApiPrefixPath/organizations/get/$orgId}",
       // queryParameters: {
       //   'api_key': token,
