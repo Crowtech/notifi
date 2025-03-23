@@ -41,6 +41,7 @@ class OrganizationsRepository {
   Future<OrganizationsResponse> searchOrganizations(
       {required NestQueryData queryData, CancelToken? cancelToken}) async {
     NestFilter nf = NestFilter(offset: queryData.page);
+    nf.includeGPS = false;
     var data = jsonEncode(nf);
     logNoStack.i(
         "ORGANIZATIONS_REPOSITORY: search currentUserId=${currentUser.id} token=${token.substring(0, 10)} netfilter=$NestFilter");
@@ -69,6 +70,7 @@ class OrganizationsRepository {
   Future<OrganizationsResponse> nowPlayingOrganizations(
       {required int page, CancelToken? cancelToken}) async {
     NestFilter nf = NestFilter(offset: 0);
+    nf.includeGPS = false;
     var data = jsonEncode(nf);
     logNoStack.i(
         "ORGANIZATIONS_REPOSITORY: now Playing currentUserId=${currentUser.id} token=${token.substring(0, 10)} $nf");
