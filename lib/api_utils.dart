@@ -359,7 +359,7 @@ Future<Map> registerFCM(
     logNoStack.i("REGISTER FCM: result ${response.toString()}");
     return response;
   }).catchError((error) {
-    log.e("REGISTER FCM: Register FCM error");
+    log.e("REGISTER FCM: Register FCM error $error");
     // ignore: invalid_return_type_for_catch_error
     return Map;
   });

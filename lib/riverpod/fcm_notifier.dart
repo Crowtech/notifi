@@ -29,8 +29,9 @@ class FcmNotifier extends _$FcmNotifier {
 
   void setFcm(String fcm) {
       logNoStack.i("FCM_NOTIFIER: Setting fcm : $fcm}");
+   //   ref.read(sendFcmProvider(fcm));
     state = fcm;
-    ref.read(sendFcmProvider(fcm));
+   // 
   }
 
 
