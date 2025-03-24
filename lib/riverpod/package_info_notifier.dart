@@ -21,7 +21,7 @@ var logNoStack = logger.Logger(
 );
 
 @Riverpod(keepAlive: true)
-class PackageInfodNotifier extends _$PackageInfoNotifier {
+class PackageInfoNotifier extends _$PackageInfoNotifier {
   @override
   String  build() {
     return "NOT_READY";
