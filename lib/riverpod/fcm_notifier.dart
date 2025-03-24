@@ -30,6 +30,7 @@ class FcmNotifier extends _$FcmNotifier {
   void setFcm(String fcm) {
       logNoStack.i("FCM_NOTIFIER: Setting fcm : $fcm}");
     state = fcm;
+    ref.read(sendFcmProvider);
   }
 
 
@@ -38,7 +39,6 @@ class FcmNotifier extends _$FcmNotifier {
 
 @Riverpod(keepAlive: true)
 void sendFcm(Ref ref) async {
-
 
   var fcm = ref.watch(fcmNotifierProvider);
     String? token = ref.read(nestAuthProvider.notifier).token;
