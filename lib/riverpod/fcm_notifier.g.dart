@@ -6,25 +6,23 @@ part of 'fcm_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$adamFilteredMapUserMarkersHash() =>
-    r'fd3f0c48afc55a2491b8ac4d688ad613551232c6';
+String _$sendFcmHash() => r'56cadbde402ae16e2b6b3fb4e08eac068ec94647';
 
-/// See also [adamFilteredMapUserMarkers].
-@ProviderFor(adamFilteredMapUserMarkers)
-final adamFilteredMapUserMarkersProvider = Provider<void>.internal(
-  adamFilteredMapUserMarkers,
-  name: r'adamFilteredMapUserMarkersProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$adamFilteredMapUserMarkersHash,
+/// See also [sendFcm].
+@ProviderFor(sendFcm)
+final sendFcmProvider = Provider<void>.internal(
+  sendFcm,
+  name: r'sendFcmProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$sendFcmHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef AdamFilteredMapUserMarkersRef = ProviderRef<void>;
-String _$fcmNotifierHash() => r'fa050154bc77a32c006c2f7d67f81d61e1101680';
+typedef SendFcmRef = ProviderRef<void>;
+String _$fcmNotifierHash() => r'8459c4fba7d5074558e0321149fd7e187a94913a';
 
 /// See also [FcmNotifier].
 @ProviderFor(FcmNotifier)

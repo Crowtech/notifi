@@ -28,6 +28,7 @@ class FcmNotifier extends _$FcmNotifier {
   }
 
   void setFcm(String fcm) {
+      logNoStack.i("FCM_NOTIFIER: Setting fcm : $fcm}");
     state = fcm;
   }
 
@@ -36,7 +37,7 @@ class FcmNotifier extends _$FcmNotifier {
 
 
 @Riverpod(keepAlive: true)
-void adamFilteredMapUserMarkers(Ref ref) async {
+void sendFcm(Ref ref) async {
 
 
   var fcm = ref.watch(fcmNotifierProvider);
@@ -44,8 +45,10 @@ void adamFilteredMapUserMarkers(Ref ref) async {
     if (token == null) {
       return;
     }
+    logNoStack.i("SEND_FCM: Sending fcm to api : $fcm}");
     String devicecode = await fetchDeviceId();
     //Locale locale = (Locale)null;
-    registerFCM( token, devicecode, fcm);
+    Map result = await registerFCM( token, devicecode, fcm);
+    logNoStack.i("SEND_FCM: result = $result");
   }
 

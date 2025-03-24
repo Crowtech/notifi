@@ -9,9 +9,11 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:notifi/models/person.dart' as Person;
+import 'package:notifi/riverpod/fcm_notifier.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:logger/logger.dart' as logger;
 
@@ -87,6 +89,8 @@ Future<void> setupFlutterNotifications() async {
 }
 
 class Notifi extends ChangeNotifier {
+  Ref ref;
+  
   int secondsToast = 2;
   final List<String> _topics = [];
   String _fcm = "Loading ...";
@@ -153,7 +157,8 @@ class Notifi extends ChangeNotifier {
   }
 
   Notifi(
-      {this.options,
+      { required this.ref,
+      this.options,
       required PackageInfo packageInfo,
       required String deviceId,
       this.secondsToast = 2,
@@ -274,6 +279,7 @@ class Notifi extends ChangeNotifier {
         _fcmToken = token;
         fcm = token!;
         notifyListeners();
+        ref.read(fcmNotifierProvider.notifier).setFcm(fcm);
       });
     }
 
@@ -288,6 +294,7 @@ class Notifi extends ChangeNotifier {
             notifyListeners();
             logNoStack.i("NOTIFI: Mobile Apple fcm token is $_fcmToken");
             subscribeToTopics();
+            ref.read(fcmNotifierProvider.notifier).setFcm(fcm);
           });
         }
       });
@@ -299,6 +306,7 @@ class Notifi extends ChangeNotifier {
         notifyListeners();
         logNoStack.d("NOTIFI: Mobile Android fcm token is $_fcmToken");
         subscribeToTopics();
+        ref.read(fcmNotifierProvider.notifier).setFcm(fcm);
       });
     }
 
@@ -330,7 +338,7 @@ class Notifi extends ChangeNotifier {
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: secondsToast,
           backgroundColor: Colors.red,
-        textColor: Colors.white,
+          textColor: Colors.white,
           fontSize: 16.0);
       logNoStack.i("NOTIFI: INCOMING NOTIFICATION: AFter toast");
     });
