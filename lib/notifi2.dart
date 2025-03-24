@@ -15,12 +15,10 @@ import 'package:logger/logger.dart' as logger;
 import 'package:notifi/jwt_utils.dart';
 import 'package:notifi/riverpod/deviceid_notifier.dart';
 import 'package:notifi/riverpod/fcm_notifier.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'credentials.dart';
 import 'firebase/firebase_api.dart';
-import 'riverpod/package_info_notifier.dart';
 
 part 'notifi2.g.dart';
 
@@ -103,10 +101,8 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
   List<String> _topics = topics ?? [];
   List<CameraDescription> _cameras = <CameraDescription>[];
 
-  PackageInfo packageInfo = await fetchPackageInfo();
   String deviceId = await fetchDeviceId();
 
-  ref.read(packageInfoNotifierProvider.notifier).setPackageInfo(packageInfo);
   ref.read(deviceIdNotifierProvider.notifier).setDeviceId(deviceId);
 
   if (kIsWeb) {

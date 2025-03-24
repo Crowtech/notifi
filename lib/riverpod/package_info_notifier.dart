@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notifi/api_utils.dart';
 import 'package:notifi/jwt_utils.dart';
 import 'package:notifi/state/nest_auth2.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:latlong2/latlong.dart';
@@ -21,19 +22,6 @@ var logNoStack = logger.Logger(
 );
 
 @Riverpod(keepAlive: true)
-class PackageInfoNotifier extends _$PackageInfoNotifier {
-  @override
-  String  build() {
-    return "NOT_READY";
-  }
-
-  void setPackageInfo(String packageInfo) {
-      logNoStack.i("PACKAGE_INFO_NOTIFIER: Setting fcm : $packageInfo}");
-   //   ref.read(sendFcmProvider(fcm));
-    state = packageInfo;
-   // 
-  }
-
-
+Future<PackageInfo> packageInfo(Ref ref) async {
+  return await fetchPackageInfo();
 }
-
