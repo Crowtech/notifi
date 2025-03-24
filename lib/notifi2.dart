@@ -20,6 +20,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'credentials.dart';
 import 'firebase/firebase_api.dart';
 
+part 'notifi2.g.dart';
+
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
   level: logger.Level.info,
