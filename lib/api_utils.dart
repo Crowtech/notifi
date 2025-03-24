@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/credentials.dart';
+import 'package:notifi/i18n/strings.g.dart';
 import 'package:notifi/jwt_utils.dart';
 import 'package:notifi/models/appversion.dart';
 import 'package:notifi/models/gps.dart';
@@ -347,17 +348,18 @@ Future<bool> verifyToken(String token) async {
 // }
 
 Future<Map> registerFCM(
-    Locale locale, String token, String deviceid, String fcm) async {
+    /*Locale locale, */String token, String deviceid, String fcm) async {
+  
   logNoStack.i(
       "REGISTER FCM: About to send FCM and deviceid to api $defaultAPIBaseUrl$defaultApiPrefixPath/persons/devicefcm/$deviceid/$fcm");
-  apiPost(locale, token,
+  apiPostNoLocale( token,
           "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/devicefcm/$deviceid/$fcm")
       .then((response) {
     logNoStack.i("REGISTER FCM: back from send FCM sending $deviceid");
     logNoStack.i("REGISTER FCM: result ${response.toString()}");
     return response;
   }).catchError((error) {
-    log.d("REGISTER FCM: Register FCM error");
+    log.e("REGISTER FCM: Register FCM error");
     // ignore: invalid_return_type_for_catch_error
     return Map;
   });
