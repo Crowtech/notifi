@@ -6,7 +6,7 @@ part of 'localization_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$appLocalizationsHash() => r'f2587d643ed3e654930d13c814ad57f9f2af245b';
+String _$appLocalizationsHash() => r'ee827fa82c4ba06bc253dee7341a892b6ee82bb1';
 
 /// provider used to access the AppLocalizations object for the current locale
 ///
