@@ -13,6 +13,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/jwt_utils.dart';
+import 'package:notifi/riverpod/deviceid_notifier.dart';
 import 'package:notifi/riverpod/fcm_notifier.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -103,6 +104,9 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
 
   PackageInfo packageInfo = await fetchPackageInfo();
   String deviceId = await fetchDeviceId();
+
+  ref.read(packageInfoNotifierProvider.notifier).setPackageInfo(packageInfo);
+  ref.read(deviceIdNotifierProvider.notifier).setDeviceId(deviceId);
 
   if (kIsWeb) {
     _topics = [];
