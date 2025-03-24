@@ -6,7 +6,7 @@ part of 'fcm_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$sendFcmHash() => r'1bdfb6f2561373af38810bd264fa37eee348c938';
+String _$sendFcmHash() => r'f0846f8df4e280457ce32d79a18d08126a1a94c2';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -155,7 +155,7 @@ class _SendFcmProviderElement extends ProviderElement<void> with SendFcmRef {
   String get fcm => (origin as SendFcmProvider).fcm;
 }
 
-String _$fcmNotifierHash() => r'3506619b549f51a72d27f2bbba887689363fcd49';
+String _$fcmNotifierHash() => r'8459c4fba7d5074558e0321149fd7e187a94913a';
 
 /// See also [FcmNotifier].
 @ProviderFor(FcmNotifier)
