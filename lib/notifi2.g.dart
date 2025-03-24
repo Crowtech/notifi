@@ -6,7 +6,7 @@ part of 'notifi2.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$notifi2Hash() => r'a4e3e07d319b95dc5ae16a6f365fecdf143cb554';
+String _$notifi2Hash() => r'8b6dabc7239dc70c1f96f68ebd3a7ecabbe4a06f';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -34,7 +34,7 @@ class _SystemHash {
 const notifi2Provider = Notifi2Family();
 
 /// See also [Notifi2].
-class Notifi2Family extends Family<bool> {
+class Notifi2Family extends Family<void> {
   /// See also [Notifi2].
   const Notifi2Family();
 
@@ -78,7 +78,7 @@ class Notifi2Family extends Family<bool> {
 }
 
 /// See also [Notifi2].
-class Notifi2Provider extends Provider<bool> {
+class Notifi2Provider extends Provider<void> {
   /// See also [Notifi2].
   Notifi2Provider(
     FirebaseOptions options,
@@ -122,7 +122,7 @@ class Notifi2Provider extends Provider<bool> {
 
   @override
   Override overrideWith(
-    bool Function(Notifi2Ref provider) create,
+    void Function(Notifi2Ref provider) create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -141,7 +141,7 @@ class Notifi2Provider extends Provider<bool> {
   }
 
   @override
-  ProviderElement<bool> createElement() {
+  ProviderElement<void> createElement() {
     return _Notifi2ProviderElement(this);
   }
 
@@ -166,7 +166,7 @@ class Notifi2Provider extends Provider<bool> {
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin Notifi2Ref on ProviderRef<bool> {
+mixin Notifi2Ref on ProviderRef<void> {
   /// The parameter `options` of this provider.
   FirebaseOptions get options;
 
@@ -177,7 +177,7 @@ mixin Notifi2Ref on ProviderRef<bool> {
   List<String>? get topics;
 }
 
-class _Notifi2ProviderElement extends ProviderElement<bool> with Notifi2Ref {
+class _Notifi2ProviderElement extends ProviderElement<void> with Notifi2Ref {
   _Notifi2ProviderElement(super.provider);
 
   @override

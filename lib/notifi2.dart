@@ -91,7 +91,7 @@ Future<void> setupFlutterNotifications() async {
 }
 
 @Riverpod(keepAlive: true)
-bool Notifi2(Ref ref, FirebaseOptions options, secondsToast,
+void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
     List<String>? topics) async {
   logNoStack.i("NOTIFI2: run");
   FirebaseOptions? _options;
@@ -257,7 +257,6 @@ bool Notifi2(Ref ref, FirebaseOptions options, secondsToast,
 
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-  return true;
 }
 
 // void setPreventAutoLogin(bool preventAutoLogin) {
