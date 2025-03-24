@@ -7,7 +7,7 @@ part of 'package_info_notifier.dart';
 // **************************************************************************
 
 String _$packageInfoNotifierHash() =>
-    r'acd129d4ebd7965f0491bcfc85a9cc0fee661752';
+    r'9545a2a427206b4da2d40907796847c31f786cc0';
 
 /// See also [PackageInfoNotifier].
 @ProviderFor(PackageInfoNotifier)

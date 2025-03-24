@@ -27,7 +27,7 @@ class PackageInfoNotifier extends _$PackageInfoNotifier {
     return "NOT_READY";
   }
 
-  void setDPackageInfo(String packageInfo) {
+  void setPackageInfo(String packageInfo) {
       logNoStack.i("PACKAGE_INFO_NOTIFIER: Setting fcm : $packageInfo}");
    //   ref.read(sendFcmProvider(fcm));
     state = packageInfo;

@@ -20,6 +20,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'credentials.dart';
 import 'firebase/firebase_api.dart';
+import 'riverpod/package_info_notifier.dart';
 
 part 'notifi2.g.dart';
 
