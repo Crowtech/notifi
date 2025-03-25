@@ -37,3 +37,9 @@ class DeviceIdNotifier extends _$DeviceIdNotifier {
 
 }
 
+@riverpod
+Future<String> fetchDeviceCode(Ref ref) async {
+  
+  return await fetchDeviceId();
+}
+

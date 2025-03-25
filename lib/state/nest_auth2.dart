@@ -76,7 +76,7 @@ class NestAuthController extends Notifier<bool> with ChangeNotifier {
       }
     });
 
-    logNoStack.i("NEST_AUTH_CONTROLLER : BUILD, skipLogin is ${skipLogin?'ON':'OFF'} preventLogn is ${preventAutoLogin?'ON':'OFF'}");
+    logNoStack.i("NEST_AUTH2_CONTROLLER : BUILD, skipLogin is ${skipLogin?'ON':'OFF'} preventLogn is ${preventAutoLogin?'ON':'OFF'}");
     if (skipLogin && (!preventAutoLogin)) {
        logNoStack.i("AUTH CONTROLLER BUILD: SKIP LOGIN DETECTED !");
       loginUsernamePassword(testUsername, testPassword);
@@ -107,7 +107,7 @@ class NestAuthController extends Notifier<bool> with ChangeNotifier {
   }
 
   Future<void> login() async {
-    logNoStack.i("NEST_AUTH LOGIN called.");
+    logNoStack.i("NEST_AUTH2 LOGIN called.");
 
     app_state.currentManager
         .loginAuthorizationCodeFlow(
@@ -119,20 +119,20 @@ class NestAuthController extends Notifier<bool> with ChangeNotifier {
       //NOTE: you can pass more parameters here.
     )
         .then((oidcUser) {
-      logNoStack.i("AUTH_CONTROLLER LOGIN called and RESULT provided");
+      logNoStack.i("NEST_AUTH2: AUTH_CONTROLLER LOGIN called and RESULT provided");
       if (oidcUser != null) {
         logNoStack.i(
-            "AUTH_CONTROLLER LOGIN called and RESULT provided IS NOT NULL, setting oidc ${oidcUser.userInfo['email']}");
+            "NEST_AUTH2: AUTH_CONTROLLER LOGIN called and RESULT provided IS NOT NULL, setting oidc ${oidcUser.userInfo['email']}");
         loginOidc(oidcUser);
       } else {
         logNoStack
-            .i("AUTH_CONTROLLER LOGIN called and RESULT provided IS  NULL");
+            .i("NEST_AUTH2: AUTH_CONTROLLER LOGIN called and RESULT provided IS  NULL");
       }
     });
   }
 
   Future<void> refreshPerson() async {
-    logNoStack.i("NEST_AUTH: Refreshing Person");
+    logNoStack.i("NEST_AUTH2: Refreshing Person");
     var oidcUser = await app_state.currentManager.refreshToken();
     loginOidc(oidcUser);
   }
@@ -147,15 +147,15 @@ class NestAuthController extends Notifier<bool> with ChangeNotifier {
   }
 
   Future<void> loginOidc(OidcUser? oidcUser) async {
-    logNoStack.i("NEST_AUTH: LOGIN_OIDC: START");
+    logNoStack.i("NEST_AUTH2: LOGIN_OIDC: START");
 
     if (oidcUser != null) {
       log.i(
-          "NEST_AUTH LOGIN_OIDC: In AuthControllerLogin: oidcUser is ${oidcUser.userInfo['email']} fetching user ");
+          "NEST_AUTH2 LOGIN_OIDC: In AuthControllerLogin: oidcUser is ${oidcUser.userInfo['email']} fetching user ");
 
 // Now fetch the actual user from the backend
 
-      logNoStack.i("NEST_AUTH  LOGIN_OIDC: SAbout to loginToken");
+      logNoStack.i("NEST_AUTH2  LOGIN_OIDC: SAbout to loginToken");
       token = oidcUser.token.accessToken!;
       currentUser = await registerLogin(oidcUser.token.accessToken!);
       currentUser.isSignedIn = true;
@@ -169,7 +169,7 @@ class NestAuthController extends Notifier<bool> with ChangeNotifier {
 //such as Firebase, SharedPreferences, and more.
 
   Future<void> signOut() async {
-    logNoStack.i("NEST_AUTH_CONTROLLER : SIGN_OUT");
+    logNoStack.i("NEST_AUTH2_CONTROLLER : SIGN_OUT");
     currentUser.isSignedIn = false;
 
     isLoggedIn = false;
@@ -178,13 +178,13 @@ class NestAuthController extends Notifier<bool> with ChangeNotifier {
       bg.BackgroundGeolocation.stop();
     }
 
-    logNoStack.i("NEST_AUTH LOGOUT , token is $token");
+    logNoStack.i("NEST_AUTH2 LOGOUT , token is $token");
     apiPostNoLocale(
             token!, "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/logout")
         .then((result) {
-      log.i("NEST_AUTHLOGOUT result $result");
+      log.i("NEST_AUTH2: LOGOUT result $result");
     }).catchError((error) {
-      log.e("NEST_AUTH LOGOUT  api logout error ${error.toString()}");
+      log.e("NEST_AUTH2 LOGOUT  api logout error ${error.toString()}");
     });
 
     token = null;

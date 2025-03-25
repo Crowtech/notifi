@@ -101,9 +101,8 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
   List<String> _topics = topics ?? [];
   List<CameraDescription> _cameras = <CameraDescription>[];
 
-  String deviceId = await fetchDeviceId();
 
-  ref.read(deviceIdNotifierProvider.notifier).setDeviceId(deviceId);
+  //ref.read(deviceIdNotifierProvider.notifier).setDeviceId(deviceId);
 
   if (kIsWeb) {
     _topics = [];
