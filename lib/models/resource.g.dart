@@ -24,6 +24,7 @@ Resource _$ResourceFromJson(Map<String, dynamic> json) => Resource(
       gps: json['gps'] == null
           ? null
           : GPS.fromJson(json['gps'] as Map<String, dynamic>),
+      selected: json['selected'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$ResourceToJson(Resource instance) => <String, dynamic>{

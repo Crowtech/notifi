@@ -29,7 +29,7 @@ Vehicle _$VehicleFromJson(Map<String, dynamic> json) => Vehicle(
       gps: json['gps'] == null
           ? null
           : GPS.fromJson(json['gps'] as Map<String, dynamic>),
-    );
+    )..selected = json['selected'] as bool;
 
 Map<String, dynamic> _$VehicleToJson(Vehicle instance) => <String, dynamic>{
       'orgid': instance.orgid,

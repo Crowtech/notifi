@@ -24,6 +24,7 @@ Organization _$OrganizationFromJson(Map<String, dynamic> json) => Organization(
       gps: json['gps'] == null
           ? null
           : GPS.fromJson(json['gps'] as Map<String, dynamic>),
+      selected: json['selected'] as bool? ?? false,
       orgType: json['orgType'] as String,
       url: json['url'] as String,
     );

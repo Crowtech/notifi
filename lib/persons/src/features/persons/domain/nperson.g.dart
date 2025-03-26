@@ -36,7 +36,9 @@ NPerson _$NPersonFromJson(Map<String, dynamic> json) => NPerson(
       gps: json['gps'] == null
           ? null
           : GPS.fromJson(json['gps'] as Map<String, dynamic>),
-    )..token = json['token'] as String?;
+    )
+      ..selected = json['selected'] as bool
+      ..token = json['token'] as String?;
 
 Map<String, dynamic> _$NPersonToJson(NPerson instance) => <String, dynamic>{
       'orgid': instance.orgid,

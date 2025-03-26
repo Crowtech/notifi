@@ -26,7 +26,7 @@ Location _$LocationFromJson(Map<String, dynamic> json) => Location(
       gps: json['gps'] == null
           ? null
           : GPS.fromJson(json['gps'] as Map<String, dynamic>),
-    );
+    )..selected = json['selected'] as bool;
 
 Map<String, dynamic> _$LocationToJson(Location instance) => <String, dynamic>{
       'orgid': instance.orgid,

@@ -29,7 +29,7 @@ Equipment _$EquipmentFromJson(Map<String, dynamic> json) => Equipment(
       gps: json['gps'] == null
           ? null
           : GPS.fromJson(json['gps'] as Map<String, dynamic>),
-    );
+    )..selected = json['selected'] as bool;
 
 Map<String, dynamic> _$EquipmentToJson(Equipment instance) => <String, dynamic>{
       'orgid': instance.orgid,
