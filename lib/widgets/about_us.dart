@@ -5,18 +5,21 @@ import 'package:notifi/jwt_utils.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 
-Future<void> AboutUsDialog(BuildContext context, String appTitle)  async{
+Future<void> AboutUsDialog(BuildContext context, String appTitle, Icon logo)  async{
     PackageInfo packageInfo = await fetchPackageInfo();
+    String deviceId = await fetchDeviceId();
 
     
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          icon: logo,
           title:  Text('About ${appTitle}'),
           content:  Text(
             '$appTitle\n'
-            'Version ${packageInfo.version}\n'
+            'Version\t${packageInfo.version}\n'
+            'Device\t${deviceId}\n'
             '\n'
             ' © ${defaultRealm.capitalise()} 2024,2025 and © Crowtech 2024,2025',
           ),
