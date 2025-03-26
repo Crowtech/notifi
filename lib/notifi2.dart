@@ -201,16 +201,16 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
 
   if (isIOS) {
     logNoStack.i("NOTIFI: Fetching Mobile Apple fcm token ");
-    FirebaseMessaging.instance.getAPNSToken().then((apnsToken) {
-      if (apnsToken != null) {
+   // FirebaseMessaging.instance.getAPNSToken().then((apnsToken) {
+     // if (apnsToken != null) {
         // APNS token is available, make FCM plugin API requests...
         FirebaseMessaging.instance.getToken().then((token) {
           logNoStack.i("NOTIFI: Mobile Apple fcm token is $_fcmToken");
           subscribeToTopics(_topics);
           ref.read(fcmNotifierProvider.notifier).setFcm(token!);
         });
-      }
-    });
+  //    }
+  //  });
   }
   if (isAndroid) {
     FirebaseMessaging.instance.getToken().then((token) {
