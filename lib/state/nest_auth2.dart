@@ -67,9 +67,9 @@ class NestAuthController extends Notifier<bool> with ChangeNotifier {
         token = event?.token.accessToken;
         var deviceId = await fetchDeviceId();
         if (!isLoggedIn) {
-        logNoStack.i(
-          'NEST_AUTH2: BUILD: App State User changed (login): exp:$exp, $username, $name $deviceId',
-        );
+          logNoStack.i(
+            'NEST_AUTH2: BUILD: App State User changed (login): exp:$exp, $username, $name $deviceId',
+          );
         }
 
         await loginOidc(event);
@@ -152,12 +152,11 @@ class NestAuthController extends Notifier<bool> with ChangeNotifier {
   }
 
   Future<void> loginOidc(OidcUser? oidcUser) async {
-
     if (oidcUser != null) {
-       token = oidcUser.token.accessToken!;
-             if (!isLoggedIn) {
-      log.i(
-          "NEST_AUTH2 LOGIN_OIDC: In AuthControllerLogin: oidcUser is ${oidcUser.userInfo['email']} fetching user ")
+      token = oidcUser.token.accessToken!;
+      if (!isLoggedIn) {
+        log.i(
+            "NEST_AUTH2 LOGIN_OIDC: In AuthControllerLogin: oidcUser is ${oidcUser.userInfo['email']} fetching user ");
 
         currentUser = await registerLogin(oidcUser.token.accessToken!);
         currentUser.isSignedIn = true;
