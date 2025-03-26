@@ -5,8 +5,8 @@ import 'package:notifi/organizations/src/common_widgets/top_gradient.dart';
 
 import '../../domain/norganization.dart';
 
-class OrganizationListTile extends StatelessWidget {
-  const OrganizationListTile({
+class OrganizationDropdownTile extends StatelessWidget {
+  const OrganizationDropdownTile({
     super.key,
     required this.organization,
     // debugging hint to show the tile index
@@ -17,7 +17,7 @@ class OrganizationListTile extends StatelessWidget {
   final int? debugIndex;
   final VoidCallback? onPressed;
 
-  static const posterHeight = 80.0;
+  static const posterHeight = 30.0;
 
   @override
   Widget build(BuildContext context) {
@@ -34,17 +34,7 @@ class OrganizationListTile extends StatelessWidget {
                   height: posterHeight,
                   child: NestPoster(imagePath: organization.getAvatarUrl()),
                 ),
-                // if (debugIndex != null) ...[
-                //   const Positioned.fill(child: TopGradient()),
-                //   Positioned(
-                //     left: 4,
-                //     top: 4,
-                //     child: Text(
-                //       '$debugIndex',
-                //       style: const TextStyle(color: Colors.white, fontSize: 14),
-                //     ),
-                //   ),
-                // ]
+              
               ],
             ),
           ),
@@ -55,15 +45,9 @@ class OrganizationListTile extends StatelessWidget {
               children: [
                 Text(
                   organization.name!,
-                  style: Theme.of(context).textTheme.titleMedium,
+                  style: Theme.of(context).textTheme.titleSmall,
                 ),
-                if (organization.created != null) ...[
-                  const SizedBox(height: 8),
-                  Text(
-                    'Created: ${organization.created}',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                ],
+              
               ],
             ),
           )

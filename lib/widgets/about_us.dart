@@ -21,7 +21,7 @@ Future<void> AboutUsDialog(BuildContext context, String appTitle, Widget logo)  
             'Version\t${packageInfo.version}\n'
             'Device\t${deviceId}\n'
             '\n'
-            ' © ${defaultRealm.capitalise()} 2024,2025 and © Crowtech 2024,2025',
+            ' © Crowtech 2024,2025 under license to  ${defaultRealm.capitalise()}' ,
           ),
           actions: <Widget>[
             // TextButton(
