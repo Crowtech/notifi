@@ -5,7 +5,7 @@ import 'package:notifi/jwt_utils.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 
-Future<void> AboutUsDialog(BuildContext context, String appTitle, Icon logo)  async{
+Future<void> AboutUsDialog(BuildContext context, String appTitle, Widget logo)  async{
     PackageInfo packageInfo = await fetchPackageInfo();
     String deviceId = await fetchDeviceId();
 

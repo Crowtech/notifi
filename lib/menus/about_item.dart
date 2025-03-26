@@ -17,11 +17,12 @@ var logNoStack = logger.Logger(
 );
 
 class AboutItem extends ConsumerWidget {
-  const AboutItem(this.code, this.label, this.icon, this.selectedIcon,  this.appTitle,
+  const AboutItem(this.code, this.label, this.logo, this.icon, this.selectedIcon,  this.appTitle,
       {super.key});
 
   final String code;
   final String label;
+  final Widget logo;
   final Widget icon;
   final Widget selectedIcon;
   final String appTitle;
@@ -29,7 +30,7 @@ class AboutItem extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final String selectedMenuItem = ref.watch(menuIndexProvider) as String;
+   // final String selectedMenuItem = ref.watch(menuIndexProvider) as String;
 
     // switch (selectedMenuItem) {
     //   case "TEST":
@@ -56,7 +57,7 @@ class AboutItem extends ConsumerWidget {
       ),
       onTap: () {
         context.pop();
-       AboutUsDialog(context,appTitle);
+       AboutUsDialog(context,appTitle,logo);
         // showAboutDialog(
         //   context: context,
         //   applicationName: defaultRealm.capitalise(),
