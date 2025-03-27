@@ -121,7 +121,7 @@ void initNotifi(BuildContext context, String token, String topic) async {
 
 Future<PackageInfo> fetchPackageInfo() async {
   var info = await PackageInfo.fromPlatform();
-  logNoStack.d("NOTIFI PACKAGE INFO is $info");
+  logNoStack.d("NOTIFI2 PACKAGE INFO is $info");
 
   return info;
 }

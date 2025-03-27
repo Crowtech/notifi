@@ -132,7 +132,7 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
   WidgetsFlutterBinding.ensureInitialized();
 
   logNoStack
-      .i("NOTIFI: Camera setting is ${enableCamera ? "ENABLED" : "DISABLED"}");
+      .i("NOTIFI2: Camera setting is ${enableCamera ? "ENABLED" : "DISABLED"}");
   if (enableCamera) {
     initialiseCamera(_cameras);
   }
@@ -165,22 +165,22 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
   );
 
   if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-    logNoStack.i('NOTIFI: User granted notifications permission');
+    logNoStack.i('NOTIFI2: User granted notifications permission');
   } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
-    logNoStack.i('NOTIFI: User granted provisional messaging permission');
+    logNoStack.i('NOTIFI2: User granted provisional messaging permission');
   } else {
     logNoStack
-        .i('NOTIFI: User declined or has not accepted messaging permission');
+        .i('NOTIFI2: User declined or has not accepted messaging permission');
   }
   logNoStack
-      .i('NOTIFI: User granted permission: ${settings.authorizationStatus}');
+      .i('NOTIFI2: User granted permission: ${settings.authorizationStatus}');
 
   FirebaseMessaging.instance.onTokenRefresh.listen((token) async {
     // TODO: If necessary send token to application server.
 
     // Note: This callback is fired at each app startup and whenever a new
     // token is generated.
-    logNoStack.i("NOTIFI: Refresh Notifi FCM TOKEN = $token");
+    logNoStack.i("NOTIFI2: Refresh Notifi FCM TOKEN = $token");
     ref.read(fcmNotifierProvider.notifier).setFcm(token);
   }).onError((err) {
     // Error getting token.
@@ -192,20 +192,20 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
     logNoStack.i("Got to here: WEB not detected");
   }
   if (kIsWeb) {
-    logNoStack.i("NOTIFI: vapidKey is $vapidKey");
+    logNoStack.i("NOTIFI2: vapidKey is $vapidKey");
     FirebaseMessaging.instance.getToken(vapidKey: vapidKey).then((token) {
-      logNoStack.i("NOTIFI: Web fcm token is $token");
+      logNoStack.i("NOTIFI2: Web fcm token is $token");
       ref.read(fcmNotifierProvider.notifier).setFcm(token!);
     });
   }
 
   if (isIOS) {
-    logNoStack.i("NOTIFI: Fetching Mobile Apple fcm token ");
+    logNoStack.i("NOTIFI2: Fetching Mobile Apple fcm token ");
    // FirebaseMessaging.instance.getAPNSToken().then((apnsToken) {
      // if (apnsToken != null) {
         // APNS token is available, make FCM plugin API requests...
         FirebaseMessaging.instance.getToken().then((token) {
-          logNoStack.i("NOTIFI: Mobile Apple fcm token is $_fcmToken");
+          logNoStack.i("NOTIFI2: Mobile Apple fcm token is $_fcmToken");
           subscribeToTopics(_topics);
           ref.read(fcmNotifierProvider.notifier).setFcm(token!);
         });
@@ -216,20 +216,20 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
     FirebaseMessaging.instance.getToken().then((token) {
       _fcmToken = token;
       String fcm = token!;
-      logNoStack.d("NOTIFI: Mobile Android fcm token is $_fcmToken");
+      logNoStack.d("NOTIFI2: Mobile Android fcm token is $_fcmToken");
       subscribeToTopics(_topics);
       ref.read(fcmNotifierProvider.notifier).setFcm(fcm);
     });
   }
 
-  logNoStack.d("NOTIFI: Got to here before setup Flutter Notifications");
+  logNoStack.d("NOTIFI2: Got to here before setup Flutter Notifications");
   await setupFlutterNotifications();
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     final notification = message.notification;
     if (notification == null) return;
 
     logNoStack.i(
-        "NOTIFI: INCOMING NOTIFICATION:!nTITLE: ${notification.title}\nBODY: ${notification.body}");
+        "NOTIFI2: INCOMING NOTIFICATION:!nTITLE: ${notification.title}\nBODY: ${notification.body}");
     flutterLocalNotificationsPlugin.show(
       notification.hashCode,
       notification.title,
@@ -243,7 +243,7 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
       payload: jsonEncode(message.toMap()),
     );
     logNoStack
-        .i("NOTIFI: INCOMING NOTIFICATION: AFter flutterLocalnotifixaiotn");
+        .i("NOTIFI2: INCOMING NOTIFICATION: AFter flutterLocalnotifixaiotn");
     Fluttertoast.showToast(
         msg: "${notification.title!}::${notification.body!}",
         toastLength: Toast.LENGTH_SHORT,
@@ -252,7 +252,7 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
         backgroundColor: Colors.red,
         textColor: Colors.white,
         fontSize: 16.0);
-    logNoStack.i("NOTIFI: INCOMING NOTIFICATION: AFter toast");
+    logNoStack.i("NOTIFI2: INCOMING NOTIFICATION: AFter toast");
   });
 
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
@@ -283,19 +283,19 @@ void initialiseCamera(List<CameraDescription> cameras) async {
 void subscribeToTopics(List<String> topics) {
   if (enableNotifications) {
     if (!kIsWeb) {
-      logNoStack.i("NOTIFI: Subscribing to topics");
+      logNoStack.i("NOTIFI2: Subscribing to topics");
 
       for (final topic in topics) {
         try {
           FirebaseMessaging.instance.subscribeToTopic(topic).then((_) {
-            logNoStack.i("NOTIFI: Subscribed to topic: $topic");
+            logNoStack.i("NOTIFI2: Subscribed to topic: $topic");
           });
         } on Exception catch (_) {
-          log.e("NOTIFI: Firebase error");
+          log.e("NOTIFI2: Firebase error");
         }
       }
     } else {
-      logNoStack.i("NOTIFI: Not subscribing to topics");
+      logNoStack.i("NOTIFI2: Not subscribing to topics");
     }
   }
 }
