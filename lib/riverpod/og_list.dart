@@ -24,7 +24,7 @@ var logNoStack = logger.Logger(
 );
 
 @riverpod
-Future<List<Organization>> og_list(Ref ref) async {
+Future<List<Organization>> ogList(Ref ref) async {
   NestFilter nestFilter = NestFilter();
 
   nestFilter.offset = 0;
