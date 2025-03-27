@@ -29,7 +29,7 @@ var logNoStack = logger.Logger(
 );
 
 /// Metadata used when fetching organizations with the paginated search API.
-typedef NestQueryData = ({String query, int page});
+//typedef NestQueryData = ({String query, int page});
 
 class OrganizationsRepositoryNestFilter {
   const OrganizationsRepositoryNestFilter(
