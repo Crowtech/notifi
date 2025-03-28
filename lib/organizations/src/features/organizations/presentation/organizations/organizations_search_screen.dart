@@ -38,9 +38,12 @@ class OrganizationsSearchScreen extends ConsumerWidget {
     final query = ref.watch(organizationsSearchQueryNotifierProvider);
     // * get the first page so we can retrieve the total number of results
     NestFilter nestFilter = NestFilter();
-    final responseAsync = ref.watch(
-      fetchOrganizationsNestFilterProvider(nestFilter: nestFilter),
+        final responseAsync = ref.watch(
+      fetchOrganizationsNestFilterProvider,
     );
+    // final responseAsync = ref.watch(
+    //   fetchOrganizationsNestFilterProvider(nestFilter: nestFilter),
+    // );
     final totalResults = responseAsync.valueOrNull?.totalResults;
     return Scaffold(
       appBar: AppBar(title:  Text(nt.t.resources.organization)),
@@ -54,10 +57,14 @@ class OrganizationsSearchScreen extends ConsumerWidget {
                 ref.invalidate(fetchOrganizationsNestFilterProvider);
                 // keep showing the progress indicator until the first page is fetched
                 try {
-                  await ref.read(
-                    fetchOrganizationsNestFilterProvider(nestFilter: nestFilter)
+                    await ref.read(
+                    fetchOrganizationsNestFilterProvider
                         .future,
                   );
+                  // await ref.read(
+                  //   fetchOrganizationsNestFilterProvider(nestFilter: nestFilter)
+                  //       .future,
+                  // );
                 } catch (e) {
                   // fail silently as the provider error state is handled inside the ListView
                 }
@@ -77,9 +84,12 @@ class OrganizationsSearchScreen extends ConsumerWidget {
                   // Note that ref.watch is called for up to pageSize items
                   // with the same page and query arguments (but this is ok since data is cached)
                   NestFilter nestFilter = NestFilter(offset: page, query: ";name:$query;");
-                  final responseAsync = ref.watch(
-                    fetchOrganizationsNestFilterProvider(nestFilter: nestFilter),
+                    final responseAsync = ref.watch(
+                    fetchOrganizationsNestFilterProvider,
                   );
+                  // final responseAsync = ref.watch(
+                  //   fetchOrganizationsNestFilterProvider(nestFilter: nestFilter),
+                  // );
                   return responseAsync.when(
                     error: (err, stack) => OrganizationListTileError(
                       query: query,
@@ -148,13 +158,17 @@ class OrganizationListTileError extends ConsumerWidget {
                       : () {
                           // invalidate the provider for the errored page
                           NestFilter nestFilter = NestFilter(offset: page, query: ";name:$query;");
-                          ref.invalidate(fetchOrganizationsNestFilterProvider(
-                              nestFilter: nestFilter));
+                            ref.invalidate(fetchOrganizationsNestFilterProvider);
+                          // ref.invalidate(fetchOrganizationsNestFilterProvider(
+                          //     nestFilter: nestFilter));
                           // wait until the page is loaded again
-                          return ref.read(
-                            fetchOrganizationsNestFilterProvider(
-                                nestFilter: nestFilter).future,
+                            return ref.read(
+                            fetchOrganizationsNestFilterProvider.future,
                           );
+                          // return ref.read(
+                          //   fetchOrganizationsNestFilterProvider(
+                          //       nestFilter: nestFilter).future,
+                          // );
                         },
                   child: const Text('Retry'),
                 ),
