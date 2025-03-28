@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notifi/models/organization.dart';
+import 'package:notifi/organizations/src/features/organizations/data/organizations_repository_nf.dart';
 
 import '../../data/organizations_repository.dart';
 
@@ -28,7 +29,7 @@ class OrganizationDetailsScreen extends ConsumerWidget {
         ),
       );
     } else {
-      final organizationAsync = ref.watch(organizationProvider(organizationId: organizationId));
+      final organizationAsync = ref.watch(organization2Provider(organizationId: organizationId));
       return organizationAsync.when(
         error: (e, st) => Scaffold(
           appBar: AppBar(

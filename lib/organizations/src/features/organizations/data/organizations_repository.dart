@@ -15,7 +15,6 @@ import 'package:logger/logger.dart' as logger;
 
 import '../domain/organization_response.dart';
 
-part 'organizations_repository.g.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),

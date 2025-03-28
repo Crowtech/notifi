@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
+import 'package:notifi/models/nestfilter.dart';
+import 'package:notifi/organizations/src/features/organizations/data/organizations_repository_nf.dart';
 
 import '../../data/organizations_repository.dart';
 import 'organization_list_tile.dart';
@@ -35,8 +37,9 @@ class OrganizationsSearchScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final query = ref.watch(organizationsSearchQueryNotifierProvider);
     // * get the first page so we can retrieve the total number of results
+    NestFilter nestFilter = NestFilter();
     final responseAsync = ref.watch(
-      fetchOrganizationsProvider(queryData: (page: 1, query: query)),
+      fetchOrganizationsNestFilterProvider(nestFilter: nestFilter),
     );
     final totalResults = responseAsync.valueOrNull?.totalResults;
     return Scaffold(
@@ -48,11 +51,11 @@ class OrganizationsSearchScreen extends ConsumerWidget {
             child: RefreshIndicator(
               onRefresh: () async {
                 // dispose all the pages previously fetched. Next read will refresh them
-                ref.invalidate(fetchOrganizationsProvider);
+                ref.invalidate(fetchOrganizationsNestFilterProvider);
                 // keep showing the progress indicator until the first page is fetched
                 try {
                   await ref.read(
-                    fetchOrganizationsProvider(queryData: (page: 1, query: query))
+                    fetchOrganizationsNestFilterProvider(nestFilter: nestFilter)
                         .future,
                   );
                 } catch (e) {
@@ -73,8 +76,9 @@ class OrganizationsSearchScreen extends ConsumerWidget {
                   // as soon as the index exceeds the page size
                   // Note that ref.watch is called for up to pageSize items
                   // with the same page and query arguments (but this is ok since data is cached)
+                  NestFilter nestFilter = NestFilter(offset: page, query: ";name:$query;");
                   final responseAsync = ref.watch(
-                    fetchOrganizationsProvider(queryData: (page: page, query: query)),
+                    fetchOrganizationsNestFilterProvider(nestFilter: nestFilter),
                   );
                   return responseAsync.when(
                     error: (err, stack) => OrganizationListTileError(
@@ -143,12 +147,13 @@ class OrganizationListTileError extends ConsumerWidget {
                       ? null
                       : () {
                           // invalidate the provider for the errored page
-                          ref.invalidate(fetchOrganizationsProvider(
-                              queryData: (page: page, query: query)));
+                          NestFilter nestFilter = NestFilter(offset: page, query: ";name:$query;");
+                          ref.invalidate(fetchOrganizationsNestFilterProvider(
+                              nestFilter: nestFilter));
                           // wait until the page is loaded again
                           return ref.read(
-                            fetchOrganizationsProvider(
-                                queryData: (page: page, query: query)).future,
+                            fetchOrganizationsNestFilterProvider(
+                                nestFilter: nestFilter).future,
                           );
                         },
                   child: const Text('Retry'),
