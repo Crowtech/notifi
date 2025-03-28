@@ -66,7 +66,10 @@ class OrganizationsRepositoryNestFilter {
   }
 
   Future<OrganizationsResponse> allOrganizations(
-      {required NestFilter nestFilter, CancelToken? cancelToken}) async {
+      {
+       // required NestFilter nestFilter, 
+      CancelToken? cancelToken}) async {
+           NestFilter nestFilter = NestFilter(offset:0,limit:1000,includeGPS: false);
     var data = jsonEncode(nestFilter);
     logNoStack.i(
         "ORGANIZATIONS_REPOSITORY_NF: all Orgs currentUserId=${currentUser.id} token=${token.substring(0, 10)} $nestFilter");
@@ -99,7 +102,7 @@ class OrganizationsRepositoryNestFilter {
         .d("ORGANIZATIONS_REPOSITORY_NF: all Orgs back from api, responseData=${response.data}");
 
     OrganizationsResponse or = OrganizationsResponse.fromJson(response.data);
-    logNoStack.i("ORGANIZATIONS_REPOSITORY_NF: all Orgs back from api ${or.results}");
+    logNoStack.i("ORGANIZATIONS_REPOSITORY_NF: all Orgs back from api \n${or.results}");
     return or;
   }
 
@@ -152,9 +155,11 @@ Future<Organization> organization2(
 /// Provider to fetch paginated organizations data
 @riverpod
 Future<OrganizationsResponse> fetchOrganizationsNestFilter(
-  FetchOrganizationsNestFilterRef ref, {
-  required NestFilter nestFilter,
-}) async {
+  FetchOrganizationsNestFilterRef ref, 
+ // {
+ // required NestFilter nestFilter,
+//}
+) async {
    //final organizationsRepo = ref.read(organizationsRepositoryNestFilterProvider);
   final organizationsRepo = ref.watch(organizationsRepositoryNestFilterProvider);
   // See this for how the timeout is implemented:
@@ -186,9 +191,10 @@ Future<OrganizationsResponse> fetchOrganizationsNestFilter(
   });
   //if (nestFilter.query.isEmpty) {
     // use non-search endpoint
-    logNoStack.i("FETCH_ORG_NF: about to call allOrgs nf=$nestFilter");
+    //logNoStack.i("FETCH_ORG_NF: about to call allOrgs nf=$nestFilter");
+     logNoStack.i("FETCH_ORG_NF: about to call allOrgs ");
     return organizationsRepo.allOrganizations(
-      nestFilter: nestFilter,
+     // nestFilter: nestFilter,
       cancelToken: cancelToken,
     );
   // } else {

@@ -54,7 +54,7 @@ class Organization extends Resource {
 
   @override
   String toString() {
-    return "Organization=>${super.toString()} $orgType $url ";
+    return "Organization=>${super.toString()} $orgType $url \n";
   }
 
   String toShortString() {
