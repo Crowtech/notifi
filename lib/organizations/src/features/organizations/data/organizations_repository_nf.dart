@@ -68,8 +68,7 @@ class OrganizationsRepositoryNestFilter {
   }
 
   Future<OrganizationsResponse> allOrganizations(
-      {required int page, CancelToken? cancelToken}) async {
-    NestFilter nf = NestFilter(offset: 0,limit: 10000);
+      {required NestFilter nf, CancelToken? cancelToken}) async {
     nf.includeGPS = false;
     var data = jsonEncode(nf);
     logNoStack.i(
@@ -190,7 +189,7 @@ Future<OrganizationsResponse> fetchOrganizationsNestFilter(
   //if (nestFilter.query.isEmpty) {
     // use non-search endpoint
     return organizationsRepo.allOrganizations(
-      page: nestFilter.offset,
+      nestFilter: nestFilter,
       cancelToken: cancelToken,
     );
   // } else {
