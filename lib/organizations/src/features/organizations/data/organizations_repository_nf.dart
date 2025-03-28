@@ -70,9 +70,9 @@ class OrganizationsRepositoryNestFilter {
     var data = jsonEncode(nestFilter);
     logNoStack.i(
         "ORGANIZATIONS_REPOSITORY_NF: all Orgs currentUserId=${currentUser.id} token=${token.substring(0, 10)} $nestFilter");
-    logNoStack.i("ORGANIZATIONS_REPOSITORY_NF: all Orgs: scheme:${defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf(":"))}");
-    logNoStack.i("ORGANIZATIONS_REPOSITORY_NF: all Orgs: host:${defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf(":")+3)}");
-logNoStack.i("ORGANIZATIONS_REPOSITORY_NF: all Orgs: path:${defaultApiPrefixPath}/resources/sources/${currentUser.id}}");
+//     logNoStack.i("ORGANIZATIONS_REPOSITORY_NF: all Orgs: scheme:${defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf(":"))}");
+//     logNoStack.i("ORGANIZATIONS_REPOSITORY_NF: all Orgs: host:${defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf(":")+3)}");
+// logNoStack.i("ORGANIZATIONS_REPOSITORY_NF: all Orgs: path:${defaultApiPrefixPath}/resources/sources/${currentUser.id}}");
 
     final uri = Uri(
       scheme: defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf(":")),
@@ -155,8 +155,8 @@ Future<OrganizationsResponse> fetchOrganizationsNestFilter(
   FetchOrganizationsNestFilterRef ref, {
   required NestFilter nestFilter,
 }) async {
-   final organizationsRepo = ref.read(organizationsRepositoryNestFilterProvider);
-  //final organizationsRepo = ref.watch(organizationsRepositoryNestFilterProvider);
+   //final organizationsRepo = ref.read(organizationsRepositoryNestFilterProvider);
+  final organizationsRepo = ref.watch(organizationsRepositoryNestFilterProvider);
   // See this for how the timeout is implemented:
   // https://codewithandrea.com/articles/flutter-riverpod-data-caching-providers-lifecycle/#caching-with-timeout
   // Cancel the page request if the UI no longer needs it.
