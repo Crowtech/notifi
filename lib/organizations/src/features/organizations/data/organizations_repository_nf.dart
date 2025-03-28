@@ -63,7 +63,7 @@ class OrganizationsRepositoryNestFilter {
 
     final response = await client.postUri(uri,
         options: options, data: data, cancelToken: cancelToken);
-
+    logNoStack.i("ORGANIZATIONS_REPOSITORY_NF: response ${response.data}");
     return OrganizationsResponse.fromJson(response.data);
   }
 
