@@ -68,11 +68,11 @@ class OrganizationsRepositoryNestFilter {
   }
 
   Future<OrganizationsResponse> allOrganizations(
-      {required NestFilter nf, CancelToken? cancelToken}) async {
-    nf.includeGPS = false;
-    var data = jsonEncode(nf);
+      {required NestFilter nestFilter, CancelToken? cancelToken}) async {
+    nestFilter.includeGPS = false;
+    var data = jsonEncode(nestFilter);
     logNoStack.i(
-        "ORGANIZATIONS_REPOSITORY_NF: all Orgs currentUserId=${currentUser.id} token=${token.substring(0, 10)} $nf");
+        "ORGANIZATIONS_REPOSITORY_NF: all Orgs currentUserId=${currentUser.id} token=${token.substring(0, 10)} $nestFilter");
     logNoStack.i("ORGANIZATIONS_REPOSITORY_NF: all Orgs: scheme:${defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf(":"))}");
     logNoStack.i("ORGANIZATIONS_REPOSITORY_NF: all Orgs: host:${defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf(":")+3)}");
 logNoStack.i("ORGANIZATIONS_REPOSITORY_NF: all Orgs: path:${defaultApiPrefixPath}/resources/sources/${currentUser.id}}");
