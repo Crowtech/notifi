@@ -2,10 +2,12 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:notifi/credentials.dart';
+import 'package:notifi/models/nest_filter_type.dart';
 import 'package:notifi/models/nestfilter.dart';
 import 'package:notifi/models/organization.dart';
 import 'package:notifi/models/person.dart';
 import 'package:notifi/persons/src/utils/cancel_token_ref.dart';
+import 'package:notifi/riverpod/nest_filter_provider.dart';
 import 'package:notifi/state/nest_auth2.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -32,10 +34,11 @@ var logNoStack = logger.Logger(
 
 class OrganizationsRepositoryNestFilter {
   const OrganizationsRepositoryNestFilter(
-      {required this.client, required this.token, required this.currentUser});
+      {required this.client, required this.token, required this.currentUser, required this.nestFilter});
   final Dio client;
   final String token;
   final Person currentUser;
+  final NestFilter nestFilter;
 
   Future<OrganizationsResponse> searchOrganizations(
       {required NestFilter nestFilter, CancelToken? cancelToken}) async {
@@ -136,6 +139,7 @@ OrganizationsRepositoryNestFilter organizationsRepositoryNestFilter(Organization
       client: ref.watch(dioProvider),
       token: ref.read(nestAuthProvider.notifier).token!,
       currentUser: ref.read(nestAuthProvider.notifier).currentUser,
+      nestFilter: ref.watch(AdamNestFilterProvider(NestFilterType.organizations)),
     );
 
 class AbortedException implements Exception {}
