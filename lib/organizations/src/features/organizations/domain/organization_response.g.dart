@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'norganization_response.dart';
+part of 'organization_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

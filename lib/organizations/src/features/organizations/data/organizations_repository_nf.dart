@@ -13,8 +13,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:notifi/organizations/src/utils/dio_provider.dart';
 import 'package:logger/logger.dart' as logger;
 
-import '../domain/norganization.dart';
-import '../domain/norganization_response.dart';
+import '../domain/organization.dart';
+import '../domain/organization_response.dart';
 
 part 'organizations_repository_nf.g.dart';
 
@@ -41,7 +41,6 @@ class OrganizationsRepositoryNestFilter {
   Future<OrganizationsResponse> searchOrganizations(
       {required NestFilter nestFilter, CancelToken? cancelToken}) async {
   
-    nestFilter.includeGPS = false;
     var data = jsonEncode(nestFilter);
     logNoStack.i(
         "ORGANIZATIONS_REPOSITORY_NF: search currentUserId=${currentUser.id} token=${token.substring(0, 10)} nestfilter=$nestFilter");
@@ -69,7 +68,6 @@ class OrganizationsRepositoryNestFilter {
 
   Future<OrganizationsResponse> allOrganizations(
       {required NestFilter nestFilter, CancelToken? cancelToken}) async {
-    nestFilter.includeGPS = false;
     var data = jsonEncode(nestFilter);
     logNoStack.i(
         "ORGANIZATIONS_REPOSITORY_NF: all Orgs currentUserId=${currentUser.id} token=${token.substring(0, 10)} $nestFilter");
