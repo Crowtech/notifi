@@ -73,10 +73,10 @@ class OrganizationsRepositoryNestFilter {
     nf.includeGPS = false;
     var data = jsonEncode(nf);
     logNoStack.i(
-        "ORGANIZATIONS_REPOSITORY_NF: now Playing currentUserId=${currentUser.id} token=${token.substring(0, 10)} $nf");
-    logNoStack.i("ORGANIZATIONS_REPOSITORY_NF: nowPlayingOrgs: scheme:${defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf(":"))}");
-    logNoStack.i("ORGANIZATIONS_REPOSITORY_NF: nowPlayingOrgs: host:${defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf(":")+3)}");
-logNoStack.i("ORGANIZATIONS_REPOSITORY_NF: nowPlayingOrgs: path:${defaultApiPrefixPath}/resources/sources/${currentUser.id}}");
+        "ORGANIZATIONS_REPOSITORY_NF: all Orgs currentUserId=${currentUser.id} token=${token.substring(0, 10)} $nf");
+    logNoStack.i("ORGANIZATIONS_REPOSITORY_NF: all Orgs: scheme:${defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf(":"))}");
+    logNoStack.i("ORGANIZATIONS_REPOSITORY_NF: all Orgs: host:${defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf(":")+3)}");
+logNoStack.i("ORGANIZATIONS_REPOSITORY_NF: all Orgs: path:${defaultApiPrefixPath}/resources/sources/${currentUser.id}}");
 
     final uri = Uri(
       scheme: defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf(":")),
@@ -95,12 +95,12 @@ logNoStack.i("ORGANIZATIONS_REPOSITORY_NF: nowPlayingOrgs: path:${defaultApiPref
       "Authorization": 'Bearer $token'
     });
 
-    logNoStack.i("ORGANIZATIONS_REPOSITORY_NF: all Orgs uri=${uri.toString()}");
+    logNoStack.i("ORGANIZATIONS_REPOSITORY_NF: all Orgs uri=${uri.toString()} about to call api");
     final response = await client.postUri(uri,
         options: options, data: data, cancelToken: cancelToken);
 
     logNoStack
-        .i("ORGANIZATIONS_REPOSITORY_NF: all Orgs , responseData=${response.data}");
+        .i("ORGANIZATIONS_REPOSITORY_NF: all Orgs back from api, responseData=${response.data}");
     return OrganizationsResponse.fromJson(response.data);
   }
 
