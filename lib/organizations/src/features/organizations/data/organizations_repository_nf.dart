@@ -101,7 +101,10 @@ logNoStack.i("ORGANIZATIONS_REPOSITORY_NF: all Orgs: path:${defaultApiPrefixPath
 
     logNoStack
         .i("ORGANIZATIONS_REPOSITORY_NF: all Orgs back from api, responseData=${response.data}");
-    return OrganizationsResponse.fromJson(response.data);
+
+    OrganizationsResponse or = OrganizationsResponse.fromJson(response.data);
+    logNoStack.i("ORGANIZATIONS_REPOSITORY_NF: all Orgs back from api ${or.results}");
+    return or;
   }
 
   Future<Organization> organization(
@@ -184,17 +187,17 @@ Future<OrganizationsResponse> fetchOrganizationsNestFilter(
   ref.onResume(() {
     timer?.cancel();
   });
-  if (nestFilter.query.isEmpty) {
+  //if (nestFilter.query.isEmpty) {
     // use non-search endpoint
     return organizationsRepo.allOrganizations(
       page: nestFilter.offset,
       cancelToken: cancelToken,
     );
-  } else {
-    // use search endpoint
-    return organizationsRepo.searchOrganizations(
-      nestFilter: nestFilter,
-      cancelToken: cancelToken,
-    );
-  }
+  // } else {
+  //   // use search endpoint
+  //   return organizationsRepo.searchOrganizations(
+  //     nestFilter: nestFilter,
+  //     cancelToken: cancelToken,
+  //   );
+  // }
 }

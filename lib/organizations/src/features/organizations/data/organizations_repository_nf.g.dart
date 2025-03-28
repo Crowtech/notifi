@@ -192,7 +192,7 @@ class _Organization2ProviderElement
 }
 
 String _$fetchOrganizationsNestFilterHash() =>
-    r'a682286cf73d845f747d9aec000d9c28bf951022';
+    r'0fbf07df2b1953581aef2ac1d3506c809dd84792';
 
 /// Provider to fetch paginated organizations data
 ///
