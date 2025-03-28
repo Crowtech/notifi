@@ -96,7 +96,7 @@ class OrganizationsRepositoryNestFilter {
         options: options, data: data, cancelToken: cancelToken);
 
     logNoStack
-        .i("ORGANIZATIONS_REPOSITORY_NF: all Orgs back from api, responseData=${response.data}");
+        .d("ORGANIZATIONS_REPOSITORY_NF: all Orgs back from api, responseData=${response.data}");
 
     OrganizationsResponse or = OrganizationsResponse.fromJson(response.data);
     logNoStack.i("ORGANIZATIONS_REPOSITORY_NF: all Orgs back from api ${or.results}");
@@ -186,6 +186,7 @@ Future<OrganizationsResponse> fetchOrganizationsNestFilter(
   });
   //if (nestFilter.query.isEmpty) {
     // use non-search endpoint
+    logNoStack.i("FETCH_ORG_NF: about to call allOrgs nf=$nestFilter");
     return organizationsRepo.allOrganizations(
       nestFilter: nestFilter,
       cancelToken: cancelToken,
