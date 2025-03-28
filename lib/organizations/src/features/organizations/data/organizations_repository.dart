@@ -13,7 +13,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:notifi/organizations/src/utils/dio_provider.dart';
 import 'package:logger/logger.dart' as logger;
 
-import '../domain/organization.dart';
 import '../domain/organization_response.dart';
 
 part 'organizations_repository.g.dart';

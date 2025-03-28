@@ -2,7 +2,6 @@ library core;
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:notifi/models/organization.dart';
-import 'norganization.dart';
 
 part 'organization_response.freezed.dart';
 part 'organization_response.g.dart';
