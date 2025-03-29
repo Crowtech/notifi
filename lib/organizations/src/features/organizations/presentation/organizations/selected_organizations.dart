@@ -44,6 +44,7 @@ class SelectedOrganizations extends _$SelectedOrganizations {
     } else {
       removeOrg(organization);
     }
+
   }
 
   List<int> getIdList() {
@@ -56,6 +57,28 @@ class SelectedOrganizations extends _$SelectedOrganizations {
         orgIntList.add(org.id!);
       }
     }
+    return orgIntList;
+  }
+}
+
+
+@Riverpod(keepAlive: true)
+class SelectedOrganizationIds extends _$SelectedOrganizationIds {
+  @override
+  List<int> build() {
+    logNoStack.i("SELECTED ORG IDS BUILD");
+    return getIdList();
+  }
+
+ 
+  List<int> getIdList() {
+    List<int> orgIntList = [];
+
+    List<Organization> orgs = ref.watch(selectedOrganizationsProvider);
+      for (Organization org in orgs) {
+        orgIntList.add(org.id!);
+      }
+  
     return orgIntList;
   }
 }

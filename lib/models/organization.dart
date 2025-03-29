@@ -54,7 +54,7 @@ class Organization extends Resource {
 
   @override
   String toString() {
-    return "Organization=>${super.toString()} $orgType $url \n";
+    return "Organization=>${super.toString()} $orgType $url";
   }
 
   String toShortString() {
@@ -131,4 +131,5 @@ Organization defaultOrganization = Organization(
   gps: defaultGPS,
   orgType: "group",
   url: "https://www.crowtech.com.au",
+  selected: false,
 ); //fcm

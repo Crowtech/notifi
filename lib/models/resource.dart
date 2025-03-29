@@ -58,7 +58,7 @@ class Resource extends CrowtechObject implements PagingDataItem {
 
   @override
   String toString() {
-    return "Resource=>${super.toString()} $description, $location, $devicecode $gps";
+    return "Resource=>${super.toString()} $description, $location, $devicecode $gps $selected";
   }
 
   String getAvatarUrl() {
