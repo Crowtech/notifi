@@ -4,8 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/widgets/about_us.dart';
 
-import 'menu_selection.dart';
-
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
   level: logger.Level.info,

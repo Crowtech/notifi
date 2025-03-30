@@ -47,6 +47,8 @@ class TranslationsZh extends Translations {
 	@override String authored_by({required Object name}) => '作者 ${name}';
 	@override String get auto => '自动的';
 	@override String get billing => '计费';
+	@override String get camera_1 => '相机 1';
+	@override String get camera_2 => '相机 2';
 	@override String get camera_title => '相机';
 	@override String get camera_access_denied_without_prompt => '请前往“设置”应用启用相机访问权限';
 	@override String get camera_access_restricted => '相机访问受到限制';
@@ -73,6 +75,7 @@ class TranslationsZh extends Translations {
 	@override String get location_permission_permanent_denied => '位置权限被永久拒绝，我们无法请求权限。';
 	@override String get locked => '已锁定';
 	@override String get movement_status => '是移動的嗎';
+	@override String get next => '下一个';
 	@override String get none => '没有任何';
 	@override String get highlight_title => '生成上下文感知的翻译';
 	@override String get highlight_description => '使用 GPT 生成上下文感知的翻译';
@@ -98,6 +101,7 @@ class TranslationsZh extends Translations {
 	@override String get resetting_focus_point => '重置焦点';
 	@override late final _TranslationsSearchZh search = _TranslationsSearchZh._(_root);
 	@override String get settings => '设置';
+	@override String get skip => '跳过';
 	@override String get splash_text => '启动画面';
 	@override String get still => '固定的';
 	@override String get terms_and_conditions => '条款和条件';
@@ -272,6 +276,8 @@ extension on TranslationsZh {
 			case 'authored_by': return ({required Object name}) => '作者 ${name}';
 			case 'auto': return '自动的';
 			case 'billing': return '计费';
+			case 'camera_1': return '相机 1';
+			case 'camera_2': return '相机 2';
 			case 'camera_title': return '相机';
 			case 'camera_access_denied_without_prompt': return '请前往“设置”应用启用相机访问权限';
 			case 'camera_access_restricted': return '相机访问受到限制';
@@ -298,6 +304,7 @@ extension on TranslationsZh {
 			case 'location_permission_permanent_denied': return '位置权限被永久拒绝，我们无法请求权限。';
 			case 'locked': return '已锁定';
 			case 'movement_status': return '是移動的嗎';
+			case 'next': return '下一个';
 			case 'none': return '没有任何';
 			case 'highlight_title': return '生成上下文感知的翻译';
 			case 'highlight_description': return '使用 GPT 生成上下文感知的翻译';
@@ -355,6 +362,7 @@ extension on TranslationsZh {
 			case 'search.unknown': return '按名称搜索...';
 			case 'search.vehicle': return '按车辆名称或代码搜索...';
 			case 'settings': return '设置';
+			case 'skip': return '跳过';
 			case 'splash_text': return '启动画面';
 			case 'still': return '固定的';
 			case 'terms_and_conditions': return '条款和条件';

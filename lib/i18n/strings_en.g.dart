@@ -49,6 +49,8 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String authored_by({required Object name}) => 'by ${name}';
 	String get auto => 'Auto';
 	String get billing => 'Billing';
+	String get camera_1 => 'Camera 1';
+	String get camera_2 => 'Camera 2';
 	String get camera_title => 'Camera';
 	String get camera_access_denied_without_prompt => 'Please go to Settings app to enable camera access.';
 	String get camera_access_restricted => 'Camera access is restricted';
@@ -77,6 +79,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get map => 'Map';
 	String get members => 'Members';
 	String get movement_status => 'Is Moving?';
+	String get next => 'Next';
 	String get none => 'None';
 	String get highlight_title => 'Generate Context-Aware Translations';
 	String get highlight_description => 'Generate context-aware aware translatinons with GPT';
@@ -100,6 +103,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get resetting_focus_point => 'Resetting focus point';
 	late final TranslationsSearchEn search = TranslationsSearchEn.internal(_root);
 	String get settings => 'Settings';
+	String get skip => 'Skip';
 	String get splash_text => 'Splash Screen';
 	String get still => 'Still';
 	String get terms_and_conditions => 'Terms & Conditions';
@@ -274,6 +278,8 @@ extension on Translations {
 			case 'authored_by': return ({required Object name}) => 'by ${name}';
 			case 'auto': return 'Auto';
 			case 'billing': return 'Billing';
+			case 'camera_1': return 'Camera 1';
+			case 'camera_2': return 'Camera 2';
 			case 'camera_title': return 'Camera';
 			case 'camera_access_denied_without_prompt': return 'Please go to Settings app to enable camera access.';
 			case 'camera_access_restricted': return 'Camera access is restricted';
@@ -302,6 +308,7 @@ extension on Translations {
 			case 'map': return 'Map';
 			case 'members': return 'Members';
 			case 'movement_status': return 'Is Moving?';
+			case 'next': return 'Next';
 			case 'none': return 'None';
 			case 'highlight_title': return 'Generate Context-Aware Translations';
 			case 'highlight_description': return 'Generate context-aware aware translatinons with GPT';
@@ -357,6 +364,7 @@ extension on Translations {
 			case 'search.unknown': return 'Search by name';
 			case 'search.vehicle': return 'Search by vehicle name or code...';
 			case 'settings': return 'Settings';
+			case 'skip': return 'Skip';
 			case 'splash_text': return 'Splash Screen';
 			case 'still': return 'Still';
 			case 'terms_and_conditions': return 'Terms & Conditions';

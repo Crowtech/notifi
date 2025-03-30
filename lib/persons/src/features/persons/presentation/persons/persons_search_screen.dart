@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
 
@@ -11,7 +10,6 @@ import 'person_list_tile.dart';
 import 'person_list_tile_shimmer.dart';
 import 'persons_search_bar.dart';
 import 'persons_search_query_notifier.dart';
-
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -22,9 +20,6 @@ var logNoStack = logger.Logger(
   printer: logger.PrettyPrinter(methodCount: 0),
   level: logger.Level.info,
 );
-
-
-
 
 class PersonsSearchScreen extends ConsumerWidget {
   const PersonsSearchScreen({super.key});
@@ -40,7 +35,7 @@ class PersonsSearchScreen extends ConsumerWidget {
     );
     final totalResults = responseAsync.valueOrNull?.totalResults;
     return Scaffold(
-      appBar: AppBar(title:  Text(nt.t.resources.person)),
+      appBar: AppBar(title: Text(nt.t.resources.person)),
       body: Column(
         children: [
           const PersonsSearchBar(),
@@ -108,6 +103,15 @@ class PersonsSearchScreen extends ConsumerWidget {
             ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          logNoStack.i("PERSONS_SEARCH_SCREEN: Add button pressed");
+        },
+        // foregroundColor: customizations[index].$1,
+        // backgroundColor: customizations[index].$2,
+        // shape:
+        child: const Icon(Icons.add),
       ),
     );
   }

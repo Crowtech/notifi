@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
+import 'package:notifi/models/nest_filter_type.dart';
 import 'package:notifi/models/nestfilter.dart';
 import 'package:notifi/organizations/src/features/organizations/data/organizations_repository_nf.dart';
+import 'package:notifi/riverpod/nest_filter_provider.dart';
 
 import '../../data/organizations_repository.dart';
 import 'organization_list_tile.dart';
 import 'organization_list_tile_shimmer.dart';
 import 'organizations_search_bar.dart';
 import 'organizations_search_query_notifier.dart';
-
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -25,9 +25,6 @@ var logNoStack = logger.Logger(
   level: logger.Level.info,
 );
 
-
-
-
 class OrganizationsSearchScreen extends ConsumerWidget {
   const OrganizationsSearchScreen({super.key});
 
@@ -36,9 +33,11 @@ class OrganizationsSearchScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final query = ref.watch(organizationsSearchQueryNotifierProvider);
+    logNoStack.i("ORGS_SEARCH_SCREEN: query is $query , now setting AdamNestFilter");
+    ref.read(AdamNestFilterProvider(NestFilterType.organizations).notifier).setQuery(";name:$query;");
     // * get the first page so we can retrieve the total number of results
     NestFilter nestFilter = NestFilter();
-        final responseAsync = ref.watch(
+    final responseAsync = ref.watch(
       fetchOrganizationsNestFilterProvider,
     );
     // final responseAsync = ref.watch(
@@ -46,7 +45,7 @@ class OrganizationsSearchScreen extends ConsumerWidget {
     // );
     final totalResults = responseAsync.valueOrNull?.totalResults;
     return Scaffold(
-      appBar: AppBar(title:  Text(nt.t.resources.organization)),
+      appBar: AppBar(title: Text(nt.t.resources.organization)),
       body: Column(
         children: [
           const OrganizationsSearchBar(),
@@ -57,9 +56,8 @@ class OrganizationsSearchScreen extends ConsumerWidget {
                 ref.invalidate(fetchOrganizationsNestFilterProvider);
                 // keep showing the progress indicator until the first page is fetched
                 try {
-                    await ref.read(
-                    fetchOrganizationsNestFilterProvider
-                        .future,
+                  await ref.read(
+                    fetchOrganizationsNestFilterProvider.future,
                   );
                   // await ref.read(
                   //   fetchOrganizationsNestFilterProvider(nestFilter: nestFilter)
@@ -83,8 +81,9 @@ class OrganizationsSearchScreen extends ConsumerWidget {
                   // as soon as the index exceeds the page size
                   // Note that ref.watch is called for up to pageSize items
                   // with the same page and query arguments (but this is ok since data is cached)
-                  NestFilter nestFilter = NestFilter(offset: page, query: ";name:$query;");
-                    final responseAsync = ref.watch(
+                  NestFilter nestFilter =
+                      NestFilter(offset: page, query: ";name:$query;");
+                  final responseAsync = ref.watch(
                     fetchOrganizationsNestFilterProvider,
                   );
                   // final responseAsync = ref.watch(
@@ -123,6 +122,15 @@ class OrganizationsSearchScreen extends ConsumerWidget {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          logNoStack.i("ORGS_SEARCH_SCREEN: Add button pressed");
+        },
+        // foregroundColor: customizations[index].$1,
+        // backgroundColor: customizations[index].$2,
+        // shape:
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }
@@ -157,12 +165,13 @@ class OrganizationListTileError extends ConsumerWidget {
                       ? null
                       : () {
                           // invalidate the provider for the errored page
-                          NestFilter nestFilter = NestFilter(offset: page, query: ";name:$query;");
-                            ref.invalidate(fetchOrganizationsNestFilterProvider);
+                          NestFilter nestFilter =
+                              NestFilter(offset: page, query: ";name:$query;");
+                          ref.invalidate(fetchOrganizationsNestFilterProvider);
                           // ref.invalidate(fetchOrganizationsNestFilterProvider(
                           //     nestFilter: nestFilter));
                           // wait until the page is loaded again
-                            return ref.read(
+                          return ref.read(
                             fetchOrganizationsNestFilterProvider.future,
                           );
                           // return ref.read(
