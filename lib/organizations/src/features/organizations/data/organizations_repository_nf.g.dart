@@ -192,155 +192,26 @@ class _Organization2ProviderElement
 }
 
 String _$fetchOrganizationsNestFilterHash() =>
-    r'00fb27bd782ae02854b8eed975280d4c6ddfc149';
+    r'de1f558a172029e955fe13e53d4c9ac5f1d3e952';
 
 /// Provider to fetch paginated organizations data
 ///
 /// Copied from [fetchOrganizationsNestFilter].
 @ProviderFor(fetchOrganizationsNestFilter)
-const fetchOrganizationsNestFilterProvider =
-    FetchOrganizationsNestFilterFamily();
-
-/// Provider to fetch paginated organizations data
-///
-/// Copied from [fetchOrganizationsNestFilter].
-class FetchOrganizationsNestFilterFamily
-    extends Family<AsyncValue<OrganizationsResponse>> {
-  /// Provider to fetch paginated organizations data
-  ///
-  /// Copied from [fetchOrganizationsNestFilter].
-  const FetchOrganizationsNestFilterFamily();
-
-  /// Provider to fetch paginated organizations data
-  ///
-  /// Copied from [fetchOrganizationsNestFilter].
-  FetchOrganizationsNestFilterProvider call({
-    required NestFilter nestFilter,
-  }) {
-    return FetchOrganizationsNestFilterProvider(
-      nestFilter: nestFilter,
-    );
-  }
-
-  @override
-  FetchOrganizationsNestFilterProvider getProviderOverride(
-    covariant FetchOrganizationsNestFilterProvider provider,
-  ) {
-    return call(
-      nestFilter: provider.nestFilter,
-    );
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'fetchOrganizationsNestFilterProvider';
-}
-
-/// Provider to fetch paginated organizations data
-///
-/// Copied from [fetchOrganizationsNestFilter].
-class FetchOrganizationsNestFilterProvider
-    extends AutoDisposeFutureProvider<OrganizationsResponse> {
-  /// Provider to fetch paginated organizations data
-  ///
-  /// Copied from [fetchOrganizationsNestFilter].
-  FetchOrganizationsNestFilterProvider({
-    required NestFilter nestFilter,
-  }) : this._internal(
-          (ref) => fetchOrganizationsNestFilter(
-            ref as FetchOrganizationsNestFilterRef,
-            nestFilter: nestFilter,
-          ),
-          from: fetchOrganizationsNestFilterProvider,
-          name: r'fetchOrganizationsNestFilterProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$fetchOrganizationsNestFilterHash,
-          dependencies: FetchOrganizationsNestFilterFamily._dependencies,
-          allTransitiveDependencies:
-              FetchOrganizationsNestFilterFamily._allTransitiveDependencies,
-          nestFilter: nestFilter,
-        );
-
-  FetchOrganizationsNestFilterProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.nestFilter,
-  }) : super.internal();
-
-  final NestFilter nestFilter;
-
-  @override
-  Override overrideWith(
-    FutureOr<OrganizationsResponse> Function(
-            FetchOrganizationsNestFilterRef provider)
-        create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: FetchOrganizationsNestFilterProvider._internal(
-        (ref) => create(ref as FetchOrganizationsNestFilterRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        nestFilter: nestFilter,
-      ),
-    );
-  }
-
-  @override
-  AutoDisposeFutureProviderElement<OrganizationsResponse> createElement() {
-    return _FetchOrganizationsNestFilterProviderElement(this);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is FetchOrganizationsNestFilterProvider &&
-        other.nestFilter == nestFilter;
-  }
-
-  @override
-  int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, nestFilter.hashCode);
-
-    return _SystemHash.finish(hash);
-  }
-}
+final fetchOrganizationsNestFilterProvider =
+    AutoDisposeFutureProvider<OrganizationsResponse>.internal(
+  fetchOrganizationsNestFilter,
+  name: r'fetchOrganizationsNestFilterProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$fetchOrganizationsNestFilterHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin FetchOrganizationsNestFilterRef
-    on AutoDisposeFutureProviderRef<OrganizationsResponse> {
-  /// The parameter `nestFilter` of this provider.
-  NestFilter get nestFilter;
-}
-
-class _FetchOrganizationsNestFilterProviderElement
-    extends AutoDisposeFutureProviderElement<OrganizationsResponse>
-    with FetchOrganizationsNestFilterRef {
-  _FetchOrganizationsNestFilterProviderElement(super.provider);
-
-  @override
-  NestFilter get nestFilter =>
-      (origin as FetchOrganizationsNestFilterProvider).nestFilter;
-}
+typedef FetchOrganizationsNestFilterRef
+    = AutoDisposeFutureProviderRef<OrganizationsResponse>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
