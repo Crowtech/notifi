@@ -125,7 +125,11 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
     _topics.add('web');
   }
 
+    logNoStack
+      .i("NOTIFI2: EnableNotifications setting is ${enableNotifications ? "ENABLED" : "DISABLED"}");
   if (enableNotifications) {
+   logNoStack
+      .i("NOTIFI2: About to initialise Firebase");
     await Firebase.initializeApp(options: options);
   }
 
