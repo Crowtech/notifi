@@ -90,10 +90,20 @@ Future<void> setupFlutterNotifications() async {
   isFlutterLocalNotificationsInitialized = true;
 }
 
+bool notifi2AlreadyRunning = false;
+
 @Riverpod(keepAlive: true)
 void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
     List<String>? topics) async {
-  logNoStack.i("NOTIFI2: run");
+      logNoStack.i("NOTIFI2: run $notifi2AlreadyRunning");
+      if (notifi2AlreadyRunning==true) {
+        return;
+      } else {
+        notifi2AlreadyRunning=true;
+      }
+  
+
+
   FirebaseOptions? _options = options;
 
  
