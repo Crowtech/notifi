@@ -202,6 +202,7 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
       });
   }
 
+logNoStack.i("NOTIFI2: About to fetch Mobile Apple fcm token ");
   if (isIOS) {
     logNoStack.i("NOTIFI2: Fetching Mobile Apple fcm token ");
     FirebaseMessaging.instance.getAPNSToken().then((apnsToken) {
