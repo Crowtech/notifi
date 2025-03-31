@@ -95,23 +95,20 @@ bool notifi2AlreadyRunning = false;
 @Riverpod(keepAlive: true)
 void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
     List<String>? topics) async {
-      logNoStack.i("NOTIFI2: run $notifi2AlreadyRunning?'notifi already running':'notifi starting new");
-      if (notifi2AlreadyRunning==true) {
-        return;
-      } else {
-        notifi2AlreadyRunning=true;
-      }
-  
-
+  logNoStack.i(
+      "NOTIFI2: run $notifi2AlreadyRunning?'notifi already running':'notifi starting new");
+  if (notifi2AlreadyRunning == true) {
+    return;
+  } else {
+    notifi2AlreadyRunning = true;
+  }
 
   FirebaseOptions? _options = options;
 
- 
   bool _preventAutoLogin = false;
   int _secondsToast = secondsToast ?? 2;
   List<String> _topics = topics ?? [];
   List<CameraDescription> _cameras = <CameraDescription>[];
-
 
   //ref.read(deviceIdNotifierProvider.notifier).setDeviceId(deviceId);
 
@@ -136,8 +133,8 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
     _topics.add('web');
   }
 
-    logNoStack
-      .i("NOTIFI2: EnableNotifications setting is ${enableNotifications ? "ENABLED" : "DISABLED"}");
+  logNoStack.i(
+      "NOTIFI2: EnableNotifications setting is ${enableNotifications ? "ENABLED" : "DISABLED"}");
 
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -151,14 +148,13 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
   if (enableNotifications) {
     logNoStack.i("NOTIFI2: About to initialise Firebase");
     await Firebase.initializeApp(options: options);
-logNoStack.i("NOTIFI2: after init Firebase App");
+    logNoStack.i("NOTIFI2: after init Firebase App");
     // Set the background messaging handler early on, as a named top-level function
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
- 
+
     if (!kIsWeb) {
-       await FirebaseApi().initNotifications();
-      await setupFlutterNotifications();  //<--- using the web example
-     
+      await FirebaseApi().initNotifications();
+      await setupFlutterNotifications(); //<--- using the web example
     } else {
       await setupFlutterNotifications();
     }
@@ -209,36 +205,35 @@ logNoStack.i("NOTIFI2: after init Firebase App");
       logNoStack.i("NOTIFI2: Web fcm token is $token");
       ref.read(fcmNotifierProvider.notifier).setFcm(token!);
     }).catchError((e) {
-        logNoStack.e('NOTIFI2: web fcm Got error: $e'); // Finally, callback fires.
-       
-      });
+      logNoStack
+          .e('NOTIFI2: web fcm Got error: $e'); // Finally, callback fires.
+    });
   }
 
-logNoStack.i("NOTIFI2: About to fetch Mobile Apple fcm token !!! ");
+  logNoStack.i("NOTIFI2: About to fetch Mobile Apple fcm token !!! ");
   if (isIOS) {
-
-      String? apnsToken = await FirebaseMessaging.instance.getAPNSToken();
-          logNoStack.i('APNS Token: $apnsToken');
-          await Future.delayed(Duration(seconds: 2));
-  //subscribeToTopics(_topics);
-     //     ref.read(fcmNotifierProvider.notifier).setFcm(token!);
+    String? apnsToken = await FirebaseMessaging.instance.getAPNSToken();
+    logNoStack.i('APNS Token: $apnsToken');
+    await Future.delayed(Duration(seconds: 2));
+    //subscribeToTopics(_topics);
+    //     ref.read(fcmNotifierProvider.notifier).setFcm(token!);
 
     logNoStack.i("NOTIFI2: Fetching Mobile Apple fcm token ");
-   // FirebaseMessaging.instance.getAPNSToken().then((apnsToken) {
-       logNoStack.i("NOTIFI2: In getAPNSToken $apnsToken ");
-      if (apnsToken != null) {
-        // APNS token is available, make FCM plugin API requests...
-        FirebaseMessaging.instance.getToken().then((token) {
-          logNoStack.i("NOTIFI2: Mobile Apple fcm token is $_fcmToken");
-          subscribeToTopics(_topics);
-          ref.read(fcmNotifierProvider.notifier).setFcm(token!);
-        });
-      } else {
-           logNoStack.i("NOTIFI2: In getAPNSToken IT IS NULL ");
-      }
+    // FirebaseMessaging.instance.getAPNSToken().then((apnsToken) {
+    logNoStack.i("NOTIFI2: In getAPNSToken $apnsToken ");
+    if (apnsToken != null) {
+      // APNS token is available, make FCM plugin API requests...
+      FirebaseMessaging.instance.getToken().then((token) {
+        logNoStack.i("NOTIFI2: Mobile Apple fcm token is $_fcmToken");
+        subscribeToTopics(_topics);
+        ref.read(fcmNotifierProvider.notifier).setFcm(token!);
+      });
+    } else {
+      logNoStack.i("NOTIFI2: In getAPNSToken IT IS NULL ");
+    }
     // }).catchError((e) {
     //     logNoStack.e('NOTIFI2: ios fcm Got error: $e'); // Finally, callback fires.
-       
+
     //   });
   }
   if (isAndroid) {
@@ -249,9 +244,9 @@ logNoStack.i("NOTIFI2: About to fetch Mobile Apple fcm token !!! ");
       subscribeToTopics(_topics);
       ref.read(fcmNotifierProvider.notifier).setFcm(fcm);
     }).catchError((e) {
-        logNoStack.e('NOTIFI2: android fcm Got error: $e'); // Finally, callback fires.
-       
-      });
+      logNoStack
+          .e('NOTIFI2: android fcm Got error: $e'); // Finally, callback fires.
+    });
   }
 
   logNoStack.d("NOTIFI2: Got to here before setup Flutter Notifications");
@@ -288,7 +283,6 @@ logNoStack.i("NOTIFI2: About to fetch Mobile Apple fcm token !!! ");
   });
 
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-
 }
 
 // void setPreventAutoLogin(bool preventAutoLogin) {
