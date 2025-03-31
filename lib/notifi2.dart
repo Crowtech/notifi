@@ -214,10 +214,18 @@ logNoStack.i("NOTIFI2: after init Firebase App");
       });
   }
 
-logNoStack.i("NOTIFI2: About to fetch Mobile Apple fcm token ");
+logNoStack.i("NOTIFI2: About to fetch Mobile Apple fcm token !!! ");
   if (isIOS) {
+
+      String? apnsToken = await FirebaseMessaging.instance.getAPNSToken();
+          logNoStack.i('APNS Token: $apnsToken');
+          await Future.delayed(Duration(seconds: 2));
+  //subscribeToTopics(_topics);
+     //     ref.read(fcmNotifierProvider.notifier).setFcm(token!);
+
     logNoStack.i("NOTIFI2: Fetching Mobile Apple fcm token ");
-    FirebaseMessaging.instance.getAPNSToken().then((apnsToken) {
+   // FirebaseMessaging.instance.getAPNSToken().then((apnsToken) {
+       logNoStack.i("NOTIFI2: In getAPNSToken $apnsToken ");
       if (apnsToken != null) {
         // APNS token is available, make FCM plugin API requests...
         FirebaseMessaging.instance.getToken().then((token) {
@@ -225,11 +233,13 @@ logNoStack.i("NOTIFI2: About to fetch Mobile Apple fcm token ");
           subscribeToTopics(_topics);
           ref.read(fcmNotifierProvider.notifier).setFcm(token!);
         });
+      } else {
+           logNoStack.i("NOTIFI2: In getAPNSToken IT IS NULL ");
       }
-    }).catchError((e) {
-        logNoStack.e('NOTIFI2: ios fcm Got error: $e'); // Finally, callback fires.
+    // }).catchError((e) {
+    //     logNoStack.e('NOTIFI2: ios fcm Got error: $e'); // Finally, callback fires.
        
-      });
+    //   });
   }
   if (isAndroid) {
     FirebaseMessaging.instance.getToken().then((token) {
