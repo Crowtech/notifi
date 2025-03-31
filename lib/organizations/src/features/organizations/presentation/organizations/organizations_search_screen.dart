@@ -42,7 +42,7 @@ class OrganizationsSearchScreen extends ConsumerWidget {
     //   fetchOrganizationsNestFilterProvider,
     // );
     final responseAsync = ref.watch(
-      fetchOrganizationsNestFilterProvider(nestFilter: nestFilter),
+      fetchOrganizationsNestFilterProvider
     );
     final totalResults = responseAsync.valueOrNull?.totalResults;
     return Scaffold(
@@ -61,7 +61,7 @@ class OrganizationsSearchScreen extends ConsumerWidget {
                   //   fetchOrganizationsNestFilterProvider.future,
                   // );
                   await ref.read(
-                    fetchOrganizationsNestFilterProvider(nestFilter: nestFilter)
+                    fetchOrganizationsNestFilterProvider
                         .future,
                   );
                 } catch (e) {
@@ -88,7 +88,7 @@ class OrganizationsSearchScreen extends ConsumerWidget {
                   //   fetchOrganizationsNestFilterProvider,
                   // );
                    final responseAsync = ref.watch(
-                     fetchOrganizationsNestFilterProvider(nestFilter: nestFilter),
+                     fetchOrganizationsNestFilterProvider,
                    );
                   return responseAsync.when(
                     error: (err, stack) => OrganizationListTileError(
@@ -176,8 +176,7 @@ class OrganizationListTileError extends ConsumerWidget {
                           //   fetchOrganizationsNestFilterProvider.future,
                           // );
                           return ref.read(
-                            fetchOrganizationsNestFilterProvider(
-                                nestFilter: nestFilter).future,
+                            fetchOrganizationsNestFilterProvider.future,
                           );
                         },
                   child: const Text('Retry'),

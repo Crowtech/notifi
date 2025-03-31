@@ -34,11 +34,11 @@ var logNoStack = logger.Logger(
 
 class OrganizationsRepositoryNestFilter {
   const OrganizationsRepositoryNestFilter(
-      {required this.client, required this.token, required this.currentUser, required this.nestFilter});
+      {required this.client, required this.token, required this.currentUser/*, required this.nestFilter*/});
   final Dio client;
   final String token;
   final Person currentUser;
-  final NestFilter nestFilter;
+  //final NestFilter nestFilter;
 
   Future<OrganizationsResponse> searchOrganizations(
       {required NestFilter nestFilter, CancelToken? cancelToken}) async {
@@ -140,7 +140,7 @@ OrganizationsRepositoryNestFilter organizationsRepositoryNestFilter(Organization
       client: ref.watch(dioProvider),
       token: ref.read(nestAuthProvider.notifier).token!,
       currentUser: ref.read(nestAuthProvider.notifier).currentUser,
-      nestFilter: ref.watch(AdamNestFilterProvider(NestFilterType.organizations)),
+   //   nestFilter: ref.watch(AdamNestFilterProvider(NestFilterType.organizations)),
     );
 
 class AbortedException implements Exception {}
