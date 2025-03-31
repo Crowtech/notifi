@@ -95,7 +95,7 @@ bool notifi2AlreadyRunning = false;
 @Riverpod(keepAlive: true)
 void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
     List<String>? topics) async {
-      logNoStack.i("NOTIFI2: run $notifi2AlreadyRunning");
+      logNoStack.i("NOTIFI2: run $notifi2AlreadyRunning?'notifi already running':'notifi starting new");
       if (notifi2AlreadyRunning==true) {
         return;
       } else {
@@ -151,13 +151,14 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
   if (enableNotifications) {
     logNoStack.i("NOTIFI2: About to initialise Firebase");
     await Firebase.initializeApp(options: options);
-
+logNoStack.i("NOTIFI2: after init Firebase App");
     // Set the background messaging handler early on, as a named top-level function
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-
+ 
     if (!kIsWeb) {
-      // await setupFlutterNotifications();  <--- using the web example
-      await FirebaseApi().initNotifications();
+       await FirebaseApi().initNotifications();
+      await setupFlutterNotifications();  //<--- using the web example
+     
     } else {
       await setupFlutterNotifications();
     }
