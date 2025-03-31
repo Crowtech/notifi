@@ -94,8 +94,9 @@ Future<void> setupFlutterNotifications() async {
 void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
     List<String>? topics) async {
   logNoStack.i("NOTIFI2: run");
-  FirebaseOptions? _options;
+  FirebaseOptions? _options = options;
 
+ 
   bool _preventAutoLogin = false;
   int _secondsToast = secondsToast ?? 2;
   List<String> _topics = topics ?? [];
@@ -127,11 +128,6 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
 
     logNoStack
       .i("NOTIFI2: EnableNotifications setting is ${enableNotifications ? "ENABLED" : "DISABLED"}");
-  if (enableNotifications) {
-   logNoStack
-      .i("NOTIFI2: About to initialise Firebase");
-    await Firebase.initializeApp(options: options);
-  }
 
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -143,6 +139,7 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
 
   //if (Constants.notificationsEnabled) {
   if (enableNotifications) {
+    logNoStack.i("NOTIFI2: About to initialise Firebase");
     await Firebase.initializeApp(options: options);
 
     // Set the background messaging handler early on, as a named top-level function
