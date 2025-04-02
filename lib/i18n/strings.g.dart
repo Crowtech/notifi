@@ -6,7 +6,7 @@
 /// Locales: 2
 /// Strings: 256 (128 per locale)
 ///
-/// Built on 2025-03-31 at 07:52 UTC
+/// Built on 2025-04-02 at 02:46 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint, unused_import
@@ -32,8 +32,8 @@ enum AppLocale with BaseAppLocale<AppLocale, Translations> {
 
 	const AppLocale({
 		required this.languageCode,
-		this.scriptCode, // ignore: unused_element
-		this.countryCode, // ignore: unused_element
+		this.scriptCode, // ignore: unused_element, unused_element_parameter
+		this.countryCode, // ignore: unused_element, unused_element_parameter
 	});
 
 	@override final String languageCode;
