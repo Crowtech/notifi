@@ -36,6 +36,11 @@ class NestNotifis extends _$NestNotifis {
 
   List<NestNotifi> _notifications = [];
 
+  void clear()
+  {
+    _notifications.clear();
+  } 
+
   Future<List<NestNotifi>> _fetch() async {
     NestFilter nestFilter = NestFilter();
 
