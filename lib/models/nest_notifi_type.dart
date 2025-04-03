@@ -1,5 +1,5 @@
-enum NestAlertType {
-  unknown,
+enum NestNotifiType {
+  undefined,
   gps,
   status,
   addition,

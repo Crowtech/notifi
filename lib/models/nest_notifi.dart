@@ -3,36 +3,36 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:logger/logger.dart';
 import 'package:notifi/entities/paging_data_item.dart';
 import 'package:notifi/models/gps.dart';
-import 'package:notifi/models/nestalert_type.dart';
+import 'package:notifi/models/nest_notifi_type.dart';
 import 'package:notifi/models/resource_type.dart';
 
 import '../jwt_utils.dart';
 import 'crowtech_object.dart';
-part 'nest_alert.g.dart';
+ part 'nest_notifi.g.dart';
 
 var logger = Logger(
   printer: PrettyPrinter(),
 );
 
 @JsonSerializable(explicitToJson: true)
-class NestAlert extends CrowtechObject implements PagingDataItem {
-  static String className = "NestAlert";
+class NestNotifi extends CrowtechObject implements PagingDataItem {
+  static String className = "NestNotifi";
   static String tablename = className.toLowerCase();
 
   int _pageId = 0;
+
   String? subject;
   String? description;
-  String? image_url;
+  String? imageUrl;
 
   GPS? gps;
   @JsonKey(includeFromJson: false, includeToJson: false)
   bool selected = false;
 
-  NestAlertType? nestAlertType;
-  String? imageUrl;
+  NestNotifiType? nestNotifiType;
 
 
-  NestAlert({
+  NestNotifi({
     super.orgid,
     super.id,
     super.code,
@@ -44,22 +44,22 @@ class NestAlert extends CrowtechObject implements PagingDataItem {
     this.imageUrl,
     this.gps,
     this.selected = false,
-    this.nestAlertType = NestAlertType.unknown,
+    this.nestNotifiType = NestNotifiType.undefined,
   });
 
-  factory NestAlert.fromJson(Map<String, dynamic> json) =>
-      _$NestAlertFromJson(json);
+  factory NestNotifi.fromJson(Map<String, dynamic> json) =>
+      _$NestNotifiFromJson(json);
   @override
-  Map<String, dynamic> toJson() => _$NestAlertToJson(this);
+  Map<String, dynamic> toJson() => _$NestNotifiToJson(this);
 
   @override
-  NestAlert fromJson(Map<String, dynamic> json) {
-    return NestAlert.fromJson(json);
+  NestNotifi fromJson(Map<String, dynamic> json) {
+    return NestNotifi.fromJson(json);
   }
 
   @override
   String toString() {
-    return "NestAlert=>${super.toString()} $description, $nestAlertType, $imageUrl $gps $selected";
+    return "NestNotifi=>${super.toString()} $description, $nestNotifiType, $imageUrl $gps $selected";
   }
 
   String getImageUrl() {
@@ -72,14 +72,14 @@ class NestAlert extends CrowtechObject implements PagingDataItem {
   }
 
   @override
-  int get pageId => _pageId;
-
-  @override
   bool operator ==(Object other) =>
-      other is NestAlert &&
+      other is NestNotifi &&
       other.runtimeType == runtimeType &&
       other.id == id;
 
   @override
-  int get hashCode => id.hashCode;
+  int get hashCode => code.hashCode;
+
+    @override
+  int get pageId => _pageId;
 }

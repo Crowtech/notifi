@@ -6,7 +6,7 @@ part of 'nest_notifi.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-NestAlert _$NestAlertFromJson(Map<String, dynamic> json) => NestAlert(
+NestNotifi _$NestNotifiFromJson(Map<String, dynamic> json) => NestNotifi(
       orgid: (json['orgid'] as num?)?.toInt(),
       id: (json['id'] as num?)?.toInt(),
       code: json['code'] as String?,
@@ -23,12 +23,13 @@ NestAlert _$NestAlertFromJson(Map<String, dynamic> json) => NestAlert(
       gps: json['gps'] == null
           ? null
           : GPS.fromJson(json['gps'] as Map<String, dynamic>),
-      nestAlertType:
-          $enumDecodeNullable(_$NestAlertTypeEnumMap, json['nestAlertType']) ??
-              NestAlertType.unknown,
-    )..image_url = json['image_url'] as String?;
+      nestNotifiType: $enumDecodeNullable(
+              _$NestNotifiTypeEnumMap, json['nestNotifiType']) ??
+          NestNotifiType.undefined,
+    );
 
-Map<String, dynamic> _$NestAlertToJson(NestAlert instance) => <String, dynamic>{
+Map<String, dynamic> _$NestNotifiToJson(NestNotifi instance) =>
+    <String, dynamic>{
       'orgid': instance.orgid,
       'id': instance.id,
       'created': instance.created?.toIso8601String(),
@@ -37,19 +38,18 @@ Map<String, dynamic> _$NestAlertToJson(NestAlert instance) => <String, dynamic>{
       'name': instance.name,
       'subject': instance.subject,
       'description': instance.description,
-      'image_url': instance.image_url,
-      'gps': instance.gps?.toJson(),
-      'nestAlertType': _$NestAlertTypeEnumMap[instance.nestAlertType],
       'imageUrl': instance.imageUrl,
+      'gps': instance.gps?.toJson(),
+      'nestNotifiType': _$NestNotifiTypeEnumMap[instance.nestNotifiType],
     };
 
-const _$NestAlertTypeEnumMap = {
-  NestAlertType.unknown: 'unknown',
-  NestAlertType.gps: 'gps',
-  NestAlertType.status: 'status',
-  NestAlertType.addition: 'addition',
-  NestAlertType.removal: 'removal',
-  NestAlertType.message: 'message',
-  NestAlertType.alarm: 'alarm',
-  NestAlertType.update: 'update',
+const _$NestNotifiTypeEnumMap = {
+  NestNotifiType.undefined: 'undefined',
+  NestNotifiType.gps: 'gps',
+  NestNotifiType.status: 'status',
+  NestNotifiType.addition: 'addition',
+  NestNotifiType.removal: 'removal',
+  NestNotifiType.message: 'message',
+  NestNotifiType.alarm: 'alarm',
+  NestNotifiType.update: 'update',
 };
