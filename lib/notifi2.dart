@@ -13,8 +13,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/jwt_utils.dart';
+import 'package:notifi/models/nest_notifi.dart';
 import 'package:notifi/riverpod/deviceid_notifier.dart';
 import 'package:notifi/riverpod/fcm_notifier.dart';
+import 'package:notifi/riverpod/nest_notifis_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'credentials.dart';
@@ -271,6 +273,8 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
     );
     logNoStack
         .i("NOTIFI2: INCOMING NOTIFICATION: AFter flutterLocalnotifixaiotn");
+
+        ref.read(nestNotifisProvider.notifier).addRemoteNotification(notification);
     Fluttertoast.showToast(
         msg: "${notification.title!}::${notification.body!}",
         toastLength: Toast.LENGTH_SHORT,

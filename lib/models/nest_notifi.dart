@@ -21,7 +21,6 @@ class NestNotifi extends CrowtechObject implements PagingDataItem {
 
   int _pageId = 0;
 
-  String? subject;
   String? description;
   String? imageUrl;
 
@@ -40,7 +39,6 @@ class NestNotifi extends CrowtechObject implements PagingDataItem {
     super.updated,
     super.name,
     this.description,
-    this.subject,
     this.imageUrl,
     this.gps,
     this.selected = false,

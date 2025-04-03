@@ -18,7 +18,6 @@ NestNotifi _$NestNotifiFromJson(Map<String, dynamic> json) => NestNotifi(
           : DateTime.parse(json['updated'] as String),
       name: json['name'] as String?,
       description: json['description'] as String?,
-      subject: json['subject'] as String?,
       imageUrl: json['imageUrl'] as String?,
       gps: json['gps'] == null
           ? null
@@ -36,7 +35,6 @@ Map<String, dynamic> _$NestNotifiToJson(NestNotifi instance) =>
       'code': instance.code,
       'updated': instance.updated?.toIso8601String(),
       'name': instance.name,
-      'subject': instance.subject,
       'description': instance.description,
       'imageUrl': instance.imageUrl,
       'gps': instance.gps?.toJson(),

@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'crowtech_base.g.dart';
+//part 'crowtech_base.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 abstract class CrowtechBase<T> {
