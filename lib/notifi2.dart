@@ -12,6 +12,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:logger/logger.dart' as logger;
+import 'package:notifi/api_utils.dart';
 import 'package:notifi/jwt_utils.dart';
 import 'package:notifi/models/nest_notifi.dart';
 import 'package:notifi/riverpod/deviceid_notifier.dart';
@@ -220,7 +221,7 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
   if (isIOS) {
     String? apnsToken = await FirebaseMessaging.instance.getAPNSToken();
     logNoStack.i('APNS Token: $apnsToken');
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 3));
     //subscribeToTopics(_topics);
     //     ref.read(fcmNotifierProvider.notifier).setFcm(token!);
 
@@ -229,10 +230,11 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
     logNoStack.i("NOTIFI2: In getAPNSToken $apnsToken ");
     if (apnsToken != null) {
       // APNS token is available, make FCM plugin API requests...
-      FirebaseMessaging.instance.getToken().then((token) {
+      FirebaseMessaging.instance.getToken().then((token) async {
         logNoStack.i("NOTIFI2: Mobile Apple fcm token is $token");
         subscribeToTopics(_topics);
         ref.read(fcmNotifierProvider.notifier).setFcm(token!);
+          await registerFCM( token, deviceId, token);
       });
     } else {
       logNoStack.i("NOTIFI2: In getAPNSToken IT IS NULL ");
@@ -243,12 +245,13 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
     //   });
   }
   if (isAndroid) {
-    FirebaseMessaging.instance.getToken().then((token) {
+    FirebaseMessaging.instance.getToken().then((token) async {
       _fcmToken = token;
       String fcm = token!;
       logNoStack.d("NOTIFI2: Mobile Android fcm token is $_fcmToken");
       subscribeToTopics(_topics);
       ref.read(fcmNotifierProvider.notifier).setFcm(fcm);
+         await registerFCM( token, deviceId, token);
     }).catchError((e) {
       logNoStack
           .e('NOTIFI2: android fcm Got error: $e'); // Finally, callback fires.
