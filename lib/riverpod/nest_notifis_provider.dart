@@ -7,6 +7,7 @@ import 'package:notifi/models/nest_notifi.dart';
 import 'package:notifi/models/nestfilter.dart';
 import 'package:notifi/state/nest_auth2.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:app_badge_plus/app_badge_plus.dart';
 
 import '../api_utils.dart';
 import '../models/crowtech_basepage.dart';
@@ -33,13 +34,14 @@ var logNoStack = logger.Logger(
 // interact with our Orgs class.
 @riverpod
 class NestNotifis extends _$NestNotifis {
-
   List<NestNotifi> _notifications = [];
 
-  void clear()
-  {
+  void clear() async {
+    if (await AppBadgePlus.isSupported()) {
+      AppBadgePlus.updateBadge(0);
+    }
     _notifications.clear();
-  } 
+  }
 
   Future<List<NestNotifi>> _fetch() async {
     NestFilter nestFilter = NestFilter();
@@ -81,6 +83,10 @@ class NestNotifis extends _$NestNotifis {
   FutureOr<List<NestNotifi>> build() async {
     // Load initial todo list from the remote repository
     _notifications = await _fetch();
+    // updated app badge
+    if (await AppBadgePlus.isSupported()) {
+      AppBadgePlus.updateBadge(_notifications.length);
+    }
     return _notifications;
   }
 
@@ -92,7 +98,10 @@ class NestNotifis extends _$NestNotifis {
     state = await AsyncValue.guard(() async {
       //state = [...state, item];
       _notifications.add(item);
-     // return _fetch();
+      // return _fetch();
+      if (await AppBadgePlus.isSupported()) {
+        AppBadgePlus.updateBadge(_notifications.length);
+      }
       return _notifications;
     });
   }
@@ -107,9 +116,12 @@ class NestNotifis extends _$NestNotifis {
       NestNotifi nn = NestNotifi();
       nn.name = item.title ?? "";
       nn.description = item.body ?? "";
-  
+
       _notifications.add(nn);
-     // return _fetch();
+      if (await AppBadgePlus.isSupported()) {
+        AppBadgePlus.updateBadge(_notifications.length);
+      }
+      // return _fetch();
       return _notifications;
     });
   }
@@ -119,7 +131,8 @@ class NestNotifis extends _$NestNotifis {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       _notifications.remove(item);
-     // return _fetch();
+      // return _fetch();
+
       return _notifications;
     });
   }
@@ -128,8 +141,7 @@ class NestNotifis extends _$NestNotifis {
   Future<void> toggle(String code) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
-
-return _notifications;
+      return _notifications;
     });
   }
 }
