@@ -135,6 +135,10 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
     _topics.add('web');
   }
 
+  // Add the unique devicecode as a topic
+  String deviceId = await fetchDeviceId();
+  _topics.add(deviceId);
+
   logNoStack.i(
       "NOTIFI2: EnableNotifications setting is ${enableNotifications ? "ENABLED" : "DISABLED"}");
 
@@ -226,7 +230,7 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
     if (apnsToken != null) {
       // APNS token is available, make FCM plugin API requests...
       FirebaseMessaging.instance.getToken().then((token) {
-        logNoStack.i("NOTIFI2: Mobile Apple fcm token is $_fcmToken");
+        logNoStack.i("NOTIFI2: Mobile Apple fcm token is $token");
         subscribeToTopics(_topics);
         ref.read(fcmNotifierProvider.notifier).setFcm(token!);
       });
@@ -309,6 +313,7 @@ void initialiseCamera(List<CameraDescription> cameras) async {
     logNoStack.e("${e.code} ${e..description}");
   }
 }
+
 
 void subscribeToTopics(List<String> topics) {
   if (enableNotifications) {
