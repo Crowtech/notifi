@@ -18,6 +18,7 @@ import 'package:notifi/models/nest_notifi.dart';
 import 'package:notifi/riverpod/deviceid_notifier.dart';
 import 'package:notifi/riverpod/fcm_notifier.dart';
 import 'package:notifi/riverpod/nest_notifis_provider.dart';
+import 'package:notifi/state/nest_auth2.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'credentials.dart';
@@ -208,9 +209,15 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
   }
   if (kIsWeb) {
     logNoStack.i("NOTIFI2: vapidKey is $vapidKey");
-    FirebaseMessaging.instance.getToken(vapidKey: vapidKey).then((token) {
+    FirebaseMessaging.instance.getToken(vapidKey: vapidKey).then((token) async {
       logNoStack.i("NOTIFI2: Web fcm token is $token");
       ref.read(fcmNotifierProvider.notifier).setFcm(token!);
+        bool isLoggedIn = ref.read(nestAuthProvider.notifier).isLoggedIn;
+        if (isLoggedIn) {
+          String authToken = ref.read(nestAuthProvider.notifier).token!;
+          await registerFCM(authToken, deviceId, token);
+        }
+
     }).catchError((e) {
       logNoStack
           .e('NOTIFI2: web fcm Got error: $e'); // Finally, callback fires.
@@ -234,7 +241,11 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
         logNoStack.i("NOTIFI2: Mobile Apple fcm token is $token");
         subscribeToTopics(_topics);
         ref.read(fcmNotifierProvider.notifier).setFcm(token!);
-          await registerFCM( token, deviceId, token);
+        bool isLoggedIn = ref.read(nestAuthProvider.notifier).isLoggedIn;
+        if (isLoggedIn) {
+          String authToken = ref.read(nestAuthProvider.notifier).token!;
+          await registerFCM(authToken, deviceId, token);
+        }
       });
     } else {
       logNoStack.i("NOTIFI2: In getAPNSToken IT IS NULL ");
@@ -251,7 +262,11 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
       logNoStack.d("NOTIFI2: Mobile Android fcm token is $_fcmToken");
       subscribeToTopics(_topics);
       ref.read(fcmNotifierProvider.notifier).setFcm(fcm);
-         await registerFCM( token, deviceId, token);
+      bool isLoggedIn = ref.read(nestAuthProvider.notifier).isLoggedIn;
+      if (isLoggedIn) {
+        String authToken = ref.read(nestAuthProvider.notifier).token!;
+        await registerFCM(authToken, deviceId, token);
+      }
     }).catchError((e) {
       logNoStack
           .e('NOTIFI2: android fcm Got error: $e'); // Finally, callback fires.
@@ -281,7 +296,7 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
     logNoStack
         .i("NOTIFI2: INCOMING NOTIFICATION: AFter flutterLocalnotifixaiotn");
 
-        ref.read(nestNotifisProvider.notifier).addRemoteNotification(notification);
+    ref.read(nestNotifisProvider.notifier).addRemoteNotification(notification);
     Fluttertoast.showToast(
         msg: "${notification.title!}::${notification.body!}",
         toastLength: Toast.LENGTH_SHORT,
@@ -316,7 +331,6 @@ void initialiseCamera(List<CameraDescription> cameras) async {
     logNoStack.e("${e.code} ${e..description}");
   }
 }
-
 
 void subscribeToTopics(List<String> topics) {
   if (enableNotifications) {

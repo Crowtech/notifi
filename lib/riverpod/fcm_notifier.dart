@@ -39,7 +39,7 @@ class FcmNotifier extends _$FcmNotifier {
 
 
 @Riverpod(keepAlive: true)
-void sendFcm(Ref ref, String fcm) async {
+void sendFcm(Ref ref) async {
 
   var fcm = ref.watch(fcmNotifierProvider);
     String? token = ref.read(nestAuthProvider.notifier).token;

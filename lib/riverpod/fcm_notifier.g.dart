@@ -6,155 +6,22 @@ part of 'fcm_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$sendFcmHash() => r'f0846f8df4e280457ce32d79a18d08126a1a94c2';
-
-/// Copied from Dart SDK
-class _SystemHash {
-  _SystemHash._();
-
-  static int combine(int hash, int value) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + value);
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
-    return hash ^ (hash >> 6);
-  }
-
-  static int finish(int hash) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
-    // ignore: parameter_assignments
-    hash = hash ^ (hash >> 11);
-    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
-  }
-}
+String _$sendFcmHash() => r'56cadbde402ae16e2b6b3fb4e08eac068ec94647';
 
 /// See also [sendFcm].
 @ProviderFor(sendFcm)
-const sendFcmProvider = SendFcmFamily();
-
-/// See also [sendFcm].
-class SendFcmFamily extends Family<void> {
-  /// See also [sendFcm].
-  const SendFcmFamily();
-
-  /// See also [sendFcm].
-  SendFcmProvider call(
-    String fcm,
-  ) {
-    return SendFcmProvider(
-      fcm,
-    );
-  }
-
-  @override
-  SendFcmProvider getProviderOverride(
-    covariant SendFcmProvider provider,
-  ) {
-    return call(
-      provider.fcm,
-    );
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'sendFcmProvider';
-}
-
-/// See also [sendFcm].
-class SendFcmProvider extends Provider<void> {
-  /// See also [sendFcm].
-  SendFcmProvider(
-    String fcm,
-  ) : this._internal(
-          (ref) => sendFcm(
-            ref as SendFcmRef,
-            fcm,
-          ),
-          from: sendFcmProvider,
-          name: r'sendFcmProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$sendFcmHash,
-          dependencies: SendFcmFamily._dependencies,
-          allTransitiveDependencies: SendFcmFamily._allTransitiveDependencies,
-          fcm: fcm,
-        );
-
-  SendFcmProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.fcm,
-  }) : super.internal();
-
-  final String fcm;
-
-  @override
-  Override overrideWith(
-    void Function(SendFcmRef provider) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: SendFcmProvider._internal(
-        (ref) => create(ref as SendFcmRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        fcm: fcm,
-      ),
-    );
-  }
-
-  @override
-  ProviderElement<void> createElement() {
-    return _SendFcmProviderElement(this);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is SendFcmProvider && other.fcm == fcm;
-  }
-
-  @override
-  int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, fcm.hashCode);
-
-    return _SystemHash.finish(hash);
-  }
-}
+final sendFcmProvider = Provider<void>.internal(
+  sendFcm,
+  name: r'sendFcmProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$sendFcmHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin SendFcmRef on ProviderRef<void> {
-  /// The parameter `fcm` of this provider.
-  String get fcm;
-}
-
-class _SendFcmProviderElement extends ProviderElement<void> with SendFcmRef {
-  _SendFcmProviderElement(super.provider);
-
-  @override
-  String get fcm => (origin as SendFcmProvider).fcm;
-}
-
+typedef SendFcmRef = ProviderRef<void>;
 String _$fcmNotifierHash() => r'8459c4fba7d5074558e0321149fd7e187a94913a';
 
 /// See also [FcmNotifier].

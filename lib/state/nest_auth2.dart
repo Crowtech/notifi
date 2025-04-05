@@ -6,6 +6,7 @@ import 'package:notifi/api_utils.dart';
 import 'package:notifi/credentials.dart';
 import 'package:notifi/jwt_utils.dart';
 import 'package:notifi/models/person.dart';
+import 'package:notifi/riverpod/fcm_notifier.dart';
 import 'package:oidc/oidc.dart';
 import 'package:notifi/app_state.dart' as app_state;
 import 'package:logger/logger.dart' as logger;
@@ -161,6 +162,10 @@ class NestAuthController extends Notifier<bool> with ChangeNotifier {
         currentUser = await registerLogin(oidcUser.token.accessToken!);
         currentUser.isSignedIn = true;
         isLoggedIn = true;
+        var deviceId = await fetchDeviceId();
+        var fcm = ref.read(fcmNotifierProvider);
+          await registerFCM(token!, deviceId, fcm);
+ 
         state = true;
       }
       // notifyListeners();
