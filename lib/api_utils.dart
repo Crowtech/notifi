@@ -33,7 +33,7 @@ Future<dynamic> apiPostNoLocale(String token, String apiPath) async {
 
 Future<dynamic> apiPostDataNoLocale(
     String token, String apiPath, String? dataName, Object? data) async {
-  logNoStack.i("API POST : APIPath -> $apiPath");
+  logNoStack.d("API POST : APIPath -> $apiPath");
   var url = Uri.parse(apiPath);
   String jsonData;
   final http.Response response;
@@ -62,9 +62,9 @@ Future<dynamic> apiPostDataNoLocale(
   if (response.statusCode == 202 ||
       response.statusCode == 201 ||
       response.statusCode == 200) {
-    logNoStack.i(
+    logNoStack.d(
         "API POST No LOCALE: $apiPath created successfully! with status ${response.statusCode}");
-        logNoStack.i("API POST No Locale: respose is ${response.body}");
+        logNoStack.d("API POST No Locale: respose is ${response.body}");
         if (response.body.isEmpty) {
           return [];
         }
