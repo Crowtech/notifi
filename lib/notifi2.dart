@@ -212,6 +212,14 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
     FirebaseMessaging.instance.getToken(vapidKey: vapidKey).then((token) async {
       logNoStack.i("NOTIFI2: Web fcm token is $token");
       ref.read(fcmNotifierProvider.notifier).setFcm(token!);
+        Fluttertoast.showToast(
+        msg: "FCM : ${token}",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: secondsToast,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0);
         bool isLoggedIn = ref.read(nestAuthProvider.notifier).isLoggedIn;
         if (isLoggedIn) {
           String authToken = ref.read(nestAuthProvider.notifier).token!;
@@ -241,8 +249,17 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
         logNoStack.i("NOTIFI2: Mobile Apple fcm token is $token");
         subscribeToTopics(_topics);
         ref.read(fcmNotifierProvider.notifier).setFcm(token!);
+         Fluttertoast.showToast(
+        msg: "FCM : ${token}",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: secondsToast,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0);
         bool isLoggedIn = ref.read(nestAuthProvider.notifier).isLoggedIn;
         if (isLoggedIn) {
+             logNoStack.i("NOTIFI2: USER LOGGED IN , so  sending fcm $token");
           String authToken = ref.read(nestAuthProvider.notifier).token!;
           await registerFCM(authToken, deviceId, token);
         }
@@ -262,8 +279,17 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
       logNoStack.d("NOTIFI2: Mobile Android fcm token is $_fcmToken");
       subscribeToTopics(_topics);
       ref.read(fcmNotifierProvider.notifier).setFcm(fcm);
+        Fluttertoast.showToast(
+        msg: "FCM : ${token}",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: secondsToast,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0);
       bool isLoggedIn = ref.read(nestAuthProvider.notifier).isLoggedIn;
       if (isLoggedIn) {
+     
         String authToken = ref.read(nestAuthProvider.notifier).token!;
         await registerFCM(authToken, deviceId, token);
       }

@@ -164,7 +164,11 @@ class NestAuthController extends Notifier<bool> with ChangeNotifier {
         isLoggedIn = true;
         var deviceId = await fetchDeviceId();
         var fcm = ref.read(fcmNotifierProvider);
+        if (fcm != 'NOT_READY') {
           await registerFCM(token!, deviceId, fcm);
+        } else {
+            logNoStack.i("NEST_AUTH2: USER LOGGED IN , but fcm not ready");
+        }
  
         state = true;
       }
