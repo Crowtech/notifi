@@ -64,6 +64,7 @@ Future<dynamic> apiPostDataNoLocale(
       response.statusCode == 200) {
     logNoStack.i(
         "API POST No LOCALE: $apiPath created successfully! with status ${response.statusCode}");
+        logNoStack.i("API POST No Locale: respose is ${response.body}");
     final resultMap = jsonDecode(response.body);
     return resultMap;
   } else {
