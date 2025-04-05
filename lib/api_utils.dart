@@ -53,12 +53,12 @@ Future<dynamic> apiPostDataNoLocale(
     // No data
     response = await http.post(url, headers: {
       "Content-Type": "application/json",
-      "Accept": "application/json",
+      //"Accept": "application/json",
       "Authorization": "Bearer $token",
     });
   }
 
-  logNoStack.d(response.statusCode);
+  logNoStack.i(response.statusCode);
   if (response.statusCode == 202 ||
       response.statusCode == 201 ||
       response.statusCode == 200) {
@@ -129,7 +129,6 @@ Future<http.Response> apiPostDataStrNoLocale(
 
   logNoStack.i("API_UTILS:apiPostDataStrNoLocale: $url $jsonDataStr");
 
-
   final http.Response response;
   if (jsonDataStr != null) {
     response = await http.post(url,
@@ -150,7 +149,7 @@ Future<http.Response> apiPostDataStrNoLocale(
 
   log.i("API_UTILS:apiPostDataStrNoLocale: ${response.statusCode}");
   if (response.statusCode == 204 ||
-    response.statusCode == 202 ||
+      response.statusCode == 202 ||
       response.statusCode == 201 ||
       response.statusCode == 200) {
     return response;
@@ -161,13 +160,11 @@ Future<http.Response> apiPostDataStrNoLocale(
   }
 }
 
-
 Future<http.Response> apiPutDataStrNoLocale(
     String token, String apiPath, String? jsonDataStr) async {
   var url = Uri.parse(apiPath);
 
   logNoStack.i("API_UTILS:apiPutDataStrNoLocale: $url $jsonDataStr");
-
 
   final http.Response response;
   if (jsonDataStr != null) {
@@ -189,7 +186,7 @@ Future<http.Response> apiPutDataStrNoLocale(
 
   log.i("API_UTILS:apiPutDataStrNoLocale: ${response.statusCode}");
   if (response.statusCode == 204 ||
-    response.statusCode == 202 ||
+      response.statusCode == 202 ||
       response.statusCode == 201 ||
       response.statusCode == 200) {
     return response;
@@ -199,26 +196,28 @@ Future<http.Response> apiPutDataStrNoLocale(
     throw "api Post created unsuccessfully!";
   }
 }
-Future<http.Response> apiGetData(
-    String apiPath, String accept) async {
+
+Future<http.Response> apiGetData(String apiPath, String accept) async {
   var url = Uri.parse(apiPath);
-  
 
   final http.Response response;
-  logNoStack.i("Response code for apiGeData is $apiPath for \"Content-Type\" and \"Accept\" $accept");
+  logNoStack.i(
+      "Response code for apiGeData is $apiPath for \"Content-Type\" and \"Accept\" $accept");
   // No data
   response = await http.get(url, headers: {
     "Content-Type": accept,
     "Accept": accept,
   });
 
-  logNoStack.i("Response code for apiGeData is ${response.statusCode} for $apiPath");
+  logNoStack
+      .i("Response code for apiGeData is ${response.statusCode} for $apiPath");
   if (response.statusCode == 202 ||
       response.statusCode == 201 ||
       response.statusCode == 200) {
     return response;
   } else {
-    logNoStack.e("API GET DATA: apiGetData created unsuccessfully! ${response.statusCode}");
+    logNoStack.e(
+        "API GET DATA: apiGetData created unsuccessfully! ${response.statusCode}");
     throw "api Get created unsuccessfully!";
   }
 }
@@ -263,14 +262,11 @@ Future<Person> registerLogin(
 ) async {
   String deviceId = await fetchDeviceId();
   logNoStack.i("API_UTILS: Login: deviceid=$deviceId");
-  String url =  "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/login?devicecode=$deviceId";
+  String url =
+      "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/login?devicecode=$deviceId";
   try {
-    
-    var currentUserMap = await apiPostDataNoLocale(
-        token,
-       url,
-        "deviceid",
-        deviceId);
+    var currentUserMap =
+        await apiPostDataNoLocale(token, url, "deviceid", deviceId);
 
     var currentUser = Person.fromJson(currentUserMap);
 
@@ -348,18 +344,17 @@ Future<bool> verifyToken(String token) async {
 // }
 
 Future<Map> registerFCM(
-    /*Locale locale, */String token, String deviceid, String fcm) async {
-  
+    /*Locale locale, */ String token, String deviceid, String fcm) async {
   logNoStack.i(
       "REGISTER FCM: About to send FCM and deviceid to api $defaultAPIBaseUrl$defaultApiPrefixPath/persons/devicefcm/$deviceid/$fcm");
-  apiPostNoLocale( token,
+  apiPostNoLocale(token,
           "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/devicefcm/$deviceid/$fcm")
       .then((response) {
     logNoStack.i("REGISTER FCM: back from send FCM sending $deviceid");
     logNoStack.i("REGISTER FCM: result ${response.toString()}");
     return response;
   }).catchError((error) {
-    log.e("REGISTER FCM: Register FCM error $error");
+    log.e("REGISTER FCM: Register FCM error $error ");
     // ignore: invalid_return_type_for_catch_error
     return Map;
   });
@@ -369,15 +364,15 @@ Future<Map> registerFCM(
 Future<String> fetchLatestAppVersion() async {
   var apiPath = "$defaultAPIBaseUrl$defaultApiPrefixPath/appversionss/latest";
   try {
-  var response = await apiGetData(apiPath,"application/json");
+    var response = await apiGetData(apiPath, "application/json");
     logNoStack.d("FETCH LATEST APP VERSION: result ${response.body}");
     final map = jsonDecode(response.body);
     AppVersion appVersion = AppVersion.fromJson(map);
-    logNoStack.i("Latest AppVersion is $appVersion , current version is $appVersion");
-  //return response.body;
+    logNoStack
+        .i("Latest AppVersion is $appVersion , current version is $appVersion");
+    //return response.body;
     return appVersion.version!;
-
-    } on Exception catch (error) {
+  } on Exception catch (error) {
     throw ("API_UTILS: Register login error $error");
   }
 }
@@ -405,8 +400,8 @@ Future<CrowtechBasePage<GPS>> fetchGPS(
   String jsonDataStr = jsonEncode(nestfilter);
   logNoStack.i("Sending NestFilter gps $nestfilter with json as $jsonDataStr");
 
-  var response = await apiPostDataStr(
-      locale, token, "$defaultAPIBaseUrl$defaultApiPrefixPath/gps/fetch", jsonDataStr);
+  var response = await apiPostDataStr(locale, token,
+      "$defaultAPIBaseUrl$defaultApiPrefixPath/gps/fetch", jsonDataStr);
   // .then((response) {
   logNoStack.d("result ${response.body.toString()}");
   final map = jsonDecode(response.body);
@@ -466,35 +461,35 @@ Future<CrowtechBasePage<GPS>> fetchGPS(
 //  throw Future.error("Nothing");
 }
 
-Future<bool> updateKeycloakUserInfo(String token,String id, String email, String firstname, String lastname)  async {
+Future<bool> updateKeycloakUserInfo(String token, String id, String email,
+    String firstname, String lastname) async {
 //PUT /{realm}/users/{id}
 
-  var url = Uri.parse("$defaultAPIBaseUrl$defaultApiPrefixPath/persons/update/$id");
+  var url =
+      Uri.parse("$defaultAPIBaseUrl$defaultApiPrefixPath/persons/update/$id");
 
   final http.Response response;
-logNoStack.i("API_UTILS: update user: $lastname");
+  logNoStack.i("API_UTILS: update user: $lastname");
   // No data
-  response = await http.put(url, 
-  headers: {
+  response = await http.put(url, headers: {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Authorization": "Bearer $token",
-  },
-  body: {
+  }, body: {
     "lastName": lastname,
   }
-  // body: jsonEncode(<String, dynamic>{
-  //        // 'username': email,
-  //       //  'firstName': firstname,
-  //         'lastName': lastname,
-  //       //  'email': email,
-  //         // Add any other data you want to send in the body
-  //       })
-  );
+      // body: jsonEncode(<String, dynamic>{
+      //        // 'username': email,
+      //       //  'firstName': firstname,
+      //         'lastName': lastname,
+      //       //  'email': email,
+      //         // Add any other data you want to send in the body
+      //       })
+      );
 
   logNoStack.i(response.statusCode);
   if (response.statusCode == 204 ||
-    response.statusCode == 202 ||
+      response.statusCode == 202 ||
       response.statusCode == 201 ||
       response.statusCode == 200) {
     return true;
@@ -503,26 +498,27 @@ logNoStack.i("API_UTILS: update user: $lastname");
   }
 }
 
-Future<bool> updateKeycloakPassword(String token,String id, String password)  async {
+Future<bool> updateKeycloakPassword(
+    String token, String id, String password) async {
 //PUT /{realm}/users/{id}
 
-  var url = Uri.parse("$defaultAPIBaseUrl$defaultApiPrefixPath/persons/password/$id");
+  var url =
+      Uri.parse("$defaultAPIBaseUrl$defaultApiPrefixPath/persons/password/$id");
 
   final http.Response response;
 
   // No data
-  response = await http.put(url, 
-  headers: {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-    "Authorization": "Bearer $token",
-  },
-  body: jsonEncode(password)
-  );
+  response = await http.put(url,
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": "Bearer $token",
+      },
+      body: jsonEncode(password));
 
   logNoStack.i(response.statusCode);
   if (response.statusCode == 204 ||
-    response.statusCode == 202 ||
+      response.statusCode == 202 ||
       response.statusCode == 201 ||
       response.statusCode == 200) {
     return true;
