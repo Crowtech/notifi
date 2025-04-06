@@ -10,6 +10,7 @@ import 'package:notifi/models/crowtech_basepage.dart';
 import 'package:notifi/models/nestfilter.dart';
 import 'package:notifi/models/organization.dart';
 import 'package:notifi/models/person.dart';
+import 'package:notifi/organizations/src/features/organizations/data/organizations_repository_nf.dart';
 import 'package:notifi/riverpod/organizations.dart';
 import 'package:notifi/state/nest_auth2.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -33,7 +34,7 @@ class FcmNotifier extends _$FcmNotifier {
   Set<String> _topics = {
     defaultRealm,
     'test',
-};
+  };
 
   @override
   String build() {
@@ -103,15 +104,16 @@ class FcmNotifier extends _$FcmNotifier {
     Map result = await registerFCM(token, devicecode, fcm);
     logNoStack.i("SEND_FCM: result = $result");
 
-    CrowtechBasePage<Organization> page = await ref
-        .read(organizationsProvider.notifier)
-        .fetchPage(defaultNestFilter);
+    final responseAsync = ref.watch(
+      fetchOrganizationsNestFilterProvider,
+    );
 
-    if (page.items != null) {
-      for (Organization org in page.items!) {
-        ref.read(fcmNotifierProvider.notifier).addTopic(org.code!);
+    if (responseAsync.hasValue) {
+      for (Organization org in responseAsync.value!.results) {
+        addTopic(org.code!);
       }
     }
+
     Person currentUser = ref.read(nestAuthProvider.notifier).currentUser;
     addTopic(currentUser.code!);
     addTopic(currentUser.username);
@@ -127,9 +129,7 @@ Future<void> subscribeToTopics(Set<String> topics) async {
       for (final topic in topics) {
         try {
           logNoStack.i("FCM_NOTIFIER: Subscribing to topic: $topic");
-          FirebaseMessaging.instance.subscribeToTopic(topic).then((_) {
-            
-          });
+          FirebaseMessaging.instance.subscribeToTopic(topic).then((_) {});
         } on Exception catch (_) {
           log.e("FCM_NOTIFIER: Firebase error");
         }
