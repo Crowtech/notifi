@@ -30,10 +30,10 @@ var logNoStack = logger.Logger(
 
 @Riverpod(keepAlive: true)
 class FcmNotifier extends _$FcmNotifier {
-  List<String> _topics = [
+  Set<String> _topics = {
     defaultRealm,
     'test',
-  ];
+};
 
   @override
   String build() {
@@ -44,7 +44,7 @@ class FcmNotifier extends _$FcmNotifier {
 
   Future<void> init() async {
     if (kIsWeb) {
-      _topics = [];
+      _topics = {};
     }
 
     if (defaultTargetPlatform == TargetPlatform.android) {
@@ -77,17 +77,17 @@ class FcmNotifier extends _$FcmNotifier {
     //
   }
 
-  List<String> getTopics() {
+  Set<String> getTopics() {
     return _topics;
   }
 
-  List<String> addTopic(String topic) {
+  Set<String> addTopic(String topic) {
     _topics.add(topic);
     logNoStack.i("FCM_NOTIFIER, ADDING TOPIC $topic");
     return _topics;
   }
 
-  List<String> removeTopic(String topic) {
+  Set<String> removeTopic(String topic) {
     _topics.remove(topic);
     return _topics;
   }
@@ -119,22 +119,23 @@ class FcmNotifier extends _$FcmNotifier {
   }
 }
 
-Future<void> subscribeToTopics(List<String> topics) async {
+Future<void> subscribeToTopics(Set<String> topics) async {
   if (enableNotifications) {
     if (!kIsWeb) {
-      logNoStack.i("NOTIFI2: Subscribing to topics");
+      logNoStack.i("NOTIFI2: Subscribing to ${topics.length} topics");
 
       for (final topic in topics) {
         try {
+          logNoStack.i("FCM_NOTIFIER: Subscribing to topic: $topic");
           FirebaseMessaging.instance.subscribeToTopic(topic).then((_) {
-            logNoStack.i("NOTIFI2: Subscribed to topic: $topic");
+            
           });
         } on Exception catch (_) {
-          log.e("NOTIFI2: Firebase error");
+          log.e("FCM_NOTIFIER: Firebase error");
         }
       }
     } else {
-      logNoStack.i("NOTIFI2: Not subscribing to topics");
+      logNoStack.i("FCM_NOTIFIER: Not subscribing to topics");
     }
   }
 }

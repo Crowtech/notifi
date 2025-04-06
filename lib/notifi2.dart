@@ -328,22 +328,4 @@ void initialiseCamera(List<CameraDescription> cameras) async {
   }
 }
 
-void subscribeToTopics(List<String> topics) {
-  if (enableNotifications) {
-    if (!kIsWeb) {
-      logNoStack.i("NOTIFI2: Subscribing to topics");
 
-      for (final topic in topics) {
-        try {
-          FirebaseMessaging.instance.subscribeToTopic(topic).then((_) {
-            logNoStack.i("NOTIFI2: Subscribed to topic: $topic");
-          });
-        } on Exception catch (_) {
-          log.e("NOTIFI2: Firebase error");
-        }
-      }
-    } else {
-      logNoStack.i("NOTIFI2: Not subscribing to topics");
-    }
-  }
-}
