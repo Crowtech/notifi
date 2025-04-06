@@ -114,8 +114,6 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
 
   //ref.read(deviceIdNotifierProvider.notifier).setDeviceId(deviceId);
 
-  
-
   logNoStack.i(
       "NOTIFI2: EnableNotifications setting is ${enableNotifications ? "ENABLED" : "DISABLED"}");
 
@@ -184,19 +182,22 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
   }
   if (kIsWeb) {
     logNoStack.i("NOTIFI2: vapidKey is $vapidKey");
-    FirebaseMessaging.instance.getToken(vapidKey: vapidKey).then((token) async {
-      logNoStack.i("NOTIFI2: Web fcm token is $token");
-      ref.read(fcmNotifierProvider.notifier).setFcm(token!);
-        Fluttertoast.showToast(
-        msg: "FCM : ${token}",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: secondsToast,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0);
-     
-
+    FirebaseMessaging.instance.getToken(vapidKey: vapidKey).then((fcm) async {
+      logNoStack.i("NOTIFI2: Web fcm token is $fcm");
+      ref.read(fcmNotifierProvider.notifier).setFcm(fcm!);
+      bool isLoggedIn = ref.read(nestAuthProvider.notifier).isLoggedIn;
+      if (isLoggedIn) {
+        String authToken = ref.read(nestAuthProvider.notifier).token!;
+        ref.read(fcmNotifierProvider.notifier).sendFcm(authToken, fcm);
+      }
+      Fluttertoast.showToast(
+          msg: "FCM : ${fcm}",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: secondsToast,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
     }).catchError((e) {
       logNoStack
           .e('NOTIFI2: web fcm Got error: $e'); // Finally, callback fires.
@@ -216,19 +217,23 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
     logNoStack.i("NOTIFI2: In getAPNSToken $apnsToken ");
     if (apnsToken != null) {
       // APNS token is available, make FCM plugin API requests...
-      FirebaseMessaging.instance.getToken().then((token) async {
-        logNoStack.i("NOTIFI2: Mobile Apple fcm token is $token");
-    
-        ref.read(fcmNotifierProvider.notifier).setFcm(token!);
-         Fluttertoast.showToast(
-        msg: "FCM : ${token}",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: secondsToast,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0);
+      FirebaseMessaging.instance.getToken().then((fcm) async {
+        logNoStack.i("NOTIFI2: Mobile Apple fcm token is $fcm");
 
+        ref.read(fcmNotifierProvider.notifier).setFcm(fcm!);
+        bool isLoggedIn = ref.read(nestAuthProvider.notifier).isLoggedIn;
+        if (isLoggedIn) {
+          String authToken = ref.read(nestAuthProvider.notifier).token!;
+          ref.read(fcmNotifierProvider.notifier).sendFcm(authToken, fcm);
+        }
+        Fluttertoast.showToast(
+            msg: "FCM : ${fcm}",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: secondsToast,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
       });
     } else {
       logNoStack.i("NOTIFI2: In getAPNSToken IT IS NULL ");
@@ -243,17 +248,21 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
       _fcmToken = token;
       String fcm = token!;
       logNoStack.d("NOTIFI2: Mobile Android fcm token is $_fcmToken");
-   
-      ref.read(fcmNotifierProvider.notifier).setFcm(fcm);
-        Fluttertoast.showToast(
-        msg: "FCM : ${token}",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: secondsToast,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0);
 
+      ref.read(fcmNotifierProvider.notifier).setFcm(fcm);
+      bool isLoggedIn = ref.read(nestAuthProvider.notifier).isLoggedIn;
+      if (isLoggedIn) {
+        String authToken = ref.read(nestAuthProvider.notifier).token!;
+        ref.read(fcmNotifierProvider.notifier).sendFcm(authToken, fcm);
+      }
+      Fluttertoast.showToast(
+          msg: "FCM : ${token}",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: secondsToast,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
     }).catchError((e) {
       logNoStack
           .e('NOTIFI2: android fcm Got error: $e'); // Finally, callback fires.

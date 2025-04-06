@@ -6,6 +6,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notifi/api_utils.dart';
 import 'package:notifi/credentials.dart';
 import 'package:notifi/jwt_utils.dart';
+import 'package:notifi/models/crowtech_basepage.dart';
+import 'package:notifi/models/nestfilter.dart';
+import 'package:notifi/models/organization.dart';
+import 'package:notifi/models/person.dart';
+import 'package:notifi/riverpod/organizations.dart';
 import 'package:notifi/state/nest_auth2.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:logger/logger.dart' as logger;
@@ -96,6 +101,22 @@ class FcmNotifier extends _$FcmNotifier {
     //Locale locale = (Locale)null;
     Map result = await registerFCM(token, devicecode, fcm);
     logNoStack.i("SEND_FCM: result = $result");
+
+          CrowtechBasePage<Organization> page = await ref
+              .read(organizationsProvider.notifier)
+              .fetchPage(defaultNestFilter);
+
+          if (page.items != null) {
+            for (Organization org in page.items!) {
+              ref.read(fcmNotifierProvider.notifier).addTopic(org.code!);
+            }
+          }
+          Person currentUser = ref.read(nestAuthProvider.notifier).currentUser;
+          ref.read(fcmNotifierProvider.notifier).addTopic(currentUser.code!);
+          ref.read(fcmNotifierProvider.notifier).addTopic(currentUser.username);
+          ref.read(fcmNotifierProvider.notifier).addTopic(currentUser.code!);
+
+          ref.read(fcmNotifierProvider.notifier).setTopics();
   }
 }
 
