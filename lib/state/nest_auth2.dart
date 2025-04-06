@@ -166,6 +166,10 @@ class NestAuthController extends Notifier<bool> with ChangeNotifier {
         currentUser = await registerLogin(oidcUser.token.accessToken!);
         currentUser.isSignedIn = true;
         isLoggedIn = true;
+
+        String fcm = ref.read(fcmNotifierProvider);
+        ref.read(fcmNotifierProvider.notifier).sendFcm(token!, fcm);
+
         CrowtechBasePage<Organization> page = await ref
             .read(organizationsProvider.notifier)
             .fetchPage(defaultNestFilter);
