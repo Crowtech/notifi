@@ -97,8 +97,7 @@ Future<void> setupFlutterNotifications() async {
 bool notifi2AlreadyRunning = false;
 
 @Riverpod(keepAlive: true)
-void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
-    List<String>? topics) async {
+void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
   logNoStack.i(
       "NOTIFI2: run $notifi2AlreadyRunning?'notifi already running':'notifi starting new");
   if (notifi2AlreadyRunning == true) {
@@ -111,35 +110,11 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
 
   bool _preventAutoLogin = false;
   int _secondsToast = secondsToast ?? 2;
-  List<String> _topics = topics ?? [];
   List<CameraDescription> _cameras = <CameraDescription>[];
 
   //ref.read(deviceIdNotifierProvider.notifier).setDeviceId(deviceId);
 
-  if (kIsWeb) {
-    _topics = [];
-  }
-
-  if (defaultTargetPlatform == TargetPlatform.android) {
-    _topics.add('android');
-  } else if (defaultTargetPlatform == TargetPlatform.iOS) {
-    _topics.add('ios');
-  } else if (defaultTargetPlatform == TargetPlatform.linux) {
-    _topics.add('linux');
-  } else if (defaultTargetPlatform == TargetPlatform.windows) {
-    _topics.add('windows');
-  } else if (defaultTargetPlatform == TargetPlatform.macOS) {
-    _topics.add('macos');
-  } else if (defaultTargetPlatform == TargetPlatform.fuchsia) {
-    _topics.add('fuchsia');
-  } else {
-    // We use 'web' as the default platform for unknown platforms.
-    _topics.add('web');
-  }
-
-  // Add the unique devicecode as a topic
-  String deviceId = await fetchDeviceId();
-  _topics.add(deviceId);
+  
 
   logNoStack.i(
       "NOTIFI2: EnableNotifications setting is ${enableNotifications ? "ENABLED" : "DISABLED"}");
@@ -220,11 +195,7 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
         backgroundColor: Colors.red,
         textColor: Colors.white,
         fontSize: 16.0);
-        bool isLoggedIn = ref.read(nestAuthProvider.notifier).isLoggedIn;
-        if (isLoggedIn) {
-          String authToken = ref.read(nestAuthProvider.notifier).token!;
-          await registerFCM(authToken, deviceId, token);
-        }
+     
 
     }).catchError((e) {
       logNoStack
@@ -247,7 +218,7 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
       // APNS token is available, make FCM plugin API requests...
       FirebaseMessaging.instance.getToken().then((token) async {
         logNoStack.i("NOTIFI2: Mobile Apple fcm token is $token");
-        subscribeToTopics(_topics);
+    
         ref.read(fcmNotifierProvider.notifier).setFcm(token!);
          Fluttertoast.showToast(
         msg: "FCM : ${token}",
@@ -257,12 +228,7 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
         backgroundColor: Colors.red,
         textColor: Colors.white,
         fontSize: 16.0);
-        bool isLoggedIn = ref.read(nestAuthProvider.notifier).isLoggedIn;
-        if (isLoggedIn) {
-             logNoStack.i("NOTIFI2: USER LOGGED IN , so  sending fcm $token");
-          String authToken = ref.read(nestAuthProvider.notifier).token!;
-          await registerFCM(authToken, deviceId, token);
-        }
+
       });
     } else {
       logNoStack.i("NOTIFI2: In getAPNSToken IT IS NULL ");
@@ -277,7 +243,7 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
       _fcmToken = token;
       String fcm = token!;
       logNoStack.d("NOTIFI2: Mobile Android fcm token is $_fcmToken");
-      subscribeToTopics(_topics);
+   
       ref.read(fcmNotifierProvider.notifier).setFcm(fcm);
         Fluttertoast.showToast(
         msg: "FCM : ${token}",
@@ -287,12 +253,7 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast,
         backgroundColor: Colors.red,
         textColor: Colors.white,
         fontSize: 16.0);
-      bool isLoggedIn = ref.read(nestAuthProvider.notifier).isLoggedIn;
-      if (isLoggedIn) {
-     
-        String authToken = ref.read(nestAuthProvider.notifier).token!;
-        await registerFCM(authToken, deviceId, token);
-      }
+
     }).catchError((e) {
       logNoStack
           .e('NOTIFI2: android fcm Got error: $e'); // Finally, callback fires.

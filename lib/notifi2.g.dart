@@ -6,7 +6,7 @@ part of 'notifi2.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$notifi2Hash() => r'd6d5f4b4c553b6b447dfb3b304f07ec39faccfd0';
+String _$notifi2Hash() => r'3eb899de2695def746d4958875375e4e945ce33f';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -42,12 +42,10 @@ class Notifi2Family extends Family<void> {
   Notifi2Provider call(
     FirebaseOptions options,
     dynamic secondsToast,
-    List<String>? topics,
   ) {
     return Notifi2Provider(
       options,
       secondsToast,
-      topics,
     );
   }
 
@@ -58,7 +56,6 @@ class Notifi2Family extends Family<void> {
     return call(
       provider.options,
       provider.secondsToast,
-      provider.topics,
     );
   }
 
@@ -83,13 +80,11 @@ class Notifi2Provider extends Provider<void> {
   Notifi2Provider(
     FirebaseOptions options,
     dynamic secondsToast,
-    List<String>? topics,
   ) : this._internal(
           (ref) => Notifi2(
             ref as Notifi2Ref,
             options,
             secondsToast,
-            topics,
           ),
           from: notifi2Provider,
           name: r'notifi2Provider',
@@ -101,7 +96,6 @@ class Notifi2Provider extends Provider<void> {
           allTransitiveDependencies: Notifi2Family._allTransitiveDependencies,
           options: options,
           secondsToast: secondsToast,
-          topics: topics,
         );
 
   Notifi2Provider._internal(
@@ -113,12 +107,10 @@ class Notifi2Provider extends Provider<void> {
     required super.from,
     required this.options,
     required this.secondsToast,
-    required this.topics,
   }) : super.internal();
 
   final FirebaseOptions options;
   final dynamic secondsToast;
-  final List<String>? topics;
 
   @override
   Override overrideWith(
@@ -135,7 +127,6 @@ class Notifi2Provider extends Provider<void> {
         debugGetCreateSourceHash: null,
         options: options,
         secondsToast: secondsToast,
-        topics: topics,
       ),
     );
   }
@@ -149,8 +140,7 @@ class Notifi2Provider extends Provider<void> {
   bool operator ==(Object other) {
     return other is Notifi2Provider &&
         other.options == options &&
-        other.secondsToast == secondsToast &&
-        other.topics == topics;
+        other.secondsToast == secondsToast;
   }
 
   @override
@@ -158,7 +148,6 @@ class Notifi2Provider extends Provider<void> {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, options.hashCode);
     hash = _SystemHash.combine(hash, secondsToast.hashCode);
-    hash = _SystemHash.combine(hash, topics.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -172,9 +161,6 @@ mixin Notifi2Ref on ProviderRef<void> {
 
   /// The parameter `secondsToast` of this provider.
   dynamic get secondsToast;
-
-  /// The parameter `topics` of this provider.
-  List<String>? get topics;
 }
 
 class _Notifi2ProviderElement extends ProviderElement<void> with Notifi2Ref {
@@ -184,8 +170,6 @@ class _Notifi2ProviderElement extends ProviderElement<void> with Notifi2Ref {
   FirebaseOptions get options => (origin as Notifi2Provider).options;
   @override
   dynamic get secondsToast => (origin as Notifi2Provider).secondsToast;
-  @override
-  List<String>? get topics => (origin as Notifi2Provider).topics;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -5,8 +5,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notifi/api_utils.dart';
 import 'package:notifi/credentials.dart';
 import 'package:notifi/jwt_utils.dart';
+import 'package:notifi/models/crowtech_basepage.dart';
+import 'package:notifi/models/nestfilter.dart';
+import 'package:notifi/models/organization.dart';
 import 'package:notifi/models/person.dart';
 import 'package:notifi/riverpod/fcm_notifier.dart';
+import 'package:notifi/riverpod/organizations.dart';
 import 'package:oidc/oidc.dart';
 import 'package:notifi/app_state.dart' as app_state;
 import 'package:logger/logger.dart' as logger;
@@ -162,14 +166,21 @@ class NestAuthController extends Notifier<bool> with ChangeNotifier {
         currentUser = await registerLogin(oidcUser.token.accessToken!);
         currentUser.isSignedIn = true;
         isLoggedIn = true;
-        var deviceId = await fetchDeviceId();
-        var fcm = ref.read(fcmNotifierProvider);
-        if (fcm != 'NOT_READY') {
-          await registerFCM(token!, deviceId, fcm);
-        } else {
-            logNoStack.i("NEST_AUTH2: USER LOGGED IN , but fcm not ready");
+        CrowtechBasePage<Organization> page = await ref
+            .read(organizationsProvider.notifier)
+            .fetchPage(defaultNestFilter);
+
+        if (page.items != null) {
+          for (Organization org in page.items!) {
+            ref.read(fcmNotifierProvider.notifier).addTopic(org.code!);
+          }
         }
- 
+        ref.read(fcmNotifierProvider.notifier).addTopic(currentUser.code!);
+        ref.read(fcmNotifierProvider.notifier).addTopic(currentUser.username);
+        ref.read(fcmNotifierProvider.notifier).addTopic(currentUser.code!);
+
+        ref.read(fcmNotifierProvider.notifier).setTopics();
+
         state = true;
       }
       // notifyListeners();

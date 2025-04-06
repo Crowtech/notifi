@@ -25,14 +25,43 @@ var logNoStack = logger.Logger(
 
 @Riverpod(keepAlive: true)
 class FcmNotifier extends _$FcmNotifier {
-  List<String> topics = [
+  List<String> _topics = [
     defaultRealm,
     'test',
   ];
 
   @override
   String build() {
+    init();
+
     return "NOT_READY";
+  }
+
+  Future<void> init() async {
+    if (kIsWeb) {
+      _topics = [];
+    }
+
+    if (defaultTargetPlatform == TargetPlatform.android) {
+      _topics.add('android');
+    } else if (defaultTargetPlatform == TargetPlatform.iOS) {
+      _topics.add('ios');
+    } else if (defaultTargetPlatform == TargetPlatform.linux) {
+      _topics.add('linux');
+    } else if (defaultTargetPlatform == TargetPlatform.windows) {
+      _topics.add('windows');
+    } else if (defaultTargetPlatform == TargetPlatform.macOS) {
+      _topics.add('macos');
+    } else if (defaultTargetPlatform == TargetPlatform.fuchsia) {
+      _topics.add('fuchsia');
+    } else {
+      // We use 'web' as the default platform for unknown platforms.
+      _topics.add('web');
+    }
+
+    // Add the unique devicecode as a topic
+    String deviceId = await fetchDeviceId();
+    _topics.add(deviceId);
   }
 
   void setFcm(String fcm) {
@@ -43,25 +72,25 @@ class FcmNotifier extends _$FcmNotifier {
   }
 
   List<String> getTopics() {
-    return topics;
+    return _topics;
   }
 
   List<String> addTopic(String topic) {
-    topics.add(topic);
-    return topics;
+    _topics.add(topic);
+    return _topics;
   }
 
   List<String> removeTopic(String topic) {
-    topics.remove(topic);
-    return topics;
+    _topics.remove(topic);
+    return _topics;
   }
 
   void setTopics() {
-    subscribeToTopics(topics);
+    subscribeToTopics(_topics);
   }
 }
 
-void subscribeToTopics(List<String> topics) {
+Future<void> subscribeToTopics(List<String> topics) async {
   if (enableNotifications) {
     if (!kIsWeb) {
       logNoStack.i("NOTIFI2: Subscribing to topics");
@@ -88,9 +117,12 @@ void sendFcm(Ref ref) async {
   if (token == null) {
     return;
   }
-  logNoStack.i("SEND_FCM: Sending fcm to api : $fcm}");
-  String devicecode = await fetchDeviceId();
-  //Locale locale = (Locale)null;
-  Map result = await registerFCM(token, devicecode, fcm);
-  logNoStack.i("SEND_FCM: result = $result");
+  bool isLoggedIn = ref.read(nestAuthProvider.notifier).isLoggedIn;
+  if (isLoggedIn) {
+    logNoStack.i("SEND_FCM: Sending fcm to api : $fcm}");
+    String devicecode = await fetchDeviceId();
+    //Locale locale = (Locale)null;
+    Map result = await registerFCM(token, devicecode, fcm);
+    logNoStack.i("SEND_FCM: result = $result");
+  }
 }
