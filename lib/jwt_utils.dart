@@ -158,7 +158,7 @@ Future<String> fetchDeviceId() async {
   } else {
     final appSetIdPlugin = AppSetId();
     deviceId = await appSetIdPlugin.getIdentifier() ?? "Unknown";
-    deviceId = "$deviceType:$deviceId"; // watch for OS
+    deviceId = "$deviceType$deviceId"; // watch for OS
   }
   return deviceId;
 }
