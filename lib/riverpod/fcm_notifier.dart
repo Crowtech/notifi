@@ -83,6 +83,7 @@ class FcmNotifier extends _$FcmNotifier {
 
   List<String> addTopic(String topic) {
     _topics.add(topic);
+    logNoStack.i("FCM_NOTIFIER, ADDING TOPIC $topic");
     return _topics;
   }
 
@@ -102,21 +103,19 @@ class FcmNotifier extends _$FcmNotifier {
     Map result = await registerFCM(token, devicecode, fcm);
     logNoStack.i("SEND_FCM: result = $result");
 
-          CrowtechBasePage<Organization> page = await ref
-              .read(organizationsProvider.notifier)
-              .fetchPage(defaultNestFilter);
+    CrowtechBasePage<Organization> page = await ref
+        .read(organizationsProvider.notifier)
+        .fetchPage(defaultNestFilter);
 
-          if (page.items != null) {
-            for (Organization org in page.items!) {
-              ref.read(fcmNotifierProvider.notifier).addTopic(org.code!);
-            }
-          }
-          Person currentUser = ref.read(nestAuthProvider.notifier).currentUser;
-          ref.read(fcmNotifierProvider.notifier).addTopic(currentUser.code!);
-          ref.read(fcmNotifierProvider.notifier).addTopic(currentUser.username);
-          ref.read(fcmNotifierProvider.notifier).addTopic(currentUser.code!);
-
-          ref.read(fcmNotifierProvider.notifier).setTopics();
+    if (page.items != null) {
+      for (Organization org in page.items!) {
+        ref.read(fcmNotifierProvider.notifier).addTopic(org.code!);
+      }
+    }
+    Person currentUser = ref.read(nestAuthProvider.notifier).currentUser;
+    addTopic(currentUser.code!);
+    addTopic(currentUser.username);
+    setTopics();
   }
 }
 
