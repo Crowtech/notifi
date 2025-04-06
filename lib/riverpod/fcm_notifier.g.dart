@@ -22,7 +22,7 @@ final sendFcmProvider = Provider<void>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef SendFcmRef = ProviderRef<void>;
-String _$fcmNotifierHash() => r'426e4b993c260e3a89fb2ced5661561546a3c689';
+String _$fcmNotifierHash() => r'6e81a01b9a2507d3a87b4d50d1e6c04503af7991';
 
 /// See also [FcmNotifier].
 @ProviderFor(FcmNotifier)

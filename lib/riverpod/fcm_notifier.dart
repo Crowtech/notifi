@@ -66,6 +66,7 @@ class FcmNotifier extends _$FcmNotifier {
 
   void setFcm(String fcm) {
     logNoStack.i("FCM_NOTIFIER: Setting fcm : $fcm}");
+
     //   ref.read(sendFcmProvider(fcm));
     state = fcm;
     //
@@ -87,6 +88,14 @@ class FcmNotifier extends _$FcmNotifier {
 
   void setTopics() {
     subscribeToTopics(_topics);
+  }
+
+  void sendFcm(String token, String fcm) async {
+    logNoStack.i("SEND_FCM: Sending fcm to api : $fcm}");
+    String devicecode = await fetchDeviceId();
+    //Locale locale = (Locale)null;
+    Map result = await registerFCM(token, devicecode, fcm);
+    logNoStack.i("SEND_FCM: result = $result");
   }
 }
 
