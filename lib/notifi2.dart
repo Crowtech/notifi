@@ -274,7 +274,8 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     final notification = message.notification;
     if (notification == null) return;
-
+    Map<String, dynamic> data = message.data;
+    logNoStack.i("NOTIFI2: INCOMING NOTIFICATION: $data from ${message.from}");
     logNoStack.i(
         "NOTIFI2: INCOMING NOTIFICATION:!nTITLE: ${notification.title}\nBODY: ${notification.body}");
     flutterLocalNotificationsPlugin.show(
