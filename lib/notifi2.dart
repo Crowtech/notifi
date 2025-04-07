@@ -305,6 +305,7 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
           timeInSecForIosWeb: secondsToast*4,
           backgroundColor: const Color.fromARGB(255, 143, 54, 244),
           textColor: const Color.fromARGB(255, 250, 248, 248),
+          webBgColor: "linear-gradient(139deg, #3a47d5, #purple)",
           fontSize: 16.0);
     } else if (message.notification != null) {
       final notification = message.notification;
