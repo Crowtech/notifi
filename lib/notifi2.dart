@@ -287,7 +287,7 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
   if (message.notification != null) {
     print('Message also contained a notification: ${message.notification}');
   }
-    logNoStack.i("NOTIFI2: iIncoming Notification msgType=>${message.messageType!}");
+   // logNoStack.i("NOTIFI2: iIncoming Notification msgType=>${message.messageType!}");
     if (message.data.isNotEmpty) {
       Map<String, dynamic> data = message.data;
       logNoStack
