@@ -281,6 +281,12 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
   logNoStack.d("NOTIFI2: Got to here before setup Flutter Notifications");
   await setupFlutterNotifications();
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+     print('Got a message whilst in the foreground!');
+  print('Message data: ${message.data}');
+
+  if (message.notification != null) {
+    print('Message also contained a notification: ${message.notification}');
+  }
     logNoStack.i("NOTIFI2: iIncoming Notification msgType=>${message.messageType!}");
     if (message.data.isNotEmpty) {
       Map<String, dynamic> data = message.data;
