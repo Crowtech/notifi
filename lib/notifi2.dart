@@ -59,11 +59,10 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   if (message.data.isNotEmpty) {
     String output = '';
     for (final kv in message.data.entries) {
-    output += ('${kv.key} = ${kv.value}\n');
-  }
+      output += ('${kv.key} = ${kv.value}\n');
+    }
     log.i("Handling a background message data:\n$output");
   }
-  
 }
 
 Future<void> setupFlutterNotifications() async {
@@ -281,24 +280,31 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
   logNoStack.d("NOTIFI2: Got to here before setup Flutter Notifications");
   await setupFlutterNotifications();
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-     print('Got a message whilst in the foreground!');
-  print('Message data: ${message.data}');
+    print('Got a message whilst in the foreground!!!!');
+    print('Message data!!!: ${message.data}');
 
-  if (message.notification != null) {
-    print('Message also contained a notification: ${message.notification}');
-  }
-   // logNoStack.i("NOTIFI2: iIncoming Notification msgType=>${message.messageType!}");
+
+    // if (message.notification != null) {
+    //   print('Message also contained a notification: ${message.notification}');
+    // }
+    // logNoStack.i("NOTIFI2: iIncoming Notification msgType=>${message.messageType!}");
     if (message.data.isNotEmpty) {
+      print('Message data AGAIN!: ${message.data}');
       Map<String, dynamic> data = message.data;
-      logNoStack
-          .i("NOTIFI2: INCOMING NOTIFICATION: $data from ${message.from}");
-            Fluttertoast.showToast(
-          msg: "${data.toString()}",
+      print('Message data AGAIN2!: ${data}');
+      String output = '';
+      for (final kv in message.data.entries) {
+        output += ('${kv.key} = ${kv.value}\n');
+      }
+      logNoStack.i(
+          "NOTIFI2: INCOMING DATA NOTIFICATION!:\n $output\n ");
+      Fluttertoast.showToast(
+          msg: "${output}",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: secondsToast,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
+          timeInSecForIosWeb: secondsToast*4,
+          backgroundColor: const Color.fromARGB(255, 203, 244, 54),
+          textColor: const Color.fromARGB(255, 12, 1, 1),
           fontSize: 16.0);
     } else if (message.notification != null) {
       final notification = message.notification;

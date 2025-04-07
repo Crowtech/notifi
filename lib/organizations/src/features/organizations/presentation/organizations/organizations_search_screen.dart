@@ -37,13 +37,11 @@ class OrganizationsSearchScreen extends ConsumerWidget {
     // ref.read(AdamNestFilterProvider(NestFilterType.organizations).notifier).setQuery(";name:$query;");
     // * get the first page so we can retrieve the total number of results
     NestFilter nestFilter = NestFilter(query: ";name:$query");
-  
+
     // final responseAsync = ref.watch(
     //   fetchOrganizationsNestFilterProvider,
     // );
-    final responseAsync = ref.watch(
-      fetchOrganizationsNestFilterProvider
-    );
+    final responseAsync = ref.watch(fetchOrganizationsNestFilterProvider);
     final totalResults = responseAsync.valueOrNull?.totalResults;
     return Scaffold(
       appBar: AppBar(title: Text(nt.t.resources.organization)),
@@ -61,8 +59,7 @@ class OrganizationsSearchScreen extends ConsumerWidget {
                   //   fetchOrganizationsNestFilterProvider.future,
                   // );
                   await ref.read(
-                    fetchOrganizationsNestFilterProvider
-                        .future,
+                    fetchOrganizationsNestFilterProvider.future,
                   );
                 } catch (e) {
                   // fail silently as the provider error state is handled inside the ListView
@@ -87,9 +84,9 @@ class OrganizationsSearchScreen extends ConsumerWidget {
                   // final responseAsync = ref.watch(
                   //   fetchOrganizationsNestFilterProvider,
                   // );
-                   final responseAsync = ref.watch(
-                     fetchOrganizationsNestFilterProvider,
-                   );
+                  final responseAsync = ref.watch(
+                    fetchOrganizationsNestFilterProvider,
+                  );
                   return responseAsync.when(
                     error: (err, stack) => OrganizationListTileError(
                       query: query,
@@ -106,15 +103,19 @@ class OrganizationsSearchScreen extends ConsumerWidget {
                         return null;
                       }
                       final organization = response.results[indexInPage];
-                      return OrganizationListTile(
-                        organization: organization,
-                        debugIndex: index + 1,
-                        onPressed: () => context.goNamed(
-                          "organization",
-                          pathParameters: {'id': organization.id.toString()},
-                          extra: organization,
-                        ),
-                      );
+                      return Dismissible(
+                          key: Key(organization.id.toString()),
+                          child: OrganizationListTile(
+                            organization: organization,
+                            debugIndex: index + 1,
+                            onPressed: () => context.goNamed(
+                              "organization",
+                              pathParameters: {
+                                'id': organization.id.toString()
+                              },
+                              extra: organization,
+                            ),
+                          ));
                     },
                   );
                 },
