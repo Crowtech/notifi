@@ -299,12 +299,12 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
       logNoStack.i(
           "NOTIFI2: INCOMING DATA NOTIFICATION!:\n $output\n ");
       Fluttertoast.showToast(
-          msg: "${output}",
+          msg: "Incoming Data!",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: secondsToast*4,
-          backgroundColor: const Color.fromARGB(255, 203, 244, 54),
-          textColor: const Color.fromARGB(255, 12, 1, 1),
+          backgroundColor: const Color.fromARGB(255, 143, 54, 244),
+          textColor: const Color.fromARGB(255, 250, 248, 248),
           fontSize: 16.0);
     } else if (message.notification != null) {
       final notification = message.notification;
