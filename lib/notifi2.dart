@@ -55,8 +55,15 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.
   await Firebase.initializeApp();
-
-  log.d("Handling a background message: ${message.messageId}");
+  log.i("Handling a background message: ${message.messageId}");
+  if (message.data.isNotEmpty) {
+    String output = '';
+    for (final kv in message.data.entries) {
+    output += ('${kv.key} = ${kv.value}\n');
+  }
+    log.i("Handling a background message data:\n$output");
+  }
+  
 }
 
 Future<void> setupFlutterNotifications() async {
@@ -188,7 +195,9 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
       bool isLoggedIn = ref.read(nestAuthProvider.notifier).isLoggedIn;
       if (isLoggedIn) {
         String authToken = ref.read(nestAuthProvider.notifier).token!;
-        ref.read(fcmNotifierProvider.notifier).sendFcm(authToken, fcm);
+        if (fcm != null) {
+          ref.read(fcmNotifierProvider.notifier).sendFcm(authToken, fcm);
+        }
       }
       Fluttertoast.showToast(
           msg: "FCM : ${fcm}",
@@ -272,37 +281,53 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
   logNoStack.d("NOTIFI2: Got to here before setup Flutter Notifications");
   await setupFlutterNotifications();
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    final notification = message.notification;
-    if (notification == null) return;
-    Map<String, dynamic> data = message.data;
-    logNoStack.i("NOTIFI2: INCOMING NOTIFICATION: $data from ${message.from}");
-    logNoStack.i(
-        "NOTIFI2: INCOMING NOTIFICATION:!nTITLE: ${notification.title}\nBODY: ${notification.body}");
-    flutterLocalNotificationsPlugin.show(
-      notification.hashCode,
-      notification.title,
-      notification.body,
-      NotificationDetails(
-        android: AndroidNotificationDetails(
-            _androidChannel.id, _androidChannel.name,
-            channelDescription: _androidChannel.description,
-            icon: '@drawable/ic_launcher'),
-      ),
-      payload: jsonEncode(message.toMap()),
-    );
-    logNoStack
-        .i("NOTIFI2: INCOMING NOTIFICATION: AFter flutterLocalnotifixaiotn");
+    logNoStack.i("NOTIFI2: iIncoming Notification msgType=>${message.messageType!}");
+    if (message.data.isNotEmpty) {
+      Map<String, dynamic> data = message.data;
+      logNoStack
+          .i("NOTIFI2: INCOMING NOTIFICATION: $data from ${message.from}");
+            Fluttertoast.showToast(
+          msg: "${data.toString()}",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: secondsToast,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    } else if (message.notification != null) {
+      final notification = message.notification;
+      logNoStack.i("NOTIFI2: INCOMING NOTIFICATION: $notification");
+      logNoStack.i(
+          "NOTIFI2: INCOMING NOTIFICATION:!nTITLE: ${notification!.title}\nBODY: ${notification.body}");
 
-    ref.read(nestNotifisProvider.notifier).addRemoteNotification(notification);
-    Fluttertoast.showToast(
-        msg: "${notification.title!}::${notification.body!}",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: secondsToast,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0);
-    logNoStack.i("NOTIFI2: INCOMING NOTIFICATION: AFter toast");
+      flutterLocalNotificationsPlugin.show(
+        notification.hashCode,
+        notification.title,
+        notification.body,
+        NotificationDetails(
+          android: AndroidNotificationDetails(
+              _androidChannel.id, _androidChannel.name,
+              channelDescription: _androidChannel.description,
+              icon: '@drawable/ic_launcher'),
+        ),
+        payload: jsonEncode(message.toMap()),
+      );
+      logNoStack
+          .i("NOTIFI2: INCOMING NOTIFICATION: AFter flutterLocalnotifixaiotn");
+
+      ref
+          .read(nestNotifisProvider.notifier)
+          .addRemoteNotification(notification);
+      Fluttertoast.showToast(
+          msg: "${notification.title!}::${notification.body!}",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: secondsToast,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+      logNoStack.i("NOTIFI2: INCOMING NOTIFICATION: AFter toast");
+    }
   });
 
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
@@ -328,5 +353,3 @@ void initialiseCamera(List<CameraDescription> cameras) async {
     logNoStack.e("${e.code} ${e..description}");
   }
 }
-
-
