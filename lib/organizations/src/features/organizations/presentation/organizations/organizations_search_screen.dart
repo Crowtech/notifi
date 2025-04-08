@@ -117,17 +117,17 @@ class OrganizationsSearchScreen extends ConsumerWidget {
                                 return AlertDialog(
                                   title: Text('${nt.t.response.delete}'),
                                   content:  Text(
-                                      'Are you sure you want to delete this item?'),
+                                      '${nt.t.response.delete_sure}'),
                                   actions: [
                                     TextButton(
                                       onPressed: () =>
                                           Navigator.of(context).pop(false),
-                                      child: const Text('Cancel'),
+                                      child:  Text('${nt.t.response.cancel}'),
                                     ),
                                     TextButton(
                                       onPressed: () =>
                                           Navigator.of(context).pop(true),
-                                      child: const Text('Delete'),
+                                      child: Text('${nt.t.response.delete}'),
                                     ),
                                   ],
                                 );
