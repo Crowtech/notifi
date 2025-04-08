@@ -24,7 +24,6 @@ class Organization extends Resource {
   String url;
 
   Organization({
-    super.orgid,
     super.id,
     super.code,
     super.created,

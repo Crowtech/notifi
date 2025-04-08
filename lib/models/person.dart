@@ -39,7 +39,6 @@ class Person extends Resource {
 
   Person({
     this.isSignedIn = false,
-    super.orgid,
     super.id,
     super.code,
     super.created,

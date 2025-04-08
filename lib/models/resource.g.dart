@@ -7,7 +7,6 @@ part of 'resource.dart';
 // **************************************************************************
 
 Resource _$ResourceFromJson(Map<String, dynamic> json) => Resource(
-      orgid: (json['orgid'] as num?)?.toInt(),
       id: (json['id'] as num?)?.toInt(),
       code: json['code'] as String?,
       created: json['created'] == null
@@ -26,7 +25,7 @@ Resource _$ResourceFromJson(Map<String, dynamic> json) => Resource(
           ? null
           : GPS.fromJson(json['gps'] as Map<String, dynamic>),
       selected: json['selected'] as bool? ?? false,
-    );
+    )..orgid = (json['orgid'] as num?)?.toInt();
 
 Map<String, dynamic> _$ResourceToJson(Resource instance) => <String, dynamic>{
       'orgid': instance.orgid,

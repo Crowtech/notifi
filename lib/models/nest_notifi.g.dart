@@ -7,7 +7,6 @@ part of 'nest_notifi.dart';
 // **************************************************************************
 
 NestNotifi _$NestNotifiFromJson(Map<String, dynamic> json) => NestNotifi(
-      orgid: (json['orgid'] as num?)?.toInt(),
       id: (json['id'] as num?)?.toInt(),
       code: json['code'] as String?,
       created: json['created'] == null
@@ -26,7 +25,7 @@ NestNotifi _$NestNotifiFromJson(Map<String, dynamic> json) => NestNotifi(
       nestNotifiType: $enumDecodeNullable(
               _$NestNotifiTypeEnumMap, json['nestNotifiType']) ??
           NestNotifiType.undefined,
-    );
+    )..orgid = (json['orgid'] as num?)?.toInt();
 
 Map<String, dynamic> _$NestNotifiToJson(NestNotifi instance) =>
     <String, dynamic>{

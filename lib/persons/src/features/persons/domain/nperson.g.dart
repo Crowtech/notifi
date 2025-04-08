@@ -7,7 +7,7 @@ part of 'nperson.dart';
 // **************************************************************************
 
 NPerson _$NPersonFromJson(Map<String, dynamic> json) => NPerson(
-      orgid: (json['orgid'] as num?)?.toInt(),
+      orgid: json['orgid'],
       id: (json['id'] as num?)?.toInt(),
       code: json['code'] as String?,
       created: json['created'] == null

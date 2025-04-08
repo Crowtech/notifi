@@ -7,7 +7,6 @@ part of 'organization.dart';
 // **************************************************************************
 
 Organization _$OrganizationFromJson(Map<String, dynamic> json) => Organization(
-      orgid: (json['orgid'] as num?)?.toInt(),
       id: (json['id'] as num?)?.toInt(),
       code: json['code'] as String?,
       created: json['created'] == null
@@ -28,7 +27,7 @@ Organization _$OrganizationFromJson(Map<String, dynamic> json) => Organization(
       selected: json['selected'] as bool? ?? false,
       orgType: json['orgType'] as String,
       url: json['url'] as String,
-    );
+    )..orgid = (json['orgid'] as num?)?.toInt();
 
 Map<String, dynamic> _$OrganizationToJson(Organization instance) =>
     <String, dynamic>{

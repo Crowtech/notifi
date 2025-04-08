@@ -7,7 +7,6 @@ part of 'equipment.dart';
 // **************************************************************************
 
 Equipment _$EquipmentFromJson(Map<String, dynamic> json) => Equipment(
-      orgid: (json['orgid'] as num?)?.toInt(),
       id: (json['id'] as num?)?.toInt(),
       code: json['code'] as String?,
       created: json['created'] == null
@@ -30,7 +29,9 @@ Equipment _$EquipmentFromJson(Map<String, dynamic> json) => Equipment(
       gps: json['gps'] == null
           ? null
           : GPS.fromJson(json['gps'] as Map<String, dynamic>),
-    )..selected = json['selected'] as bool;
+    )
+      ..orgid = (json['orgid'] as num?)?.toInt()
+      ..selected = json['selected'] as bool;
 
 Map<String, dynamic> _$EquipmentToJson(Equipment instance) => <String, dynamic>{
       'orgid': instance.orgid,

@@ -28,7 +28,6 @@ class Location extends Resource {
 
   Location(
       {
-      super.orgid,
       super.id,
       super.code,
       super.created,
@@ -93,10 +92,10 @@ class Location extends Resource {
 }
 
 Location defaultLocation = Location(
-  orgid: 0,
   id: 0,
   code: "LOC_DEFAULT", // code
   created: DateTime.now(), // created
+  active: true,
   updated: DateTime.now(), // updated
   name: "Default Location", // name
   description: "This is a default Location", // description

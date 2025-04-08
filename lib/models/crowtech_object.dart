@@ -13,7 +13,6 @@ class CrowtechObject extends CrowtechBase<CrowtechObject> {
 
   CrowtechObject(
       {
-      super.orgid,
       super.id,
       super.code,
       super.created,

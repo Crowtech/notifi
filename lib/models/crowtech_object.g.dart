@@ -8,7 +8,6 @@ part of 'crowtech_object.dart';
 
 CrowtechObject _$CrowtechObjectFromJson(Map<String, dynamic> json) =>
     CrowtechObject(
-      orgid: (json['orgid'] as num?)?.toInt(),
       id: (json['id'] as num?)?.toInt(),
       code: json['code'] as String?,
       created: json['created'] == null
@@ -19,7 +18,7 @@ CrowtechObject _$CrowtechObjectFromJson(Map<String, dynamic> json) =>
       updated: json['updated'] == null
           ? null
           : DateTime.parse(json['updated'] as String),
-    );
+    )..orgid = (json['orgid'] as num?)?.toInt();
 
 Map<String, dynamic> _$CrowtechObjectToJson(CrowtechObject instance) =>
     <String, dynamic>{

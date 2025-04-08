@@ -7,7 +7,6 @@ part of 'location.dart';
 // **************************************************************************
 
 Location _$LocationFromJson(Map<String, dynamic> json) => Location(
-      orgid: (json['orgid'] as num?)?.toInt(),
       id: (json['id'] as num?)?.toInt(),
       code: json['code'] as String?,
       created: json['created'] == null
@@ -27,7 +26,9 @@ Location _$LocationFromJson(Map<String, dynamic> json) => Location(
       gps: json['gps'] == null
           ? null
           : GPS.fromJson(json['gps'] as Map<String, dynamic>),
-    )..selected = json['selected'] as bool;
+    )
+      ..orgid = (json['orgid'] as num?)?.toInt()
+      ..selected = json['selected'] as bool;
 
 Map<String, dynamic> _$LocationToJson(Location instance) => <String, dynamic>{
       'orgid': instance.orgid,

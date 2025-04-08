@@ -29,7 +29,6 @@ class Equipment extends Resource {
   GPS? gps;
 
   Equipment({
-    super.orgid,
     super.id,
     super.code,
     super.created,
@@ -99,10 +98,10 @@ class Equipment extends Resource {
 }
 
 Equipment defaultEquipment = Equipment(
-  orgid: 0,
   id: 0,
   code: "EQP_DEFAULT", // code
   created: DateTime.now(), // created
+  active: true,
   updated: DateTime.now(), // updated
   name: "Default Equipment", // name
   description: "This is a default Equipment", // description

@@ -8,7 +8,6 @@ part of 'person.dart';
 
 Person _$PersonFromJson(Map<String, dynamic> json) => Person(
       isSignedIn: json['isSignedIn'] as bool? ?? false,
-      orgid: (json['orgid'] as num?)?.toInt(),
       id: (json['id'] as num?)?.toInt(),
       code: json['code'] as String?,
       created: json['created'] == null
@@ -39,6 +38,7 @@ Person _$PersonFromJson(Map<String, dynamic> json) => Person(
           ? null
           : GPS.fromJson(json['gps'] as Map<String, dynamic>),
     )
+      ..orgid = (json['orgid'] as num?)?.toInt()
       ..selected = json['selected'] as bool
       ..token = json['token'] as String?;
 

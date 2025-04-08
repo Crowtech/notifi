@@ -29,7 +29,6 @@ class Vehicle extends Resource {
   GPS? gps;
 
   Vehicle({
-    super.orgid,
     super.id,
     super.code,
     super.created,
@@ -99,10 +98,10 @@ class Vehicle extends Resource {
 }
 
 Vehicle defaultVehicle = Vehicle(
-  orgid: 0,
   id: 0,
   code: "VEH_DEFAULT", // code
   created: DateTime.now(), // created
+  active: true,
   updated: DateTime.now(), // updated
   name: "Default Vehicle", // name
   description: "This is a default Vehicle", // description

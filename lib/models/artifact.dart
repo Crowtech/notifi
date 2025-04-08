@@ -28,7 +28,6 @@ class Artifact extends Resource {
 
   Artifact(
       {
-      super.orgid,
       super.id,
       super.code,
       super.created,
@@ -84,7 +83,6 @@ class Artifact extends Resource {
 }
 
 Artifact defaultArtifact = Artifact(
-  orgid: 0,
   id: 0,
   code: "ART_DEFAULT", // code
   created: DateTime.now(), // created

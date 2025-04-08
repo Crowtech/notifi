@@ -32,7 +32,6 @@ class NestNotifi extends CrowtechObject implements PagingDataItem {
 
 
   NestNotifi({
-    super.orgid,
     super.id,
     super.code,
     super.created,

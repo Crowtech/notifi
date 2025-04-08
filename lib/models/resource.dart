@@ -31,7 +31,6 @@ class Resource extends CrowtechObject implements PagingDataItem {
   ResourceType resourceType;
 
   Resource({
-    super.orgid,
     super.id,
     super.code,
     super.created,
