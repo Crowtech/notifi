@@ -44,10 +44,10 @@ class NPerson extends Resource {
 
   NPerson({
 
-      super.orgid,
       super.id,
       super.code,
       super.created,
+      super.active,
       super.updated,
       super.name,
       super.description,
@@ -109,10 +109,10 @@ class NPerson extends Resource {
 
 
   NPerson copyWith({
-    int? orgid,
     int? id,
     String? code,
     DateTime? created,
+    bool? active,
     DateTime? updated,
     String? name,
     String? description,
@@ -138,6 +138,7 @@ class NPerson extends Resource {
       id: id ?? this.id,
       code: code ?? this.code,
       created: created ?? this.created,
+      active: active ?? this.active,
       updated: updated ?? this.updated,
       name: name ?? this.name,
       description: description ?? this.description,
@@ -163,10 +164,10 @@ class NPerson extends Resource {
 
 NPerson defaultPerson = NPerson(
 
-  orgid: 0,
   id: 0,
   code: "PER_DEFAULT", // code
   created: DateTime.now(), // created
+  active: true,
   updated: DateTime.now(), // updated
   name: "Default Person", // name
   description: "This is a default Person", // description

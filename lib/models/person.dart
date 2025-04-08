@@ -115,10 +115,10 @@ class Person extends Resource {
 
 Person defaultPerson = Person(
   isSignedIn: false,
-  orgid: 0,
   id: 0,
   code: "PER_DEFAULT", // code
   created: DateTime.now(), // created
+  active: true,
   updated: DateTime.now(), // updated
   name: "Default Person", // name
   description: "This is a default Person", // description

@@ -7,12 +7,12 @@ part of 'nperson.dart';
 // **************************************************************************
 
 NPerson _$NPersonFromJson(Map<String, dynamic> json) => NPerson(
-      orgid: json['orgid'],
       id: (json['id'] as num?)?.toInt(),
       code: json['code'] as String?,
       created: json['created'] == null
           ? null
           : DateTime.parse(json['created'] as String),
+      active: json['active'] as bool?,
       updated: json['updated'] == null
           ? null
           : DateTime.parse(json['updated'] as String),
@@ -37,7 +37,7 @@ NPerson _$NPersonFromJson(Map<String, dynamic> json) => NPerson(
           ? null
           : GPS.fromJson(json['gps'] as Map<String, dynamic>),
     )
-      ..active = json['active'] as bool?
+      ..orgid = (json['orgid'] as num?)?.toInt()
       ..selected = json['selected'] as bool
       ..token = json['token'] as String?;
 

@@ -118,10 +118,10 @@ class Organization extends Resource {
 }
 
 Organization defaultOrganization = Organization(
-  orgid: 0,
   id: 0,
   code: "ORG_DEFAULT", // code
   created: DateTime.now(), // created
+  active: true,
   updated: DateTime.now(), // updated
   name: "Default Organization", // name
   description: "This is a default Organization", // description
