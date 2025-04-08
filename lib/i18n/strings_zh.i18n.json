@@ -60,6 +60,7 @@
   "none": "没有任何",
   "highlight_title": "生成上下文感知的翻译",
   "highlight_description": "使用 GPT 生成上下文感知的翻译",
+  "language": "语言",
   "lastname": "姓",
   "light": "光",
   "login": "登录",

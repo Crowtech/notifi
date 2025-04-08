@@ -63,6 +63,7 @@
   "none": "None",
   "highlight_title": "Generate Context-Aware Translations",
   "highlight_description": "Generate context-aware aware translatinons with GPT",
+  "language": "Language",
   "lastname": "Lastname",
   "login": "Login",
   "login_page": "Login Page",

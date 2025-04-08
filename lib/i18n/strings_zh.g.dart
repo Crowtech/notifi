@@ -81,6 +81,7 @@ class TranslationsZh implements Translations {
 	@override String get none => '没有任何';
 	@override String get highlight_title => '生成上下文感知的翻译';
 	@override String get highlight_description => '使用 GPT 生成上下文感知的翻译';
+	@override String get language => '语言';
 	@override String get lastname => '姓';
 	@override String get light => '光';
 	@override String get login => '登录';
@@ -320,6 +321,7 @@ extension on TranslationsZh {
 			case 'none': return '没有任何';
 			case 'highlight_title': return '生成上下文感知的翻译';
 			case 'highlight_description': return '使用 GPT 生成上下文感知的翻译';
+			case 'language': return '语言';
 			case 'lastname': return '姓';
 			case 'light': return '光';
 			case 'login': return '登录';

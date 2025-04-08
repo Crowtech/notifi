@@ -87,6 +87,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get none => 'None';
 	String get highlight_title => 'Generate Context-Aware Translations';
 	String get highlight_description => 'Generate context-aware aware translatinons with GPT';
+	String get language => 'Language';
 	String get lastname => 'Lastname';
 	String get login => 'Login';
 	String get login_page => 'Login Page';
@@ -326,6 +327,7 @@ extension on Translations {
 			case 'none': return 'None';
 			case 'highlight_title': return 'Generate Context-Aware Translations';
 			case 'highlight_description': return 'Generate context-aware aware translatinons with GPT';
+			case 'language': return 'Language';
 			case 'lastname': return 'Lastname';
 			case 'login': return 'Login';
 			case 'login_page': return 'Login Page';
