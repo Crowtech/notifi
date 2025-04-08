@@ -90,7 +90,13 @@
   "response": {
     "ok": "OK",
     "cancel": "Cancel",
-    "reset": "Reset"
+    "reset": "Reset",
+    "delete": "Delete",
+    "edit": "Edit",
+    "save": "Save",
+    "update": "Update",
+    "create": "Create", 
+    "join": "Join"
   },
   "select": {
     "departments": "Select Departments ..",

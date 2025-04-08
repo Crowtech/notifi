@@ -194,6 +194,12 @@ class TranslationsResponseEn {
 	String get ok => 'OK';
 	String get cancel => 'Cancel';
 	String get reset => 'Reset';
+	String get delete => 'Delete';
+	String get edit => 'Edit';
+	String get save => 'Save';
+	String get update => 'Update';
+	String get create => 'Create';
+	String get join => 'Join';
 }
 
 // Path: select
@@ -339,6 +345,12 @@ extension on Translations {
 			case 'response.ok': return 'OK';
 			case 'response.cancel': return 'Cancel';
 			case 'response.reset': return 'Reset';
+			case 'response.delete': return 'Delete';
+			case 'response.edit': return 'Edit';
+			case 'response.save': return 'Save';
+			case 'response.update': return 'Update';
+			case 'response.create': return 'Create';
+			case 'response.join': return 'Join';
 			case 'select.departments': return 'Select Departments ..';
 			case 'select.drivers': return 'Select Drivers ..';
 			case 'select.groups': return 'Select Groups ..';

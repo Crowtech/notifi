@@ -193,6 +193,12 @@ class _TranslationsResponseZh extends TranslationsResponseEn {
 	@override String get ok => '好的';
 	@override String get cancel => '取消';
 	@override String get reset => '重置';
+	@override String get delete => '删除';
+	@override String get save => 'S节省';
+	@override String get edit => '编辑';
+	@override String get update => '更新';
+	@override String get create => '创造';
+	@override String get join => '加入';
 }
 
 // Path: select
@@ -338,6 +344,12 @@ extension on TranslationsZh {
 			case 'response.ok': return '好的';
 			case 'response.cancel': return '取消';
 			case 'response.reset': return '重置';
+			case 'response.delete': return '删除';
+			case 'response.save': return 'S节省';
+			case 'response.edit': return '编辑';
+			case 'response.update': return '更新';
+			case 'response.create': return '创造';
+			case 'response.join': return '加入';
 			case 'select.departments': return '选择部门 ..';
 			case 'select.drivers': return '选择驱动程序 ..';
 			case 'select.groups': return '选择组 ..';

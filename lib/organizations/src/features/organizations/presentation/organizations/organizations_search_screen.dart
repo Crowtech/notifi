@@ -105,6 +105,31 @@ class OrganizationsSearchScreen extends ConsumerWidget {
                       final organization = response.results[indexInPage];
                       return Dismissible(
                           key: Key(organization.id.toString()),
+                          direction: DismissDirection.horizontal,
+                          confirmDismiss: (direction) {
+                            return showDialog<bool>(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: const Text('Delete'),
+                                  content: const Text(
+                                      'Are you sure you want to delete this item?'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.of(context).pop(false),
+                                      child: const Text('Cancel'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.of(context).pop(true),
+                                      child: const Text('Delete'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
                           child: OrganizationListTile(
                             organization: organization,
                             debugIndex: index + 1,

@@ -90,8 +90,14 @@
   "response": {
     "ok": "好的",
     "cancel": "取消",
-    "reset": "重置"
-  },
+    "reset": "重置",
+      "delete": "删除",
+      "save": "S节省",
+      "edit": "编辑",
+      "update": "更新",
+      "create": "创造", 
+      "join": "加入"
+    },
   "select": {
     "departments": "选择部门 ..",
     "drivers": "选择驱动程序 ..",
