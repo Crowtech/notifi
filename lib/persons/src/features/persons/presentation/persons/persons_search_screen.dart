@@ -126,7 +126,7 @@ class PersonsSearchScreen extends ConsumerWidget {
                           pathParameters: {'id': person.id.toString()},
                           extra: person,
                         ),
-                      );
+                      ));
                     },
                   );
                 },
