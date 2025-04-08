@@ -55,6 +55,7 @@ class TranslationsZh implements Translations {
 	@override String get camera_access_restricted => '相机访问受到限制';
 	@override String get camera_denied => '您已拒绝相机访问';
 	@override String get camera_not_found => '未找到相机';
+	@override String get dark => '黑暗的';
 	@override String get dashboard => '仪表板';
 	@override String get deviceid => '设备标识符';
 	@override String get edit => '编辑';
@@ -81,6 +82,7 @@ class TranslationsZh implements Translations {
 	@override String get highlight_title => '生成上下文感知的翻译';
 	@override String get highlight_description => '使用 GPT 生成上下文感知的翻译';
 	@override String get lastname => '姓';
+	@override String get light => '光';
 	@override String get login => '登录';
 	@override String get login_page => '登录页面';
 	@override String get logout => '登出';
@@ -292,6 +294,7 @@ extension on TranslationsZh {
 			case 'camera_access_restricted': return '相机访问受到限制';
 			case 'camera_denied': return '您已拒绝相机访问';
 			case 'camera_not_found': return '未找到相机';
+			case 'dark': return '黑暗的';
 			case 'dashboard': return '仪表板';
 			case 'deviceid': return '设备标识符';
 			case 'edit': return '编辑';
@@ -318,6 +321,7 @@ extension on TranslationsZh {
 			case 'highlight_title': return '生成上下文感知的翻译';
 			case 'highlight_description': return '使用 GPT 生成上下文感知的翻译';
 			case 'lastname': return '姓';
+			case 'light': return '光';
 			case 'login': return '登录';
 			case 'login_page': return '登录页面';
 			case 'logout': return '登出';

@@ -58,6 +58,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get camera_access_restricted => 'Camera access is restricted';
 	String get camera_denied => 'Camera access denied by user.';
 	String get camera_not_found => 'No camera found.';
+	String get dark => 'departments';
 	String get dashboard => 'Dashboard';
 	String get deviceid => 'DeviceID';
 	String get edit => 'Edit';
@@ -74,6 +75,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get image_uploaded_failure => 'Image failed to upload';
 	String get intro_title => 'Welcome to Crowtech';
 	String get intro_description => 'Advanced Design';
+	String get light => 'light';
 	String get location_permission_denied => 'Location permissions are denied';
 	String get location_services_disabled => 'Location services are disabled. Please enable the services';
 	String get location_permission_permanent_denied => 'Location permissions are permanently denied, we cannot request permissions.';
@@ -295,6 +297,7 @@ extension on Translations {
 			case 'camera_access_restricted': return 'Camera access is restricted';
 			case 'camera_denied': return 'Camera access denied by user.';
 			case 'camera_not_found': return 'No camera found.';
+			case 'dark': return 'departments';
 			case 'dashboard': return 'Dashboard';
 			case 'deviceid': return 'DeviceID';
 			case 'edit': return 'Edit';
@@ -311,6 +314,7 @@ extension on Translations {
 			case 'image_uploaded_failure': return 'Image failed to upload';
 			case 'intro_title': return 'Welcome to Crowtech';
 			case 'intro_description': return 'Advanced Design';
+			case 'light': return 'light';
 			case 'location_permission_denied': return 'Location permissions are denied';
 			case 'location_services_disabled': return 'Location services are disabled. Please enable the services';
 			case 'location_permission_permanent_denied': return 'Location permissions are permanently denied, we cannot request permissions.';
