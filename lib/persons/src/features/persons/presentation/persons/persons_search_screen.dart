@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
+import 'package:notifi/widgets/slide_left_background.dart';
+import 'package:notifi/widgets/slide_right_background.dart';
 
 import '../../data/persons_repository.dart';
 import 'person_list_tile.dart';
@@ -87,7 +89,36 @@ class PersonsSearchScreen extends ConsumerWidget {
                         return null;
                       }
                       final person = response.results[indexInPage];
-                      return PersonListTile(
+                       return Dismissible(
+                          key: Key(person.id.toString()),
+                          direction: DismissDirection.horizontal,
+                          background: slideRightBackground(),
+                          secondaryBackground: slideLeftBackground(),
+                          confirmDismiss: (direction) {
+                            return showDialog<bool>(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: Text('${nt.t.response.delete}'),
+                                  content:  Text(
+                                      '${nt.t.response.delete_sure}'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.of(context).pop(false),
+                                      child:  Text('${nt.t.response.cancel}'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.of(context).pop(true),
+                                      child: Text('${nt.t.response.delete}'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                          child: PersonListTile(
                         person: person,
                         debugIndex: index + 1,
                         onPressed: () => context.goNamed(
