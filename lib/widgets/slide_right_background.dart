@@ -4,7 +4,7 @@ import 'package:notifi/i18n/strings.g.dart' as nt;
 Widget slideRightBackground() {
   return Container(
     color: Colors.green,
-    child: const Align(
+    child: Align(
        alignment: Alignment.centerLeft,
       child: Row(
         

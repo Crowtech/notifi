@@ -92,6 +92,7 @@
     "cancel": "取消",
     "reset": "重置",
       "delete": "删除",
+      "delete_sure": "您确实要删除此项吗",
       "save": "S节省",
       "edit": "编辑",
       "update": "更新",

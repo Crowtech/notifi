@@ -8,6 +8,8 @@ import 'package:notifi/models/nest_filter_type.dart';
 import 'package:notifi/models/nestfilter.dart';
 import 'package:notifi/organizations/src/features/organizations/data/organizations_repository_nf.dart';
 import 'package:notifi/riverpod/nest_filter_provider.dart';
+import 'package:notifi/widgets/slide_left_background.dart';
+import 'package:notifi/widgets/slide_right_background.dart';
 
 import '../../data/organizations_repository.dart';
 import 'organization_list_tile.dart';
@@ -106,13 +108,15 @@ class OrganizationsSearchScreen extends ConsumerWidget {
                       return Dismissible(
                           key: Key(organization.id.toString()),
                           direction: DismissDirection.horizontal,
+                          background: slideRightBackground(),
+                          secondaryBackground: slideLeftBackground(),
                           confirmDismiss: (direction) {
                             return showDialog<bool>(
                               context: context,
                               builder: (context) {
                                 return AlertDialog(
-                                  title: const Text('Delete'),
-                                  content: const Text(
+                                  title: Text('${nt.t.response.delete}'),
+                                  content:  Text(
                                       'Are you sure you want to delete this item?'),
                                   actions: [
                                     TextButton(
