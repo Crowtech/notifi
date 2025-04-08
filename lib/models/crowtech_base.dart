@@ -10,9 +10,10 @@ abstract class CrowtechBase<T> {
   int? orgid;
   int? id;
   DateTime? created = DateTime.now().toUtc();
+  bool? active=true;
   String? code;
 
-  CrowtechBase({this.orgid,this.id, this.created, required this.code}); 
+  CrowtechBase({this.orgid,this.id, this.created, this.active,required this.code}); 
 
   //CrowtechBase.namedConstructor({this.id, required this.created, this.code});
 

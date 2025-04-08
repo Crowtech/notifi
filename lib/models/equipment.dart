@@ -34,6 +34,7 @@ class Equipment extends Resource {
     super.code,
     super.created,
     super.updated,
+    super.active,
     super.name,
     super.description,
     super.location,

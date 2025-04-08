@@ -16,6 +16,7 @@ Equipment _$EquipmentFromJson(Map<String, dynamic> json) => Equipment(
       updated: json['updated'] == null
           ? null
           : DateTime.parse(json['updated'] as String),
+      active: json['active'] as bool?,
       name: json['name'] as String?,
       description: json['description'] as String?,
       location: json['location'] as String?,
@@ -35,6 +36,7 @@ Map<String, dynamic> _$EquipmentToJson(Equipment instance) => <String, dynamic>{
       'orgid': instance.orgid,
       'id': instance.id,
       'created': instance.created?.toIso8601String(),
+      'active': instance.active,
       'code': instance.code,
       'updated': instance.updated?.toIso8601String(),
       'name': instance.name,

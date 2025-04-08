@@ -43,6 +43,7 @@ class Person extends Resource {
     super.id,
     super.code,
     super.created,
+    super.active,
     super.updated,
     super.name,
     super.description,

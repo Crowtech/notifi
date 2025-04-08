@@ -119,7 +119,7 @@ Future<String> sendGPS(Person currentUser,String token, bg.Location location) as
       moving: location.isMoving,
       resourcecode: currentUser.code!,
       devicecode: deviceId,
-      orgid: currentUser.orgid,
+      active: true,
     );
 
 // this is because the class inheritance doesn't seem to want to set the fields from the constructor

@@ -19,13 +19,16 @@ AppVersion _$AppVersionFromJson(Map<String, dynamic> json) => AppVersion(
       version: json['version'] as String?,
       buildNumber: json['buildNumber'] as String?,
       dockerId: json['dockerId'] as String?,
-    )..orgid = (json['orgid'] as num?)?.toInt();
+    )
+      ..orgid = (json['orgid'] as num?)?.toInt()
+      ..active = json['active'] as bool?;
 
 Map<String, dynamic> _$AppVersionToJson(AppVersion instance) =>
     <String, dynamic>{
       'orgid': instance.orgid,
       'id': instance.id,
       'created': instance.created?.toIso8601String(),
+      'active': instance.active,
       'code': instance.code,
       'updated': instance.updated?.toIso8601String(),
       'name': instance.name,

@@ -32,6 +32,7 @@ class Artifact extends Resource {
       super.id,
       super.code,
       super.created,
+      super.active,
       super.updated,
       super.name,
       super.description,
@@ -88,6 +89,7 @@ Artifact defaultArtifact = Artifact(
   code: "ART_DEFAULT", // code
   created: DateTime.now(), // created
   updated: DateTime.now(), // updated
+  active: true,
   name: "Default Artifact", // name
   description: "This is a default Artifact", // description
   location: "", // location

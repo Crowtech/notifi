@@ -13,6 +13,7 @@ Organization _$OrganizationFromJson(Map<String, dynamic> json) => Organization(
       created: json['created'] == null
           ? null
           : DateTime.parse(json['created'] as String),
+      active: json['active'] as bool?,
       updated: json['updated'] == null
           ? null
           : DateTime.parse(json['updated'] as String),
@@ -34,6 +35,7 @@ Map<String, dynamic> _$OrganizationToJson(Organization instance) =>
       'orgid': instance.orgid,
       'id': instance.id,
       'created': instance.created?.toIso8601String(),
+      'active': instance.active,
       'code': instance.code,
       'updated': instance.updated?.toIso8601String(),
       'name': instance.name,
