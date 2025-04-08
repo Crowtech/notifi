@@ -194,6 +194,7 @@ class _TranslationsResponseZh implements TranslationsResponseEn {
 	@override String get delete => '删除';
 	@override String get delete_sure => '您确实要删除此项吗';
 	@override String get save => 'S节省';
+	@override String get submit => '提交';
 	@override String get edit => '编辑';
 	@override String get update => '更新';
 	@override String get create => '创造';
@@ -346,6 +347,7 @@ extension on TranslationsZh {
 			case 'response.delete': return '删除';
 			case 'response.delete_sure': return '您确实要删除此项吗';
 			case 'response.save': return 'S节省';
+			case 'response.submit': return '提交';
 			case 'response.edit': return '编辑';
 			case 'response.update': return '更新';
 			case 'response.create': return '创造';

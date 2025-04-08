@@ -7,6 +7,7 @@ import 'package:logger/logger.dart' as logger;
 import 'package:notifi/models/nest_filter_type.dart';
 import 'package:notifi/models/nestfilter.dart';
 import 'package:notifi/organizations/src/features/organizations/data/organizations_repository_nf.dart';
+import 'package:notifi/organizations/src/features/organizations/presentation/organizations/organization_form.dart';
 import 'package:notifi/riverpod/nest_filter_provider.dart';
 import 'package:notifi/widgets/slide_left_background.dart';
 import 'package:notifi/widgets/slide_right_background.dart';
@@ -116,13 +117,12 @@ class OrganizationsSearchScreen extends ConsumerWidget {
                               builder: (context) {
                                 return AlertDialog(
                                   title: Text('${nt.t.response.delete}'),
-                                  content:  Text(
-                                      '${nt.t.response.delete_sure}'),
+                                  content: Text('${nt.t.response.delete_sure}'),
                                   actions: [
                                     TextButton(
                                       onPressed: () =>
                                           Navigator.of(context).pop(false),
-                                      child:  Text('${nt.t.response.cancel}'),
+                                      child: Text('${nt.t.response.cancel}'),
                                     ),
                                     TextButton(
                                       onPressed: () =>
@@ -156,6 +156,10 @@ class OrganizationsSearchScreen extends ConsumerWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           logNoStack.i("ORGS_SEARCH_SCREEN: Add button pressed");
+          showDialog(
+            context: context,
+            builder: (context) => CreateOrganizationForm(),
+          );
         },
         // foregroundColor: customizations[index].$1,
         // backgroundColor: customizations[index].$2,

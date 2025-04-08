@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
+import 'package:notifi/persons/src/features/persons/presentation/persons/person_form.dart';
 import 'package:notifi/widgets/slide_left_background.dart';
 import 'package:notifi/widgets/slide_right_background.dart';
 
@@ -138,6 +139,10 @@ class PersonsSearchScreen extends ConsumerWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           logNoStack.i("PERSONS_SEARCH_SCREEN: Add button pressed");
+             showDialog(
+            context: context,
+            builder: (context) => CreatePersonForm(),
+          );
         },
         // foregroundColor: customizations[index].$1,
         // backgroundColor: customizations[index].$2,

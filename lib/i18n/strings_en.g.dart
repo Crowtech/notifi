@@ -198,6 +198,7 @@ class TranslationsResponseEn {
 	String get delete_sure => 'Are you sure you want to delete this item?';
 	String get edit => 'Edit';
 	String get save => 'Save';
+	String get submit => 'Submit';
 	String get update => 'Update';
 	String get create => 'Create';
 	String get join => 'Join';
@@ -350,6 +351,7 @@ extension on Translations {
 			case 'response.delete_sure': return 'Are you sure you want to delete this item?';
 			case 'response.edit': return 'Edit';
 			case 'response.save': return 'Save';
+			case 'response.submit': return 'Submit';
 			case 'response.update': return 'Update';
 			case 'response.create': return 'Create';
 			case 'response.join': return 'Join';
