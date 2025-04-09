@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../../../organizations/src/common_widgets/nest_poster.dart';
 import '../../../../../../organizations/src/common_widgets/top_gradient.dart';
 import '../../domain/nperson.dart';
+import 'package:notifi/i18n/strings.g.dart' as nt;
 
 class PersonListTile extends StatelessWidget {
   const PersonListTile({
@@ -60,7 +61,7 @@ class PersonListTile extends StatelessWidget {
                 if (person.created != null) ...[
                   const SizedBox(height: 8),
                   Text(
-                    'Created: ${person.created}',
+                    '${nt.t.created}: ${person.created}',
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ],

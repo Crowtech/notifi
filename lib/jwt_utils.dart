@@ -17,6 +17,7 @@ import 'package:oidc/oidc.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as prov;
+import 'package:notifi/i18n/strings.g.dart' as nt;
 
 import 'api_utils.dart';
 import 'credentials.dart';
@@ -91,6 +92,12 @@ Future<bool> loginUser(
     //     "logged in notifi user: ${Provider.of<Notifi>(context, listen: false).currentUser}");
 
    // ref.read(currentUserProvider.notifier).setPerson(user);
+  if (user.i18n == 'en') {
+    nt.LocaleSettings.setLocale(nt.AppLocale.en);
+  } else if (user.i18n == 'zh') {
+    nt.LocaleSettings.setLocale(nt.AppLocale.zh);
+  }
+
     return true;
   }).catchError((error) {
     log.e("login api error $error");
