@@ -7,6 +7,7 @@ import 'package:logger/logger.dart' as logger;
 import 'package:notifi/models/nest_filter_type.dart';
 import 'package:notifi/models/nestfilter.dart';
 import 'package:notifi/organizations/src/features/organizations/data/organizations_repository_nf.dart';
+import 'package:notifi/organizations/src/features/organizations/presentation/organization_details/organization_details_screen.dart';
 import 'package:notifi/organizations/src/features/organizations/presentation/organizations/organization_form.dart';
 import 'package:notifi/riverpod/nest_filter_provider.dart';
 import 'package:notifi/widgets/slide_left_background.dart';
@@ -137,15 +138,22 @@ class OrganizationsSearchScreen extends ConsumerWidget {
                           child: OrganizationListTile(
                             organization: organization,
                             debugIndex: index + 1,
-                            onPressed: () { 
+                            onPressed: () {
                               logNoStack.i("Clicked on ${organization.name}");
-                              context.goNamed(
-                              "organization",
-                              pathParameters: {
-                                'id': organization.id.toString()
-                              },
-                              extra: organization,
-                            );},
+                              showDialog(
+                                context: context,
+                                builder: (context) => OrganizationDetailsScreen(
+                                    organizationId: organization.id!,
+                                    organization: organization),
+                              );
+                            },
+                            //   context.goNamed(
+                            //   "organization",
+                            //   pathParameters: {
+                            //     'id': organization.id.toString()
+                            //   },
+                            //   extra: organization,
+                            // );},
                           ));
                     },
                   );

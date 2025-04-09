@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
+import 'package:notifi/persons/src/features/persons/presentation/person_details/person_details_screen.dart';
 import 'package:notifi/persons/src/features/persons/presentation/persons/person_form.dart';
 import 'package:notifi/widgets/slide_left_background.dart';
 import 'package:notifi/widgets/slide_right_background.dart';
@@ -90,7 +91,7 @@ class PersonsSearchScreen extends ConsumerWidget {
                         return null;
                       }
                       final person = response.results[indexInPage];
-                       return Dismissible(
+                      return Dismissible(
                           key: Key(person.id.toString()),
                           direction: DismissDirection.horizontal,
                           background: slideRightBackground(),
@@ -101,13 +102,12 @@ class PersonsSearchScreen extends ConsumerWidget {
                               builder: (context) {
                                 return AlertDialog(
                                   title: Text('${nt.t.response.delete}'),
-                                  content:  Text(
-                                      '${nt.t.response.delete_sure}'),
+                                  content: Text('${nt.t.response.delete_sure}'),
                                   actions: [
                                     TextButton(
                                       onPressed: () =>
                                           Navigator.of(context).pop(false),
-                                      child:  Text('${nt.t.response.cancel}'),
+                                      child: Text('${nt.t.response.cancel}'),
                                     ),
                                     TextButton(
                                       onPressed: () =>
@@ -120,17 +120,17 @@ class PersonsSearchScreen extends ConsumerWidget {
                             );
                           },
                           child: PersonListTile(
-                        person: person,
-                        debugIndex: index + 1,
-                        onPressed: () { 
-                           logNoStack.i("Clicked on ${person.name}");
-                          context.goNamed(
-                          "person",
-                          pathParameters: {'id': person.id.toString()},
-                          extra: person,
-                        );
-                        },
-                      ));
+                            person: person,
+                            debugIndex: index + 1,
+                            onPressed: () {
+                              logNoStack.i("Clicked on ${person.name}");
+                              showDialog(
+                                context: context,
+                                builder: (context) => PersonDetailsScreen(
+                                    personId: person.id!, person: person),
+                              );
+                            },
+                          ));
                     },
                   );
                 },
@@ -142,7 +142,7 @@ class PersonsSearchScreen extends ConsumerWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           logNoStack.i("PERSONS_SEARCH_SCREEN: Add button pressed");
-             showDialog(
+          showDialog(
             context: context,
             builder: (context) => CreatePersonForm(),
           );
