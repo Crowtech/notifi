@@ -58,6 +58,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get camera_access_restricted => 'Camera access is restricted';
 	String get camera_denied => 'Camera access denied by user.';
 	String get camera_not_found => 'No camera found.';
+	String get created => 'Created';
 	String get dark => 'dark';
 	String get dashboard => 'Dashboard';
 	String get deviceid => 'DeviceID';
@@ -298,6 +299,7 @@ extension on Translations {
 			case 'camera_access_restricted': return 'Camera access is restricted';
 			case 'camera_denied': return 'Camera access denied by user.';
 			case 'camera_not_found': return 'No camera found.';
+			case 'created': return 'Created';
 			case 'dark': return 'dark';
 			case 'dashboard': return 'Dashboard';
 			case 'deviceid': return 'DeviceID';

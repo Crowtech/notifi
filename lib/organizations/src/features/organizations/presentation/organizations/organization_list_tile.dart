@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:notifi/models/organization.dart';
 import 'package:notifi/organizations/src/common_widgets/nest_poster.dart';
 import 'package:notifi/organizations/src/common_widgets/top_gradient.dart';
+import 'package:notifi/i18n/strings.g.dart' as nt;
 
 
 class OrganizationListTile extends StatelessWidget {
@@ -59,7 +60,7 @@ class OrganizationListTile extends StatelessWidget {
                 if (organization.created != null) ...[
                   const SizedBox(height: 8),
                   Text(
-                    'Created: ${organization.created}',
+                    '${nt.t.created}: ${organization.created}',
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ],

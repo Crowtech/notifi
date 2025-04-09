@@ -57,6 +57,7 @@ class TranslationsZh extends Translations {
 	@override String get camera_access_restricted => '相机访问受到限制';
 	@override String get camera_denied => '您已拒绝相机访问';
 	@override String get camera_not_found => '未找到相机';
+	@override String get created => '创建时间';
 	@override String get dark => '黑暗的';
 	@override String get dashboard => '仪表板';
 	@override String get deviceid => '设备标识符';
@@ -297,6 +298,7 @@ extension on TranslationsZh {
 			case 'camera_access_restricted': return '相机访问受到限制';
 			case 'camera_denied': return '您已拒绝相机访问';
 			case 'camera_not_found': return '未找到相机';
+			case 'created': return '创建时间';
 			case 'dark': return '黑暗的';
 			case 'dashboard': return '仪表板';
 			case 'deviceid': return '设备标识符';
