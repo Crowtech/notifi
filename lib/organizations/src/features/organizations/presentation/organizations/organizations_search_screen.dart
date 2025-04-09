@@ -137,13 +137,15 @@ class OrganizationsSearchScreen extends ConsumerWidget {
                           child: OrganizationListTile(
                             organization: organization,
                             debugIndex: index + 1,
-                            onPressed: () => context.goNamed(
+                            onPressed: () { 
+                              logNoStack.i("Clicked on ${organization.name}");
+                              context.goNamed(
                               "organization",
                               pathParameters: {
                                 'id': organization.id.toString()
                               },
                               extra: organization,
-                            ),
+                            );},
                           ));
                     },
                   );

@@ -122,11 +122,14 @@ class PersonsSearchScreen extends ConsumerWidget {
                           child: PersonListTile(
                         person: person,
                         debugIndex: index + 1,
-                        onPressed: () => context.goNamed(
+                        onPressed: () { 
+                           logNoStack.i("Clicked on ${person.name}");
+                          context.goNamed(
                           "person",
                           pathParameters: {'id': person.id.toString()},
                           extra: person,
-                        ),
+                        );
+                        },
                       ));
                     },
                   );
