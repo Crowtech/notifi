@@ -16,6 +16,7 @@ import 'package:notifi/app_state.dart' as app_state;
 import 'package:logger/logger.dart' as logger;
 import 'package:flutter_background_geolocation/flutter_background_geolocation.dart'
     as bg;
+    import 'package:notifi/i18n/strings.g.dart' as nt;
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -166,6 +167,13 @@ class NestAuthController extends Notifier<bool> with ChangeNotifier {
         currentUser = await registerLogin(oidcUser.token.accessToken!);
         currentUser.isSignedIn = true;
         isLoggedIn = true;
+            if (currentUser.i18n == "zh") { // UGLY
+                        nt.LocaleSettings.setLocale(nt.AppLocale.zh);
+                      } else  if ( currentUser.i18n== "en") {
+                        nt.LocaleSettings.setLocale(nt.AppLocale.en);
+                      } else {
+                        nt.LocaleSettings.setLocale(nt.AppLocale.en);
+                      }
 
         String fcm = ref.read(fcmNotifierProvider);
         if (fcm != 'NOT_READY') {
