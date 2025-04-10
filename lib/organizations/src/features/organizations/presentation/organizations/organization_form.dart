@@ -94,21 +94,7 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
                     ? null
                     : nt.t.organization.email_validation,
               ),
-              SizedBox(height: 16),
-              TextFormField(
-                controller: _urlController,
-                autocorrect: true,
-                decoration: InputDecoration(
-                  labelText: nt.t.organization.url,
-                  border: OutlineInputBorder(),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return nt.t.organization.url_validation;
-                  }
-                  return null;
-                },
-              ),
+
               // SizedBox(height: 16),
               // TextFormField(
               //   controller: _addressController,
@@ -136,7 +122,42 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
                 groupValue: orgTypeIndex,
                 onChanged: (value) => orgTypeIndex = value!,
               ),
+                RadioListTile<OrganizationType>(
+                title: Text(nt.t.group_types.friends),
+                value: OrganizationType.FRIENDS,
+                groupValue: orgTypeIndex,
+                onChanged: (value) => orgTypeIndex = value!,
+              ),
+                RadioListTile<OrganizationType>(
+                title: Text(nt.t.group_types.org),
+                value: OrganizationType.ORG,
+                groupValue: orgTypeIndex,
+                onChanged: (value) => orgTypeIndex = value!,
+              ),
+                RadioListTile<OrganizationType>(
+                title: Text(nt.t.group_types.government),
+                value: OrganizationType.GOVERNMENT,
+                groupValue: orgTypeIndex,
+                onChanged: (value) => orgTypeIndex = value!,
+              ),
               const SizedBox(height: 16),
+
+              SizedBox(height: 16),
+              TextFormField(
+                enabled: (orgTypeIndex.isUrlable),
+                controller: _urlController,
+                autocorrect: true,
+                decoration: InputDecoration(
+                  labelText: nt.t.organization.url,
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return nt.t.organization.url_validation;
+                  }
+                  return null;
+                },
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
