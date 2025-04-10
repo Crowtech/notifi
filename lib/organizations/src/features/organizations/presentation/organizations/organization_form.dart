@@ -66,7 +66,6 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
               ),
               SizedBox(height: 16),
               TextFormField(
-                expands: true,
                 controller: _descriptionController,
                 decoration: InputDecoration(
                   labelText: nt.t.organization.description,
