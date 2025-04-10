@@ -65,16 +65,17 @@ class SelectedOrganizations extends _$SelectedOrganizations {
   } 
 
     SelectedResources getSelectedResources(Map<int, bool> orgMap) {
-    SelectedResources selectedResources = SelectedResources(selectedResourceIds: [], unselectedResourceIds: []);
+    List<int> selectedResourceIds = [];
+    List<int> unselectedResourceIds = [];
 
       for (MapEntry<int, bool> org in orgMap.entries) {
         if (org.value == true) {
-          selectedResources.selectedResourceIds.add(org.key);
+          selectedResourceIds.add(org.key);
         } else {
-          selectedResources.unselectedResourceIds.add(org.key);
+          unselectedResourceIds.add(org.key);
         }
       }
-   
+   SelectedResources selectedResources = SelectedResources(selectedResourceIds: selectedResourceIds, unselectedResourceIds: unselectedResourceIds);
     return selectedResources;
   }
 }
