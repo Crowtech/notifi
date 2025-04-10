@@ -46,12 +46,11 @@ class SelectedResources with _$SelectedResources {
 class AsyncSelectedResources extends _$AsyncSelectedResources {
   Future<SelectedResources> _fetch() async {
 
-    Person currentUser = ref.read(nestAuthProvider.notifier).currentUser;
     String token = ref.read(nestAuthProvider.notifier).token!;
    
     var response = await apiGetData(
         token,
-        "$defaultAPIBaseUrl$defaultApiPrefixPath/resources/sources/${currentUser.id}");
+        "$defaultAPIBaseUrl$defaultApiPrefixPath/resources/sources/selected");
     // .then((response) {
     logNoStack.i("SELECTED_RESOURCES: result ${response.body.toString()}");
     final map = jsonDecode(response.body);
@@ -75,12 +74,11 @@ class AsyncSelectedResources extends _$AsyncSelectedResources {
     // Add the new selectedResource and reload the selectedResources from the remote repository
     state = await AsyncValue.guard(() async {
 
-     Person currentUser = ref.read(nestAuthProvider.notifier).currentUser;
     String token = ref.read(nestAuthProvider.notifier).token!;
    
     var response = await apiPostDataNoLocale(
         token,
-        "$defaultAPIBaseUrl$defaultApiPrefixPath/resources/sources/${currentUser.id}",
+        "$defaultAPIBaseUrl$defaultApiPrefixPath/resources/sources/selected",
         "selectedResources",
         jsonEncode(selectedResources));
     // .then((response) {

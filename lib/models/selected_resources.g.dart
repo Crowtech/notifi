@@ -29,7 +29,7 @@ Map<String, dynamic> _$$SelectedResourcesImplToJson(
 // **************************************************************************
 
 String _$asyncSelectedResourcesHash() =>
-    r'be7af162a46ca74e96435e19fbe2d1e0d5848e5a';
+    r'dec334638f1712ee609da6be92fc5b5a9422b367';
 
 /// See also [AsyncSelectedResources].
 @ProviderFor(AsyncSelectedResources)
