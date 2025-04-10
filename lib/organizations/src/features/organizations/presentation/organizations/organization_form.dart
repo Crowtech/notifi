@@ -206,7 +206,7 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
                   ),
                   const SizedBox(width: 16),
                   ElevatedButton(
-                    onPressed: _formKey.currentState!.validate()
+                    onPressed: (_formKey.currentState !=null &&_formKey.currentState!.validate())
                         ? _handleSubmit
                         : null,
                     child: Text(nt.t.response.submit),
