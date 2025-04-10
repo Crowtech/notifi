@@ -70,7 +70,7 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
     return Dialog(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Form(
+        child: SingleChildScrollView(child: Form(
           key: _formKey,
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -193,7 +193,7 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
                       (orgTypeIndex != null && orgTypeIndex!.isUrlable)) {
                     return nt.t.organization.url_validation;
                   } else {
-                    if (value != null && !value.isUri()) {
+                    if (value != null && !value.isUri() && orgTypeIndex!.isUrlable) {
                       return nt.t.organization.url_validation;
                     } else {
                       return null;
@@ -224,6 +224,7 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
               ),
             ],
           ),
+        ),
         ),
       ),
     );
