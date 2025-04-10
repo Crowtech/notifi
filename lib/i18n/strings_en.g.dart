@@ -70,6 +70,8 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get firstname => 'Firstname';
 	String get focus_mode => 'Focus Mode';
 	String get groups => 'Groups';
+	String get group_types_title => 'Group Types';
+	late final TranslationsGroupTypesEn group_types = TranslationsGroupTypesEn.internal(_root);
 	String get help => 'Help';
 	String get home => 'Home';
 	String get image_uploaded_success => 'Image uploaded successfully';
@@ -155,6 +157,29 @@ class TranslationsAccountEn {
 	String get update_failure => 'Update failed';
 	String get update_success => 'Update successful';
 	String get username_taken => 'Username already taken.';
+}
+
+// Path: group_types
+class TranslationsGroupTypesEn {
+	TranslationsGroupTypesEn.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get kDefault => 'Default';
+	String get commercial => 'Commercial';
+	String get government => 'Government';
+	String get unknown => 'Unknown';
+	String get private => 'Private';
+	String get person => 'Person';
+	String get org => 'Organization';
+	String get group => 'Group';
+	String get family => 'Family';
+	String get friends => 'Friends';
+	String get Education => 'Education';
+	String get team => 'Team';
+	String get department => 'Department';
+	String get company => 'Company';
 }
 
 // Path: organization
@@ -333,6 +358,21 @@ extension on Translations {
 			case 'firstname': return 'Firstname';
 			case 'focus_mode': return 'Focus Mode';
 			case 'groups': return 'Groups';
+			case 'group_types_title': return 'Group Types';
+			case 'group_types.kDefault': return 'Default';
+			case 'group_types.commercial': return 'Commercial';
+			case 'group_types.government': return 'Government';
+			case 'group_types.unknown': return 'Unknown';
+			case 'group_types.private': return 'Private';
+			case 'group_types.person': return 'Person';
+			case 'group_types.org': return 'Organization';
+			case 'group_types.group': return 'Group';
+			case 'group_types.family': return 'Family';
+			case 'group_types.friends': return 'Friends';
+			case 'group_types.Education': return 'Education';
+			case 'group_types.team': return 'Team';
+			case 'group_types.department': return 'Department';
+			case 'group_types.company': return 'Company';
 			case 'help': return 'Help';
 			case 'home': return 'Home';
 			case 'image_uploaded_success': return 'Image uploaded successfully';

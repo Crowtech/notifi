@@ -69,6 +69,8 @@ class TranslationsZh extends Translations {
 	@override String get firstname => '给定的名称';
 	@override String get focus_mode => '专注模式';
 	@override String get groups => '群组';
+	@override String get group_types_title => '群组类型';
+	@override late final _TranslationsGroupTypesZh group_types = _TranslationsGroupTypesZh._(_root);
 	@override String get help => '帮助';
 	@override String get home => '家';
 	@override String get image_uploaded_success => '图片上传成功';
@@ -153,6 +155,29 @@ class _TranslationsAccountZh extends TranslationsAccountEn {
 	@override String get update_failure => '更新失败';
 	@override String get update_success => '更新成功';
 	@override String get username_taken => '用户名已被使用。';
+}
+
+// Path: group_types
+class _TranslationsGroupTypesZh extends TranslationsGroupTypesEn {
+	_TranslationsGroupTypesZh._(TranslationsZh root) : this._root = root, super.internal(root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get kDefault => '默认';
+	@override String get commercial => '商业的';
+	@override String get government => '政府';
+	@override String get unknown => '未知';
+	@override String get private => '私人的';
+	@override String get person => '人';
+	@override String get org => '组织';
+	@override String get group => '团体';
+	@override String get family => '家庭';
+	@override String get friends => '朋友们';
+	@override String get Education => '教育';
+	@override String get team => '团队';
+	@override String get department => '部门';
+	@override String get company => '公司';
 }
 
 // Path: resource
@@ -310,6 +335,21 @@ extension on TranslationsZh {
 			case 'firstname': return '给定的名称';
 			case 'focus_mode': return '专注模式';
 			case 'groups': return '群组';
+			case 'group_types_title': return '群组类型';
+			case 'group_types.kDefault': return '默认';
+			case 'group_types.commercial': return '商业的';
+			case 'group_types.government': return '政府';
+			case 'group_types.unknown': return '未知';
+			case 'group_types.private': return '私人的';
+			case 'group_types.person': return '人';
+			case 'group_types.org': return '组织';
+			case 'group_types.group': return '团体';
+			case 'group_types.family': return '家庭';
+			case 'group_types.friends': return '朋友们';
+			case 'group_types.Education': return '教育';
+			case 'group_types.team': return '团队';
+			case 'group_types.department': return '部门';
+			case 'group_types.company': return '公司';
 			case 'help': return '帮助';
 			case 'home': return '家';
 			case 'image_uploaded_success': return '图片上传成功';

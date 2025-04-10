@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
+import 'package:notifi/models/organization_type.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -23,15 +24,17 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _emailController = TextEditingController();
-  final _phoneController = TextEditingController();
+  final _urlController = TextEditingController();
   final _addressController = TextEditingController();
+
+  OrganizationType orgTypeIndex = OrganizationType.GROUP;
 
   @override
   void dispose() {
     _nameController.dispose();
     _descriptionController.dispose();
     _emailController.dispose();
-    _phoneController.dispose();
+    _urlController.dispose();
     _addressController.dispose();
     super.dispose();
   }
@@ -53,6 +56,7 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
               SizedBox(height: 16),
               TextFormField(
                 controller: _nameController,
+                autocorrect: true,
                 decoration: InputDecoration(
                   labelText: nt.t.organization.name,
                   border: OutlineInputBorder(),
@@ -67,6 +71,7 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
               SizedBox(height: 16),
               TextFormField(
                 controller: _descriptionController,
+                autocorrect: true,
                 decoration: InputDecoration(
                   labelText: nt.t.organization.description,
                   border: OutlineInputBorder(),
@@ -85,22 +90,25 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
                   labelText: nt.t.organization.email,
                   border: OutlineInputBorder(),
                 ),
-  validator: (input) => EmailValidator.validate(input!)? null : nt.t.organization.email_validation,
+                validator: (input) => EmailValidator.validate(input!)
+                    ? null
+                    : nt.t.organization.email_validation,
               ),
-              // SizedBox(height: 16),
-              // TextFormField(
-              //   controller: _phoneController,
-              //   decoration: InputDecoration(
-              //     labelText: 'Organization Phone Number',
-              //     border: OutlineInputBorder(),
-              //   ),
-              //   validator: (value) {
-              //     if (value == null || value.isEmpty) {
-              //       return 'Please enter organization phone number';
-              //     }
-              //     return null;
-              //   },
-              // ),
+              SizedBox(height: 16),
+              TextFormField(
+                controller: _urlController,
+                autocorrect: true,
+                decoration: InputDecoration(
+                  labelText: nt.t.organization.url,
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return nt.t.organization.url_validation;
+                  }
+                  return null;
+                },
+              ),
               // SizedBox(height: 16),
               // TextFormField(
               //   controller: _addressController,
@@ -115,7 +123,20 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
               //     return null;
               //   },
               //),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
+              RadioListTile<OrganizationType>(
+                title: Text(nt.t.group_types.group),
+                value: OrganizationType.GROUP,
+                groupValue: orgTypeIndex,
+                onChanged: (value) => orgTypeIndex = value!,
+              ),
+              RadioListTile<OrganizationType>(
+                title: Text(nt.t.group_types.family),
+                value: OrganizationType.FAMILY,
+                groupValue: orgTypeIndex,
+                onChanged: (value) => orgTypeIndex = value!,
+              ),
+              const SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -125,7 +146,7 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
                     },
                     child: Text(nt.t.response.cancel),
                   ),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
@@ -134,8 +155,10 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
                           'name': _nameController.text,
                           'description': _descriptionController.text,
                           'email': _emailController.text,
-                       //   'phone': _phoneController.text,
-                       //   'address': _addressController.text,
+                          'url': _urlController.text,
+                          'orgType': orgTypeIndex.name,
+                          //   'phone': _phoneController.text,
+                          //   'address': _addressController.text,
                         };
                         // Call API or perform action to create organization
                         print(organizationData);
