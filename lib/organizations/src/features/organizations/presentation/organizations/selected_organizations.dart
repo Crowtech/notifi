@@ -78,7 +78,12 @@ class SelectedOrganizationIds extends _$SelectedOrganizationIds {
       for (Organization org in orgs) {
         orgIntList.add(org.id!);
       }
+
+      // save selectedOrgs to api
+     // dsfsdf
   
+//  /resources/selected/  SelectedResources
+
     return orgIntList;
   }
 }
