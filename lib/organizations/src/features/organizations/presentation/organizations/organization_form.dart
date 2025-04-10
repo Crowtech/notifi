@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:flutter_regex/flutter_regex.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/models/organization_type.dart';
@@ -80,6 +81,7 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
               ),
               SizedBox(height: 16),
               TextFormField(
+                autovalidateMode: AutovalidateMode.onUnfocus,
                 controller: _nameController,
                 autocorrect: true,
                 decoration: InputDecoration(
@@ -95,6 +97,7 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
               ),
               SizedBox(height: 16),
               TextFormField(
+                autovalidateMode: AutovalidateMode.onUnfocus,
                 controller: _descriptionController,
                 autocorrect: true,
                 decoration: InputDecoration(
@@ -109,7 +112,9 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
                 },
               ),
               SizedBox(height: 16),
+
               TextFormField(
+                autovalidateMode: AutovalidateMode.onUnfocus,
                 controller: _emailController,
                 decoration: InputDecoration(
                   labelText: nt.t.organization.email,
@@ -135,51 +140,47 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
               //   },
               //),
               const SizedBox(height: 16),
-      
-                  RadioListTile<OrganizationType>(
-                    key: const Key("group"),
-                    title: Text(nt.t.group_types.group),
-                    value: OrganizationType.GROUP,
-                    groupValue: orgTypeIndex,
-                    onChanged: _handleRadioValueChanged,
-                  ),
-                  RadioListTile<OrganizationType>(
-                    key: const Key("family"),
-                    title: Text(nt.t.group_types.family),
-                    value: OrganizationType.FAMILY,
-                    groupValue: orgTypeIndex,
-                    onChanged: (newValue) {
-            if (newValue != null) {
-              setState(() => orgTypeIndex = newValue);
-            }
-          },
-                  ),
-                  RadioListTile<OrganizationType>(
-                    key: const Key("friends"),
-                    title: Text(nt.t.group_types.friends),
-                    value: OrganizationType.FRIENDS,
-                   // selected: OrganizationType.FRIENDS==orgTypeIndex,
-                    groupValue: orgTypeIndex,
-                    onChanged: _handleRadioValueChanged,
-                  ),
-                  RadioListTile<OrganizationType>(
-                     key: const Key("ord"),
-                    title: Text(nt.t.group_types.org),
-                    value: OrganizationType.ORG,
-                    groupValue: orgTypeIndex,
-                    onChanged: _handleRadioValueChanged,
-                  ),
-                  RadioListTile<OrganizationType>(
-                     key: const Key("government"),
-                    title: Text(nt.t.group_types.government),
-                    value: OrganizationType.GOVERNMENT,
-                    groupValue: orgTypeIndex,
-                    onChanged: _handleRadioValueChanged,
-                  ),
-       
-       
+
+              RadioListTile<OrganizationType>(
+                key: const Key("group"),
+                title: Text(nt.t.group_types.group),
+                value: OrganizationType.GROUP,
+                groupValue: orgTypeIndex,
+                onChanged: _handleRadioValueChanged,
+              ),
+              RadioListTile<OrganizationType>(
+                key: const Key("family"),
+                title: Text(nt.t.group_types.family),
+                value: OrganizationType.FAMILY,
+                groupValue: orgTypeIndex,
+                onChanged: _handleRadioValueChanged,
+              ),
+              RadioListTile<OrganizationType>(
+                key: const Key("friends"),
+                title: Text(nt.t.group_types.friends),
+                value: OrganizationType.FRIENDS,
+                // selected: OrganizationType.FRIENDS==orgTypeIndex,
+                groupValue: orgTypeIndex,
+                onChanged: _handleRadioValueChanged,
+              ),
+              RadioListTile<OrganizationType>(
+                key: const Key("ord"),
+                title: Text(nt.t.group_types.org),
+                value: OrganizationType.ORG,
+                groupValue: orgTypeIndex,
+                onChanged: _handleRadioValueChanged,
+              ),
+              RadioListTile<OrganizationType>(
+                key: const Key("government"),
+                title: Text(nt.t.group_types.government),
+                value: OrganizationType.GOVERNMENT,
+                groupValue: orgTypeIndex,
+                onChanged: _handleRadioValueChanged,
+              ),
+
               SizedBox(height: 16),
               TextFormField(
+                autovalidateMode: AutovalidateMode.onUnfocus,
                 enabled: (orgTypeIndex != null && orgTypeIndex!.isUrlable),
                 controller: _urlController,
                 autocorrect: true,
@@ -191,7 +192,14 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
                   if ((value == null || value.isEmpty) &&
                       (orgTypeIndex != null && orgTypeIndex!.isUrlable)) {
                     return nt.t.organization.url_validation;
+                  } else {
+                    if (value != null && !value.isUri()) {
+                      return nt.t.organization.url_validation;
+                    } else {
+                      return null;
+                    }
                   }
+
                   return null;
                 },
               ),
@@ -206,7 +214,8 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
                   ),
                   const SizedBox(width: 16),
                   ElevatedButton(
-                    onPressed: (_formKey.currentState !=null &&_formKey.currentState!.validate())
+                    onPressed: (_formKey.currentState != null &&
+                            _formKey.currentState!.validate())
                         ? _handleSubmit
                         : null,
                     child: Text(nt.t.response.submit),
