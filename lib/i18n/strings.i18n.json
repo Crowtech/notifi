@@ -73,6 +73,20 @@
   "moving": "Moving",
   "odometer": "Odometer",
   "openstreetmap" : "OpenStreetMap contributors",
+  "organization" : {
+    "create": "Create a new Organization",
+    "edit": "Edit Organization",
+    "join": "Join Organization",
+    "name": "Name",
+    "name_validation": "Please enter organization name",
+    "description": "Description",
+    "description_validation": "Please enter organization descriptionn",
+    "email": "Email",
+    "email_validation": "Please enter valid organization email",
+    "url": "Web Address",
+     "url_validation": "Please enter valid organization web address",
+    "org_type": "Organization Type"
+  },
   "resource": {
     "artifact": "Artifact",
     "equipment": "Equipment",

@@ -41,9 +41,9 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	// Translations
 	String get app_title => 'Crowtech';
 	String get notfound_404 => '404 - Page not found!';
-	late final TranslationsMenuEn menu = TranslationsMenuEn.internal(_root);
+	late final TranslationsMenuEn menu = TranslationsMenuEn._(_root);
 	String get about_us => 'About Us';
-	late final TranslationsAccountEn account = TranslationsAccountEn.internal(_root);
+	late final TranslationsAccountEn account = TranslationsAccountEn._(_root);
 	String get activity => 'Activity';
 	String get audio_access_denied => 'You have denied audio access';
 	String get audio_access_denied_without_prompt => 'Please go to Settings app to enable audio access';
@@ -97,24 +97,25 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get moving => 'Moving';
 	String get odometer => 'Odometer';
 	String get openstreetmap => 'OpenStreetMap contributors';
-	late final TranslationsResourceEn resource = TranslationsResourceEn.internal(_root);
-	late final TranslationsResourcesEn resources = TranslationsResourcesEn.internal(_root);
-	late final TranslationsResponseEn response = TranslationsResponseEn.internal(_root);
-	late final TranslationsSelectEn select = TranslationsSelectEn.internal(_root);
+	late final TranslationsOrganizationEn organization = TranslationsOrganizationEn._(_root);
+	late final TranslationsResourceEn resource = TranslationsResourceEn._(_root);
+	late final TranslationsResourcesEn resources = TranslationsResourcesEn._(_root);
+	late final TranslationsResponseEn response = TranslationsResponseEn._(_root);
+	late final TranslationsSelectEn select = TranslationsSelectEn._(_root);
 	String get privacy_policy => 'Privacy Policy';
 	String get profile => 'Profile';
 	String get pulltorefresh => 'Pull to refresh';
 	String get reset_offset => 'Reset Offset';
 	String get resetting_exposure_point => 'Resetting exposure point';
 	String get resetting_focus_point => 'Resetting focus point';
-	late final TranslationsSearchEn search = TranslationsSearchEn.internal(_root);
+	late final TranslationsSearchEn search = TranslationsSearchEn._(_root);
 	String get settings => 'Settings';
 	String get skip => 'Skip';
 	String get splash_text => 'Splash Screen';
 	String get still => 'Still';
 	String get terms_and_conditions => 'Terms & Conditions';
 	String get test_page => 'Test Page';
-	late final TranslationsUnknownEn unknown = TranslationsUnknownEn.internal(_root);
+	late final TranslationsUnknownEn unknown = TranslationsUnknownEn._(_root);
 	String get update_account => 'Update Account';
 	String get zoom_in => 'Zoom In';
 	String get zoom_out => 'Zoom out';
@@ -126,7 +127,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 // Path: menu
 class TranslationsMenuEn {
-	TranslationsMenuEn.internal(this._root);
+	TranslationsMenuEn._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -137,7 +138,7 @@ class TranslationsMenuEn {
 
 // Path: account
 class TranslationsAccountEn {
-	TranslationsAccountEn.internal(this._root);
+	TranslationsAccountEn._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -156,9 +157,30 @@ class TranslationsAccountEn {
 	String get username_taken => 'Username already taken.';
 }
 
+// Path: organization
+class TranslationsOrganizationEn {
+	TranslationsOrganizationEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get create => 'Create a new Organization';
+	String get edit => 'Edit Organization';
+	String get join => 'Join Organization';
+	String get name => 'Name';
+	String get name_validation => 'Please enter organization name';
+	String get description => 'Description';
+	String get description_validation => 'Please enter organization descriptionn';
+	String get email => 'Email';
+	String get email_validation => 'Please enter valid organization email';
+	String get url => 'Web Address';
+	String get url_validation => 'Please enter valid organization web address';
+	String get org_type => 'Organization Type';
+}
+
 // Path: resource
 class TranslationsResourceEn {
-	TranslationsResourceEn.internal(this._root);
+	TranslationsResourceEn._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -174,7 +196,7 @@ class TranslationsResourceEn {
 
 // Path: resources
 class TranslationsResourcesEn {
-	TranslationsResourcesEn.internal(this._root);
+	TranslationsResourcesEn._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -190,7 +212,7 @@ class TranslationsResourcesEn {
 
 // Path: response
 class TranslationsResponseEn {
-	TranslationsResponseEn.internal(this._root);
+	TranslationsResponseEn._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -210,7 +232,7 @@ class TranslationsResponseEn {
 
 // Path: select
 class TranslationsSelectEn {
-	TranslationsSelectEn.internal(this._root);
+	TranslationsSelectEn._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -232,7 +254,7 @@ class TranslationsSelectEn {
 
 // Path: search
 class TranslationsSearchEn {
-	TranslationsSearchEn.internal(this._root);
+	TranslationsSearchEn._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -248,7 +270,7 @@ class TranslationsSearchEn {
 
 // Path: unknown
 class TranslationsUnknownEn {
-	TranslationsUnknownEn.internal(this._root);
+	TranslationsUnknownEn._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -338,6 +360,18 @@ extension on Translations {
 			case 'moving': return 'Moving';
 			case 'odometer': return 'Odometer';
 			case 'openstreetmap': return 'OpenStreetMap contributors';
+			case 'organization.create': return 'Create a new Organization';
+			case 'organization.edit': return 'Edit Organization';
+			case 'organization.join': return 'Join Organization';
+			case 'organization.name': return 'Name';
+			case 'organization.name_validation': return 'Please enter organization name';
+			case 'organization.description': return 'Description';
+			case 'organization.description_validation': return 'Please enter organization descriptionn';
+			case 'organization.email': return 'Email';
+			case 'organization.email_validation': return 'Please enter valid organization email';
+			case 'organization.url': return 'Web Address';
+			case 'organization.url_validation': return 'Please enter valid organization web address';
+			case 'organization.org_type': return 'Organization Type';
 			case 'resource.artifact': return 'Artifact';
 			case 'resource.equipment': return 'Equipment';
 			case 'resource.location': return 'Location';

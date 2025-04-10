@@ -203,6 +203,13 @@ extension StringExtensions on String {
   } 
 }
 
+extension EmailValidator on String {
+  bool isValidEmail() {
+    return RegExp(
+            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+        .hasMatch(this);
+  }
+}
 
 String getImageUrl({String? url, int diameter=64, String defaultUrl="https://gravatar.com/avatar/E9BC1D1E7E57D73ACC1682C0AD66CA4F"}) {
   if (url == null || url.isEmpty) {

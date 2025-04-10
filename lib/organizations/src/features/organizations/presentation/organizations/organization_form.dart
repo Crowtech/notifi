@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
 
@@ -46,33 +47,34 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'Create New Organization',
+                nt.t.organization.create,
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 16),
               TextFormField(
                 controller: _nameController,
                 decoration: InputDecoration(
-                  labelText: 'Organization Name',
+                  labelText: nt.t.organization.name,
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter organization name';
+                    return nt.t.organization.name_validation;
                   }
                   return null;
                 },
               ),
               SizedBox(height: 16),
               TextFormField(
+                expands: true,
                 controller: _descriptionController,
                 decoration: InputDecoration(
-                  labelText: 'Organization Description',
+                  labelText: nt.t.organization.description,
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter organization description';
+                    return nt.t.organization.description_validation;
                   }
                   return null;
                 },
@@ -81,44 +83,39 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
               TextFormField(
                 controller: _emailController,
                 decoration: InputDecoration(
-                  labelText: 'Organization Email',
+                  labelText: nt.t.organization.email,
                   border: OutlineInputBorder(),
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty || !value.contains('@')) {
-                    return 'Please enter valid organization email';
-                  }
-                  return null;
-                },
+  validator: (input) => EmailValidator.validate(input!)? null : nt.t.organization.email_validation,
               ),
-              SizedBox(height: 16),
-              TextFormField(
-                controller: _phoneController,
-                decoration: InputDecoration(
-                  labelText: 'Organization Phone Number',
-                  border: OutlineInputBorder(),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter organization phone number';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 16),
-              TextFormField(
-                controller: _addressController,
-                decoration: InputDecoration(
-                  labelText: 'Organization Address',
-                  border: OutlineInputBorder(),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter organization address';
-                  }
-                  return null;
-                },
-              ),
+              // SizedBox(height: 16),
+              // TextFormField(
+              //   controller: _phoneController,
+              //   decoration: InputDecoration(
+              //     labelText: 'Organization Phone Number',
+              //     border: OutlineInputBorder(),
+              //   ),
+              //   validator: (value) {
+              //     if (value == null || value.isEmpty) {
+              //       return 'Please enter organization phone number';
+              //     }
+              //     return null;
+              //   },
+              // ),
+              // SizedBox(height: 16),
+              // TextFormField(
+              //   controller: _addressController,
+              //   decoration: InputDecoration(
+              //     labelText: 'Organization Address',
+              //     border: OutlineInputBorder(),
+              //   ),
+              //   validator: (value) {
+              //     if (value == null || value.isEmpty) {
+              //       return 'Please enter organization address';
+              //     }
+              //     return null;
+              //   },
+              //),
               SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -127,7 +124,7 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text('${nt.t.response.cancel}'),
+                    child: Text(nt.t.response.cancel),
                   ),
                   SizedBox(width: 16),
                   ElevatedButton(
@@ -138,15 +135,15 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
                           'name': _nameController.text,
                           'description': _descriptionController.text,
                           'email': _emailController.text,
-                          'phone': _phoneController.text,
-                          'address': _addressController.text,
+                       //   'phone': _phoneController.text,
+                       //   'address': _addressController.text,
                         };
                         // Call API or perform action to create organization
                         print(organizationData);
                         Navigator.of(context).pop();
                       }
                     },
-                    child: Text('Submit'),
+                    child: Text(nt.t.response.submit),
                   ),
                 ],
               ),

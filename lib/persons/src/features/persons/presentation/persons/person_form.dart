@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
 

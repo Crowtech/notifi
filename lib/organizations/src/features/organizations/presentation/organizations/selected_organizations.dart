@@ -26,6 +26,7 @@ var logNoStack = logger.Logger(
 class SelectedOrganizations extends _$SelectedOrganizations {
   @override
   List<Organization> build() {
+   
     logNoStack.i("SELECTED ORGS BUILD");
     return [];
   }
