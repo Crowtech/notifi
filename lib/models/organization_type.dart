@@ -24,7 +24,7 @@ enum OrganizationType {
       case OrganizationType.ORG:
       case OrganizationType.EDUCATION:
       case OrganizationType.COMPANY:
-      
+
         return true;
 
       default:
@@ -32,6 +32,38 @@ enum OrganizationType {
     }
  }
 
+int get index {
+    switch (this) {
+      case OrganizationType.DEFAULT:
+        return 0;
+      case OrganizationType.COMMERCIAL:
+        return 1;
+      case OrganizationType.GOVERNMENT:
+        return 2;      
+      case OrganizationType.UNKNOWN:
+        return 3;
+      case OrganizationType.PRIVATE:
+        return 4;
+      case OrganizationType.PERSON:
+        return 5;
+      case OrganizationType.ORG:
+        return 6;
+        case OrganizationType.GROUP:
+        return 7;
+      case OrganizationType.FAMILY:
+        return 8;
+      case OrganizationType.FRIENDS:
+        return 9;
+      case OrganizationType.EDUCATION:
+        return 10;
+      case OrganizationType.TEAM:
+        return 11;
+      case OrganizationType.DEPARTMENT:
+        return 12;
+      case OrganizationType.COMPANY:
+        return 13;
+    } 
+}
 
   String get name {
     switch (this) {

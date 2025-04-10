@@ -27,7 +27,7 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
   final _urlController = TextEditingController();
   final _addressController = TextEditingController();
 
-  OrganizationType orgTypeIndex = OrganizationType.GROUP;
+  OrganizationType? orgTypeIndex = null;
 
   @override
   void dispose() {
@@ -37,6 +37,31 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
     _urlController.dispose();
     _addressController.dispose();
     super.dispose();
+  }
+
+  void _handleRadioValueChanged(OrganizationType? value) {
+    if (value != null) {
+      setState(() {
+        orgTypeIndex = value;
+        print(orgTypeIndex!.name);
+      });
+    }
+  }
+
+  void _handleSubmit() {
+    // Submit the form data
+    final organizationData = {
+      'name': _nameController.text,
+      'description': _descriptionController.text,
+      'email': _emailController.text,
+      'url': _urlController.text,
+      'orgType': orgTypeIndex!.name,
+      //   'phone': _phoneController.text,
+      //   'address': _addressController.text,
+    };
+    // Call API or perform action to create organization
+    print(organizationData);
+    Navigator.of(context).pop();
   }
 
   @override
@@ -110,41 +135,50 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
               //   },
               //),
               const SizedBox(height: 16),
-              RadioListTile<OrganizationType>(
-                title: Text(nt.t.group_types.group),
-                value: OrganizationType.GROUP,
-                groupValue: orgTypeIndex,
-                onChanged: (value) => orgTypeIndex = value!,
-              ),
-              RadioListTile<OrganizationType>(
-                title: Text(nt.t.group_types.family),
-                value: OrganizationType.FAMILY,
-                groupValue: orgTypeIndex,
-                onChanged: (value) => orgTypeIndex = value!,
-              ),
-                RadioListTile<OrganizationType>(
-                title: Text(nt.t.group_types.friends),
-                value: OrganizationType.FRIENDS,
-                groupValue: orgTypeIndex,
-                onChanged: (value) => orgTypeIndex = value!,
-              ),
-                RadioListTile<OrganizationType>(
-                title: Text(nt.t.group_types.org),
-                value: OrganizationType.ORG,
-                groupValue: orgTypeIndex,
-                onChanged: (value) => orgTypeIndex = value!,
-              ),
-                RadioListTile<OrganizationType>(
-                title: Text(nt.t.group_types.government),
-                value: OrganizationType.GOVERNMENT,
-                groupValue: orgTypeIndex,
-                onChanged: (value) => orgTypeIndex = value!,
-              ),
-              const SizedBox(height: 16),
-
+      
+                  RadioListTile<OrganizationType>(
+                    key: const Key("group"),
+                    title: Text(nt.t.group_types.group),
+                    value: OrganizationType.GROUP,
+                    groupValue: orgTypeIndex,
+                    onChanged: _handleRadioValueChanged,
+                  ),
+                  RadioListTile<OrganizationType>(
+                    key: const Key("family"),
+                    title: Text(nt.t.group_types.family),
+                    value: OrganizationType.FAMILY,
+                    groupValue: orgTypeIndex,
+                    onChanged: (newValue) {
+            if (newValue != null) {
+              setState(() => orgTypeIndex = newValue);
+            }
+          },
+                  ),
+                  RadioListTile<OrganizationType>(
+                    key: const Key("friends"),
+                    title: Text(nt.t.group_types.friends),
+                    value: OrganizationType.FRIENDS,
+                    selected: OrganizationType.FRIENDS==orgTypeIndex,
+                    groupValue: orgTypeIndex,
+                    onChanged: _handleRadioValueChanged,
+                  ),
+                  RadioListTile<OrganizationType>(
+                    title: Text(nt.t.group_types.org),
+                    value: OrganizationType.ORG,
+                    groupValue: orgTypeIndex,
+                    onChanged: _handleRadioValueChanged,
+                  ),
+                  RadioListTile<OrganizationType>(
+                    title: Text(nt.t.group_types.government),
+                    value: OrganizationType.GOVERNMENT,
+                    groupValue: orgTypeIndex,
+                    onChanged: _handleRadioValueChanged,
+                  ),
+       
+       
               SizedBox(height: 16),
               TextFormField(
-                enabled: (orgTypeIndex.isUrlable),
+                enabled: (orgTypeIndex != null && orgTypeIndex!.isUrlable),
                 controller: _urlController,
                 autocorrect: true,
                 decoration: InputDecoration(
@@ -152,7 +186,8 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
+                  if ((value == null || value.isEmpty) &&
+                      (orgTypeIndex != null && orgTypeIndex!.isUrlable)) {
                     return nt.t.organization.url_validation;
                   }
                   return null;
@@ -169,23 +204,9 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
                   ),
                   const SizedBox(width: 16),
                   ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        // Submit the form data
-                        final organizationData = {
-                          'name': _nameController.text,
-                          'description': _descriptionController.text,
-                          'email': _emailController.text,
-                          'url': _urlController.text,
-                          'orgType': orgTypeIndex.name,
-                          //   'phone': _phoneController.text,
-                          //   'address': _addressController.text,
-                        };
-                        // Call API or perform action to create organization
-                        print(organizationData);
-                        Navigator.of(context).pop();
-                      }
-                    },
+                    onPressed: _formKey.currentState!.validate()
+                        ? _handleSubmit
+                        : null,
                     child: Text(nt.t.response.submit),
                   ),
                 ],
