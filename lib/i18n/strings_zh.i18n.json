@@ -90,6 +90,20 @@
   "moving": "动人",
   "odometer": "里程表",
   "openstreetmap" : "OpenStreetMap 贡献者",
+  "organization" : {
+    "create": "创建新组织",
+    "edit": "编辑组织",
+    "join": "加入组织",
+    "name": "姓名",
+    "name_validation": "请输入组织名称",
+    "description": "描述",
+    "description_validation": "请输入组织描述",
+    "email": "电子邮件",
+    "email_validation": "请输入有效的组织电子邮件",
+    "url": "网址",
+    "url_validation": "请输入有效的组织网址",
+    "org_type": "组织类型"
+  },
   "resource": {
     "artifact": "人工制品",
     "equipment": "设备",

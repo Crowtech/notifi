@@ -101,7 +101,7 @@
     "email": "Email",
     "email_validation": "Please enter valid organization email",
     "url": "Web Address",
-     "url_validation": "Please enter valid organization web address",
+    "url_validation": "Please enter valid organization web address",
     "org_type": "Organization Type"
   },
   "resource": {

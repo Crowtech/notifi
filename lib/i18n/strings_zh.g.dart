@@ -96,6 +96,7 @@ class TranslationsZh implements Translations {
 	@override String get moving => '动人';
 	@override String get odometer => '里程表';
 	@override String get openstreetmap => 'OpenStreetMap 贡献者';
+	@override late final _TranslationsOrganizationZh organization = _TranslationsOrganizationZh._(_root);
 	@override late final _TranslationsResourceZh resource = _TranslationsResourceZh._(_root);
 	@override late final _TranslationsResourcesZh resources = _TranslationsResourcesZh._(_root);
 	@override late final _TranslationsResponseZh response = _TranslationsResponseZh._(_root);
@@ -176,6 +177,27 @@ class _TranslationsGroupTypesZh implements TranslationsGroupTypesEn {
 	@override String get team => '团队';
 	@override String get department => '部门';
 	@override String get company => '公司';
+}
+
+// Path: organization
+class _TranslationsOrganizationZh implements TranslationsOrganizationEn {
+	_TranslationsOrganizationZh._(this._root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get create => '创建新组织';
+	@override String get edit => '编辑组织';
+	@override String get join => '加入组织';
+	@override String get name => '姓名';
+	@override String get name_validation => '请输入组织名称';
+	@override String get description => '描述';
+	@override String get description_validation => '请输入组织描述';
+	@override String get email => '电子邮件';
+	@override String get email_validation => '请输入有效的组织电子邮件';
+	@override String get url => '网址';
+	@override String get url_validation => '请输入有效的组织网址';
+	@override String get org_type => '组织类型';
 }
 
 // Path: resource
@@ -375,6 +397,18 @@ extension on TranslationsZh {
 			case 'moving': return '动人';
 			case 'odometer': return '里程表';
 			case 'openstreetmap': return 'OpenStreetMap 贡献者';
+			case 'organization.create': return '创建新组织';
+			case 'organization.edit': return '编辑组织';
+			case 'organization.join': return '加入组织';
+			case 'organization.name': return '姓名';
+			case 'organization.name_validation': return '请输入组织名称';
+			case 'organization.description': return '描述';
+			case 'organization.description_validation': return '请输入组织描述';
+			case 'organization.email': return '电子邮件';
+			case 'organization.email_validation': return '请输入有效的组织电子邮件';
+			case 'organization.url': return '网址';
+			case 'organization.url_validation': return '请输入有效的组织网址';
+			case 'organization.org_type': return '组织类型';
 			case 'resource.artifact': return '人工制品';
 			case 'resource.equipment': return '设备';
 			case 'resource.location': return '地点';
