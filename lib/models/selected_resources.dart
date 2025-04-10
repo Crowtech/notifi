@@ -75,7 +75,8 @@ class AsyncSelectedResources extends _$AsyncSelectedResources {
     state = await AsyncValue.guard(() async {
 
     String token = ref.read(nestAuthProvider.notifier).token!;
-   
+   logNoStack.i("SELECTED_RESOURCES: setSelectedResourceIds $selectedResources");
+   logNoStack.i("SELECTED_RESOURCES: api path=>$defaultAPIBaseUrl$defaultApiPrefixPath/resources/sources/selected");
     var response = await apiPostDataNoLocale(
         token,
         "$defaultAPIBaseUrl$defaultApiPrefixPath/resources/sources/selected",
