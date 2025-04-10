@@ -2,6 +2,8 @@ import 'package:notifi/models/nest_filter_type.dart';
 import 'package:notifi/models/nestfilter.dart';
 import 'package:notifi/models/organization.dart';
 import 'package:notifi/models/person.dart';
+import 'package:notifi/models/selected_resources.dart';
+import 'package:notifi/riverpod/language/localization_provider.dart';
 import 'package:notifi/state/nest_auth2.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -28,23 +30,25 @@ class SelectedOrganizations extends _$SelectedOrganizations {
     return [];
   }
 
-  void addOrg(Organization organization) {
+  void addOrg(Map<int, bool> orgMap,Organization organization) {
     logNoStack.i("SELECTED_ORGS: add ${organization.url}");
+
     state = [...state, organization];
   }
 
-  void removeOrg(Organization organization) {
+  void removeOrg(Map<int, bool> orgMap,Organization organization) {
     logNoStack.i("SELECTED_ORGS: remove ${organization.url}");
     state = [...state]..remove(organization);
   }
 
-  void update(Organization organization, bool add) {
+  void update(Map<int, bool> orgMap,Organization organization, bool add) {
     if (add == true) {
-      addOrg(organization);
+      addOrg(orgMap,organization);
     } else {
-      removeOrg(organization);
+      removeOrg(orgMap,organization);
     }
-
+    // save to api
+    ref.read(asyncSelectedResourcesProvider.notifier).setSelectedResourceIds(getSelectedResources(orgMap));
   }
 
   List<int> getIdList() {
@@ -58,6 +62,20 @@ class SelectedOrganizations extends _$SelectedOrganizations {
       }
     }
     return orgIntList;
+  } 
+
+    SelectedResources getSelectedResources(Map<int, bool> orgMap) {
+    SelectedResources selectedResources = SelectedResources(selectedResourceIds: [], unselectedResourceIds: []);
+
+      for (MapEntry<int, bool> org in orgMap.entries) {
+        if (org.value == true) {
+          selectedResources.selectedResourceIds.add(org.key);
+        } else {
+          selectedResources.unselectedResourceIds.add(org.key);
+        }
+      }
+   
+    return selectedResources;
   }
 }
 
