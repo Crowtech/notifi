@@ -5,8 +5,8 @@ version: 0.0.75
 #homepage:
 
 environment:
-  sdk: ^3.5.3
-  flutter: ">=1.17.0"
+  sdk: ^3.7.3
+  flutter: '>=3.28.0-2.0.pre.38697'
 
 dependencies:
   flutter:
