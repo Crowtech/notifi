@@ -64,6 +64,7 @@ class _TextFormFieldWidgetState
   final Debouncer _debouncer = Debouncer(milliseconds: 500);
   String? _olderValue;
   bool isValid = false;
+  bool isEmpty = true;
   List<TextInputFormatter>? inputFormatters = [];
 
   @override
@@ -74,11 +75,18 @@ class _TextFormFieldWidgetState
     } else if (widget.forceUppercase) { // should be enum
       inputFormatters = [UpperCaseTextFormatter()];
     }
+    isEmpty = widget.initialValue.isEmpty;
    // ref.read(enableWidgetProvider(widget.fieldCode).notifier).setEnabled(widget.enabled);
   }
 
 Color statusColor() {
-  if ( widget.optional || isValid) {
+  if (widget.enabled == false) {
+    return Colors.grey;
+  }
+  else if (widget.optional && isEmpty) {
+    return Colors.black;
+  }
+  else if ( !isEmpty && isValid ) {
     return Colors.green;
   } else {
     return Colors.red;
@@ -130,6 +138,7 @@ Color statusColor() {
                     ? widget.itemValidation
                     : null;
         _olderValue = _isEmptyValue(value) ? value : _olderValue;
+        isEmpty = _isEmptyValue(value);
         return result;
       },
       onChanged: (value) => _debouncer.run(() {
