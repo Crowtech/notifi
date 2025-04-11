@@ -166,9 +166,14 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
   }
 
   bool isValidInput(String? value) {
-    if (value == null || value.isEmpty) {
+    if (!enableWidget) {
+      isValid = true;
+    }
+    else if (value == null || value.isEmpty) {
       if (!widget.optional) {
         isValid = false;
+      } else {
+        isValid = true;
       }
     } else if (widget.onValidate != null) {
       logNoStack.i(
@@ -184,7 +189,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
       ).hasMatch(value);
     }
     logNoStack.i(
-      "Checking validation for ${widget.fieldCode} $value optional:${widget.optional} isValid:$isValid",
+      "Checking validation for enabled:$enableWidget ${widget.fieldCode} $value optional:${widget.optional} isValid:$isValid",
     );
 
     return isValid;
