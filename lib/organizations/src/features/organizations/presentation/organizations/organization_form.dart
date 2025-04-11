@@ -216,6 +216,7 @@ class _CreateOrganizationFormState
                     ),
                     const SizedBox(width: 16),
                     ElevatedButton(
+                      key: const Key("submit"),
                       onPressed:
                           !_formKey.currentState!.validate()
                               ? null
