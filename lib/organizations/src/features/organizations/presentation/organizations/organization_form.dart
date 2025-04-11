@@ -12,6 +12,7 @@ import 'package:logger/logger.dart' as logger;
 import 'package:notifi/jwt_utils.dart';
 import 'package:notifi/models/organization_type.dart';
 import 'package:notifi/riverpod/enable_widget.dart';
+import 'package:notifi/riverpod/refresh_widget.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -89,8 +90,9 @@ class _CreateOrganizationFormState
 
   @override
   Widget build(BuildContext context) {
+    var watch = ref.watch(refreshWidgetProvider("organization"));
     String capitalizedItem = nt.t.organization_capitalized;
-    logNoStack.i("Organization form build");
+    logNoStack.i("Organization form build $watch");
     return Dialog(
       child: Padding(
         padding: const EdgeInsets.all(16.0),

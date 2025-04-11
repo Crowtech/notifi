@@ -5,6 +5,7 @@ import 'package:logger/logger.dart' as logger;
 import 'package:notifi/helpers/debouncer.dart';
 import 'package:notifi/helpers/text_formatter.dart';
 import 'package:notifi/riverpod/enable_widget.dart';
+import 'package:notifi/riverpod/refresh_widget.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -104,6 +105,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
   @override
   Widget build(BuildContext context) {
     var enableWidget = ref.watch(enableWidgetProvider(widget.fieldCode));
+    logNoStack.i("TEXT_FORM_WIDGET: BUILD: ${widget.fieldCode} enableWidget:$enableWidget");
     return TextFormField(
       key: itemFormFieldKey,
       initialValue: widget.initialValue,
@@ -155,7 +157,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
           }),
       onFieldSubmitted: (value) {
         isValidInput(value);
-        ref.invalidate(enableWidgetProvider(widget.fieldCode));
+        ref.read(refreshWidgetProvider("organization").notifier).refresh();
       },
     );
   }
