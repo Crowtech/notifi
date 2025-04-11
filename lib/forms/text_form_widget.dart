@@ -80,7 +80,7 @@ class _TextFormFieldWidgetState
 
   @override
   Widget build(BuildContext context) {
-    var enableWidget = ref.watch(enableWidgetProvider(widget.fieldCode));
+    var enableWidget = true; //ref.watch(enableWidgetProvider(widget.fieldCode));
     return TextFormField(
       key: itemFormFieldKey,
       enabled: enableWidget,
