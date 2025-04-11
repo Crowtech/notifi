@@ -12,7 +12,8 @@ part of 'activity_page.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 Activity _$ActivityFromJson(Map<String, dynamic> json) {
   return _Activity.fromJson(json);
@@ -63,24 +64,31 @@ class _$ActivityCopyWithImpl<$Res, $Val extends Activity>
     Object? participants = null,
     Object? price = null,
   }) {
-    return _then(_value.copyWith(
-      activity: null == activity
-          ? _value.activity
-          : activity // ignore: cast_nullable_to_non_nullable
-              as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      participants: null == participants
-          ? _value.participants
-          : participants // ignore: cast_nullable_to_non_nullable
-              as int,
-      price: null == price
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as double,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            activity:
+                null == activity
+                    ? _value.activity
+                    : activity // ignore: cast_nullable_to_non_nullable
+                        as String,
+            type:
+                null == type
+                    ? _value.type
+                    : type // ignore: cast_nullable_to_non_nullable
+                        as String,
+            participants:
+                null == participants
+                    ? _value.participants
+                    : participants // ignore: cast_nullable_to_non_nullable
+                        as int,
+            price:
+                null == price
+                    ? _value.price
+                    : price // ignore: cast_nullable_to_non_nullable
+                        as double,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -88,8 +96,9 @@ class _$ActivityCopyWithImpl<$Res, $Val extends Activity>
 abstract class _$$ActivityImplCopyWith<$Res>
     implements $ActivityCopyWith<$Res> {
   factory _$$ActivityImplCopyWith(
-          _$ActivityImpl value, $Res Function(_$ActivityImpl) then) =
-      __$$ActivityImplCopyWithImpl<$Res>;
+    _$ActivityImpl value,
+    $Res Function(_$ActivityImpl) then,
+  ) = __$$ActivityImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String activity, String type, int participants, double price});
@@ -100,8 +109,9 @@ class __$$ActivityImplCopyWithImpl<$Res>
     extends _$ActivityCopyWithImpl<$Res, _$ActivityImpl>
     implements _$$ActivityImplCopyWith<$Res> {
   __$$ActivityImplCopyWithImpl(
-      _$ActivityImpl _value, $Res Function(_$ActivityImpl) _then)
-      : super(_value, _then);
+    _$ActivityImpl _value,
+    $Res Function(_$ActivityImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of Activity
   /// with the given fields replaced by the non-null parameter values.
@@ -113,35 +123,42 @@ class __$$ActivityImplCopyWithImpl<$Res>
     Object? participants = null,
     Object? price = null,
   }) {
-    return _then(_$ActivityImpl(
-      activity: null == activity
-          ? _value.activity
-          : activity // ignore: cast_nullable_to_non_nullable
-              as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      participants: null == participants
-          ? _value.participants
-          : participants // ignore: cast_nullable_to_non_nullable
-              as int,
-      price: null == price
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as double,
-    ));
+    return _then(
+      _$ActivityImpl(
+        activity:
+            null == activity
+                ? _value.activity
+                : activity // ignore: cast_nullable_to_non_nullable
+                    as String,
+        type:
+            null == type
+                ? _value.type
+                : type // ignore: cast_nullable_to_non_nullable
+                    as String,
+        participants:
+            null == participants
+                ? _value.participants
+                : participants // ignore: cast_nullable_to_non_nullable
+                    as int,
+        price:
+            null == price
+                ? _value.price
+                : price // ignore: cast_nullable_to_non_nullable
+                    as double,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ActivityImpl implements _Activity {
-  _$ActivityImpl(
-      {required this.activity,
-      required this.type,
-      required this.participants,
-      required this.price});
+  _$ActivityImpl({
+    required this.activity,
+    required this.type,
+    required this.participants,
+    required this.price,
+  });
 
   factory _$ActivityImpl.fromJson(Map<String, dynamic> json) =>
       _$$ActivityImplFromJson(json);
@@ -188,18 +205,17 @@ class _$ActivityImpl implements _Activity {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ActivityImplToJson(
-      this,
-    );
+    return _$$ActivityImplToJson(this);
   }
 }
 
 abstract class _Activity implements Activity {
-  factory _Activity(
-      {required final String activity,
-      required final String type,
-      required final int participants,
-      required final double price}) = _$ActivityImpl;
+  factory _Activity({
+    required final String activity,
+    required final String type,
+    required final int participants,
+    required final double price,
+  }) = _$ActivityImpl;
 
   factory _Activity.fromJson(Map<String, dynamic> json) =
       _$ActivityImpl.fromJson;

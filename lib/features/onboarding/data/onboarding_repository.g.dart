@@ -13,14 +13,15 @@ String _$onboardingRepositoryHash() =>
 @ProviderFor(onboardingRepository)
 final onboardingRepositoryProvider =
     FutureProvider<OnboardingRepository>.internal(
-  onboardingRepository,
-  name: r'onboardingRepositoryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$onboardingRepositoryHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      onboardingRepository,
+      name: r'onboardingRepositoryProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$onboardingRepositoryHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element

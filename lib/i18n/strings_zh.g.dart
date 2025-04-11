@@ -10,7 +10,7 @@ import 'package:slang/generated.dart';
 import 'strings.g.dart';
 
 // Path: <root>
-class TranslationsZh extends Translations {
+class TranslationsZh implements Translations {
 	/// You can call this constructor and build your own translation instance of this locale.
 	/// Constructing via the enum [AppLocale.build] is preferred.
 	TranslationsZh({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver, TranslationMetadata<AppLocale, Translations>? meta})
@@ -20,9 +20,7 @@ class TranslationsZh extends Translations {
 		    overrides: overrides ?? {},
 		    cardinalResolver: cardinalResolver,
 		    ordinalResolver: ordinalResolver,
-		  ),
-		  super(cardinalResolver: cardinalResolver, ordinalResolver: ordinalResolver) {
-		super.$meta.setFlatMapFunction($meta.getTranslation); // copy base translations to super.$meta
+		  ) {
 		$meta.setFlatMapFunction(_flatMapFunction);
 	}
 
@@ -30,7 +28,7 @@ class TranslationsZh extends Translations {
 	@override final TranslationMetadata<AppLocale, Translations> $meta;
 
 	/// Access flat map
-	@override dynamic operator[](String key) => $meta.getTranslation(key) ?? super.$meta.getTranslation(key);
+	@override dynamic operator[](String key) => $meta.getTranslation(key);
 
 	late final TranslationsZh _root = this; // ignore: unused_field
 
@@ -68,6 +66,7 @@ class TranslationsZh extends Translations {
 	@override String get favourite => '最喜欢的';
 	@override String get firstname => '给定的名称';
 	@override String get focus_mode => '专注模式';
+	@override late final _TranslationsFormZh form = _TranslationsFormZh._(_root);
 	@override String get groups => '群组';
 	@override String get group_types_title => '群组类型';
 	@override late final _TranslationsGroupTypesZh group_types = _TranslationsGroupTypesZh._(_root);
@@ -98,17 +97,18 @@ class TranslationsZh extends Translations {
 	@override String get moving => '动人';
 	@override String get odometer => '里程表';
 	@override String get openstreetmap => 'OpenStreetMap 贡献者';
-	@override late final _TranslationsOrganizationZh organization = _TranslationsOrganizationZh._(_root);
-	@override late final _TranslationsResourceZh resource = _TranslationsResourceZh._(_root);
-	@override late final _TranslationsResourcesZh resources = _TranslationsResourcesZh._(_root);
-	@override late final _TranslationsResponseZh response = _TranslationsResponseZh._(_root);
-	@override late final _TranslationsSelectZh select = _TranslationsSelectZh._(_root);
+	@override String get organization => '组织';
+	@override String get person => '人';
 	@override String get privacy_policy => '隐私政策';
 	@override String get profile => '轮廓';
 	@override String get pulltorefresh => '下拉刷新';
 	@override String get reset_offset => '重置偏移';
 	@override String get resetting_exposure_point => '重置曝光点';
 	@override String get resetting_focus_point => '重置焦点';
+	@override late final _TranslationsResourceZh resource = _TranslationsResourceZh._(_root);
+	@override late final _TranslationsResourcesZh resources = _TranslationsResourcesZh._(_root);
+	@override late final _TranslationsResponseZh response = _TranslationsResponseZh._(_root);
+	@override late final _TranslationsSelectZh select = _TranslationsSelectZh._(_root);
 	@override late final _TranslationsSearchZh search = _TranslationsSearchZh._(_root);
 	@override String get settings => '设置';
 	@override String get skip => '跳过';
@@ -127,8 +127,8 @@ class TranslationsZh extends Translations {
 }
 
 // Path: menu
-class _TranslationsMenuZh extends TranslationsMenuEn {
-	_TranslationsMenuZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsMenuZh implements TranslationsMenuEn {
+	_TranslationsMenuZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -138,8 +138,8 @@ class _TranslationsMenuZh extends TranslationsMenuEn {
 }
 
 // Path: account
-class _TranslationsAccountZh extends TranslationsAccountEn {
-	_TranslationsAccountZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsAccountZh implements TranslationsAccountEn {
+	_TranslationsAccountZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -158,9 +158,30 @@ class _TranslationsAccountZh extends TranslationsAccountEn {
 	@override String get username_taken => '用户名已被使用。';
 }
 
+// Path: form
+class _TranslationsFormZh implements TranslationsFormEn {
+	_TranslationsFormZh._(this._root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String create({required Object item}) => '创建${item}';
+	@override String edit({required Object item}) => '编辑${item}';
+	@override String join({required Object item.capitalize}) => '加入${item.capitalize}';
+	@override String get name => '姓名';
+	@override String name_validation({required Object item}) => '请输入${item}名称';
+	@override String description({required Object item}) => '${item} 的描述';
+	@override String description_validation({required Object item}) => '请输入${item}描述';
+	@override String get email => '电子邮件';
+	@override String email_validation({required Object item}) => '请输入有效的${item}邮箱地址';
+	@override String get url => '网址';
+	@override String url_validation({required Object item}) => '请输入有效的${item}网址';
+	@override String org_type({required Object item.capitalize}) => '${item.capitalize} 类型';
+}
+
 // Path: group_types
-class _TranslationsGroupTypesZh extends TranslationsGroupTypesEn {
-	_TranslationsGroupTypesZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsGroupTypesZh implements TranslationsGroupTypesEn {
+	_TranslationsGroupTypesZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -181,30 +202,9 @@ class _TranslationsGroupTypesZh extends TranslationsGroupTypesEn {
 	@override String get company => '公司';
 }
 
-// Path: organization
-class _TranslationsOrganizationZh extends TranslationsOrganizationEn {
-	_TranslationsOrganizationZh._(TranslationsZh root) : this._root = root, super.internal(root);
-
-	final TranslationsZh _root; // ignore: unused_field
-
-	// Translations
-	@override String get create => '创建新组织';
-	@override String get edit => '编辑组织';
-	@override String get join => '加入组织';
-	@override String get name => '姓名';
-	@override String get name_validation => '请输入组织名称';
-	@override String get description => '描述';
-	@override String get description_validation => '请输入组织描述';
-	@override String get email => '电子邮件';
-	@override String get email_validation => '请输入有效的组织电子邮件';
-	@override String get url => '网址';
-	@override String get url_validation => '请输入有效的组织网址';
-	@override String get org_type => '组织类型';
-}
-
 // Path: resource
-class _TranslationsResourceZh extends TranslationsResourceEn {
-	_TranslationsResourceZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsResourceZh implements TranslationsResourceEn {
+	_TranslationsResourceZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -219,8 +219,8 @@ class _TranslationsResourceZh extends TranslationsResourceEn {
 }
 
 // Path: resources
-class _TranslationsResourcesZh extends TranslationsResourcesEn {
-	_TranslationsResourcesZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsResourcesZh implements TranslationsResourcesEn {
+	_TranslationsResourcesZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -235,8 +235,8 @@ class _TranslationsResourcesZh extends TranslationsResourcesEn {
 }
 
 // Path: response
-class _TranslationsResponseZh extends TranslationsResponseEn {
-	_TranslationsResponseZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsResponseZh implements TranslationsResponseEn {
+	_TranslationsResponseZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -255,8 +255,8 @@ class _TranslationsResponseZh extends TranslationsResponseEn {
 }
 
 // Path: select
-class _TranslationsSelectZh extends TranslationsSelectEn {
-	_TranslationsSelectZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsSelectZh implements TranslationsSelectEn {
+	_TranslationsSelectZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -277,8 +277,8 @@ class _TranslationsSelectZh extends TranslationsSelectEn {
 }
 
 // Path: search
-class _TranslationsSearchZh extends TranslationsSearchEn {
-	_TranslationsSearchZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsSearchZh implements TranslationsSearchEn {
+	_TranslationsSearchZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -293,8 +293,8 @@ class _TranslationsSearchZh extends TranslationsSearchEn {
 }
 
 // Path: unknown
-class _TranslationsUnknownZh extends TranslationsUnknownEn {
-	_TranslationsUnknownZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsUnknownZh implements TranslationsUnknownEn {
+	_TranslationsUnknownZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -356,6 +356,18 @@ extension on TranslationsZh {
 			case 'favourite': return '最喜欢的';
 			case 'firstname': return '给定的名称';
 			case 'focus_mode': return '专注模式';
+			case 'form.create': return ({required Object item}) => '创建${item}';
+			case 'form.edit': return ({required Object item}) => '编辑${item}';
+			case 'form.join': return ({required Object item.capitalize}) => '加入${item.capitalize}';
+			case 'form.name': return '姓名';
+			case 'form.name_validation': return ({required Object item}) => '请输入${item}名称';
+			case 'form.description': return ({required Object item}) => '${item} 的描述';
+			case 'form.description_validation': return ({required Object item}) => '请输入${item}描述';
+			case 'form.email': return '电子邮件';
+			case 'form.email_validation': return ({required Object item}) => '请输入有效的${item}邮箱地址';
+			case 'form.url': return '网址';
+			case 'form.url_validation': return ({required Object item}) => '请输入有效的${item}网址';
+			case 'form.org_type': return ({required Object item.capitalize}) => '${item.capitalize} 类型';
 			case 'groups': return '群组';
 			case 'group_types_title': return '群组类型';
 			case 'group_types.kDefault': return '默认';
@@ -399,18 +411,14 @@ extension on TranslationsZh {
 			case 'moving': return '动人';
 			case 'odometer': return '里程表';
 			case 'openstreetmap': return 'OpenStreetMap 贡献者';
-			case 'organization.create': return '创建新组织';
-			case 'organization.edit': return '编辑组织';
-			case 'organization.join': return '加入组织';
-			case 'organization.name': return '姓名';
-			case 'organization.name_validation': return '请输入组织名称';
-			case 'organization.description': return '描述';
-			case 'organization.description_validation': return '请输入组织描述';
-			case 'organization.email': return '电子邮件';
-			case 'organization.email_validation': return '请输入有效的组织电子邮件';
-			case 'organization.url': return '网址';
-			case 'organization.url_validation': return '请输入有效的组织网址';
-			case 'organization.org_type': return '组织类型';
+			case 'organization': return '组织';
+			case 'person': return '人';
+			case 'privacy_policy': return '隐私政策';
+			case 'profile': return '轮廓';
+			case 'pulltorefresh': return '下拉刷新';
+			case 'reset_offset': return '重置偏移';
+			case 'resetting_exposure_point': return '重置曝光点';
+			case 'resetting_focus_point': return '重置焦点';
 			case 'resource.artifact': return '人工制品';
 			case 'resource.equipment': return '设备';
 			case 'resource.location': return '地点';
@@ -449,12 +457,6 @@ extension on TranslationsZh {
 			case 'select.resources': return '选择资源 ..';
 			case 'select.teams': return '选择团队s ..';
 			case 'select.vehicles': return '选择车辆 ..';
-			case 'privacy_policy': return '隐私政策';
-			case 'profile': return '轮廓';
-			case 'pulltorefresh': return '下拉刷新';
-			case 'reset_offset': return '重置偏移';
-			case 'resetting_exposure_point': return '重置曝光点';
-			case 'resetting_focus_point': return '重置焦点';
 			case 'search.artifact': return '按名称搜索...';
 			case 'search.equipment': return '按名称或型号搜索...';
 			case 'search.location': return '按地点名称搜索...';

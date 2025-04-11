@@ -2,12 +2,10 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:notifi/credentials.dart';
-import 'package:notifi/models/nest_filter_type.dart';
 import 'package:notifi/models/nestfilter.dart';
 import 'package:notifi/models/organization.dart';
 import 'package:notifi/models/person.dart';
 import 'package:notifi/persons/src/utils/cancel_token_ref.dart';
-import 'package:notifi/riverpod/nest_filter_provider.dart';
 import 'package:notifi/state/nest_auth2.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

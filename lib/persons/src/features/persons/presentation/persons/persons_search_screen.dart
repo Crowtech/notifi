@@ -101,18 +101,18 @@ class PersonsSearchScreen extends ConsumerWidget {
                               context: context,
                               builder: (context) {
                                 return AlertDialog(
-                                  title: Text('${nt.t.response.delete}'),
-                                  content: Text('${nt.t.response.delete_sure}'),
+                                  title: Text(nt.t.response.delete),
+                                  content: Text(nt.t.response.delete_sure),
                                   actions: [
                                     TextButton(
                                       onPressed: () =>
                                           Navigator.of(context).pop(false),
-                                      child: Text('${nt.t.response.cancel}'),
+                                      child: Text(nt.t.response.cancel),
                                     ),
                                     TextButton(
                                       onPressed: () =>
                                           Navigator.of(context).pop(true),
-                                      child: Text('${nt.t.response.delete}'),
+                                      child: Text(nt.t.response.delete),
                                     ),
                                   ],
                                 );

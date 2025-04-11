@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter_regex/flutter_regex.dart';
+import 'package:notifi/forms/email_form_widget.dart';
+import 'package:notifi/helpers/debouncer.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/models/organization_type.dart';
@@ -16,22 +20,38 @@ var logNoStack = logger.Logger(
 );
 
 class CreateOrganizationForm extends StatefulWidget {
+  const CreateOrganizationForm({super.key});
+
   @override
   _CreateOrganizationFormState createState() => _CreateOrganizationFormState();
 }
 
 class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
   final _formKey = GlobalKey<FormState>();
+    final GlobalKey<FormFieldState> nameFormFieldKey =
+      GlobalKey<FormFieldState>();
+        final GlobalKey<FormFieldState> descriptionFormFieldKey =
+
+      GlobalKey<FormFieldState>();
+        final GlobalKey<FormFieldState> urlFormFieldKey =
+      GlobalKey<FormFieldState>();
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _emailController = TextEditingController();
   final _urlController = TextEditingController();
   final _addressController = TextEditingController();
 
-  OrganizationType? orgTypeIndex = null;
+  String? _olderNameValue;
+  String? _olderDescriptionValue;
+  String? _olderUrlValue;
+
+  final Debouncer _debouncer = Debouncer(milliseconds: 500);
+
+  OrganizationType? orgTypeIndex;
 
   @override
   void dispose() {
+    _debouncer.dispose();
     _nameController.dispose();
     _descriptionController.dispose();
     _emailController.dispose();
@@ -70,161 +90,144 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
     return Dialog(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                nt.t.organization.create,
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 16),
-              TextFormField(
-                autovalidateMode: AutovalidateMode.onUnfocus,
-                controller: _nameController,
-                autocorrect: true,
-                decoration: InputDecoration(
-                  labelText: nt.t.organization.name,
-                  border: OutlineInputBorder(),
+        child: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  nt.t.form.create(item: nt.t.organization),
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return nt.t.organization.name_validation;
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 16),
-              TextFormField(
-                autovalidateMode: AutovalidateMode.onUnfocus,
-                controller: _descriptionController,
-                autocorrect: true,
-                decoration: InputDecoration(
-                  labelText: nt.t.organization.description,
-                  border: OutlineInputBorder(),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return nt.t.organization.description_validation;
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 16),
-
-              TextFormField(
-                autovalidateMode: AutovalidateMode.onUnfocus,
-                controller: _emailController,
-                decoration: InputDecoration(
-                  labelText: nt.t.organization.email,
-                  border: OutlineInputBorder(),
-                ),
-                validator: (input) => EmailValidator.validate(input!)
-                    ? null
-                    : nt.t.organization.email_validation,
-              ),
-
-              // SizedBox(height: 16),
-              // TextFormField(
-              //   controller: _addressController,
-              //   decoration: InputDecoration(
-              //     labelText: 'Organization Address',
-              //     border: OutlineInputBorder(),
-              //   ),
-              //   validator: (value) {
-              //     if (value == null || value.isEmpty) {
-              //       return 'Please enter organization address';
-              //     }
-              //     return null;
-              //   },
-              //),
-              const SizedBox(height: 16),
-
-              RadioListTile<OrganizationType>(
-                key: const Key("group"),
-                title: Text(nt.t.group_types.group),
-                value: OrganizationType.GROUP,
-                groupValue: orgTypeIndex,
-                onChanged: _handleRadioValueChanged,
-              ),
-              RadioListTile<OrganizationType>(
-                key: const Key("family"),
-                title: Text(nt.t.group_types.family),
-                value: OrganizationType.FAMILY,
-                groupValue: orgTypeIndex,
-                onChanged: _handleRadioValueChanged,
-              ),
-              RadioListTile<OrganizationType>(
-                key: const Key("friends"),
-                title: Text(nt.t.group_types.friends),
-                value: OrganizationType.FRIENDS,
-                // selected: OrganizationType.FRIENDS==orgTypeIndex,
-                groupValue: orgTypeIndex,
-                onChanged: _handleRadioValueChanged,
-              ),
-              RadioListTile<OrganizationType>(
-                key: const Key("ord"),
-                title: Text(nt.t.group_types.org),
-                value: OrganizationType.ORG,
-                groupValue: orgTypeIndex,
-                onChanged: _handleRadioValueChanged,
-              ),
-              RadioListTile<OrganizationType>(
-                key: const Key("government"),
-                title: Text(nt.t.group_types.government),
-                value: OrganizationType.GOVERNMENT,
-                groupValue: orgTypeIndex,
-                onChanged: _handleRadioValueChanged,
-              ),
-
-              SizedBox(height: 16),
-              TextFormField(
-                autovalidateMode: AutovalidateMode.onUnfocus,
-                enabled: (orgTypeIndex != null && orgTypeIndex!.isUrlable),
-                controller: _urlController,
-                autocorrect: true,
-                decoration: InputDecoration(
-                  labelText: nt.t.organization.url,
-                  border: OutlineInputBorder(),
-                ),
-                validator: (value) {
-                  if ( orgTypeIndex != null &&!orgTypeIndex!.isUrlable) {
-                    _urlController.value = TextEditingValue.empty;
+                const SizedBox(height: 16),
+               
+                const SizedBox(height: 16),
+                TextFormField(
+                  autovalidateMode: AutovalidateMode.onUnfocus,
+                  controller: _descriptionController,
+                  autocorrect: true,
+                  decoration: InputDecoration(
+                    labelText: nt.t.form.description(item: nt.t.organization),
+                    border: const OutlineInputBorder(),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return nt.t.form.description_validation(item: nt.t.organization);
+                    }
                     return null;
-                  } else if (value != null && value.isUri() && orgTypeIndex!.isUrlable){
-                    return null; // good
-                  } else {
-                     return nt.t.organization.url_validation;
-                  }
-            
+                  },
+                ),
+                const SizedBox(height: 16),
 
-                },
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Text(nt.t.response.cancel),
+                EmailTextFormFieldWidget(itemCategory: nt.t.organization),
+
+                // SizedBox(height: 16),
+                // TextFormField(
+                //   controller: _addressController,
+                //   decoration: InputDecoration(
+                //     labelText: 'Organization Address',
+                //     border: OutlineInputBorder(),
+                //   ),
+                //   validator: (value) {
+                //     if (value == null || value.isEmpty) {
+                //       return 'Please enter organization address';
+                //     }
+                //     return null;
+                //   },
+                //),
+                const SizedBox(height: 16),
+
+                RadioListTile<OrganizationType>(
+                  key: const Key("group"),
+                  title: Text(nt.t.group_types.group),
+                  value: OrganizationType.GROUP,
+                  groupValue: orgTypeIndex,
+                  onChanged: _handleRadioValueChanged,
+                ),
+                RadioListTile<OrganizationType>(
+                  key: const Key("family"),
+                  title: Text(nt.t.group_types.family),
+                  value: OrganizationType.FAMILY,
+                  groupValue: orgTypeIndex,
+                  onChanged: _handleRadioValueChanged,
+                ),
+                RadioListTile<OrganizationType>(
+                  key: const Key("friends"),
+                  title: Text(nt.t.group_types.friends),
+                  value: OrganizationType.FRIENDS,
+                  // selected: OrganizationType.FRIENDS==orgTypeIndex,
+                  groupValue: orgTypeIndex,
+                  onChanged: _handleRadioValueChanged,
+                ),
+                RadioListTile<OrganizationType>(
+                  key: const Key("ord"),
+                  title: Text(nt.t.group_types.org),
+                  value: OrganizationType.ORG,
+                  groupValue: orgTypeIndex,
+                  onChanged: _handleRadioValueChanged,
+                ),
+                RadioListTile<OrganizationType>(
+                  key: const Key("government"),
+                  title: Text(nt.t.group_types.government),
+                  value: OrganizationType.GOVERNMENT,
+                  groupValue: orgTypeIndex,
+                  onChanged: _handleRadioValueChanged,
+                ),
+
+                const SizedBox(height: 16),
+                TextFormField(
+                  autovalidateMode: AutovalidateMode.onUnfocus,
+                  enabled: (orgTypeIndex != null && orgTypeIndex!.isUrlable),
+                  controller: _urlController,
+                  autocorrect: true,
+                  decoration: InputDecoration(
+                    labelText: nt.t.form.url,
+                    border: const OutlineInputBorder(),
                   ),
-                  const SizedBox(width: 16),
-                  ElevatedButton(
-                    onPressed: (_formKey.currentState != null &&
-                            _formKey.currentState!.validate())
-                        ? _handleSubmit
-                        : null,
-                    child: Text(nt.t.response.submit),
-                  ),
-                ],
-              ),
-            ],
+                  validator: (value) {
+                    if (orgTypeIndex != null && !orgTypeIndex!.isUrlable) {
+                      _urlController.value = TextEditingValue.empty;
+                      return null;
+                    } else if (value != null &&
+                        value.isUri() &&
+                        orgTypeIndex!.isUrlable) {
+                      return null; // good
+                    } else {
+                      return nt.t.form.url_validation(item: nt.t.organization);
+                    }
+                  },
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text(nt.t.response.cancel),
+                    ),
+                    const SizedBox(width: 16),
+                    ElevatedButton(
+                      onPressed:
+                          (_formKey.currentState != null &&
+                                  _formKey.currentState!.validate())
+                              ? _handleSubmit
+                              : null,
+                      child: Text(nt.t.response.submit),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-        ),
         ),
       ),
     );
   }
+
+ 
 }

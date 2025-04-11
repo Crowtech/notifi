@@ -35,6 +35,7 @@ class Person extends Resource {
   String? fcm;
   String? token; // used to get roles
 
+  @override
   GPS? gps;
 
   Person({

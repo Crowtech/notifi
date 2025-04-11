@@ -1,6 +1,5 @@
 import 'package:notifi/models/organization.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:uuid/uuid.dart';
 
 
 

@@ -2,21 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 class LocaleDropdown extends StatefulWidget {
+  const LocaleDropdown({super.key});
+
   @override
   _LocaleDropdownState createState() => _LocaleDropdownState();
 }
 
 class _LocaleDropdownState extends State<LocaleDropdown> {
-  Locale _selectedLocale = Locale('en'); // default locale is English
+  Locale _selectedLocale = const Locale('en'); // default locale is English
 
   final List<Locale> _locales = [
-    Locale('en'), // English
-    Locale('zh', 'CN'), // Simplified Chinese
+    const Locale('en'), // English
+    const Locale('zh', 'CN'), // Simplified Chinese
   ];
 
   final Map<Locale, String> _localeNames = {
-    Locale('en'): 'English',
-    Locale('zh', 'CN'): '简体中文', // Simplified Chinese
+    const Locale('en'): 'English',
+    const Locale('zh', 'CN'): '简体中文', // Simplified Chinese
   };
 
   void _changeLocale(Locale locale) {

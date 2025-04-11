@@ -15,14 +15,15 @@ String _$personsSearchQueryNotifierHash() =>
 @ProviderFor(PersonsSearchQueryNotifier)
 final personsSearchQueryNotifierProvider =
     AutoDisposeNotifierProvider<PersonsSearchQueryNotifier, String>.internal(
-  PersonsSearchQueryNotifier.new,
-  name: r'personsSearchQueryNotifierProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$personsSearchQueryNotifierHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      PersonsSearchQueryNotifier.new,
+      name: r'personsSearchQueryNotifierProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$personsSearchQueryNotifierHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$PersonsSearchQueryNotifier = AutoDisposeNotifier<String>;
 // ignore_for_file: type=lint

@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notifi/models/organization.dart';
 import 'package:notifi/organizations/src/features/organizations/data/organizations_repository_nf.dart';
 
-import '../../data/organizations_repository.dart';
 
 import '../organizations/organization_list_tile.dart';
 import '../organizations/organization_list_tile_shimmer.dart';

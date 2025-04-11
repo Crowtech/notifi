@@ -112,11 +112,11 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
     notifi2AlreadyRunning = true;
   }
 
-  FirebaseOptions? _options = options;
+  FirebaseOptions? options0 = options;
 
-  bool _preventAutoLogin = false;
-  int _secondsToast = secondsToast ?? 2;
-  List<CameraDescription> _cameras = <CameraDescription>[];
+  bool preventAutoLogin = false;
+  int secondsToast0 = secondsToast ?? 2;
+  List<CameraDescription> cameras = <CameraDescription>[];
 
   //ref.read(deviceIdNotifierProvider.notifier).setDeviceId(deviceId);
 
@@ -128,7 +128,7 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
   logNoStack
       .i("NOTIFI2: Camera setting is ${enableCamera ? "ENABLED" : "DISABLED"}");
   if (enableCamera) {
-    initialiseCamera(_cameras);
+    initialiseCamera(cameras);
   }
 
   //if (Constants.notificationsEnabled) {
@@ -194,12 +194,10 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
       bool isLoggedIn = ref.read(nestAuthProvider.notifier).isLoggedIn;
       if (isLoggedIn) {
         String authToken = ref.read(nestAuthProvider.notifier).token!;
-        if (fcm != null) {
-          ref.read(fcmNotifierProvider.notifier).sendFcm(authToken, fcm);
-        }
-      }
+        ref.read(fcmNotifierProvider.notifier).sendFcm(authToken, fcm);
+            }
       Fluttertoast.showToast(
-          msg: "FCM : ${fcm}",
+          msg: "FCM : $fcm",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: secondsToast,
@@ -216,7 +214,7 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
   if (isIOS) {
     String? apnsToken = await FirebaseMessaging.instance.getAPNSToken();
     logNoStack.i('APNS Token: $apnsToken');
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 3));
     //subscribeToTopics(_topics);
     //     ref.read(fcmNotifierProvider.notifier).setFcm(token!);
 
@@ -235,7 +233,7 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
           ref.read(fcmNotifierProvider.notifier).sendFcm(authToken, fcm);
         }
         Fluttertoast.showToast(
-            msg: "FCM : ${fcm}",
+            msg: "FCM : $fcm",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: secondsToast,
@@ -264,7 +262,7 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
         ref.read(fcmNotifierProvider.notifier).sendFcm(authToken, fcm);
       }
       Fluttertoast.showToast(
-          msg: "FCM : ${token}",
+          msg: "FCM : $token",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: secondsToast,
@@ -291,7 +289,7 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
     if (message.data.isNotEmpty) {
       print('Message data AGAIN!: ${message.data}');
       Map<String, dynamic> data = message.data;
-      print('Message data AGAIN2!: ${data}');
+      print('Message data AGAIN2!: $data');
       String output = '';
       for (final kv in message.data.entries) {
         output += ('${kv.key} = ${kv.value}\n');

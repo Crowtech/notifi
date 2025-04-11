@@ -12,7 +12,8 @@ part of 'selected_resources.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 SelectedResources _$SelectedResourcesFromJson(Map<String, dynamic> json) {
   return _SelectedResources.fromJson(json);
@@ -36,8 +37,9 @@ mixin _$SelectedResources {
 /// @nodoc
 abstract class $SelectedResourcesCopyWith<$Res> {
   factory $SelectedResourcesCopyWith(
-          SelectedResources value, $Res Function(SelectedResources) then) =
-      _$SelectedResourcesCopyWithImpl<$Res, SelectedResources>;
+    SelectedResources value,
+    $Res Function(SelectedResources) then,
+  ) = _$SelectedResourcesCopyWithImpl<$Res, SelectedResources>;
   @useResult
   $Res call({List<int> selectedResourceIds, List<int> unselectedResourceIds});
 }
@@ -60,25 +62,31 @@ class _$SelectedResourcesCopyWithImpl<$Res, $Val extends SelectedResources>
     Object? selectedResourceIds = null,
     Object? unselectedResourceIds = null,
   }) {
-    return _then(_value.copyWith(
-      selectedResourceIds: null == selectedResourceIds
-          ? _value.selectedResourceIds
-          : selectedResourceIds // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      unselectedResourceIds: null == unselectedResourceIds
-          ? _value.unselectedResourceIds
-          : unselectedResourceIds // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            selectedResourceIds:
+                null == selectedResourceIds
+                    ? _value.selectedResourceIds
+                    : selectedResourceIds // ignore: cast_nullable_to_non_nullable
+                        as List<int>,
+            unselectedResourceIds:
+                null == unselectedResourceIds
+                    ? _value.unselectedResourceIds
+                    : unselectedResourceIds // ignore: cast_nullable_to_non_nullable
+                        as List<int>,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$SelectedResourcesImplCopyWith<$Res>
     implements $SelectedResourcesCopyWith<$Res> {
-  factory _$$SelectedResourcesImplCopyWith(_$SelectedResourcesImpl value,
-          $Res Function(_$SelectedResourcesImpl) then) =
-      __$$SelectedResourcesImplCopyWithImpl<$Res>;
+  factory _$$SelectedResourcesImplCopyWith(
+    _$SelectedResourcesImpl value,
+    $Res Function(_$SelectedResourcesImpl) then,
+  ) = __$$SelectedResourcesImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<int> selectedResourceIds, List<int> unselectedResourceIds});
@@ -88,9 +96,10 @@ abstract class _$$SelectedResourcesImplCopyWith<$Res>
 class __$$SelectedResourcesImplCopyWithImpl<$Res>
     extends _$SelectedResourcesCopyWithImpl<$Res, _$SelectedResourcesImpl>
     implements _$$SelectedResourcesImplCopyWith<$Res> {
-  __$$SelectedResourcesImplCopyWithImpl(_$SelectedResourcesImpl _value,
-      $Res Function(_$SelectedResourcesImpl) _then)
-      : super(_value, _then);
+  __$$SelectedResourcesImplCopyWithImpl(
+    _$SelectedResourcesImpl _value,
+    $Res Function(_$SelectedResourcesImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of SelectedResources
   /// with the given fields replaced by the non-null parameter values.
@@ -100,27 +109,31 @@ class __$$SelectedResourcesImplCopyWithImpl<$Res>
     Object? selectedResourceIds = null,
     Object? unselectedResourceIds = null,
   }) {
-    return _then(_$SelectedResourcesImpl(
-      selectedResourceIds: null == selectedResourceIds
-          ? _value._selectedResourceIds
-          : selectedResourceIds // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      unselectedResourceIds: null == unselectedResourceIds
-          ? _value._unselectedResourceIds
-          : unselectedResourceIds // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-    ));
+    return _then(
+      _$SelectedResourcesImpl(
+        selectedResourceIds:
+            null == selectedResourceIds
+                ? _value._selectedResourceIds
+                : selectedResourceIds // ignore: cast_nullable_to_non_nullable
+                    as List<int>,
+        unselectedResourceIds:
+            null == unselectedResourceIds
+                ? _value._unselectedResourceIds
+                : unselectedResourceIds // ignore: cast_nullable_to_non_nullable
+                    as List<int>,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$SelectedResourcesImpl implements _SelectedResources {
-  _$SelectedResourcesImpl(
-      {required final List<int> selectedResourceIds,
-      required final List<int> unselectedResourceIds})
-      : _selectedResourceIds = selectedResourceIds,
-        _unselectedResourceIds = unselectedResourceIds;
+  _$SelectedResourcesImpl({
+    required final List<int> selectedResourceIds,
+    required final List<int> unselectedResourceIds,
+  }) : _selectedResourceIds = selectedResourceIds,
+       _unselectedResourceIds = unselectedResourceIds;
 
   factory _$SelectedResourcesImpl.fromJson(Map<String, dynamic> json) =>
       _$$SelectedResourcesImplFromJson(json);
@@ -153,18 +166,23 @@ class _$SelectedResourcesImpl implements _SelectedResources {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SelectedResourcesImpl &&
-            const DeepCollectionEquality()
-                .equals(other._selectedResourceIds, _selectedResourceIds) &&
-            const DeepCollectionEquality()
-                .equals(other._unselectedResourceIds, _unselectedResourceIds));
+            const DeepCollectionEquality().equals(
+              other._selectedResourceIds,
+              _selectedResourceIds,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other._unselectedResourceIds,
+              _unselectedResourceIds,
+            ));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_selectedResourceIds),
-      const DeepCollectionEquality().hash(_unselectedResourceIds));
+    runtimeType,
+    const DeepCollectionEquality().hash(_selectedResourceIds),
+    const DeepCollectionEquality().hash(_unselectedResourceIds),
+  );
 
   /// Create a copy of SelectedResources
   /// with the given fields replaced by the non-null parameter values.
@@ -173,21 +191,21 @@ class _$SelectedResourcesImpl implements _SelectedResources {
   @pragma('vm:prefer-inline')
   _$$SelectedResourcesImplCopyWith<_$SelectedResourcesImpl> get copyWith =>
       __$$SelectedResourcesImplCopyWithImpl<_$SelectedResourcesImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SelectedResourcesImplToJson(
-      this,
-    );
+    return _$$SelectedResourcesImplToJson(this);
   }
 }
 
 abstract class _SelectedResources implements SelectedResources {
-  factory _SelectedResources(
-          {required final List<int> selectedResourceIds,
-          required final List<int> unselectedResourceIds}) =
-      _$SelectedResourcesImpl;
+  factory _SelectedResources({
+    required final List<int> selectedResourceIds,
+    required final List<int> unselectedResourceIds,
+  }) = _$SelectedResourcesImpl;
 
   factory _SelectedResources.fromJson(Map<String, dynamic> json) =
       _$SelectedResourcesImpl.fromJson;

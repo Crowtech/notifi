@@ -12,14 +12,15 @@ String _$personsRepositoryHash() => r'6c2ec24f561bb955d8e9e98fbacaa749e8d381c0';
 @ProviderFor(personsRepository)
 final personsRepositoryProvider =
     AutoDisposeProvider<PersonsRepository>.internal(
-  personsRepository,
-  name: r'personsRepositoryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$personsRepositoryHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      personsRepository,
+      name: r'personsRepositoryProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$personsRepositoryHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
@@ -65,21 +66,13 @@ class PersonFamily extends Family<AsyncValue<NPerson>> {
   /// Provider to fetch a person by ID
   ///
   /// Copied from [person].
-  PersonProvider call({
-    required int personId,
-  }) {
-    return PersonProvider(
-      personId: personId,
-    );
+  PersonProvider call({required int personId}) {
+    return PersonProvider(personId: personId);
   }
 
   @override
-  PersonProvider getProviderOverride(
-    covariant PersonProvider provider,
-  ) {
-    return call(
-      personId: provider.personId,
-    );
+  PersonProvider getProviderOverride(covariant PersonProvider provider) {
+    return call(personId: provider.personId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -104,23 +97,17 @@ class PersonProvider extends AutoDisposeFutureProvider<NPerson> {
   /// Provider to fetch a person by ID
   ///
   /// Copied from [person].
-  PersonProvider({
-    required int personId,
-  }) : this._internal(
-          (ref) => person(
-            ref as PersonRef,
-            personId: personId,
-          ),
-          from: personProvider,
-          name: r'personProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$personHash,
-          dependencies: PersonFamily._dependencies,
-          allTransitiveDependencies: PersonFamily._allTransitiveDependencies,
-          personId: personId,
-        );
+  PersonProvider({required int personId})
+    : this._internal(
+        (ref) => person(ref as PersonRef, personId: personId),
+        from: personProvider,
+        name: r'personProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product') ? null : _$personHash,
+        dependencies: PersonFamily._dependencies,
+        allTransitiveDependencies: PersonFamily._allTransitiveDependencies,
+        personId: personId,
+      );
 
   PersonProvider._internal(
     super._createNotifier, {
@@ -135,9 +122,7 @@ class PersonProvider extends AutoDisposeFutureProvider<NPerson> {
   final int personId;
 
   @override
-  Override overrideWith(
-    FutureOr<NPerson> Function(PersonRef provider) create,
-  ) {
+  Override overrideWith(FutureOr<NPerson> Function(PersonRef provider) create) {
     return ProviderOverride(
       origin: this,
       override: PersonProvider._internal(
@@ -206,21 +191,15 @@ class FetchPersonsFamily extends Family<AsyncValue<NPersonsResponse>> {
   /// Provider to fetch paginated persons data
   ///
   /// Copied from [fetchPersons].
-  FetchPersonsProvider call({
-    required ({int page, String query}) queryData,
-  }) {
-    return FetchPersonsProvider(
-      queryData: queryData,
-    );
+  FetchPersonsProvider call({required ({int page, String query}) queryData}) {
+    return FetchPersonsProvider(queryData: queryData);
   }
 
   @override
   FetchPersonsProvider getProviderOverride(
     covariant FetchPersonsProvider provider,
   ) {
-    return call(
-      queryData: provider.queryData,
-    );
+    return call(queryData: provider.queryData);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -245,24 +224,20 @@ class FetchPersonsProvider extends AutoDisposeFutureProvider<NPersonsResponse> {
   /// Provider to fetch paginated persons data
   ///
   /// Copied from [fetchPersons].
-  FetchPersonsProvider({
-    required ({int page, String query}) queryData,
-  }) : this._internal(
-          (ref) => fetchPersons(
-            ref as FetchPersonsRef,
-            queryData: queryData,
-          ),
-          from: fetchPersonsProvider,
-          name: r'fetchPersonsProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$fetchPersonsHash,
-          dependencies: FetchPersonsFamily._dependencies,
-          allTransitiveDependencies:
-              FetchPersonsFamily._allTransitiveDependencies,
-          queryData: queryData,
-        );
+  FetchPersonsProvider({required ({int page, String query}) queryData})
+    : this._internal(
+        (ref) => fetchPersons(ref as FetchPersonsRef, queryData: queryData),
+        from: fetchPersonsProvider,
+        name: r'fetchPersonsProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$fetchPersonsHash,
+        dependencies: FetchPersonsFamily._dependencies,
+        allTransitiveDependencies:
+            FetchPersonsFamily._allTransitiveDependencies,
+        queryData: queryData,
+      );
 
   FetchPersonsProvider._internal(
     super._createNotifier, {
@@ -329,5 +304,6 @@ class _FetchPersonsProviderElement
   ({int page, String query}) get queryData =>
       (origin as FetchPersonsProvider).queryData;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../widgets/loading_spinner.dart';
 
 class SplashPage extends StatelessWidget {
-  SplashPage(String this.splashText,{super.key});
+  SplashPage(this.splashText,{super.key});
   String splashText;
 
   @override
@@ -15,8 +15,8 @@ class SplashPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(splashText),
-            SizedBox(height: 16),
-            LoadingSpinner(),
+            const SizedBox(height: 16),
+            const LoadingSpinner(),
           ],
         ),
       ),

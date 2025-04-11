@@ -7,25 +7,28 @@ part of 'nest_notifi.dart';
 // **************************************************************************
 
 NestNotifi _$NestNotifiFromJson(Map<String, dynamic> json) => NestNotifi(
-      id: (json['id'] as num?)?.toInt(),
-      code: json['code'] as String?,
-      created: json['created'] == null
+  id: (json['id'] as num?)?.toInt(),
+  code: json['code'] as String?,
+  created:
+      json['created'] == null
           ? null
           : DateTime.parse(json['created'] as String),
-      active: json['active'] as bool?,
-      updated: json['updated'] == null
+  active: json['active'] as bool?,
+  updated:
+      json['updated'] == null
           ? null
           : DateTime.parse(json['updated'] as String),
-      name: json['name'] as String?,
-      description: json['description'] as String?,
-      imageUrl: json['imageUrl'] as String?,
-      gps: json['gps'] == null
+  name: json['name'] as String?,
+  description: json['description'] as String?,
+  imageUrl: json['imageUrl'] as String?,
+  gps:
+      json['gps'] == null
           ? null
           : GPS.fromJson(json['gps'] as Map<String, dynamic>),
-      nestNotifiType: $enumDecodeNullable(
-              _$NestNotifiTypeEnumMap, json['nestNotifiType']) ??
-          NestNotifiType.undefined,
-    )..orgid = (json['orgid'] as num?)?.toInt();
+  nestNotifiType:
+      $enumDecodeNullable(_$NestNotifiTypeEnumMap, json['nestNotifiType']) ??
+      NestNotifiType.undefined,
+)..orgid = (json['orgid'] as num?)?.toInt();
 
 Map<String, dynamic> _$NestNotifiToJson(NestNotifi instance) =>
     <String, dynamic>{

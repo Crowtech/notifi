@@ -1,12 +1,6 @@
-import 'dart:ui';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:notifi/api_utils.dart';
-import 'package:notifi/jwt_utils.dart';
-import 'package:notifi/state/nest_auth2.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:logger/logger.dart' as logger;
-import 'package:latlong2/latlong.dart';
 
 part 'deviceid_notifier.g.dart';
 

@@ -10,16 +10,16 @@ Widget slideRightBackground() {
         
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          SizedBox(
+          const SizedBox(
             width: 20,
           ),
-          Icon(
+          const Icon(
             Icons.edit,
             color: Colors.white,
           ),
           Text(
             " ${nt.t.response.edit}",
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w700,
             ),

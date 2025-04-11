@@ -12,7 +12,8 @@ part of 'user_role.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$UserRole {
@@ -23,8 +24,7 @@ mixin _$UserRole {
     required TResult Function() user,
     required TResult Function() guest,
     required TResult Function() none,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? admin,
@@ -32,8 +32,7 @@ mixin _$UserRole {
     TResult? Function()? user,
     TResult? Function()? guest,
     TResult? Function()? none,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? admin,
@@ -42,8 +41,7 @@ mixin _$UserRole {
     TResult Function()? guest,
     TResult Function()? none,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Admin value) admin,
@@ -51,8 +49,7 @@ mixin _$UserRole {
     required TResult Function(User value) user,
     required TResult Function(Guest value) guest,
     required TResult Function(None value) none,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Admin value)? admin,
@@ -60,8 +57,7 @@ mixin _$UserRole {
     TResult? Function(User value)? user,
     TResult? Function(Guest value)? guest,
     TResult? Function(None value)? none,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Admin value)? admin,
@@ -70,8 +66,7 @@ mixin _$UserRole {
     TResult Function(Guest value)? guest,
     TResult Function(None value)? none,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -97,8 +92,9 @@ class _$UserRoleCopyWithImpl<$Res, $Val extends UserRole>
 /// @nodoc
 abstract class _$$AdminImplCopyWith<$Res> {
   factory _$$AdminImplCopyWith(
-          _$AdminImpl value, $Res Function(_$AdminImpl) then) =
-      __$$AdminImplCopyWithImpl<$Res>;
+    _$AdminImpl value,
+    $Res Function(_$AdminImpl) then,
+  ) = __$$AdminImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -106,8 +102,9 @@ class __$$AdminImplCopyWithImpl<$Res>
     extends _$UserRoleCopyWithImpl<$Res, _$AdminImpl>
     implements _$$AdminImplCopyWith<$Res> {
   __$$AdminImplCopyWithImpl(
-      _$AdminImpl _value, $Res Function(_$AdminImpl) _then)
-      : super(_value, _then);
+    _$AdminImpl _value,
+    $Res Function(_$AdminImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of UserRole
   /// with the given fields replaced by the non-null parameter values.
@@ -228,7 +225,7 @@ class __$$DevImplCopyWithImpl<$Res>
     extends _$UserRoleCopyWithImpl<$Res, _$DevImpl>
     implements _$$DevImplCopyWith<$Res> {
   __$$DevImplCopyWithImpl(_$DevImpl _value, $Res Function(_$DevImpl) _then)
-      : super(_value, _then);
+    : super(_value, _then);
 
   /// Create a copy of UserRole
   /// with the given fields replaced by the non-null parameter values.
@@ -341,8 +338,9 @@ abstract class Dev implements UserRole {
 /// @nodoc
 abstract class _$$UserImplCopyWith<$Res> {
   factory _$$UserImplCopyWith(
-          _$UserImpl value, $Res Function(_$UserImpl) then) =
-      __$$UserImplCopyWithImpl<$Res>;
+    _$UserImpl value,
+    $Res Function(_$UserImpl) then,
+  ) = __$$UserImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -350,7 +348,7 @@ class __$$UserImplCopyWithImpl<$Res>
     extends _$UserRoleCopyWithImpl<$Res, _$UserImpl>
     implements _$$UserImplCopyWith<$Res> {
   __$$UserImplCopyWithImpl(_$UserImpl _value, $Res Function(_$UserImpl) _then)
-      : super(_value, _then);
+    : super(_value, _then);
 
   /// Create a copy of UserRole
   /// with the given fields replaced by the non-null parameter values.
@@ -463,8 +461,9 @@ abstract class User implements UserRole {
 /// @nodoc
 abstract class _$$GuestImplCopyWith<$Res> {
   factory _$$GuestImplCopyWith(
-          _$GuestImpl value, $Res Function(_$GuestImpl) then) =
-      __$$GuestImplCopyWithImpl<$Res>;
+    _$GuestImpl value,
+    $Res Function(_$GuestImpl) then,
+  ) = __$$GuestImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -472,8 +471,9 @@ class __$$GuestImplCopyWithImpl<$Res>
     extends _$UserRoleCopyWithImpl<$Res, _$GuestImpl>
     implements _$$GuestImplCopyWith<$Res> {
   __$$GuestImplCopyWithImpl(
-      _$GuestImpl _value, $Res Function(_$GuestImpl) _then)
-      : super(_value, _then);
+    _$GuestImpl _value,
+    $Res Function(_$GuestImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of UserRole
   /// with the given fields replaced by the non-null parameter values.
@@ -586,8 +586,9 @@ abstract class Guest implements UserRole {
 /// @nodoc
 abstract class _$$NoneImplCopyWith<$Res> {
   factory _$$NoneImplCopyWith(
-          _$NoneImpl value, $Res Function(_$NoneImpl) then) =
-      __$$NoneImplCopyWithImpl<$Res>;
+    _$NoneImpl value,
+    $Res Function(_$NoneImpl) then,
+  ) = __$$NoneImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -595,7 +596,7 @@ class __$$NoneImplCopyWithImpl<$Res>
     extends _$UserRoleCopyWithImpl<$Res, _$NoneImpl>
     implements _$$NoneImplCopyWith<$Res> {
   __$$NoneImplCopyWithImpl(_$NoneImpl _value, $Res Function(_$NoneImpl) _then)
-      : super(_value, _then);
+    : super(_value, _then);
 
   /// Create a copy of UserRole
   /// with the given fields replaced by the non-null parameter values.

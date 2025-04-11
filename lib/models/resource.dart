@@ -18,7 +18,7 @@ class Resource extends CrowtechObject implements PagingDataItem {
   static String className = "Resource";
   static String tablename = className.toLowerCase();
 
-  int _pageId = 0;
+  final int _pageId = 0;
   String? description;
   String? location;
   String? devicecode;

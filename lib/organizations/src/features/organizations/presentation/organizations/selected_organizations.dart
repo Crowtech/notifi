@@ -1,14 +1,8 @@
-import 'package:notifi/models/nest_filter_type.dart';
-import 'package:notifi/models/nestfilter.dart';
 import 'package:notifi/models/organization.dart';
-import 'package:notifi/models/person.dart';
 import 'package:notifi/models/selected_resources.dart';
-import 'package:notifi/riverpod/language/localization_provider.dart';
-import 'package:notifi/state/nest_auth2.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:logger/logger.dart' as logger;
-import 'package:latlong2/latlong.dart';
 
 part 'selected_organizations.g.dart';
 

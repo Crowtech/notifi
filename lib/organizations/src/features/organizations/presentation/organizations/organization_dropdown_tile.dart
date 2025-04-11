@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notifi/models/organization.dart';
 import 'package:notifi/organizations/src/common_widgets/nest_poster.dart';
-import 'package:notifi/organizations/src/common_widgets/top_gradient.dart';
 
 
 class OrganizationDropdownTile extends StatelessWidget {

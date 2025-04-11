@@ -12,7 +12,8 @@ part of 'nperson_response.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 NPersonsResponse _$NPersonsResponseFromJson(Map<String, dynamic> json) {
   return _NPersonsResponse.fromJson(json);
@@ -43,15 +44,17 @@ mixin _$NPersonsResponse {
 /// @nodoc
 abstract class $NPersonsResponseCopyWith<$Res> {
   factory $NPersonsResponseCopyWith(
-          NPersonsResponse value, $Res Function(NPersonsResponse) then) =
-      _$NPersonsResponseCopyWithImpl<$Res, NPersonsResponse>;
+    NPersonsResponse value,
+    $Res Function(NPersonsResponse) then,
+  ) = _$NPersonsResponseCopyWithImpl<$Res, NPersonsResponse>;
   @useResult
-  $Res call(
-      {@JsonKey(name: 'startIndex') int page,
-      @JsonKey(name: 'items') List<NPerson> results,
-      @JsonKey(name: 'resultCount') int totalResults,
-      @JsonKey(name: 'totalItems') int totalPages,
-      List<String> errors});
+  $Res call({
+    @JsonKey(name: 'startIndex') int page,
+    @JsonKey(name: 'items') List<NPerson> results,
+    @JsonKey(name: 'resultCount') int totalResults,
+    @JsonKey(name: 'totalItems') int totalPages,
+    List<String> errors,
+  });
 }
 
 /// @nodoc
@@ -75,54 +78,65 @@ class _$NPersonsResponseCopyWithImpl<$Res, $Val extends NPersonsResponse>
     Object? totalPages = null,
     Object? errors = null,
   }) {
-    return _then(_value.copyWith(
-      page: null == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
-              as int,
-      results: null == results
-          ? _value.results
-          : results // ignore: cast_nullable_to_non_nullable
-              as List<NPerson>,
-      totalResults: null == totalResults
-          ? _value.totalResults
-          : totalResults // ignore: cast_nullable_to_non_nullable
-              as int,
-      totalPages: null == totalPages
-          ? _value.totalPages
-          : totalPages // ignore: cast_nullable_to_non_nullable
-              as int,
-      errors: null == errors
-          ? _value.errors
-          : errors // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            page:
+                null == page
+                    ? _value.page
+                    : page // ignore: cast_nullable_to_non_nullable
+                        as int,
+            results:
+                null == results
+                    ? _value.results
+                    : results // ignore: cast_nullable_to_non_nullable
+                        as List<NPerson>,
+            totalResults:
+                null == totalResults
+                    ? _value.totalResults
+                    : totalResults // ignore: cast_nullable_to_non_nullable
+                        as int,
+            totalPages:
+                null == totalPages
+                    ? _value.totalPages
+                    : totalPages // ignore: cast_nullable_to_non_nullable
+                        as int,
+            errors:
+                null == errors
+                    ? _value.errors
+                    : errors // ignore: cast_nullable_to_non_nullable
+                        as List<String>,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$NPersonsResponseImplCopyWith<$Res>
     implements $NPersonsResponseCopyWith<$Res> {
-  factory _$$NPersonsResponseImplCopyWith(_$NPersonsResponseImpl value,
-          $Res Function(_$NPersonsResponseImpl) then) =
-      __$$NPersonsResponseImplCopyWithImpl<$Res>;
+  factory _$$NPersonsResponseImplCopyWith(
+    _$NPersonsResponseImpl value,
+    $Res Function(_$NPersonsResponseImpl) then,
+  ) = __$$NPersonsResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@JsonKey(name: 'startIndex') int page,
-      @JsonKey(name: 'items') List<NPerson> results,
-      @JsonKey(name: 'resultCount') int totalResults,
-      @JsonKey(name: 'totalItems') int totalPages,
-      List<String> errors});
+  $Res call({
+    @JsonKey(name: 'startIndex') int page,
+    @JsonKey(name: 'items') List<NPerson> results,
+    @JsonKey(name: 'resultCount') int totalResults,
+    @JsonKey(name: 'totalItems') int totalPages,
+    List<String> errors,
+  });
 }
 
 /// @nodoc
 class __$$NPersonsResponseImplCopyWithImpl<$Res>
     extends _$NPersonsResponseCopyWithImpl<$Res, _$NPersonsResponseImpl>
     implements _$$NPersonsResponseImplCopyWith<$Res> {
-  __$$NPersonsResponseImplCopyWithImpl(_$NPersonsResponseImpl _value,
-      $Res Function(_$NPersonsResponseImpl) _then)
-      : super(_value, _then);
+  __$$NPersonsResponseImplCopyWithImpl(
+    _$NPersonsResponseImpl _value,
+    $Res Function(_$NPersonsResponseImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of NPersonsResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -135,42 +149,49 @@ class __$$NPersonsResponseImplCopyWithImpl<$Res>
     Object? totalPages = null,
     Object? errors = null,
   }) {
-    return _then(_$NPersonsResponseImpl(
-      page: null == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
-              as int,
-      results: null == results
-          ? _value._results
-          : results // ignore: cast_nullable_to_non_nullable
-              as List<NPerson>,
-      totalResults: null == totalResults
-          ? _value.totalResults
-          : totalResults // ignore: cast_nullable_to_non_nullable
-              as int,
-      totalPages: null == totalPages
-          ? _value.totalPages
-          : totalPages // ignore: cast_nullable_to_non_nullable
-              as int,
-      errors: null == errors
-          ? _value._errors
-          : errors // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-    ));
+    return _then(
+      _$NPersonsResponseImpl(
+        page:
+            null == page
+                ? _value.page
+                : page // ignore: cast_nullable_to_non_nullable
+                    as int,
+        results:
+            null == results
+                ? _value._results
+                : results // ignore: cast_nullable_to_non_nullable
+                    as List<NPerson>,
+        totalResults:
+            null == totalResults
+                ? _value.totalResults
+                : totalResults // ignore: cast_nullable_to_non_nullable
+                    as int,
+        totalPages:
+            null == totalPages
+                ? _value.totalPages
+                : totalPages // ignore: cast_nullable_to_non_nullable
+                    as int,
+        errors:
+            null == errors
+                ? _value._errors
+                : errors // ignore: cast_nullable_to_non_nullable
+                    as List<String>,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$NPersonsResponseImpl implements _NPersonsResponse {
-  _$NPersonsResponseImpl(
-      {@JsonKey(name: 'startIndex') required this.page,
-      @JsonKey(name: 'items') required final List<NPerson> results,
-      @JsonKey(name: 'resultCount') required this.totalResults,
-      @JsonKey(name: 'totalItems') required this.totalPages,
-      final List<String> errors = const []})
-      : _results = results,
-        _errors = errors;
+  _$NPersonsResponseImpl({
+    @JsonKey(name: 'startIndex') required this.page,
+    @JsonKey(name: 'items') required final List<NPerson> results,
+    @JsonKey(name: 'resultCount') required this.totalResults,
+    @JsonKey(name: 'totalItems') required this.totalPages,
+    final List<String> errors = const [],
+  }) : _results = results,
+       _errors = errors;
 
   factory _$NPersonsResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$NPersonsResponseImplFromJson(json);
@@ -224,12 +245,13 @@ class _$NPersonsResponseImpl implements _NPersonsResponse {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      page,
-      const DeepCollectionEquality().hash(_results),
-      totalResults,
-      totalPages,
-      const DeepCollectionEquality().hash(_errors));
+    runtimeType,
+    page,
+    const DeepCollectionEquality().hash(_results),
+    totalResults,
+    totalPages,
+    const DeepCollectionEquality().hash(_errors),
+  );
 
   /// Create a copy of NPersonsResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -238,23 +260,24 @@ class _$NPersonsResponseImpl implements _NPersonsResponse {
   @pragma('vm:prefer-inline')
   _$$NPersonsResponseImplCopyWith<_$NPersonsResponseImpl> get copyWith =>
       __$$NPersonsResponseImplCopyWithImpl<_$NPersonsResponseImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$NPersonsResponseImplToJson(
-      this,
-    );
+    return _$$NPersonsResponseImplToJson(this);
   }
 }
 
 abstract class _NPersonsResponse implements NPersonsResponse {
-  factory _NPersonsResponse(
-      {@JsonKey(name: 'startIndex') required final int page,
-      @JsonKey(name: 'items') required final List<NPerson> results,
-      @JsonKey(name: 'resultCount') required final int totalResults,
-      @JsonKey(name: 'totalItems') required final int totalPages,
-      final List<String> errors}) = _$NPersonsResponseImpl;
+  factory _NPersonsResponse({
+    @JsonKey(name: 'startIndex') required final int page,
+    @JsonKey(name: 'items') required final List<NPerson> results,
+    @JsonKey(name: 'resultCount') required final int totalResults,
+    @JsonKey(name: 'totalItems') required final int totalPages,
+    final List<String> errors,
+  }) = _$NPersonsResponseImpl;
 
   factory _NPersonsResponse.fromJson(Map<String, dynamic> json) =
       _$NPersonsResponseImpl.fromJson;

@@ -45,6 +45,20 @@
   "favourite": "最喜欢的",
   "firstname": "给定的名称",
   "focus_mode": "专注模式",
+  "form" : {
+    "create": "创建${item}",
+    "edit": "编辑${item}",
+    "join": "加入${item.capitalize}",
+    "name": "姓名",
+    "name_validation": "请输入${item}名称",
+    "description": "${item} 的描述",
+    "description_validation": "请输入${item}描述",
+    "email": "电子邮件",
+    "email_validation": "请输入有效的${item}邮箱地址",
+    "url": "网址",
+    "url_validation": "请输入有效的${item}网址",
+    "org_type": "${item.capitalize} 类型"
+  },
   "groups": "群组",
 "group_types_title" : "群组类型",
   "group_types":{
@@ -90,20 +104,16 @@
   "moving": "动人",
   "odometer": "里程表",
   "openstreetmap" : "OpenStreetMap 贡献者",
-  "organization" : {
-    "create": "创建新组织",
-    "edit": "编辑组织",
-    "join": "加入组织",
-    "name": "姓名",
-    "name_validation": "请输入组织名称",
-    "description": "描述",
-    "description_validation": "请输入组织描述",
-    "email": "电子邮件",
-    "email_validation": "请输入有效的组织电子邮件",
-    "url": "网址",
-    "url_validation": "请输入有效的组织网址",
-    "org_type": "组织类型"
-  },
+  "organization": "组织",
+  "person": "人",
+  "privacy_policy": "隐私政策",
+  "profile": "轮廓",
+  "pulltorefresh": "下拉刷新",
+
+  "reset_offset": "重置偏移",
+  "resetting_exposure_point": "重置曝光点",
+  "resetting_focus_point": "重置焦点",
+
   "resource": {
     "artifact": "人工制品",
     "equipment": "设备",
@@ -150,12 +160,7 @@
     "teams": "选择团队s ..",
     "vehicles": "选择车辆 .."
   },
-  "privacy_policy": "隐私政策",
-  "profile": "轮廓",
-  "pulltorefresh": "下拉刷新",
-  "reset_offset": "重置偏移",
-  "resetting_exposure_point": "重置曝光点",
-  "resetting_focus_point": "重置焦点",
+
 
   "search": {
     "artifact": "按名称搜索...",

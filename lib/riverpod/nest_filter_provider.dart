@@ -22,6 +22,7 @@ var logNoStack = logger.Logger(
 @Riverpod(keepAlive: true)
 class AdamNestFilter extends _$AdamNestFilter {
 
+  @override
   late NestFilterType nestFilterType;
 
   @override

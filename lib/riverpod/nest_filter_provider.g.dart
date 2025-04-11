@@ -6,7 +6,7 @@ part of 'nest_filter_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$adamNestFilterHash() => r'064f859c1f1d1ba097c82f21039a994916b6adc0';
+String _$adamNestFilterHash() => r'ad662a2fd2df53d3614e32c2e5da8cf9225bfd66';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -32,9 +32,7 @@ class _SystemHash {
 abstract class _$AdamNestFilter extends BuildlessNotifier<NestFilter> {
   late final NestFilterType nestFilterType;
 
-  NestFilter build(
-    NestFilterType nestFilterType,
-  );
+  NestFilter build(NestFilterType nestFilterType);
 }
 
 /// See also [AdamNestFilter].
@@ -47,21 +45,15 @@ class AdamNestFilterFamily extends Family<NestFilter> {
   const AdamNestFilterFamily();
 
   /// See also [AdamNestFilter].
-  AdamNestFilterProvider call(
-    NestFilterType nestFilterType,
-  ) {
-    return AdamNestFilterProvider(
-      nestFilterType,
-    );
+  AdamNestFilterProvider call(NestFilterType nestFilterType) {
+    return AdamNestFilterProvider(nestFilterType);
   }
 
   @override
   AdamNestFilterProvider getProviderOverride(
     covariant AdamNestFilterProvider provider,
   ) {
-    return call(
-      provider.nestFilterType,
-    );
+    return call(provider.nestFilterType);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -83,21 +75,20 @@ class AdamNestFilterFamily extends Family<NestFilter> {
 class AdamNestFilterProvider
     extends NotifierProviderImpl<AdamNestFilter, NestFilter> {
   /// See also [AdamNestFilter].
-  AdamNestFilterProvider(
-    NestFilterType nestFilterType,
-  ) : this._internal(
-          () => AdamNestFilter()..nestFilterType = nestFilterType,
-          from: adamNestFilterProvider,
-          name: r'adamNestFilterProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$adamNestFilterHash,
-          dependencies: AdamNestFilterFamily._dependencies,
-          allTransitiveDependencies:
-              AdamNestFilterFamily._allTransitiveDependencies,
-          nestFilterType: nestFilterType,
-        );
+  AdamNestFilterProvider(NestFilterType nestFilterType)
+    : this._internal(
+        () => AdamNestFilter()..nestFilterType = nestFilterType,
+        from: adamNestFilterProvider,
+        name: r'adamNestFilterProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$adamNestFilterHash,
+        dependencies: AdamNestFilterFamily._dependencies,
+        allTransitiveDependencies:
+            AdamNestFilterFamily._allTransitiveDependencies,
+        nestFilterType: nestFilterType,
+      );
 
   AdamNestFilterProvider._internal(
     super._createNotifier, {
@@ -112,12 +103,8 @@ class AdamNestFilterProvider
   final NestFilterType nestFilterType;
 
   @override
-  NestFilter runNotifierBuild(
-    covariant AdamNestFilter notifier,
-  ) {
-    return notifier.build(
-      nestFilterType,
-    );
+  NestFilter runNotifierBuild(covariant AdamNestFilter notifier) {
+    return notifier.build(nestFilterType);
   }
 
   @override
@@ -172,5 +159,6 @@ class _AdamNestFilterProviderElement
   NestFilterType get nestFilterType =>
       (origin as AdamNestFilterProvider).nestFilterType;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

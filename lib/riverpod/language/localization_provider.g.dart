@@ -14,14 +14,15 @@ String _$appLocalizationsHash() => r'ee827fa82c4ba06bc253dee7341a892b6ee82bb1';
 @ProviderFor(appLocalizations)
 final appLocalizationsProvider =
     AutoDisposeProvider<nt.AppLocaleUtils>.internal(
-  appLocalizations,
-  name: r'appLocalizationsProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$appLocalizationsHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      appLocalizations,
+      name: r'appLocalizationsProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$appLocalizationsHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element

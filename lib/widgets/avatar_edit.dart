@@ -196,7 +196,7 @@ class _EditableAvatarState extends ConsumerState<EditableAvatar> {
       saveFileToMinio(newFile);
       } else {
                 final showFile = File(pickedFile.path);
-        logNoStack.i("AVATAR_EDIT: New path: ${showFile}");
+        logNoStack.i("AVATAR_EDIT: New path: $showFile");
       
       setState(() {
         _image = showFile;

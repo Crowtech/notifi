@@ -73,7 +73,7 @@ class NestNotifis extends _$NestNotifis {
       final items = jsonDecode(map['items']) as List<Map<NestNotifi, dynamic>>;
 
       String itemsJson = map['items'];
-      logNoStack.i("NEST_NOTIFI: itemsJson=${itemsJson}");
+      logNoStack.i("NEST_NOTIFI: itemsJson=$itemsJson");
       final items2 = jsonDecode(itemsJson); // as List<Map<Org, dynamic>>;
       return items2.map(NestNotifi.fromJson).toList();
     }

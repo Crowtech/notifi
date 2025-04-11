@@ -43,6 +43,20 @@
   "exposure_mode": "Exposure Mode",
   "exposure_offset": "Exposure Offset",
   "favourite": "Favourite",
+  "form" : {
+    "create": "Create a new ${item.capitalize}",
+    "edit": "Edit ${item.capitalize}",
+    "join": "Join ${item.capitalize}",
+    "name": "Name",
+    "name_validation": "Please enter ${item} name",
+    "description": "Description of ${item}",
+    "description_validation": "Please enter ${item} description",
+    "email": "Email",
+    "email_validation": "Please enter valid ${item} email",
+    "url": "Web Address",
+    "url_validation": "Please enter valid ${item} web address",
+    "org_type": "${item.capitalize} Type"
+  },
   "firstname": "Firstname",
   "focus_mode": "Focus Mode",
   "groups": "Groups",
@@ -90,20 +104,12 @@
   "moving": "Moving",
   "odometer": "Odometer",
   "openstreetmap" : "OpenStreetMap contributors",
-  "organization" : {
-    "create": "Create a new Organization",
-    "edit": "Edit Organization",
-    "join": "Join Organization",
-    "name": "Name",
-    "name_validation": "Please enter organization name",
-    "description": "Description",
-    "description_validation": "Please enter organization descriptionn",
-    "email": "Email",
-    "email_validation": "Please enter valid organization email",
-    "url": "Web Address",
-    "url_validation": "Please enter valid organization web address",
-    "org_type": "Organization Type"
-  },
+  "organization": "organization",
+  "person": "Person",
+  "privacy_policy": "Privacy Policy",
+  "profile": "Profile",
+  "pulltorefresh": "Pull to refresh",
+
   "resource": {
     "artifact": "Artifact",
     "equipment": "Equipment",
@@ -150,9 +156,7 @@
     "teams": "Select Teams ..",
     "vehicles": "Select Vehicles .."
   },
-  "privacy_policy": "Privacy Policy",
-  "profile": "Profile",
-  "pulltorefresh": "Pull to refresh",
+  
   "reset_offset": "Reset Offset",
   "resetting_exposure_point": "Resetting exposure point",
   "resetting_focus_point": "Resetting focus point",

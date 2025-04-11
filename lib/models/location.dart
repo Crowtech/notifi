@@ -24,7 +24,8 @@ class Location extends Resource {
     Resource author;
     DateTime expiry;
 
-    GPS? gps;
+    @override
+  GPS? gps;
 
   Location(
       {
@@ -78,7 +79,7 @@ class Location extends Resource {
   }
 
   String getInitials() {
-    return "${name!.substring(0, 0)}";
+    return name!.substring(0, 0);
   }
 
     @override

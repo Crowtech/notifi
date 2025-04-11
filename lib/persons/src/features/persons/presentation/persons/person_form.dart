@@ -14,6 +14,8 @@ var logNoStack = logger.Logger(
 );
 
 class CreatePersonForm extends StatefulWidget {
+  const CreatePersonForm({super.key});
+
   @override
   _CreatePersonFormState createState() => _CreatePersonFormState();
 }
@@ -46,14 +48,14 @@ class _CreatePersonFormState extends State<CreatePersonForm> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
+              const Text(
                 'Create New Person',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: _nameController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Person Name',
                   border: OutlineInputBorder(),
                 ),
@@ -64,10 +66,10 @@ class _CreatePersonFormState extends State<CreatePersonForm> {
                   return null;
                 },
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: _descriptionController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Person Description',
                   border: OutlineInputBorder(),
                 ),
@@ -78,10 +80,10 @@ class _CreatePersonFormState extends State<CreatePersonForm> {
                   return null;
                 },
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: _emailController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Person Email',
                   border: OutlineInputBorder(),
                 ),
@@ -92,10 +94,10 @@ class _CreatePersonFormState extends State<CreatePersonForm> {
                   return null;
                 },
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: _phoneController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Person Phone Number',
                   border: OutlineInputBorder(),
                 ),
@@ -106,10 +108,10 @@ class _CreatePersonFormState extends State<CreatePersonForm> {
                   return null;
                 },
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: _addressController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Person Address',
                   border: OutlineInputBorder(),
                 ),
@@ -120,7 +122,7 @@ class _CreatePersonFormState extends State<CreatePersonForm> {
                   return null;
                 },
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -128,9 +130,9 @@ class _CreatePersonFormState extends State<CreatePersonForm> {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text('${nt.t.response.cancel}'),
+                    child: Text(nt.t.response.cancel),
                   ),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
@@ -147,7 +149,7 @@ class _CreatePersonFormState extends State<CreatePersonForm> {
                         Navigator.of(context).pop();
                       }
                     },
-                    child: Text('${nt.t.response.submit}'),
+                    child: Text(nt.t.response.submit),
                   ),
                 ],
               ),

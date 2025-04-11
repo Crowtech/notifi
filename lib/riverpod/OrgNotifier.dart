@@ -41,7 +41,7 @@ class OrgNotifier extends _$OrgNotifier {
 
   // Let's mark a organization as selected
   void toggle(int organizationId) async {
-    AsyncValue<List<Organization>> organizations = await state;
+    AsyncValue<List<Organization>> organizations = state;
 
 //state = organizations;
 
@@ -52,7 +52,7 @@ class OrgNotifier extends _$OrgNotifier {
           // Once more, since our state is immutable, we need to make a copy
           // of the organization. We're using our `copyWith` method implemented before
           // to help with that.
-          organization.copyWith(selected: !organization.selected!)
+          organization.copyWith(selected: !organization.selected)
         else
           // other organizations are not modified
           organization,

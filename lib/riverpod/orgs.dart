@@ -93,7 +93,7 @@ class AsyncOrgs extends _$AsyncOrgs {
     //return todos.map(Org.fromJson).toList();
 
     String itemsJson = map['items'];
-     logNoStack.i("ORGS: itemsJson=${itemsJson}");
+     logNoStack.i("ORGS: itemsJson=$itemsJson");
     final todos2 = jsonDecode(itemsJson);// as List<Map<Org, dynamic>>;
     return todos2.map(Org.fromJson).toList();
     }

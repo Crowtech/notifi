@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
@@ -6,16 +5,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notifi/api_utils.dart';
 import 'package:notifi/credentials.dart';
 import 'package:notifi/jwt_utils.dart';
-import 'package:notifi/models/crowtech_basepage.dart';
-import 'package:notifi/models/nestfilter.dart';
 import 'package:notifi/models/organization.dart';
 import 'package:notifi/models/person.dart';
 import 'package:notifi/organizations/src/features/organizations/data/organizations_repository_nf.dart';
-import 'package:notifi/riverpod/organizations.dart';
 import 'package:notifi/state/nest_auth2.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:logger/logger.dart' as logger;
-import 'package:latlong2/latlong.dart';
 
 part 'fcm_notifier.g.dart';
 

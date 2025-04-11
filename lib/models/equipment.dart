@@ -26,6 +26,7 @@ class Equipment extends Resource {
   String serialNumber;
   String mac;
 
+  @override
   GPS? gps;
 
   Equipment({

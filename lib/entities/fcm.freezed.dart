@@ -12,58 +12,64 @@ part of 'fcm.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$Fcm {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            FirebaseOptions? firebaseOptions,
-            String? vapidKey,
-            int secondsToast,
-            List<String> topics,
-            String token)
-        active,
+      FirebaseOptions? firebaseOptions,
+      String? vapidKey,
+      int secondsToast,
+      List<String> topics,
+      String token,
+    )
+    active,
     required TResult Function() inactive,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(FirebaseOptions? firebaseOptions, String? vapidKey,
-            int secondsToast, List<String> topics, String token)?
-        active,
+    TResult? Function(
+      FirebaseOptions? firebaseOptions,
+      String? vapidKey,
+      int secondsToast,
+      List<String> topics,
+      String token,
+    )?
+    active,
     TResult? Function()? inactive,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(FirebaseOptions? firebaseOptions, String? vapidKey,
-            int secondsToast, List<String> topics, String token)?
-        active,
+    TResult Function(
+      FirebaseOptions? firebaseOptions,
+      String? vapidKey,
+      int secondsToast,
+      List<String> topics,
+      String token,
+    )?
+    active,
     TResult Function()? inactive,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Active value) active,
     required TResult Function(Inactive value) inactive,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Active value)? active,
     TResult? Function(Inactive value)? inactive,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Active value)? active,
     TResult Function(Inactive value)? inactive,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -88,15 +94,17 @@ class _$FcmCopyWithImpl<$Res, $Val extends Fcm> implements $FcmCopyWith<$Res> {
 /// @nodoc
 abstract class _$$ActiveImplCopyWith<$Res> {
   factory _$$ActiveImplCopyWith(
-          _$ActiveImpl value, $Res Function(_$ActiveImpl) then) =
-      __$$ActiveImplCopyWithImpl<$Res>;
+    _$ActiveImpl value,
+    $Res Function(_$ActiveImpl) then,
+  ) = __$$ActiveImplCopyWithImpl<$Res>;
   @useResult
-  $Res call(
-      {FirebaseOptions? firebaseOptions,
-      String? vapidKey,
-      int secondsToast,
-      List<String> topics,
-      String token});
+  $Res call({
+    FirebaseOptions? firebaseOptions,
+    String? vapidKey,
+    int secondsToast,
+    List<String> topics,
+    String token,
+  });
 }
 
 /// @nodoc
@@ -104,8 +112,9 @@ class __$$ActiveImplCopyWithImpl<$Res>
     extends _$FcmCopyWithImpl<$Res, _$ActiveImpl>
     implements _$$ActiveImplCopyWith<$Res> {
   __$$ActiveImplCopyWithImpl(
-      _$ActiveImpl _value, $Res Function(_$ActiveImpl) _then)
-      : super(_value, _then);
+    _$ActiveImpl _value,
+    $Res Function(_$ActiveImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of Fcm
   /// with the given fields replaced by the non-null parameter values.
@@ -118,42 +127,49 @@ class __$$ActiveImplCopyWithImpl<$Res>
     Object? topics = null,
     Object? token = null,
   }) {
-    return _then(_$ActiveImpl(
-      firebaseOptions: freezed == firebaseOptions
-          ? _value.firebaseOptions
-          : firebaseOptions // ignore: cast_nullable_to_non_nullable
-              as FirebaseOptions?,
-      vapidKey: freezed == vapidKey
-          ? _value.vapidKey
-          : vapidKey // ignore: cast_nullable_to_non_nullable
-              as String?,
-      secondsToast: null == secondsToast
-          ? _value.secondsToast
-          : secondsToast // ignore: cast_nullable_to_non_nullable
-              as int,
-      topics: null == topics
-          ? _value._topics
-          : topics // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+    return _then(
+      _$ActiveImpl(
+        firebaseOptions:
+            freezed == firebaseOptions
+                ? _value.firebaseOptions
+                : firebaseOptions // ignore: cast_nullable_to_non_nullable
+                    as FirebaseOptions?,
+        vapidKey:
+            freezed == vapidKey
+                ? _value.vapidKey
+                : vapidKey // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        secondsToast:
+            null == secondsToast
+                ? _value.secondsToast
+                : secondsToast // ignore: cast_nullable_to_non_nullable
+                    as int,
+        topics:
+            null == topics
+                ? _value._topics
+                : topics // ignore: cast_nullable_to_non_nullable
+                    as List<String>,
+        token:
+            null == token
+                ? _value.token
+                : token // ignore: cast_nullable_to_non_nullable
+                    as String,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$ActiveImpl extends Active {
-  const _$ActiveImpl(
-      {required this.firebaseOptions,
-      required this.vapidKey,
-      required this.secondsToast,
-      required final List<String> topics,
-      required this.token})
-      : _topics = topics,
-        super._();
+  const _$ActiveImpl({
+    required this.firebaseOptions,
+    required this.vapidKey,
+    required this.secondsToast,
+    required final List<String> topics,
+    required this.token,
+  }) : _topics = topics,
+       super._();
 
   @override
   final FirebaseOptions? firebaseOptions;
@@ -193,8 +209,14 @@ class _$ActiveImpl extends Active {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, firebaseOptions, vapidKey,
-      secondsToast, const DeepCollectionEquality().hash(_topics), token);
+  int get hashCode => Object.hash(
+    runtimeType,
+    firebaseOptions,
+    vapidKey,
+    secondsToast,
+    const DeepCollectionEquality().hash(_topics),
+    token,
+  );
 
   /// Create a copy of Fcm
   /// with the given fields replaced by the non-null parameter values.
@@ -208,12 +230,13 @@ class _$ActiveImpl extends Active {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            FirebaseOptions? firebaseOptions,
-            String? vapidKey,
-            int secondsToast,
-            List<String> topics,
-            String token)
-        active,
+      FirebaseOptions? firebaseOptions,
+      String? vapidKey,
+      int secondsToast,
+      List<String> topics,
+      String token,
+    )
+    active,
     required TResult Function() inactive,
   }) {
     return active(firebaseOptions, vapidKey, secondsToast, topics, token);
@@ -222,9 +245,14 @@ class _$ActiveImpl extends Active {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(FirebaseOptions? firebaseOptions, String? vapidKey,
-            int secondsToast, List<String> topics, String token)?
-        active,
+    TResult? Function(
+      FirebaseOptions? firebaseOptions,
+      String? vapidKey,
+      int secondsToast,
+      List<String> topics,
+      String token,
+    )?
+    active,
     TResult? Function()? inactive,
   }) {
     return active?.call(firebaseOptions, vapidKey, secondsToast, topics, token);
@@ -233,9 +261,14 @@ class _$ActiveImpl extends Active {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(FirebaseOptions? firebaseOptions, String? vapidKey,
-            int secondsToast, List<String> topics, String token)?
-        active,
+    TResult Function(
+      FirebaseOptions? firebaseOptions,
+      String? vapidKey,
+      int secondsToast,
+      List<String> topics,
+      String token,
+    )?
+    active,
     TResult Function()? inactive,
     required TResult orElse(),
   }) {
@@ -278,12 +311,13 @@ class _$ActiveImpl extends Active {
 }
 
 abstract class Active extends Fcm {
-  const factory Active(
-      {required final FirebaseOptions? firebaseOptions,
-      required final String? vapidKey,
-      required final int secondsToast,
-      required final List<String> topics,
-      required final String token}) = _$ActiveImpl;
+  const factory Active({
+    required final FirebaseOptions? firebaseOptions,
+    required final String? vapidKey,
+    required final int secondsToast,
+    required final List<String> topics,
+    required final String token,
+  }) = _$ActiveImpl;
   const Active._() : super._();
 
   FirebaseOptions? get firebaseOptions;
@@ -302,8 +336,9 @@ abstract class Active extends Fcm {
 /// @nodoc
 abstract class _$$InactiveImplCopyWith<$Res> {
   factory _$$InactiveImplCopyWith(
-          _$InactiveImpl value, $Res Function(_$InactiveImpl) then) =
-      __$$InactiveImplCopyWithImpl<$Res>;
+    _$InactiveImpl value,
+    $Res Function(_$InactiveImpl) then,
+  ) = __$$InactiveImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -311,8 +346,9 @@ class __$$InactiveImplCopyWithImpl<$Res>
     extends _$FcmCopyWithImpl<$Res, _$InactiveImpl>
     implements _$$InactiveImplCopyWith<$Res> {
   __$$InactiveImplCopyWithImpl(
-      _$InactiveImpl _value, $Res Function(_$InactiveImpl) _then)
-      : super(_value, _then);
+    _$InactiveImpl _value,
+    $Res Function(_$InactiveImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of Fcm
   /// with the given fields replaced by the non-null parameter values.
@@ -341,12 +377,13 @@ class _$InactiveImpl extends Inactive {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            FirebaseOptions? firebaseOptions,
-            String? vapidKey,
-            int secondsToast,
-            List<String> topics,
-            String token)
-        active,
+      FirebaseOptions? firebaseOptions,
+      String? vapidKey,
+      int secondsToast,
+      List<String> topics,
+      String token,
+    )
+    active,
     required TResult Function() inactive,
   }) {
     return inactive();
@@ -355,9 +392,14 @@ class _$InactiveImpl extends Inactive {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(FirebaseOptions? firebaseOptions, String? vapidKey,
-            int secondsToast, List<String> topics, String token)?
-        active,
+    TResult? Function(
+      FirebaseOptions? firebaseOptions,
+      String? vapidKey,
+      int secondsToast,
+      List<String> topics,
+      String token,
+    )?
+    active,
     TResult? Function()? inactive,
   }) {
     return inactive?.call();
@@ -366,9 +408,14 @@ class _$InactiveImpl extends Inactive {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(FirebaseOptions? firebaseOptions, String? vapidKey,
-            int secondsToast, List<String> topics, String token)?
-        active,
+    TResult Function(
+      FirebaseOptions? firebaseOptions,
+      String? vapidKey,
+      int secondsToast,
+      List<String> topics,
+      String token,
+    )?
+    active,
     TResult Function()? inactive,
     required TResult orElse(),
   }) {

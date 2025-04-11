@@ -46,8 +46,8 @@ CurrentLocationLayer currentUserLocation(BuildContext context,
       ),
       moveAnimationDuration: Duration.zero, // disable animation
     );
-  } on MissingPluginException catch (e) {
-    currentLocationLayer = CurrentLocationLayer();
+  } on MissingPluginException {
+    currentLocationLayer = const CurrentLocationLayer();
   }
   return currentLocationLayer;
 }

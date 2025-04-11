@@ -15,12 +15,12 @@ Future<void> AboutUsDialog(BuildContext context, String appTitle, Widget logo)  
       builder: (BuildContext context) {
         return AlertDialog(
           icon: logo,
-          title:  Text('About ${appTitle}'),
+          title:  Text('About $appTitle'),
           content:  Text(
             '$appTitle\n'
             'Version\t${packageInfo.version}\n'
             'Installed\t${packageInfo.installTime}\n'
-            'Device\t${deviceId}\n'
+            'Device\t$deviceId\n'
             '\n'
             ' © Crowtech 2024,2025 under license to  ${defaultRealm.capitalise()}' ,
           ),

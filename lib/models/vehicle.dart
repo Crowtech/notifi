@@ -26,6 +26,7 @@ class Vehicle extends Resource {
   String serialNumber;
   String mac;
 
+  @override
   GPS? gps;
 
   Vehicle({

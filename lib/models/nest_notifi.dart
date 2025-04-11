@@ -19,7 +19,7 @@ class NestNotifi extends CrowtechObject implements PagingDataItem {
   static String className = "NestNotifi";
   static String tablename = className.toLowerCase();
 
-  int _pageId = 0;
+  final int _pageId = 0;
 
   String? description;
   String? imageUrl;
