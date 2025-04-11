@@ -107,17 +107,19 @@ class _TextFormFieldWidgetState
   }
 
   bool isValid(String? value) {
-    if (widget.optional) {
-      return true;
-    }
+    logNoStack.i("Checking validation for ${widget.fieldCode} $value ${widget.optional}");
+
     if (value == null) {
-      return false;
+      if (!widget.optional) {
+        return false;
+      }
     }
     if (widget.onValidate != null) {
+          logNoStack.i("Checking validation using onValidate ${widget.onValidate!(value!)?'GOOD':'BAD'}");
       return widget.onValidate!(value);
     } 
     return RegExp(widget.regex,caseSensitive: false, unicode: true, dotAll: true)
-  .hasMatch(value);
+  .hasMatch(value!);
   }
 
   bool _isEmptyOlderValue(String? value) {
