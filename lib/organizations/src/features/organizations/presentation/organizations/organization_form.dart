@@ -227,8 +227,11 @@ class _CreateOrganizationFormState
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text('Processing Data')),
                           );
+                           Navigator.of(context).pop();
+                        }else {
+                          return null;
                         }
-                        Navigator.of(context).pop();
+                       
                       },
                       // (_formKey.currentState != null &&
                       //         _formKey.currentState!.validate())
