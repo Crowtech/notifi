@@ -28,7 +28,7 @@ class LinkItem extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-     final String selectedMenuItem = ref.watch(menuIndexProvider);
+     //final String selectedMenuItem = ref.watch(menuIndexProvider);
 
     // switch (selectedMenuItem) {
     //   case "TEST":
