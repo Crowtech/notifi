@@ -59,6 +59,7 @@ class _TextFormFieldWidgetState
       GlobalKey<FormFieldState>();
   final Debouncer _debouncer = Debouncer(milliseconds: 500);
   String? _olderValue;
+  bool isValid = false;
   List<TextInputFormatter>? inputFormatters = [];
 
   @override
@@ -87,13 +88,28 @@ class _TextFormFieldWidgetState
       inputFormatters: [...inputFormatters!],
       textCapitalization: widget.textCapitalization,
       decoration: InputDecoration(
+        errorStyle: TextStyle(color: Colors.red),
         labelText: widget.itemName,
+        enabledBorder: OutlineInputBorder(
+          borderSide:  BorderSide(color: isValid?Colors.green:Colors.red, width: isValid?2.0:1.0),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+       
+        disabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.grey, width: 1.0),
+          borderRadius: BorderRadius.circular(10.0),  
+        ),
+       
+        errorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.red, width: 2.0),
+          borderRadius: BorderRadius.circular(10.0),
+        ),  
       ),
       validator: (value) {
         String? result =
             (!_isEmptyOlderValue(_olderValue)) && value!.isEmpty
                 ? null
-                : !isValid(value)
+                : !isValidInput(value)
                     ? widget.itemValidation
                     : null;
         _olderValue = _isEmptyValue(value) ? value : _olderValue;
@@ -106,20 +122,20 @@ class _TextFormFieldWidgetState
     );
   }
 
-  bool isValid(String? value) {
-    logNoStack.i("Checking validation for ${widget.fieldCode} $value ${widget.optional}");
-
-    if (value == null) {
+  bool isValidInput(String? value) {
+    logNoStack.i("Checking validation for ${widget.fieldCode} $value optional:${widget.optional}");
+    if (value == null || value.isEmpty) {
       if (!widget.optional) {
-        return false;
+        isValid = false;
       }
-    }
-    if (widget.onValidate != null) {
+    }else if (widget.onValidate != null) {
           logNoStack.i("Checking validation using onValidate ${widget.onValidate!(value!)?'GOOD':'BAD'}");
-      return widget.onValidate!(value);
-    } 
-    return RegExp(widget.regex,caseSensitive: false, unicode: true, dotAll: true)
-  .hasMatch(value!);
+      isValid = widget.onValidate!(value);
+    } else {
+    isValid = RegExp(widget.regex,caseSensitive: false, unicode: true, dotAll: true)
+  .hasMatch(value);
+    }
+  return isValid;
   }
 
   bool _isEmptyOlderValue(String? value) {
