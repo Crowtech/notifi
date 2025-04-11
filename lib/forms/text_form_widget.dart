@@ -69,7 +69,7 @@ class _TextFormFieldWidgetState
     } else if (widget.forceUppercase) { // should be enum
       inputFormatters = [UpperCaseTextFormatter()];
     }
-    // ref.watch(enableWidgetProvider(widget.fieldCode).notifier).setEnabled(widget.enabled);
+    ref.read(enableWidgetProvider(widget.fieldCode).notifier).setEnabled(widget.enabled);
   }
 
   @override
@@ -80,7 +80,7 @@ class _TextFormFieldWidgetState
 
   @override
   Widget build(BuildContext context) {
-    var enableWidget = true; //ref.watch(enableWidgetProvider(widget.fieldCode));
+    var enableWidget = ref.watch(enableWidgetProvider(widget.fieldCode));
     return TextFormField(
       key: itemFormFieldKey,
       enabled: enableWidget,

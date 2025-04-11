@@ -158,5 +158,136 @@ class _EnableWidgetProviderElement
   String get code => (origin as EnableWidgetProvider).code;
 }
 
+String _$enableWidgetTrueHash() => r'113063abc481c00a6417288b9a6cf45eba8dcd9e';
+
+abstract class _$EnableWidgetTrue extends BuildlessAutoDisposeNotifier<bool> {
+  late final String code;
+
+  bool build(String code);
+}
+
+/// See also [EnableWidgetTrue].
+@ProviderFor(EnableWidgetTrue)
+const enableWidgetTrueProvider = EnableWidgetTrueFamily();
+
+/// See also [EnableWidgetTrue].
+class EnableWidgetTrueFamily extends Family<bool> {
+  /// See also [EnableWidgetTrue].
+  const EnableWidgetTrueFamily();
+
+  /// See also [EnableWidgetTrue].
+  EnableWidgetTrueProvider call(String code) {
+    return EnableWidgetTrueProvider(code);
+  }
+
+  @override
+  EnableWidgetTrueProvider getProviderOverride(
+    covariant EnableWidgetTrueProvider provider,
+  ) {
+    return call(provider.code);
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'enableWidgetTrueProvider';
+}
+
+/// See also [EnableWidgetTrue].
+class EnableWidgetTrueProvider
+    extends AutoDisposeNotifierProviderImpl<EnableWidgetTrue, bool> {
+  /// See also [EnableWidgetTrue].
+  EnableWidgetTrueProvider(String code)
+    : this._internal(
+        () => EnableWidgetTrue()..code = code,
+        from: enableWidgetTrueProvider,
+        name: r'enableWidgetTrueProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$enableWidgetTrueHash,
+        dependencies: EnableWidgetTrueFamily._dependencies,
+        allTransitiveDependencies:
+            EnableWidgetTrueFamily._allTransitiveDependencies,
+        code: code,
+      );
+
+  EnableWidgetTrueProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.code,
+  }) : super.internal();
+
+  final String code;
+
+  @override
+  bool runNotifierBuild(covariant EnableWidgetTrue notifier) {
+    return notifier.build(code);
+  }
+
+  @override
+  Override overrideWith(EnableWidgetTrue Function() create) {
+    return ProviderOverride(
+      origin: this,
+      override: EnableWidgetTrueProvider._internal(
+        () => create()..code = code,
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        code: code,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeNotifierProviderElement<EnableWidgetTrue, bool> createElement() {
+    return _EnableWidgetTrueProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is EnableWidgetTrueProvider && other.code == code;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, code.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+mixin EnableWidgetTrueRef on AutoDisposeNotifierProviderRef<bool> {
+  /// The parameter `code` of this provider.
+  String get code;
+}
+
+class _EnableWidgetTrueProviderElement
+    extends AutoDisposeNotifierProviderElement<EnableWidgetTrue, bool>
+    with EnableWidgetTrueRef {
+  _EnableWidgetTrueProviderElement(super.provider);
+
+  @override
+  String get code => (origin as EnableWidgetTrueProvider).code;
+}
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

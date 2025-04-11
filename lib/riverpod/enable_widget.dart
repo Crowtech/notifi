@@ -14,3 +14,13 @@ class EnableWidget extends _$EnableWidget {
     state = enabled;
   }
 }
+
+@riverpod
+class EnableWidgetTrue extends _$EnableWidgetTrue {
+  @override
+  bool build(String code) => true;   // enable as false
+
+  void setEnabled(bool enabled) {
+    state = enabled;
+  }
+}
