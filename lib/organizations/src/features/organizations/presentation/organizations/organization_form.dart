@@ -189,18 +189,16 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
-                  if ((value == null || value.isEmpty) &&
-                      (orgTypeIndex != null && orgTypeIndex!.isUrlable)) {
-                    return nt.t.organization.url_validation;
+                  if ( orgTypeIndex != null &&!orgTypeIndex!.isUrlable) {
+                    _urlController.value = TextEditingValue.empty;
+                    return null;
+                  } else if (value != null && value.isUri() && orgTypeIndex!.isUrlable){
+                    return null; // good
                   } else {
-                    if (value != null && !value.isUri() && orgTypeIndex!.isUrlable) {
-                      return nt.t.organization.url_validation;
-                    } else {
-                      return null;
-                    }
+                     return nt.t.organization.url_validation;
                   }
+            
 
-                  return null;
                 },
               ),
               Row(
