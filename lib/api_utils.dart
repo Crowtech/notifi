@@ -121,9 +121,9 @@ Future<dynamic> apiPostData(Locale locale, String token, String apiPath,
     return resultMap;
   } else {
     logNoStack.e(
-        "API POST DATA: $apiPath created unsuccessfully! with status ${response.statusCode}");
+        "API POST DATA: $apiPath created unsuccessfully! with status ${response.statusCode} $apiPath $data");
     return Future.error(
-        "API POST DATA: $apiPath created unsuccessfully! with status ${response.statusCode}");
+        "API POST DATA: $apiPath created unsuccessfully! with status ${response.statusCode} $apiPath $data");
   }
 }
 
@@ -159,8 +159,8 @@ Future<http.Response> apiPostDataStrNoLocale(
     return response;
   } else {
     log.i(
-        "API POST DATA: apiPostDataStrNoLocaleapiPost created unsuccessfully!");
-    throw "api Post created unsuccessfully!";
+        "API POST DATA: apiPostDataStrNoLocaleapiPost created unsuccessfully $apiPath $jsonDataStr!");
+    throw "api Post created unsuccessfully! $apiPath $jsonDataStr!";
   }
 }
 
