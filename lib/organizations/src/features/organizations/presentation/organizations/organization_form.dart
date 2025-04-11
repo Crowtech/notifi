@@ -30,7 +30,8 @@ class CreateOrganizationForm extends ConsumerStatefulWidget {
   _CreateOrganizationFormState createState() => _CreateOrganizationFormState();
 }
 
-class _CreateOrganizationFormState extends ConsumerState<CreateOrganizationForm> {
+class _CreateOrganizationFormState
+    extends ConsumerState<CreateOrganizationForm> {
   final _formKey = GlobalKey<FormState>();
   final GlobalKey<FormFieldState> nameFormFieldKey =
       GlobalKey<FormFieldState>();
@@ -51,9 +52,10 @@ class _CreateOrganizationFormState extends ConsumerState<CreateOrganizationForm>
 
   OrganizationType? orgTypeIndex;
 
-bool _enableUrl(String url) {
-    return (orgTypeIndex != null && orgTypeIndex!.isUrlable); 
+  bool _enableUrl(String url) {
+    return (orgTypeIndex != null && orgTypeIndex!.isUrlable);
   }
+
   bool _validateUrl(String url) {
     if (orgTypeIndex != null && orgTypeIndex!.isUrlable) {
       if (Uri.tryParse(url)!.hasAbsolutePath) {
@@ -70,6 +72,10 @@ bool _enableUrl(String url) {
   void initState() {
     super.initState();
     orgTypeIndex = OrganizationType.GROUP;
+    ref.read(enableWidgetProvider("name").notifier).set(true);
+    ref.read(enableWidgetProvider("description").notifier).set(true);
+    ref.read(enableWidgetProvider("email").notifier).set(true);
+     ref.read(enableWidgetProvider("submit").notifier).set(false);
   }
 
   @override
@@ -89,11 +95,9 @@ bool _enableUrl(String url) {
         orgTypeIndex = value;
         print(orgTypeIndex!.name);
       });
-      ref.read(enableWidgetProvider("url").notifier).set (value.isUrlable);
-
-      }
+      ref.read(enableWidgetProvider("url").notifier).set(value.isUrlable);
     }
-    
+  }
 
   void _handleSubmit() {
     // Submit the form data
@@ -114,6 +118,7 @@ bool _enableUrl(String url) {
   @override
   Widget build(BuildContext context) {
     String capitalizedItem = nt.t.organization_capitalized;
+    var enableSubmit = ref.watch(enableWidgetProvider("submit"));
 
     return Dialog(
       child: Padding(
@@ -239,6 +244,7 @@ bool _enableUrl(String url) {
                     ),
                     const SizedBox(width: 16),
                     ElevatedButton(
+                    
                       onPressed:
                           (_formKey.currentState != null &&
                                   _formKey.currentState!.validate())
