@@ -225,7 +225,7 @@ class _CreateOrganizationFormState
                                 // If the form is valid, display a snackbar. In the real world,
                                 // you'd often call a server or save the information in a database.
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
+                                   SnackBar(
                                     content: Text(nt.t.saving),
                                   ),
                                 );
