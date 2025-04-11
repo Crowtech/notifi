@@ -10,7 +10,7 @@ class EnableWidget extends _$EnableWidget {
   @override
   bool build(String code) => false;   // enable as false
 
-  void set(bool enable) {
-    state = enable;
+  void setEnabled(bool enabled) {
+    state = enabled;
   }
 }

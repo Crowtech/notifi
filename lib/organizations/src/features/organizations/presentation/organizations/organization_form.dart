@@ -68,14 +68,18 @@ class _CreateOrganizationFormState
     }
   }
 
+  void initFields() async
+  {
+
+  
+  }
+
   @override
   void initState() {
     super.initState();
     orgTypeIndex = OrganizationType.GROUP;
-    ref.read(enableWidgetProvider("name").notifier).set(true);
-    ref.read(enableWidgetProvider("description").notifier).set(true);
-    ref.read(enableWidgetProvider("email").notifier).set(true);
-     ref.read(enableWidgetProvider("submit").notifier).set(false);
+
+   
   }
 
   @override
@@ -118,7 +122,6 @@ class _CreateOrganizationFormState
   @override
   Widget build(BuildContext context) {
     String capitalizedItem = nt.t.organization_capitalized;
-    var enableSubmit = ref.watch(enableWidgetProvider("submit"));
 
     return Dialog(
       child: Padding(
@@ -149,6 +152,7 @@ class _CreateOrganizationFormState
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
                   fieldCode: "description",
+                  enabled: true;
                   itemCategory: nt.t.organization,
                   itemName: nt.t.form.description(
                     item: nt.t.organization_capitalized,

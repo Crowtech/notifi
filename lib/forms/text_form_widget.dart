@@ -21,6 +21,7 @@ typedef ValidateFunction<String> = bool Function(String value);
 class TextFormFieldWidget extends ConsumerStatefulWidget {
   const TextFormFieldWidget({super.key,
   required this.fieldCode,
+  this.enabled = true,
   required this.itemCategory, 
   required this.itemName, 
   required this.itemValidation, 
@@ -33,6 +34,7 @@ class TextFormFieldWidget extends ConsumerStatefulWidget {
   });
   
   final String fieldCode;
+  final bool enabled;
   final String itemCategory;
   final String itemName;
   final String itemValidation;
@@ -66,9 +68,8 @@ class _TextFormFieldWidgetState
       inputFormatters = [LowerCaseTextFormatter()];
     } else if (widget.forceUppercase) { // should be enum
       inputFormatters = [UpperCaseTextFormatter()];
-    } {
-
     }
+     ref.watch(enableWidgetProvider(widget.fieldCode).notifier).setEnabled(widget.enabled);
   }
 
   @override
