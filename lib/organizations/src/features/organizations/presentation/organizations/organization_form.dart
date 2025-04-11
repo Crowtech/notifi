@@ -33,27 +33,20 @@ class CreateOrganizationForm extends ConsumerStatefulWidget {
 class _CreateOrganizationFormState
     extends ConsumerState<CreateOrganizationForm> {
   final _formKey = GlobalKey<FormState>();
-  final GlobalKey<FormFieldState> nameFormFieldKey =
-      GlobalKey<FormFieldState>();
-  final GlobalKey<FormFieldState> descriptionFormFieldKey =
-      GlobalKey<FormFieldState>();
-  final GlobalKey<FormFieldState> urlFormFieldKey = GlobalKey<FormFieldState>();
+
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _emailController = TextEditingController();
   final _urlController = TextEditingController();
 
-
-
   OrganizationType? orgTypeIndex;
 
-bool _validateEmail(String? email) {
+  bool _validateEmail(String? email) {
     if (email == null) {
       return false;
     }
-  return emailValidator.EmailValidator.validate(email);
-}
-
+    return emailValidator.EmailValidator.validate(email);
+  }
 
   @override
   void initState() {
@@ -63,7 +56,6 @@ bool _validateEmail(String? email) {
 
   @override
   void dispose() {
-
     super.dispose();
   }
 
@@ -73,7 +65,9 @@ bool _validateEmail(String? email) {
         orgTypeIndex = value;
         logNoStack.i(orgTypeIndex!.name);
       });
-      ref.read(enableWidgetProvider("false-url").notifier).setEnabled(value.isUrlable);
+      ref
+          .read(enableWidgetProvider("false-url").notifier)
+          .setEnabled(value.isUrlable);
     }
   }
 
@@ -96,7 +90,7 @@ bool _validateEmail(String? email) {
   @override
   Widget build(BuildContext context) {
     String capitalizedItem = nt.t.organization_capitalized;
-  logNoStack.i("Organization form build");
+    logNoStack.i("Organization form build");
     return Dialog(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -145,7 +139,7 @@ bool _validateEmail(String? email) {
                   itemValidation: nt.t.form.email_validation(
                     item: nt.t.organization_capitalized,
                   ),
-                   onValidate: _validateEmail,
+                  onValidate: _validateEmail,
                   regex:
                       r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$",
                   forceLowercase: true,
@@ -175,7 +169,7 @@ bool _validateEmail(String? email) {
                   onChanged: _handleRadioValueChanged,
                 ),
                 RadioListTile<OrganizationType>(
-                  key: const Key("ord"),
+                  key: const Key("org"),
                   title: Text(nt.t.group_types.org),
                   value: OrganizationType.ORG,
                   groupValue: orgTypeIndex,
@@ -198,10 +192,10 @@ bool _validateEmail(String? email) {
                   itemValidation: nt.t.form.url_validation(
                     item: nt.t.organization_capitalized,
                   ),
-               
+
                   regex:
                       r"^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$",
-                     // r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$",
+                  // r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$",
                   forceLowercase: true,
                 ),
                 // TextFormField(
@@ -226,12 +220,20 @@ bool _validateEmail(String? email) {
                     ),
                     const SizedBox(width: 16),
                     ElevatedButton(
-                    
-                      onPressed:
-                          (_formKey.currentState != null &&
-                                  _formKey.currentState!.validate())
-                              ? _handleSubmit
-                              : null,
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          // If the form is valid, display a snackbar. In the real world,
+                          // you'd often call a server or save the information in a database.
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Processing Data')),
+                          );
+                        }
+                        Navigator.of(context).pop();
+                      },
+                      // (_formKey.currentState != null &&
+                      //         _formKey.currentState!.validate())
+                      //     ? _handleSubmit
+                      //     : null,
                       child: Text(nt.t.response.submit),
                     ),
                   ],
