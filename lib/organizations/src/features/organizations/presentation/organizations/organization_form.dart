@@ -30,13 +30,11 @@ class CreateOrganizationForm extends StatefulWidget {
 
 class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
   final _formKey = GlobalKey<FormState>();
-    final GlobalKey<FormFieldState> nameFormFieldKey =
+  final GlobalKey<FormFieldState> nameFormFieldKey =
       GlobalKey<FormFieldState>();
-        final GlobalKey<FormFieldState> descriptionFormFieldKey =
-
+  final GlobalKey<FormFieldState> descriptionFormFieldKey =
       GlobalKey<FormFieldState>();
-        final GlobalKey<FormFieldState> urlFormFieldKey =
-      GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> urlFormFieldKey = GlobalKey<FormFieldState>();
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _emailController = TextEditingController();
@@ -91,7 +89,6 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
   Widget build(BuildContext context) {
     String capitalizedItem = nt.t.organization_capitalized;
 
-
     return Dialog(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -109,11 +106,36 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
                   ),
                 ),
                 const SizedBox(height: 16),
-                TextFormFieldWidget(itemCategory: nt.t.organization, itemName:nt.t.name, itemValidation: nt.t.form.name_validation(item: nt.t.organization_capitalized), regex: r"^[\p{L} ,.'-]*$"),
+                TextFormFieldWidget(
+                  itemCategory: nt.t.organization,
+                  itemName: nt.t.name,
+                  itemValidation: nt.t.form.name_validation(
+                    item: nt.t.organization_capitalized,
+                  ),
+                  regex: r"^[\p{L} ,.'-]*$",
+                ),
                 const SizedBox(height: 16),
-                  TextFormFieldWidget(itemCategory: nt.t.organization, itemName: nt.t.form.description(item: nt.t.organization_capitalized), itemValidation: nt.t.form.description_validation(item: nt.t.organization_capitalized), regex: r"^[\p{L} ,.'-]*$"),
+                TextFormFieldWidget(
+                  itemCategory: nt.t.organization,
+                  itemName: nt.t.form.description(
+                    item: nt.t.organization_capitalized,
+                  ),
+                  itemValidation: nt.t.form.description_validation(
+                    item: nt.t.organization_capitalized,
+                  ),
+                  regex: r"^[\p{L} ,.'-]*$",
+                ),
                 const SizedBox(height: 16),
-                EmailTextFormFieldWidget(itemCategory: capitalizedItem),
+                TextFormFieldWidget(
+                  itemCategory: nt.t.organization,
+                  itemName: nt.t.form.email,
+                  itemValidation: nt.t.form.email_validation(
+                    item: nt.t.organization_capitalized,
+                  ),
+                  regex:
+                      r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$",
+                  forceLowercase: true,
+                ),
                 const SizedBox(height: 16),
 
                 RadioListTile<OrganizationType>(
@@ -203,6 +225,4 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
       ),
     );
   }
-
- 
 }

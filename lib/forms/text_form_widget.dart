@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/helpers/debouncer.dart';
+import 'package:notifi/helpers/text_formatter.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -13,12 +15,24 @@ var logNoStack = logger.Logger(
 );
 
 class TextFormFieldWidget extends StatefulWidget {
-  const TextFormFieldWidget({super.key,required this.itemCategory, required this.itemName, required this.itemValidation, required this.regex});
+  const TextFormFieldWidget({super.key,
+  required this.itemCategory, 
+  required this.itemName, 
+  required this.itemValidation, 
+  required this.regex,
+  this.forceLowercase = false,
+  this.forceUppercase = false,  
+  this.textCapitalization = TextCapitalization.none,
+  });
   
   final String itemCategory;
   final String itemName;
   final String itemValidation;
   final String regex;
+  final bool forceLowercase;
+  final bool forceUppercase;
+  final TextCapitalization textCapitalization;
+
 
   @override
   State<TextFormFieldWidget> createState() =>
@@ -31,6 +45,19 @@ class _TextFormFieldWidgetState
       GlobalKey<FormFieldState>();
   final Debouncer _debouncer = Debouncer(milliseconds: 500);
   String? _olderValue;
+  List<TextInputFormatter>? inputFormatters = [];
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.forceLowercase) { // should be enum
+      inputFormatters = [LowerCaseTextFormatter()];
+    } else if (widget.forceUppercase) { // should be enum
+      inputFormatters = [UpperCaseTextFormatter()];
+    } {
+
+    }
+  }
 
   @override
   void dispose() {
@@ -42,6 +69,8 @@ class _TextFormFieldWidgetState
   Widget build(BuildContext context) {
     return TextFormField(
       key: itemFormFieldKey,
+      inputFormatters: [...inputFormatters!],
+      textCapitalization: widget.textCapitalization,
       decoration: InputDecoration(
         labelText: widget.itemName,
       ),
