@@ -16,22 +16,22 @@ var logNoStack = logger.Logger(
   level: logger.Level.info,
 );
 
-class EmailTextFormFieldWidget extends StatefulWidget {
-  const EmailTextFormFieldWidget({super.key,required this.itemCategory});
+class NameTextFormFieldWidget extends StatefulWidget {
+  const NameTextFormFieldWidget({super.key,required this.itemCategory});
 
   final String itemCategory;
 
   @override
-  State<EmailTextFormFieldWidget> createState() =>
-      _EmailTextFormFieldWidgetState();
+  State<NameTextFormFieldWidget> createState() =>
+      _NameTextFormFieldWidgetState();
 }
 
-class _EmailTextFormFieldWidgetState
-    extends State<EmailTextFormFieldWidget> {
-  final GlobalKey<FormFieldState> emailFormFieldKey =
+class _NameTextFormFieldWidgetState
+    extends State<NameTextFormFieldWidget> {
+  final GlobalKey<FormFieldState> nameFormFieldKey =
       GlobalKey<FormFieldState>();
   final Debouncer _debouncer = Debouncer(milliseconds: 500);
-  String? _olderEmailValue;
+  String? _olderValue;
 
   @override
   void dispose() {
@@ -42,23 +42,23 @@ class _EmailTextFormFieldWidgetState
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      key: emailFormFieldKey,
+      key: nameFormFieldKey,
       decoration: const InputDecoration(
-        labelText: nt.t.email,
+        labelText: nt.t.name,
       ),
       validator: (value) {
         String? result =
-            (!_isEmptyOlderValue(_olderEmailValue)) && value!.isEmpty
+            (!_isEmptyOlderValue(_olderValue)) && value!.isEmpty
                 ? null
                 : !isValidEmail(value)
                     ? nt.t.form.email_validation(item: widget.itemCategory )
                     : null;
-        _olderEmailValue = _isEmptyValue(value) ? value : _olderEmailValue;
+        _olderValue = _isEmptyValue(value) ? value : _olderValue;
         return result;
       },
       onChanged: (value) => _debouncer.run(() {
-        _olderEmailValue = value.isEmpty ? _olderEmailValue : value;
-        emailFormFieldKey.currentState?.validate();
+        _olderValue = value.isEmpty ? _olderValue : value;
+        nameFormFieldKey.currentState?.validate();
       }),
     );
   }

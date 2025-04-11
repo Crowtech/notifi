@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter_regex/flutter_regex.dart';
 import 'package:notifi/forms/email_form_widget.dart';
+import 'package:notifi/forms/name_form_widget.dart';
 import 'package:notifi/helpers/debouncer.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
@@ -108,7 +109,7 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
                   ),
                 ),
                 const SizedBox(height: 16),
-               
+                NameTextFormFieldWidget(itemCategory: nt.t.organization),
                 const SizedBox(height: 16),
                 TextFormField(
                   autovalidateMode: AutovalidateMode.onUnfocus,
@@ -126,23 +127,7 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
                   },
                 ),
                 const SizedBox(height: 16),
-
                 EmailTextFormFieldWidget(itemCategory: capitalizedItem),
-
-                // SizedBox(height: 16),
-                // TextFormField(
-                //   controller: _addressController,
-                //   decoration: InputDecoration(
-                //     labelText: 'Organization Address',
-                //     border: OutlineInputBorder(),
-                //   ),
-                //   validator: (value) {
-                //     if (value == null || value.isEmpty) {
-                //       return 'Please enter organization address';
-                //     }
-                //     return null;
-                //   },
-                //),
                 const SizedBox(height: 16),
 
                 RadioListTile<OrganizationType>(
