@@ -218,7 +218,8 @@ class _CreateOrganizationFormState
                     ElevatedButton(
                       key: const Key("submit"),
                       onPressed:
-                          !_formKey.currentState!.validate()
+                          !(_formKey.currentState != null &&
+                              _formKey.currentState!.validate())
                               ? null
                               : () {
                                 // If the form is valid, display a snackbar. In the real world,
