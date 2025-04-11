@@ -66,7 +66,8 @@ class _TextFormFieldWidgetState
     if (value == null) {
       return false;
     }
-    return RegExp(widget.regex).hasMatch(value);
+    return RegExp(widget.regex,caseSensitive: false, unicode: true, dotAll: true)
+  .hasMatch(value);
   }
 
   bool _isEmptyOlderValue(String? value) {
