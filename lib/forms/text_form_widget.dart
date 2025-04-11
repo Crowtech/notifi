@@ -150,7 +150,10 @@ Color statusColor() {
         _olderValue = value.isEmpty ? _olderValue : value;
         itemFormFieldKey.currentState?.validate();
       }),
-      onFieldSubmitted:(value) => isValidInput(value),
+      onFieldSubmitted:(value) {
+        isValidInput(value);
+        ref.read(enableWidgetProvider(widget.fieldCode));
+      },
     );
   }
 
