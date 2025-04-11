@@ -117,7 +117,7 @@ class _CreateOrganizationFormState
                   itemValidation: nt.t.form.name_validation(
                     item: nt.t.organization_capitalized,
                   ),
-                  regex: r"^[\p{L} ,.'-]*$",
+                  regex: r"^[\p{L} ,.'-0-9]*$",
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
@@ -130,7 +130,7 @@ class _CreateOrganizationFormState
                   itemValidation: nt.t.form.description_validation(
                     item: nt.t.organization_capitalized,
                   ),
-                  regex: r"^[\p{L} ,.'-]*$",
+                  regex: r"^[\p{L} ,.'-0-9]*$",
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
@@ -199,23 +199,12 @@ class _CreateOrganizationFormState
                   itemValidation: nt.t.form.url_validation(
                     item: nt.t.organization_capitalized,
                   ),
-
                   regex:
                       r"^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$",
-                  // r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$",
+                  optional: true,
                   forceLowercase: true,
                 ),
-                // TextFormField(
-                //   autovalidateMode: AutovalidateMode.onUnfocus,
-                //   enabled: (orgTypeIndex != null && orgTypeIndex!.isUrlable),
-                //   controller: _urlController,
-                //   autocorrect: true,
-                //   decoration: InputDecoration(
-                //     labelText: nt.t.form.url,
-                //     border: const OutlineInputBorder(),
-                //   ),
-                //   validator: _validateUrl,
-                // ),
+               
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [

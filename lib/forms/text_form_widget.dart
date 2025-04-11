@@ -63,6 +63,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
   String? _olderValue;
   bool isValid = false;
   bool isEmpty = true;
+  late bool enableWidget; 
   List<TextInputFormatter>? inputFormatters = [];
 
   @override
@@ -76,12 +77,13 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
       inputFormatters = [UpperCaseTextFormatter()];
     }
     isEmpty = widget.initialValue.isEmpty;
+    enableWidget = widget.enabled;
     // ref.read(enableWidgetProvider(widget.fieldCode).notifier).setEnabled(widget.enabled);
   }
 
   Color statusColor() {
     logNoStack.i(
-      "StatusCOlor: ${widget.fieldCode} enabled:${widget.enabled} isValid:$isValid isEmpty:$isEmpty optional:${widget.optional}",
+      "StatusColor: ${widget.fieldCode} enabled:$enableWidget isValid:$isValid isEmpty:$isEmpty optional:${widget.optional}",
     );
     if (widget.enabled == false) {
       return Colors.grey;
@@ -104,7 +106,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
 
   @override
   Widget build(BuildContext context) {
-    var enableWidget = ref.watch(enableWidgetProvider(widget.fieldCode));
+    enableWidget = ref.watch(enableWidgetProvider(widget.fieldCode));
     logNoStack.i("TEXT_FORM_WIDGET: BUILD: ${widget.fieldCode} enableWidget:$enableWidget");
     return TextFormField(
       key: itemFormFieldKey,
@@ -118,7 +120,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
         errorStyle: TextStyle(color: Colors.red),
         labelText: widget.itemName,
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: statusColor(), width: 2.5),
+          borderSide: BorderSide(color: statusColor(), width: 3.0),
           borderRadius: BorderRadius.circular(10.0),
         ),
         enabledBorder: OutlineInputBorder(
@@ -135,7 +137,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
         ),
 
         errorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.red, width: 2.0),
+          borderSide: const BorderSide(color: Colors.red, width: 3.0),
           borderRadius: BorderRadius.circular(10.0),
         ),
       ),
