@@ -81,7 +81,7 @@ class _CreateOrganizationFormState
         orgTypeIndex = value;
         logNoStack.i(orgTypeIndex!.name);
       });
-      ref.read(enableWidgetProvider("url").notifier).setEnabled(value.isUrlable);
+      ref.read(enableWidgetProvider("false-url").notifier).setEnabled(value.isUrlable);
     }
   }
 
@@ -123,7 +123,7 @@ class _CreateOrganizationFormState
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
-                  fieldCode: "name",
+                  fieldCode: "true-name",
                   itemCategory: nt.t.organization,
                   itemName: nt.t.name,
                   itemValidation: nt.t.form.name_validation(
@@ -133,7 +133,7 @@ class _CreateOrganizationFormState
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
-                  fieldCode: "description",
+                  fieldCode: "true-description",
                   enabled: true,
                   itemCategory: nt.t.organization,
                   itemName: nt.t.form.description(
@@ -146,7 +146,7 @@ class _CreateOrganizationFormState
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
-                  fieldCode: "email",
+                  fieldCode: "true-email",
                   enabled: true,
                   itemCategory: nt.t.organization,
                   itemName: nt.t.form.email,
@@ -198,7 +198,7 @@ class _CreateOrganizationFormState
 
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
-                  fieldCode: "url",
+                  fieldCode: "false-url",
                   enabled: false,
                   itemCategory: nt.t.organization,
                   itemName: nt.t.form.url,
