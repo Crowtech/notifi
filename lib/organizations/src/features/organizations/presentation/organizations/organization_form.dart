@@ -42,13 +42,8 @@ class _CreateOrganizationFormState
   final _descriptionController = TextEditingController();
   final _emailController = TextEditingController();
   final _urlController = TextEditingController();
-  final _addressController = TextEditingController();
 
-  String? _olderNameValue;
-  String? _olderDescriptionValue;
-  String? _olderUrlValue;
 
-  final Debouncer _debouncer = Debouncer(milliseconds: 500);
 
   OrganizationType? orgTypeIndex;
 
@@ -68,28 +63,15 @@ class _CreateOrganizationFormState
     }
   }
 
-  void initFields() async
-  {
-
-  
-  }
-
   @override
   void initState() {
     super.initState();
     orgTypeIndex = OrganizationType.GROUP;
-
-   
   }
 
   @override
   void dispose() {
-    _debouncer.dispose();
-    _nameController.dispose();
-    _descriptionController.dispose();
-    _emailController.dispose();
-    _urlController.dispose();
-    _addressController.dispose();
+
     super.dispose();
   }
 
@@ -97,7 +79,7 @@ class _CreateOrganizationFormState
     if (value != null) {
       setState(() {
         orgTypeIndex = value;
-        print(orgTypeIndex!.name);
+        logNoStack.i(orgTypeIndex!.name);
       });
       ref.read(enableWidgetProvider("url").notifier).setEnabled(value.isUrlable);
     }
@@ -122,7 +104,7 @@ class _CreateOrganizationFormState
   @override
   Widget build(BuildContext context) {
     String capitalizedItem = nt.t.organization_capitalized;
-
+  logNoStack.i("Organization form build");
     return Dialog(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
