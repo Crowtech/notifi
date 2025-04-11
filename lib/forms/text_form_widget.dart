@@ -154,10 +154,11 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
           (value) => _debouncer.run(() {
             _olderValue = value.isEmpty ? _olderValue : value;
             itemFormFieldKey.currentState?.validate();
+            ref.read(refreshWidgetProvider("organization").notifier).refresh();
           }),
       onFieldSubmitted: (value) {
         isValidInput(value);
-        ref.read(refreshWidgetProvider("organization").notifier).refresh();
+        
       },
     );
   }
