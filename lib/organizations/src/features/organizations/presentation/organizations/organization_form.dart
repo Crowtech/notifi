@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:email_validator/email_validator.dart';
+import 'package:email_validator/email_validator.dart' as emailValidator;
 import 'package:flutter_regex/flutter_regex.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notifi/forms/email_form_widget.dart';
@@ -47,20 +47,18 @@ class _CreateOrganizationFormState
 
   OrganizationType? orgTypeIndex;
 
-  bool _enableUrl(String url) {
-    return (orgTypeIndex != null && orgTypeIndex!.isUrlable);
-  }
-
+bool _validateEmail(String? email) {
+    if (email == null) {
+      return false;
+    }
+  return emailValidator.EmailValidator.validate(email);
+}
   bool _validateUrl(String url) {
-    if (orgTypeIndex != null && orgTypeIndex!.isUrlable) {
-      if (Uri.tryParse(url)!.hasAbsolutePath) {
+       if (Uri.tryParse(url)!.hasAbsolutePath) {
         return true;
       } else {
         return false;
       }
-    } else {
-      return true;
-    }
   }
 
   @override
@@ -153,6 +151,7 @@ class _CreateOrganizationFormState
                   itemValidation: nt.t.form.email_validation(
                     item: nt.t.organization_capitalized,
                   ),
+                   onValidate: _validateEmail,
                   regex:
                       r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$",
                   forceLowercase: true,
