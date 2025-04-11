@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:email_validator/email_validator.dart';
-import 'package:flutter_regex/flutter_regex.dart';
-import 'package:notifi/helpers/debouncer.dart';
-import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
-import 'package:notifi/models/organization_type.dart';
+import 'package:notifi/helpers/debouncer.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -16,19 +12,22 @@ var logNoStack = logger.Logger(
   level: logger.Level.info,
 );
 
-class NameTextFormFieldWidget extends StatefulWidget {
-  const NameTextFormFieldWidget({super.key,required this.itemCategory});
-
+class TextFormFieldWidget extends StatefulWidget {
+  const TextFormFieldWidget({super.key,required this.itemCategory, required this.itemName, required this.itemValidation, required this.regex});
+  
   final String itemCategory;
+  final String itemName;
+  final String itemValidation;
+  final String regex;
 
   @override
-  State<NameTextFormFieldWidget> createState() =>
-      _NameTextFormFieldWidgetState();
+  State<TextFormFieldWidget> createState() =>
+      _TextFormFieldWidgetState();
 }
 
-class _NameTextFormFieldWidgetState
-    extends State<NameTextFormFieldWidget> {
-  final GlobalKey<FormFieldState> nameFormFieldKey =
+class _TextFormFieldWidgetState
+    extends State<TextFormFieldWidget> {
+  final GlobalKey<FormFieldState> itemFormFieldKey =
       GlobalKey<FormFieldState>();
   final Debouncer _debouncer = Debouncer(milliseconds: 500);
   String? _olderValue;
@@ -42,32 +41,32 @@ class _NameTextFormFieldWidgetState
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      key: nameFormFieldKey,
+      key: itemFormFieldKey,
       decoration: InputDecoration(
-        labelText: nt.t.name,
+        labelText: widget.itemName,
       ),
       validator: (value) {
         String? result =
             (!_isEmptyOlderValue(_olderValue)) && value!.isEmpty
                 ? null
-                : !isValidEmail(value)
-                    ? nt.t.form.email_validation(item: widget.itemCategory )
+                : !isValid(value)
+                    ? widget.itemValidation
                     : null;
         _olderValue = _isEmptyValue(value) ? value : _olderValue;
         return result;
       },
       onChanged: (value) => _debouncer.run(() {
         _olderValue = value.isEmpty ? _olderValue : value;
-        nameFormFieldKey.currentState?.validate();
+        itemFormFieldKey.currentState?.validate();
       }),
     );
   }
 
-  bool isValidEmail(String? email) {
-    if (email == null) {
+  bool isValid(String? value) {
+    if (value == null) {
       return false;
     }
-    return EmailValidator.validate(email);
+    return RegExp(widget.regex).hasMatch(value);
   }
 
   bool _isEmptyOlderValue(String? value) {

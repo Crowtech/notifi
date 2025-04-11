@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter_regex/flutter_regex.dart';
 import 'package:notifi/forms/email_form_widget.dart';
-import 'package:notifi/forms/name_form_widget.dart';
+import 'package:notifi/forms/text_form_widget.dart';
 import 'package:notifi/helpers/debouncer.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
@@ -109,23 +109,9 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
                   ),
                 ),
                 const SizedBox(height: 16),
-                NameTextFormFieldWidget(itemCategory: nt.t.organization),
+                TextFormFieldWidget(itemCategory: nt.t.organization, itemName:nt.t.name, itemValidation: nt.t.form.name_validation(item: nt.t.organization_capitalized), regex: r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]'),
                 const SizedBox(height: 16),
-                TextFormField(
-                  autovalidateMode: AutovalidateMode.onUnfocus,
-                  controller: _descriptionController,
-                  autocorrect: true,
-                  decoration: InputDecoration(
-                    labelText: nt.t.form.description(item: nt.t.organization),
-                    border: const OutlineInputBorder(),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return nt.t.form.description_validation(item: nt.t.organization);
-                    }
-                    return null;
-                  },
-                ),
+                  TextFormFieldWidget(itemCategory: nt.t.organization, itemName: nt.t.form.description(item: nt.t.organization_capitalized), itemValidation: nt.t.form.description_validation(item: nt.t.organization_capitalized), regex: r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]'),
                 const SizedBox(height: 16),
                 EmailTextFormFieldWidget(itemCategory: capitalizedItem),
                 const SizedBox(height: 16),
