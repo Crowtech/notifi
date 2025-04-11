@@ -73,6 +73,13 @@ class _TextFormFieldWidgetState
    // ref.read(enableWidgetProvider(widget.fieldCode).notifier).setEnabled(widget.enabled);
   }
 
+Color statusColor() {
+  if ( widget.optional || isValid) {
+    return Colors.green;
+  } else {
+    return Colors.red;
+  }
+}
   @override
   void dispose() {
     _debouncer.dispose();
@@ -91,7 +98,7 @@ class _TextFormFieldWidgetState
         errorStyle: TextStyle(color: Colors.red),
         labelText: widget.itemName,
         enabledBorder: OutlineInputBorder(
-          borderSide:  BorderSide(color: isValid?Colors.green:Colors.red, width: isValid?2.0:1.0),
+          borderSide:  BorderSide(color: statusColor() , width: isValid?2.0:1.0),
           borderRadius: BorderRadius.circular(10.0),
         ),
        
