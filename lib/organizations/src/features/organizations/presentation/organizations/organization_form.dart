@@ -53,13 +53,7 @@ bool _validateEmail(String? email) {
     }
   return emailValidator.EmailValidator.validate(email);
 }
-  bool _validateUrl(String url) {
-       if (Uri.tryParse(url)!.hasAbsolutePath) {
-        return true;
-      } else {
-        return false;
-      }
-  }
+
 
   @override
   void initState() {
@@ -204,7 +198,7 @@ bool _validateEmail(String? email) {
                   itemValidation: nt.t.form.url_validation(
                     item: nt.t.organization_capitalized,
                   ),
-                  onValidate: _validateUrl,
+               
                   regex:
                       r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$",
                   forceLowercase: true,
