@@ -44,9 +44,9 @@
   "exposure_offset": "Exposure Offset",
   "favourite": "Favourite",
   "form" : {
-    "create": "Create a new ${item.capitalize}",
-    "edit": "Edit ${item.capitalize}",
-    "join": "Join ${item.capitalize}",
+    "create": "Create a new ${item}",
+    "edit": "Edit ${item}",
+    "join": "Join ${item}",
     "name": "Name",
     "name_validation": "Please enter ${item} name",
     "description": "Description of ${item}",
@@ -55,7 +55,7 @@
     "email_validation": "Please enter valid ${item} email",
     "url": "Web Address",
     "url_validation": "Please enter valid ${item} web address",
-    "org_type": "${item.capitalize} Type"
+    "org_type": "${item} Type"
   },
   "firstname": "Firstname",
   "focus_mode": "Focus Mode",

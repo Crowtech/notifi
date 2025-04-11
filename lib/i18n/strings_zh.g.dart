@@ -167,7 +167,7 @@ class _TranslationsFormZh implements TranslationsFormEn {
 	// Translations
 	@override String create({required Object item}) => '创建${item}';
 	@override String edit({required Object item}) => '编辑${item}';
-	@override String join({required Object item.capitalize}) => '加入${item.capitalize}';
+	@override String join({required Object item}) => '加入${item}';
 	@override String get name => '姓名';
 	@override String name_validation({required Object item}) => '请输入${item}名称';
 	@override String description({required Object item}) => '${item} 的描述';
@@ -176,7 +176,7 @@ class _TranslationsFormZh implements TranslationsFormEn {
 	@override String email_validation({required Object item}) => '请输入有效的${item}邮箱地址';
 	@override String get url => '网址';
 	@override String url_validation({required Object item}) => '请输入有效的${item}网址';
-	@override String org_type({required Object item.capitalize}) => '${item.capitalize} 类型';
+	@override String org_type({required Object item}) => '${item} 类型';
 }
 
 // Path: group_types
@@ -358,7 +358,7 @@ extension on TranslationsZh {
 			case 'focus_mode': return '专注模式';
 			case 'form.create': return ({required Object item}) => '创建${item}';
 			case 'form.edit': return ({required Object item}) => '编辑${item}';
-			case 'form.join': return ({required Object item.capitalize}) => '加入${item.capitalize}';
+			case 'form.join': return ({required Object item}) => '加入${item}';
 			case 'form.name': return '姓名';
 			case 'form.name_validation': return ({required Object item}) => '请输入${item}名称';
 			case 'form.description': return ({required Object item}) => '${item} 的描述';
@@ -367,7 +367,7 @@ extension on TranslationsZh {
 			case 'form.email_validation': return ({required Object item}) => '请输入有效的${item}邮箱地址';
 			case 'form.url': return '网址';
 			case 'form.url_validation': return ({required Object item}) => '请输入有效的${item}网址';
-			case 'form.org_type': return ({required Object item.capitalize}) => '${item.capitalize} 类型';
+			case 'form.org_type': return ({required Object item}) => '${item} 类型';
 			case 'groups': return '群组';
 			case 'group_types_title': return '群组类型';
 			case 'group_types.kDefault': return '默认';

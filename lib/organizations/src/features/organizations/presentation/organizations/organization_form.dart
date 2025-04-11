@@ -7,6 +7,7 @@ import 'package:notifi/forms/email_form_widget.dart';
 import 'package:notifi/helpers/debouncer.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
+import 'package:notifi/jwt_utils.dart';
 import 'package:notifi/models/organization_type.dart';
 
 var log = logger.Logger(
@@ -87,6 +88,9 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
 
   @override
   Widget build(BuildContext context) {
+    String capitalizedItem = nt.t.organization;
+    capitalizedItem = capitalizedItem.capitalise as String;
+
     return Dialog(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -97,7 +101,7 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  nt.t.form.create(item: nt.t.organization),
+                  nt.t.form.create(item: capitalizedItem),
                   style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -123,7 +127,7 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
                 ),
                 const SizedBox(height: 16),
 
-                EmailTextFormFieldWidget(itemCategory: nt.t.organization),
+                EmailTextFormFieldWidget(itemCategory: capitalizedItem),
 
                 // SizedBox(height: 16),
                 // TextFormField(
@@ -197,7 +201,7 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
                         orgTypeIndex!.isUrlable) {
                       return null; // good
                     } else {
-                      return nt.t.form.url_validation(item: nt.t.organization);
+                      return nt.t.form.url_validation(item: capitalizedItem);
                     }
                   },
                 ),

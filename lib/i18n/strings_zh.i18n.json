@@ -48,7 +48,7 @@
   "form" : {
     "create": "创建${item}",
     "edit": "编辑${item}",
-    "join": "加入${item.capitalize}",
+    "join": "加入${item}",
     "name": "姓名",
     "name_validation": "请输入${item}名称",
     "description": "${item} 的描述",
@@ -57,7 +57,7 @@
     "email_validation": "请输入有效的${item}邮箱地址",
     "url": "网址",
     "url_validation": "请输入有效的${item}网址",
-    "org_type": "${item.capitalize} 类型"
+    "org_type": "${item} 类型"
   },
   "groups": "群组",
 "group_types_title" : "群组类型",

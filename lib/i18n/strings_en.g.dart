@@ -168,9 +168,9 @@ class TranslationsFormEn {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	String create({required Object item.capitalize}) => 'Create a new ${item.capitalize}';
-	String edit({required Object item.capitalize}) => 'Edit ${item.capitalize}';
-	String join({required Object item.capitalize}) => 'Join ${item.capitalize}';
+	String create({required Object item}) => 'Create a new ${item}';
+	String edit({required Object item}) => 'Edit ${item}';
+	String join({required Object item}) => 'Join ${item}';
 	String get name => 'Name';
 	String name_validation({required Object item}) => 'Please enter ${item} name';
 	String description({required Object item}) => 'Description of ${item}';
@@ -179,7 +179,7 @@ class TranslationsFormEn {
 	String email_validation({required Object item}) => 'Please enter valid ${item} email';
 	String get url => 'Web Address';
 	String url_validation({required Object item}) => 'Please enter valid ${item} web address';
-	String org_type({required Object item.capitalize}) => '${item.capitalize} Type';
+	String org_type({required Object item}) => '${item} Type';
 }
 
 // Path: group_types
@@ -357,9 +357,9 @@ extension on Translations {
 			case 'exposure_mode': return 'Exposure Mode';
 			case 'exposure_offset': return 'Exposure Offset';
 			case 'favourite': return 'Favourite';
-			case 'form.create': return ({required Object item.capitalize}) => 'Create a new ${item.capitalize}';
-			case 'form.edit': return ({required Object item.capitalize}) => 'Edit ${item.capitalize}';
-			case 'form.join': return ({required Object item.capitalize}) => 'Join ${item.capitalize}';
+			case 'form.create': return ({required Object item}) => 'Create a new ${item}';
+			case 'form.edit': return ({required Object item}) => 'Edit ${item}';
+			case 'form.join': return ({required Object item}) => 'Join ${item}';
 			case 'form.name': return 'Name';
 			case 'form.name_validation': return ({required Object item}) => 'Please enter ${item} name';
 			case 'form.description': return ({required Object item}) => 'Description of ${item}';
@@ -368,7 +368,7 @@ extension on Translations {
 			case 'form.email_validation': return ({required Object item}) => 'Please enter valid ${item} email';
 			case 'form.url': return 'Web Address';
 			case 'form.url_validation': return ({required Object item}) => 'Please enter valid ${item} web address';
-			case 'form.org_type': return ({required Object item.capitalize}) => '${item.capitalize} Type';
+			case 'form.org_type': return ({required Object item}) => '${item} Type';
 			case 'firstname': return 'Firstname';
 			case 'focus_mode': return 'Focus Mode';
 			case 'groups': return 'Groups';
