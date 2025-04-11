@@ -83,7 +83,10 @@ Color statusColor() {
   if (widget.enabled == false) {
     return Colors.grey;
   }
-  else if (widget.optional && isEmpty) {
+  else if (isEmpty && widget.optional) {
+    return Colors.green;
+  }
+  else if (isEmpty) {
     return Colors.black;
   }
   else if ( !isEmpty && isValid ) {
