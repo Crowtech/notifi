@@ -43,7 +43,7 @@ class _EmailTextFormFieldWidgetState
   Widget build(BuildContext context) {
     return TextFormField(
       key: emailFormFieldKey,
-      decoration: const InputDecoration(
+      decoration:  InputDecoration(
         labelText: nt.t.email,
       ),
       validator: (value) {

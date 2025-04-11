@@ -43,7 +43,7 @@ class _NameTextFormFieldWidgetState
   Widget build(BuildContext context) {
     return TextFormField(
       key: nameFormFieldKey,
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         labelText: nt.t.name,
       ),
       validator: (value) {
