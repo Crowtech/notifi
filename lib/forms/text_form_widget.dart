@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/helpers/debouncer.dart';
 import 'package:notifi/helpers/text_formatter.dart';
+import 'package:notifi/riverpod/enable_widget.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -14,33 +16,43 @@ var logNoStack = logger.Logger(
   level: logger.Level.info,
 );
 
-class TextFormFieldWidget extends StatefulWidget {
+typedef ValidateFunction<String> = bool Function(String value);
+
+class TextFormFieldWidget extends ConsumerStatefulWidget {
   const TextFormFieldWidget({super.key,
+  required this.fieldCode,
   required this.itemCategory, 
   required this.itemName, 
   required this.itemValidation, 
   required this.regex,
+  this.optional = false,
   this.forceLowercase = false,
   this.forceUppercase = false,  
   this.textCapitalization = TextCapitalization.none,
+  this.onValidate,
   });
   
+  final String fieldCode;
   final String itemCategory;
   final String itemName;
   final String itemValidation;
+  final bool optional;
   final String regex;
   final bool forceLowercase;
   final bool forceUppercase;
   final TextCapitalization textCapitalization;
+  final ValidateFunction<String>? onValidate;
 
 
   @override
-  State<TextFormFieldWidget> createState() =>
+  ConsumerState<TextFormFieldWidget> createState() =>
       _TextFormFieldWidgetState();
 }
 
+
+
 class _TextFormFieldWidgetState
-    extends State<TextFormFieldWidget> {
+    extends ConsumerState<TextFormFieldWidget> {
   final GlobalKey<FormFieldState> itemFormFieldKey =
       GlobalKey<FormFieldState>();
   final Debouncer _debouncer = Debouncer(milliseconds: 500);
@@ -67,8 +79,10 @@ class _TextFormFieldWidgetState
 
   @override
   Widget build(BuildContext context) {
+    var enableWidget = ref.watch(enableWidgetProvider(widget.fieldCode));
     return TextFormField(
       key: itemFormFieldKey,
+      enabled: enableWidget,
       inputFormatters: [...inputFormatters!],
       textCapitalization: widget.textCapitalization,
       decoration: InputDecoration(
@@ -92,9 +106,15 @@ class _TextFormFieldWidgetState
   }
 
   bool isValid(String? value) {
+    if (widget.optional) {
+      return true;
+    }
     if (value == null) {
       return false;
     }
+    if (widget.onValidate != null) {
+      return widget.onValidate!(value);
+    } 
     return RegExp(widget.regex,caseSensitive: false, unicode: true, dotAll: true)
   .hasMatch(value);
   }

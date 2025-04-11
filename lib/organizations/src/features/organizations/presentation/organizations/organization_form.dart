@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter_regex/flutter_regex.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notifi/forms/email_form_widget.dart';
 import 'package:notifi/forms/text_form_widget.dart';
 import 'package:notifi/helpers/debouncer.dart';
@@ -10,6 +11,7 @@ import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/jwt_utils.dart';
 import 'package:notifi/models/organization_type.dart';
+import 'package:notifi/riverpod/enable_widget.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -21,14 +23,14 @@ var logNoStack = logger.Logger(
   level: logger.Level.info,
 );
 
-class CreateOrganizationForm extends StatefulWidget {
+class CreateOrganizationForm extends ConsumerStatefulWidget {
   const CreateOrganizationForm({super.key});
 
   @override
   _CreateOrganizationFormState createState() => _CreateOrganizationFormState();
 }
 
-class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
+class _CreateOrganizationFormState extends ConsumerState<CreateOrganizationForm> {
   final _formKey = GlobalKey<FormState>();
   final GlobalKey<FormFieldState> nameFormFieldKey =
       GlobalKey<FormFieldState>();
@@ -49,6 +51,27 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
 
   OrganizationType? orgTypeIndex;
 
+bool _enableUrl(String url) {
+    return (orgTypeIndex != null && orgTypeIndex!.isUrlable); 
+  }
+  bool _validateUrl(String url) {
+    if (orgTypeIndex != null && orgTypeIndex!.isUrlable) {
+      if (Uri.tryParse(url)!.hasAbsolutePath) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return true;
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    orgTypeIndex = OrganizationType.GROUP;
+  }
+
   @override
   void dispose() {
     _debouncer.dispose();
@@ -66,8 +89,11 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
         orgTypeIndex = value;
         print(orgTypeIndex!.name);
       });
+      ref.read(enableWidgetProvider("url").notifier).set (value.isUrlable);
+
+      }
     }
-  }
+    
 
   void _handleSubmit() {
     // Submit the form data
@@ -107,6 +133,7 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
+                  fieldCode: "name",
                   itemCategory: nt.t.organization,
                   itemName: nt.t.name,
                   itemValidation: nt.t.form.name_validation(
@@ -116,6 +143,7 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
+                  fieldCode: "description",
                   itemCategory: nt.t.organization,
                   itemName: nt.t.form.description(
                     item: nt.t.organization_capitalized,
@@ -127,6 +155,7 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
+                  fieldCode: "email",
                   itemCategory: nt.t.organization,
                   itemName: nt.t.form.email,
                   itemValidation: nt.t.form.email_validation(
@@ -176,28 +205,29 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
                 ),
 
                 const SizedBox(height: 16),
-                TextFormField(
-                  autovalidateMode: AutovalidateMode.onUnfocus,
-                  enabled: (orgTypeIndex != null && orgTypeIndex!.isUrlable),
-                  controller: _urlController,
-                  autocorrect: true,
-                  decoration: InputDecoration(
-                    labelText: nt.t.form.url,
-                    border: const OutlineInputBorder(),
+                TextFormFieldWidget(
+                  fieldCode: "url",
+                  itemCategory: nt.t.organization,
+                  itemName: nt.t.form.url,
+                  itemValidation: nt.t.form.url_validation(
+                    item: nt.t.organization_capitalized,
                   ),
-                  validator: (value) {
-                    if (orgTypeIndex != null && !orgTypeIndex!.isUrlable) {
-                      _urlController.value = TextEditingValue.empty;
-                      return null;
-                    } else if (value != null &&
-                        value.isUri() &&
-                        orgTypeIndex!.isUrlable) {
-                      return null; // good
-                    } else {
-                      return nt.t.form.url_validation(item: capitalizedItem);
-                    }
-                  },
+                  onValidate: _validateUrl,
+                  regex:
+                      r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$",
+                  forceLowercase: true,
                 ),
+                // TextFormField(
+                //   autovalidateMode: AutovalidateMode.onUnfocus,
+                //   enabled: (orgTypeIndex != null && orgTypeIndex!.isUrlable),
+                //   controller: _urlController,
+                //   autocorrect: true,
+                //   decoration: InputDecoration(
+                //     labelText: nt.t.form.url,
+                //     border: const OutlineInputBorder(),
+                //   ),
+                //   validator: _validateUrl,
+                // ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
