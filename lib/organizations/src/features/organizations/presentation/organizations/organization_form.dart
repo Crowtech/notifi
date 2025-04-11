@@ -204,7 +204,7 @@ class _CreateOrganizationFormState
                   optional: true,
                   forceLowercase: true,
                 ),
-
+                const SizedBox(height: 16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -219,14 +219,14 @@ class _CreateOrganizationFormState
                       key: const Key("submit"),
                       onPressed:
                           !(_formKey.currentState != null &&
-                              _formKey.currentState!.validate())
+                                  _formKey.currentState!.validate())
                               ? null
                               : () {
                                 // If the form is valid, display a snackbar. In the real world,
                                 // you'd often call a server or save the information in a database.
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
-                                    content: Text('Processing Data'),
+                                    content: Text(nt.t.saving),
                                   ),
                                 );
                                 Navigator.of(context).pop();

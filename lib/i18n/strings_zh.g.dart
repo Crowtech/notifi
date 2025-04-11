@@ -10,7 +10,7 @@ import 'package:slang/generated.dart';
 import 'strings.g.dart';
 
 // Path: <root>
-class TranslationsZh extends Translations {
+class TranslationsZh implements Translations {
 	/// You can call this constructor and build your own translation instance of this locale.
 	/// Constructing via the enum [AppLocale.build] is preferred.
 	TranslationsZh({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver, TranslationMetadata<AppLocale, Translations>? meta})
@@ -20,9 +20,7 @@ class TranslationsZh extends Translations {
 		    overrides: overrides ?? {},
 		    cardinalResolver: cardinalResolver,
 		    ordinalResolver: ordinalResolver,
-		  ),
-		  super(cardinalResolver: cardinalResolver, ordinalResolver: ordinalResolver) {
-		super.$meta.setFlatMapFunction($meta.getTranslation); // copy base translations to super.$meta
+		  ) {
 		$meta.setFlatMapFunction(_flatMapFunction);
 	}
 
@@ -30,7 +28,7 @@ class TranslationsZh extends Translations {
 	@override final TranslationMetadata<AppLocale, Translations> $meta;
 
 	/// Access flat map
-	@override dynamic operator[](String key) => $meta.getTranslation(key) ?? super.$meta.getTranslation(key);
+	@override dynamic operator[](String key) => $meta.getTranslation(key);
 
 	late final TranslationsZh _root = this; // ignore: unused_field
 
@@ -100,6 +98,7 @@ class TranslationsZh extends Translations {
 	@override String get none => '没有任何';
 	@override String get odometer => '里程表';
 	@override String get openstreetmap => 'OpenStreetMap 贡献者';
+	@override String get optional => '选修的';
 	@override String get organization => '组织';
 	@override String get organization_capitalized => '组织';
 	@override String get person => '人';
@@ -113,6 +112,7 @@ class TranslationsZh extends Translations {
 	@override late final _TranslationsResourceZh resource = _TranslationsResourceZh._(_root);
 	@override late final _TranslationsResourcesZh resources = _TranslationsResourcesZh._(_root);
 	@override late final _TranslationsResponseZh response = _TranslationsResponseZh._(_root);
+	@override String get saving => '正在保存';
 	@override late final _TranslationsSelectZh select = _TranslationsSelectZh._(_root);
 	@override late final _TranslationsSearchZh search = _TranslationsSearchZh._(_root);
 	@override String get settings => '设置';
@@ -132,8 +132,8 @@ class TranslationsZh extends Translations {
 }
 
 // Path: menu
-class _TranslationsMenuZh extends TranslationsMenuEn {
-	_TranslationsMenuZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsMenuZh implements TranslationsMenuEn {
+	_TranslationsMenuZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -143,8 +143,8 @@ class _TranslationsMenuZh extends TranslationsMenuEn {
 }
 
 // Path: account
-class _TranslationsAccountZh extends TranslationsAccountEn {
-	_TranslationsAccountZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsAccountZh implements TranslationsAccountEn {
+	_TranslationsAccountZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -164,8 +164,8 @@ class _TranslationsAccountZh extends TranslationsAccountEn {
 }
 
 // Path: form
-class _TranslationsFormZh extends TranslationsFormEn {
-	_TranslationsFormZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsFormZh implements TranslationsFormEn {
+	_TranslationsFormZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -185,8 +185,8 @@ class _TranslationsFormZh extends TranslationsFormEn {
 }
 
 // Path: group_types
-class _TranslationsGroupTypesZh extends TranslationsGroupTypesEn {
-	_TranslationsGroupTypesZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsGroupTypesZh implements TranslationsGroupTypesEn {
+	_TranslationsGroupTypesZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -208,8 +208,8 @@ class _TranslationsGroupTypesZh extends TranslationsGroupTypesEn {
 }
 
 // Path: resource
-class _TranslationsResourceZh extends TranslationsResourceEn {
-	_TranslationsResourceZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsResourceZh implements TranslationsResourceEn {
+	_TranslationsResourceZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -224,8 +224,8 @@ class _TranslationsResourceZh extends TranslationsResourceEn {
 }
 
 // Path: resources
-class _TranslationsResourcesZh extends TranslationsResourcesEn {
-	_TranslationsResourcesZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsResourcesZh implements TranslationsResourcesEn {
+	_TranslationsResourcesZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -240,8 +240,8 @@ class _TranslationsResourcesZh extends TranslationsResourcesEn {
 }
 
 // Path: response
-class _TranslationsResponseZh extends TranslationsResponseEn {
-	_TranslationsResponseZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsResponseZh implements TranslationsResponseEn {
+	_TranslationsResponseZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -260,8 +260,8 @@ class _TranslationsResponseZh extends TranslationsResponseEn {
 }
 
 // Path: select
-class _TranslationsSelectZh extends TranslationsSelectEn {
-	_TranslationsSelectZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsSelectZh implements TranslationsSelectEn {
+	_TranslationsSelectZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -282,8 +282,8 @@ class _TranslationsSelectZh extends TranslationsSelectEn {
 }
 
 // Path: search
-class _TranslationsSearchZh extends TranslationsSearchEn {
-	_TranslationsSearchZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsSearchZh implements TranslationsSearchEn {
+	_TranslationsSearchZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -298,8 +298,8 @@ class _TranslationsSearchZh extends TranslationsSearchEn {
 }
 
 // Path: unknown
-class _TranslationsUnknownZh extends TranslationsUnknownEn {
-	_TranslationsUnknownZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsUnknownZh implements TranslationsUnknownEn {
+	_TranslationsUnknownZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -417,6 +417,7 @@ extension on TranslationsZh {
 			case 'none': return '没有任何';
 			case 'odometer': return '里程表';
 			case 'openstreetmap': return 'OpenStreetMap 贡献者';
+			case 'optional': return '选修的';
 			case 'organization': return '组织';
 			case 'organization_capitalized': return '组织';
 			case 'person': return '人';
@@ -452,6 +453,7 @@ extension on TranslationsZh {
 			case 'response.update': return '更新';
 			case 'response.create': return '创造';
 			case 'response.join': return '加入';
+			case 'saving': return '正在保存';
 			case 'select.departments': return '选择部门 ..';
 			case 'select.drivers': return '选择驱动程序 ..';
 			case 'select.groups': return '选择组 ..';

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart' as logger;
+import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:notifi/helpers/debouncer.dart';
 import 'package:notifi/helpers/text_formatter.dart';
 import 'package:notifi/riverpod/enable_widget.dart';
@@ -118,7 +119,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
       textCapitalization: widget.textCapitalization,
       decoration: InputDecoration(
         errorStyle: TextStyle(color: Colors.red),
-        labelText: widget.itemName,
+        labelText: widget.optional ? "${widget.itemName} (${nt.t.optional})" : widget.itemName,
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: statusColor(), width: 3.0),
           borderRadius: BorderRadius.circular(10.0),

@@ -105,6 +105,7 @@
   "none": "None",
   "odometer": "Odometer",
   "openstreetmap" : "OpenStreetMap contributors",
+  "optional": "Optional",
   "organization": "organization",
   "organization_capitalized": "Organization",
   "person": "person",
@@ -144,6 +145,7 @@
     "create": "Create", 
     "join": "Join"
   },
+  "saving": "Saving ...",
   "select": {
     "departments": "Select Departments ..",
     "drivers": "Select Drivers ..",
