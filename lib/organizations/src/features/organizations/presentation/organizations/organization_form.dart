@@ -148,6 +148,7 @@ class _CreateOrganizationFormState
 
                 RadioListTile<OrganizationType>(
                   key: const Key("group"),
+                  dense: true,
                   title: Text(nt.t.group_types.group),
                   value: OrganizationType.GROUP,
                   groupValue: orgTypeIndex,
@@ -155,6 +156,7 @@ class _CreateOrganizationFormState
                 ),
                 RadioListTile<OrganizationType>(
                   key: const Key("family"),
+                  dense: true,
                   title: Text(nt.t.group_types.family),
                   value: OrganizationType.FAMILY,
                   groupValue: orgTypeIndex,
@@ -162,6 +164,7 @@ class _CreateOrganizationFormState
                 ),
                 RadioListTile<OrganizationType>(
                   key: const Key("friends"),
+                  dense: true,
                   title: Text(nt.t.group_types.friends),
                   value: OrganizationType.FRIENDS,
                   // selected: OrganizationType.FRIENDS==orgTypeIndex,
@@ -170,6 +173,7 @@ class _CreateOrganizationFormState
                 ),
                 RadioListTile<OrganizationType>(
                   key: const Key("org"),
+                  dense: true,
                   title: Text(nt.t.group_types.org),
                   value: OrganizationType.ORG,
                   groupValue: orgTypeIndex,
@@ -177,6 +181,7 @@ class _CreateOrganizationFormState
                 ),
                 RadioListTile<OrganizationType>(
                   key: const Key("government"),
+                  dense: true,
                   title: Text(nt.t.group_types.government),
                   value: OrganizationType.GOVERNMENT,
                   groupValue: orgTypeIndex,

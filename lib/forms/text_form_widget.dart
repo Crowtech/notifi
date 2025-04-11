@@ -21,7 +21,9 @@ typedef ValidateFunction<String> = bool Function(String value);
 class TextFormFieldWidget extends ConsumerStatefulWidget {
   const TextFormFieldWidget({super.key,
   required this.fieldCode,
+  this.initialValue = "",
   this.enabled = true,
+  this.readOnly = false,
   required this.itemCategory, 
   required this.itemName, 
   required this.itemValidation, 
@@ -34,6 +36,8 @@ class TextFormFieldWidget extends ConsumerStatefulWidget {
   });
   
   final String fieldCode;
+  final String initialValue;
+  final bool readOnly;
   final bool enabled;
   final String itemCategory;
   final String itemName;
@@ -91,12 +95,18 @@ Color statusColor() {
     var enableWidget = ref.watch(enableWidgetProvider(widget.fieldCode));
     return TextFormField(
       key: itemFormFieldKey,
+      initialValue: widget.initialValue ,
+      readOnly: widget.readOnly,
       enabled: enableWidget,
       inputFormatters: [...inputFormatters!],
       textCapitalization: widget.textCapitalization,
       decoration: InputDecoration(
         errorStyle: TextStyle(color: Colors.red),
         labelText: widget.itemName,
+        focusedBorder: OutlineInputBorder(
+          borderSide:  BorderSide(color: statusColor() , width: 2.5),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
         enabledBorder: OutlineInputBorder(
           borderSide:  BorderSide(color: statusColor() , width: isValid?2.0:1.0),
           borderRadius: BorderRadius.circular(10.0),
