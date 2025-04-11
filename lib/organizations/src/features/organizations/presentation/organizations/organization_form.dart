@@ -204,7 +204,7 @@ class _CreateOrganizationFormState
                   optional: true,
                   forceLowercase: true,
                 ),
-               
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -216,19 +216,19 @@ class _CreateOrganizationFormState
                     ),
                     const SizedBox(width: 16),
                     ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          // If the form is valid, display a snackbar. In the real world,
-                          // you'd often call a server or save the information in a database.
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Processing Data')),
-                          );
-                           Navigator.of(context).pop();
-                        }else {
-                          return null;
-                        }
-                       
-                      },
+                      onPressed:
+                          !_formKey.currentState!.validate()
+                              ? null
+                              : () {
+                                // If the form is valid, display a snackbar. In the real world,
+                                // you'd often call a server or save the information in a database.
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Processing Data'),
+                                  ),
+                                );
+                                Navigator.of(context).pop();
+                              },
                       // (_formKey.currentState != null &&
                       //         _formKey.currentState!.validate())
                       //     ? _handleSubmit

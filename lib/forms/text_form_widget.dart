@@ -85,7 +85,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
     logNoStack.i(
       "StatusColor: ${widget.fieldCode} enabled:$enableWidget isValid:$isValid isEmpty:$isEmpty optional:${widget.optional}",
     );
-    if (widget.enabled == false) {
+    if (enableWidget == false) {
       return Colors.grey;
     } else if (isEmpty && widget.optional) {
       return Colors.green;
