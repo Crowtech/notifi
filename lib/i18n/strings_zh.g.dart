@@ -98,7 +98,9 @@ class TranslationsZh implements Translations {
 	@override String get odometer => '里程表';
 	@override String get openstreetmap => 'OpenStreetMap 贡献者';
 	@override String get organization => '组织';
+	@override String get organization_capitalized => '组织';
 	@override String get person => '人';
+	@override String get person_capitalized => '人';
 	@override String get privacy_policy => '隐私政策';
 	@override String get profile => '轮廓';
 	@override String get pulltorefresh => '下拉刷新';
@@ -412,7 +414,9 @@ extension on TranslationsZh {
 			case 'odometer': return '里程表';
 			case 'openstreetmap': return 'OpenStreetMap 贡献者';
 			case 'organization': return '组织';
+			case 'organization_capitalized': return '组织';
 			case 'person': return '人';
+			case 'person_capitalized': return '人';
 			case 'privacy_policy': return '隐私政策';
 			case 'profile': return '轮廓';
 			case 'pulltorefresh': return '下拉刷新';

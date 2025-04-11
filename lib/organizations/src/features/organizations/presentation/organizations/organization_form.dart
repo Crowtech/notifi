@@ -88,8 +88,8 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
 
   @override
   Widget build(BuildContext context) {
-    String capitalizedItem = nt.t.organization;
-    capitalizedItem = capitalizedItem.capitalise as String;
+    String capitalizedItem = nt.t.organization_capitalized;
+
 
     return Dialog(
       child: Padding(

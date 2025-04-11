@@ -101,7 +101,9 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get odometer => 'Odometer';
 	String get openstreetmap => 'OpenStreetMap contributors';
 	String get organization => 'organization';
-	String get person => 'Person';
+	String get organization_capitalized => 'Organization';
+	String get person => 'person';
+	String get person_capitalized => 'Person';
 	String get privacy_policy => 'Privacy Policy';
 	String get profile => 'Profile';
 	String get pulltorefresh => 'Pull to refresh';
@@ -415,7 +417,9 @@ extension on Translations {
 			case 'odometer': return 'Odometer';
 			case 'openstreetmap': return 'OpenStreetMap contributors';
 			case 'organization': return 'organization';
-			case 'person': return 'Person';
+			case 'organization_capitalized': return 'Organization';
+			case 'person': return 'person';
+			case 'person_capitalized': return 'Person';
 			case 'privacy_policy': return 'Privacy Policy';
 			case 'profile': return 'Profile';
 			case 'pulltorefresh': return 'Pull to refresh';
