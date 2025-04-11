@@ -80,6 +80,7 @@ class _TextFormFieldWidgetState
   }
 
 Color statusColor() {
+  logNoStack.i("StatusCOlor: ${widget.fieldCode} enabled:${widget.enabled} isValid:$isValid isEmpty:$isEmpty optional:${widget.optional}");
   if (widget.enabled == false) {
     return Colors.grey;
   }
@@ -107,6 +108,7 @@ Color statusColor() {
     return TextFormField(
       key: itemFormFieldKey,
       initialValue: widget.initialValue ,
+      autocorrect: true,
       readOnly: widget.readOnly,
       enabled: enableWidget,
       inputFormatters: [...inputFormatters!],
