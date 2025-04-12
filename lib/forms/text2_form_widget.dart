@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:notifi/helpers/debouncer.dart';
@@ -23,7 +24,6 @@ typedef ValidateFunction<String> = bool Function(String value);
 class TextFormFieldWidget extends ConsumerStatefulWidget {
   const TextFormFieldWidget({
     super.key,
-    required this.textController,
     required this.formKey,
     required this.formCode,
     required this.fieldCode,
@@ -42,7 +42,6 @@ class TextFormFieldWidget extends ConsumerStatefulWidget {
   });
 
   final GlobalKey<FormState> formKey;
-  final TextEditingController textController;
   final String formCode;
   final String fieldCode;
   final String initialValue;
@@ -133,77 +132,29 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
     logNoStack.i(
         "TEXT_FORM_WIDGET: BUILD: ${widget.fieldCode} enableWidget:$enableWidget");
     return TextFormField(
-      controller: widget.textController,
-      keyboardType: textInputType(),
-      key: itemFormFieldKey,
-      initialValue: widget.initialValue,
-      autocorrect: true,
-      readOnly: widget.readOnly,
-      enabled: enableWidget,
-      inputFormatters: [...inputFormatters!],
-      textCapitalization: widget.textCapitalization,
-      decoration: InputDecoration(
-        errorStyle: const TextStyle(color: Colors.red),
-        labelText: widget.optional
-            ? "${widget.itemName} (${nt.t.optional})"
-            : widget.itemName,
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: statusColor(), width: 3.0),
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: statusColor(),
-            width: isValid ? 2.0 : 1.0,
-          ),
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        disabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.grey, width: 1.0),
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.red, width: 3.0),
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-      ),
-      validator: (value) {
-        String? result = (!_isEmptyOlderValue(_olderValue)) && value!.isEmpty
-            ? null
-            : !isValidInput(value)
-                ? widget.itemValidation
-                : null;
-        _olderValue = _isEmptyValue(value) ? value : _olderValue;
-        isEmpty = _isEmptyValue(value);
-        return result;
-      },
-      onChanged: (value) => _debouncer.run(() {
-        _olderValue = value.isEmpty ? _olderValue : value;
-        itemFormFieldKey.currentState?.validate();
-        //ref.read(refreshWidgetProvider("organization").notifier).refresh();
-        ref.read(refreshWidgetProvider(widget.fieldCode).notifier).refresh();
-        final form = widget.formKey.currentState;
-        if (form != null) {
-          form.save();  // in this way validation will not be triggered
-    
-         // widget.formKey.forceErrorText == null && widget.validator?.call(_value) == null;
-          
-       
-          ref
-              .read(refreshWidgetProvider("${widget.formCode}-submit").notifier)
-              .set(true);
-        } else {
-          ref
-              .read(refreshWidgetProvider("${widget.formCode}-submit").notifier)
-              .set(false);
-        }
-        
-        // ref.read(refreshWidgetProvider("${widget.formCode}-submit").notifier).refresh();
-      }),
-      onFieldSubmitted: (value) {
-        isValidInput(value);
-      },
-    );
+     decoration: InputDecoration(labelText: widget.itemName),
+    keyboardType: textInputType(),
+    autovalidateMode: AutovalidateMode.always,
+    validator: FormBuilderValidators.compose([
+        /// Makes this field required
+        FormBuilderValidators.required(),
+
+        /// Ensures the value entered is numeric - with a custom error message
+        FormBuilderValidators.numeric(errorText: widget.itemValidation),
+
+        /// Sets a maximum value of 70
+        //FormBuilderValidators.max(70),
+
+        /// Include your own custom `FormFieldValidator` function, if you want
+        /// Ensures positive values only. We could also have used `FormBuilderValidators.min(0)` instead
+        (val) {
+            // final number = int.tryParse(val);
+            // if (number == null) return null;
+            // if (number < 0) return 'We cannot have a negative age';
+            // return null;
+        },
+    ]),
+);
   }
 
   bool isValidInput(String? value) {

@@ -19,6 +19,7 @@ class Organization extends Resource {
   static String tablename = className.toLowerCase();
 
   String orgType;
+  String email;
   String url;
 
   Organization({
@@ -35,6 +36,7 @@ class Organization extends Resource {
     super.gps,
     super.selected,
     required this.orgType,
+    required this.email,
     required this.url,
   }) {
     super.resourceType = ResourceType.organization;
@@ -85,6 +87,7 @@ class Organization extends Resource {
     String? avatarUrl,
     GPS? gps,
     String? orgType,
+    String? email,
     String? url,
     bool? selected,
   }) {
@@ -100,6 +103,7 @@ class Organization extends Resource {
       avatarUrl: avatarUrl ?? this.avatarUrl,
       gps: gps ?? this.gps,
       orgType: orgType ?? this.orgType,
+      email: email ?? this.email,
       url: url ?? this.url,
       selected: selected ?? this.selected,
     );
@@ -128,6 +132,7 @@ Organization defaultOrganization = Organization(
   avatarUrl: "$defaultMinioEndpointUrl/$defaultRealm/organization.png",
   gps: defaultGPS,
   orgType: "group",
+  email: "user@email.com",
   url: "https://www.crowtech.com.au",
   selected: false,
 ); //fcm

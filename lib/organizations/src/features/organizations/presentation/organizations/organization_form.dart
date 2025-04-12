@@ -1,15 +1,20 @@
 
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart' as emailValidator;
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:notifi/api_utils.dart';
+import 'package:notifi/credentials.dart';
 import 'package:notifi/forms/cancel_button_widget.dart';
 import 'package:notifi/forms/submit_button_widget.dart';
 import 'package:notifi/forms/text_form_widget.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
+import 'package:notifi/models/organization.dart';
 import 'package:notifi/models/organization_type.dart';
 import 'package:notifi/riverpod/enable_widget.dart';
 import 'package:notifi/riverpod/refresh_widget.dart';
+import 'package:notifi/state/nest_auth2.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -32,6 +37,7 @@ String formCode;
 
 class _CreateOrganizationFormState
     extends ConsumerState<CreateOrganizationForm> {
+
   final _formKey = GlobalKey<FormState>();
 
   final _nameController = TextEditingController();
@@ -112,6 +118,7 @@ class _CreateOrganizationFormState
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
+                  textController: _nameController,
                    formKey: _formKey,
                   formCode: widget.formCode,
                   fieldCode: "true-name",
@@ -124,6 +131,7 @@ class _CreateOrganizationFormState
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
+                  textController: _descriptionController,
                    formKey: _formKey,
                   formCode: widget.formCode,
                   fieldCode: "true-description",
@@ -139,6 +147,7 @@ class _CreateOrganizationFormState
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
+                  textController: _emailController,
                    formKey: _formKey,
                    formCode: widget.formCode,
                   fieldCode: "true-email",
@@ -199,6 +208,7 @@ class _CreateOrganizationFormState
 
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
+                  textController: _urlController,
                   formKey: _formKey,
                    formCode: widget.formCode,
                   fieldCode: "false-url",
@@ -237,6 +247,20 @@ class _CreateOrganizationFormState
                               content: Text(nt.t.saving),
                             ),
                           );
+
+                            // save organization
+                            Organization organization = Organization(
+                              name: _nameController.text,
+                              description: _descriptionController.text,
+                              orgType: orgTypeIndex!.name,
+                              url: _urlController.text,
+                              email: _emailController.text,
+                              );
+                                var token = ref.read(nestAuthProvider.notifier).token;
+                                var apiPath = "$defaultAPIBaseUrl$defaultApiPrefixPath/organizations";
+                                 var result = apiPostDataNoLocaleRaw(token!, apiPath, organization);  
+
+  logNoStack.i("result is ${result}");
                           Navigator.of(context).pop();
                         }},
                           // !(_formKey.currentState != null &&
