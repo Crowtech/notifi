@@ -227,16 +227,18 @@ class _CreateOrganizationFormState
                       return 
                   ElevatedButton(
                        key: const Key("organization-submit"),
-                        onPressed: (!enableStr.startsWith("true")&& _formKey.currentState!.validate())? null : () {
+                        onPressed: () {
+                        //(!enableStr.startsWith("true"))? null : () {
                           // If the form is valid, display a snackbar. In the real world,
                           // you'd often call a server or save the information in a database.
+                         if (_formKey.currentState!.validate()){
                           ScaffoldMessenger.of(context).showSnackBar(
                              SnackBar(
                               content: Text(nt.t.saving),
                             ),
                           );
                           Navigator.of(context).pop();
-                        },
+                        }},
                           // !(_formKey.currentState != null &&
                           //         _formKey.currentState!.validate())
                           //     ? null
