@@ -13,4 +13,8 @@ class RefreshWidget extends _$RefreshWidget {
   void refresh() {
     state = const Uuid().v4().toUpperCase();
   }
+
+    void set(bool enable) {
+    state = "${enable?'true':'false'}-const Uuid().v4().toUpperCase()";
+  }
 }

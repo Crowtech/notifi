@@ -217,11 +217,20 @@ class _CreateOrganizationFormState
                   //SubmitButtonWidget(formKey: _formKey, formCode: widget.formCode)
                     Consumer(
                      builder: (context, watch, child) {
-                  watch.watch(refreshWidgetProvider("${widget.formCode}-submit"));
+                  var enableStr = watch.watch(refreshWidgetProvider("${widget.formCode}-submit"));
                       return 
                   ElevatedButton(
                        key: const Key("organization-submit"),
-                        onPressed: null,
+                        onPressed: !enableStr.startsWith("true") ? null : () {
+                          // If the form is valid, display a snackbar. In the real world,
+                          // you'd often call a server or save the information in a database.
+                          ScaffoldMessenger.of(context).showSnackBar(
+                             SnackBar(
+                              content: Text(nt.t.saving),
+                            ),
+                          );
+                          Navigator.of(context).pop();
+                        },
                           // !(_formKey.currentState != null &&
                           //         _formKey.currentState!.validate())
                           //     ? null
