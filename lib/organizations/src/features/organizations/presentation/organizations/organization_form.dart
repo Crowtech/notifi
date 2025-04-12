@@ -111,6 +111,7 @@ class _CreateOrganizationFormState
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
+                   formKey: _formKey,
                   formCode: widget.formCode,
                   fieldCode: "true-name",
                   itemCategory: nt.t.organization,
@@ -122,6 +123,7 @@ class _CreateOrganizationFormState
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
+                   formKey: _formKey,
                   formCode: widget.formCode,
                   fieldCode: "true-description",
                   enabled: true,
@@ -136,6 +138,7 @@ class _CreateOrganizationFormState
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
+                   formKey: _formKey,
                    formCode: widget.formCode,
                   fieldCode: "true-email",
                   enabled: true,
@@ -195,6 +198,7 @@ class _CreateOrganizationFormState
 
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
+                  formKey: _formKey,
                    formCode: widget.formCode,
                   fieldCode: "false-url",
                   enabled: false,
