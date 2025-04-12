@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:flutter_regex/flutter_regex.dart';
 import 'package:notifi/helpers/debouncer.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
-import 'package:notifi/models/organization_type.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),

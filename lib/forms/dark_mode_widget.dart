@@ -6,10 +6,10 @@ class CustomModeSwitch extends StatelessWidget {
   final ValueChanged<bool> onChanged;
 
   const CustomModeSwitch({
-    Key? key,
+    super.key,
     required this.isDarkMode,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,21 +21,21 @@ class CustomModeSwitch extends StatelessWidget {
       borderRadius: BorderRadius.circular(20),
       selectedColor: Colors.white,
       fillColor: Theme.of(context).colorScheme.primary,
-      constraints: BoxConstraints(minHeight: 40.0, minWidth: 100.0),
+      constraints: const BoxConstraints(minHeight: 40.0, minWidth: 100.0),
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children:  [
-            Icon(Icons.wb_sunny),
-            SizedBox(width: 8),
+            const Icon(Icons.wb_sunny),
+            const SizedBox(width: 8),
             Text(nt.t.light),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children:  [
-            Icon(Icons.nights_stay),
-            SizedBox(width: 8),
+            const Icon(Icons.nights_stay),
+            const SizedBox(width: 8),
             Text(nt.t.dark),
           ],
         ),

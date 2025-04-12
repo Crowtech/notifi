@@ -107,7 +107,9 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
 
   @override
   Widget build(BuildContext context) {
-    enableWidget = ref.watch(enableWidgetProvider(widget.fieldCode));
+    enableWidget = ref.watch(enableWidgetProvider(widget.fieldCode)); 
+    ref.watch(refreshWidgetProvider(widget.fieldCode));
+
     logNoStack.i("TEXT_FORM_WIDGET: BUILD: ${widget.fieldCode} enableWidget:$enableWidget");
     return TextFormField(
       key: itemFormFieldKey,
@@ -118,7 +120,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
       inputFormatters: [...inputFormatters!],
       textCapitalization: widget.textCapitalization,
       decoration: InputDecoration(
-        errorStyle: TextStyle(color: Colors.red),
+        errorStyle: const TextStyle(color: Colors.red),
         labelText: widget.optional ? "${widget.itemName} (${nt.t.optional})" : widget.itemName,
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: statusColor(), width: 3.0),
@@ -157,7 +159,8 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
           (value) => _debouncer.run(() {
             _olderValue = value.isEmpty ? _olderValue : value;
             itemFormFieldKey.currentState?.validate();
-            ref.read(refreshWidgetProvider("organization").notifier).refresh();
+            //ref.read(refreshWidgetProvider("organization").notifier).refresh();
+            ref.read(refreshWidgetProvider(widget.fieldCode).notifier).refresh();
           }),
       onFieldSubmitted: (value) {
         isValidInput(value);
@@ -178,7 +181,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
       }
     } else if (widget.onValidate != null) {
       logNoStack.i(
-        "Checking validation using onValidate ${widget.onValidate!(value!) ? 'GOOD' : 'BAD'}",
+        "Checking validation using onValidate ${widget.onValidate!(value) ? 'GOOD' : 'BAD'}",
       );
       isValid = widget.onValidate!(value);
     } else {

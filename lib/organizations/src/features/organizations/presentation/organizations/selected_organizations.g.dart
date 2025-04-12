@@ -13,15 +13,14 @@ String _$selectedOrganizationsHash() =>
 @ProviderFor(SelectedOrganizations)
 final selectedOrganizationsProvider =
     NotifierProvider<SelectedOrganizations, List<Organization>>.internal(
-      SelectedOrganizations.new,
-      name: r'selectedOrganizationsProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$selectedOrganizationsHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  SelectedOrganizations.new,
+  name: r'selectedOrganizationsProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$selectedOrganizationsHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 typedef _$SelectedOrganizations = Notifier<List<Organization>>;
 String _$selectedOrganizationIdsHash() =>
@@ -31,15 +30,14 @@ String _$selectedOrganizationIdsHash() =>
 @ProviderFor(SelectedOrganizationIds)
 final selectedOrganizationIdsProvider =
     NotifierProvider<SelectedOrganizationIds, List<int>>.internal(
-      SelectedOrganizationIds.new,
-      name: r'selectedOrganizationIdsProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$selectedOrganizationIdsHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  SelectedOrganizationIds.new,
+  name: r'selectedOrganizationIdsProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$selectedOrganizationIdsHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 typedef _$SelectedOrganizationIds = Notifier<List<int>>;
 // ignore_for_file: type=lint

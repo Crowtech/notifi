@@ -12,12 +12,10 @@ part of 'organization_response.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 OrganizationsResponse _$OrganizationsResponseFromJson(
-  Map<String, dynamic> json,
-) {
+    Map<String, dynamic> json) {
   return _OrganizationsResponse.fromJson(json);
 }
 
@@ -45,25 +43,21 @@ mixin _$OrganizationsResponse {
 
 /// @nodoc
 abstract class $OrganizationsResponseCopyWith<$Res> {
-  factory $OrganizationsResponseCopyWith(
-    OrganizationsResponse value,
-    $Res Function(OrganizationsResponse) then,
-  ) = _$OrganizationsResponseCopyWithImpl<$Res, OrganizationsResponse>;
+  factory $OrganizationsResponseCopyWith(OrganizationsResponse value,
+          $Res Function(OrganizationsResponse) then) =
+      _$OrganizationsResponseCopyWithImpl<$Res, OrganizationsResponse>;
   @useResult
-  $Res call({
-    @JsonKey(name: 'startIndex') int page,
-    @JsonKey(name: 'items') List<Organization> results,
-    @JsonKey(name: 'resultCount') int totalResults,
-    @JsonKey(name: 'totalItems') int totalPages,
-    List<String> errors,
-  });
+  $Res call(
+      {@JsonKey(name: 'startIndex') int page,
+      @JsonKey(name: 'items') List<Organization> results,
+      @JsonKey(name: 'resultCount') int totalResults,
+      @JsonKey(name: 'totalItems') int totalPages,
+      List<String> errors});
 }
 
 /// @nodoc
-class _$OrganizationsResponseCopyWithImpl<
-  $Res,
-  $Val extends OrganizationsResponse
->
+class _$OrganizationsResponseCopyWithImpl<$Res,
+        $Val extends OrganizationsResponse>
     implements $OrganizationsResponseCopyWith<$Res> {
   _$OrganizationsResponseCopyWithImpl(this._value, this._then);
 
@@ -83,36 +77,28 @@ class _$OrganizationsResponseCopyWithImpl<
     Object? totalPages = null,
     Object? errors = null,
   }) {
-    return _then(
-      _value.copyWith(
-            page:
-                null == page
-                    ? _value.page
-                    : page // ignore: cast_nullable_to_non_nullable
-                        as int,
-            results:
-                null == results
-                    ? _value.results
-                    : results // ignore: cast_nullable_to_non_nullable
-                        as List<Organization>,
-            totalResults:
-                null == totalResults
-                    ? _value.totalResults
-                    : totalResults // ignore: cast_nullable_to_non_nullable
-                        as int,
-            totalPages:
-                null == totalPages
-                    ? _value.totalPages
-                    : totalPages // ignore: cast_nullable_to_non_nullable
-                        as int,
-            errors:
-                null == errors
-                    ? _value.errors
-                    : errors // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      page: null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      results: null == results
+          ? _value.results
+          : results // ignore: cast_nullable_to_non_nullable
+              as List<Organization>,
+      totalResults: null == totalResults
+          ? _value.totalResults
+          : totalResults // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalPages: null == totalPages
+          ? _value.totalPages
+          : totalPages // ignore: cast_nullable_to_non_nullable
+              as int,
+      errors: null == errors
+          ? _value.errors
+          : errors // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ) as $Val);
   }
 }
 
@@ -120,29 +106,27 @@ class _$OrganizationsResponseCopyWithImpl<
 abstract class _$$OrganizationsResponseImplCopyWith<$Res>
     implements $OrganizationsResponseCopyWith<$Res> {
   factory _$$OrganizationsResponseImplCopyWith(
-    _$OrganizationsResponseImpl value,
-    $Res Function(_$OrganizationsResponseImpl) then,
-  ) = __$$OrganizationsResponseImplCopyWithImpl<$Res>;
+          _$OrganizationsResponseImpl value,
+          $Res Function(_$OrganizationsResponseImpl) then) =
+      __$$OrganizationsResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    @JsonKey(name: 'startIndex') int page,
-    @JsonKey(name: 'items') List<Organization> results,
-    @JsonKey(name: 'resultCount') int totalResults,
-    @JsonKey(name: 'totalItems') int totalPages,
-    List<String> errors,
-  });
+  $Res call(
+      {@JsonKey(name: 'startIndex') int page,
+      @JsonKey(name: 'items') List<Organization> results,
+      @JsonKey(name: 'resultCount') int totalResults,
+      @JsonKey(name: 'totalItems') int totalPages,
+      List<String> errors});
 }
 
 /// @nodoc
 class __$$OrganizationsResponseImplCopyWithImpl<$Res>
-    extends
-        _$OrganizationsResponseCopyWithImpl<$Res, _$OrganizationsResponseImpl>
+    extends _$OrganizationsResponseCopyWithImpl<$Res,
+        _$OrganizationsResponseImpl>
     implements _$$OrganizationsResponseImplCopyWith<$Res> {
-  __$$OrganizationsResponseImplCopyWithImpl(
-    _$OrganizationsResponseImpl _value,
-    $Res Function(_$OrganizationsResponseImpl) _then,
-  ) : super(_value, _then);
+  __$$OrganizationsResponseImplCopyWithImpl(_$OrganizationsResponseImpl _value,
+      $Res Function(_$OrganizationsResponseImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of OrganizationsResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -155,49 +139,42 @@ class __$$OrganizationsResponseImplCopyWithImpl<$Res>
     Object? totalPages = null,
     Object? errors = null,
   }) {
-    return _then(
-      _$OrganizationsResponseImpl(
-        page:
-            null == page
-                ? _value.page
-                : page // ignore: cast_nullable_to_non_nullable
-                    as int,
-        results:
-            null == results
-                ? _value._results
-                : results // ignore: cast_nullable_to_non_nullable
-                    as List<Organization>,
-        totalResults:
-            null == totalResults
-                ? _value.totalResults
-                : totalResults // ignore: cast_nullable_to_non_nullable
-                    as int,
-        totalPages:
-            null == totalPages
-                ? _value.totalPages
-                : totalPages // ignore: cast_nullable_to_non_nullable
-                    as int,
-        errors:
-            null == errors
-                ? _value._errors
-                : errors // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-      ),
-    );
+    return _then(_$OrganizationsResponseImpl(
+      page: null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      results: null == results
+          ? _value._results
+          : results // ignore: cast_nullable_to_non_nullable
+              as List<Organization>,
+      totalResults: null == totalResults
+          ? _value.totalResults
+          : totalResults // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalPages: null == totalPages
+          ? _value.totalPages
+          : totalPages // ignore: cast_nullable_to_non_nullable
+              as int,
+      errors: null == errors
+          ? _value._errors
+          : errors // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$OrganizationsResponseImpl implements _OrganizationsResponse {
-  _$OrganizationsResponseImpl({
-    @JsonKey(name: 'startIndex') required this.page,
-    @JsonKey(name: 'items') required final List<Organization> results,
-    @JsonKey(name: 'resultCount') required this.totalResults,
-    @JsonKey(name: 'totalItems') required this.totalPages,
-    final List<String> errors = const [],
-  }) : _results = results,
-       _errors = errors;
+  _$OrganizationsResponseImpl(
+      {@JsonKey(name: 'startIndex') required this.page,
+      @JsonKey(name: 'items') required final List<Organization> results,
+      @JsonKey(name: 'resultCount') required this.totalResults,
+      @JsonKey(name: 'totalItems') required this.totalPages,
+      final List<String> errors = const []})
+      : _results = results,
+        _errors = errors;
 
   factory _$OrganizationsResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$OrganizationsResponseImplFromJson(json);
@@ -251,13 +228,12 @@ class _$OrganizationsResponseImpl implements _OrganizationsResponse {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    page,
-    const DeepCollectionEquality().hash(_results),
-    totalResults,
-    totalPages,
-    const DeepCollectionEquality().hash(_errors),
-  );
+      runtimeType,
+      page,
+      const DeepCollectionEquality().hash(_results),
+      totalResults,
+      totalPages,
+      const DeepCollectionEquality().hash(_errors));
 
   /// Create a copy of OrganizationsResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -265,26 +241,24 @@ class _$OrganizationsResponseImpl implements _OrganizationsResponse {
   @override
   @pragma('vm:prefer-inline')
   _$$OrganizationsResponseImplCopyWith<_$OrganizationsResponseImpl>
-  get copyWith =>
-      __$$OrganizationsResponseImplCopyWithImpl<_$OrganizationsResponseImpl>(
-        this,
-        _$identity,
-      );
+      get copyWith => __$$OrganizationsResponseImplCopyWithImpl<
+          _$OrganizationsResponseImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$OrganizationsResponseImplToJson(this);
+    return _$$OrganizationsResponseImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _OrganizationsResponse implements OrganizationsResponse {
-  factory _OrganizationsResponse({
-    @JsonKey(name: 'startIndex') required final int page,
-    @JsonKey(name: 'items') required final List<Organization> results,
-    @JsonKey(name: 'resultCount') required final int totalResults,
-    @JsonKey(name: 'totalItems') required final int totalPages,
-    final List<String> errors,
-  }) = _$OrganizationsResponseImpl;
+  factory _OrganizationsResponse(
+      {@JsonKey(name: 'startIndex') required final int page,
+      @JsonKey(name: 'items') required final List<Organization> results,
+      @JsonKey(name: 'resultCount') required final int totalResults,
+      @JsonKey(name: 'totalItems') required final int totalPages,
+      final List<String> errors}) = _$OrganizationsResponseImpl;
 
   factory _OrganizationsResponse.fromJson(Map<String, dynamic> json) =
       _$OrganizationsResponseImpl.fromJson;
@@ -309,5 +283,5 @@ abstract class _OrganizationsResponse implements OrganizationsResponse {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$OrganizationsResponseImplCopyWith<_$OrganizationsResponseImpl>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }

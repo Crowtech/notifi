@@ -14,10 +14,9 @@ String _$languageRepositoryHash() =>
 final languageRepositoryProvider = Provider<LanguageRepository>.internal(
   languageRepository,
   name: r'languageRepositoryProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$languageRepositoryHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$languageRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -33,15 +32,14 @@ String _$currentLanguageHash() => r'20db6341210e993420fd55beec3754abe7ef10d5';
 @ProviderFor(CurrentLanguage)
 final currentLanguageProvider =
     AsyncNotifierProvider<CurrentLanguage, LanguageEnum>.internal(
-      CurrentLanguage.new,
-      name: r'currentLanguageProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$currentLanguageHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  CurrentLanguage.new,
+  name: r'currentLanguageProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$currentLanguageHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 typedef _$CurrentLanguage = AsyncNotifier<LanguageEnum>;
 // ignore_for_file: type=lint

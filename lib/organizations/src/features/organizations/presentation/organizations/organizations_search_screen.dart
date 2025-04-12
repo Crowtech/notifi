@@ -168,7 +168,7 @@ class OrganizationsSearchScreen extends ConsumerWidget {
           logNoStack.i("ORGS_SEARCH_SCREEN: Add button pressed");
           showDialog(
             context: context,
-            builder: (context) => CreateOrganizationForm(),
+            builder: (context) => const CreateOrganizationForm(),
           );
         },
         // foregroundColor: customizations[index].$1,

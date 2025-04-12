@@ -39,13 +39,21 @@ class FcmFamily extends Family<AsyncValue<Fcm>> {
   const FcmFamily();
 
   /// See also [fcm].
-  FcmProvider call(FirebaseOptions? options) {
-    return FcmProvider(options);
+  FcmProvider call(
+    FirebaseOptions? options,
+  ) {
+    return FcmProvider(
+      options,
+    );
   }
 
   @override
-  FcmProvider getProviderOverride(covariant FcmProvider provider) {
-    return call(provider.options);
+  FcmProvider getProviderOverride(
+    covariant FcmProvider provider,
+  ) {
+    return call(
+      provider.options,
+    );
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -66,17 +74,21 @@ class FcmFamily extends Family<AsyncValue<Fcm>> {
 /// See also [fcm].
 class FcmProvider extends AutoDisposeFutureProvider<Fcm> {
   /// See also [fcm].
-  FcmProvider(FirebaseOptions? options)
-    : this._internal(
-        (ref) => fcm(ref as FcmRef, options),
-        from: fcmProvider,
-        name: r'fcmProvider',
-        debugGetCreateSourceHash:
-            const bool.fromEnvironment('dart.vm.product') ? null : _$fcmHash,
-        dependencies: FcmFamily._dependencies,
-        allTransitiveDependencies: FcmFamily._allTransitiveDependencies,
-        options: options,
-      );
+  FcmProvider(
+    FirebaseOptions? options,
+  ) : this._internal(
+          (ref) => fcm(
+            ref as FcmRef,
+            options,
+          ),
+          from: fcmProvider,
+          name: r'fcmProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product') ? null : _$fcmHash,
+          dependencies: FcmFamily._dependencies,
+          allTransitiveDependencies: FcmFamily._allTransitiveDependencies,
+          options: options,
+        );
 
   FcmProvider._internal(
     super._createNotifier, {
@@ -91,7 +103,9 @@ class FcmProvider extends AutoDisposeFutureProvider<Fcm> {
   final FirebaseOptions? options;
 
   @override
-  Override overrideWith(FutureOr<Fcm> Function(FcmRef provider) create) {
+  Override overrideWith(
+    FutureOr<Fcm> Function(FcmRef provider) create,
+  ) {
     return ProviderOverride(
       origin: this,
       override: FcmProvider._internal(
@@ -145,7 +159,9 @@ String _$fcmControllerHash() => r'38515adc759847875b5e03c71b6494110178047d';
 abstract class _$FcmController extends BuildlessAutoDisposeAsyncNotifier<Fcm> {
   late final FirebaseOptions options;
 
-  FutureOr<Fcm> build(FirebaseOptions options);
+  FutureOr<Fcm> build(
+    FirebaseOptions options,
+  );
 }
 
 /// This controller is an [AsyncNotifier] that holds and handles our authentication state
@@ -166,15 +182,21 @@ class FcmControllerFamily extends Family<AsyncValue<Fcm>> {
   /// This controller is an [AsyncNotifier] that holds and handles our authentication state
   ///
   /// Copied from [FcmController].
-  FcmControllerProvider call(FirebaseOptions options) {
-    return FcmControllerProvider(options);
+  FcmControllerProvider call(
+    FirebaseOptions options,
+  ) {
+    return FcmControllerProvider(
+      options,
+    );
   }
 
   @override
   FcmControllerProvider getProviderOverride(
     covariant FcmControllerProvider provider,
   ) {
-    return call(provider.options);
+    return call(
+      provider.options,
+    );
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -200,20 +222,21 @@ class FcmControllerProvider
   /// This controller is an [AsyncNotifier] that holds and handles our authentication state
   ///
   /// Copied from [FcmController].
-  FcmControllerProvider(FirebaseOptions options)
-    : this._internal(
-        () => FcmController()..options = options,
-        from: fcmControllerProvider,
-        name: r'fcmControllerProvider',
-        debugGetCreateSourceHash:
-            const bool.fromEnvironment('dart.vm.product')
-                ? null
-                : _$fcmControllerHash,
-        dependencies: FcmControllerFamily._dependencies,
-        allTransitiveDependencies:
-            FcmControllerFamily._allTransitiveDependencies,
-        options: options,
-      );
+  FcmControllerProvider(
+    FirebaseOptions options,
+  ) : this._internal(
+          () => FcmController()..options = options,
+          from: fcmControllerProvider,
+          name: r'fcmControllerProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$fcmControllerHash,
+          dependencies: FcmControllerFamily._dependencies,
+          allTransitiveDependencies:
+              FcmControllerFamily._allTransitiveDependencies,
+          options: options,
+        );
 
   FcmControllerProvider._internal(
     super._createNotifier, {
@@ -228,8 +251,12 @@ class FcmControllerProvider
   final FirebaseOptions options;
 
   @override
-  FutureOr<Fcm> runNotifierBuild(covariant FcmController notifier) {
-    return notifier.build(options);
+  FutureOr<Fcm> runNotifierBuild(
+    covariant FcmController notifier,
+  ) {
+    return notifier.build(
+      options,
+    );
   }
 
   @override
@@ -282,6 +309,5 @@ class _FcmControllerProviderElement
   @override
   FirebaseOptions get options => (origin as FcmControllerProvider).options;
 }
-
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -6,8 +6,6 @@ import 'package:notifi/models/gps.dart';
 import 'package:notifi/models/person.dart';
 import 'package:notifi/models/resource_type.dart';
 
-import '../jwt_utils.dart';
-import 'gendertype.dart';
 import 'resource.dart';
 
 part 'artifact.g.dart';

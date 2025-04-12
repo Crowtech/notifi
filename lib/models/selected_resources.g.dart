@@ -7,24 +7,22 @@ part of 'selected_resources.dart';
 // **************************************************************************
 
 _$SelectedResourcesImpl _$$SelectedResourcesImplFromJson(
-  Map<String, dynamic> json,
-) => _$SelectedResourcesImpl(
-  selectedResourceIds:
-      (json['selectedResourceIds'] as List<dynamic>)
+        Map<String, dynamic> json) =>
+    _$SelectedResourcesImpl(
+      selectedResourceIds: (json['selectedResourceIds'] as List<dynamic>)
           .map((e) => (e as num).toInt())
           .toList(),
-  unselectedResourceIds:
-      (json['unselectedResourceIds'] as List<dynamic>)
+      unselectedResourceIds: (json['unselectedResourceIds'] as List<dynamic>)
           .map((e) => (e as num).toInt())
           .toList(),
-);
+    );
 
 Map<String, dynamic> _$$SelectedResourcesImplToJson(
-  _$SelectedResourcesImpl instance,
-) => <String, dynamic>{
-  'selectedResourceIds': instance.selectedResourceIds,
-  'unselectedResourceIds': instance.unselectedResourceIds,
-};
+        _$SelectedResourcesImpl instance) =>
+    <String, dynamic>{
+      'selectedResourceIds': instance.selectedResourceIds,
+      'unselectedResourceIds': instance.unselectedResourceIds,
+    };
 
 // **************************************************************************
 // RiverpodGenerator
@@ -36,15 +34,12 @@ String _$asyncSelectedResourcesHash() =>
 /// See also [AsyncSelectedResources].
 @ProviderFor(AsyncSelectedResources)
 final asyncSelectedResourcesProvider = AutoDisposeAsyncNotifierProvider<
-  AsyncSelectedResources,
-  SelectedResources
->.internal(
+    AsyncSelectedResources, SelectedResources>.internal(
   AsyncSelectedResources.new,
   name: r'asyncSelectedResourcesProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$asyncSelectedResourcesHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$asyncSelectedResourcesHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

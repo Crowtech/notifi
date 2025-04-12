@@ -14,15 +14,12 @@ String _$organizationsSearchQueryNotifierHash() =>
 /// Copied from [OrganizationsSearchQueryNotifier].
 @ProviderFor(OrganizationsSearchQueryNotifier)
 final organizationsSearchQueryNotifierProvider = AutoDisposeNotifierProvider<
-  OrganizationsSearchQueryNotifier,
-  String
->.internal(
+    OrganizationsSearchQueryNotifier, String>.internal(
   OrganizationsSearchQueryNotifier.new,
   name: r'organizationsSearchQueryNotifierProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$organizationsSearchQueryNotifierHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$organizationsSearchQueryNotifierHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

@@ -144,7 +144,7 @@ class PersonsSearchScreen extends ConsumerWidget {
           logNoStack.i("PERSONS_SEARCH_SCREEN: Add button pressed");
           showDialog(
             context: context,
-            builder: (context) => CreatePersonForm(),
+            builder: (context) => const CreatePersonForm(),
           );
         },
         // foregroundColor: customizations[index].$1,

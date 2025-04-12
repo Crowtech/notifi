@@ -39,13 +39,24 @@ class Notifi2Family extends Family<void> {
   const Notifi2Family();
 
   /// See also [Notifi2].
-  Notifi2Provider call(FirebaseOptions options, dynamic secondsToast) {
-    return Notifi2Provider(options, secondsToast);
+  Notifi2Provider call(
+    FirebaseOptions options,
+    dynamic secondsToast,
+  ) {
+    return Notifi2Provider(
+      options,
+      secondsToast,
+    );
   }
 
   @override
-  Notifi2Provider getProviderOverride(covariant Notifi2Provider provider) {
-    return call(provider.options, provider.secondsToast);
+  Notifi2Provider getProviderOverride(
+    covariant Notifi2Provider provider,
+  ) {
+    return call(
+      provider.options,
+      provider.secondsToast,
+    );
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -66,20 +77,26 @@ class Notifi2Family extends Family<void> {
 /// See also [Notifi2].
 class Notifi2Provider extends Provider<void> {
   /// See also [Notifi2].
-  Notifi2Provider(FirebaseOptions options, dynamic secondsToast)
-    : this._internal(
-        (ref) => Notifi2(ref as Notifi2Ref, options, secondsToast),
-        from: notifi2Provider,
-        name: r'notifi2Provider',
-        debugGetCreateSourceHash:
-            const bool.fromEnvironment('dart.vm.product')
-                ? null
-                : _$notifi2Hash,
-        dependencies: Notifi2Family._dependencies,
-        allTransitiveDependencies: Notifi2Family._allTransitiveDependencies,
-        options: options,
-        secondsToast: secondsToast,
-      );
+  Notifi2Provider(
+    FirebaseOptions options,
+    dynamic secondsToast,
+  ) : this._internal(
+          (ref) => Notifi2(
+            ref as Notifi2Ref,
+            options,
+            secondsToast,
+          ),
+          from: notifi2Provider,
+          name: r'notifi2Provider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$notifi2Hash,
+          dependencies: Notifi2Family._dependencies,
+          allTransitiveDependencies: Notifi2Family._allTransitiveDependencies,
+          options: options,
+          secondsToast: secondsToast,
+        );
 
   Notifi2Provider._internal(
     super._createNotifier, {
@@ -96,7 +113,9 @@ class Notifi2Provider extends Provider<void> {
   final dynamic secondsToast;
 
   @override
-  Override overrideWith(void Function(Notifi2Ref provider) create) {
+  Override overrideWith(
+    void Function(Notifi2Ref provider) create,
+  ) {
     return ProviderOverride(
       origin: this,
       override: Notifi2Provider._internal(
@@ -152,6 +171,5 @@ class _Notifi2ProviderElement extends ProviderElement<void> with Notifi2Ref {
   @override
   dynamic get secondsToast => (origin as Notifi2Provider).secondsToast;
 }
-
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

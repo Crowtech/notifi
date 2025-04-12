@@ -12,15 +12,13 @@ String _$nestNotifisHash() => r'0f10bea9e6e238029b49646e62f1edb1ec1ccf36';
 @ProviderFor(NestNotifis)
 final nestNotifisProvider =
     AutoDisposeAsyncNotifierProvider<NestNotifis, List<NestNotifi>>.internal(
-      NestNotifis.new,
-      name: r'nestNotifisProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$nestNotifisHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  NestNotifis.new,
+  name: r'nestNotifisProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$nestNotifisHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 typedef _$NestNotifis = AutoDisposeAsyncNotifier<List<NestNotifi>>;
 // ignore_for_file: type=lint

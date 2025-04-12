@@ -10,7 +10,6 @@ import 'package:notifi/models/organization.dart';
 import 'package:notifi/models/person.dart';
 import 'package:notifi/state/nest_auth2.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/credentials.dart';
 

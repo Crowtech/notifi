@@ -13,15 +13,14 @@ String _$currentOrganizationHash() =>
 @ProviderFor(CurrentOrganization)
 final currentOrganizationProvider =
     AutoDisposeNotifierProvider<CurrentOrganization, Organization>.internal(
-      CurrentOrganization.new,
-      name: r'currentOrganizationProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$currentOrganizationHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  CurrentOrganization.new,
+  name: r'currentOrganizationProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$currentOrganizationHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 typedef _$CurrentOrganization = AutoDisposeNotifier<Organization>;
 // ignore_for_file: type=lint

@@ -32,7 +32,9 @@ class _SystemHash {
 abstract class _$EnableWidget extends BuildlessAutoDisposeNotifier<bool> {
   late final String code;
 
-  bool build(String code);
+  bool build(
+    String code,
+  );
 }
 
 /// See also [EnableWidget].
@@ -45,15 +47,21 @@ class EnableWidgetFamily extends Family<bool> {
   const EnableWidgetFamily();
 
   /// See also [EnableWidget].
-  EnableWidgetProvider call(String code) {
-    return EnableWidgetProvider(code);
+  EnableWidgetProvider call(
+    String code,
+  ) {
+    return EnableWidgetProvider(
+      code,
+    );
   }
 
   @override
   EnableWidgetProvider getProviderOverride(
     covariant EnableWidgetProvider provider,
   ) {
-    return call(provider.code);
+    return call(
+      provider.code,
+    );
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -75,20 +83,21 @@ class EnableWidgetFamily extends Family<bool> {
 class EnableWidgetProvider
     extends AutoDisposeNotifierProviderImpl<EnableWidget, bool> {
   /// See also [EnableWidget].
-  EnableWidgetProvider(String code)
-    : this._internal(
-        () => EnableWidget()..code = code,
-        from: enableWidgetProvider,
-        name: r'enableWidgetProvider',
-        debugGetCreateSourceHash:
-            const bool.fromEnvironment('dart.vm.product')
-                ? null
-                : _$enableWidgetHash,
-        dependencies: EnableWidgetFamily._dependencies,
-        allTransitiveDependencies:
-            EnableWidgetFamily._allTransitiveDependencies,
-        code: code,
-      );
+  EnableWidgetProvider(
+    String code,
+  ) : this._internal(
+          () => EnableWidget()..code = code,
+          from: enableWidgetProvider,
+          name: r'enableWidgetProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$enableWidgetHash,
+          dependencies: EnableWidgetFamily._dependencies,
+          allTransitiveDependencies:
+              EnableWidgetFamily._allTransitiveDependencies,
+          code: code,
+        );
 
   EnableWidgetProvider._internal(
     super._createNotifier, {
@@ -103,8 +112,12 @@ class EnableWidgetProvider
   final String code;
 
   @override
-  bool runNotifierBuild(covariant EnableWidget notifier) {
-    return notifier.build(code);
+  bool runNotifierBuild(
+    covariant EnableWidget notifier,
+  ) {
+    return notifier.build(
+      code,
+    );
   }
 
   @override
@@ -163,7 +176,9 @@ String _$enableWidgetTrueHash() => r'113063abc481c00a6417288b9a6cf45eba8dcd9e';
 abstract class _$EnableWidgetTrue extends BuildlessAutoDisposeNotifier<bool> {
   late final String code;
 
-  bool build(String code);
+  bool build(
+    String code,
+  );
 }
 
 /// See also [EnableWidgetTrue].
@@ -176,15 +191,21 @@ class EnableWidgetTrueFamily extends Family<bool> {
   const EnableWidgetTrueFamily();
 
   /// See also [EnableWidgetTrue].
-  EnableWidgetTrueProvider call(String code) {
-    return EnableWidgetTrueProvider(code);
+  EnableWidgetTrueProvider call(
+    String code,
+  ) {
+    return EnableWidgetTrueProvider(
+      code,
+    );
   }
 
   @override
   EnableWidgetTrueProvider getProviderOverride(
     covariant EnableWidgetTrueProvider provider,
   ) {
-    return call(provider.code);
+    return call(
+      provider.code,
+    );
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -206,20 +227,21 @@ class EnableWidgetTrueFamily extends Family<bool> {
 class EnableWidgetTrueProvider
     extends AutoDisposeNotifierProviderImpl<EnableWidgetTrue, bool> {
   /// See also [EnableWidgetTrue].
-  EnableWidgetTrueProvider(String code)
-    : this._internal(
-        () => EnableWidgetTrue()..code = code,
-        from: enableWidgetTrueProvider,
-        name: r'enableWidgetTrueProvider',
-        debugGetCreateSourceHash:
-            const bool.fromEnvironment('dart.vm.product')
-                ? null
-                : _$enableWidgetTrueHash,
-        dependencies: EnableWidgetTrueFamily._dependencies,
-        allTransitiveDependencies:
-            EnableWidgetTrueFamily._allTransitiveDependencies,
-        code: code,
-      );
+  EnableWidgetTrueProvider(
+    String code,
+  ) : this._internal(
+          () => EnableWidgetTrue()..code = code,
+          from: enableWidgetTrueProvider,
+          name: r'enableWidgetTrueProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$enableWidgetTrueHash,
+          dependencies: EnableWidgetTrueFamily._dependencies,
+          allTransitiveDependencies:
+              EnableWidgetTrueFamily._allTransitiveDependencies,
+          code: code,
+        );
 
   EnableWidgetTrueProvider._internal(
     super._createNotifier, {
@@ -234,8 +256,12 @@ class EnableWidgetTrueProvider
   final String code;
 
   @override
-  bool runNotifierBuild(covariant EnableWidgetTrue notifier) {
-    return notifier.build(code);
+  bool runNotifierBuild(
+    covariant EnableWidgetTrue notifier,
+  ) {
+    return notifier.build(
+      code,
+    );
   }
 
   @override
@@ -288,6 +314,5 @@ class _EnableWidgetTrueProviderElement
   @override
   String get code => (origin as EnableWidgetTrueProvider).code;
 }
-
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

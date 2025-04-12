@@ -1,15 +1,10 @@
-import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart' as emailValidator;
-import 'package:flutter_regex/flutter_regex.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:notifi/forms/email_form_widget.dart';
 import 'package:notifi/forms/text_form_widget.dart';
-import 'package:notifi/helpers/debouncer.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
-import 'package:notifi/jwt_utils.dart';
 import 'package:notifi/models/organization_type.dart';
 import 'package:notifi/riverpod/enable_widget.dart';
 import 'package:notifi/riverpod/refresh_widget.dart';

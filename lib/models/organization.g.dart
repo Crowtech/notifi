@@ -7,30 +7,27 @@ part of 'organization.dart';
 // **************************************************************************
 
 Organization _$OrganizationFromJson(Map<String, dynamic> json) => Organization(
-  id: (json['id'] as num?)?.toInt(),
-  code: json['code'] as String?,
-  created:
-      json['created'] == null
+      id: (json['id'] as num?)?.toInt(),
+      code: json['code'] as String?,
+      created: json['created'] == null
           ? null
           : DateTime.parse(json['created'] as String),
-  active: json['active'] as bool?,
-  updated:
-      json['updated'] == null
+      active: json['active'] as bool?,
+      updated: json['updated'] == null
           ? null
           : DateTime.parse(json['updated'] as String),
-  name: json['name'] as String?,
-  description: json['description'] as String?,
-  location: json['location'] as String?,
-  devicecode: json['devicecode'] as String?,
-  avatarUrl: json['avatarUrl'] as String?,
-  gps:
-      json['gps'] == null
+      name: json['name'] as String?,
+      description: json['description'] as String?,
+      location: json['location'] as String?,
+      devicecode: json['devicecode'] as String?,
+      avatarUrl: json['avatarUrl'] as String?,
+      gps: json['gps'] == null
           ? null
           : GPS.fromJson(json['gps'] as Map<String, dynamic>),
-  selected: json['selected'] as bool? ?? false,
-  orgType: json['orgType'] as String,
-  url: json['url'] as String,
-)..orgid = (json['orgid'] as num?)?.toInt();
+      selected: json['selected'] as bool? ?? false,
+      orgType: json['orgType'] as String,
+      url: json['url'] as String,
+    )..orgid = (json['orgid'] as num?)?.toInt();
 
 Map<String, dynamic> _$OrganizationToJson(Organization instance) =>
     <String, dynamic>{

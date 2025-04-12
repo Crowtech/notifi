@@ -12,15 +12,14 @@ String _$deviceIdNotifierHash() => r'ee6f0eead077be53d74bf35d241ba1cfdbbba5c7';
 @ProviderFor(DeviceIdNotifier)
 final deviceIdNotifierProvider =
     NotifierProvider<DeviceIdNotifier, String>.internal(
-      DeviceIdNotifier.new,
-      name: r'deviceIdNotifierProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$deviceIdNotifierHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  DeviceIdNotifier.new,
+  name: r'deviceIdNotifierProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$deviceIdNotifierHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 typedef _$DeviceIdNotifier = Notifier<String>;
 // ignore_for_file: type=lint

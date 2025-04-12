@@ -32,7 +32,9 @@ class _SystemHash {
 abstract class _$RefreshWidget extends BuildlessAutoDisposeNotifier<String> {
   late final String code;
 
-  String build(String code);
+  String build(
+    String code,
+  );
 }
 
 /// See also [RefreshWidget].
@@ -45,15 +47,21 @@ class RefreshWidgetFamily extends Family<String> {
   const RefreshWidgetFamily();
 
   /// See also [RefreshWidget].
-  RefreshWidgetProvider call(String code) {
-    return RefreshWidgetProvider(code);
+  RefreshWidgetProvider call(
+    String code,
+  ) {
+    return RefreshWidgetProvider(
+      code,
+    );
   }
 
   @override
   RefreshWidgetProvider getProviderOverride(
     covariant RefreshWidgetProvider provider,
   ) {
-    return call(provider.code);
+    return call(
+      provider.code,
+    );
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -75,20 +83,21 @@ class RefreshWidgetFamily extends Family<String> {
 class RefreshWidgetProvider
     extends AutoDisposeNotifierProviderImpl<RefreshWidget, String> {
   /// See also [RefreshWidget].
-  RefreshWidgetProvider(String code)
-    : this._internal(
-        () => RefreshWidget()..code = code,
-        from: refreshWidgetProvider,
-        name: r'refreshWidgetProvider',
-        debugGetCreateSourceHash:
-            const bool.fromEnvironment('dart.vm.product')
-                ? null
-                : _$refreshWidgetHash,
-        dependencies: RefreshWidgetFamily._dependencies,
-        allTransitiveDependencies:
-            RefreshWidgetFamily._allTransitiveDependencies,
-        code: code,
-      );
+  RefreshWidgetProvider(
+    String code,
+  ) : this._internal(
+          () => RefreshWidget()..code = code,
+          from: refreshWidgetProvider,
+          name: r'refreshWidgetProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$refreshWidgetHash,
+          dependencies: RefreshWidgetFamily._dependencies,
+          allTransitiveDependencies:
+              RefreshWidgetFamily._allTransitiveDependencies,
+          code: code,
+        );
 
   RefreshWidgetProvider._internal(
     super._createNotifier, {
@@ -103,8 +112,12 @@ class RefreshWidgetProvider
   final String code;
 
   @override
-  String runNotifierBuild(covariant RefreshWidget notifier) {
-    return notifier.build(code);
+  String runNotifierBuild(
+    covariant RefreshWidget notifier,
+  ) {
+    return notifier.build(
+      code,
+    );
   }
 
   @override
@@ -157,6 +170,5 @@ class _RefreshWidgetProviderElement
   @override
   String get code => (origin as RefreshWidgetProvider).code;
 }
-
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

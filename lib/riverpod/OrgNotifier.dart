@@ -4,7 +4,6 @@
 // The public methods on this class will be what allow the UI to modify the state.
 import 'dart:convert';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notifi/api_utils.dart';
 import 'package:notifi/models/crowtech_basepage.dart';
 import 'package:notifi/models/nestfilter.dart';

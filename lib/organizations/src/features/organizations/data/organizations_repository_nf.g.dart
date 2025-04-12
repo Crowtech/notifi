@@ -13,20 +13,19 @@ String _$organizationsRepositoryNestFilterHash() =>
 @ProviderFor(organizationsRepositoryNestFilter)
 final organizationsRepositoryNestFilterProvider =
     AutoDisposeProvider<OrganizationsRepositoryNestFilter>.internal(
-      organizationsRepositoryNestFilter,
-      name: r'organizationsRepositoryNestFilterProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$organizationsRepositoryNestFilterHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  organizationsRepositoryNestFilter,
+  name: r'organizationsRepositoryNestFilterProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$organizationsRepositoryNestFilterHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef OrganizationsRepositoryNestFilterRef =
-    AutoDisposeProviderRef<OrganizationsRepositoryNestFilter>;
+typedef OrganizationsRepositoryNestFilterRef
+    = AutoDisposeProviderRef<OrganizationsRepositoryNestFilter>;
 String _$organization2Hash() => r'a0c0ed97d628b88242996a0971c2b40d941794ca';
 
 /// Copied from Dart SDK
@@ -68,15 +67,21 @@ class Organization2Family extends Family<AsyncValue<Organization>> {
   /// Provider to fetch a organization by ID
   ///
   /// Copied from [organization2].
-  Organization2Provider call({required int organizationId}) {
-    return Organization2Provider(organizationId: organizationId);
+  Organization2Provider call({
+    required int organizationId,
+  }) {
+    return Organization2Provider(
+      organizationId: organizationId,
+    );
   }
 
   @override
   Organization2Provider getProviderOverride(
     covariant Organization2Provider provider,
   ) {
-    return call(organizationId: provider.organizationId);
+    return call(
+      organizationId: provider.organizationId,
+    );
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -101,23 +106,24 @@ class Organization2Provider extends AutoDisposeFutureProvider<Organization> {
   /// Provider to fetch a organization by ID
   ///
   /// Copied from [organization2].
-  Organization2Provider({required int organizationId})
-    : this._internal(
-        (ref) => organization2(
-          ref as Organization2Ref,
+  Organization2Provider({
+    required int organizationId,
+  }) : this._internal(
+          (ref) => organization2(
+            ref as Organization2Ref,
+            organizationId: organizationId,
+          ),
+          from: organization2Provider,
+          name: r'organization2Provider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$organization2Hash,
+          dependencies: Organization2Family._dependencies,
+          allTransitiveDependencies:
+              Organization2Family._allTransitiveDependencies,
           organizationId: organizationId,
-        ),
-        from: organization2Provider,
-        name: r'organization2Provider',
-        debugGetCreateSourceHash:
-            const bool.fromEnvironment('dart.vm.product')
-                ? null
-                : _$organization2Hash,
-        dependencies: Organization2Family._dependencies,
-        allTransitiveDependencies:
-            Organization2Family._allTransitiveDependencies,
-        organizationId: organizationId,
-      );
+        );
 
   Organization2Provider._internal(
     super._createNotifier, {
@@ -194,19 +200,18 @@ String _$fetchOrganizationsNestFilterHash() =>
 @ProviderFor(fetchOrganizationsNestFilter)
 final fetchOrganizationsNestFilterProvider =
     AutoDisposeFutureProvider<OrganizationsResponse>.internal(
-      fetchOrganizationsNestFilter,
-      name: r'fetchOrganizationsNestFilterProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$fetchOrganizationsNestFilterHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  fetchOrganizationsNestFilter,
+  name: r'fetchOrganizationsNestFilterProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$fetchOrganizationsNestFilterHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef FetchOrganizationsNestFilterRef =
-    AutoDisposeFutureProviderRef<OrganizationsResponse>;
+typedef FetchOrganizationsNestFilterRef
+    = AutoDisposeFutureProviderRef<OrganizationsResponse>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
