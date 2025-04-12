@@ -219,7 +219,7 @@ class _CreateOrganizationFormState
                  //   builder: (context, watch, child) {
                      // watch.watch(refreshWidgetProvider("${widget.formCode}-submit"));
                      ElevatedButton(
-                       // key: const Key("organization-submit"),
+                       key: const Key("organization-submit"),
                         onPressed:
                           !(_formKey.currentState != null &&
                                   _formKey.currentState!.validate())
