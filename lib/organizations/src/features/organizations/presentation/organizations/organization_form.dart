@@ -214,7 +214,26 @@ class _CreateOrganizationFormState
                   children: [
                    CancelButtonWidget(formKey: _formKey, formCode: widget.formCode),
                     const SizedBox(width: 16),
-                   SubmitButtonWidget(formKey: _formKey, formCode: widget.formCode)
+                  // SubmitButtonWidget(formKey: _formKey, formCode: widget.formCode)
+                   ElevatedButton(
+                      key: const Key("organization-submit"),
+                      onPressed:
+                          !(_formKey.currentState != null &&
+                                  _formKey.currentState!.validate())
+                              ? null
+                              : () {
+                                // If the form is valid, display a snackbar. In the real world,
+                                // you'd often call a server or save the information in a database.
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                   SnackBar(
+                                    content: Text(nt.t.saving),
+                                  ),
+                                );
+                                Navigator.of(context).pop();
+                              },
+
+                      child: Text(nt.t.response.submit),
+                    ),
                   ],
                 ),
               ],
