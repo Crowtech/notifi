@@ -99,7 +99,7 @@ class _CreateOrganizationFormState
         child: SingleChildScrollView(
           child: Form(
             key: _formKey,
-            autovalidateMode: AutovalidateMode.onUnfocus,
+            autovalidateMode: AutovalidateMode.disabled,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
