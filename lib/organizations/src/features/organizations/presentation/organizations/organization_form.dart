@@ -225,11 +225,11 @@ class _CreateOrganizationFormState
                                   _formKey.currentState!.validate())
                               ? null
                               : () {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                   SnackBar(
-                                    content: Text(nt.t.saving),
-                                  ),
-                                );
+                                //   ScaffoldMessenger.of(context).showSnackBar(
+                                //    SnackBar(
+                                //     content: Text(nt.t.saving),
+                                //   ),
+                                // );
                                 Navigator.of(context).pop();
                               },
 
