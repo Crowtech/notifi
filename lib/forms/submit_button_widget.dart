@@ -23,10 +23,10 @@ GlobalKey<FormState> formKey;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    //var watch = ref.watch(refreshWidgetProvider("$formCode-submit"));
+    ref.watch(refreshWidgetProvider("$formCode-submit"));
     logNoStack.i("Submit button $formCode ");
     return ElevatedButton(
-                      key: Key("${formCode}-submit"),
+                    //  key: Key("${formCode}-submit"),
                       onPressed:
                           !(formKey.currentState != null &&
                                   formKey.currentState!.validate())
