@@ -262,9 +262,9 @@ class _CreateOrganizationFormState
                               );
                                 var token = ref.read(nestAuthProvider.notifier).token;
                                 var apiPath = "$defaultAPIBaseUrl$defaultApiPrefixPath/organizations";
-                                 var result = apiPostDataNoLocaleRaw(token!, apiPath, organization);  
+                              //   var result = apiPostDataNoLocaleRaw(token!, apiPath, organization);  
 
-  logNoStack.i("result is ${result}");
+  logNoStack.i("result is ${apiPath}");
                           Navigator.of(context).pop();
                         }},
                           // !(_formKey.currentState != null &&
