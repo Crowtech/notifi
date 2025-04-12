@@ -64,6 +64,10 @@ class _CreateOrganizationFormState
   @override
   void dispose() {
     super.dispose();
+    _nameController.dispose();
+    _descriptionController.dispose();
+    _emailController.dispose();
+    _urlController.dispose();
   }
 
   void _handleRadioValueChanged(OrganizationType? value) {
