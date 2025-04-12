@@ -179,8 +179,13 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
         itemFormFieldKey.currentState?.validate();
         //ref.read(refreshWidgetProvider("organization").notifier).refresh();
         ref.read(refreshWidgetProvider(widget.fieldCode).notifier).refresh();
-        if (widget.formKey.currentState != null) {
-          widget.formKey.currentState!.save();
+        final form = widget.formKey.currentState;
+        if (form != null) {
+          form.save();  // in this way validation will not be triggered
+    
+         // widget.formKey.forceErrorText == null && widget.validator?.call(_value) == null;
+          
+       
           ref
               .read(refreshWidgetProvider("${widget.formCode}-submit").notifier)
               .set(true);
@@ -189,6 +194,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
               .read(refreshWidgetProvider("${widget.formCode}-submit").notifier)
               .set(false);
         }
+        
         // ref.read(refreshWidgetProvider("${widget.formCode}-submit").notifier).refresh();
       }),
       onFieldSubmitted: (value) {
