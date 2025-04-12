@@ -68,7 +68,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
   String? _olderValue;
   bool isValid = false;
   bool isEmpty = true;
-  late bool enableWidget; 
+  late bool enableWidget;
   List<TextInputFormatter>? inputFormatters = [];
 
   @override
@@ -125,10 +125,11 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
 
   @override
   Widget build(BuildContext context) {
-    enableWidget = ref.watch(enableWidgetProvider(widget.fieldCode)); 
+    enableWidget = ref.watch(enableWidgetProvider(widget.fieldCode));
     ref.watch(refreshWidgetProvider(widget.fieldCode));
 
-    logNoStack.i("TEXT_FORM_WIDGET: BUILD: ${widget.fieldCode} enableWidget:$enableWidget");
+    logNoStack.i(
+        "TEXT_FORM_WIDGET: BUILD: ${widget.fieldCode} enableWidget:$enableWidget");
     return TextFormField(
       keyboardType: textInputType(),
       key: itemFormFieldKey,
@@ -140,7 +141,9 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
       textCapitalization: widget.textCapitalization,
       decoration: InputDecoration(
         errorStyle: const TextStyle(color: Colors.red),
-        labelText: widget.optional ? "${widget.itemName} (${nt.t.optional})" : widget.itemName,
+        labelText: widget.optional
+            ? "${widget.itemName} (${nt.t.optional})"
+            : widget.itemName,
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: statusColor(), width: 3.0),
           borderRadius: BorderRadius.circular(10.0),
@@ -152,45 +155,44 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
           ),
           borderRadius: BorderRadius.circular(10.0),
         ),
-
         disabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.grey, width: 1.0),
           borderRadius: BorderRadius.circular(10.0),
         ),
-
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.red, width: 3.0),
           borderRadius: BorderRadius.circular(10.0),
         ),
       ),
       validator: (value) {
-        String? result =
-            (!_isEmptyOlderValue(_olderValue)) && value!.isEmpty
-                ? null
-                : !isValidInput(value)
+        String? result = (!_isEmptyOlderValue(_olderValue)) && value!.isEmpty
+            ? null
+            : !isValidInput(value)
                 ? widget.itemValidation
                 : null;
         _olderValue = _isEmptyValue(value) ? value : _olderValue;
         isEmpty = _isEmptyValue(value);
         return result;
       },
-      onChanged:
-          (value) => _debouncer.run(() {
-            _olderValue = value.isEmpty ? _olderValue : value;
-            itemFormFieldKey.currentState?.validate();
-            //ref.read(refreshWidgetProvider("organization").notifier).refresh();
-            ref.read(refreshWidgetProvider(widget.fieldCode).notifier).refresh();
-            if (!(widget.formKey.currentState != null &&
-                                   widget.formKey.currentState!.validate())) {
-              ref.read(refreshWidgetProvider("${widget.formCode}-submit").notifier).set(false);
-            } else {
-              ref.read(refreshWidgetProvider("${widget.formCode}-submit").notifier).set(true);
-            }
-           // ref.read(refreshWidgetProvider("${widget.formCode}-submit").notifier).refresh();
-          }),
+      onChanged: (value) => _debouncer.run(() {
+        _olderValue = value.isEmpty ? _olderValue : value;
+        itemFormFieldKey.currentState?.validate();
+        //ref.read(refreshWidgetProvider("organization").notifier).refresh();
+        ref.read(refreshWidgetProvider(widget.fieldCode).notifier).refresh();
+        if (widget.formKey.currentState != null) {
+          widget.formKey.currentState!.save();
+          ref
+              .read(refreshWidgetProvider("${widget.formCode}-submit").notifier)
+              .set(true);
+        } else {
+          ref
+              .read(refreshWidgetProvider("${widget.formCode}-submit").notifier)
+              .set(false);
+        }
+        // ref.read(refreshWidgetProvider("${widget.formCode}-submit").notifier).refresh();
+      }),
       onFieldSubmitted: (value) {
         isValidInput(value);
-        
       },
     );
   }
@@ -198,8 +200,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
   bool isValidInput(String? value) {
     if (!enableWidget) {
       isValid = true;
-    }
-    else if (value == null || value.isEmpty) {
+    } else if (value == null || value.isEmpty) {
       if (!widget.optional) {
         isValid = false;
       } else {
