@@ -34,11 +34,11 @@ GlobalKey<FormState> formKey;
                               : () {
                                 // If the form is valid, display a snackbar. In the real world,
                                 // you'd often call a server or save the information in a database.
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                   SnackBar(
-                                    content: Text(nt.t.saving),
-                                  ),
-                                );
+                                // ScaffoldMessenger.of(context).showSnackBar(
+                                //    SnackBar(
+                                //     content: Text(nt.t.saving),
+                                //   ),
+                                // );
                                 Navigator.of(context).pop();
                               },
 

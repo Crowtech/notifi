@@ -90,9 +90,9 @@ class _CreateOrganizationFormState
 
   @override
   Widget build(BuildContext context) {
-    //var watch = ref.watch(refreshWidgetProvider("organization"));
+    var watch = ref.watch(refreshWidgetProvider("organization"));
     String capitalizedItem = nt.t.organization_capitalized;
-    logNoStack.i("Organization form build ");
+    logNoStack.i("Organization form build $watch");
     return Dialog(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
