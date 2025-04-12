@@ -103,6 +103,20 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
     }
   }
 
+  TextInputType textInputType() {
+    if (widget.fieldCode.contains("email")) {
+      return TextInputType.emailAddress;
+    } else if (widget.fieldCode.contains("url")) {
+      return TextInputType.url;
+    } else if (widget.fieldCode.contains("name")) {
+      return TextInputType.name;
+    } else if (widget.fieldCode.contains("number")) {
+      return TextInputType.number;
+    } else {
+      return TextInputType.text;
+    }
+  }
+
   @override
   void dispose() {
     _debouncer.dispose();
@@ -116,6 +130,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
 
     logNoStack.i("TEXT_FORM_WIDGET: BUILD: ${widget.fieldCode} enableWidget:$enableWidget");
     return TextFormField(
+      keyboardType: textInputType(),
       key: itemFormFieldKey,
       initialValue: widget.initialValue,
       autocorrect: true,
