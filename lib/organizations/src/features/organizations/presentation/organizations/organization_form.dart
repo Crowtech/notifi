@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart' as emailValidator;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:notifi/forms/cancel_button_widget.dart';
+import 'package:notifi/forms/submit_button_widget.dart';
 import 'package:notifi/forms/text_form_widget.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
@@ -20,7 +22,9 @@ var logNoStack = logger.Logger(
 );
 
 class CreateOrganizationForm extends ConsumerStatefulWidget {
-  const CreateOrganizationForm({super.key});
+  CreateOrganizationForm({super.key,required this.formCode});
+
+String formCode;
 
   @override
   _CreateOrganizationFormState createState() => _CreateOrganizationFormState();
@@ -36,6 +40,7 @@ class _CreateOrganizationFormState
   final _urlController = TextEditingController();
 
   OrganizationType? orgTypeIndex;
+
 
   bool _validateEmail(String? email) {
     if (email == null) {
@@ -67,21 +72,21 @@ class _CreateOrganizationFormState
     }
   }
 
-  void _handleSubmit() {
-    // Submit the form data
-    final organizationData = {
-      'name': _nameController.text,
-      'description': _descriptionController.text,
-      'email': _emailController.text,
-      'url': _urlController.text,
-      'orgType': orgTypeIndex!.name,
-      //   'phone': _phoneController.text,
-      //   'address': _addressController.text,
-    };
-    // Call API or perform action to create organization
-    print(organizationData);
-    Navigator.of(context).pop();
-  }
+  // void _handleSubmit() {
+  //   // Submit the form data
+  //   final organizationData = {
+  //     'name': _nameController.text,
+  //     'description': _descriptionController.text,
+  //     'email': _emailController.text,
+  //     'url': _urlController.text,
+  //     'orgType': orgTypeIndex!.name,
+  //     //   'phone': _phoneController.text,
+  //     //   'address': _addressController.text,
+  //   };
+  //   // Call API or perform action to create organization
+  //   print(organizationData);
+  //   Navigator.of(context).pop();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -106,6 +111,7 @@ class _CreateOrganizationFormState
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
+                  formCode: widget.formCode,
                   fieldCode: "true-name",
                   itemCategory: nt.t.organization,
                   itemName: nt.t.name,
@@ -116,6 +122,7 @@ class _CreateOrganizationFormState
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
+                  formCode: widget.formCode,
                   fieldCode: "true-description",
                   enabled: true,
                   itemCategory: nt.t.organization,
@@ -129,6 +136,7 @@ class _CreateOrganizationFormState
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
+                   formCode: widget.formCode,
                   fieldCode: "true-email",
                   enabled: true,
                   itemCategory: nt.t.organization,
@@ -187,6 +195,7 @@ class _CreateOrganizationFormState
 
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
+                   formCode: widget.formCode,
                   fieldCode: "false-url",
                   enabled: false,
                   itemCategory: nt.t.organization,
@@ -203,35 +212,9 @@ class _CreateOrganizationFormState
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Text(nt.t.response.cancel),
-                    ),
+                    CancelButtonWidget(formKey: _formKey, formCode: widget.formCode),
                     const SizedBox(width: 16),
-                    ElevatedButton(
-                      key: const Key("submit"),
-                      onPressed:
-                          !(_formKey.currentState != null &&
-                                  _formKey.currentState!.validate())
-                              ? null
-                              : () {
-                                // If the form is valid, display a snackbar. In the real world,
-                                // you'd often call a server or save the information in a database.
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                   SnackBar(
-                                    content: Text(nt.t.saving),
-                                  ),
-                                );
-                                Navigator.of(context).pop();
-                              },
-                      // (_formKey.currentState != null &&
-                      //         _formKey.currentState!.validate())
-                      //     ? _handleSubmit
-                      //     : null,
-                      child: Text(nt.t.response.submit),
-                    ),
+                    SubmitButtonWidget(formKey: _formKey, formCode: widget.formCode)
                   ],
                 ),
               ],

@@ -23,6 +23,7 @@ typedef ValidateFunction<String> = bool Function(String value);
 class TextFormFieldWidget extends ConsumerStatefulWidget {
   const TextFormFieldWidget({
     super.key,
+    required this.formCode,
     required this.fieldCode,
     this.initialValue = "",
     this.enabled = true,
@@ -38,6 +39,7 @@ class TextFormFieldWidget extends ConsumerStatefulWidget {
     this.onValidate,
   });
 
+  final String formCode;
   final String fieldCode;
   final String initialValue;
   final bool readOnly;
@@ -161,6 +163,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
             itemFormFieldKey.currentState?.validate();
             //ref.read(refreshWidgetProvider("organization").notifier).refresh();
             ref.read(refreshWidgetProvider(widget.fieldCode).notifier).refresh();
+            ref.read(refreshWidgetProvider("${widget.formCode}-submit").notifier).refresh();
           }),
       onFieldSubmitted: (value) {
         isValidInput(value);
