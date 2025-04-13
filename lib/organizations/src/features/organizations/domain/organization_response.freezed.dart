@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,107 +10,67 @@ part of 'organization_response.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-OrganizationsResponse _$OrganizationsResponseFromJson(
-    Map<String, dynamic> json) {
-  return _OrganizationsResponse.fromJson(json);
-}
 
 /// @nodoc
 mixin _$OrganizationsResponse {
   @JsonKey(name: 'startIndex')
-  int get page => throw _privateConstructorUsedError;
+  int get page;
   @JsonKey(name: 'items')
-  List<Organization> get results => throw _privateConstructorUsedError;
+  List<Organization> get results;
   @JsonKey(name: 'resultCount')
-  int get totalResults => throw _privateConstructorUsedError;
+  int get totalResults;
   @JsonKey(name: 'totalItems')
-  int get totalPages => throw _privateConstructorUsedError;
-  List<String> get errors => throw _privateConstructorUsedError;
-
-  /// Serializes this OrganizationsResponse to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  int get totalPages;
+  List<String> get errors;
 
   /// Create a copy of OrganizationsResponse
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $OrganizationsResponseCopyWith<OrganizationsResponse> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $OrganizationsResponseCopyWith<$Res> {
-  factory $OrganizationsResponseCopyWith(OrganizationsResponse value,
-          $Res Function(OrganizationsResponse) then) =
-      _$OrganizationsResponseCopyWithImpl<$Res, OrganizationsResponse>;
-  @useResult
-  $Res call(
-      {@JsonKey(name: 'startIndex') int page,
-      @JsonKey(name: 'items') List<Organization> results,
-      @JsonKey(name: 'resultCount') int totalResults,
-      @JsonKey(name: 'totalItems') int totalPages,
-      List<String> errors});
-}
-
-/// @nodoc
-class _$OrganizationsResponseCopyWithImpl<$Res,
-        $Val extends OrganizationsResponse>
-    implements $OrganizationsResponseCopyWith<$Res> {
-  _$OrganizationsResponseCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of OrganizationsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $OrganizationsResponseCopyWith<OrganizationsResponse> get copyWith =>
+      _$OrganizationsResponseCopyWithImpl<OrganizationsResponse>(
+          this as OrganizationsResponse, _$identity);
+
+  /// Serializes this OrganizationsResponse to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? page = null,
-    Object? results = null,
-    Object? totalResults = null,
-    Object? totalPages = null,
-    Object? errors = null,
-  }) {
-    return _then(_value.copyWith(
-      page: null == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
-              as int,
-      results: null == results
-          ? _value.results
-          : results // ignore: cast_nullable_to_non_nullable
-              as List<Organization>,
-      totalResults: null == totalResults
-          ? _value.totalResults
-          : totalResults // ignore: cast_nullable_to_non_nullable
-              as int,
-      totalPages: null == totalPages
-          ? _value.totalPages
-          : totalPages // ignore: cast_nullable_to_non_nullable
-              as int,
-      errors: null == errors
-          ? _value.errors
-          : errors // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is OrganizationsResponse &&
+            (identical(other.page, page) || other.page == page) &&
+            const DeepCollectionEquality().equals(other.results, results) &&
+            (identical(other.totalResults, totalResults) ||
+                other.totalResults == totalResults) &&
+            (identical(other.totalPages, totalPages) ||
+                other.totalPages == totalPages) &&
+            const DeepCollectionEquality().equals(other.errors, errors));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      page,
+      const DeepCollectionEquality().hash(results),
+      totalResults,
+      totalPages,
+      const DeepCollectionEquality().hash(errors));
+
+  @override
+  String toString() {
+    return 'OrganizationsResponse(page: $page, results: $results, totalResults: $totalResults, totalPages: $totalPages, errors: $errors)';
   }
 }
 
 /// @nodoc
-abstract class _$$OrganizationsResponseImplCopyWith<$Res>
-    implements $OrganizationsResponseCopyWith<$Res> {
-  factory _$$OrganizationsResponseImplCopyWith(
-          _$OrganizationsResponseImpl value,
-          $Res Function(_$OrganizationsResponseImpl) then) =
-      __$$OrganizationsResponseImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $OrganizationsResponseCopyWith<$Res> {
+  factory $OrganizationsResponseCopyWith(OrganizationsResponse value,
+          $Res Function(OrganizationsResponse) _then) =
+      _$OrganizationsResponseCopyWithImpl;
   @useResult
   $Res call(
       {@JsonKey(name: 'startIndex') int page,
@@ -120,13 +81,12 @@ abstract class _$$OrganizationsResponseImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$OrganizationsResponseImplCopyWithImpl<$Res>
-    extends _$OrganizationsResponseCopyWithImpl<$Res,
-        _$OrganizationsResponseImpl>
-    implements _$$OrganizationsResponseImplCopyWith<$Res> {
-  __$$OrganizationsResponseImplCopyWithImpl(_$OrganizationsResponseImpl _value,
-      $Res Function(_$OrganizationsResponseImpl) _then)
-      : super(_value, _then);
+class _$OrganizationsResponseCopyWithImpl<$Res>
+    implements $OrganizationsResponseCopyWith<$Res> {
+  _$OrganizationsResponseCopyWithImpl(this._self, this._then);
+
+  final OrganizationsResponse _self;
+  final $Res Function(OrganizationsResponse) _then;
 
   /// Create a copy of OrganizationsResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -139,25 +99,25 @@ class __$$OrganizationsResponseImplCopyWithImpl<$Res>
     Object? totalPages = null,
     Object? errors = null,
   }) {
-    return _then(_$OrganizationsResponseImpl(
+    return _then(_self.copyWith(
       page: null == page
-          ? _value.page
+          ? _self.page
           : page // ignore: cast_nullable_to_non_nullable
               as int,
       results: null == results
-          ? _value._results
+          ? _self.results
           : results // ignore: cast_nullable_to_non_nullable
               as List<Organization>,
       totalResults: null == totalResults
-          ? _value.totalResults
+          ? _self.totalResults
           : totalResults // ignore: cast_nullable_to_non_nullable
               as int,
       totalPages: null == totalPages
-          ? _value.totalPages
+          ? _self.totalPages
           : totalPages // ignore: cast_nullable_to_non_nullable
               as int,
       errors: null == errors
-          ? _value._errors
+          ? _self.errors
           : errors // ignore: cast_nullable_to_non_nullable
               as List<String>,
     ));
@@ -166,8 +126,8 @@ class __$$OrganizationsResponseImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$OrganizationsResponseImpl implements _OrganizationsResponse {
-  _$OrganizationsResponseImpl(
+class _OrganizationsResponse implements OrganizationsResponse {
+  _OrganizationsResponse(
       {@JsonKey(name: 'startIndex') required this.page,
       @JsonKey(name: 'items') required final List<Organization> results,
       @JsonKey(name: 'resultCount') required this.totalResults,
@@ -175,9 +135,8 @@ class _$OrganizationsResponseImpl implements _OrganizationsResponse {
       final List<String> errors = const []})
       : _results = results,
         _errors = errors;
-
-  factory _$OrganizationsResponseImpl.fromJson(Map<String, dynamic> json) =>
-      _$$OrganizationsResponseImplFromJson(json);
+  factory _OrganizationsResponse.fromJson(Map<String, dynamic> json) =>
+      _$OrganizationsResponseFromJson(json);
 
   @override
   @JsonKey(name: 'startIndex')
@@ -206,16 +165,27 @@ class _$OrganizationsResponseImpl implements _OrganizationsResponse {
     return EqualUnmodifiableListView(_errors);
   }
 
+  /// Create a copy of OrganizationsResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'OrganizationsResponse(page: $page, results: $results, totalResults: $totalResults, totalPages: $totalPages, errors: $errors)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$OrganizationsResponseCopyWith<_OrganizationsResponse> get copyWith =>
+      __$OrganizationsResponseCopyWithImpl<_OrganizationsResponse>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$OrganizationsResponseToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$OrganizationsResponseImpl &&
+            other is _OrganizationsResponse &&
             (identical(other.page, page) || other.page == page) &&
             const DeepCollectionEquality().equals(other._results, _results) &&
             (identical(other.totalResults, totalResults) ||
@@ -235,53 +205,70 @@ class _$OrganizationsResponseImpl implements _OrganizationsResponse {
       totalPages,
       const DeepCollectionEquality().hash(_errors));
 
-  /// Create a copy of OrganizationsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$OrganizationsResponseImplCopyWith<_$OrganizationsResponseImpl>
-      get copyWith => __$$OrganizationsResponseImplCopyWithImpl<
-          _$OrganizationsResponseImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$OrganizationsResponseImplToJson(
-      this,
-    );
+  String toString() {
+    return 'OrganizationsResponse(page: $page, results: $results, totalResults: $totalResults, totalPages: $totalPages, errors: $errors)';
   }
 }
 
-abstract class _OrganizationsResponse implements OrganizationsResponse {
-  factory _OrganizationsResponse(
-      {@JsonKey(name: 'startIndex') required final int page,
-      @JsonKey(name: 'items') required final List<Organization> results,
-      @JsonKey(name: 'resultCount') required final int totalResults,
-      @JsonKey(name: 'totalItems') required final int totalPages,
-      final List<String> errors}) = _$OrganizationsResponseImpl;
+/// @nodoc
+abstract mixin class _$OrganizationsResponseCopyWith<$Res>
+    implements $OrganizationsResponseCopyWith<$Res> {
+  factory _$OrganizationsResponseCopyWith(_OrganizationsResponse value,
+          $Res Function(_OrganizationsResponse) _then) =
+      __$OrganizationsResponseCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'startIndex') int page,
+      @JsonKey(name: 'items') List<Organization> results,
+      @JsonKey(name: 'resultCount') int totalResults,
+      @JsonKey(name: 'totalItems') int totalPages,
+      List<String> errors});
+}
 
-  factory _OrganizationsResponse.fromJson(Map<String, dynamic> json) =
-      _$OrganizationsResponseImpl.fromJson;
+/// @nodoc
+class __$OrganizationsResponseCopyWithImpl<$Res>
+    implements _$OrganizationsResponseCopyWith<$Res> {
+  __$OrganizationsResponseCopyWithImpl(this._self, this._then);
 
-  @override
-  @JsonKey(name: 'startIndex')
-  int get page;
-  @override
-  @JsonKey(name: 'items')
-  List<Organization> get results;
-  @override
-  @JsonKey(name: 'resultCount')
-  int get totalResults;
-  @override
-  @JsonKey(name: 'totalItems')
-  int get totalPages;
-  @override
-  List<String> get errors;
+  final _OrganizationsResponse _self;
+  final $Res Function(_OrganizationsResponse) _then;
 
   /// Create a copy of OrganizationsResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$OrganizationsResponseImplCopyWith<_$OrganizationsResponseImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? page = null,
+    Object? results = null,
+    Object? totalResults = null,
+    Object? totalPages = null,
+    Object? errors = null,
+  }) {
+    return _then(_OrganizationsResponse(
+      page: null == page
+          ? _self.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      results: null == results
+          ? _self._results
+          : results // ignore: cast_nullable_to_non_nullable
+              as List<Organization>,
+      totalResults: null == totalResults
+          ? _self.totalResults
+          : totalResults // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalPages: null == totalPages
+          ? _self.totalPages
+          : totalPages // ignore: cast_nullable_to_non_nullable
+              as int,
+      errors: null == errors
+          ? _self._errors
+          : errors // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
 }
+
+// dart format on

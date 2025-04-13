@@ -6,9 +6,9 @@ part of 'organization_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$OrganizationsResponseImpl _$$OrganizationsResponseImplFromJson(
+_OrganizationsResponse _$OrganizationsResponseFromJson(
         Map<String, dynamic> json) =>
-    _$OrganizationsResponseImpl(
+    _OrganizationsResponse(
       page: (json['startIndex'] as num).toInt(),
       results: (json['items'] as List<dynamic>)
           .map((e) => Organization.fromJson(e as Map<String, dynamic>))
@@ -21,8 +21,8 @@ _$OrganizationsResponseImpl _$$OrganizationsResponseImplFromJson(
           const [],
     );
 
-Map<String, dynamic> _$$OrganizationsResponseImplToJson(
-        _$OrganizationsResponseImpl instance) =>
+Map<String, dynamic> _$OrganizationsResponseToJson(
+        _OrganizationsResponse instance) =>
     <String, dynamic>{
       'startIndex': instance.page,
       'items': instance.results,

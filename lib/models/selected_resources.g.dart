@@ -6,9 +6,8 @@ part of 'selected_resources.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$SelectedResourcesImpl _$$SelectedResourcesImplFromJson(
-        Map<String, dynamic> json) =>
-    _$SelectedResourcesImpl(
+_SelectedResources _$SelectedResourcesFromJson(Map<String, dynamic> json) =>
+    _SelectedResources(
       selectedResourceIds: (json['selectedResourceIds'] as List<dynamic>)
           .map((e) => (e as num).toInt())
           .toList(),
@@ -17,8 +16,7 @@ _$SelectedResourcesImpl _$$SelectedResourcesImplFromJson(
           .toList(),
     );
 
-Map<String, dynamic> _$$SelectedResourcesImplToJson(
-        _$SelectedResourcesImpl instance) =>
+Map<String, dynamic> _$SelectedResourcesToJson(_SelectedResources instance) =>
     <String, dynamic>{
       'selectedResourceIds': instance.selectedResourceIds,
       'unselectedResourceIds': instance.unselectedResourceIds,
