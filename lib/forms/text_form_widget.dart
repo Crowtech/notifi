@@ -23,8 +23,6 @@ typedef ValidateFunction<String> = bool Function(String value);
 class TextFormFieldWidget extends ConsumerStatefulWidget {
   const TextFormFieldWidget({
     super.key,
-    required this.textController,
-    required this.formKey,
     required this.formCode,
     required this.fieldCode,
     this.initialValue = "",
@@ -41,8 +39,6 @@ class TextFormFieldWidget extends ConsumerStatefulWidget {
     this.onValidate,
   });
 
-  final GlobalKey<FormState> formKey;
-  final TextEditingController textController;
   final String formCode;
   final String fieldCode;
   final String initialValue;
@@ -70,7 +66,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
   String? _olderValue;
   bool isValid = false;
   bool isEmpty = true;
-  late bool enableWidget;
+  late bool enableWidget; 
   List<TextInputFormatter>? inputFormatters = [];
 
   @override
@@ -105,20 +101,6 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
     }
   }
 
-  TextInputType textInputType() {
-    if (widget.fieldCode.contains("email")) {
-      return TextInputType.emailAddress;
-    } else if (widget.fieldCode.contains("url")) {
-      return TextInputType.url;
-    } else if (widget.fieldCode.contains("name")) {
-      return TextInputType.name;
-    } else if (widget.fieldCode.contains("number")) {
-      return TextInputType.number;
-    } else {
-      return TextInputType.text;
-    }
-  }
-
   @override
   void dispose() {
     _debouncer.dispose();
@@ -127,14 +109,11 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
 
   @override
   Widget build(BuildContext context) {
-    enableWidget = ref.watch(enableWidgetProvider(widget.fieldCode));
+    enableWidget = ref.watch(enableWidgetProvider(widget.fieldCode)); 
     ref.watch(refreshWidgetProvider(widget.fieldCode));
 
-    logNoStack.i(
-        "TEXT_FORM_WIDGET: BUILD: ${widget.fieldCode} enableWidget:$enableWidget");
+    logNoStack.i("TEXT_FORM_WIDGET: BUILD: ${widget.fieldCode} enableWidget:$enableWidget");
     return TextFormField(
-      controller: widget.textController,
-      keyboardType: textInputType(),
       key: itemFormFieldKey,
       initialValue: widget.initialValue,
       autocorrect: true,
@@ -144,9 +123,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
       textCapitalization: widget.textCapitalization,
       decoration: InputDecoration(
         errorStyle: const TextStyle(color: Colors.red),
-        labelText: widget.optional
-            ? "${widget.itemName} (${nt.t.optional})"
-            : widget.itemName,
+        labelText: widget.optional ? "${widget.itemName} (${nt.t.optional})" : widget.itemName,
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: statusColor(), width: 3.0),
           borderRadius: BorderRadius.circular(10.0),
@@ -158,50 +135,39 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
           ),
           borderRadius: BorderRadius.circular(10.0),
         ),
+
         disabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.grey, width: 1.0),
           borderRadius: BorderRadius.circular(10.0),
         ),
+
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.red, width: 3.0),
           borderRadius: BorderRadius.circular(10.0),
         ),
       ),
       validator: (value) {
-        String? result = (!_isEmptyOlderValue(_olderValue)) && value!.isEmpty
-            ? null
-            : !isValidInput(value)
+        String? result =
+            (!_isEmptyOlderValue(_olderValue)) && value!.isEmpty
+                ? null
+                : !isValidInput(value)
                 ? widget.itemValidation
                 : null;
         _olderValue = _isEmptyValue(value) ? value : _olderValue;
         isEmpty = _isEmptyValue(value);
         return result;
       },
-      onChanged: (value) => _debouncer.run(() {
-        _olderValue = value.isEmpty ? _olderValue : value;
-        itemFormFieldKey.currentState?.validate();
-        //ref.read(refreshWidgetProvider("organization").notifier).refresh();
-        ref.read(refreshWidgetProvider(widget.fieldCode).notifier).refresh();
-        final form = widget.formKey.currentState;
-        if (form != null) {
-          form.save();  // in this way validation will not be triggered
-    
-         // widget.formKey.forceErrorText == null && widget.validator?.call(_value) == null;
-          
-       
-          ref
-              .read(refreshWidgetProvider("${widget.formCode}-submit").notifier)
-              .set(true);
-        } else {
-          ref
-              .read(refreshWidgetProvider("${widget.formCode}-submit").notifier)
-              .set(false);
-        }
-        
-        // ref.read(refreshWidgetProvider("${widget.formCode}-submit").notifier).refresh();
-      }),
+      onChanged:
+          (value) => _debouncer.run(() {
+            _olderValue = value.isEmpty ? _olderValue : value;
+            itemFormFieldKey.currentState?.validate();
+            //ref.read(refreshWidgetProvider("organization").notifier).refresh();
+            ref.read(refreshWidgetProvider(widget.fieldCode).notifier).refresh();
+           // ref.read(refreshWidgetProvider("${widget.formCode}-submit").notifier).refresh();
+          }),
       onFieldSubmitted: (value) {
         isValidInput(value);
+        
       },
     );
   }
@@ -209,7 +175,8 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
   bool isValidInput(String? value) {
     if (!enableWidget) {
       isValid = true;
-    } else if (value == null || value.isEmpty) {
+    }
+    else if (value == null || value.isEmpty) {
       if (!widget.optional) {
         isValid = false;
       } else {

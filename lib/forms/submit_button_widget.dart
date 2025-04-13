@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
-import 'package:notifi/riverpod/refresh_widget.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -15,18 +14,18 @@ var logNoStack = logger.Logger(
 );
 
 // ignore: must_be_immutable
-class SubmitButtonWidget extends StatelessWidget {
+class SubmitButtonWidget extends ConsumerWidget {
   SubmitButtonWidget({super.key,required this.formKey,required this.formCode});
 
 GlobalKey<FormState> formKey;
   String formCode;
 
   @override
-  Widget build(BuildContext context/*, WidgetRef ref*/) {
+  Widget build(BuildContext context, WidgetRef ref) {
     //ref.watch(refreshWidgetProvider("$formCode-submit"));
     logNoStack.i("Submit button $formCode ");
     return ElevatedButton(
-                      key: Key("${formCode}-submit"),
+                    //  key: Key("${formCode}-submit"),
                       onPressed:
                           !(formKey.currentState != null &&
                                   formKey.currentState!.validate())
