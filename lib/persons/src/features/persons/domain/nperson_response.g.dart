@@ -6,8 +6,9 @@ part of 'nperson_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_NPersonsResponse _$NPersonsResponseFromJson(Map<String, dynamic> json) =>
-    _NPersonsResponse(
+_$NPersonsResponseImpl _$$NPersonsResponseImplFromJson(
+        Map<String, dynamic> json) =>
+    _$NPersonsResponseImpl(
       page: (json['startIndex'] as num).toInt(),
       results: (json['items'] as List<dynamic>)
           .map((e) => NPerson.fromJson(e as Map<String, dynamic>))
@@ -20,7 +21,8 @@ _NPersonsResponse _$NPersonsResponseFromJson(Map<String, dynamic> json) =>
           const [],
     );
 
-Map<String, dynamic> _$NPersonsResponseToJson(_NPersonsResponse instance) =>
+Map<String, dynamic> _$$NPersonsResponseImplToJson(
+        _$NPersonsResponseImpl instance) =>
     <String, dynamic>{
       'startIndex': instance.page,
       'items': instance.results,

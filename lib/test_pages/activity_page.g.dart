@@ -6,14 +6,16 @@ part of 'activity_page.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_Activity _$ActivityFromJson(Map<String, dynamic> json) => _Activity(
+_$ActivityImpl _$$ActivityImplFromJson(Map<String, dynamic> json) =>
+    _$ActivityImpl(
       activity: json['activity'] as String,
       type: json['type'] as String,
       participants: (json['participants'] as num).toInt(),
       price: (json['price'] as num).toDouble(),
     );
 
-Map<String, dynamic> _$ActivityToJson(_Activity instance) => <String, dynamic>{
+Map<String, dynamic> _$$ActivityImplToJson(_$ActivityImpl instance) =>
+    <String, dynamic>{
       'activity': instance.activity,
       'type': instance.type,
       'participants': instance.participants,

@@ -1,4 +1,3 @@
-// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -10,129 +9,698 @@ part of 'user_role.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$UserRole {
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is UserRole);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  String toString() {
-    return 'UserRole()';
-  }
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() admin,
+    required TResult Function() dev,
+    required TResult Function() user,
+    required TResult Function() guest,
+    required TResult Function() none,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? admin,
+    TResult? Function()? dev,
+    TResult? Function()? user,
+    TResult? Function()? guest,
+    TResult? Function()? none,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? admin,
+    TResult Function()? dev,
+    TResult Function()? user,
+    TResult Function()? guest,
+    TResult Function()? none,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Admin value) admin,
+    required TResult Function(Dev value) dev,
+    required TResult Function(User value) user,
+    required TResult Function(Guest value) guest,
+    required TResult Function(None value) none,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Admin value)? admin,
+    TResult? Function(Dev value)? dev,
+    TResult? Function(User value)? user,
+    TResult? Function(Guest value)? guest,
+    TResult? Function(None value)? none,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Admin value)? admin,
+    TResult Function(Dev value)? dev,
+    TResult Function(User value)? user,
+    TResult Function(Guest value)? guest,
+    TResult Function(None value)? none,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-class $UserRoleCopyWith<$Res> {
-  $UserRoleCopyWith(UserRole _, $Res Function(UserRole) __);
+abstract class $UserRoleCopyWith<$Res> {
+  factory $UserRoleCopyWith(UserRole value, $Res Function(UserRole) then) =
+      _$UserRoleCopyWithImpl<$Res, UserRole>;
+}
+
+/// @nodoc
+class _$UserRoleCopyWithImpl<$Res, $Val extends UserRole>
+    implements $UserRoleCopyWith<$Res> {
+  _$UserRoleCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of UserRole
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+abstract class _$$AdminImplCopyWith<$Res> {
+  factory _$$AdminImplCopyWith(
+          _$AdminImpl value, $Res Function(_$AdminImpl) then) =
+      __$$AdminImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$AdminImplCopyWithImpl<$Res>
+    extends _$UserRoleCopyWithImpl<$Res, _$AdminImpl>
+    implements _$$AdminImplCopyWith<$Res> {
+  __$$AdminImplCopyWithImpl(
+      _$AdminImpl _value, $Res Function(_$AdminImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of UserRole
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class Admin implements UserRole {
-  const Admin();
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is Admin);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
+class _$AdminImpl implements Admin {
+  const _$AdminImpl();
 
   @override
   String toString() {
     return 'UserRole.admin()';
   }
-}
-
-/// @nodoc
-
-class Dev implements UserRole {
-  const Dev();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is Dev);
+        (other.runtimeType == runtimeType && other is _$AdminImpl);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() admin,
+    required TResult Function() dev,
+    required TResult Function() user,
+    required TResult Function() guest,
+    required TResult Function() none,
+  }) {
+    return admin();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? admin,
+    TResult? Function()? dev,
+    TResult? Function()? user,
+    TResult? Function()? guest,
+    TResult? Function()? none,
+  }) {
+    return admin?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? admin,
+    TResult Function()? dev,
+    TResult Function()? user,
+    TResult Function()? guest,
+    TResult Function()? none,
+    required TResult orElse(),
+  }) {
+    if (admin != null) {
+      return admin();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Admin value) admin,
+    required TResult Function(Dev value) dev,
+    required TResult Function(User value) user,
+    required TResult Function(Guest value) guest,
+    required TResult Function(None value) none,
+  }) {
+    return admin(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Admin value)? admin,
+    TResult? Function(Dev value)? dev,
+    TResult? Function(User value)? user,
+    TResult? Function(Guest value)? guest,
+    TResult? Function(None value)? none,
+  }) {
+    return admin?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Admin value)? admin,
+    TResult Function(Dev value)? dev,
+    TResult Function(User value)? user,
+    TResult Function(Guest value)? guest,
+    TResult Function(None value)? none,
+    required TResult orElse(),
+  }) {
+    if (admin != null) {
+      return admin(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Admin implements UserRole {
+  const factory Admin() = _$AdminImpl;
+}
+
+/// @nodoc
+abstract class _$$DevImplCopyWith<$Res> {
+  factory _$$DevImplCopyWith(_$DevImpl value, $Res Function(_$DevImpl) then) =
+      __$$DevImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$DevImplCopyWithImpl<$Res>
+    extends _$UserRoleCopyWithImpl<$Res, _$DevImpl>
+    implements _$$DevImplCopyWith<$Res> {
+  __$$DevImplCopyWithImpl(_$DevImpl _value, $Res Function(_$DevImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of UserRole
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$DevImpl implements Dev {
+  const _$DevImpl();
 
   @override
   String toString() {
     return 'UserRole.dev()';
   }
-}
-
-/// @nodoc
-
-class User implements UserRole {
-  const User();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is User);
+        (other.runtimeType == runtimeType && other is _$DevImpl);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() admin,
+    required TResult Function() dev,
+    required TResult Function() user,
+    required TResult Function() guest,
+    required TResult Function() none,
+  }) {
+    return dev();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? admin,
+    TResult? Function()? dev,
+    TResult? Function()? user,
+    TResult? Function()? guest,
+    TResult? Function()? none,
+  }) {
+    return dev?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? admin,
+    TResult Function()? dev,
+    TResult Function()? user,
+    TResult Function()? guest,
+    TResult Function()? none,
+    required TResult orElse(),
+  }) {
+    if (dev != null) {
+      return dev();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Admin value) admin,
+    required TResult Function(Dev value) dev,
+    required TResult Function(User value) user,
+    required TResult Function(Guest value) guest,
+    required TResult Function(None value) none,
+  }) {
+    return dev(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Admin value)? admin,
+    TResult? Function(Dev value)? dev,
+    TResult? Function(User value)? user,
+    TResult? Function(Guest value)? guest,
+    TResult? Function(None value)? none,
+  }) {
+    return dev?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Admin value)? admin,
+    TResult Function(Dev value)? dev,
+    TResult Function(User value)? user,
+    TResult Function(Guest value)? guest,
+    TResult Function(None value)? none,
+    required TResult orElse(),
+  }) {
+    if (dev != null) {
+      return dev(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Dev implements UserRole {
+  const factory Dev() = _$DevImpl;
+}
+
+/// @nodoc
+abstract class _$$UserImplCopyWith<$Res> {
+  factory _$$UserImplCopyWith(
+          _$UserImpl value, $Res Function(_$UserImpl) then) =
+      __$$UserImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$UserImplCopyWithImpl<$Res>
+    extends _$UserRoleCopyWithImpl<$Res, _$UserImpl>
+    implements _$$UserImplCopyWith<$Res> {
+  __$$UserImplCopyWithImpl(_$UserImpl _value, $Res Function(_$UserImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of UserRole
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$UserImpl implements User {
+  const _$UserImpl();
 
   @override
   String toString() {
     return 'UserRole.user()';
   }
-}
-
-/// @nodoc
-
-class Guest implements UserRole {
-  const Guest();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is Guest);
+        (other.runtimeType == runtimeType && other is _$UserImpl);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() admin,
+    required TResult Function() dev,
+    required TResult Function() user,
+    required TResult Function() guest,
+    required TResult Function() none,
+  }) {
+    return user();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? admin,
+    TResult? Function()? dev,
+    TResult? Function()? user,
+    TResult? Function()? guest,
+    TResult? Function()? none,
+  }) {
+    return user?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? admin,
+    TResult Function()? dev,
+    TResult Function()? user,
+    TResult Function()? guest,
+    TResult Function()? none,
+    required TResult orElse(),
+  }) {
+    if (user != null) {
+      return user();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Admin value) admin,
+    required TResult Function(Dev value) dev,
+    required TResult Function(User value) user,
+    required TResult Function(Guest value) guest,
+    required TResult Function(None value) none,
+  }) {
+    return user(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Admin value)? admin,
+    TResult? Function(Dev value)? dev,
+    TResult? Function(User value)? user,
+    TResult? Function(Guest value)? guest,
+    TResult? Function(None value)? none,
+  }) {
+    return user?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Admin value)? admin,
+    TResult Function(Dev value)? dev,
+    TResult Function(User value)? user,
+    TResult Function(Guest value)? guest,
+    TResult Function(None value)? none,
+    required TResult orElse(),
+  }) {
+    if (user != null) {
+      return user(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class User implements UserRole {
+  const factory User() = _$UserImpl;
+}
+
+/// @nodoc
+abstract class _$$GuestImplCopyWith<$Res> {
+  factory _$$GuestImplCopyWith(
+          _$GuestImpl value, $Res Function(_$GuestImpl) then) =
+      __$$GuestImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$GuestImplCopyWithImpl<$Res>
+    extends _$UserRoleCopyWithImpl<$Res, _$GuestImpl>
+    implements _$$GuestImplCopyWith<$Res> {
+  __$$GuestImplCopyWithImpl(
+      _$GuestImpl _value, $Res Function(_$GuestImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of UserRole
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$GuestImpl implements Guest {
+  const _$GuestImpl();
 
   @override
   String toString() {
     return 'UserRole.guest()';
   }
-}
-
-/// @nodoc
-
-class None implements UserRole {
-  const None();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is None);
+        (other.runtimeType == runtimeType && other is _$GuestImpl);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
 
   @override
-  String toString() {
-    return 'UserRole.none()';
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() admin,
+    required TResult Function() dev,
+    required TResult Function() user,
+    required TResult Function() guest,
+    required TResult Function() none,
+  }) {
+    return guest();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? admin,
+    TResult? Function()? dev,
+    TResult? Function()? user,
+    TResult? Function()? guest,
+    TResult? Function()? none,
+  }) {
+    return guest?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? admin,
+    TResult Function()? dev,
+    TResult Function()? user,
+    TResult Function()? guest,
+    TResult Function()? none,
+    required TResult orElse(),
+  }) {
+    if (guest != null) {
+      return guest();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Admin value) admin,
+    required TResult Function(Dev value) dev,
+    required TResult Function(User value) user,
+    required TResult Function(Guest value) guest,
+    required TResult Function(None value) none,
+  }) {
+    return guest(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Admin value)? admin,
+    TResult? Function(Dev value)? dev,
+    TResult? Function(User value)? user,
+    TResult? Function(Guest value)? guest,
+    TResult? Function(None value)? none,
+  }) {
+    return guest?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Admin value)? admin,
+    TResult Function(Dev value)? dev,
+    TResult Function(User value)? user,
+    TResult Function(Guest value)? guest,
+    TResult Function(None value)? none,
+    required TResult orElse(),
+  }) {
+    if (guest != null) {
+      return guest(this);
+    }
+    return orElse();
   }
 }
 
-// dart format on
+abstract class Guest implements UserRole {
+  const factory Guest() = _$GuestImpl;
+}
+
+/// @nodoc
+abstract class _$$NoneImplCopyWith<$Res> {
+  factory _$$NoneImplCopyWith(
+          _$NoneImpl value, $Res Function(_$NoneImpl) then) =
+      __$$NoneImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$NoneImplCopyWithImpl<$Res>
+    extends _$UserRoleCopyWithImpl<$Res, _$NoneImpl>
+    implements _$$NoneImplCopyWith<$Res> {
+  __$$NoneImplCopyWithImpl(_$NoneImpl _value, $Res Function(_$NoneImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of UserRole
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$NoneImpl implements None {
+  const _$NoneImpl();
+
+  @override
+  String toString() {
+    return 'UserRole.none()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$NoneImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() admin,
+    required TResult Function() dev,
+    required TResult Function() user,
+    required TResult Function() guest,
+    required TResult Function() none,
+  }) {
+    return none();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? admin,
+    TResult? Function()? dev,
+    TResult? Function()? user,
+    TResult? Function()? guest,
+    TResult? Function()? none,
+  }) {
+    return none?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? admin,
+    TResult Function()? dev,
+    TResult Function()? user,
+    TResult Function()? guest,
+    TResult Function()? none,
+    required TResult orElse(),
+  }) {
+    if (none != null) {
+      return none();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Admin value) admin,
+    required TResult Function(Dev value) dev,
+    required TResult Function(User value) user,
+    required TResult Function(Guest value) guest,
+    required TResult Function(None value) none,
+  }) {
+    return none(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Admin value)? admin,
+    TResult? Function(Dev value)? dev,
+    TResult? Function(User value)? user,
+    TResult? Function(Guest value)? guest,
+    TResult? Function(None value)? none,
+  }) {
+    return none?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Admin value)? admin,
+    TResult Function(Dev value)? dev,
+    TResult Function(User value)? user,
+    TResult Function(Guest value)? guest,
+    TResult Function(None value)? none,
+    required TResult orElse(),
+  }) {
+    if (none != null) {
+      return none(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class None implements UserRole {
+  const factory None() = _$NoneImpl;
+}

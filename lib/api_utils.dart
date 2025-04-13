@@ -77,6 +77,44 @@ Future<dynamic> apiPostDataNoLocale(
   }
 }
 
+Future<dynamic> apiPostDataNoLocaleRaw(
+    String token, String apiPath, Object? data) async {
+  logNoStack.i("API POST RAW: APIPath -> $apiPath");
+  var url = Uri.parse(apiPath);
+  String jsonData;
+  final http.Response response;
+    jsonData = jsonEncode(data);
+
+    response = await http.post(url,
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Authorization": "Bearer $token",
+        },
+        body: jsonData);
+ 
+
+  logNoStack.i(response.statusCode);
+  if (response.statusCode == 202 ||
+      response.statusCode == 201 ||
+      response.statusCode == 200) {
+    logNoStack.d(
+        "API POST RAW No LOCALE: $apiPath created successfully! with status ${response.statusCode}");
+        logNoStack.d("API POST No Locale: respose is ${response.body}");
+        if (response.body.isEmpty) {
+          return [];
+        }
+    final resultMap = jsonDecode(response.body);
+    return resultMap;
+  } else {
+    logNoStack.e(
+        "$apiPath RAW created unsuccessfully! with url $url status ${response.statusCode} and error: ${response.reasonPhrase}");
+    return Future.error(
+        "$apiPath RAW created unsuccessfully! with url $url status ${response.statusCode} and error: ${response.reasonPhrase}");
+  }
+}
+
+
 Future<dynamic> apiPost(Locale locale, String token, String apiPath) async {
   return apiPostData(locale, token, apiPath, null, null);
 }

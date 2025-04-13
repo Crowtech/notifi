@@ -1,14 +1,18 @@
-
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart' as emailValidator;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:notifi/api_utils.dart';
+import 'package:notifi/credentials.dart';
 import 'package:notifi/forms/cancel_button_widget.dart';
+import 'package:notifi/forms/submit_button_widget.dart';
 import 'package:notifi/forms/text_form_widget.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
+import 'package:notifi/models/organization.dart';
 import 'package:notifi/models/organization_type.dart';
 import 'package:notifi/riverpod/enable_widget.dart';
 import 'package:notifi/riverpod/refresh_widget.dart';
+import 'package:notifi/state/nest_auth2.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -21,9 +25,9 @@ var logNoStack = logger.Logger(
 );
 
 class CreateOrganizationForm extends ConsumerStatefulWidget {
-  CreateOrganizationForm({super.key,required this.formCode});
+  CreateOrganizationForm({super.key, required this.formCode});
 
-String formCode;
+  String formCode;
 
   @override
   _CreateOrganizationFormState createState() => _CreateOrganizationFormState();
@@ -39,7 +43,6 @@ class _CreateOrganizationFormState
   final _urlController = TextEditingController();
 
   OrganizationType? orgTypeIndex;
-
 
   bool _validateEmail(String? email) {
     if (email == null) {
@@ -89,9 +92,9 @@ class _CreateOrganizationFormState
 
   @override
   Widget build(BuildContext context) {
-    var watch = ref.watch(refreshWidgetProvider("organization"));
+    // var watch = ref.watch(refreshWidgetProvider("organization"));
     String capitalizedItem = nt.t.organization_capitalized;
-    logNoStack.i("Organization form build $watch");
+    logNoStack.i("Organization form build ");
     return Dialog(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -135,7 +138,7 @@ class _CreateOrganizationFormState
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
-                   formCode: widget.formCode,
+                  formCode: widget.formCode,
                   fieldCode: "true-email",
                   enabled: true,
                   itemCategory: nt.t.organization,
@@ -149,7 +152,6 @@ class _CreateOrganizationFormState
                   forceLowercase: true,
                 ),
                 const SizedBox(height: 16),
-
                 RadioListTile<OrganizationType>(
                   key: const Key("group"),
                   dense: true,
@@ -191,10 +193,9 @@ class _CreateOrganizationFormState
                   groupValue: orgTypeIndex,
                   onChanged: _handleRadioValueChanged,
                 ),
-
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
-                   formCode: widget.formCode,
+                  formCode: widget.formCode,
                   fieldCode: "false-url",
                   enabled: false,
                   itemCategory: nt.t.organization,
@@ -211,31 +212,50 @@ class _CreateOrganizationFormState
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                   CancelButtonWidget(formKey: _formKey, formCode: widget.formCode),
+                    CancelButtonWidget(
+                        formKey: _formKey, formCode: widget.formCode),
                     const SizedBox(width: 16),
-                  // SubmitButtonWidget(formKey: _formKey, formCode: widget.formCode)
-                   Consumer(
-                    builder: (context, watch, child) {
-                     // watch.watch(refreshWidgetProvider("${widget.formCode}-submit"));
-                     return ElevatedButton(
-                       key: const Key("organization-submit"),
-                        onPressed:
-                          !(_formKey.currentState != null &&
-                                  _formKey.currentState!.validate())
-                              ? null
-                              : () {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                   SnackBar(
-                                    content: Text(nt.t.saving),
-                                  ),
-                                );
-                                Navigator.of(context).pop();
-                              },
+                    //SubmitButtonWidget(formKey: _formKey, formCode: widget.formCode)
+                    //  Consumer(
+                    //   builder: (context, watch, child) {
+                    //    // watch.watch(refreshWidgetProvider("${widget.formCode}-submit"));
+                    ElevatedButton(
+                      key: const Key("organization-submit"),
+                      onPressed: !(_formKey.currentState != null &&
+                              _formKey.currentState!.validate())
+                          ? null
+                          : () {
+                              // If the form is valid, display a snackbar. In the real world,
+                              // you'd often call a server or save the information in a database.
 
-                        child: Text(nt.t.response.submit),
-                      );
-                    },
-                    ),
+                              // save organization
+                              Organization organization = Organization(
+                                name: _nameController.text,
+                                description: _descriptionController.text,
+                                orgType: orgTypeIndex!.name,
+                                url: _urlController.text,
+                                //email: _emailController.text,
+                              );
+                              var token =
+                                  ref.read(nestAuthProvider.notifier).token;
+                              var apiPath =
+                                  "$defaultAPIBaseUrl$defaultApiPrefixPath/organizations";
+                              var result = apiPostDataNoLocaleRaw(
+                                  token!, apiPath, organization);
+
+                              logNoStack.i("result is ${apiPath}");
+
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(nt.t.saving),
+                                ),
+                              );
+                              Navigator.of(context).pop();
+                            },
+                      child: Text(nt.t.response.submit),
+                    )
+                    //   },
+                    //   ),
                   ],
                 ),
               ],
