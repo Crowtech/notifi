@@ -31,6 +31,8 @@ class SelectedResources with _$SelectedResources {
   }) = _SelectedResources;
 
   factory SelectedResources.fromJson(Map<String, dynamic> json) => _$SelectedResourcesFromJson(json);
+  
+  
 }
 
 // This will generates a AsyncNotifier and AsyncNotifierProvider.
