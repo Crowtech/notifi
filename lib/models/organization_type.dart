@@ -102,20 +102,21 @@ extension OrganizationTypeExtension on OrganizationType {
   List<String> get getOrgTypeList
   {
     return [  
-      "nt.t.group_types.${OrganizationType.DEFAULT.name.toLowerCase()}",
-      "nt.t.group_types.${OrganizationType.COMMERCIAL.name.toLowerCase()}",
-      "nt.t.group_types.${OrganizationType.GOVERNMENT.name.toLowerCase()}",
-      "nt.t.group_types.${OrganizationType.UNKNOWN.name.toLowerCase()}",
-      "nt.t.group_types.${OrganizationType.PRIVATE.name.toLowerCase()}",
-      "nt.t.group_types.${OrganizationType.PERSON.name.toLowerCase()}",
-      "nt.t.group_types.${OrganizationType.ORG.name.toLowerCase()}",
-      "nt.t.group_types.${OrganizationType.GROUP.name.toLowerCase()}",
-      "nt.t.group_types.${OrganizationType.FAMILY.name.toLowerCase()}",
-      "nt.t.group_types.${OrganizationType.FRIENDS.name.toLowerCase()}",
-      "nt.t.group_types.${OrganizationType.EDUCATION.name.toLowerCase()}",
-      "nt.t.group_types.${OrganizationType.TEAM.name.toLowerCase()}",
-      "nt.t.group_types.${OrganizationType.DEPARTMENT.name.toLowerCase()}",
-      "nt.t.group_types.${OrganizationType.COMPANY.name.toLowerCase()}",
+      nt.t["group_types.${OrganizationType.DEFAULT.name.toLowerCase()}"],
+      nt.t["group_types.${OrganizationType.COMMERCIAL.name.toLowerCase()}"],
+      nt.t["group_types.${OrganizationType.GOVERNMENT.name.toLowerCase()}"],
+      nt.t["group_types.${OrganizationType.UNKNOWN.name.toLowerCase()}"],
+      nt.t["group_types.${OrganizationType.PRIVATE.name.toLowerCase()}"],
+      nt.t["group_types.${OrganizationType.PERSON.name.toLowerCase()}"],
+      nt.t["group_types.${OrganizationType.ORG.name.toLowerCase()}"],
+      nt.t["group_types.${OrganizationType.GROUP.name.toLowerCase()}"],
+      nt.t["group_types.${OrganizationType.FAMILY.name.toLowerCase()}"],
+      nt.t["group_types.${OrganizationType.FRIENDS.name.toLowerCase()}"],
+      nt.t["group_types.${OrganizationType.EDUCATION.name.toLowerCase()}"],
+      nt.t["group_types.${OrganizationType.TEAM.name.toLowerCase()}"],
+      nt.t["group_types.${OrganizationType.DEPARTMENT.name.toLowerCase()}"],
+      nt.t["group_types.${OrganizationType.COMPANY.name.toLowerCase()}"],
+     
     ];
   }
 }
