@@ -26,8 +26,8 @@ Organization _$OrganizationFromJson(Map<String, dynamic> json) => Organization(
           : GPS.fromJson(json['gps'] as Map<String, dynamic>),
       selected: json['selected'] as bool? ?? false,
       orgType: json['orgType'] as String,
-      url: json['url'] as String,
-      email: json['email'] as String,
+      url: json['url'] as String?,
+      email: json['email'] as String?,
     )..orgid = (json['orgid'] as num?)?.toInt();
 
 Map<String, dynamic> _$OrganizationToJson(Organization instance) =>

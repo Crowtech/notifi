@@ -19,8 +19,8 @@ class Organization extends Resource {
   static String tablename = className.toLowerCase();
 
   String orgType;
-  String url;
-  String email;
+  String? url;
+  String? email;
 
   Organization({
     super.id,
