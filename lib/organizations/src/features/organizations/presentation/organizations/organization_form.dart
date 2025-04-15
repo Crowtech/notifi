@@ -113,6 +113,7 @@ class _CreateOrganizationFormState
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
+                  textController: _nameController,
                   formCode: widget.formCode,
                   fieldCode: "true-name",
                   itemCategory: nt.t.organization,
@@ -124,6 +125,7 @@ class _CreateOrganizationFormState
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
+                  textController: _descriptionController,
                   formCode: widget.formCode,
                   fieldCode: "true-description",
                   enabled: true,
@@ -138,6 +140,7 @@ class _CreateOrganizationFormState
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
+                  textController: _emailController,
                   formCode: widget.formCode,
                   fieldCode: "true-email",
                   enabled: true,
@@ -195,6 +198,7 @@ class _CreateOrganizationFormState
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
+                  textController: _urlController,
                   formCode: widget.formCode,
                   fieldCode: "false-url",
                   enabled: false,
@@ -232,7 +236,7 @@ class _CreateOrganizationFormState
                               Organization organization = Organization(
                                 name: _nameController.text,
                                 description: _descriptionController.text,
-                               orgType: orgTypeIndex!.name,
+                                orgType: orgTypeIndex!.name,
                                 url: _urlController.text,
                                 //email: _emailController.text,
                               );
@@ -241,9 +245,8 @@ class _CreateOrganizationFormState
                               var apiPath =
                                   "$defaultAPIBaseUrl$defaultApiPrefixPath/organizations/create";
 
-
-
-                                  logNoStack.i("ORG_FORM: sending ${organization} to ${apiPath}");
+                              logNoStack.i(
+                                  "ORG_FORM: sending ${organization} to ${apiPath}");
                               var result = apiPostDataNoLocaleRaw(
                                   token!, apiPath, organization);
 

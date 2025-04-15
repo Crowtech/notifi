@@ -23,6 +23,7 @@ typedef ValidateFunction<String> = bool Function(String value);
 class TextFormFieldWidget extends ConsumerStatefulWidget {
   const TextFormFieldWidget({
     super.key,
+    required this.textController,
     required this.formCode,
     required this.fieldCode,
     this.initialValue = "",
@@ -39,6 +40,7 @@ class TextFormFieldWidget extends ConsumerStatefulWidget {
     this.onValidate,
   });
 
+  final TextEditingController textController;
   final String formCode;
   final String fieldCode;
   final String initialValue;
