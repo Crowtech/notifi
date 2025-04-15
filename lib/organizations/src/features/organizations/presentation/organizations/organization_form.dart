@@ -237,6 +237,7 @@ class _CreateOrganizationFormState
                                 description: fieldValues['description'],
                                 orgType:  fieldValues['orgType']!,
                                 url: fieldValues['url']!,
+                                email: fieldValues['email']!,
                                 //email: _emailController.text,
                               );
                               var token =

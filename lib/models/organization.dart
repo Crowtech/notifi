@@ -20,6 +20,7 @@ class Organization extends Resource {
 
   String orgType;
   String url;
+  String email;
 
   Organization({
     super.id,
@@ -36,6 +37,7 @@ class Organization extends Resource {
     super.selected,
     required this.orgType,
     required this.url,
+    required this.email,
   }) {
     super.resourceType = ResourceType.organization;
   }
@@ -86,6 +88,7 @@ class Organization extends Resource {
     GPS? gps,
     String? orgType,
     String? url,
+    String? email,
     bool? selected,
   }) {
     return Organization(
@@ -101,6 +104,7 @@ class Organization extends Resource {
       gps: gps ?? this.gps,
       orgType: orgType ?? this.orgType,
       url: url ?? this.url,
+      email: email ?? this.email,
       selected: selected ?? this.selected,
     );
   }
@@ -129,5 +133,6 @@ Organization defaultOrganization = Organization(
   gps: defaultGPS,
   orgType: "group",
   url: "https://www.crowtech.com.au",
+  email: "adamcrow63+default@email.com",
   selected: false,
 ); //fcm
