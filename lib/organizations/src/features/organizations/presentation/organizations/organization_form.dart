@@ -232,7 +232,7 @@ class _CreateOrganizationFormState
                               Organization organization = Organization(
                                 name: _nameController.text,
                                 description: _descriptionController.text,
-                                orgType: orgTypeIndex!.name,
+                               orgType: orgTypeIndex!.name,
                                 url: _urlController.text,
                                 //email: _emailController.text,
                               );
@@ -240,10 +240,14 @@ class _CreateOrganizationFormState
                                   ref.read(nestAuthProvider.notifier).token;
                               var apiPath =
                                   "$defaultAPIBaseUrl$defaultApiPrefixPath/organizations/create";
+
+
+
+                                  logNoStack.i("ORG_FORM: sending ${organization} to ${apiPath}");
                               var result = apiPostDataNoLocaleRaw(
                                   token!, apiPath, organization);
 
-                              logNoStack.i("result is ${apiPath}");
+                              logNoStack.i("result is ${result}");
 
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
