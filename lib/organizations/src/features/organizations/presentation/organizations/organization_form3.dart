@@ -162,7 +162,7 @@ class _CreateOrganizationForm3State
                       validator: FormBuilderValidators.compose(
                           [FormBuilderValidators.required()]),
                       options:
-                          OrganizationType.getOrgTypeList()
+                          OrganizationType.DEFAULT.getOrgTypeList
                               .map((orgType) => FormBuilderFieldOption(
                                     value: orgType,
                                     child: Text(orgType),

@@ -99,7 +99,7 @@ extension OrganizationTypeExtension on OrganizationType {
     }
   }
 
-  List<String> getOrgTypeList()
+  List<String> get getOrgTypeList
   {
     return [  
       "nt.t.group_types.${OrganizationType.DEFAULT.name.toLowerCase()}",
