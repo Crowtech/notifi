@@ -37,10 +37,8 @@ class _CreateOrganizationFormState
     extends ConsumerState<CreateOrganizationForm> {
   final _formKey = GlobalKey<FormState>();
 
-  final _nameController = TextEditingController();
-  final _descriptionController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _urlController = TextEditingController();
+
+  final Map<String, dynamic> fieldValues = {};
 
   OrganizationType? orgTypeIndex;
 
@@ -68,6 +66,7 @@ class _CreateOrganizationFormState
         orgTypeIndex = value;
         logNoStack.i(orgTypeIndex!.name);
       });
+      fieldValues['orgType'] = orgTypeIndex!.name;
       ref
           .read(enableWidgetProvider("false-url").notifier)
           .setEnabled(value.isUrlable);
@@ -113,7 +112,7 @@ class _CreateOrganizationFormState
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
-                  textController: _nameController,
+                  fieldValues: fieldValues,
                   formCode: widget.formCode,
                   fieldCode: "true-name",
                   itemCategory: nt.t.organization,
@@ -125,7 +124,7 @@ class _CreateOrganizationFormState
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
-                  textController: _descriptionController,
+                  fieldValues: fieldValues,
                   formCode: widget.formCode,
                   fieldCode: "true-description",
                   enabled: true,
@@ -140,7 +139,7 @@ class _CreateOrganizationFormState
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
-                  textController: _emailController,
+                  fieldValues: fieldValues,
                   formCode: widget.formCode,
                   fieldCode: "true-email",
                   enabled: true,
@@ -198,7 +197,7 @@ class _CreateOrganizationFormState
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
-                  textController: _urlController,
+                  fieldValues: fieldValues,
                   formCode: widget.formCode,
                   fieldCode: "false-url",
                   enabled: false,
@@ -231,13 +230,13 @@ class _CreateOrganizationFormState
                           : () {
                               // If the form is valid, display a snackbar. In the real world,
                               // you'd often call a server or save the information in a database.
-                    
+
                               // save organization
                               Organization organization = Organization(
-                                name: _nameController.text,
-                                description: _descriptionController.text,
-                                orgType: orgTypeIndex!.name,
-                                url: _urlController.text,
+                                name: fieldValues['name'],
+                                description: fieldValues['description'],
+                                orgType:  fieldValues['orgType']!,
+                                url: fieldValues['url']!,
                                 //email: _emailController.text,
                               );
                               var token =

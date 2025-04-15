@@ -22,8 +22,8 @@ typedef ValidateFunction<String> = bool Function(String value);
 
 class TextFormFieldWidget extends ConsumerStatefulWidget {
   const TextFormFieldWidget({
-    super.key,
-    required this.textController,
+    super.key,  
+    required this.fieldValues,
     required this.formCode,
     required this.fieldCode,
     this.initialValue = "",
@@ -40,9 +40,9 @@ class TextFormFieldWidget extends ConsumerStatefulWidget {
     this.onValidate,
   });
 
-  final TextEditingController textController;
+  final Map<String,dynamic> fieldValues;
   final String formCode;
-  final String fieldCode;
+  final String fieldCode;   
   final String initialValue;
   final bool readOnly;
   final bool enabled;
@@ -158,6 +158,9 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
                 : null;
         _olderValue = _isEmptyValue(value) ? value : _olderValue;
         isEmpty = _isEmptyValue(value);
+        String fieldCode = widget.fieldCode.substring(widget.fieldCode.indexOf('-') + 1); // remove the true/false-
+        widget.fieldValues[fieldCode] = value;
+
         return result;
       },
       onChanged:
