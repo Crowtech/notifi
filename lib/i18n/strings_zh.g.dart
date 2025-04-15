@@ -40,6 +40,7 @@ class TranslationsZh implements Translations {
 	@override String get notfound_404 => '404-页面未找到！';
 	@override late final _TranslationsMenuZh menu = _TranslationsMenuZh._(_root);
 	@override String get about_us => '关于我们';
+	@override String get accept_terms_switch => '我接受条款和条件';
 	@override late final _TranslationsAccountZh account = _TranslationsAccountZh._(_root);
 	@override String get activity => '活动';
 	@override String get audio_access_denied => '您已拒绝音频访问';
@@ -201,7 +202,7 @@ class _TranslationsGroupTypesZh implements TranslationsGroupTypesEn {
 	@override String get group => '团体';
 	@override String get family => '家庭';
 	@override String get friends => '朋友们';
-	@override String get Education => '教育';
+	@override String get education => '教育';
 	@override String get team => '团队';
 	@override String get department => '部门';
 	@override String get company => '公司';
@@ -324,6 +325,7 @@ extension on TranslationsZh {
 			case 'menu.account': return '帐户菜单';
 			case 'menu.product': return '产品菜单';
 			case 'about_us': return '关于我们';
+			case 'accept_terms_switch': return '我接受条款和条件';
 			case 'account.title': return '帐户';
 			case 'account.change_password': return '更改密码';
 			case 'account.email_taken': return '电子邮件已被占用';
@@ -385,7 +387,7 @@ extension on TranslationsZh {
 			case 'group_types.group': return '团体';
 			case 'group_types.family': return '家庭';
 			case 'group_types.friends': return '朋友们';
-			case 'group_types.Education': return '教育';
+			case 'group_types.education': return '教育';
 			case 'group_types.team': return '团队';
 			case 'group_types.department': return '部门';
 			case 'group_types.company': return '公司';

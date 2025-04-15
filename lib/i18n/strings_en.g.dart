@@ -43,6 +43,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get notfound_404 => '404 - Page not found!';
 	late final TranslationsMenuEn menu = TranslationsMenuEn._(_root);
 	String get about_us => 'About Us';
+	String get accept_terms_switch => 'I Accept the terms and conditions';
 	late final TranslationsAccountEn account = TranslationsAccountEn._(_root);
 	String get activity => 'Activity';
 	String get audio_access_denied => 'You have denied audio access';
@@ -204,7 +205,7 @@ class TranslationsGroupTypesEn {
 	String get group => 'Group';
 	String get family => 'Family';
 	String get friends => 'Friends';
-	String get Education => 'Education';
+	String get education => 'Education';
 	String get team => 'Team';
 	String get department => 'Department';
 	String get company => 'Company';
@@ -327,6 +328,7 @@ extension on Translations {
 			case 'menu.account': return 'Account Menu';
 			case 'menu.product': return 'Product Menu';
 			case 'about_us': return 'About Us';
+			case 'accept_terms_switch': return 'I Accept the terms and conditions';
 			case 'account.title': return 'Account';
 			case 'account.change_password': return 'Change password';
 			case 'account.email_taken': return 'Email already taken.';
@@ -388,7 +390,7 @@ extension on Translations {
 			case 'group_types.group': return 'Group';
 			case 'group_types.family': return 'Family';
 			case 'group_types.friends': return 'Friends';
-			case 'group_types.Education': return 'Education';
+			case 'group_types.education': return 'Education';
 			case 'group_types.team': return 'Team';
 			case 'group_types.department': return 'Department';
 			case 'group_types.company': return 'Company';
