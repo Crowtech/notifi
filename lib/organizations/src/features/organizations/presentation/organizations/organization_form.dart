@@ -239,7 +239,7 @@ class _CreateOrganizationFormState
                               var token =
                                   ref.read(nestAuthProvider.notifier).token;
                               var apiPath =
-                                  "$defaultAPIBaseUrl$defaultApiPrefixPath/organizations";
+                                  "$defaultAPIBaseUrl$defaultApiPrefixPath/organizations/create";
                               var result = apiPostDataNoLocaleRaw(
                                   token!, apiPath, organization);
 
