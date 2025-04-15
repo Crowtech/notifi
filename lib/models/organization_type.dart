@@ -1,22 +1,24 @@
-enum OrganizationType {
-    DEFAULT,
-    COMMERCIAL,
-    GOVERNMENT,
-    UNKNOWN,
-    PRIVATE,
-    PERSON,
-    ORG,
-    GROUP,
-    FAMILY,
-    FRIENDS,
-    EDUCATION,
-    TEAM,
-    DEPARTMENT,
-    COMPANY
-}
-   extension OrganizationTypeExtension on OrganizationType {
+import 'package:notifi/i18n/strings.g.dart' as nt;
 
- bool get isUrlable {
+enum OrganizationType {
+  DEFAULT,
+  COMMERCIAL,
+  GOVERNMENT,
+  UNKNOWN,
+  PRIVATE,
+  PERSON,
+  ORG,
+  GROUP,
+  FAMILY,
+  FRIENDS,
+  EDUCATION,
+  TEAM,
+  DEPARTMENT,
+  COMPANY
+}
+
+extension OrganizationTypeExtension on OrganizationType {
+  bool get isUrlable {
     switch (this) {
       case OrganizationType.COMMERCIAL:
       case OrganizationType.GOVERNMENT:
@@ -24,22 +26,21 @@ enum OrganizationType {
       case OrganizationType.ORG:
       case OrganizationType.EDUCATION:
       case OrganizationType.COMPANY:
-
         return true;
 
       default:
         return false;
     }
- }
+  }
 
-int get index {
+  int get index {
     switch (this) {
       case OrganizationType.DEFAULT:
         return 0;
       case OrganizationType.COMMERCIAL:
         return 1;
       case OrganizationType.GOVERNMENT:
-        return 2;      
+        return 2;
       case OrganizationType.UNKNOWN:
         return 3;
       case OrganizationType.PRIVATE:
@@ -48,7 +49,7 @@ int get index {
         return 5;
       case OrganizationType.ORG:
         return 6;
-        case OrganizationType.GROUP:
+      case OrganizationType.GROUP:
         return 7;
       case OrganizationType.FAMILY:
         return 8;
@@ -62,8 +63,8 @@ int get index {
         return 12;
       case OrganizationType.COMPANY:
         return 13;
-    } 
-}
+    }
+  }
 
   String get name {
     switch (this) {
@@ -72,7 +73,7 @@ int get index {
       case OrganizationType.COMMERCIAL:
         return "Commercial";
       case OrganizationType.GOVERNMENT:
-        return "Government";      
+        return "Government";
       case OrganizationType.UNKNOWN:
         return "Unknown";
       case OrganizationType.PRIVATE:
@@ -96,5 +97,25 @@ int get index {
       case OrganizationType.COMPANY:
         return "Company";
     }
+  }
+
+  List<String> getOrgTypeList()
+  {
+    return [  
+      "nt.t.group_types.${OrganizationType.DEFAULT.name.toLowerCase()}",
+      "nt.t.group_types.${OrganizationType.COMMERCIAL.name.toLowerCase()}",
+      "nt.t.group_types.${OrganizationType.GOVERNMENT.name.toLowerCase()}",
+      "nt.t.group_types.${OrganizationType.UNKNOWN.name.toLowerCase()}",
+      "nt.t.group_types.${OrganizationType.PRIVATE.name.toLowerCase()}",
+      "nt.t.group_types.${OrganizationType.PERSON.name.toLowerCase()}",
+      "nt.t.group_types.${OrganizationType.ORG.name.toLowerCase()}",
+      "nt.t.group_types.${OrganizationType.GROUP.name.toLowerCase()}",
+      "nt.t.group_types.${OrganizationType.FAMILY.name.toLowerCase()}",
+      "nt.t.group_types.${OrganizationType.FRIENDS.name.toLowerCase()}",
+      "nt.t.group_types.${OrganizationType.EDUCATION.name.toLowerCase()}",
+      "nt.t.group_types.${OrganizationType.TEAM.name.toLowerCase()}",
+      "nt.t.group_types.${OrganizationType.DEPARTMENT.name.toLowerCase()}",
+      "nt.t.group_types.${OrganizationType.COMPANY.name.toLowerCase()}",
+    ];
+  }
 }
- }

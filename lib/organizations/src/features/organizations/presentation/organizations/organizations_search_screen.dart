@@ -10,6 +10,7 @@ import 'package:notifi/organizations/src/features/organizations/data/organizatio
 import 'package:notifi/organizations/src/features/organizations/presentation/organization_details/organization_details_screen.dart';
 import 'package:notifi/organizations/src/features/organizations/presentation/organizations/organization_form.dart';
 import 'package:notifi/organizations/src/features/organizations/presentation/organizations/organization_form2.dart';
+import 'package:notifi/organizations/src/features/organizations/presentation/organizations/organization_form3.dart';
 import 'package:notifi/riverpod/nest_filter_provider.dart';
 import 'package:notifi/widgets/slide_left_background.dart';
 import 'package:notifi/widgets/slide_right_background.dart';
@@ -169,7 +170,7 @@ class OrganizationsSearchScreen extends ConsumerWidget {
           logNoStack.i("ORGS_SEARCH_SCREEN: Add button pressed");
           showDialog(
             context: context,
-            builder: (context) => CreateOrganizationForm2(formCode:"organization"),
+            builder: (context) => CreateOrganizationForm3(formCode:"organization"),
           );
         },
         // foregroundColor: customizations[index].$1,
