@@ -196,8 +196,8 @@ Future<http.Response> apiPostDataStrNoLocale(
     return response;
   } else {
     log.i(
-        "API POST DATA: apiPostDataStrNoLocaleapiPost created unsuccessfully $apiPath $jsonDataStr!");
-    throw "api Post created unsuccessfully! $apiPath $jsonDataStr!";
+        "API POST DATA: apiPostDataStrNoLocaleapiPost created unsuccessfully ${response.statusCode} $apiPath $jsonDataStr!");
+    throw "api Post created unsuccessfully! ${response.statusCode} $apiPath $jsonDataStr!";
   }
 }
 
