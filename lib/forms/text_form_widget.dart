@@ -7,6 +7,7 @@ import 'package:notifi/helpers/debouncer.dart';
 import 'package:notifi/helpers/text_formatter.dart';
 import 'package:notifi/riverpod/enable_widget.dart';
 import 'package:notifi/riverpod/refresh_widget.dart';
+import 'package:notifi/riverpod/validate_form.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -160,7 +161,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
         isEmpty = _isEmptyValue(value);
         String fieldCode = widget.fieldCode.substring(widget.fieldCode.indexOf('-') + 1); // remove the true/false-
         widget.fieldValues[fieldCode] = value;
-
+        ref.read(validateFormProvider(widget.formCode).notifier).add(fieldCode, isValid);
         return result;
       },
       onChanged:

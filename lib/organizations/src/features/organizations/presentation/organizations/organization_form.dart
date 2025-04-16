@@ -12,6 +12,7 @@ import 'package:notifi/models/organization.dart';
 import 'package:notifi/models/organization_type.dart';
 import 'package:notifi/riverpod/enable_widget.dart';
 import 'package:notifi/riverpod/refresh_widget.dart';
+import 'package:notifi/riverpod/validate_form.dart';
 import 'package:notifi/state/nest_auth2.dart';
 
 var log = logger.Logger(
@@ -219,15 +220,16 @@ class _CreateOrganizationFormState
                         formKey: _formKey, formCode: widget.formCode),
                     const SizedBox(width: 16),
                     //SubmitButtonWidget(formKey: _formKey, formCode: widget.formCode)
-                    //  Consumer(
-                    //   builder: (context, watch, child) {
-                    //    // watch.watch(refreshWidgetProvider("${widget.formCode}-submit"));
+                    Consumer(
+                    builder: (context, watch, child) {
+                    bool isValid = ref.watch(validateFormProvider("${widget.formCode}"));
                     ElevatedButton(
                       key: const Key("organization-submit"),
-                      onPressed: !(_formKey.currentState != null &&
-                              _formKey.currentState!.validate())
+                      onPressed: !isValid
                           ? null
                           : () {
+                            if (_formKey.currentState != null &&
+                              _formKey.currentState!.validate())
                               // If the form is valid, display a snackbar. In the real world,
                               // you'd often call a server or save the information in a database.
 
