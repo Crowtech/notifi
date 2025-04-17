@@ -52,7 +52,7 @@ class _CreateOrganizationFormState
   @override
   void initState() {
     super.initState();
-    orgTypeIndex = OrganizationType.GROUP;
+    orgTypeIndex = OrganizationType.UNKNOWN;
   }
 
   @override
@@ -67,6 +67,7 @@ class _CreateOrganizationFormState
         logNoStack.i(orgTypeIndex!.name);
       });
       fieldValues['orgType'] = orgTypeIndex!.name;
+      ref.read(validateFormProvider("organization").notifier).add("orgType", true);
       ref
           .read(enableWidgetProvider("false-url").notifier)
           .setEnabled(value.isUrlable);
@@ -93,7 +94,7 @@ class _CreateOrganizationFormState
   Widget build(BuildContext context) {
     // var watch = ref.watch(refreshWidgetProvider("organization"));
     String capitalizedItem = nt.t.organization_capitalized;
-    logNoStack.i("Organization form build ");
+    logNoStack.i("ORG_FORM: BUILD ");
     return Dialog(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -222,6 +223,7 @@ class _CreateOrganizationFormState
                     Consumer(builder: (context, watch, child) {
                       bool isValid =
                           ref.watch(validateFormProvider("${widget.formCode}"));
+                          logNoStack.i("ORG_FORM: isValid $isValid");
                       return ElevatedButton(
                         key: const Key("organization-submit"),
                         onPressed: !isValid
