@@ -74,7 +74,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
   bool initialValid = false;
 
   @override
-  Future<void> initState() async {
+  void initState() {
     super.initState();
     if (widget.forceLowercase) {
       // should be enum
@@ -86,8 +86,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
     isEmpty = widget.initialValue.isEmpty;
     enableWidget = widget.enabled;
     initialValid = isValidInput(widget.initialValue);
-    await Future<void>.delayed(const Duration(milliseconds: 500));
-   ref.read(validateFormProvider(widget.formCode).notifier).add(widget.fieldCode, initialValid);
+   
     // ref.read(enableWidgetProvider(widget.fieldCode).notifier).setEnabled(widget.enabled);
   }
 
