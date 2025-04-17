@@ -156,12 +156,11 @@ class OrganizationsSearchScreen extends ConsumerWidget {
                                                   const Duration(seconds: 3),
                                               title: nt.t.organization,
                                               subtitle: nt.t.form.deleted(
-                                                  item: nt.t
-                                                      .organization_capitalized),
+                                                  item: nt.t.organization_capitalized),
                                               configuration:
                                                   const IconConfiguration(
                                                       icon: Icons.done),
-                                              maxWidth: 260,
+                                              maxWidth: 300,
                                             );
                                           }
                                           Navigator.of(context).pop(true);
