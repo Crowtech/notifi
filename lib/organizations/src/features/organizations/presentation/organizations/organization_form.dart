@@ -276,7 +276,7 @@ class _CreateOrganizationFormState
                                       fieldValues['url']!);
 
                                   if (urlNotExisting == false) {
-                                     logNoStack.e("error is ${error}");
+                                     logNoStack.e("error is ${nt.t.form.already_exists(item: nt.t.organization_capitalized, field: nt.t.form.url)}");
                                       StatusAlert.show(
                                         context,
                                         duration: const Duration(seconds: 4),
