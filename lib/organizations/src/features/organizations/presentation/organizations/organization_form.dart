@@ -38,7 +38,6 @@ class _CreateOrganizationFormState
     extends ConsumerState<CreateOrganizationForm> {
   final _formKey = GlobalKey<FormState>();
 
-
   final Map<String, dynamic> fieldValues = {};
 
   OrganizationType? orgTypeIndex;
@@ -220,49 +219,51 @@ class _CreateOrganizationFormState
                         formKey: _formKey, formCode: widget.formCode),
                     const SizedBox(width: 16),
                     //SubmitButtonWidget(formKey: _formKey, formCode: widget.formCode)
-                    Consumer(
-                    builder: (context, watch, child) {
-                    bool isValid = ref.watch(validateFormProvider("${widget.formCode}"));
-                    ElevatedButton(
-                      key: const Key("organization-submit"),
-                      onPressed: !isValid
-                          ? null
-                          : () {
-                            if (_formKey.currentState != null &&
-                              _formKey.currentState!.validate())
-                              // If the form is valid, display a snackbar. In the real world,
-                              // you'd often call a server or save the information in a database.
+                    Consumer(builder: (context, watch, child) {
+                      bool isValid =
+                          ref.watch(validateFormProvider("${widget.formCode}"));
+                      return ElevatedButton(
+                        key: const Key("organization-submit"),
+                        onPressed: !isValid
+                            ? null
+                            : () {
+                                if (_formKey.currentState != null &&
+                                    _formKey.currentState!.validate()) {
+                                  // If the form is valid, display a snackbar. In the real world,
+                                  // you'd often call a server or save the information in a database.
 
-                              // save organization
-                              Organization organization = Organization(
-                                name: fieldValues['name'],
-                                description: fieldValues['description'],
-                                orgType:  fieldValues['orgType']!,
-                                url: fieldValues['url']!,
-                                email: fieldValues['email']!,
-                                //email: _emailController.text,
-                              );
-                              var token =
-                                  ref.read(nestAuthProvider.notifier).token;
-                              var apiPath =
-                                  "$defaultAPIBaseUrl$defaultApiPrefixPath/organizations/create";
+                                  // save organization
+                                  Organization organization = Organization(
+                                    name: fieldValues['name'],
+                                    description: fieldValues['description'],
+                                    orgType: fieldValues['orgType']!,
+                                    url: fieldValues['url']!,
+                                    email: fieldValues['email']!,
+                                    //email: _emailController.text,
+                                  );
+                                  var token =
+                                      ref.read(nestAuthProvider.notifier).token;
+                                  var apiPath =
+                                      "$defaultAPIBaseUrl$defaultApiPrefixPath/organizations/create";
 
-                              logNoStack.i(
-                                  "ORG_FORM: sending ${organization} to ${apiPath}");
-                              var result = apiPostDataNoLocaleRaw(
-                                  token!, apiPath, organization);
+                                  logNoStack.i(
+                                      "ORG_FORM: sending ${organization} to ${apiPath}");
+                                  var result = apiPostDataNoLocaleRaw(
+                                      token!, apiPath, organization);
 
-                              logNoStack.i("result is ${result}");
+                                  logNoStack.i("result is ${result}");
 
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(nt.t.saving),
-                                ),
-                              );
-                              Navigator.of(context).pop();
-                            },
-                      child: Text(nt.t.response.submit),
-                    )
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(nt.t.saving),
+                                    ),
+                                  );
+                                  Navigator.of(context).pop();
+                                }
+                              },
+                        child: Text(nt.t.response.submit),
+                      );
+                    })
                     //   },
                     //   ),
                   ],
