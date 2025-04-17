@@ -282,13 +282,14 @@ class _CreateOrganizationFormState
                                     StatusAlert.show(
                                       context,
                                       duration: const Duration(seconds: 4),
-                                      title: nt.t.organization,
-                                      subtitle: nt.t.form.already_exists(
+                                      //title: nt.t.organization,
+                                      title: nt.t.form.already_exists(
                                           item: nt.t.organization_capitalized,
                                           field: nt.t.form.url),
                                       configuration: const IconConfiguration(
                                           icon: Icons.error),
                                       maxWidth: 300,
+                                      dismissOnBackgroundTap: true,
                                     );
                                   } else {
                                     // If the form is valid, display a snackbar. In the real world,

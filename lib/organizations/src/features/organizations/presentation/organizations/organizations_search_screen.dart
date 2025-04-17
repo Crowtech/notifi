@@ -138,6 +138,12 @@ class OrganizationsSearchScreen extends ConsumerWidget {
                                 },
                               );
                             } else {
+                               showDialog(
+                                context: context,
+                                builder: (context) => OrganizationDetailsScreen(
+                                    organizationId: organization.id!,
+                                    organization: organization),
+                              );
                               return Future.value(false);
                             }
                           },
