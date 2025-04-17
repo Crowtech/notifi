@@ -48,7 +48,7 @@ class AsyncSelectedResources extends _$AsyncSelectedResources {
    
     var response = await apiGetData(
         token,
-        "$defaultAPIBaseUrl$defaultApiPrefixPath/resources/sources/selected");
+        "$defaultAPIBaseUrl$defaultApiPrefixPath/resources/sources/selected","application/json");
     // .then((response) {
     logNoStack.i("SELECTED_RESOURCES: result ${response.body.toString()}");
     final map = jsonDecode(response.body);

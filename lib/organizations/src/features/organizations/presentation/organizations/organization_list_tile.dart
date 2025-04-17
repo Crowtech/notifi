@@ -56,6 +56,13 @@ class OrganizationListTile extends StatelessWidget {
                   organization.name!,
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
+                 if (organization.created != null) ...[
+                  const SizedBox(height: 8),
+                  Text(
+                    '${nt.t.form.url}: ${organization.url}',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ],
                 if (organization.created != null) ...[
                   const SizedBox(height: 8),
                   Text(

@@ -12,6 +12,7 @@ import 'package:notifi/api_utils.dart';
 import 'package:notifi/credentials.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:notifi/models/person.dart';
+import 'package:notifi/models/resource.dart';
 import 'package:notifi/riverpod/refresh_widget.dart';
 import 'package:notifi/state/nest_auth2.dart';
 import 'package:http/http.dart' as http;
@@ -33,8 +34,10 @@ var logNoStack = logger.Logger(
 class EditableAvatar extends ConsumerStatefulWidget {
   final String? imageUrl;
   double diameter;
+  final Resource resource;
 
-  EditableAvatar({super.key, this.imageUrl, this.diameter = 50});
+  EditableAvatar(
+      {super.key, this.imageUrl, this.diameter = 50, required this.resource});
 
   @override
   _EditableAvatarState createState() => _EditableAvatarState();
@@ -140,25 +143,40 @@ class _EditableAvatarState extends ConsumerState<EditableAvatar> {
         await minio.fPutObject(defaultRealm, avatarFilename, file.path);
     logNoStack.i("uploaded file ${file.path} with etag $etag");
 
+    if (widget.resource.code!.startsWith("PER_")) {
 // set the person's api avatar_url
-    currentPerson!.avatarUrl =
-        "$defaultMinioEndpointUrl/$defaultRealm/$avatarFilename";
+      currentPerson!.avatarUrl =
+          "$defaultMinioEndpointUrl/$defaultRealm/$avatarFilename";
 
-    ref.read(nestAuthProvider.notifier).updateCurrentUser(currentPerson!);
-    var jsonDataStr = jsonEncode(currentPerson!);
-    logNoStack.i(
-        "AVATAR_EDIT: put url = $defaultAPIBaseUrl$defaultApiPrefixPath/persons");
+      ref.read(nestAuthProvider.notifier).updateCurrentUser(currentPerson!);
+      var jsonDataStr = jsonEncode(currentPerson!);
+      logNoStack.i(
+          "AVATAR_EDIT: put url = $defaultAPIBaseUrl$defaultApiPrefixPath/persons");
 
-    var responsePut = apiPutDataStrNoLocale(
-        token!,
-        "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/${currentPerson!.id}",
-        jsonDataStr);
-    logNoStack.i(
-        "AVATAR_EDIT put person is $responsePut saving ${currentPerson!.avatarUrl}");
+      var responsePut = apiPutDataStrNoLocale(
+          token!,
+          "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/${currentPerson!.id}",
+          jsonDataStr);
+      logNoStack.i(
+          "AVATAR_EDIT put person is $responsePut saving ${currentPerson!.avatarUrl}");
 
 // now refresh nestAvatar
-    // ref.read(RefreshWidgetProvider(currentPerson!.code!).notifier).refresh();
-    ref.read(RefreshWidgetProvider(currentPerson!.code!).notifier).refresh();
+      // ref.read(RefreshWidgetProvider(currentPerson!.code!).notifier).refresh();
+      ref.read(RefreshWidgetProvider(currentPerson!.code!).notifier).refresh();
+    } else if (widget.resource.code!.startsWith("ORG_")) {
+      widget.resource!.avatarUrl =
+          "$defaultMinioEndpointUrl/$defaultRealm/$avatarFilename";
+      var jsonDataStr = jsonEncode(currentPerson!);
+      logNoStack.i(
+          "AVATAR_EDIT: put url = $defaultAPIBaseUrl$defaultApiPrefixPath/persons");
+
+      var responsePut = apiPutDataStrNoLocale(
+          token!,
+          "$defaultAPIBaseUrl$defaultApiPrefixPath/organizations/${widget.resource.id}",
+          jsonDataStr);
+      logNoStack.i(
+          "AVATAR_EDIT put organization is $responsePut saving ${widget.resource.avatarUrl}");
+    }
   }
 
   Future<void> _pickImage(ImageSource source) async {
@@ -185,23 +203,23 @@ class _EditableAvatarState extends ConsumerState<EditableAvatar> {
 
         await pickedFile.saveTo(newFile.path);
         logNoStack.i("AVATAR_EDIT: New path: ${newFile.path}");
-      
-      setState(() {
-        _image = showFile;
-        _fileExists = true;
-      });
-      
-      // ref.read(minIOUploadProvider.notifier).uploadImageToMinIO(_image!);
 
-      saveFileToMinio(newFile);
+        setState(() {
+          _image = showFile;
+          _fileExists = true;
+        });
+
+        // ref.read(minIOUploadProvider.notifier).uploadImageToMinIO(_image!);
+
+        saveFileToMinio(newFile);
       } else {
-                final showFile = File(pickedFile.path);
+        final showFile = File(pickedFile.path);
         logNoStack.i("AVATAR_EDIT: New path: $showFile");
-      
-      setState(() {
-        _image = showFile;
-        _fileExists = true;
-      });
+
+        setState(() {
+          _image = showFile;
+          _fileExists = true;
+        });
       }
     }
   }
