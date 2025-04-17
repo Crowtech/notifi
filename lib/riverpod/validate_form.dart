@@ -14,7 +14,7 @@ var logNoStack = logger.Logger(
   level: logger.Level.info,
 );
 
-@riverpod
+@Riverpod(keepAlive: true)
 class ValidateForm extends _$ValidateForm {
   Map<String, bool> fields = {};
   @override
