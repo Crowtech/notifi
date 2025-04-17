@@ -54,7 +54,7 @@ class _CreateOrganizationFormState
   void initState() {
     super.initState();
     orgTypeIndex = OrganizationType.UNKNOWN;
-   // ref.read(initialFormValidationsProvider("organization").notifier).add("orgType", false);
+    // ref.read(initialFormValidationsProvider("organization").notifier).add("orgType", false);
   }
 
   @override
@@ -69,7 +69,9 @@ class _CreateOrganizationFormState
         logNoStack.i(orgTypeIndex!.name);
       });
       fieldValues['orgType'] = orgTypeIndex!.name;
-      ref.read(validateFormProvider("organization").notifier).add("orgType", true);
+      ref
+          .read(validateFormProvider("organization").notifier)
+          .add("orgType", true);
       ref
           .read(enableWidgetProvider("false-url").notifier)
           .setEnabled(value.isUrlable);
@@ -225,7 +227,7 @@ class _CreateOrganizationFormState
                     Consumer(builder: (context, watch, child) {
                       bool isValid =
                           ref.watch(validateFormProvider("${widget.formCode}"));
-                          logNoStack.i("ORG_FORM: isValid $isValid");
+                      logNoStack.i("ORG_FORM: isValid $isValid");
                       return ElevatedButton(
                         key: const Key("organization-submit"),
                         onPressed: !isValid
@@ -257,14 +259,15 @@ class _CreateOrganizationFormState
 
                                   logNoStack.i("result is ${result}");
 
-StatusAlert.show(
-      context,
-      duration: Duration(seconds: 2),
-      title: nt.t.,
-      subtitle: 'Subtitle',
-      configuration: IconConfiguration(icon: Icons.done),
-      maxWidth: 260,
-    )
+                                  StatusAlert.show(
+                                    context,
+                                    duration: Duration(seconds: 2),
+                                    title: nt.t.organization,
+                                    subtitle: nt.t.saved,
+                                    configuration:
+                                        IconConfiguration(icon: Icons.done),
+                                    maxWidth: 260,
+                                  );
                                   // ScaffoldMessenger.of(context).showSnackBar(
                                   //   SnackBar(
                                   //     content: Text(nt.t.saving),
