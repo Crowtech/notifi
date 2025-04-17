@@ -254,26 +254,34 @@ class _CreateOrganizationFormState
 
                                   logNoStack.i(
                                       "ORG_FORM: sending ${organization} to ${apiPath}");
-                                  var result = apiPostDataNoLocaleRaw(
-                                      token!, apiPath, organization);
+                                  apiPostDataNoLocaleRaw(
+                                          token!, apiPath, organization)
+                                      .then((result) {
+                                    logNoStack.i("result is ${result}");
 
-                                  logNoStack.i("result is ${result}");
+                                    StatusAlert.show(
+                                      context,
+                                      duration: const Duration(seconds: 2),
+                                      title: nt.t.organization,
+                                      subtitle: nt.t.form.saved,
+                                      configuration: const IconConfiguration(
+                                          icon: Icons.done),
+                                      maxWidth: 260,
+                                    );
 
-                                  StatusAlert.show(
-                                    context,
-                                    duration: const Duration(seconds: 2),
-                                    title: nt.t.organization,
-                                    subtitle: nt.t.form.saved,
-                                    configuration:
-                                        const IconConfiguration(icon: Icons.done),
-                                    maxWidth: 260,
-                                  );
-                                  // ScaffoldMessenger.of(context).showSnackBar(
-                                  //   SnackBar(
-                                  //     content: Text(nt.t.saving),
-                                  //   ),
-                                  // );
-                                  Navigator.of(context).pop();
+                                    Navigator.of(context).pop();
+                                  }, onError: (error) {
+                                    logNoStack.e("error is ${error}");
+                                     StatusAlert.show(
+                                      context,
+                                      duration: const Duration(seconds: 2),
+                                      title: nt.t.organization,
+                                      subtitle: nt.t.form.error_saving,
+                                      configuration: const IconConfiguration(
+                                          icon: Icons.error),
+                                      maxWidth: 260,
+                                    );
+                                  });
                                 }
                               },
                         child: Text(nt.t.response.submit),
