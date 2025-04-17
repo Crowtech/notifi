@@ -146,10 +146,10 @@ class OrganizationsSearchScreen extends ConsumerWidget {
                                           var response = await apiGetData(
                                               token!,
                                               apiPath,
-                                              "application/text");
+                                              "application/json");
                                           logNoStack.i(
-                                              "ORG_SEARCH_LIST: result ${response.body.toString()}");
-                                          if (response.body != true) {
+                                              "ORG_SEARCH_LIST: result ${response.statusCode}");
+                                          if (response.statusCode == 200) {
                                             StatusAlert.show(
                                               context,
                                               duration:
