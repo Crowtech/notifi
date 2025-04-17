@@ -63,10 +63,10 @@ Future<dynamic> apiPostDataNoLocale(
       response.statusCode == 200) {
     logNoStack.d(
         "API POST No LOCALE: $apiPath created successfully! with status ${response.statusCode}");
-        logNoStack.d("API POST No Locale: respose is ${response.body}");
-        if (response.body.isEmpty) {
-          return [];
-        }
+    logNoStack.d("API POST No Locale: respose is ${response.body}");
+    if (response.body.isEmpty) {
+      return [];
+    }
     final resultMap = jsonDecode(response.body);
     return resultMap;
   } else {
@@ -83,16 +83,15 @@ Future<dynamic> apiPostDataNoLocaleRaw(
   var url = Uri.parse(apiPath);
   String jsonData;
   final http.Response response;
-    jsonData = jsonEncode(data);
+  jsonData = jsonEncode(data);
 
-    response = await http.post(url,
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-          "Authorization": "Bearer $token",
-        },
-        body: jsonData);
- 
+  response = await http.post(url,
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": "Bearer $token",
+      },
+      body: jsonData);
 
   logNoStack.i(response.statusCode);
   if (response.statusCode == 202 ||
@@ -100,10 +99,10 @@ Future<dynamic> apiPostDataNoLocaleRaw(
       response.statusCode == 200) {
     logNoStack.d(
         "API POST RAW No LOCALE: $apiPath created successfully! with status ${response.statusCode}");
-        logNoStack.d("API POST No Locale: respose is ${response.body}");
-        if (response.body.isEmpty) {
-          return [];
-        }
+    logNoStack.d("API POST No Locale: respose is ${response.body}");
+    if (response.body.isEmpty) {
+      return [];
+    }
     final resultMap = jsonDecode(response.body);
     return resultMap;
   } else {
@@ -113,7 +112,6 @@ Future<dynamic> apiPostDataNoLocaleRaw(
         "$apiPath RAW created unsuccessfully! with url $url status ${response.statusCode} and error: ${response.reasonPhrase}");
   }
 }
-
 
 Future<dynamic> apiPost(Locale locale, String token, String apiPath) async {
   return apiPostData(locale, token, apiPath, null, null);
@@ -238,17 +236,26 @@ Future<http.Response> apiPutDataStrNoLocale(
   }
 }
 
-Future<http.Response> apiGetData(String apiPath, String accept) async {
+Future<http.Response> apiGetData(
+    String? token, String apiPath, String accept) async {
   var url = Uri.parse(apiPath);
 
   final http.Response response;
   logNoStack.i(
-      "Response code for apiGeData is $apiPath for \"Content-Type\" and \"Accept\" $accept");
+      "Response code for apiGetData is $apiPath for \"Content-Type\" and \"Accept\" $accept");
   // No data
-  response = await http.get(url, headers: {
-    "Content-Type": accept,
-    "Accept": accept,
-  });
+  if (token == null) {
+    response = await http.get(url, headers: {
+      "Content-Type": accept,
+      "Accept": accept,
+    });
+  } else {
+    response = await http.get(url, headers: {
+      "Content-Type": accept,
+      "Authorization": "Bearer $token",
+      "Accept": accept,
+    });
+  }
 
   logNoStack
       .i("Response code for apiGeData is ${response.statusCode} for $apiPath");
@@ -405,7 +412,7 @@ Future<Map> registerFCM(
 Future<String> fetchLatestAppVersion() async {
   var apiPath = "$defaultAPIBaseUrl$defaultApiPrefixPath/appversionss/latest";
   try {
-    var response = await apiGetData(apiPath, "application/json");
+    var response = await apiGetData(null, apiPath, "application/json");
     logNoStack.d("FETCH LATEST APP VERSION: result ${response.body}");
     final map = jsonDecode(response.body);
     AppVersion appVersion = AppVersion.fromJson(map);

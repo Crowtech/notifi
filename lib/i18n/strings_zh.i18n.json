@@ -47,6 +47,7 @@
   "firstname": "给定的名称",
   "focus_mode": "专注模式",
   "form" : {
+    "already_exists": "具有此${field}的${item}已存在",
     "create": "创建${item}",
     "edit": "编辑${item}",
     "error_saving": "保存错误",
@@ -58,7 +59,7 @@
     "email": "电子邮件",
     "email_validation": "请输入有效的${item}邮箱地址",
     "url": "网址",
-    "url_validation": "请输入有效的${item}网址",
+    "url_validation": "请输入有效的${item}网址，例如https://www.google.com",
     "org_type": "${item} 类型",
     "saved": "已保存"
   },

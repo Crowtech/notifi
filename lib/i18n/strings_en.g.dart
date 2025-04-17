@@ -174,6 +174,7 @@ class TranslationsFormEn {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
+	String already_exists({required Object item, required Object field}) => 'A ${item} with this ${field} already exists';
 	String create({required Object item}) => 'Create a new ${item}';
 	String edit({required Object item}) => 'Edit ${item}';
 	String get error_saving => 'Error saving';
@@ -185,7 +186,7 @@ class TranslationsFormEn {
 	String get email => 'Email';
 	String email_validation({required Object item}) => 'Please enter valid ${item} email';
 	String get url => 'Web Address';
-	String url_validation({required Object item}) => 'Please enter valid ${item} web address';
+	String url_validation({required Object item}) => 'Please enter valid ${item} web address e.g. https://www.google.com';
 	String org_type({required Object item}) => '${item} Type';
 	String get saved => 'Saved';
 }
@@ -366,6 +367,7 @@ extension on Translations {
 			case 'exposure_mode': return 'Exposure Mode';
 			case 'exposure_offset': return 'Exposure Offset';
 			case 'favourite': return 'Favourite';
+			case 'form.already_exists': return ({required Object item, required Object field}) => 'A ${item} with this ${field} already exists';
 			case 'form.create': return ({required Object item}) => 'Create a new ${item}';
 			case 'form.edit': return ({required Object item}) => 'Edit ${item}';
 			case 'form.error_saving': return 'Error saving';
@@ -377,7 +379,7 @@ extension on Translations {
 			case 'form.email': return 'Email';
 			case 'form.email_validation': return ({required Object item}) => 'Please enter valid ${item} email';
 			case 'form.url': return 'Web Address';
-			case 'form.url_validation': return ({required Object item}) => 'Please enter valid ${item} web address';
+			case 'form.url_validation': return ({required Object item}) => 'Please enter valid ${item} web address e.g. https://www.google.com';
 			case 'form.org_type': return ({required Object item}) => '${item} Type';
 			case 'form.saved': return 'Saved';
 			case 'firstname': return 'Firstname';

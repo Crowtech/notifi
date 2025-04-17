@@ -173,6 +173,7 @@ class _TranslationsFormZh extends TranslationsFormEn {
 	final TranslationsZh _root; // ignore: unused_field
 
 	// Translations
+	@override String already_exists({required Object field, required Object item}) => '具有此${field}的${item}已存在';
 	@override String create({required Object item}) => '创建${item}';
 	@override String edit({required Object item}) => '编辑${item}';
 	@override String get error_saving => '保存错误';
@@ -184,7 +185,7 @@ class _TranslationsFormZh extends TranslationsFormEn {
 	@override String get email => '电子邮件';
 	@override String email_validation({required Object item}) => '请输入有效的${item}邮箱地址';
 	@override String get url => '网址';
-	@override String url_validation({required Object item}) => '请输入有效的${item}网址';
+	@override String url_validation({required Object item}) => '请输入有效的${item}网址，例如https://www.google.com';
 	@override String org_type({required Object item}) => '${item} 类型';
 	@override String get saved => '已保存';
 }
@@ -367,6 +368,7 @@ extension on TranslationsZh {
 			case 'favourite': return '最喜欢的';
 			case 'firstname': return '给定的名称';
 			case 'focus_mode': return '专注模式';
+			case 'form.already_exists': return ({required Object field, required Object item}) => '具有此${field}的${item}已存在';
 			case 'form.create': return ({required Object item}) => '创建${item}';
 			case 'form.edit': return ({required Object item}) => '编辑${item}';
 			case 'form.error_saving': return '保存错误';
@@ -378,7 +380,7 @@ extension on TranslationsZh {
 			case 'form.email': return '电子邮件';
 			case 'form.email_validation': return ({required Object item}) => '请输入有效的${item}邮箱地址';
 			case 'form.url': return '网址';
-			case 'form.url_validation': return ({required Object item}) => '请输入有效的${item}网址';
+			case 'form.url_validation': return ({required Object item}) => '请输入有效的${item}网址，例如https://www.google.com';
 			case 'form.org_type': return ({required Object item}) => '${item} 类型';
 			case 'form.saved': return '已保存';
 			case 'groups': return '群组';

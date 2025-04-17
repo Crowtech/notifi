@@ -45,6 +45,7 @@
   "exposure_offset": "Exposure Offset",
   "favourite": "Favourite",
   "form" : {
+    "already_exists": "A ${item} with this ${field} already exists",
     "create": "Create a new ${item}",
     "edit": "Edit ${item}",
     "error_saving": "Error saving",
@@ -56,7 +57,7 @@
     "email": "Email",
     "email_validation": "Please enter valid ${item} email",
     "url": "Web Address",
-    "url_validation": "Please enter valid ${item} web address",
+    "url_validation": "Please enter valid ${item} web address e.g. https://www.google.com",
     "org_type": "${item} Type",
     "saved": "Saved"
   },

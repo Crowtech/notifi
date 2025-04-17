@@ -51,6 +51,41 @@ class _CreateOrganizationFormState
     return emailValidator.EmailValidator.validate(email);
   }
 
+  Future<bool> _validateUrl(String? url) async {
+    if (url == null) {
+      return false;
+    }
+    if (url.isEmpty) {
+      return true;
+    }
+    if (RegExp(
+      r"^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$",
+      caseSensitive: false,
+      unicode: true,
+      dotAll: true,
+    ).hasMatch(url)) {
+      // check if url exists
+      var token = ref.read(nestAuthProvider.notifier).token;
+      var apiPath =
+          "$defaultAPIBaseUrl$defaultApiPrefixPath/organizations/check/url/$url";
+
+      var response = await apiGetData(token!, apiPath, "application/text");
+      logNoStack.i("ORG_FORM: result ${response.body.toString()}");
+      if (response.body != true) {
+        StatusAlert.show(
+          context,
+          duration: const Duration(seconds: 3),
+          title: nt.t.organization,
+          subtitle: nt.t.form.already_exists(item: nt.t.organization_capitalized,field: nt.t.form.url),
+          configuration: const IconConfiguration(icon: Icons.error),
+          maxWidth: 260,
+        );
+      }
+      return response.body == "true";
+    }
+    return false;
+  }
+
   @override
   void initState() {
     super.initState();
