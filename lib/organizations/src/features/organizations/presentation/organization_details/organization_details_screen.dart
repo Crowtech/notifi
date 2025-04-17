@@ -35,7 +35,10 @@ class OrganizationDetailsScreen extends ConsumerWidget {
         appBar: AppBar(
           title: Text(organization!.name!),
         ),
-        body: Column(
+        body: 
+        SingleChildScrollView(
+        child: Column(
+           mainAxisAlignment: MainAxisAlignment.center,
           children: [
              EditableAvatar(imageUrl: organization!.getAvatarUrl(), diameter: 100,resource: organization!),
                if (organization!.created != null) ...[
@@ -60,6 +63,7 @@ class OrganizationDetailsScreen extends ConsumerWidget {
                   ),
                 ],
           ],
+        ),
         ),
       );
     } else {

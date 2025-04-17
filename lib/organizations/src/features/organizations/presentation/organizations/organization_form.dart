@@ -68,7 +68,8 @@ class _CreateOrganizationFormState
       var token = ref.read(nestAuthProvider.notifier).token;
       var apiPath =
           "$defaultAPIBaseUrl$defaultApiPrefixPath/organizations/check/url/$url";
-      apiPath = Uri.encodeFull(apiPath);
+      apiPath = Uri.encodeComponent(apiPath);
+      logNoStack.i("ORG_FORM: encodedApiPath is ${apiPath}");
       var response = await apiGetData(token!, apiPath, "application/text");
       logNoStack.i("ORG_FORM: result ${response.body.toString()}");
       if (response.body != true) {
