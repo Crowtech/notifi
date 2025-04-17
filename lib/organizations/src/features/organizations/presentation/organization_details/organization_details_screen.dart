@@ -30,13 +30,35 @@ class OrganizationDetailsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     if (organization != null) {
+      logNoStack.i("ORG_DETAILS_SCREEN: organization is $organization");
       return Scaffold(
         appBar: AppBar(
           title: Text(organization!.name!),
         ),
         body: Column(
           children: [
-            OrganizationListTile(organization: organization!),
+             EditableAvatar(imageUrl: organization!.getAvatarUrl(), diameter: 100,resource: organization!),
+               if (organization!.created != null) ...[
+                  const SizedBox(height: 8),
+                  Text(
+                    '${nt.t.form.url}: ${organization!.url}',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ],
+                 if (organization!.created != null) ...[
+                  const SizedBox(height: 8),
+                  Text(
+                    '${nt.t.form.email}: ${organization!.email}',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ],
+                if (organization!.created != null) ...[
+                  const SizedBox(height: 8),
+                  Text(
+                    '${nt.t.created}: ${organization!.created}',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ],
           ],
         ),
       );
