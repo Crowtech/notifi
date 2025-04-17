@@ -90,6 +90,7 @@ dependencies:
   slang: ^4.6.0
   slang_flutter: ^4.6.0
   smooth_page_indicator: ^1.2.1
+  status_alert: ^1.0.1
   url_strategy: ^0.3.0
   uuid: ^4.5.1 
   

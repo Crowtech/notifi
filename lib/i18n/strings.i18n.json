@@ -47,6 +47,7 @@
   "form" : {
     "create": "Create a new ${item}",
     "edit": "Edit ${item}",
+    "error_saving": "Error saving",
     "join": "Join ${item}",
     "name": "Name",
     "name_validation": "Please enter ${item} name",
@@ -56,7 +57,8 @@
     "email_validation": "Please enter valid ${item} email",
     "url": "Web Address",
     "url_validation": "Please enter valid ${item} web address",
-    "org_type": "${item} Type"
+    "org_type": "${item} Type",
+    "saved": "Saved"
   },
   "firstname": "Firstname",
   "focus_mode": "Focus Mode",

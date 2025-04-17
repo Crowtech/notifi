@@ -176,6 +176,7 @@ class TranslationsFormEn {
 	// Translations
 	String create({required Object item}) => 'Create a new ${item}';
 	String edit({required Object item}) => 'Edit ${item}';
+	String get error_saving => 'Error saving';
 	String join({required Object item}) => 'Join ${item}';
 	String get name => 'Name';
 	String name_validation({required Object item}) => 'Please enter ${item} name';
@@ -186,6 +187,7 @@ class TranslationsFormEn {
 	String get url => 'Web Address';
 	String url_validation({required Object item}) => 'Please enter valid ${item} web address';
 	String org_type({required Object item}) => '${item} Type';
+	String get saved => 'Saved';
 }
 
 // Path: group_types
@@ -366,6 +368,7 @@ extension on Translations {
 			case 'favourite': return 'Favourite';
 			case 'form.create': return ({required Object item}) => 'Create a new ${item}';
 			case 'form.edit': return ({required Object item}) => 'Edit ${item}';
+			case 'form.error_saving': return 'Error saving';
 			case 'form.join': return ({required Object item}) => 'Join ${item}';
 			case 'form.name': return 'Name';
 			case 'form.name_validation': return ({required Object item}) => 'Please enter ${item} name';
@@ -376,6 +379,7 @@ extension on Translations {
 			case 'form.url': return 'Web Address';
 			case 'form.url_validation': return ({required Object item}) => 'Please enter valid ${item} web address';
 			case 'form.org_type': return ({required Object item}) => '${item} Type';
+			case 'form.saved': return 'Saved';
 			case 'firstname': return 'Firstname';
 			case 'focus_mode': return 'Focus Mode';
 			case 'groups': return 'Groups';

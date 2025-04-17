@@ -175,6 +175,7 @@ class _TranslationsFormZh extends TranslationsFormEn {
 	// Translations
 	@override String create({required Object item}) => '创建${item}';
 	@override String edit({required Object item}) => '编辑${item}';
+	@override String get error_saving => '保存错误';
 	@override String join({required Object item}) => '加入${item}';
 	@override String get name => '姓名';
 	@override String name_validation({required Object item}) => '请输入${item}名称';
@@ -185,6 +186,7 @@ class _TranslationsFormZh extends TranslationsFormEn {
 	@override String get url => '网址';
 	@override String url_validation({required Object item}) => '请输入有效的${item}网址';
 	@override String org_type({required Object item}) => '${item} 类型';
+	@override String get saved => '已保存';
 }
 
 // Path: group_types
@@ -367,6 +369,7 @@ extension on TranslationsZh {
 			case 'focus_mode': return '专注模式';
 			case 'form.create': return ({required Object item}) => '创建${item}';
 			case 'form.edit': return ({required Object item}) => '编辑${item}';
+			case 'form.error_saving': return '保存错误';
 			case 'form.join': return ({required Object item}) => '加入${item}';
 			case 'form.name': return '姓名';
 			case 'form.name_validation': return ({required Object item}) => '请输入${item}名称';
@@ -377,6 +380,7 @@ extension on TranslationsZh {
 			case 'form.url': return '网址';
 			case 'form.url_validation': return ({required Object item}) => '请输入有效的${item}网址';
 			case 'form.org_type': return ({required Object item}) => '${item} 类型';
+			case 'form.saved': return '已保存';
 			case 'groups': return '群组';
 			case 'group_types_title': return '群组类型';
 			case 'group_types.kDefault': return '默认';

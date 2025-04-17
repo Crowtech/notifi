@@ -14,6 +14,7 @@ import 'package:notifi/riverpod/enable_widget.dart';
 import 'package:notifi/riverpod/refresh_widget.dart';
 import 'package:notifi/riverpod/validate_form.dart';
 import 'package:notifi/state/nest_auth2.dart';
+import 'package:status_alert/status_alert.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -256,11 +257,19 @@ class _CreateOrganizationFormState
 
                                   logNoStack.i("result is ${result}");
 
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(nt.t.saving),
-                                    ),
-                                  );
+StatusAlert.show(
+      context,
+      duration: Duration(seconds: 2),
+      title: nt.t.,
+      subtitle: 'Subtitle',
+      configuration: IconConfiguration(icon: Icons.done),
+      maxWidth: 260,
+    )
+                                  // ScaffoldMessenger.of(context).showSnackBar(
+                                  //   SnackBar(
+                                  //     content: Text(nt.t.saving),
+                                  //   ),
+                                  // );
                                   Navigator.of(context).pop();
                                 }
                               },
