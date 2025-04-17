@@ -53,6 +53,7 @@ class _CreateOrganizationFormState
   void initState() {
     super.initState();
     orgTypeIndex = OrganizationType.UNKNOWN;
+    ref.read(validateFormProvider("organization").notifier).add("orgType", false);
   }
 
   @override
