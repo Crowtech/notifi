@@ -50,9 +50,10 @@ class _CreateOrganizationFormState
   }
 
   @override
-  void initState() {
+  Future<void> initState() async {
     super.initState();
     orgTypeIndex = OrganizationType.UNKNOWN;
+    await Future<void>.delayed(const Duration(milliseconds: 500));
     ref.read(validateFormProvider("organization").notifier).add("orgType", false);
   }
 
