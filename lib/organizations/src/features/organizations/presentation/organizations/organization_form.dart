@@ -51,7 +51,7 @@ class _CreateOrganizationFormState
     return emailValidator.EmailValidator.validate(email);
   }
 
-  Future<bool> _validateUrl(String? url) async {
+  Future<bool> _validateUrlAsync(String? url) async {
     if (url == null) {
       return false;
     }
@@ -76,7 +76,8 @@ class _CreateOrganizationFormState
           context,
           duration: const Duration(seconds: 3),
           title: nt.t.organization,
-          subtitle: nt.t.form.already_exists(item: nt.t.organization_capitalized,field: nt.t.form.url),
+          subtitle: nt.t.form.already_exists(
+              item: nt.t.organization_capitalized, field: nt.t.form.url),
           configuration: const IconConfiguration(icon: Icons.error),
           maxWidth: 260,
         );
@@ -268,57 +269,75 @@ class _CreateOrganizationFormState
                         key: const Key("organization-submit"),
                         onPressed: !isValid
                             ? null
-                            : () {
+                            : () async {
                                 if (_formKey.currentState != null &&
                                     _formKey.currentState!.validate()) {
-                                  // If the form is valid, display a snackbar. In the real world,
-                                  // you'd often call a server or save the information in a database.
+                                  var urlNotExisting = await _validateUrlAsync(
+                                      fieldValues['url']!);
 
-                                  // save organization
-                                  Organization organization = Organization(
-                                    name: fieldValues['name'],
-                                    description: fieldValues['description'],
-                                    orgType: fieldValues['orgType']!,
-                                    url: fieldValues['url']!,
-                                    email: fieldValues['email']!,
-                                    //email: _emailController.text,
-                                  );
-                                  var token =
-                                      ref.read(nestAuthProvider.notifier).token;
-                                  var apiPath =
-                                      "$defaultAPIBaseUrl$defaultApiPrefixPath/organizations/create";
+                                  if (urlNotExisting == false) {
+                                     logNoStack.e("error is ${error}");
+                                      StatusAlert.show(
+                                        context,
+                                        duration: const Duration(seconds: 4),
+                                        title: nt.t.organization,
+                                        subtitle: nt.t.form.already_exists(item: nt.t.organization_capitalized, field: nt.t.form.url),
+                                        configuration: const IconConfiguration(
+                                            icon: Icons.error),
+                                        maxWidth: 260,
+                                      );
+                                      
+                                  } else {
+                                    // If the form is valid, display a snackbar. In the real world,
+                                    // you'd often call a server or save the information in a database.
 
-                                  logNoStack.i(
-                                      "ORG_FORM: sending ${organization} to ${apiPath}");
-                                  apiPostDataNoLocaleRaw(
-                                          token!, apiPath, organization)
-                                      .then((result) {
-                                    logNoStack.i("result is ${result}");
-
-                                    StatusAlert.show(
-                                      context,
-                                      duration: const Duration(seconds: 2),
-                                      title: nt.t.organization,
-                                      subtitle: nt.t.form.saved,
-                                      configuration: const IconConfiguration(
-                                          icon: Icons.done),
-                                      maxWidth: 260,
+                                    // save organization
+                                    Organization organization = Organization(
+                                      name: fieldValues['name'],
+                                      description: fieldValues['description'],
+                                      orgType: fieldValues['orgType']!,
+                                      url: fieldValues['url']!,
+                                      email: fieldValues['email']!,
+                                      //email: _emailController.text,
                                     );
-                                    ref.invalidate(
-                                        fetchOrganizationsNestFilterProvider);
-                                    Navigator.of(context).pop();
-                                  }, onError: (error) {
-                                    logNoStack.e("error is ${error}");
-                                    StatusAlert.show(
-                                      context,
-                                      duration: const Duration(seconds: 2),
-                                      title: nt.t.organization,
-                                      subtitle: nt.t.form.error_saving,
-                                      configuration: const IconConfiguration(
-                                          icon: Icons.error),
-                                      maxWidth: 260,
-                                    );
-                                  });
+                                    var token = ref
+                                        .read(nestAuthProvider.notifier)
+                                        .token;
+                                    var apiPath =
+                                        "$defaultAPIBaseUrl$defaultApiPrefixPath/organizations/create";
+
+                                    logNoStack.i(
+                                        "ORG_FORM: sending ${organization} to ${apiPath}");
+                                    apiPostDataNoLocaleRaw(
+                                            token!, apiPath, organization)
+                                        .then((result) {
+                                      logNoStack.i("result is ${result}");
+
+                                      StatusAlert.show(
+                                        context,
+                                        duration: const Duration(seconds: 2),
+                                        title: nt.t.organization,
+                                        subtitle: nt.t.form.saved,
+                                        configuration: const IconConfiguration(
+                                            icon: Icons.done),
+                                        maxWidth: 260,
+                                      );
+                                      ref.invalidate(
+                                          fetchOrganizationsNestFilterProvider);
+                                      Navigator.of(context).pop();
+                                    }, onError: (error) {
+                                      logNoStack.e("error is ${error}");
+                                      StatusAlert.show(
+                                        context,
+                                        duration: const Duration(seconds: 2),
+                                        title: nt.t.organization,
+                                        subtitle: nt.t.form.error_saving,
+                                        configuration: const IconConfiguration(
+                                            icon: Icons.error),
+                                        maxWidth: 260,
+                                      );
+                                    });
+                                  }
                                 }
                               },
                         child: Text(nt.t.response.submit),
