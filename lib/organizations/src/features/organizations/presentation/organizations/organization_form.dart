@@ -70,9 +70,9 @@ class _CreateOrganizationFormState
           "$defaultAPIBaseUrl$defaultApiPrefixPath/organizations/check/url/";
       apiPath = "$apiPath${Uri.encodeComponent(url)}";
       logNoStack.i("ORG_FORM: encodedApiPath is ${apiPath}");
-      var response = await apiGetData(token!, apiPath, "application/text");
+      var response = await apiGetData(token!, apiPath, "application/json");
       logNoStack.i("ORG_FORM: result ${response.body.toString()}");
-      if (response.body != true) {
+      if (!response.body.contains("true")) {
         StatusAlert.show(
           context,
           duration: const Duration(seconds: 3),
@@ -83,7 +83,7 @@ class _CreateOrganizationFormState
           maxWidth: 260,
         );
       }
-      return response.body == "true";
+      return response.body.contains("true");
     }
     return false;
   }
