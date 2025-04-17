@@ -139,8 +139,8 @@ class OrganizationsSearchScreen extends ConsumerWidget {
                                               .token;
                                           var apiPath =
                                               "$defaultAPIBaseUrl$defaultApiPrefixPath/resources/remove/${organization.id}";
-                                          apiPath =
-                                              Uri.encodeComponent(apiPath);
+                                          // apiPath =
+                                          //     Uri.encodeComponent(apiPath);
                                           logNoStack.i(
                                               "ORG_FORM: encodedApiPath is ${apiPath}");
                                           var response = await apiGetData(
