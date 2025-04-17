@@ -261,11 +261,11 @@ class _CreateOrganizationFormState
 
                                   StatusAlert.show(
                                     context,
-                                    duration: Duration(seconds: 2),
+                                    duration: const Duration(seconds: 2),
                                     title: nt.t.organization,
-                                    subtitle: nt.t.saved,
+                                    subtitle: nt.t.form.saved,
                                     configuration:
-                                        IconConfiguration(icon: Icons.done),
+                                        const IconConfiguration(icon: Icons.done),
                                     maxWidth: 260,
                                   );
                                   // ScaffoldMessenger.of(context).showSnackBar(
