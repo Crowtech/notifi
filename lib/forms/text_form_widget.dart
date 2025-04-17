@@ -122,6 +122,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
     logNoStack.i("TEXT_FORM_WIDGET: BUILD: ${widget.fieldCode} enableWidget:$enableWidget");
     return TextFormField(
       key: itemFormFieldKey,
+      autofocus: true,
       //controller: widget.textController,
       initialValue: widget.initialValue,
       autocorrect: true,

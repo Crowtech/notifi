@@ -10,6 +10,7 @@ import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/models/organization.dart';
 import 'package:notifi/models/organization_type.dart';
+import 'package:notifi/organizations/src/features/organizations/data/organizations_repository_nf.dart';
 import 'package:notifi/riverpod/enable_widget.dart';
 import 'package:notifi/riverpod/refresh_widget.dart';
 import 'package:notifi/riverpod/validate_form.dart';
@@ -268,11 +269,12 @@ class _CreateOrganizationFormState
                                           icon: Icons.done),
                                       maxWidth: 260,
                                     );
-
+                                    ref.invalidate(
+                                        fetchOrganizationsNestFilterProvider);
                                     Navigator.of(context).pop();
                                   }, onError: (error) {
                                     logNoStack.e("error is ${error}");
-                                     StatusAlert.show(
+                                    StatusAlert.show(
                                       context,
                                       duration: const Duration(seconds: 2),
                                       title: nt.t.organization,
