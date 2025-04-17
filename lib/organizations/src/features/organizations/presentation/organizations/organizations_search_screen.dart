@@ -115,27 +115,31 @@ class OrganizationsSearchScreen extends ConsumerWidget {
                           background: slideRightBackground(),
                           secondaryBackground: slideLeftBackground(),
                           confirmDismiss: (direction) {
-                            return showDialog<bool>(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  title: Text(nt.t.response.delete),
-                                  content: Text(nt.t.response.delete_sure),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () =>
-                                          Navigator.of(context).pop(false),
-                                      child: Text(nt.t.response.cancel),
-                                    ),
-                                    TextButton(
-                                      onPressed: () =>
-                                          Navigator.of(context).pop(true),
-                                      child: Text(nt.t.response.delete),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
+                            if (direction == DismissDirection.endToStart) {
+                              return showDialog<bool>(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: Text(nt.t.response.delete),
+                                    content: Text(nt.t.response.delete_sure),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(false),
+                                        child: Text(nt.t.response.cancel),
+                                      ),
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(true),
+                                        child: Text(nt.t.response.delete),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            } else {
+                              return Future.value(false);
+                            }
                           },
                           child: OrganizationListTile(
                             organization: organization,
@@ -170,7 +174,8 @@ class OrganizationsSearchScreen extends ConsumerWidget {
           logNoStack.i("ORGS_SEARCH_SCREEN: Add button pressed");
           showDialog(
             context: context,
-            builder: (context) => CreateOrganizationForm(formCode:"organization"),
+            builder: (context) =>
+                CreateOrganizationForm(formCode: "organization"),
           );
         },
         // foregroundColor: customizations[index].$1,

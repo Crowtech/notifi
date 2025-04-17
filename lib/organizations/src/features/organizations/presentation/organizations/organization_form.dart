@@ -288,7 +288,7 @@ class _CreateOrganizationFormState
                                           field: nt.t.form.url),
                                       configuration: const IconConfiguration(
                                           icon: Icons.error),
-                                      maxWidth: 260,
+                                      maxWidth: 300,
                                     );
                                   } else {
                                     // If the form is valid, display a snackbar. In the real world,
@@ -323,7 +323,7 @@ class _CreateOrganizationFormState
                                         subtitle: nt.t.form.saved,
                                         configuration: const IconConfiguration(
                                             icon: Icons.done),
-                                        maxWidth: 260,
+                                        maxWidth: 300,
                                       );
                                       ref.invalidate(
                                           fetchOrganizationsNestFilterProvider);
@@ -337,7 +337,7 @@ class _CreateOrganizationFormState
                                         subtitle: nt.t.form.error_saving,
                                         configuration: const IconConfiguration(
                                             icon: Icons.error),
-                                        maxWidth: 260,
+                                        maxWidth: 300,
                                       );
                                     });
                                   }
