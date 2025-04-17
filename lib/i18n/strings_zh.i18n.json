@@ -61,7 +61,8 @@
     "url": "网址",
     "url_validation": "请输入有效的${item}网址，例如https://www.google.com",
     "org_type": "${item} 类型",
-    "saved": "已保存"
+    "saved": "已保存",
+    "deleted": "已删除${item}"
   },
   "groups": "群组",
 "group_types_title" : "群组类型",

@@ -188,6 +188,7 @@ class _TranslationsFormZh extends TranslationsFormEn {
 	@override String url_validation({required Object item}) => '请输入有效的${item}网址，例如https://www.google.com';
 	@override String org_type({required Object item}) => '${item} 类型';
 	@override String get saved => '已保存';
+	@override String deleted({required Object item}) => '已删除${item}';
 }
 
 // Path: group_types
@@ -383,6 +384,7 @@ extension on TranslationsZh {
 			case 'form.url_validation': return ({required Object item}) => '请输入有效的${item}网址，例如https://www.google.com';
 			case 'form.org_type': return ({required Object item}) => '${item} 类型';
 			case 'form.saved': return '已保存';
+			case 'form.deleted': return ({required Object item}) => '已删除${item}';
 			case 'groups': return '群组';
 			case 'group_types_title': return '群组类型';
 			case 'group_types.kDefault': return '默认';

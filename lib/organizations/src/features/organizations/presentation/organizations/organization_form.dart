@@ -291,6 +291,7 @@ class _CreateOrganizationFormState
                                       maxWidth: 300,
                                       dismissOnBackgroundTap: true,
                                     );
+                                    
                                   } else {
                                     // If the form is valid, display a snackbar. In the real world,
                                     // you'd often call a server or save the information in a database.

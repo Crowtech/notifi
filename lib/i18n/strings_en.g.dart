@@ -189,6 +189,7 @@ class TranslationsFormEn {
 	String url_validation({required Object item}) => 'Please enter valid ${item} web address e.g. https://www.google.com';
 	String org_type({required Object item}) => '${item} Type';
 	String get saved => 'Saved';
+	String deleted({required Object item}) => 'Deleted ${item}';
 }
 
 // Path: group_types
@@ -382,6 +383,7 @@ extension on Translations {
 			case 'form.url_validation': return ({required Object item}) => 'Please enter valid ${item} web address e.g. https://www.google.com';
 			case 'form.org_type': return ({required Object item}) => '${item} Type';
 			case 'form.saved': return 'Saved';
+			case 'form.deleted': return ({required Object item}) => 'Deleted ${item}';
 			case 'firstname': return 'Firstname';
 			case 'focus_mode': return 'Focus Mode';
 			case 'groups': return 'Groups';

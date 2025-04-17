@@ -59,7 +59,8 @@
     "url": "Web Address",
     "url_validation": "Please enter valid ${item} web address e.g. https://www.google.com",
     "org_type": "${item} Type",
-    "saved": "Saved"
+    "saved": "Saved",
+    "deleted": "Deleted ${item}"
   },
   "firstname": "Firstname",
   "focus_mode": "Focus Mode",

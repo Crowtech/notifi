@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:notifi/api_utils.dart';
+import 'package:notifi/credentials.dart';
 
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
@@ -12,8 +14,10 @@ import 'package:notifi/organizations/src/features/organizations/presentation/org
 import 'package:notifi/organizations/src/features/organizations/presentation/organizations/organization_form2.dart';
 import 'package:notifi/organizations/src/features/organizations/presentation/organizations/organization_form3.dart';
 import 'package:notifi/riverpod/nest_filter_provider.dart';
+import 'package:notifi/state/nest_auth2.dart';
 import 'package:notifi/widgets/slide_left_background.dart';
 import 'package:notifi/widgets/slide_right_background.dart';
+import 'package:status_alert/status_alert.dart';
 
 import '../../data/organizations_repository.dart';
 import 'organization_list_tile.dart';
@@ -129,8 +133,39 @@ class OrganizationsSearchScreen extends ConsumerWidget {
                                         child: Text(nt.t.response.cancel),
                                       ),
                                       TextButton(
-                                        onPressed: () =>
-                                            Navigator.of(context).pop(true),
+                                        onPressed: () async {
+                                          var token = ref
+                                              .read(nestAuthProvider.notifier)
+                                              .token;
+                                          var apiPath =
+                                              "$defaultAPIBaseUrl$defaultApiPrefixPath/resources/remove/${organization.id}";
+                                          apiPath =
+                                              Uri.encodeComponent(apiPath);
+                                          logNoStack.i(
+                                              "ORG_FORM: encodedApiPath is ${apiPath}");
+                                          var response = await apiGetData(
+                                              token!,
+                                              apiPath,
+                                              "application/text");
+                                          logNoStack.i(
+                                              "ORG_SEARCH_LIST: result ${response.body.toString()}");
+                                          if (response.body != true) {
+                                            StatusAlert.show(
+                                              context,
+                                              duration:
+                                                  const Duration(seconds: 3),
+                                              title: nt.t.organization,
+                                              subtitle: nt.t.form.deleted(
+                                                  item: nt.t
+                                                      .organization_capitalized),
+                                              configuration:
+                                                  const IconConfiguration(
+                                                      icon: Icons.done),
+                                              maxWidth: 260,
+                                            );
+                                          }
+                                          Navigator.of(context).pop(true);
+                                        },
                                         child: Text(nt.t.response.delete),
                                       ),
                                     ],
@@ -138,7 +173,7 @@ class OrganizationsSearchScreen extends ConsumerWidget {
                                 },
                               );
                             } else {
-                               showDialog(
+                              showDialog(
                                 context: context,
                                 builder: (context) => OrganizationDetailsScreen(
                                     organizationId: organization.id!,
