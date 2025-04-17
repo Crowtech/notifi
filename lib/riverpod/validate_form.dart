@@ -17,6 +17,7 @@ var logNoStack = logger.Logger(
 @Riverpod(keepAlive: true)
 class InitialFormValidations extends _$InitialFormValidations {
   Map<String, bool> fields = {};
+  
   @override
   Map<String,bool> build(String code) => {};
 

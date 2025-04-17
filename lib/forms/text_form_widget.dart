@@ -86,7 +86,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
     isEmpty = widget.initialValue.isEmpty;
     enableWidget = widget.enabled;
     initialValid = isValidInput(widget.initialValue);
-    ref.read(InitialFormValidations(widget.formCode).notifier).add(widget.fieldCode,initialValid);
+    ref.read(initialFormValidations(widget.formCode).notifier).add(widget.fieldCode,initialValid);
     // ref.read(enableWidgetProvider(widget.fieldCode).notifier).setEnabled(widget.enabled);
   }
 
