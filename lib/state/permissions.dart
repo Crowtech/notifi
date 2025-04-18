@@ -66,10 +66,10 @@ if (rolesList.contains("dev")) {
   }
    else if (rolesList.contains("superadmin")) {
     return const UserRole.admin();
-  }  else if (rolesList.contains("admin")) {
-    return const UserRole.admin();
-    } else if (rolesList.contains("orgadmin")) {
+  }  else if (rolesList.contains("orgadmin")) {
     return const UserRole.orgadmin();
+    } else if (rolesList.contains("admin")) {
+    return const UserRole.admin();
   } else if (rolesList.contains("manager")) {
     return const UserRole.manager();
   } else if (rolesList.contains("user")) {

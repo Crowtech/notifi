@@ -10,6 +10,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:logger/logger.dart' as logger;
+import 'package:notifi/entities/user_role.dart';
 import 'package:notifi/i18n/string_hardcoded.dart';
 import 'package:notifi/notifi.dart';
 import 'package:notifi/models/person.dart' as person;
@@ -216,4 +217,46 @@ String getImageUrl({String? url, int diameter=64, String defaultUrl="https://gra
     url = defaultUrl;
   }
   return  "$defaultImageProxyUrl/${diameter}x/$url";
+}
+
+UserRole getRole(String? token)
+{
+  
+  if (token == null) return const UserRole.none();
+
+  bool hasExpired = JwtDecoder.isExpired(token!);
+  if (hasExpired) {
+    logNoStack.e("Permissions: User  token has expired");
+    return const UserRole.none();
+  }
+  DateTime expirationDate = JwtDecoder.getExpirationDate(token!);
+
+  // 2025-01-13 13:04:18.000
+  logNoStack.i("token expiry datetime is $expirationDate");
+  // use token to extract roles
+  Duration tokenTime = JwtDecoder.getTokenTime(token!);
+  logNoStack.i("token duration is ${tokenTime.inMinutes}");
+
+  Map<String, dynamic> jwtMap = JwtDecoder.decode(token!);
+  List rolesList = jwtMap['roles'];
+  String rolesStr = "";
+  for (var i = 0; i < rolesList.length; i++) {
+    rolesStr += "${rolesList[i]}\n";
+  }
+  logNoStack.i("PERMISSIONS: Roles for user are $rolesStr");
+if (rolesList.contains("dev")) {
+    return const UserRole.dev();
+  }
+   else if (rolesList.contains("superadmin")) {
+    return const UserRole.admin();
+  }  else if (rolesList.contains("orgadmin")) {
+    return const UserRole.orgadmin();
+    } else if (rolesList.contains("admin")) {
+    return const UserRole.admin();
+  } else if (rolesList.contains("manager")) {
+    return const UserRole.manager();
+  } else if (rolesList.contains("user")) {
+    return const UserRole.user();
+  }
+  return const UserRole.none();
 }

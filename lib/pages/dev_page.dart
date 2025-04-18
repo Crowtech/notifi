@@ -95,11 +95,11 @@ class _DevPageState extends ConsumerState<DevPage>
             context.pop(false);
           },
         ),
-        title: Text(nt.t.camera_title),
+        title: Text(nt.t.devpage),
       ),
       body: Column(
-        children: const [
-          Text("Dev Page"),
+        children:  [
+          Text(nt.t.devpage),
         ],
       ),
     );
