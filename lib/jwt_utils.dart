@@ -224,12 +224,12 @@ UserRole getRole(String? token)
   
   if (token == null) return const UserRole.none();
 
-  bool hasExpired = JwtDecoder.isExpired(token!);
+  bool hasExpired = JwtDecoder.isExpired(token);
   if (hasExpired) {
     logNoStack.e("Permissions: User  token has expired");
     return const UserRole.none();
   }
-  DateTime expirationDate = JwtDecoder.getExpirationDate(token!);
+  DateTime expirationDate = JwtDecoder.getExpirationDate(token);
 
   // 2025-01-13 13:04:18.000
   logNoStack.i("token expiry datetime is $expirationDate");
@@ -241,7 +241,9 @@ UserRole getRole(String? token)
   List rolesList = jwtMap['roles'];
   String rolesStr = "";
   for (var i = 0; i < rolesList.length; i++) {
-    rolesStr += "${rolesList[i]}\n";
+    if (rolesList[i] != null) {
+      rolesStr += "${rolesList[i]}\n";
+    }
   }
   logNoStack.i("PERMISSIONS: Roles for user are $rolesStr");
 if (rolesList.contains("dev")) {
