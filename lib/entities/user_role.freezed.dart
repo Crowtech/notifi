@@ -18,8 +18,11 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$UserRole {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() admin,
     required TResult Function() dev,
+    required TResult Function() superadmin,
+    required TResult Function() admin,
+    required TResult Function() orgadmin,
+    required TResult Function() manager,
     required TResult Function() user,
     required TResult Function() guest,
     required TResult Function() none,
@@ -27,8 +30,11 @@ mixin _$UserRole {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? admin,
     TResult? Function()? dev,
+    TResult? Function()? superadmin,
+    TResult? Function()? admin,
+    TResult? Function()? orgadmin,
+    TResult? Function()? manager,
     TResult? Function()? user,
     TResult? Function()? guest,
     TResult? Function()? none,
@@ -36,8 +42,11 @@ mixin _$UserRole {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? admin,
     TResult Function()? dev,
+    TResult Function()? superadmin,
+    TResult Function()? admin,
+    TResult Function()? orgadmin,
+    TResult Function()? manager,
     TResult Function()? user,
     TResult Function()? guest,
     TResult Function()? none,
@@ -46,8 +55,11 @@ mixin _$UserRole {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Admin value) admin,
     required TResult Function(Dev value) dev,
+    required TResult Function(SuperAdmin value) superadmin,
+    required TResult Function(Admin value) admin,
+    required TResult Function(OrgAdmin value) orgadmin,
+    required TResult Function(Manager value) manager,
     required TResult Function(User value) user,
     required TResult Function(Guest value) guest,
     required TResult Function(None value) none,
@@ -55,8 +67,11 @@ mixin _$UserRole {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Admin value)? admin,
     TResult? Function(Dev value)? dev,
+    TResult? Function(SuperAdmin value)? superadmin,
+    TResult? Function(Admin value)? admin,
+    TResult? Function(OrgAdmin value)? orgadmin,
+    TResult? Function(Manager value)? manager,
     TResult? Function(User value)? user,
     TResult? Function(Guest value)? guest,
     TResult? Function(None value)? none,
@@ -64,8 +79,11 @@ mixin _$UserRole {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Admin value)? admin,
     TResult Function(Dev value)? dev,
+    TResult Function(SuperAdmin value)? superadmin,
+    TResult Function(Admin value)? admin,
+    TResult Function(OrgAdmin value)? orgadmin,
+    TResult Function(Manager value)? manager,
     TResult Function(User value)? user,
     TResult Function(Guest value)? guest,
     TResult Function(None value)? none,
@@ -92,6 +110,286 @@ class _$UserRoleCopyWithImpl<$Res, $Val extends UserRole>
 
   /// Create a copy of UserRole
   /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+abstract class _$$DevImplCopyWith<$Res> {
+  factory _$$DevImplCopyWith(_$DevImpl value, $Res Function(_$DevImpl) then) =
+      __$$DevImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$DevImplCopyWithImpl<$Res>
+    extends _$UserRoleCopyWithImpl<$Res, _$DevImpl>
+    implements _$$DevImplCopyWith<$Res> {
+  __$$DevImplCopyWithImpl(_$DevImpl _value, $Res Function(_$DevImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of UserRole
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$DevImpl implements Dev {
+  const _$DevImpl();
+
+  @override
+  String toString() {
+    return 'UserRole.dev()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$DevImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() dev,
+    required TResult Function() superadmin,
+    required TResult Function() admin,
+    required TResult Function() orgadmin,
+    required TResult Function() manager,
+    required TResult Function() user,
+    required TResult Function() guest,
+    required TResult Function() none,
+  }) {
+    return dev();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? dev,
+    TResult? Function()? superadmin,
+    TResult? Function()? admin,
+    TResult? Function()? orgadmin,
+    TResult? Function()? manager,
+    TResult? Function()? user,
+    TResult? Function()? guest,
+    TResult? Function()? none,
+  }) {
+    return dev?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? dev,
+    TResult Function()? superadmin,
+    TResult Function()? admin,
+    TResult Function()? orgadmin,
+    TResult Function()? manager,
+    TResult Function()? user,
+    TResult Function()? guest,
+    TResult Function()? none,
+    required TResult orElse(),
+  }) {
+    if (dev != null) {
+      return dev();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Dev value) dev,
+    required TResult Function(SuperAdmin value) superadmin,
+    required TResult Function(Admin value) admin,
+    required TResult Function(OrgAdmin value) orgadmin,
+    required TResult Function(Manager value) manager,
+    required TResult Function(User value) user,
+    required TResult Function(Guest value) guest,
+    required TResult Function(None value) none,
+  }) {
+    return dev(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Dev value)? dev,
+    TResult? Function(SuperAdmin value)? superadmin,
+    TResult? Function(Admin value)? admin,
+    TResult? Function(OrgAdmin value)? orgadmin,
+    TResult? Function(Manager value)? manager,
+    TResult? Function(User value)? user,
+    TResult? Function(Guest value)? guest,
+    TResult? Function(None value)? none,
+  }) {
+    return dev?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Dev value)? dev,
+    TResult Function(SuperAdmin value)? superadmin,
+    TResult Function(Admin value)? admin,
+    TResult Function(OrgAdmin value)? orgadmin,
+    TResult Function(Manager value)? manager,
+    TResult Function(User value)? user,
+    TResult Function(Guest value)? guest,
+    TResult Function(None value)? none,
+    required TResult orElse(),
+  }) {
+    if (dev != null) {
+      return dev(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Dev implements UserRole {
+  const factory Dev() = _$DevImpl;
+}
+
+/// @nodoc
+abstract class _$$SuperAdminImplCopyWith<$Res> {
+  factory _$$SuperAdminImplCopyWith(
+          _$SuperAdminImpl value, $Res Function(_$SuperAdminImpl) then) =
+      __$$SuperAdminImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SuperAdminImplCopyWithImpl<$Res>
+    extends _$UserRoleCopyWithImpl<$Res, _$SuperAdminImpl>
+    implements _$$SuperAdminImplCopyWith<$Res> {
+  __$$SuperAdminImplCopyWithImpl(
+      _$SuperAdminImpl _value, $Res Function(_$SuperAdminImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of UserRole
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$SuperAdminImpl implements SuperAdmin {
+  const _$SuperAdminImpl();
+
+  @override
+  String toString() {
+    return 'UserRole.superadmin()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$SuperAdminImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() dev,
+    required TResult Function() superadmin,
+    required TResult Function() admin,
+    required TResult Function() orgadmin,
+    required TResult Function() manager,
+    required TResult Function() user,
+    required TResult Function() guest,
+    required TResult Function() none,
+  }) {
+    return superadmin();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? dev,
+    TResult? Function()? superadmin,
+    TResult? Function()? admin,
+    TResult? Function()? orgadmin,
+    TResult? Function()? manager,
+    TResult? Function()? user,
+    TResult? Function()? guest,
+    TResult? Function()? none,
+  }) {
+    return superadmin?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? dev,
+    TResult Function()? superadmin,
+    TResult Function()? admin,
+    TResult Function()? orgadmin,
+    TResult Function()? manager,
+    TResult Function()? user,
+    TResult Function()? guest,
+    TResult Function()? none,
+    required TResult orElse(),
+  }) {
+    if (superadmin != null) {
+      return superadmin();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Dev value) dev,
+    required TResult Function(SuperAdmin value) superadmin,
+    required TResult Function(Admin value) admin,
+    required TResult Function(OrgAdmin value) orgadmin,
+    required TResult Function(Manager value) manager,
+    required TResult Function(User value) user,
+    required TResult Function(Guest value) guest,
+    required TResult Function(None value) none,
+  }) {
+    return superadmin(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Dev value)? dev,
+    TResult? Function(SuperAdmin value)? superadmin,
+    TResult? Function(Admin value)? admin,
+    TResult? Function(OrgAdmin value)? orgadmin,
+    TResult? Function(Manager value)? manager,
+    TResult? Function(User value)? user,
+    TResult? Function(Guest value)? guest,
+    TResult? Function(None value)? none,
+  }) {
+    return superadmin?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Dev value)? dev,
+    TResult Function(SuperAdmin value)? superadmin,
+    TResult Function(Admin value)? admin,
+    TResult Function(OrgAdmin value)? orgadmin,
+    TResult Function(Manager value)? manager,
+    TResult Function(User value)? user,
+    TResult Function(Guest value)? guest,
+    TResult Function(None value)? none,
+    required TResult orElse(),
+  }) {
+    if (superadmin != null) {
+      return superadmin(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SuperAdmin implements UserRole {
+  const factory SuperAdmin() = _$SuperAdminImpl;
 }
 
 /// @nodoc
@@ -135,8 +433,11 @@ class _$AdminImpl implements Admin {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() admin,
     required TResult Function() dev,
+    required TResult Function() superadmin,
+    required TResult Function() admin,
+    required TResult Function() orgadmin,
+    required TResult Function() manager,
     required TResult Function() user,
     required TResult Function() guest,
     required TResult Function() none,
@@ -147,8 +448,11 @@ class _$AdminImpl implements Admin {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? admin,
     TResult? Function()? dev,
+    TResult? Function()? superadmin,
+    TResult? Function()? admin,
+    TResult? Function()? orgadmin,
+    TResult? Function()? manager,
     TResult? Function()? user,
     TResult? Function()? guest,
     TResult? Function()? none,
@@ -159,8 +463,11 @@ class _$AdminImpl implements Admin {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? admin,
     TResult Function()? dev,
+    TResult Function()? superadmin,
+    TResult Function()? admin,
+    TResult Function()? orgadmin,
+    TResult Function()? manager,
     TResult Function()? user,
     TResult Function()? guest,
     TResult Function()? none,
@@ -175,8 +482,11 @@ class _$AdminImpl implements Admin {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Admin value) admin,
     required TResult Function(Dev value) dev,
+    required TResult Function(SuperAdmin value) superadmin,
+    required TResult Function(Admin value) admin,
+    required TResult Function(OrgAdmin value) orgadmin,
+    required TResult Function(Manager value) manager,
     required TResult Function(User value) user,
     required TResult Function(Guest value) guest,
     required TResult Function(None value) none,
@@ -187,8 +497,11 @@ class _$AdminImpl implements Admin {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Admin value)? admin,
     TResult? Function(Dev value)? dev,
+    TResult? Function(SuperAdmin value)? superadmin,
+    TResult? Function(Admin value)? admin,
+    TResult? Function(OrgAdmin value)? orgadmin,
+    TResult? Function(Manager value)? manager,
     TResult? Function(User value)? user,
     TResult? Function(Guest value)? guest,
     TResult? Function(None value)? none,
@@ -199,8 +512,11 @@ class _$AdminImpl implements Admin {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Admin value)? admin,
     TResult Function(Dev value)? dev,
+    TResult Function(SuperAdmin value)? superadmin,
+    TResult Function(Admin value)? admin,
+    TResult Function(OrgAdmin value)? orgadmin,
+    TResult Function(Manager value)? manager,
     TResult Function(User value)? user,
     TResult Function(Guest value)? guest,
     TResult Function(None value)? none,
@@ -218,16 +534,18 @@ abstract class Admin implements UserRole {
 }
 
 /// @nodoc
-abstract class _$$DevImplCopyWith<$Res> {
-  factory _$$DevImplCopyWith(_$DevImpl value, $Res Function(_$DevImpl) then) =
-      __$$DevImplCopyWithImpl<$Res>;
+abstract class _$$OrgAdminImplCopyWith<$Res> {
+  factory _$$OrgAdminImplCopyWith(
+          _$OrgAdminImpl value, $Res Function(_$OrgAdminImpl) then) =
+      __$$OrgAdminImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$DevImplCopyWithImpl<$Res>
-    extends _$UserRoleCopyWithImpl<$Res, _$DevImpl>
-    implements _$$DevImplCopyWith<$Res> {
-  __$$DevImplCopyWithImpl(_$DevImpl _value, $Res Function(_$DevImpl) _then)
+class __$$OrgAdminImplCopyWithImpl<$Res>
+    extends _$UserRoleCopyWithImpl<$Res, _$OrgAdminImpl>
+    implements _$$OrgAdminImplCopyWith<$Res> {
+  __$$OrgAdminImplCopyWithImpl(
+      _$OrgAdminImpl _value, $Res Function(_$OrgAdminImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of UserRole
@@ -236,18 +554,18 @@ class __$$DevImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DevImpl implements Dev {
-  const _$DevImpl();
+class _$OrgAdminImpl implements OrgAdmin {
+  const _$OrgAdminImpl();
 
   @override
   String toString() {
-    return 'UserRole.dev()';
+    return 'UserRole.orgadmin()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$DevImpl);
+        (other.runtimeType == runtimeType && other is _$OrgAdminImpl);
   }
 
   @override
@@ -256,39 +574,48 @@ class _$DevImpl implements Dev {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() admin,
     required TResult Function() dev,
+    required TResult Function() superadmin,
+    required TResult Function() admin,
+    required TResult Function() orgadmin,
+    required TResult Function() manager,
     required TResult Function() user,
     required TResult Function() guest,
     required TResult Function() none,
   }) {
-    return dev();
+    return orgadmin();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? admin,
     TResult? Function()? dev,
+    TResult? Function()? superadmin,
+    TResult? Function()? admin,
+    TResult? Function()? orgadmin,
+    TResult? Function()? manager,
     TResult? Function()? user,
     TResult? Function()? guest,
     TResult? Function()? none,
   }) {
-    return dev?.call();
+    return orgadmin?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? admin,
     TResult Function()? dev,
+    TResult Function()? superadmin,
+    TResult Function()? admin,
+    TResult Function()? orgadmin,
+    TResult Function()? manager,
     TResult Function()? user,
     TResult Function()? guest,
     TResult Function()? none,
     required TResult orElse(),
   }) {
-    if (dev != null) {
-      return dev();
+    if (orgadmin != null) {
+      return orgadmin();
     }
     return orElse();
   }
@@ -296,46 +623,196 @@ class _$DevImpl implements Dev {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Admin value) admin,
     required TResult Function(Dev value) dev,
+    required TResult Function(SuperAdmin value) superadmin,
+    required TResult Function(Admin value) admin,
+    required TResult Function(OrgAdmin value) orgadmin,
+    required TResult Function(Manager value) manager,
     required TResult Function(User value) user,
     required TResult Function(Guest value) guest,
     required TResult Function(None value) none,
   }) {
-    return dev(this);
+    return orgadmin(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Admin value)? admin,
     TResult? Function(Dev value)? dev,
+    TResult? Function(SuperAdmin value)? superadmin,
+    TResult? Function(Admin value)? admin,
+    TResult? Function(OrgAdmin value)? orgadmin,
+    TResult? Function(Manager value)? manager,
     TResult? Function(User value)? user,
     TResult? Function(Guest value)? guest,
     TResult? Function(None value)? none,
   }) {
-    return dev?.call(this);
+    return orgadmin?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Admin value)? admin,
     TResult Function(Dev value)? dev,
+    TResult Function(SuperAdmin value)? superadmin,
+    TResult Function(Admin value)? admin,
+    TResult Function(OrgAdmin value)? orgadmin,
+    TResult Function(Manager value)? manager,
     TResult Function(User value)? user,
     TResult Function(Guest value)? guest,
     TResult Function(None value)? none,
     required TResult orElse(),
   }) {
-    if (dev != null) {
-      return dev(this);
+    if (orgadmin != null) {
+      return orgadmin(this);
     }
     return orElse();
   }
 }
 
-abstract class Dev implements UserRole {
-  const factory Dev() = _$DevImpl;
+abstract class OrgAdmin implements UserRole {
+  const factory OrgAdmin() = _$OrgAdminImpl;
+}
+
+/// @nodoc
+abstract class _$$ManagerImplCopyWith<$Res> {
+  factory _$$ManagerImplCopyWith(
+          _$ManagerImpl value, $Res Function(_$ManagerImpl) then) =
+      __$$ManagerImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ManagerImplCopyWithImpl<$Res>
+    extends _$UserRoleCopyWithImpl<$Res, _$ManagerImpl>
+    implements _$$ManagerImplCopyWith<$Res> {
+  __$$ManagerImplCopyWithImpl(
+      _$ManagerImpl _value, $Res Function(_$ManagerImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of UserRole
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ManagerImpl implements Manager {
+  const _$ManagerImpl();
+
+  @override
+  String toString() {
+    return 'UserRole.manager()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ManagerImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() dev,
+    required TResult Function() superadmin,
+    required TResult Function() admin,
+    required TResult Function() orgadmin,
+    required TResult Function() manager,
+    required TResult Function() user,
+    required TResult Function() guest,
+    required TResult Function() none,
+  }) {
+    return manager();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? dev,
+    TResult? Function()? superadmin,
+    TResult? Function()? admin,
+    TResult? Function()? orgadmin,
+    TResult? Function()? manager,
+    TResult? Function()? user,
+    TResult? Function()? guest,
+    TResult? Function()? none,
+  }) {
+    return manager?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? dev,
+    TResult Function()? superadmin,
+    TResult Function()? admin,
+    TResult Function()? orgadmin,
+    TResult Function()? manager,
+    TResult Function()? user,
+    TResult Function()? guest,
+    TResult Function()? none,
+    required TResult orElse(),
+  }) {
+    if (manager != null) {
+      return manager();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Dev value) dev,
+    required TResult Function(SuperAdmin value) superadmin,
+    required TResult Function(Admin value) admin,
+    required TResult Function(OrgAdmin value) orgadmin,
+    required TResult Function(Manager value) manager,
+    required TResult Function(User value) user,
+    required TResult Function(Guest value) guest,
+    required TResult Function(None value) none,
+  }) {
+    return manager(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Dev value)? dev,
+    TResult? Function(SuperAdmin value)? superadmin,
+    TResult? Function(Admin value)? admin,
+    TResult? Function(OrgAdmin value)? orgadmin,
+    TResult? Function(Manager value)? manager,
+    TResult? Function(User value)? user,
+    TResult? Function(Guest value)? guest,
+    TResult? Function(None value)? none,
+  }) {
+    return manager?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Dev value)? dev,
+    TResult Function(SuperAdmin value)? superadmin,
+    TResult Function(Admin value)? admin,
+    TResult Function(OrgAdmin value)? orgadmin,
+    TResult Function(Manager value)? manager,
+    TResult Function(User value)? user,
+    TResult Function(Guest value)? guest,
+    TResult Function(None value)? none,
+    required TResult orElse(),
+  }) {
+    if (manager != null) {
+      return manager(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Manager implements UserRole {
+  const factory Manager() = _$ManagerImpl;
 }
 
 /// @nodoc
@@ -378,8 +855,11 @@ class _$UserImpl implements User {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() admin,
     required TResult Function() dev,
+    required TResult Function() superadmin,
+    required TResult Function() admin,
+    required TResult Function() orgadmin,
+    required TResult Function() manager,
     required TResult Function() user,
     required TResult Function() guest,
     required TResult Function() none,
@@ -390,8 +870,11 @@ class _$UserImpl implements User {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? admin,
     TResult? Function()? dev,
+    TResult? Function()? superadmin,
+    TResult? Function()? admin,
+    TResult? Function()? orgadmin,
+    TResult? Function()? manager,
     TResult? Function()? user,
     TResult? Function()? guest,
     TResult? Function()? none,
@@ -402,8 +885,11 @@ class _$UserImpl implements User {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? admin,
     TResult Function()? dev,
+    TResult Function()? superadmin,
+    TResult Function()? admin,
+    TResult Function()? orgadmin,
+    TResult Function()? manager,
     TResult Function()? user,
     TResult Function()? guest,
     TResult Function()? none,
@@ -418,8 +904,11 @@ class _$UserImpl implements User {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Admin value) admin,
     required TResult Function(Dev value) dev,
+    required TResult Function(SuperAdmin value) superadmin,
+    required TResult Function(Admin value) admin,
+    required TResult Function(OrgAdmin value) orgadmin,
+    required TResult Function(Manager value) manager,
     required TResult Function(User value) user,
     required TResult Function(Guest value) guest,
     required TResult Function(None value) none,
@@ -430,8 +919,11 @@ class _$UserImpl implements User {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Admin value)? admin,
     TResult? Function(Dev value)? dev,
+    TResult? Function(SuperAdmin value)? superadmin,
+    TResult? Function(Admin value)? admin,
+    TResult? Function(OrgAdmin value)? orgadmin,
+    TResult? Function(Manager value)? manager,
     TResult? Function(User value)? user,
     TResult? Function(Guest value)? guest,
     TResult? Function(None value)? none,
@@ -442,8 +934,11 @@ class _$UserImpl implements User {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Admin value)? admin,
     TResult Function(Dev value)? dev,
+    TResult Function(SuperAdmin value)? superadmin,
+    TResult Function(Admin value)? admin,
+    TResult Function(OrgAdmin value)? orgadmin,
+    TResult Function(Manager value)? manager,
     TResult Function(User value)? user,
     TResult Function(Guest value)? guest,
     TResult Function(None value)? none,
@@ -501,8 +996,11 @@ class _$GuestImpl implements Guest {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() admin,
     required TResult Function() dev,
+    required TResult Function() superadmin,
+    required TResult Function() admin,
+    required TResult Function() orgadmin,
+    required TResult Function() manager,
     required TResult Function() user,
     required TResult Function() guest,
     required TResult Function() none,
@@ -513,8 +1011,11 @@ class _$GuestImpl implements Guest {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? admin,
     TResult? Function()? dev,
+    TResult? Function()? superadmin,
+    TResult? Function()? admin,
+    TResult? Function()? orgadmin,
+    TResult? Function()? manager,
     TResult? Function()? user,
     TResult? Function()? guest,
     TResult? Function()? none,
@@ -525,8 +1026,11 @@ class _$GuestImpl implements Guest {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? admin,
     TResult Function()? dev,
+    TResult Function()? superadmin,
+    TResult Function()? admin,
+    TResult Function()? orgadmin,
+    TResult Function()? manager,
     TResult Function()? user,
     TResult Function()? guest,
     TResult Function()? none,
@@ -541,8 +1045,11 @@ class _$GuestImpl implements Guest {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Admin value) admin,
     required TResult Function(Dev value) dev,
+    required TResult Function(SuperAdmin value) superadmin,
+    required TResult Function(Admin value) admin,
+    required TResult Function(OrgAdmin value) orgadmin,
+    required TResult Function(Manager value) manager,
     required TResult Function(User value) user,
     required TResult Function(Guest value) guest,
     required TResult Function(None value) none,
@@ -553,8 +1060,11 @@ class _$GuestImpl implements Guest {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Admin value)? admin,
     TResult? Function(Dev value)? dev,
+    TResult? Function(SuperAdmin value)? superadmin,
+    TResult? Function(Admin value)? admin,
+    TResult? Function(OrgAdmin value)? orgadmin,
+    TResult? Function(Manager value)? manager,
     TResult? Function(User value)? user,
     TResult? Function(Guest value)? guest,
     TResult? Function(None value)? none,
@@ -565,8 +1075,11 @@ class _$GuestImpl implements Guest {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Admin value)? admin,
     TResult Function(Dev value)? dev,
+    TResult Function(SuperAdmin value)? superadmin,
+    TResult Function(Admin value)? admin,
+    TResult Function(OrgAdmin value)? orgadmin,
+    TResult Function(Manager value)? manager,
     TResult Function(User value)? user,
     TResult Function(Guest value)? guest,
     TResult Function(None value)? none,
@@ -623,8 +1136,11 @@ class _$NoneImpl implements None {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() admin,
     required TResult Function() dev,
+    required TResult Function() superadmin,
+    required TResult Function() admin,
+    required TResult Function() orgadmin,
+    required TResult Function() manager,
     required TResult Function() user,
     required TResult Function() guest,
     required TResult Function() none,
@@ -635,8 +1151,11 @@ class _$NoneImpl implements None {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? admin,
     TResult? Function()? dev,
+    TResult? Function()? superadmin,
+    TResult? Function()? admin,
+    TResult? Function()? orgadmin,
+    TResult? Function()? manager,
     TResult? Function()? user,
     TResult? Function()? guest,
     TResult? Function()? none,
@@ -647,8 +1166,11 @@ class _$NoneImpl implements None {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? admin,
     TResult Function()? dev,
+    TResult Function()? superadmin,
+    TResult Function()? admin,
+    TResult Function()? orgadmin,
+    TResult Function()? manager,
     TResult Function()? user,
     TResult Function()? guest,
     TResult Function()? none,
@@ -663,8 +1185,11 @@ class _$NoneImpl implements None {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Admin value) admin,
     required TResult Function(Dev value) dev,
+    required TResult Function(SuperAdmin value) superadmin,
+    required TResult Function(Admin value) admin,
+    required TResult Function(OrgAdmin value) orgadmin,
+    required TResult Function(Manager value) manager,
     required TResult Function(User value) user,
     required TResult Function(Guest value) guest,
     required TResult Function(None value) none,
@@ -675,8 +1200,11 @@ class _$NoneImpl implements None {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Admin value)? admin,
     TResult? Function(Dev value)? dev,
+    TResult? Function(SuperAdmin value)? superadmin,
+    TResult? Function(Admin value)? admin,
+    TResult? Function(OrgAdmin value)? orgadmin,
+    TResult? Function(Manager value)? manager,
     TResult? Function(User value)? user,
     TResult? Function(Guest value)? guest,
     TResult? Function(None value)? none,
@@ -687,8 +1215,11 @@ class _$NoneImpl implements None {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Admin value)? admin,
     TResult Function(Dev value)? dev,
+    TResult Function(SuperAdmin value)? superadmin,
+    TResult Function(Admin value)? admin,
+    TResult Function(OrgAdmin value)? orgadmin,
+    TResult Function(Manager value)? manager,
     TResult Function(User value)? user,
     TResult Function(Guest value)? guest,
     TResult Function(None value)? none,

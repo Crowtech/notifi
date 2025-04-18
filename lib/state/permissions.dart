@@ -61,8 +61,21 @@ Future<UserRole> permissions(PermissionsRef ref) async {
     rolesStr += "${rolesList[i]}\n";
   }
   logNoStack.i("PERMISSIONS: Roles for ${user.email} are $rolesStr");
-
-  return _requestMock();
+if (rolesList.contains("dev")) {
+    return const UserRole.dev();
+  }
+   else if (rolesList.contains("superadmin")) {
+    return const UserRole.admin();
+  }  else if (rolesList.contains("admin")) {
+    return const UserRole.admin();
+    } else if (rolesList.contains("orgadmin")) {
+    return const UserRole.orgadmin();
+  } else if (rolesList.contains("manager")) {
+    return const UserRole.manager();
+  } else if (rolesList.contains("user")) {
+    return const UserRole.user();
+  }
+  return const UserRole.none();
 }
 
 /// Gives a random [UserRole] based on a dice roll.

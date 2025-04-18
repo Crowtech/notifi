@@ -62,6 +62,7 @@ class TranslationsZh extends Translations {
 	@override String get dark => '黑暗的';
 	@override String get dashboard => '仪表板';
 	@override String get deviceid => '设备标识符';
+	@override String get devpage => '开发者页面';
 	@override String get edit => '编辑';
 	@override String get email => '电子邮件';
 	@override String get exposure_mode => '曝光模式';
@@ -362,6 +363,7 @@ extension on TranslationsZh {
 			case 'dark': return '黑暗的';
 			case 'dashboard': return '仪表板';
 			case 'deviceid': return '设备标识符';
+			case 'devpage': return '开发者页面';
 			case 'edit': return '编辑';
 			case 'email': return '电子邮件';
 			case 'exposure_mode': return '曝光模式';
