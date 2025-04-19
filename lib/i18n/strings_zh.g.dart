@@ -58,6 +58,7 @@ class TranslationsZh extends Translations {
 	@override String get camera_access_restricted => '相机访问受到限制';
 	@override String get camera_denied => '您已拒绝相机访问';
 	@override String get camera_not_found => '未找到相机';
+	@override String copied to clipboard({required Object item}) => '${item} 已复制到剪贴板';
 	@override String get created => '创建时间';
 	@override String get dark => '黑暗的';
 	@override String get dashboard => '仪表板';
@@ -125,6 +126,7 @@ class TranslationsZh extends Translations {
 	@override String get still => '固定的';
 	@override String get terms_and_conditions => '条款和条件';
 	@override String get test_page => '测试页';
+	@override String get text => '文本';
 	@override late final _TranslationsUnknownZh unknown = _TranslationsUnknownZh._(_root);
 	@override String get update_account => '更新账户';
 	@override String get zoom_in => '放大';
@@ -359,6 +361,7 @@ extension on TranslationsZh {
 			case 'camera_access_restricted': return '相机访问受到限制';
 			case 'camera_denied': return '您已拒绝相机访问';
 			case 'camera_not_found': return '未找到相机';
+			case 'copied to clipboard': return ({required Object item}) => '${item} 已复制到剪贴板';
 			case 'created': return '创建时间';
 			case 'dark': return '黑暗的';
 			case 'dashboard': return '仪表板';
@@ -494,6 +497,7 @@ extension on TranslationsZh {
 			case 'still': return '固定的';
 			case 'terms_and_conditions': return '条款和条件';
 			case 'test_page': return '测试页';
+			case 'text': return '文本';
 			case 'unknown.person': return '匿名用户';
 			case 'unknown.organization': return '匿名组织';
 			case 'unknown.group': return '未命名的组';

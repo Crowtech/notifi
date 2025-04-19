@@ -59,6 +59,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get camera_access_restricted => 'Camera access is restricted';
 	String get camera_denied => 'Camera access denied by user.';
 	String get camera_not_found => 'No camera found.';
+	String copied to clipboard({required Object item}) => '${item} copied to clipboard';
 	String get created => 'Created';
 	String get dark => 'dark';
 	String get dashboard => 'Dashboard';
@@ -126,6 +127,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get still => 'Still';
 	String get terms_and_conditions => 'Terms & Conditions';
 	String get test_page => 'Test Page';
+	String get text => 'Text';
 	late final TranslationsUnknownEn unknown = TranslationsUnknownEn.internal(_root);
 	String get update_account => 'Update Account';
 	String get zoom_in => 'Zoom In';
@@ -360,6 +362,7 @@ extension on Translations {
 			case 'camera_access_restricted': return 'Camera access is restricted';
 			case 'camera_denied': return 'Camera access denied by user.';
 			case 'camera_not_found': return 'No camera found.';
+			case 'copied to clipboard': return ({required Object item}) => '${item} copied to clipboard';
 			case 'created': return 'Created';
 			case 'dark': return 'dark';
 			case 'dashboard': return 'Dashboard';
@@ -495,6 +498,7 @@ extension on Translations {
 			case 'still': return 'Still';
 			case 'terms_and_conditions': return 'Terms & Conditions';
 			case 'test_page': return 'Test Page';
+			case 'text': return 'Text';
 			case 'unknown.person': return 'Unnamed User';
 			case 'unknown.organization': return 'Unnamed Organization';
 			case 'unknown.group': return 'Unnamed Group';

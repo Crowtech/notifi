@@ -35,6 +35,7 @@
   "camera_access_restricted": "Camera access is restricted",
   "camera_denied": "Camera access denied by user.",
   "camera_not_found": "No camera found.",
+  "copied to clipboard": "${item} copied to clipboard",
   "created": "Created",
   "dark": "dark",
   "dashboard": "Dashboard",
@@ -186,6 +187,7 @@
   "still": "Still",
   "terms_and_conditions": "Terms & Conditions",
   "test_page": "Test Page",
+  "text": "Text",
   "unknown": {
     "person": "Unnamed User",
     "organization": "Unnamed Organization",

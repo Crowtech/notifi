@@ -35,6 +35,7 @@
   "camera_access_restricted": "相机访问受到限制",
   "camera_denied": "您已拒绝相机访问",
   "camera_not_found": "未找到相机",
+  "copied to clipboard": "${item} 已复制到剪贴板",
   "created": "创建时间",
   "dark": "黑暗的",
   "dashboard": "仪表板",
@@ -190,6 +191,7 @@
   "still": "固定的",
   "terms_and_conditions": "条款和条件",
   "test_page": "测试页",
+  "text": "文本",
   "unknown": {
     "person": "匿名用户",
     "organization": "匿名组织",
