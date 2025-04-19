@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart' as logger;
+import 'package:notifi/riverpod/info_widget.dart';
 import 'package:notifi/state/fcm_controller.dart';
 
 
@@ -29,7 +30,7 @@ class FirebaseFcm extends ConsumerWidget {
       builder: (context, ref, child) {
         final fcm = ref.watch(fcmProvider(options));
       
-      
+        ref.read(infoDataProvider("userdump").notifier).update("fcm", fcm);
         // We can then render both activities.
         // Both requests will happen in parallel and correctly be cached.
         return Column(

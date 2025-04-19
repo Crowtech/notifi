@@ -33,6 +33,7 @@ class TextFormFieldWidget extends ConsumerStatefulWidget {
     required this.itemCategory,
     required this.itemName,
     required this.itemValidation,
+    this.hintText,
     required this.regex,
     this.optional = false,
     this.forceLowercase = false,
@@ -50,6 +51,7 @@ class TextFormFieldWidget extends ConsumerStatefulWidget {
   final String itemCategory;
   final String itemName;
   final String itemValidation;
+  final String? hintText;
   final bool optional;
   final String regex;
   final bool forceLowercase;
@@ -131,6 +133,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
       inputFormatters: [...inputFormatters!],
       textCapitalization: widget.textCapitalization,
       decoration: InputDecoration(
+        hintText: widget.hintText,
         errorStyle: const TextStyle(color: Colors.red),
         labelText: widget.optional ? "${widget.itemName} (${nt.t.optional})" : widget.itemName,
         focusedBorder: OutlineInputBorder(
