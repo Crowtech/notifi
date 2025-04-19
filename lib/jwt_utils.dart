@@ -240,7 +240,7 @@ UserRole getRole(String? token)
 
   Map<String, dynamic> jwtMap = JwtDecoder.decode(token);
   logNoStack.i("PERMISSIONS: JWT Map is $jwtMap");
-  List rolesList = jwtMap['roles'];
+  List rolesList = jwtMap['realm_access']['roles'];
   String rolesStr = "";
   for (var i = 0; i < rolesList.length; i++) {
     if (rolesList[i] != null) {
