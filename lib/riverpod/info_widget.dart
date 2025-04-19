@@ -99,6 +99,7 @@ class InfoWidget extends ConsumerWidget {
     final notificationData = ref.watch(notificationsDataProvider(code));
 
     if (notificationData.isNotEmpty) {
+      logNoStack.i("NOTIFICATION DATA: $notificationData");
       tableData.addAll(notificationData);
     }
 

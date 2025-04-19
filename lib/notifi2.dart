@@ -294,7 +294,7 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
       for (final kv in message.data.entries) {
         
         if (kv.key.toLowerCase() == "nestcategory") {
-          nestCode = kv.value.toUpperCase();
+          nestCode = kv.value.toUpperCase().trim();
         } else {
           output += ('${kv.key} = ${kv.value}\n');
         }
