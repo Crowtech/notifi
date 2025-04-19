@@ -235,9 +235,11 @@ UserRole getRole(String? token)
   logNoStack.i("token expiry datetime is $expirationDate");
   // use token to extract roles
   Duration tokenTime = JwtDecoder.getTokenTime(token!);
-  logNoStack.i("token duration is ${tokenTime.inMinutes}");
+  logNoStack.i("token duration is ${tokenTime.inMinutes} for $token");
 
-  Map<String, dynamic> jwtMap = JwtDecoder.decode(token!);
+
+  Map<String, dynamic> jwtMap = JwtDecoder.decode(token);
+  logNoStack.i("PERMISSIONS: JWT Map is $jwtMap");
   List rolesList = jwtMap['roles'];
   String rolesStr = "";
   for (var i = 0; i < rolesList.length; i++) {
