@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:email_validator/email_validator.dart' as emailValidator;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart' as logger;
 import 'package:notifi/api_utils.dart';
 import 'package:notifi/credentials.dart';
 import 'package:notifi/forms/cancel_button_widget.dart';
-import 'package:notifi/forms/submit_button_widget.dart';
 import 'package:notifi/forms/text_form_widget.dart';
+import 'package:notifi/forms/validations.dart/email_validation.dart';
+import 'package:notifi/forms/validations.dart/url_validation.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
-import 'package:logger/logger.dart' as logger;
 import 'package:notifi/models/organization.dart';
 import 'package:notifi/models/organization_type.dart';
 import 'package:notifi/organizations/src/features/organizations/data/organizations_repository_nf.dart';
 import 'package:notifi/riverpod/enable_widget.dart';
-import 'package:notifi/riverpod/refresh_widget.dart';
 import 'package:notifi/riverpod/validate_form.dart';
 import 'package:notifi/state/nest_auth2.dart';
 import 'package:status_alert/status_alert.dart';
@@ -44,49 +43,6 @@ class _CreateOrganizationFormState
 
   OrganizationType? orgTypeIndex;
 
-  bool _validateEmail(String? email) {
-    if (email == null) {
-      return false;
-    }
-    return emailValidator.EmailValidator.validate(email);
-  }
-
-  Future<bool> _validateUrlAsync(String? url) async {
-    if (url == null) {
-      return false;
-    }
-    if (url.isEmpty) {
-      return true;
-    }
-    if (RegExp(
-      r"^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$",
-      caseSensitive: false,
-      unicode: true,
-      dotAll: true,
-    ).hasMatch(url)) {
-      // check if url exists
-      var token = ref.read(nestAuthProvider.notifier).token;
-      var apiPath =
-          "$defaultAPIBaseUrl$defaultApiPrefixPath/organizations/check/url/";
-      apiPath = "$apiPath${Uri.encodeComponent(url)}";
-      logNoStack.i("ORG_FORM: encodedApiPath is ${apiPath}");
-      var response = await apiGetData(token!, apiPath, "application/json");
-      logNoStack.i("ORG_FORM: result ${response.body.toString()}");
-      if (!response.body.contains("true")) {
-        StatusAlert.show(
-          context,
-          duration: const Duration(seconds: 3),
-          title: nt.t.organization,
-          subtitle: nt.t.form.already_exists(
-              item: nt.t.organization_capitalized, field: nt.t.form.url),
-          configuration: const IconConfiguration(icon: Icons.error),
-          maxWidth: 260,
-        );
-      }
-      return response.body.contains("true");
-    }
-    return false;
-  }
 
   @override
   void initState() {
@@ -116,21 +72,6 @@ class _CreateOrganizationFormState
     }
   }
 
-  // void _handleSubmit() {
-  //   // Submit the form data
-  //   final organizationData = {
-  //     'name': _nameController.text,
-  //     'description': _descriptionController.text,
-  //     'email': _emailController.text,
-  //     'url': _urlController.text,
-  //     'orgType': orgTypeIndex!.name,
-  //     //   'phone': _phoneController.text,
-  //     //   'address': _addressController.text,
-  //   };
-  //   // Call API or perform action to create organization
-  //   print(organizationData);
-  //   Navigator.of(context).pop();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -191,9 +132,8 @@ class _CreateOrganizationFormState
                   itemValidation: nt.t.form.email_validation(
                     item: nt.t.organization_capitalized,
                   ),
-                  onValidate: _validateEmail,
-                  regex:
-                      r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$",
+                  onValidate: validateEmail,
+                  regex: EMAIL_REGEX,
                   forceLowercase: true,
                 ),
                 const SizedBox(height: 16),
@@ -249,9 +189,8 @@ class _CreateOrganizationFormState
                   itemValidation: nt.t.form.url_validation(
                     item: nt.t.organization_capitalized,
                   ),
-                  regex:
-                      r"^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$",
-                  optional: true,
+                  regex: URL_REGEX,
+                   optional: true,
                   forceLowercase: true,
                 ),
                 const SizedBox(height: 16),
@@ -273,7 +212,7 @@ class _CreateOrganizationFormState
                             : () async {
                                 if (_formKey.currentState != null &&
                                     _formKey.currentState!.validate()) {
-                                  var urlNotExisting = await _validateUrlAsync(
+                                  var urlNotExisting = await validateUrlAsync(ref,context,
                                       fieldValues['url']!);
 
                                   if (urlNotExisting == false) {

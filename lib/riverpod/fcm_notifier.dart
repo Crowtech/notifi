@@ -111,7 +111,7 @@ class FcmNotifier extends _$FcmNotifier {
 
     Person currentUser = ref.read(nestAuthProvider.notifier).currentUser;
     addTopic(currentUser.code!);
-    addTopic(currentUser.username);
+    addTopic(currentUser.username!);
     setTopics();
   }
 }

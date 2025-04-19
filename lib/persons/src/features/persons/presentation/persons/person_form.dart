@@ -1,6 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:notifi/i18n/strings.g.dart' as nt;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart' as logger;
+import 'package:notifi/api_utils.dart';
+import 'package:notifi/credentials.dart';
+import 'package:notifi/forms/cancel_button_widget.dart';
+import 'package:notifi/forms/text_form_widget.dart';
+import 'package:notifi/forms/validations.dart/email_validation.dart';
+import 'package:notifi/forms/validations.dart/name_validation.dart';
+import 'package:notifi/i18n/strings.g.dart' as nt;
+import 'package:notifi/models/person.dart';
+import 'package:notifi/persons/src/features/persons/data/persons_repository.dart';
+import 'package:notifi/riverpod/validate_form.dart';
+import 'package:notifi/state/nest_auth2.dart';
+import 'package:status_alert/status_alert.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -12,147 +24,191 @@ var logNoStack = logger.Logger(
   level: logger.Level.info,
 );
 
-class CreatePersonForm extends StatefulWidget {
-  const CreatePersonForm({super.key});
+class CreatePersonForm extends ConsumerStatefulWidget {
+  CreatePersonForm({super.key, required this.formCode});
+
+  String formCode;
 
   @override
   _CreatePersonFormState createState() => _CreatePersonFormState();
 }
 
-class _CreatePersonFormState extends State<CreatePersonForm> {
+class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
   final _formKey = GlobalKey<FormState>();
-  final _nameController = TextEditingController();
-  final _descriptionController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _phoneController = TextEditingController();
-  final _addressController = TextEditingController();
+
+  final Map<String, dynamic> fieldValues = {};
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   void dispose() {
-    _nameController.dispose();
-    _descriptionController.dispose();
-    _emailController.dispose();
-    _phoneController.dispose();
-    _addressController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    String capitalizedItem = nt.t.person_capitalized;
+    logNoStack.i("PERSON_FORM: BUILD ");
     return Dialog(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text(
-                'Create New Person',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 16),
-              TextFormField(
-                controller: _nameController,
-                decoration: const InputDecoration(
-                  labelText: 'Person Name',
-                  border: OutlineInputBorder(),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter person name';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16),
-              TextFormField(
-                controller: _descriptionController,
-                decoration: const InputDecoration(
-                  labelText: 'Person Description',
-                  border: OutlineInputBorder(),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter person description';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16),
-              TextFormField(
-                controller: _emailController,
-                decoration: const InputDecoration(
-                  labelText: 'Person Email',
-                  border: OutlineInputBorder(),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty || !value.contains('@')) {
-                    return 'Please enter valid person email';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16),
-              TextFormField(
-                controller: _phoneController,
-                decoration: const InputDecoration(
-                  labelText: 'Person Phone Number',
-                  border: OutlineInputBorder(),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter person phone number';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16),
-              TextFormField(
-                controller: _addressController,
-                decoration: const InputDecoration(
-                  labelText: 'Person Address',
-                  border: OutlineInputBorder(),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter person address';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Text(nt.t.response.cancel),
+        child: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  nt.t.form.create(item: capitalizedItem),
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
                   ),
-                  const SizedBox(width: 16),
-                  ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        // Submit the form data
-                        final personData = {
-                          'name': _nameController.text,
-                          'description': _descriptionController.text,
-                          'email': _emailController.text,
-                          'phone': _phoneController.text,
-                          'address': _addressController.text,
-                        };
-                        // Call API or perform action to create organization
-                        print(personData);
-                        Navigator.of(context).pop();
-                      }
-                    },
-                    child: Text(nt.t.response.submit),
+                ),
+                const SizedBox(height: 16),
+                TextFormFieldWidget(
+                  fieldValues: fieldValues,
+                  formCode: widget.formCode,
+                  fieldCode: "true-given_name",
+                  itemCategory: nt.t.person,
+                  itemName: nt.t.firstname,
+                  itemValidation: nt.t.form.given_name_validation(
+                    item: nt.t.person_capitalized,
                   ),
-                ],
-              ),
-            ],
+                  hintText: nt.t.form.given_name_hint,
+                  regex: NAME_REGEX,
+                ),
+                const SizedBox(height: 16),
+                TextFormFieldWidget(
+                  fieldValues: fieldValues,
+                  formCode: widget.formCode,
+                  fieldCode: "true-family_name",
+                  itemCategory: nt.t.person,
+                  itemName: nt.t.lastname,
+                  itemValidation: nt.t.form.family_name_validation(
+                    item: nt.t.person_capitalized,
+                  ),
+                  hintText: nt.t.form.family_name_hint,
+                  regex: NAME_REGEX,
+                ),
+                const SizedBox(height: 16),
+                TextFormFieldWidget(
+                  fieldValues: fieldValues,
+                  formCode: widget.formCode,
+                  fieldCode: "true-email",
+                  enabled: true,
+                  itemCategory: nt.t.person,
+                  itemName: nt.t.form.email,
+                  itemValidation: nt.t.form.email_validation(
+                    item: nt.t.person_capitalized,
+                  ),
+                  hintText: nt.t.form.email_hint,
+                  onValidate: validateEmail,
+                  regex: EMAIL_REGEX,
+                  forceLowercase: true,
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    CancelButtonWidget(
+                        formKey: _formKey, formCode: widget.formCode),
+                    const SizedBox(width: 16),
+                    //SubmitButtonWidget(formKey: _formKey, formCode: widget.formCode)
+                    Consumer(builder: (context, watch, child) {
+                      bool isValid =
+                          ref.watch(validateFormProvider("${widget.formCode}"));
+                      logNoStack.i("PERSON_FORM: isValid $isValid");
+                      return ElevatedButton(
+                        key: const Key("person-submit"),
+                        onPressed: !isValid
+                            ? null
+                            : () async {
+                                if (_formKey.currentState != null &&
+                                    _formKey.currentState!.validate()) {
+                                  var emailNotExisting =
+                                      await validateEmailAsync(
+                                          ref, context, fieldValues['email']!);
+
+                                  if (emailNotExisting == false) {
+                                    logNoStack.e(
+                                        "error is ${nt.t.form.already_exists(item: nt.t.person_capitalized, field: nt.t.form.email)}");
+                                    StatusAlert.show(
+                                      context,
+                                      duration: const Duration(seconds: 4),
+                                      //title: nt.t.person,
+                                      title: nt.t.form.already_exists(
+                                          item: nt.t.person_capitalized,
+                                          field: nt.t.form.email),
+                                      configuration: const IconConfiguration(
+                                          icon: Icons.error),
+                                      maxWidth: 300,
+                                      dismissOnBackgroundTap: true,
+                                    );
+                                  } else {
+                                    // If the form is valid, display a snackbar. In the real world,
+                                    // you'd often call a server or save the information in a database.
+
+                                    // save person
+                                    Person person = Person(
+                                      firstname:
+                                          fieldValues['given_name'], // name
+                                      lastname: fieldValues[
+                                          'family_name'], // description username
+                                      email: fieldValues['email'], // email
+                                    ); //fcm
+
+                                    var token = ref
+                                        .read(nestAuthProvider.notifier)
+                                        .token;
+                                    var apiPath =
+                                        "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/create";
+
+                                    logNoStack.i(
+                                        "PERSON_FORM: sending ${person} to ${apiPath}");
+                                    apiPostDataNoLocaleRaw(
+                                            token!, apiPath, person)
+                                        .then((result) {
+                                      logNoStack.i("result is ${result}");
+
+                                      StatusAlert.show(
+                                        context,
+                                        duration: const Duration(seconds: 2),
+                                        title: nt.t.person,
+                                        subtitle: nt.t.form.saved,
+                                        configuration: const IconConfiguration(
+                                            icon: Icons.done),
+                                        maxWidth: 300,
+                                      );
+                                      ref.invalidate(fetchPersonsProvider);
+                                      Navigator.of(context).pop();
+                                    }, onError: (error) {
+                                      logNoStack.e("error is ${error}");
+                                      StatusAlert.show(
+                                        context,
+                                        duration: const Duration(seconds: 2),
+                                        title: nt.t.person,
+                                        subtitle: nt.t.form.error_saving,
+                                        configuration: const IconConfiguration(
+                                            icon: Icons.error),
+                                        maxWidth: 300,
+                                      );
+                                    });
+                                  }
+                                }
+                              },
+                        child: Text(nt.t.response.submit),
+                      );
+                    })
+                    //   },
+                    //   ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

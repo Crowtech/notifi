@@ -21,7 +21,7 @@ class Person extends Resource {
 
   bool isSignedIn;
 
-  String username;
+  String? username;
   String email;
   String firstname;
   String lastname;
@@ -50,21 +50,23 @@ class Person extends Resource {
     super.location,
     super.devicecode,
     super.avatarUrl,
-    required this.username,
+    this.username,
     required this.email,
     required this.firstname,
     required this.lastname,
-    required this.nickname,
-    required this.gender,
-    required this.i18n,
-    required this.country,
-    required this.longitude,
-    required this.latitude,
-    required this.birthyear,
-    required this.fcm,
+    this.nickname,
+    this.gender = GenderType.UNDEFINED,
+    this.i18n,
+    this.country,
+    this.longitude,
+    this.latitude,
+    this.birthyear,
+    this.fcm,
     this.gps,
   }) {
     super.resourceType = ResourceType.person;
+    username = email;
+    name = "$firstname $lastname";
   }
 
   factory Person.fromJson(Map<String, dynamic> json) => _$PersonFromJson(json);

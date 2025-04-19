@@ -299,9 +299,10 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
           output += ('${kv.key} = ${kv.value}\n');
         }
       }
+
       ref.read(notificationsDataProvider(nestCode ?? "BROADCAST").notifier).update(mapData);
       logNoStack.i(
-          "NOTIFI2: INCOMING DATA NOTIFICATION!:\n $output\n ");
+          "NOTIFI2: INCOMING DATA NOTIFICATION for $nestCode !:\n $output\n ");
       Fluttertoast.showToast(
           msg: "Incoming ${message.category ?? ''} Data!",
           toastLength: Toast.LENGTH_SHORT,

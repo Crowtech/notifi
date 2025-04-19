@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
@@ -144,7 +143,7 @@ class PersonsSearchScreen extends ConsumerWidget {
           logNoStack.i("PERSONS_SEARCH_SCREEN: Add button pressed");
           showDialog(
             context: context,
-            builder: (context) => const CreatePersonForm(),
+            builder: (context) => CreatePersonForm(formCode: "person"),
           );
         },
         // foregroundColor: customizations[index].$1,
