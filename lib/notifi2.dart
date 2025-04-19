@@ -206,7 +206,7 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
     });
   }
 
-  logNoStack.i("NOTIFI2: About to fetch Mobile Apple fcm token !!! ");
+
   if (isIOS) {
     String? apnsToken = await FirebaseMessaging.instance.getAPNSToken();
     logNoStack.i('APNS Token: $apnsToken');
@@ -283,17 +283,19 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
     // }
     // logNoStack.i("NOTIFI2: iIncoming Notification msgType=>${message.messageType!}");
     if (message.data.isNotEmpty) {
-      print('Message data AGAIN!: ${message.data}');
+      
+      logNoStack.i('Message data AGAIN!: ${message.data} category: ${message.category}');
       Map<String, dynamic> data = message.data;
-      print('Message data AGAIN2!: $data');
+      logNoStack.i('Message data AGAIN2!: $data');
       String output = '';
       for (final kv in message.data.entries) {
         output += ('${kv.key} = ${kv.value}\n');
+
       }
       logNoStack.i(
           "NOTIFI2: INCOMING DATA NOTIFICATION!:\n $output\n ");
       Fluttertoast.showToast(
-          msg: "Incoming Data!",
+          msg: "Incoming ${message.category ?? ''} Data!",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: secondsToast*4,
