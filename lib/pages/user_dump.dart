@@ -35,11 +35,13 @@ class UserDump extends ConsumerWidget {
 
     
 
-    return Scaffold(
+    return 
+    Scaffold(
       appBar: AppBar(
-        title: Text('USER DUMP'),
+        title: Text('USER DUMP'), 
       ),
-      body: SafeArea(
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 8),
           child: Center(
