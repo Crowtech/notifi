@@ -6,6 +6,7 @@ import 'package:logger/logger.dart' as logger;
 import 'package:notifi/entities/user_role.dart';
 import 'package:notifi/jwt_utils.dart';
 import 'package:notifi/models/person.dart';
+import 'package:notifi/riverpod/notifications_data.dart';
 import 'package:notifi/state/nest_auth2.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
@@ -81,6 +82,7 @@ class InfoData extends _$InfoData {
     state = {...state, ...rowMap};
   }
 
+
   void clear() {
     state = {};
   }
@@ -94,6 +96,11 @@ class InfoWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final tableData = ref.watch(infoDataProvider(code));
+    final notificationData = ref.watch(notificationsDataProvider(code));
+
+    if (notificationData.isNotEmpty) {
+      tableData.addAll(notificationData);
+    }
 
     Table table = Table(
       border: TableBorder(

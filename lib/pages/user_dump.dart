@@ -3,7 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/i18n/strings.g.dart' as nt;
+import 'package:notifi/models/person.dart';
 import 'package:notifi/riverpod/info_widget.dart';
+import 'package:notifi/state/nest_auth2.dart';
 
 
 
@@ -25,7 +27,7 @@ class UserDump extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
+    Person currentUser = ref.read(nestAuthProvider.notifier).currentUser;
     void _tap2clipboard(String text) =>
       Clipboard.setData(ClipboardData(text: text)).then((_) {
          ScaffoldMessenger.of(context).showSnackBar(
@@ -38,7 +40,7 @@ class UserDump extends ConsumerWidget {
     return 
     Scaffold(
       appBar: AppBar(
-        title: Text('USER DUMP'), 
+        title: Text('${currentUser.name} dump'), 
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -48,7 +50,7 @@ class UserDump extends ConsumerWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                InfoWidget(code: "userdump"),
+                InfoWidget(code: currentUser.code!),
               ],
             ),
           ),

@@ -14,6 +14,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/riverpod/fcm_notifier.dart';
 import 'package:notifi/riverpod/nest_notifis_provider.dart';
+import 'package:notifi/riverpod/notifications_data.dart';
 import 'package:notifi/state/nest_auth2.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -274,8 +275,8 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
   logNoStack.d("NOTIFI2: Got to here before setup Flutter Notifications");
   await setupFlutterNotifications();
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    print('Got a message whilst in the foreground!!!!');
-    print('Message data!!!: ${message.data}');
+    logNoStack.i('Got a message whilst in the foreground!!!!');
+    logNoStack.i('Message data!!!: ${message.data}');
 
 
     // if (message.notification != null) {
@@ -288,10 +289,17 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
       Map<String, dynamic> data = message.data;
       logNoStack.i('Message data AGAIN2!: $data');
       String output = '';
+      Map<String, dynamic> mapData = message.data;
+      String? nestCode;
       for (final kv in message.data.entries) {
-        output += ('${kv.key} = ${kv.value}\n');
-
+        
+        if (kv.key.toLowerCase() == "nestcategory") {
+          nestCode = kv.value.toUpperCase();
+        } else {
+          output += ('${kv.key} = ${kv.value}\n');
+        }
       }
+      ref.read(notificationsDataProvider(nestCode ?? "BROADCAST").notifier).update(mapData);
       logNoStack.i(
           "NOTIFI2: INCOMING DATA NOTIFICATION!:\n $output\n ");
       Fluttertoast.showToast(
