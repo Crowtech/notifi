@@ -74,7 +74,7 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                   formCode: widget.formCode,
                   fieldCode: "true-given_name",
                   itemCategory: nt.t.person,
-                  itemName: nt.t.firstname,
+                  itemName: nt.t.form.given_name,
                   itemValidation: nt.t.form.given_name_validation(
                     item: nt.t.person_capitalized,
                   ),
@@ -87,7 +87,7 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                   formCode: widget.formCode,
                   fieldCode: "true-family_name",
                   itemCategory: nt.t.person,
-                  itemName: nt.t.lastname,
+                  itemName: nt.t.form.family_name,
                   itemValidation: nt.t.form.family_name_validation(
                     item: nt.t.person_capitalized,
                   ),
