@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/api_utils.dart';
@@ -128,6 +129,7 @@ class _CreateOrganizationFormState
                   fieldCode: "true-email",
                   enabled: true,
                   itemCategory: nt.t.organization,
+                  inputFormatters: emailInputFormatter,
                   itemName: nt.t.form.email,
                   itemValidation: nt.t.form.email_validation(
                     item: nt.t.organization_capitalized,
@@ -184,6 +186,7 @@ class _CreateOrganizationFormState
                   formCode: widget.formCode,
                   fieldCode: "false-url",
                   enabled: false,
+                  inputFormatters: urlInputFormatter,
                   itemCategory: nt.t.organization,
                   itemName: nt.t.form.url,
                   itemValidation: nt.t.form.url_validation(

@@ -1,8 +1,10 @@
 import 'package:email_validator/email_validator.dart' as emailValidator;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notifi/api_utils.dart';
 import 'package:notifi/credentials.dart';
+import 'package:notifi/helpers/text_formatter.dart';
 import 'package:notifi/state/nest_auth2.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
@@ -20,6 +22,10 @@ var logNoStack = logger.Logger(
 
 
 String EMAIL_REGEX = r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$";
+
+List<TextInputFormatter> emailInputFormatter = [LowerCaseTextFormatter(),FilteringTextInputFormatter.allow(RegExp(EMAIL_REGEX))];
+
+
 
 bool validateEmail(String? email) {
     if (email == null) {

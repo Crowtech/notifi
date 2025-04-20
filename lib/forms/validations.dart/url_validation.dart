@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notifi/api_utils.dart';
 import 'package:notifi/credentials.dart';
+import 'package:notifi/helpers/text_formatter.dart';
 import 'package:notifi/state/nest_auth2.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
@@ -18,6 +20,8 @@ var logNoStack = logger.Logger(
 );
 
 String URL_REGEX =  r"^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$";
+
+List<TextInputFormatter> urlInputFormatter = [LowerCaseTextFormatter(),FilteringTextInputFormatter.allow(RegExp(URL_REGEX))];
 
 Future<bool> validateUrlAsync(WidgetRef ref,BuildContext context,String? url) async {
     if (url == null) {

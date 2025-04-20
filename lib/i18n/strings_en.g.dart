@@ -64,7 +64,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get dark => 'dark';
 	String get dashboard => 'Dashboard';
 	String get deviceid => 'DeviceID';
-	String get devpage => 'Dev Page';
+	String get devpage => 'Dev';
 	String get edit => 'Edit';
 	String get email => 'Email';
 	String get exposure_mode => 'Exposure Mode';
@@ -377,7 +377,7 @@ extension on Translations {
 			case 'dark': return 'dark';
 			case 'dashboard': return 'Dashboard';
 			case 'deviceid': return 'DeviceID';
-			case 'devpage': return 'Dev Page';
+			case 'devpage': return 'Dev';
 			case 'edit': return 'Edit';
 			case 'email': return 'Email';
 			case 'exposure_mode': return 'Exposure Mode';
