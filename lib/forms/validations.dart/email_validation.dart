@@ -23,7 +23,7 @@ var logNoStack = logger.Logger(
 
 String EMAIL_REGEX = r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$";
 
-List<TextInputFormatter> emailInputFormatter = [LowerCaseTextFormatter(),FilteringTextInputFormatter.allow(RegExp(EMAIL_REGEX))];
+List<TextInputFormatter> emailInputFormatter = [LowerCaseTextFormatter(),FilteringTextInputFormatter.allow(RegExp("a-zA-Z0-9@."))];
 
 
 
