@@ -83,10 +83,10 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
     inputFormatters = widget.inputFormatters;
     if (widget.forceLowercase) {
       // should be enum
-      inputFormatters = [...inputFormatters!,LowerCaseTextFormatter()];
+      //inputFormatters = [...inputFormatters!,LowerCaseTextFormatter()];
     } else if (widget.forceUppercase) {
       // should be enum
-      inputFormatters = [...inputFormatters!,UpperCaseTextFormatter()];
+      //inputFormatters = [...inputFormatters!,UpperCaseTextFormatter()];
     }
     isEmpty = widget.initialValue.isEmpty;
     enableWidget = widget.enabled;
