@@ -40,7 +40,7 @@ class TextFormFieldWidget extends ConsumerStatefulWidget {
     this.forceUppercase = false,
     this.textCapitalization = TextCapitalization.none,
     this.onValidate,
-    this.inputFormatters,
+    this.inputFormatters = const [],
   });
 
   final Map<String,dynamic> fieldValues;
@@ -59,7 +59,7 @@ class TextFormFieldWidget extends ConsumerStatefulWidget {
   final bool forceUppercase;
   final TextCapitalization textCapitalization;
   final ValidateFunction<String>? onValidate;
-  final List<TextInputFormatter>? inputFormatters;
+  final List<TextInputFormatter> inputFormatters;
 
   @override
   ConsumerState<TextFormFieldWidget> createState() =>
@@ -75,7 +75,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
   bool isEmpty = true;
   late bool enableWidget; 
   bool initialValid = false;
-  List<TextInputFormatter>? inputFormatters;
+  late List<TextInputFormatter>? inputFormatters;
 
   @override
   void initState() {
@@ -133,7 +133,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
       autocorrect: true,
       readOnly: widget.readOnly,
       enabled: enableWidget,
-      inputFormatters: inputFormatters!,
+      inputFormatters: inputFormatters,
       textCapitalization: widget.textCapitalization,
       decoration: InputDecoration(
         hintText: widget.hintText,
