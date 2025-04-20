@@ -109,6 +109,7 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                   onValidate: validateEmail,
                   regex: EMAIL_REGEX,
                   forceLowercase: true,
+                  inputFormatters: emailInputFormatter,
                 ),
                 const SizedBox(height: 16),
                 Row(
