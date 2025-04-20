@@ -133,7 +133,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
       autocorrect: true,
       readOnly: widget.readOnly,
       enabled: enableWidget,
-      inputFormatters: [...inputFormatters!],
+      inputFormatters: inputFormatters!,
       textCapitalization: widget.textCapitalization,
       decoration: InputDecoration(
         hintText: widget.hintText,
