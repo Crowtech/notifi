@@ -167,7 +167,7 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                                           'family_name'], // description username
                                       email: fieldValues['email'], // email
                                     ); //fcm
-                                    logNoStack.i('${fieldValues['orgIds']}');
+                                    logNoStack.i('person form: ${fieldValues['orgIds']}');
                                     var token = ref
                                         .read(nestAuthProvider.notifier)
                                         .token;
