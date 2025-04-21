@@ -209,7 +209,8 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
         ),
       ),
       validator: (value) {
-        return validate(value!);
+        return "bullshit";
+        //return validate(value!);
 
         // String? result = (!_isEmptyOlderValue(_olderValue)) && value!.isEmpty
         //     ? null
@@ -231,6 +232,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
       onChanged: (value) => _debouncer.run(() {
         _olderValue = value.isEmpty ? _olderValue : value;
         itemFormFieldKey.currentState?.validate();
+        
         //ref.read(refreshWidgetProvider("organization").notifier).refresh();
         //ref.read(refreshWidgetProvider(widget.fieldCode).notifier).refresh();
         //ref.read(refreshWidgetProvider("${widget.formCode}-submit").notifier).refresh();
