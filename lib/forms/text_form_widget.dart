@@ -134,6 +134,12 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
           exists = response.body.contains("true");
           logNoStack.i("TEXTFORMWIDGET: ${pureFieldCode} exists $exists");
         });
+        if (exists == true) {
+          logNoStack.i("TEXTFORMWIDGET: EXISTS !!! ERROR!!!! ${pureFieldCode} exists $exists"); 
+          return widget.itemExists; 
+        }else {
+          logNoStack.i("TEXTFORMWIDGET: EXISTS !!! NO ERROR!!!! ${pureFieldCode} exists $exists");
+        }
         return exists ? widget.itemExists : null;
       } else {
         return null; // it validates and the item does not exist
