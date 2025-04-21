@@ -24,6 +24,7 @@ class OrganizationListWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    logNoStack.i("orgList: build");
     final responseAsync = ref.watch(
       //fetchOrganizationsNestFilterProvider(nestFilter: nestFilter),
       fetchOrganizationsNestFilterProvider,
@@ -50,14 +51,16 @@ class OrganizationListWidget extends ConsumerWidget {
             key: ValueKey(orgs[index].id),
             dense: true,
             title: Text(orgs[index].name!),
+            selected: orgs[index].selected,
             value: orgs[index].selected,
-            onChanged: (ind) {
+            onChanged: (value) {    
+              orgs[index].selected = value!; 
               if (orgIds.contains(orgs[index].id!)) {
                 orgIds.remove(orgs[index].id!);
               } else {
                 orgIds.add(orgs[index].id!);
               }
-              orgs[index].selected = !orgs[index].selected;
+              
               fieldValues['orgIds'] = orgIds.toList();
               logNoStack.i("OrgList selections = $orgIds");
             },
