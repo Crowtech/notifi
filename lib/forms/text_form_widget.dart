@@ -214,6 +214,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
             : validate(value!);
             if (result != null)
             {
+              logNoStack.i("TEXT_FORM_WIDGET: SUBMIT: ${widget.fieldCode} enableWidget:$enableWidget result:$result");
               return result;
             }
         _olderValue = _isEmptyValue(value) ? value : _olderValue;
