@@ -130,7 +130,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
             "$defaultAPIBaseUrl$defaultApiPrefixPath/resources/check/${pureFieldCode}/";
         apiPath = "$apiPath${Uri.encodeComponent(value)}";
         apiGetData(token!, apiPath, "application/json").then((response) {
-          logNoStack.i("TEXTFORMWIDGET: ${pureFieldCode} response $response");
+          logNoStack.i("TEXTFORMWIDGET: ${pureFieldCode} response ${response.body}");
           exists = response.body.contains("true");
           logNoStack.i("TEXTFORMWIDGET: ${pureFieldCode} exists $exists");
         });
