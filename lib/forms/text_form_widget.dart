@@ -237,6 +237,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
       }),
       onFieldSubmitted: (value) async {
         isValidInput(value);
+        validate(value);
       },
     );
   }
