@@ -130,6 +130,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
         apiPath = "$apiPath${Uri.encodeComponent(value)}";
         apiGetData(token!, apiPath, "application/json").then((response) {
           exists = response.body.contains("true");
+          logNoStack.i("TEXTFORMWIDGET: ${pureFieldCode} exists $exists");
         });
         return exists ? widget.itemExists : null;
       } else {
