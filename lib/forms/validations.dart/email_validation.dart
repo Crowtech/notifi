@@ -50,7 +50,7 @@ bool validateEmail(String? email) {
       // check if url exists
       var token = ref.read(nestAuthProvider.notifier).token;
       var apiPath =
-          "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/check/email/";
+          "$defaultAPIBaseUrl$defaultApiPrefixPath/resources/check/email/";
       apiPath = "$apiPath${Uri.encodeComponent(email)}";
       var response = await apiGetData(token!, apiPath, "application/json");
       if (!response.body.contains("true")) {

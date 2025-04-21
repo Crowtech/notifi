@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart' as logger;
+import 'package:notifi/api_utils.dart';
+import 'package:notifi/credentials.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:notifi/helpers/debouncer.dart';
 import 'package:notifi/helpers/text_formatter.dart';
 import 'package:notifi/riverpod/enable_widget.dart';
 import 'package:notifi/riverpod/refresh_widget.dart';
 import 'package:notifi/riverpod/validate_form.dart';
+import 'package:notifi/state/nest_auth2.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -23,7 +26,7 @@ typedef ValidateFunction<String> = bool Function(String value);
 
 class TextFormFieldWidget extends ConsumerStatefulWidget {
   const TextFormFieldWidget({
-    super.key,  
+    super.key,
     required this.fieldValues,
     required this.formCode,
     required this.fieldCode,
@@ -33,6 +36,7 @@ class TextFormFieldWidget extends ConsumerStatefulWidget {
     required this.itemCategory,
     required this.itemName,
     required this.itemValidation,
+    this.itemExists = null,
     this.hintText,
     required this.regex,
     this.optional = false,
@@ -43,15 +47,16 @@ class TextFormFieldWidget extends ConsumerStatefulWidget {
     this.inputFormatters = const [],
   });
 
-  final Map<String,dynamic> fieldValues;
+  final Map<String, dynamic> fieldValues;
   final String formCode;
-  final String fieldCode;   
+  final String fieldCode;
   final String initialValue;
   final bool readOnly;
   final bool enabled;
   final String itemCategory;
   final String itemName;
   final String itemValidation;
+  final String? itemExists;
   final String? hintText;
   final bool optional;
   final String regex;
@@ -73,13 +78,16 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
   String? _olderValue;
   bool isValid = false;
   bool isEmpty = true;
-  late bool enableWidget; 
+  late bool enableWidget;
   bool initialValid = false;
   late List<TextInputFormatter>? inputFormatters;
+  late String pureFieldCode;
 
   @override
   void initState() {
     super.initState();
+    pureFieldCode =
+        widget.fieldCode.substring(widget.fieldCode.indexOf('-') + 1);
     inputFormatters = widget.inputFormatters;
     if (widget.forceLowercase) {
       // should be enum
@@ -112,6 +120,35 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
     }
   }
 
+  String? validate(String value) {
+    if (isValidInput(value)) {
+      if (widget.itemExists != null) {
+        bool exists = false;
+        var token = ref.read(nestAuthProvider.notifier).token;
+        var apiPath =
+            "$defaultAPIBaseUrl$defaultApiPrefixPath/resources/check/${pureFieldCode}/";
+        apiPath = "$apiPath${Uri.encodeComponent(value)}";
+        apiGetData(token!, apiPath, "application/json").then((response) {
+          exists = response.body.contains("true");
+        });
+        return exists ? widget.itemExists : null;
+      } else {
+        return null; // it validates and the item does not exist
+      }
+    } else {
+      return widget.itemValidation;
+    }
+  }
+
+  Future<bool> checkIfExistsAsync(String value) async {
+    var token = ref.read(nestAuthProvider.notifier).token;
+    var apiPath =
+        "$defaultAPIBaseUrl$defaultApiPrefixPath/resources/check/${pureFieldCode}/";
+    apiPath = "$apiPath${Uri.encodeComponent(value)}";
+    var response = await apiGetData(token!, apiPath, "application/json");
+    return response.body.contains("true");
+  }
+
   @override
   void dispose() {
     _debouncer.dispose();
@@ -120,11 +157,11 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
 
   @override
   Widget build(BuildContext context) {
-     
-    enableWidget = ref.watch(enableWidgetProvider(widget.fieldCode)); 
+    enableWidget = ref.watch(enableWidgetProvider(widget.fieldCode));
     ref.watch(refreshWidgetProvider(widget.fieldCode));
 
-    logNoStack.i("TEXT_FORM_WIDGET: BUILD: ${widget.fieldCode} enableWidget:$enableWidget");
+    logNoStack.i(
+        "TEXT_FORM_WIDGET: BUILD: ${widget.fieldCode} enableWidget:$enableWidget");
     return TextFormField(
       key: itemFormFieldKey,
       autofocus: true,
@@ -138,7 +175,9 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
       decoration: InputDecoration(
         hintText: widget.hintText,
         errorStyle: const TextStyle(color: Colors.red),
-        labelText: widget.optional ? "${widget.itemName} (${nt.t.optional})" : widget.itemName,
+        labelText: widget.optional
+            ? "${widget.itemName} (${nt.t.optional})"
+            : widget.itemName,
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: statusColor(), width: 3.0),
           borderRadius: BorderRadius.circular(10.0),
@@ -150,42 +189,37 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
           ),
           borderRadius: BorderRadius.circular(10.0),
         ),
-
         disabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.grey, width: 1.0),
           borderRadius: BorderRadius.circular(10.0),
         ),
-
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.red, width: 3.0),
           borderRadius: BorderRadius.circular(10.0),
         ),
       ),
       validator: (value) {
-        String? result =
-            (!_isEmptyOlderValue(_olderValue)) && value!.isEmpty
-                ? null
-                : !isValidInput(value)
-                ? widget.itemValidation
-                : null;
+        String? result = (!_isEmptyOlderValue(_olderValue)) && value!.isEmpty
+            ? null
+            : validate(value!);
         _olderValue = _isEmptyValue(value) ? value : _olderValue;
         isEmpty = _isEmptyValue(value);
-        String fieldCode = widget.fieldCode.substring(widget.fieldCode.indexOf('-') + 1); // remove the true/false-
-        widget.fieldValues[fieldCode] = value;
-        ref.read(validateFormProvider(widget.formCode).notifier).add(fieldCode, isValid);
+        // remove the true/false-
+        widget.fieldValues[pureFieldCode] = value;
+        ref
+            .read(validateFormProvider(widget.formCode).notifier)
+            .add(pureFieldCode, isValid);
         return result;
       },
-      onChanged:
-          (value) => _debouncer.run(() {
-            _olderValue = value.isEmpty ? _olderValue : value;
-            itemFormFieldKey.currentState?.validate();
-            //ref.read(refreshWidgetProvider("organization").notifier).refresh();
-            //ref.read(refreshWidgetProvider(widget.fieldCode).notifier).refresh();
-            //ref.read(refreshWidgetProvider("${widget.formCode}-submit").notifier).refresh();
-          }),
-      onFieldSubmitted: (value) {
+      onChanged: (value) => _debouncer.run(() {
+        _olderValue = value.isEmpty ? _olderValue : value;
+        itemFormFieldKey.currentState?.validate();
+        //ref.read(refreshWidgetProvider("organization").notifier).refresh();
+        //ref.read(refreshWidgetProvider(widget.fieldCode).notifier).refresh();
+        //ref.read(refreshWidgetProvider("${widget.formCode}-submit").notifier).refresh();
+      }),
+      onFieldSubmitted: (value) async {
         isValidInput(value);
-        
       },
     );
   }
@@ -193,8 +227,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
   bool isValidInput(String? value) {
     if (!enableWidget) {
       isValid = true;
-    }
-    else if (value == null || value.isEmpty) {
+    } else if (value == null || value.isEmpty) {
       if (!widget.optional) {
         isValid = false;
       } else {
