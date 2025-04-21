@@ -50,14 +50,14 @@ class OrganizationListWidget extends ConsumerWidget {
             key: ValueKey(orgs[index].id),
             dense: true,
             title: Text(orgs[index].name!),
-            value: !orgs[index].selected,
+            value: orgs[index].selected,
             onChanged: (ind) {
               if (orgIds.contains(orgs[index].id!)) {
                 orgIds.remove(orgs[index].id!);
               } else {
                 orgIds.add(orgs[index].id!);
               }
-
+              orgs[index].selected = !orgs[index].selected;
               fieldValues['orgIds'] = orgIds.toList();
               logNoStack.i("OrgList selections = $orgIds");
             },
