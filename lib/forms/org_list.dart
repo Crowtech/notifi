@@ -42,18 +42,16 @@ class OrganizationListWidget extends ConsumerWidget {
         shrinkWrap: true,
         itemCount: totalResults, //_layers.length,
         itemBuilder: (context, index) {
-          return RadioListTile<int>(
+          return CheckboxListTile(
             key: ValueKey(orgs[index].id),
             dense: true,
             title: Text(orgs[index].name!),
-            value: orgs[index].id!,
-            groupValue: value,
+            value: !orgs[index].selected,
             onChanged: (ind) {
-              value = ind!;
-              if (orgIds.contains(value!)) {
-                orgIds.remove(value!);
+              if (orgIds.contains(orgs[index].id!)) {
+                orgIds.remove(orgs[index].id!);
               } else {
-                orgIds.add(value!);
+                orgIds.add(orgs[index].id!);
               }
 
               fieldValues['orgIds'] = orgIds.toList();
