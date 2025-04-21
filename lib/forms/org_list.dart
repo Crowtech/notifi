@@ -51,10 +51,10 @@ class OrganizationListWidget extends ConsumerWidget {
             key: ValueKey(orgs[index].id),
             dense: true,
             title: Text(orgs[index].name!),
-            selected: orgIds.contains(orgs[index].id!),
-            value: orgIds.contains(orgs[index].id!),
+            selected: orgs[index].selected,
+            value: orgs[index].selected,
             onChanged: (value) {    
-              orgs[index].selected = value!; 
+              orgs[index].selected = !value!; 
               if (orgIds.contains(orgs[index].id!)) {
                 orgIds.remove(orgs[index].id!);
               } else {
