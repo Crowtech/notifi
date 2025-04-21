@@ -170,7 +170,7 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                                     logNoStack.i('person form: ${fieldValues['orgIds']}');
                                     String queryParmOrgIds = "";
                                     for (int orgId in fieldValues['orgIds']) {
-                                      queryParmOrgIds += "orgid=$orgId,";
+                                      queryParmOrgIds += "orgid=$orgId&";
                                     }
                                     queryParmOrgIds =queryParmOrgIds.substring(0,queryParmOrgIds.length-1);
                                     var token = ref
