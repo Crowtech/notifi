@@ -205,6 +205,10 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
         String? result = (!_isEmptyOlderValue(_olderValue)) && value!.isEmpty
             ? null
             : validate(value!);
+            if (result != null)
+            {
+              return result;
+            }
         _olderValue = _isEmptyValue(value) ? value : _olderValue;
         isEmpty = _isEmptyValue(value);
         // remove the true/false-
