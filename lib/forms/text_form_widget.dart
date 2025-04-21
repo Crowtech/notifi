@@ -140,12 +140,15 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
         }else {
           logNoStack.i("TEXTFORMWIDGET: EXISTS !!! NO ERROR!!!! ${pureFieldCode} exists $exists");
         }
+        logNoStack.i("Returning ${exists ? widget.itemExists : null}");
         return exists ? widget.itemExists : null;
         });
       } else {
+         logNoStack.i("Returning null");
         return null; // it validates and the item does not exist
       }
     } else {
+      logNoStack.i("Returning default widget.itemValidation");
       return widget.itemValidation;
     }
   }
@@ -209,8 +212,9 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
         ),
       ),
       validator: (value) {
-        return "bullshit";
-        //return validate(value!);
+       // return "bullshit";
+       logNoStack.i("validating $value");
+        return validate(value!);
 
         // String? result = (!_isEmptyOlderValue(_olderValue)) && value!.isEmpty
         //     ? null
