@@ -123,12 +123,14 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
   String? validate(String value) {
     if (isValidInput(value)) {
       if (widget.itemExists != null) {
+        logNoStack.i("Checking email exists");
         bool exists = false;
         var token = ref.read(nestAuthProvider.notifier).token;
         var apiPath =
             "$defaultAPIBaseUrl$defaultApiPrefixPath/resources/check/${pureFieldCode}/";
         apiPath = "$apiPath${Uri.encodeComponent(value)}";
         apiGetData(token!, apiPath, "application/json").then((response) {
+          logNoStack.i("TEXTFORMWIDGET: ${pureFieldCode} response $response");
           exists = response.body.contains("true");
           logNoStack.i("TEXTFORMWIDGET: ${pureFieldCode} exists $exists");
         });
