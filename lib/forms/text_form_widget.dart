@@ -252,7 +252,10 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
     logNoStack.i(
       "Checking validation for enabled:$enableWidget ${widget.fieldCode} $value optional:${widget.optional} isValid:$isValid",
     );
-
+    if (isValid && widget.itemExists != null) {
+      var exists = validate(value!);
+      isValid &= (exists==null);
+    }
     return isValid;
   }
 
