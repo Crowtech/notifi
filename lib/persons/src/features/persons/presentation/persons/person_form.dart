@@ -4,6 +4,7 @@ import 'package:logger/logger.dart' as logger;
 import 'package:notifi/api_utils.dart';
 import 'package:notifi/credentials.dart';
 import 'package:notifi/forms/cancel_button_widget.dart';
+import 'package:notifi/forms/org_list.dart';
 import 'package:notifi/forms/text_form_widget.dart';
 import 'package:notifi/forms/validations.dart/email_validation.dart';
 import 'package:notifi/forms/validations.dart/name_validation.dart';
@@ -112,6 +113,11 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                   inputFormatters: emailInputFormatter,
                 ),
                 const SizedBox(height: 16),
+
+                OrganizationListWidget(formKey: _formKey, formCode: widget.formCode, fieldValues: fieldValues, fieldCode: "orgids"),
+
+
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -161,7 +167,7 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                                           'family_name'], // description username
                                       email: fieldValues['email'], // email
                                     ); //fcm
-
+                                    logNoStack.i('${fieldValues['orgIds']}');
                                     var token = ref
                                         .read(nestAuthProvider.notifier)
                                         .token;
