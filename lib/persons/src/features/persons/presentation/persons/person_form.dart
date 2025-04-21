@@ -168,11 +168,16 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                                       email: fieldValues['email'], // email
                                     ); //fcm
                                     logNoStack.i('person form: ${fieldValues['orgIds']}');
+                                    String queryParmOrgIds = "";
+                                    for (int orgId in fieldValues['orgIds']) {
+                                      queryParmOrgIds += "orgid=$orgId,";
+                                    }
+                                    queryParmOrgIds =queryParmOrgIds.substring(0,queryParmOrgIds.length-1);
                                     var token = ref
                                         .read(nestAuthProvider.notifier)
                                         .token;
                                     var apiPath =
-                                        "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/create";
+                                        "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/create?$queryParmOrgIds";
 
                                     logNoStack.i(
                                         "PERSON_FORM: sending ${person} to ${apiPath}");
