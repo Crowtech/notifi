@@ -34,7 +34,7 @@ class _CreateOrganizationForm3State
   bool showSegmentedControl = true;
   final _formKey = GlobalKey<FormBuilderState>();
   bool _nameHasError = false;
-  bool _genderHasError = false;
+  final bool _genderHasError = false;
 
   var orgTypeOptions = [
     OrganizationType.DEFAULT,

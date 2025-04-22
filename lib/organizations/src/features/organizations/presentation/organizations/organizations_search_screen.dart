@@ -142,7 +142,7 @@ class OrganizationsSearchScreen extends ConsumerWidget {
                                           // apiPath =
                                           //     Uri.encodeComponent(apiPath);
                                           logNoStack.i(
-                                              "ORG_FORM: encodedApiPath is ${apiPath}");
+                                              "ORG_FORM: encodedApiPath is $apiPath");
                                           var response = await apiGetData(
                                               token!,
                                               apiPath,

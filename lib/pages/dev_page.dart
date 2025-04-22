@@ -2,20 +2,12 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'dart:async';
-import 'dart:io';
 
-import 'package:camera/camera.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notifi/entities/user_role.dart';
-import 'package:notifi/notifi.dart';
 import 'package:notifi/state/permissions.dart';
-import 'package:provider/provider.dart';
-import 'package:video_player/video_player.dart';
 import 'package:go_router/go_router.dart';
 import '../i18n/strings.g.dart' as nt; // Importing localization strings
 import 'package:logger/logger.dart' as logger;

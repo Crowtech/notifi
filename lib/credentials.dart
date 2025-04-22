@@ -127,8 +127,7 @@ Color get colorHover =>
 void showDefaultSettings() {
   logNoStack.i("Main:default Realm = $defaultRealm\n"
           "Main:default Auth Base URL = $defaultAuthBaseUrl\n"
-          "Main:default Discovery URL = $defaultDiscoveryUrl\n" "Main:default ClientId = $defaultClientId\n" "Main:default Client Secret = $defaultClientSecret\n" "Main:default Redirect URL = $defaultRedirectUrl\n" "Main:default API Base URL = $defaultAPIBaseUrl\n" +
-      "Main:default API path prefix = $defaultApiPrefixPath\n" +
+          "Main:default Discovery URL = $defaultDiscoveryUrl\n" "Main:default ClientId = $defaultClientId\n" "Main:default Client Secret = $defaultClientSecret\n" "Main:default Redirect URL = $defaultRedirectUrl\n" "Main:default API Base URL = $defaultAPIBaseUrl\n" "Main:default API path prefix = $defaultApiPrefixPath\n" +
       "Main:default Mobile Path = $defaultMobilePath\n" +
       "Main:default Auth Endpoint URL = $defaultAuthEndpointUrl\n" +
       "Main:defaultMinio URL = $defaultMinioEndpointUrl\n" +

@@ -28,7 +28,7 @@ class UserDump extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     Person currentUser = ref.read(nestAuthProvider.notifier).currentUser;
-    void _tap2clipboard(String text) =>
+    void tap2clipboard(String text) =>
       Clipboard.setData(ClipboardData(text: text)).then((_) {
          ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(nt.t.copied_to_clipboard(item: nt.t.text)))
@@ -45,7 +45,7 @@ class UserDump extends ConsumerWidget {
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

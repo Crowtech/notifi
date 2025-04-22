@@ -164,7 +164,7 @@ class _EditableAvatarState extends ConsumerState<EditableAvatar> {
       // ref.read(RefreshWidgetProvider(currentPerson!.code!).notifier).refresh();
       ref.read(RefreshWidgetProvider(currentPerson!.code!).notifier).refresh();
     } else if (widget.resource.code!.startsWith("ORG_")) {
-      widget.resource!.avatarUrl =
+      widget.resource.avatarUrl =
           "$defaultMinioEndpointUrl/$defaultRealm/$avatarFilename";
       var jsonDataStr = jsonEncode(currentPerson!);
       logNoStack.i(

@@ -41,7 +41,7 @@ class InfoData extends _$InfoData {
     // 2025-01-13 13:04:18.000
     logNoStack.i("token expiry datetime is $expirationDate");
     // use token to extract roles
-    Duration tokenTime = JwtDecoder.getTokenTime(token!);
+    Duration tokenTime = JwtDecoder.getTokenTime(token);
     logNoStack.i("token duration is ${tokenTime.inMinutes} for $token");
 
     Map<String, dynamic> jwtMap = JwtDecoder.decode(token);
@@ -68,8 +68,8 @@ class InfoData extends _$InfoData {
       "Token expired?": hasExpired ? "TOKEN EXPIRED" : "TOKEN NOT EXPIRED",
       "Token expiry DateTime": "Expiry date: ${expirationDate.toString()}",
       "Token Duration": "token duration is ${tokenTime.inMinutes} minutes",
-      "Main Role": "${userRole}",
-      "TOKEN": "${token}",
+      "Main Role": "$userRole",
+      "TOKEN": token,
       "Device ID": "${currentUser.devicecode}",
       "fcm": "${currentUser.fcm}",
       
@@ -104,14 +104,14 @@ class InfoWidget extends ConsumerWidget {
     }
 
     Table table = Table(
-      border: TableBorder(
+      border: const TableBorder(
           horizontalInside: BorderSide(color: Colors.black, width: 10.0)),
       children: [
         //This table row is for the table header which is static
         const TableRow(children: [
           Center(
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
+              padding: EdgeInsets.symmetric(vertical: 10),
               child: Text(
                 "INDEX",
                 style: TextStyle(
@@ -121,7 +121,7 @@ class InfoWidget extends ConsumerWidget {
           ),
           Center(
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
+              padding: EdgeInsets.symmetric(vertical: 10),
               child: Text(
                 "NAME",
                 style: TextStyle(
@@ -131,7 +131,7 @@ class InfoWidget extends ConsumerWidget {
           ),
           Center(
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
+              padding: EdgeInsets.symmetric(vertical: 10),
               child: Text(
                 "DATA",
                 style: TextStyle(

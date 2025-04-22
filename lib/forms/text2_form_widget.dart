@@ -149,6 +149,8 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
         /// Include your own custom `FormFieldValidator` function, if you want
         /// Ensures positive values only. We could also have used `FormBuilderValidators.min(0)` instead
         (val) {
+          return null;
+        
             // final number = int.tryParse(val);
             // if (number == null) return null;
             // if (number < 0) return 'We cannot have a negative age';

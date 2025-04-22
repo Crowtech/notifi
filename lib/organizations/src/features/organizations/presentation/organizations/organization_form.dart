@@ -206,7 +206,7 @@ class _CreateOrganizationFormState
                     //SubmitButtonWidget(formKey: _formKey, formCode: widget.formCode)
                     Consumer(builder: (context, watch, child) {
                       bool isValid =
-                          ref.watch(validateFormProvider("${widget.formCode}"));
+                          ref.watch(validateFormProvider(widget.formCode));
                       logNoStack.i("ORG_FORM: isValid $isValid");
                       return ElevatedButton(
                         key: const Key("organization-submit"),
@@ -254,11 +254,11 @@ class _CreateOrganizationFormState
                                         "$defaultAPIBaseUrl$defaultApiPrefixPath/organizations/create";
 
                                     logNoStack.i(
-                                        "ORG_FORM: sending ${organization} to ${apiPath}");
+                                        "ORG_FORM: sending $organization to $apiPath");
                                     apiPostDataNoLocaleRaw(
                                             token!, apiPath, organization)
                                         .then((result) {
-                                      logNoStack.i("result is ${result}");
+                                      logNoStack.i("result is $result");
 
                                       StatusAlert.show(
                                         context,
@@ -273,7 +273,7 @@ class _CreateOrganizationFormState
                                           fetchOrganizationsNestFilterProvider);
                                       Navigator.of(context).pop();
                                     }, onError: (error) {
-                                      logNoStack.e("error is ${error}");
+                                      logNoStack.e("error is $error");
                                       StatusAlert.show(
                                         context,
                                         duration: const Duration(seconds: 2),

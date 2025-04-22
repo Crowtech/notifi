@@ -36,7 +36,7 @@ class TextFormFieldWidget extends ConsumerStatefulWidget {
     required this.itemCategory,
     required this.itemName,
     required this.itemValidation,
-    this.itemExists = null,
+    this.itemExists,
     this.hintText,
     required this.regex,
     this.optional = false,
@@ -121,42 +121,46 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
   }
 
   String? validate(String value) {
-    if (isValidInput(value)) {
-      if (widget.itemExists != null) {
-        logNoStack.i("Checking email exists");
-        bool exists = false;
-        var token = ref.read(nestAuthProvider.notifier).token;
-        var apiPath =
-            "$defaultAPIBaseUrl$defaultApiPrefixPath/resources/check/${pureFieldCode}/";
-        apiPath = "$apiPath${Uri.encodeComponent(value)}";
-        apiGetData(token!, apiPath, "application/json").then((response) {
-          logNoStack.i("TEXTFORMWIDGET: ${pureFieldCode} response ${response.body}");
-          exists = response.body.contains("true");
-          logNoStack.i("TEXTFORMWIDGET: ${pureFieldCode} exists $exists");
-        
+    // if (isValidInput(value)) {
+    if (widget.itemExists != null) {
+      logNoStack.i("Checking email exists");
+      bool exists = false;
+      var token = ref.read(nestAuthProvider.notifier).token;
+      var apiPath =
+          "$defaultAPIBaseUrl$defaultApiPrefixPath/resources/check/$pureFieldCode/";
+      apiPath = "$apiPath${Uri.encodeComponent(value)}";
+      apiGetData(token!, apiPath, "application/json").then((response) {
+        logNoStack
+            .i("TEXTFORMWIDGET: $pureFieldCode response ${response.body}");
+        exists = response.body.contains("true");
+        logNoStack.i("TEXTFORMWIDGET: $pureFieldCode exists $exists");
+
         if (exists == true) {
-          logNoStack.i("TEXTFORMWIDGET: EXISTS !!! ERROR!!!! ${pureFieldCode} exists $exists ${widget.itemExists}"); 
-          return widget.itemExists; 
-        }else {
-          logNoStack.i("TEXTFORMWIDGET: EXISTS !!! NO ERROR!!!! ${pureFieldCode} exists $exists");
+          logNoStack.i(
+              "TEXTFORMWIDGET: EXISTS !!! ERROR!!!! $pureFieldCode exists $exists ${widget.itemExists}");
+          return widget.itemExists;
+        } else {
+          logNoStack.i(
+              "TEXTFORMWIDGET: EXISTS !!! NO ERROR!!!! $pureFieldCode exists $exists");
         }
         logNoStack.i("Returning ${exists ? widget.itemExists : null}");
         return exists ? widget.itemExists : null;
-        });
-      } else {
-         logNoStack.i("Returning null");
-        return null; // it validates and the item does not exist
-      }
+      });
     } else {
-      logNoStack.i("Returning default widget.itemValidation");
-      return widget.itemValidation;
+      logNoStack.i("Returning null");
+      return null; // it validates and the item does not exist
     }
+    // } else {
+    //   logNoStack.i("Returning default widget.itemValidation");
+    //   return widget.itemValidation;
+    // }
+    return null;
   }
 
   Future<bool> checkIfExistsAsync(String value) async {
     var token = ref.read(nestAuthProvider.notifier).token;
     var apiPath =
-        "$defaultAPIBaseUrl$defaultApiPrefixPath/resources/check/${pureFieldCode}/";
+        "$defaultAPIBaseUrl$defaultApiPrefixPath/resources/check/$pureFieldCode/";
     apiPath = "$apiPath${Uri.encodeComponent(value)}";
     var response = await apiGetData(token!, apiPath, "application/json");
     return response.body.contains("true");
@@ -212,8 +216,8 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
         ),
       ),
       validator: (value) {
-       // return "bullshit";
-       logNoStack.i("validating $value");
+        // return "bullshit";
+        logNoStack.i("validating $value");
         return validate(value!);
 
         // String? result = (!_isEmptyOlderValue(_olderValue)) && value!.isEmpty
@@ -236,7 +240,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
       onChanged: (value) => _debouncer.run(() {
         _olderValue = value.isEmpty ? _olderValue : value;
         itemFormFieldKey.currentState?.validate();
-        
+
         //ref.read(refreshWidgetProvider("organization").notifier).refresh();
         //ref.read(refreshWidgetProvider(widget.fieldCode).notifier).refresh();
         //ref.read(refreshWidgetProvider("${widget.formCode}-submit").notifier).refresh();
@@ -274,8 +278,8 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
       "Checking validation for enabled:$enableWidget ${widget.fieldCode} $value optional:${widget.optional} isValid:$isValid",
     );
     if (isValid && widget.itemExists != null) {
-     // var exists = validate(value!);
-     // isValid &= (exists==null);
+      // var exists = validate(value!);
+      // isValid &= (exists==null);
     }
     return isValid;
   }

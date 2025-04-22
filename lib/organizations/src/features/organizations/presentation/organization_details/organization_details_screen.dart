@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notifi/models/organization.dart';
 import 'package:notifi/organizations/src/features/organizations/data/organizations_repository_nf.dart';
-import 'package:notifi/persons/src/features/persons/data/persons_repository.dart';
 import 'package:notifi/widgets/avatar_edit.dart';
 
 
-import '../organizations/organization_list_tile.dart';
 import '../organizations/organization_list_tile_shimmer.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;

@@ -234,7 +234,7 @@ UserRole getRole(String? token)
   // 2025-01-13 13:04:18.000
   logNoStack.i("token expiry datetime is $expirationDate");
   // use token to extract roles
-  Duration tokenTime = JwtDecoder.getTokenTime(token!);
+  Duration tokenTime = JwtDecoder.getTokenTime(token);
   logNoStack.i("token duration is ${tokenTime.inMinutes} for $token");
 
 

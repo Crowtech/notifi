@@ -27,7 +27,7 @@ class SubmitButtonWidget extends StatelessWidget {
     //ref.watch(refreshWidgetProvider("$formCode-submit"));
     logNoStack.i("Submit button $formCode ");
     return ElevatedButton(
-      key: Key("${formCode}-submit"),
+      key: Key("$formCode-submit"),
       onPressed:
           !(formKey.currentState != null && formKey.currentState!.validate())
               ? null

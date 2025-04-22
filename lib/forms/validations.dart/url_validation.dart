@@ -41,7 +41,7 @@ Future<bool> validateUrlAsync(WidgetRef ref,BuildContext context,String? url) as
       var apiPath =
           "$defaultAPIBaseUrl$defaultApiPrefixPath/resources/check/url/";
       apiPath = "$apiPath${Uri.encodeComponent(url)}";
-      logNoStack.i("ORG_FORM: encodedApiPath is ${apiPath}");
+      logNoStack.i("ORG_FORM: encodedApiPath is $apiPath");
       var response = await apiGetData(token!, apiPath, "application/json");
       logNoStack.i("ORG_FORM: result ${response.body.toString()}");
       if (!response.body.contains("true")) {

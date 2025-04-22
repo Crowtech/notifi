@@ -128,7 +128,7 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                     //SubmitButtonWidget(formKey: _formKey, formCode: widget.formCode)
                     Consumer(builder: (context, watch, child) {
                       bool isValid =
-                          ref.watch(validateFormProvider("${widget.formCode}"));
+                          ref.watch(validateFormProvider(widget.formCode));
                       logNoStack.i("PERSON_FORM: isValid $isValid");
                       return ElevatedButton(
                         key: const Key("person-submit"),
@@ -181,11 +181,11 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                                         "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/create?$queryParmOrgIds";
 
                                     logNoStack.i(
-                                        "PERSON_FORM: sending ${person} to ${apiPath}");
+                                        "PERSON_FORM: sending $person to $apiPath");
                                     apiPostDataNoLocaleRaw(
                                             token!, apiPath, person)
                                         .then((result) {
-                                      logNoStack.i("result is ${result}");
+                                      logNoStack.i("result is $result");
 
                                       StatusAlert.show(
                                         context,
@@ -199,7 +199,7 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                                       ref.invalidate(fetchPersonsProvider);
                                       Navigator.of(context).pop();
                                     }, onError: (error) {
-                                      logNoStack.e("error is ${error}");
+                                      logNoStack.e("error is $error");
                                       StatusAlert.show(
                                         context,
                                         duration: const Duration(seconds: 2),
