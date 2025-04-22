@@ -41,10 +41,10 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	// Translations
 	String get app_title => 'Crowtech';
 	String get notfound_404 => '404 - Page not found!';
-	late final TranslationsMenuEn menu = TranslationsMenuEn.internal(_root);
+	late final TranslationsMenuEn menu = TranslationsMenuEn._(_root);
 	String get about_us => 'About Us';
 	String get accept_terms_switch => 'I Accept the terms and conditions';
-	late final TranslationsAccountEn account = TranslationsAccountEn.internal(_root);
+	late final TranslationsAccountEn account = TranslationsAccountEn._(_root);
 	String get activity => 'Activity';
 	String get audio_access_denied => 'You have denied audio access';
 	String get audio_access_denied_without_prompt => 'Please go to Settings app to enable audio access';
@@ -70,12 +70,12 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get exposure_mode => 'Exposure Mode';
 	String get exposure_offset => 'Exposure Offset';
 	String get favourite => 'Favourite';
-	late final TranslationsFormEn form = TranslationsFormEn.internal(_root);
+	late final TranslationsFormEn form = TranslationsFormEn._(_root);
 	String get firstname => 'Firstname';
 	String get focus_mode => 'Focus Mode';
 	String get groups => 'Groups';
 	String get group_types_title => 'Group Types';
-	late final TranslationsGroupTypesEn group_types = TranslationsGroupTypesEn.internal(_root);
+	late final TranslationsGroupTypesEn group_types = TranslationsGroupTypesEn._(_root);
 	String get help => 'Help';
 	String get highlight_title => 'Generate Context-Aware Translations';
 	String get highlight_description => 'Generate context-aware aware translatinons with GPT';
@@ -112,15 +112,15 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get privacy_policy => 'Privacy Policy';
 	String get profile => 'Profile';
 	String get pulltorefresh => 'Pull to refresh';
-	late final TranslationsResourceEn resource = TranslationsResourceEn.internal(_root);
-	late final TranslationsResourcesEn resources = TranslationsResourcesEn.internal(_root);
-	late final TranslationsResponseEn response = TranslationsResponseEn.internal(_root);
+	late final TranslationsResourceEn resource = TranslationsResourceEn._(_root);
+	late final TranslationsResourcesEn resources = TranslationsResourcesEn._(_root);
+	late final TranslationsResponseEn response = TranslationsResponseEn._(_root);
 	String get saving => 'Saving ...';
-	late final TranslationsSelectEn select = TranslationsSelectEn.internal(_root);
+	late final TranslationsSelectEn select = TranslationsSelectEn._(_root);
 	String get reset_offset => 'Reset Offset';
 	String get resetting_exposure_point => 'Resetting exposure point';
 	String get resetting_focus_point => 'Resetting focus point';
-	late final TranslationsSearchEn search = TranslationsSearchEn.internal(_root);
+	late final TranslationsSearchEn search = TranslationsSearchEn._(_root);
 	String get settings => 'Settings';
 	String get skip => 'Skip';
 	String get splash_text => 'Splash Screen';
@@ -128,7 +128,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get terms_and_conditions => 'Terms & Conditions';
 	String get test_page => 'Test Page';
 	String get text => 'Text';
-	late final TranslationsUnknownEn unknown = TranslationsUnknownEn.internal(_root);
+	late final TranslationsUnknownEn unknown = TranslationsUnknownEn._(_root);
 	String get update_account => 'Update Account';
 	String get zoom_in => 'Zoom In';
 	String get zoom_out => 'Zoom out';
@@ -140,7 +140,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 // Path: menu
 class TranslationsMenuEn {
-	TranslationsMenuEn.internal(this._root);
+	TranslationsMenuEn._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -151,7 +151,7 @@ class TranslationsMenuEn {
 
 // Path: account
 class TranslationsAccountEn {
-	TranslationsAccountEn.internal(this._root);
+	TranslationsAccountEn._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -172,12 +172,12 @@ class TranslationsAccountEn {
 
 // Path: form
 class TranslationsFormEn {
-	TranslationsFormEn.internal(this._root);
+	TranslationsFormEn._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	String validating({required Object item}) => 'Please wait for the ${item} validation to complete';
+	String validating({required Object field}) => 'Please wait for the ${field} validation to complete';
 	String already_exists({required Object item, required Object field}) => 'A ${item} with this ${field} already exists';
 	String create({required Object item}) => 'Create a new ${item}';
 	String edit({required Object item}) => 'Edit ${item}';
@@ -208,7 +208,7 @@ class TranslationsFormEn {
 
 // Path: group_types
 class TranslationsGroupTypesEn {
-	TranslationsGroupTypesEn.internal(this._root);
+	TranslationsGroupTypesEn._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -231,7 +231,7 @@ class TranslationsGroupTypesEn {
 
 // Path: resource
 class TranslationsResourceEn {
-	TranslationsResourceEn.internal(this._root);
+	TranslationsResourceEn._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -247,7 +247,7 @@ class TranslationsResourceEn {
 
 // Path: resources
 class TranslationsResourcesEn {
-	TranslationsResourcesEn.internal(this._root);
+	TranslationsResourcesEn._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -263,7 +263,7 @@ class TranslationsResourcesEn {
 
 // Path: response
 class TranslationsResponseEn {
-	TranslationsResponseEn.internal(this._root);
+	TranslationsResponseEn._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -283,7 +283,7 @@ class TranslationsResponseEn {
 
 // Path: select
 class TranslationsSelectEn {
-	TranslationsSelectEn.internal(this._root);
+	TranslationsSelectEn._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -305,7 +305,7 @@ class TranslationsSelectEn {
 
 // Path: search
 class TranslationsSearchEn {
-	TranslationsSearchEn.internal(this._root);
+	TranslationsSearchEn._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -321,7 +321,7 @@ class TranslationsSearchEn {
 
 // Path: unknown
 class TranslationsUnknownEn {
-	TranslationsUnknownEn.internal(this._root);
+	TranslationsUnknownEn._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -384,7 +384,7 @@ extension on Translations {
 			case 'exposure_mode': return 'Exposure Mode';
 			case 'exposure_offset': return 'Exposure Offset';
 			case 'favourite': return 'Favourite';
-			case 'form.validating': return ({required Object item}) => 'Please wait for the ${item} validation to complete';
+			case 'form.validating': return ({required Object field}) => 'Please wait for the ${field} validation to complete';
 			case 'form.already_exists': return ({required Object item, required Object field}) => 'A ${item} with this ${field} already exists';
 			case 'form.create': return ({required Object item}) => 'Create a new ${item}';
 			case 'form.edit': return ({required Object item}) => 'Edit ${item}';

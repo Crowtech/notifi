@@ -49,7 +49,7 @@
   "firstname": "给定的名称",
   "focus_mode": "专注模式",
   "form" : {
-    "validating": "请等待${item}验证完成",
+    "validating": "请等待${field}验证完成",
     "already_exists": "具有此${field}的${item}已存在",
     "create": "创建${item}",
     "edit": "编辑${item}",
