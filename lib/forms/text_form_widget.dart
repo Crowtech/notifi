@@ -142,7 +142,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
       apiPath = "$apiPath${Uri.encodeComponent(value)}";
       logNoStack.i("ORG_FORM: check encodedApiPath is $apiPath");
       var response = await apiGetData(token!, apiPath, "application/json");
-      isValid = response.body.contains("true");
+      isValid = !response.body.contains("true");  // if existing then it returns true
       isValidating = false;
     }
     return isValid;
