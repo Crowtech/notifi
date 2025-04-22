@@ -1,3 +1,4 @@
+import 'package:async_textformfield/async_textformfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -27,6 +28,7 @@ typedef ValidateFunction<String> = bool Function(String value);
 class TextFormFieldWidget extends ConsumerStatefulWidget {
   const TextFormFieldWidget({
     super.key,
+    required this.controller,
     required this.fieldValues,
     required this.formCode,
     required this.fieldCode,
@@ -47,6 +49,7 @@ class TextFormFieldWidget extends ConsumerStatefulWidget {
     this.inputFormatters = const [],
   });
 
+  final TextEditingController controller;
   final Map<String, dynamic> fieldValues;
   final String formCode;
   final String fieldCode;
@@ -121,7 +124,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
     }
   }
 
-  String? validate(String value) {
+  Future<bool> validate(String value) async {
     // if (isValidInput(value)) {
     if (widget.itemExists != null) {
       logNoStack.i("Checking email exists");
@@ -139,7 +142,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
         if (_itemExists == true) {
           logNoStack.i(
               "TEXTFORMWIDGET: EXISTS !!! ERROR!!!! $pureFieldCode exists $_itemExists ${widget.itemExists}");
-          return widget.itemExists;
+          return false;
         } else {
           logNoStack.i(
               "TEXTFORMWIDGET: EXISTS !!! NO ERROR!!!! $pureFieldCode exists $_itemExists");
@@ -147,13 +150,13 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
       });
     } else {
       logNoStack.i("Returning null");
-      return null; // it validates and the item does not exist
+      return true; // it validates and the item does not exist
     }
     // } else {
     //   logNoStack.i("Returning default widget.itemValidation");
     //   return widget.itemValidation;
     // }
-    return null;
+    return true;
   }
 
   Future<bool> checkIfExistsAsync(String value) async {
@@ -178,79 +181,93 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
 
     logNoStack.i(
         "TEXT_FORM_WIDGET: BUILD: ${widget.fieldCode} enableWidget:$enableWidget");
-    return TextFormField(
-      key: itemFormFieldKey,
-      autofocus: true,
-      //controller: widget.textController,
-      initialValue: widget.initialValue,
-      autocorrect: true,
-      readOnly: widget.readOnly,
-      enabled: enableWidget,
-      inputFormatters: inputFormatters,
-      textCapitalization: widget.textCapitalization,
-      decoration: InputDecoration(
-        hintText: widget.hintText,
-        errorStyle: const TextStyle(color: Colors.red),
-        labelText: widget.optional
-            ? "${widget.itemName} (${nt.t.optional})"
-            : widget.itemName,
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: statusColor(), width: 3.0),
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: statusColor(),
-            width: isValid ? 2.0 : 1.0,
-          ),
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        disabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.grey, width: 1.0),
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.red, width: 3.0),
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-      ),
-      validator: (value) {
-        // return "bullshit";
-        logNoStack.i("validating $value");
-        if (_itemExists == true) {
-          return widget.itemExists;
-        }
+
+    return AsyncTextFormField(
+             controller: widget.controller,
+              validationDebounce: Duration(milliseconds: 500),
+              validator: validate,
+              hintText: widget.hintText ?? widget.itemName,
+              isValidatingMessage:
+                  'Checking if email already exists ..',
+              valueIsInvalidMessage: 'Nope, Try harder..',
+              valueIsEmptyMessage: 'No one sets an empty email!',
+            );
+
+
+
+    // return TextFormField(
+    //   key: itemFormFieldKey,
+    //   autofocus: true,
+    //   //controller: widget.textController,
+    //   initialValue: widget.initialValue,
+    //   autocorrect: true,
+    //   readOnly: widget.readOnly,
+    //   enabled: enableWidget,
+    //   inputFormatters: inputFormatters,
+    //   textCapitalization: widget.textCapitalization,
+    //   decoration: InputDecoration(
+    //     hintText: widget.hintText,
+    //     errorStyle: const TextStyle(color: Colors.red),
+    //     labelText: widget.optional
+    //         ? "${widget.itemName} (${nt.t.optional})"
+    //         : widget.itemName,
+    //     focusedBorder: OutlineInputBorder(
+    //       borderSide: BorderSide(color: statusColor(), width: 3.0),
+    //       borderRadius: BorderRadius.circular(10.0),
+    //     ),
+    //     enabledBorder: OutlineInputBorder(
+    //       borderSide: BorderSide(
+    //         color: statusColor(),
+    //         width: isValid ? 2.0 : 1.0,
+    //       ),
+    //       borderRadius: BorderRadius.circular(10.0),
+    //     ),
+    //     disabledBorder: OutlineInputBorder(
+    //       borderSide: const BorderSide(color: Colors.grey, width: 1.0),
+    //       borderRadius: BorderRadius.circular(10.0),
+    //     ),
+    //     errorBorder: OutlineInputBorder(
+    //       borderSide: const BorderSide(color: Colors.red, width: 3.0),
+    //       borderRadius: BorderRadius.circular(10.0),
+    //     ),
+    //   ),
+    //   validator: (value) {
+    //     // return "bullshit";
+    //     logNoStack.i("validating $value");
+    //     if (_itemExists == true) {
+    //       return widget.itemExists;
+    //     }
   
 
-        String? result = (!_isEmptyOlderValue(_olderValue)) && value!.isEmpty
-            ? null
-            : isValidInput(value!)? null : widget.itemValidation;
+    //     String? result = (!_isEmptyOlderValue(_olderValue)) && value!.isEmpty
+    //         ? null
+    //         : isValidInput(value!)? null : widget.itemValidation;
           
-        _olderValue = _isEmptyValue(value) ? value : _olderValue;
-        isEmpty = _isEmptyValue(value);
-        // remove the true/false-
-        widget.fieldValues[pureFieldCode] = value;
-        ref
-            .read(validateFormProvider(widget.formCode).notifier)
-            .add(pureFieldCode, isValid);
-        return result;
-      },
-      onChanged: (value) => _debouncer.run(() {
-        _olderValue = value.isEmpty ? _olderValue : value;
-        itemFormFieldKey.currentState?.validate();
+    //     _olderValue = _isEmptyValue(value) ? value : _olderValue;
+    //     isEmpty = _isEmptyValue(value);
+    //     // remove the true/false-
+    //     widget.fieldValues[pureFieldCode] = value;
+    //     ref
+    //         .read(validateFormProvider(widget.formCode).notifier)
+    //         .add(pureFieldCode, isValid);
+    //     return result;
+    //   },
+    //   onChanged: (value) => _debouncer.run(() {
+    //     _olderValue = value.isEmpty ? _olderValue : value;
+    //     itemFormFieldKey.currentState?.validate();
 
-        //ref.read(refreshWidgetProvider("organization").notifier).refresh();
-        //ref.read(refreshWidgetProvider(widget.fieldCode).notifier).refresh();
-        //ref.read(refreshWidgetProvider("${widget.formCode}-submit").notifier).refresh();
-      }),
-      onFieldSubmitted: (value) async {
-        isValidInput(value);
-       // validate(value);
-      },
-      onSaved: (value) {
-        validate(value!);
-      },
-    );
+    //     //ref.read(refreshWidgetProvider("organization").notifier).refresh();
+    //     //ref.read(refreshWidgetProvider(widget.fieldCode).notifier).refresh();
+    //     //ref.read(refreshWidgetProvider("${widget.formCode}-submit").notifier).refresh();
+    //   }),
+    //   onFieldSubmitted: (value) async {
+    //     isValidInput(value);
+    //    // validate(value);
+    //   },
+    //   onSaved: (value) {
+    //     validate(value!);
+    //   },
+    // );
   }
 
   bool isValidInput(String? value) {
