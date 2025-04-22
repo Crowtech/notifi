@@ -201,7 +201,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
         }
 
         if (!isWaiting && !isValid && isExisting) {
-          return widget.valueIsInvalidMessage;
+          return widget.valueIsExisting;
         }
         if (!isWaiting && !isValid) {
           return widget.valueIsInvalidMessage;
