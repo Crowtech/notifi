@@ -111,6 +111,7 @@ Future<bool> defaultValidate(String value) async {
                 TextFormFieldWidget(
                   controller: emailController,
                   isValidatingMessage: "please wait for the validation to complete",
+                  valueIsExisting: "email already exists",
                 // validator: defaultValidate,
                   formCode: widget.formCode,
                   fieldCode: "true-email",
