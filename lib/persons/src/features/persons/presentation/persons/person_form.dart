@@ -78,7 +78,7 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
                   controller: givenNameController,
-                  fieldValues: fieldValues,
+                  validationDebounce: const Duration(milliseconds: 500),
                   formCode: widget.formCode,
                   fieldCode: "true-given_name",
                   itemCategory: nt.t.person,
@@ -92,7 +92,7 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
                   controller: familyNameController,
-                  fieldValues: fieldValues,
+            
                   formCode: widget.formCode,
                   fieldCode: "true-family_name",
                   itemCategory: nt.t.person,
@@ -106,7 +106,7 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
                   controller: emailController,
-                  fieldValues: fieldValues,
+                 
                   formCode: widget.formCode,
                   fieldCode: "true-email",
                   enabled: true,
@@ -119,7 +119,6 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                   hintText: nt.t.form.email_hint,
                   onValidate: validateEmail,
                   regex: EMAIL_REGEX,
-                  forceLowercase: true,
                   inputFormatters: emailInputFormatter,
                 ),
                 const SizedBox(height: 16),
