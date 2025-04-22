@@ -33,7 +33,7 @@ class TextFormFieldWidget extends ConsumerStatefulWidget {
     //required this.validator,
     this.validationDebounce = const Duration(milliseconds: 500),
     required this.controller,
-    this.isValidatingMessage = "please wait for the validation to complete",
+    this.isValidatingMessage,
     this.valueIsEmptyMessage = 'please enter a value',
     this.valueIsInvalidMessage = 'please enter a valid value',
     this.valueIsExisting,
@@ -58,7 +58,7 @@ class TextFormFieldWidget extends ConsumerStatefulWidget {
   Duration validationDebounce;
   final TextEditingController controller;
   String hintText;
-  String isValidatingMessage;
+  String? isValidatingMessage;
   String valueIsEmptyMessage;
   String valueIsInvalidMessage;
   String? valueIsExisting;
@@ -132,7 +132,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
   Future<bool> validate(String value) async {
     var isValid = true; //isValidInput(value);
 
-   // if (isValid && (widget.valueIsExisting != null)) {
+    if (isValid && (widget.isValidatingMessage != null)) {
       setState(() {
         isValidating = true;
       });
@@ -144,7 +144,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
       var response = await apiGetData(token!, apiPath, "application/json");
       isValid = response.body.contains("true");
       isValidating = false;
-   // }
+    }
     return isValid;
   }
 

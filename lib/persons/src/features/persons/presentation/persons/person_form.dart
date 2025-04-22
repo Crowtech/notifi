@@ -110,6 +110,7 @@ Future<bool> defaultValidate(String value) async {
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
                   controller: emailController,
+                  isValidatingMessage: "please wait for the validation to complete",
                 // validator: defaultValidate,
                   formCode: widget.formCode,
                   fieldCode: "true-email",
