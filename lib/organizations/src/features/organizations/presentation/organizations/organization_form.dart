@@ -107,6 +107,7 @@ Future<bool> defaultValidate(String value) async {
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
+                   fieldValues: fieldValues,
                  // validator: defaultValidate,
                   controller: nameController,
                  // fieldValues: fieldValues,
@@ -121,6 +122,7 @@ Future<bool> defaultValidate(String value) async {
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
+                   fieldValues: fieldValues,
                  // validator: defaultValidate,
                   controller: descriptionController,
                   //fieldValues: fieldValues,
@@ -138,6 +140,7 @@ Future<bool> defaultValidate(String value) async {
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
+                   fieldValues: fieldValues,
                     controller: emailController,
                  // fieldValues: fieldValues,
                   formCode: widget.formCode,
@@ -197,6 +200,7 @@ Future<bool> defaultValidate(String value) async {
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
+                   fieldValues: fieldValues,
                   controller: urlController,
                  // validator: defaultValidate,
                   formCode: widget.formCode,

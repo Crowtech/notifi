@@ -30,6 +30,7 @@ typedef ValidateFunction<String> = bool Function(String value);
 class TextFormFieldWidget extends ConsumerStatefulWidget {
   TextFormFieldWidget({
     super.key,
+    required this.fieldValues,
     //required this.validator,
     this.validationDebounce = const Duration(milliseconds: 500),
     required this.controller,
@@ -55,6 +56,7 @@ class TextFormFieldWidget extends ConsumerStatefulWidget {
   });
 
   //Future<bool> Function(String) validator;
+  final Map<String, dynamic> fieldValues;
   Duration validationDebounce;
   final TextEditingController controller;
   String hintText;
@@ -149,20 +151,24 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
           response.body.contains("true"); // if existing then it returns true
       if (isExisting) {
         isValid = false;
-      
-      setState(() {
-        isValidating = false;
-        isExisting = true;
-        isValid = false;
-      });
+
+        setState(() {
+          isValidating = false;
+          isExisting = true;
+          isValid = false;
+        });
       } else {
         setState(() {
-        isValidating = false;
-        isExisting = false;
-        isValid = true;
-      });
+          isValidating = false;
+          isExisting = false;
+          isValid = true;
+        });
       }
     }
+    widget.fieldValues[pureFieldCode] = value;
+    ref
+        .read(validateFormProvider(widget.formCode).notifier)
+        .add(pureFieldCode, isValid);
     return isValid;
   }
 

@@ -99,6 +99,7 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                             controller: givenNameController,
                             validationDebounce:
                                 const Duration(milliseconds: 500),
+                                 fieldValues: fieldValues,
                             formCode: widget.formCode,
                             fieldCode: "true-given_name",
                             itemCategory: nt.t.person,
@@ -112,6 +113,7 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                           const SizedBox(height: 16),
                           TextFormFieldWidget(
                             controller: familyNameController,
+                             fieldValues: fieldValues,
                             // validator: defaultValidate,
                             formCode: widget.formCode,
                             fieldCode: "true-family_name",
@@ -126,6 +128,7 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                           const SizedBox(height: 16),
                           TextFormFieldWidget(
                             controller: emailController,
+                             fieldValues: fieldValues,
                             isValidatingMessage:
                                 nt.t.form.validating(field: nt.t.form.email),
                             valueIsExisting: nt.t.form.already_exists(
