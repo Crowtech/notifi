@@ -107,7 +107,7 @@ Future<bool> defaultValidate(String value) async {
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
-                  validator: defaultValidate,
+                 // validator: defaultValidate,
                   controller: nameController,
                  // fieldValues: fieldValues,
                   formCode: widget.formCode,
@@ -121,7 +121,7 @@ Future<bool> defaultValidate(String value) async {
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
-                  validator: defaultValidate,
+                 // validator: defaultValidate,
                   controller: descriptionController,
                   //fieldValues: fieldValues,
                   formCode: widget.formCode,
@@ -149,7 +149,7 @@ Future<bool> defaultValidate(String value) async {
                   itemValidation: nt.t.form.email_validation(
                     item: nt.t.organization_capitalized,
                   ),
-                  validator: defaultValidate,
+                 // validator: defaultValidate,
                   regex: EMAIL_REGEX,
                  
                 ),
@@ -198,7 +198,7 @@ Future<bool> defaultValidate(String value) async {
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
                   controller: urlController,
-                  validator: defaultValidate,
+                 // validator: defaultValidate,
                   formCode: widget.formCode,
                   fieldCode: "false-url",
                   enabled: false,

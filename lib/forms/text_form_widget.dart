@@ -30,7 +30,7 @@ typedef ValidateFunction<String> = bool Function(String value);
 class TextFormFieldWidget extends ConsumerStatefulWidget {
   TextFormFieldWidget({
     super.key,
-    required this.validator,
+    //required this.validator,
     this.validationDebounce = const Duration(milliseconds: 500),
     required this.controller,
     this.isValidatingMessage = "please wait for the validation to complete",
@@ -54,7 +54,7 @@ class TextFormFieldWidget extends ConsumerStatefulWidget {
     this.inputFormatters = const [],
   });
 
-  Future<bool> Function(String) validator;
+  //Future<bool> Function(String) validator;
   Duration validationDebounce;
   final TextEditingController controller;
   String hintText;

@@ -80,7 +80,7 @@ Future<bool> defaultValidate(String value) async {
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
-                  validator: defaultValidate,
+                //  validator: defaultValidate,
                   controller: givenNameController,
                   validationDebounce: const Duration(milliseconds: 500),
                   formCode: widget.formCode,
@@ -96,7 +96,7 @@ Future<bool> defaultValidate(String value) async {
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
                   controller: familyNameController,
-            validator: defaultValidate,
+           // validator: defaultValidate,
                   formCode: widget.formCode,
                   fieldCode: "true-family_name",
                   itemCategory: nt.t.person,
@@ -110,7 +110,7 @@ Future<bool> defaultValidate(String value) async {
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
                   controller: emailController,
-                 validator: defaultValidate,
+                // validator: defaultValidate,
                   formCode: widget.formCode,
                   fieldCode: "true-email",
                   enabled: true,
