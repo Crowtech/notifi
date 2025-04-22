@@ -24,6 +24,9 @@ class ListPoster {
   static String tmdbBaseImageUrl = defaultImageProxyUrl;
 
   static String imageUrl(String path, PosterSize size) {
+    if (path.isEmpty) {
+      return "https://gravatar.com/avatar/E9BC1D1E7E57D73ACC1682C0AD66CA4F";
+    }
     return "$tmdbBaseImageUrl${_posterSizes[size]!}/$path";
     //return tmdbBaseImageUrl + "/${size}x/" + path;
   }
