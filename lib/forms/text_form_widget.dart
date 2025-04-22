@@ -125,7 +125,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
     // if (isValidInput(value)) {
     if (widget.itemExists != null) {
       logNoStack.i("Checking email exists");
-      bool exists = false;
+      _itemExists = false;
       var token = ref.read(nestAuthProvider.notifier).token;
       var apiPath =
           "$defaultAPIBaseUrl$defaultApiPrefixPath/resources/check/$pureFieldCode/";
@@ -133,19 +133,17 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
       apiGetData(token!, apiPath, "application/json").then((response) {
         logNoStack
             .i("TEXTFORMWIDGET: $pureFieldCode response ${response.body}");
-        exists = response.body.contains("true");
-        logNoStack.i("TEXTFORMWIDGET: $pureFieldCode exists $exists");
+        _itemExists = response.body.contains("true");
+        logNoStack.i("TEXTFORMWIDGET: $pureFieldCode exists $_itemExists");
 
-        if (exists == true) {
+        if (_itemExists == true) {
           logNoStack.i(
-              "TEXTFORMWIDGET: EXISTS !!! ERROR!!!! $pureFieldCode exists $exists ${widget.itemExists}");
+              "TEXTFORMWIDGET: EXISTS !!! ERROR!!!! $pureFieldCode exists $_itemExists ${widget.itemExists}");
           return widget.itemExists;
         } else {
           logNoStack.i(
-              "TEXTFORMWIDGET: EXISTS !!! NO ERROR!!!! $pureFieldCode exists $exists");
+              "TEXTFORMWIDGET: EXISTS !!! NO ERROR!!!! $pureFieldCode exists $_itemExists");
         }
-        logNoStack.i("Returning ${exists ? widget.itemExists : null}");
-        return exists ? widget.itemExists : null;
       });
     } else {
       logNoStack.i("Returning null");
