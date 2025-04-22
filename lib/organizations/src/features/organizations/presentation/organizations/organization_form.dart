@@ -247,25 +247,7 @@ class _CreateOrganizationFormState
                             : () async {
                                 if (_formKey.currentState != null &&
                                     _formKey.currentState!.validate()) {
-                                  var urlNotExisting = await validateUrlAsync(
-                                      ref, context, fieldValues['url']!);
-
-                                  if (urlNotExisting == false) {
-                                    logNoStack.e(
-                                        "error is ${nt.t.form.already_exists(item: nt.t.organization_capitalized, field: nt.t.form.url)}");
-                                    StatusAlert.show(
-                                      context,
-                                      duration: const Duration(seconds: 4),
-                                      //title: nt.t.organization,
-                                      title: nt.t.form.already_exists(
-                                          item: nt.t.organization_capitalized,
-                                          field: nt.t.form.url),
-                                      configuration: const IconConfiguration(
-                                          icon: Icons.error),
-                                      maxWidth: 300,
-                                      dismissOnBackgroundTap: true,
-                                    );
-                                  } else {
+                               
                                     // If the form is valid, display a snackbar. In the real world,
                                     // you'd often call a server or save the information in a database.
 
@@ -316,8 +298,8 @@ class _CreateOrganizationFormState
                                       );
                                     });
                                   }
-                                }
-                              },
+                                },
+                           
                         child: Text(nt.t.response.submit),
                       );
                     })
