@@ -136,7 +136,6 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                             enabled: true,
                             itemCategory: nt.t.person,
                             itemName: nt.t.form.email,
-                            // itemExists: nt.t.form.already_exists(item: nt.t.person_capitalized, field: nt.t.form.email),
                             itemValidation: nt.t.form.email_validation(
                               item: nt.t.person_capitalized,
                             ),

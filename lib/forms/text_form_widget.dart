@@ -149,12 +149,19 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
           response.body.contains("true"); // if existing then it returns true
       if (isExisting) {
         isValid = false;
-      }
+      
       setState(() {
         isValidating = false;
-        isExisting = isExisting;
+        isExisting = true;
         isValid = false;
       });
+      } else {
+        setState(() {
+        isValidating = false;
+        isExisting = false;
+        isValid = true;
+      });
+      }
     }
     return isValid;
   }
@@ -188,8 +195,8 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
       //autocorrect: true,
       //readOnly: widget.readOnly,
       //enabled: enableWidget,
-      //inputFormatters: inputFormatters,
-      //textCapitalization: widget.textCapitalization,
+      inputFormatters: inputFormatters,
+      textCapitalization: widget.textCapitalization,
       key: itemFormFieldKey,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
