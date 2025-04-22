@@ -7,6 +7,7 @@ import 'package:notifi/credentials.dart';
 import 'package:notifi/forms/cancel_button_widget.dart';
 import 'package:notifi/forms/text_form_widget.dart';
 import 'package:notifi/forms/validations.dart/email_validation.dart';
+import 'package:notifi/forms/validations.dart/name_validation.dart';
 import 'package:notifi/forms/validations.dart/url_validation.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:notifi/models/organization.dart';
@@ -43,10 +44,10 @@ class _CreateOrganizationFormState
   final Map<String, dynamic> fieldValues = {};
 
   OrganizationType? orgTypeIndex;
- final nameController =TextEditingController();
- final descriptionController =TextEditingController();
- final emailController =TextEditingController();
- final urlController =TextEditingController();
+  final nameController = TextEditingController();
+  final descriptionController = TextEditingController();
+  final emailController = TextEditingController();
+  final urlController = TextEditingController();
 
   @override
   void initState() {
@@ -80,9 +81,9 @@ class _CreateOrganizationFormState
     }
   }
 
-Future<bool> defaultValidate(String value) async {
-  return true;
-}
+  Future<bool> defaultValidate(String value) async {
+    return true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -107,25 +108,27 @@ Future<bool> defaultValidate(String value) async {
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
-                   fieldValues: fieldValues,
-                 // validator: defaultValidate,
                   controller: nameController,
-                 // fieldValues: fieldValues,
+                  fieldValues: fieldValues,
+                  isValidatingMessage:
+                      nt.t.form.validating(field: nt.t.form.name),
                   formCode: widget.formCode,
                   fieldCode: "true-name",
+                  enabled: true,
                   itemCategory: nt.t.organization,
-                  itemName: nt.t.name,
+                  itemName: nt.t.form.name,
                   itemValidation: nt.t.form.name_validation(
                     item: nt.t.organization_capitalized,
                   ),
-                  regex: r"^[\p{L} ,.'-0-9]*$",
+                  hintText: nt.t.form.name_hint,
+                  onValidate: validateName,
+                  regex: NAME_REGEX,
+                  inputFormatters: nameInputFormatter,
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
-                   fieldValues: fieldValues,
-                 // validator: defaultValidate,
+                  fieldValues: fieldValues,
                   controller: descriptionController,
-                  //fieldValues: fieldValues,
                   formCode: widget.formCode,
                   fieldCode: "true-description",
                   enabled: true,
@@ -140,21 +143,25 @@ Future<bool> defaultValidate(String value) async {
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
-                   fieldValues: fieldValues,
-                    controller: emailController,
-                 // fieldValues: fieldValues,
+                  controller: emailController,
+                  fieldValues: fieldValues,
+                  isValidatingMessage:
+                      nt.t.form.validating(field: nt.t.form.email),
+                  valueIsExisting: nt.t.form.already_exists(
+                      item: nt.t.organization_capitalized,
+                      field: nt.t.form.email),
                   formCode: widget.formCode,
                   fieldCode: "true-email",
                   enabled: true,
                   itemCategory: nt.t.organization,
-                  inputFormatters: emailInputFormatter,
                   itemName: nt.t.form.email,
                   itemValidation: nt.t.form.email_validation(
                     item: nt.t.organization_capitalized,
                   ),
-                 // validator: defaultValidate,
+                  hintText: nt.t.form.email_hint,
+                  onValidate: validateEmail,
                   regex: EMAIL_REGEX,
-                 
+                  inputFormatters: emailInputFormatter,
                 ),
                 const SizedBox(height: 16),
                 RadioListTile<OrganizationType>(
@@ -200,20 +207,26 @@ Future<bool> defaultValidate(String value) async {
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
-                   fieldValues: fieldValues,
                   controller: urlController,
-                 // validator: defaultValidate,
+                  fieldValues: fieldValues,
+                  isValidatingMessage:
+                      nt.t.form.validating(field: nt.t.form.url),
+                  valueIsExisting: nt.t.form.already_exists(
+                      item: nt.t.organization_capitalized,
+                      field: nt.t.form.url),
                   formCode: widget.formCode,
                   fieldCode: "false-url",
                   enabled: false,
-                  inputFormatters: urlInputFormatter,
                   itemCategory: nt.t.organization,
                   itemName: nt.t.form.url,
                   itemValidation: nt.t.form.url_validation(
                     item: nt.t.organization_capitalized,
                   ),
+                  hintText: nt.t.form.url_hint,
+                  onValidate: validateUrl,
                   regex: URL_REGEX,
-                   optional: true,
+                  inputFormatters: urlInputFormatter,
+                  optional: true,
                 ),
                 const SizedBox(height: 16),
                 Row(
@@ -234,8 +247,8 @@ Future<bool> defaultValidate(String value) async {
                             : () async {
                                 if (_formKey.currentState != null &&
                                     _formKey.currentState!.validate()) {
-                                  var urlNotExisting = await validateUrlAsync(ref,context,
-                                      fieldValues['url']!);
+                                  var urlNotExisting = await validateUrlAsync(
+                                      ref, context, fieldValues['url']!);
 
                                   if (urlNotExisting == false) {
                                     logNoStack.e(
@@ -252,7 +265,6 @@ Future<bool> defaultValidate(String value) async {
                                       maxWidth: 300,
                                       dismissOnBackgroundTap: true,
                                     );
-                                    
                                   } else {
                                     // If the form is valid, display a snackbar. In the real world,
                                     // you'd often call a server or save the information in a database.

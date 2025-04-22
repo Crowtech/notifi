@@ -1,4 +1,6 @@
+import 'package:flutter/services.dart';
 import 'package:logger/logger.dart' as logger;
+import 'package:notifi/helpers/text_formatter.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -12,6 +14,8 @@ var logNoStack = logger.Logger(
 
 
 String NAME_REGEX = r"^[\p{L} ,.'-0-9]*$";
+
+List<TextInputFormatter> nameInputFormatter = [LowerCaseTextFormatter(),FilteringTextInputFormatter.allow(RegExp("[a-zA-Z0-9+\\+\\@\\\\_.]"))];
 
 bool validateName(String? name) {
     if (name == null) {

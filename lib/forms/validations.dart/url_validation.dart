@@ -23,7 +23,20 @@ String URL_REGEX =  r"^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA
 
 List<TextInputFormatter> urlInputFormatter = [LowerCaseTextFormatter(),FilteringTextInputFormatter.allow(RegExp(URL_REGEX))];
 
-Future<bool> validateUrlAsync(WidgetRef ref,BuildContext context,String? url) async {
+bool validateUrl(String? url) {
+    if (url == null) {
+      return false;
+    }
+    return RegExp(
+      URL_REGEX,
+      caseSensitive: false,
+      unicode: true,
+      dotAll: true,
+    ).hasMatch(url);
+  }
+
+
+Future<bool> validateUrlsync(WidgetRef ref,BuildContext context,String? url) async {
     if (url == null) {
       return false;
     }
