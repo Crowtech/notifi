@@ -132,7 +132,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
   Future<bool> validate(String value) async {
     var isValid = true; //isValidInput(value);
 
-    if (isValid && (widget.valueIsExisting != null)) {
+   // if (isValid && (widget.valueIsExisting != null)) {
       setState(() {
         isValidating = true;
       });
@@ -144,7 +144,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
       var response = await apiGetData(token!, apiPath, "application/json");
       isValid = response.body.contains("true");
       isValidating = false;
-    }
+   // }
     return isValid;
   }
 
