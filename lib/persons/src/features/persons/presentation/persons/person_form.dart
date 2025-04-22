@@ -38,9 +38,9 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
   final _formKey = GlobalKey<FormState>();
 
   final Map<String, dynamic> fieldValues = {};
-   final givenNameController =TextEditingController();
-    final familyNameController =TextEditingController();
-  final emailController =TextEditingController();
+  final givenNameController = TextEditingController();
+  final familyNameController = TextEditingController();
+  final emailController = TextEditingController();
 
   @override
   void initState() {
@@ -55,185 +55,221 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
     super.dispose();
   }
 
-Future<bool> defaultValidate(String value) async {
-  return true;
-}
+  Future<bool> defaultValidate(String value) async {
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     String capitalizedItem = nt.t.person_capitalized;
     logNoStack.i("PERSON_FORM: BUILD ");
+    // e.g. dialog should be no bigger than 70% of the screen
+    final maximumHeightOfDialog = MediaQuery.of(context).size.height * 0.8;
     return Dialog(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  nt.t.form.create(item: capitalizedItem),
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxHeight: maximumHeightOfDialog,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SingleChildScrollView(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Flexible(
+                    child: AnimatedSize(
+                      // animate changes in size, when the list
+                      //size is changing, e.g. search functionality
+                      duration: Duration(milliseconds: 200),
+                      child: Column(
+                        children: [
+                          Text(
+                            nt.t.form.create(item: capitalizedItem),
+                            style: const TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          TextFormFieldWidget(
+                            //  validator: defaultValidate,
+                            controller: givenNameController,
+                            validationDebounce:
+                                const Duration(milliseconds: 500),
+                            formCode: widget.formCode,
+                            fieldCode: "true-given_name",
+                            itemCategory: nt.t.person,
+                            itemName: nt.t.form.given_name,
+                            itemValidation: nt.t.form.given_name_validation(
+                              item: nt.t.person_capitalized,
+                            ),
+                            hintText: nt.t.form.given_name_hint,
+                            regex: NAME_REGEX,
+                          ),
+                          const SizedBox(height: 16),
+                          TextFormFieldWidget(
+                            controller: familyNameController,
+                            // validator: defaultValidate,
+                            formCode: widget.formCode,
+                            fieldCode: "true-family_name",
+                            itemCategory: nt.t.person,
+                            itemName: nt.t.form.family_name,
+                            itemValidation: nt.t.form.family_name_validation(
+                              item: nt.t.person_capitalized,
+                            ),
+                            hintText: nt.t.form.family_name_hint,
+                            regex: NAME_REGEX,
+                          ),
+                          const SizedBox(height: 16),
+                          TextFormFieldWidget(
+                            controller: emailController,
+                            isValidatingMessage:
+                                nt.t.form.validating(field: nt.t.form.email),
+                            valueIsExisting: nt.t.form.already_exists(
+                                item: nt.t.person_capitalized,
+                                field: nt.t.form.email),
+                            formCode: widget.formCode,
+                            fieldCode: "true-email",
+                            enabled: true,
+                            itemCategory: nt.t.person,
+                            itemName: nt.t.form.email,
+                            // itemExists: nt.t.form.already_exists(item: nt.t.person_capitalized, field: nt.t.form.email),
+                            itemValidation: nt.t.form.email_validation(
+                              item: nt.t.person_capitalized,
+                            ),
+                            hintText: nt.t.form.email_hint,
+                            onValidate: validateEmail,
+                            regex: EMAIL_REGEX,
+                            inputFormatters: emailInputFormatter,
+                          ),
+                          const SizedBox(height: 16),
+                          OrganizationListWidget(
+                              formKey: _formKey,
+                              formCode: widget.formCode,
+                              fieldValues: fieldValues,
+                              fieldCode: "orgids"),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              CancelButtonWidget(
+                                  formKey: _formKey, formCode: widget.formCode),
+                              const SizedBox(width: 16),
+                              //SubmitButtonWidget(formKey: _formKey, formCode: widget.formCode)
+                              Consumer(builder: (context, watch, child) {
+                                bool isValid = ref.watch(
+                                    validateFormProvider(widget.formCode));
+                                logNoStack.i("PERSON_FORM: isValid $isValid");
+                                return ElevatedButton(
+                                  key: const Key("person-submit"),
+                                  onPressed: !isValid
+                                      ? null
+                                      : () async {
+                                          if (_formKey.currentState != null &&
+                                              _formKey.currentState!
+                                                  .validate()) {
+                                            // var emailNotExisting =
+                                            //     await validateEmailAsync(
+                                            //         ref, context, fieldValues['email']!);
+
+                                            // if (emailNotExisting == false) {
+                                            //   logNoStack.e(
+                                            //       "error is ${nt.t.form.already_exists(item: nt.t.person_capitalized, field: nt.t.form.email)}");
+                                            //   StatusAlert.show(
+                                            //     context,
+                                            //     duration: const Duration(seconds: 4),
+                                            //     //title: nt.t.person,
+                                            //     title: nt.t.form.already_exists(
+                                            //         item: nt.t.person_capitalized,
+                                            //         field: nt.t.form.email),
+                                            //     configuration: const IconConfiguration(
+                                            //         icon: Icons.error),
+                                            //     maxWidth: 300,
+                                            //     dismissOnBackgroundTap: true,
+                                            //   );
+                                            // } else {
+                                            // If the form is valid, display a snackbar. In the real world,
+                                            // you'd often call a server or save the information in a database.
+
+                                            // save person
+                                            Person person = Person(
+                                              firstname: fieldValues[
+                                                  'given_name'], // name
+                                              lastname: fieldValues[
+                                                  'family_name'], // description username
+                                              email:
+                                                  fieldValues['email'], // email
+                                            ); //fcm
+                                            logNoStack.i(
+                                                'person form: ${fieldValues['orgIds']}');
+                                            String queryParmOrgIds = "";
+                                            for (int orgId
+                                                in fieldValues['orgIds']) {
+                                              queryParmOrgIds +=
+                                                  "orgid=$orgId&";
+                                            }
+                                            queryParmOrgIds =
+                                                queryParmOrgIds.substring(0,
+                                                    queryParmOrgIds.length - 1);
+                                            var token = ref
+                                                .read(nestAuthProvider.notifier)
+                                                .token;
+                                            var apiPath =
+                                                "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/create?$queryParmOrgIds";
+
+                                            logNoStack.i(
+                                                "PERSON_FORM: sending $person to $apiPath");
+                                            apiPostDataNoLocaleRaw(
+                                                    token!, apiPath, person)
+                                                .then((result) {
+                                              logNoStack.i("result is $result");
+
+                                              StatusAlert.show(
+                                                context,
+                                                duration:
+                                                    const Duration(seconds: 2),
+                                                title: nt.t.person,
+                                                subtitle: nt.t.form.saved,
+                                                configuration:
+                                                    const IconConfiguration(
+                                                        icon: Icons.done),
+                                                maxWidth: 300,
+                                              );
+                                              ref.invalidate(
+                                                  fetchPersonsProvider);
+                                              Navigator.of(context).pop();
+                                            }, onError: (error) {
+                                              logNoStack.e("error is $error");
+                                              StatusAlert.show(
+                                                context,
+                                                duration:
+                                                    const Duration(seconds: 2),
+                                                title: nt.t.person,
+                                                subtitle:
+                                                    nt.t.form.error_saving,
+                                                configuration:
+                                                    const IconConfiguration(
+                                                        icon: Icons.error),
+                                                maxWidth: 300,
+                                              );
+                                            });
+                                          }
+                                        },
+                                  child: Text(nt.t.response.submit),
+                                );
+                              })
+                              //   },
+                              //   ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                ),
-                const SizedBox(height: 16),
-                TextFormFieldWidget(
-                //  validator: defaultValidate,
-                  controller: givenNameController,
-                  validationDebounce: const Duration(milliseconds: 500),
-                  formCode: widget.formCode,
-                  fieldCode: "true-given_name",
-                  itemCategory: nt.t.person,
-                  itemName: nt.t.form.given_name,
-                  itemValidation: nt.t.form.given_name_validation(
-                    item: nt.t.person_capitalized,
-                  ),
-                  hintText: nt.t.form.given_name_hint,
-                  regex: NAME_REGEX,
-                ),
-                const SizedBox(height: 16),
-                TextFormFieldWidget(
-                  controller: familyNameController,
-           // validator: defaultValidate,
-                  formCode: widget.formCode,
-                  fieldCode: "true-family_name",
-                  itemCategory: nt.t.person,
-                  itemName: nt.t.form.family_name,
-                  itemValidation: nt.t.form.family_name_validation(
-                    item: nt.t.person_capitalized,
-                  ),
-                  hintText: nt.t.form.family_name_hint,
-                  regex: NAME_REGEX,
-                ),
-                const SizedBox(height: 16),
-                TextFormFieldWidget(
-                  controller: emailController,
-                  isValidatingMessage: nt.t.form.validating(field: nt.t.form.email),
-                  valueIsExisting: nt.t.form.already_exists(item: nt.t.person_capitalized, field: nt.t.form.email),
-                  formCode: widget.formCode,
-                  fieldCode: "true-email",
-                  enabled: true,
-                  itemCategory: nt.t.person,
-                  itemName: nt.t.form.email,
-                 // itemExists: nt.t.form.already_exists(item: nt.t.person_capitalized, field: nt.t.form.email),
-                  itemValidation: nt.t.form.email_validation(
-                    item: nt.t.person_capitalized,
-                  ),
-                  hintText: nt.t.form.email_hint,
-                  onValidate: validateEmail,
-                  regex: EMAIL_REGEX,
-                  inputFormatters: emailInputFormatter,
-                ),
-                const SizedBox(height: 16),
-
-                OrganizationListWidget(formKey: _formKey, formCode: widget.formCode, fieldValues: fieldValues, fieldCode: "orgids"),
-
-
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    CancelButtonWidget(
-                        formKey: _formKey, formCode: widget.formCode),
-                    const SizedBox(width: 16),
-                    //SubmitButtonWidget(formKey: _formKey, formCode: widget.formCode)
-                    Consumer(builder: (context, watch, child) {
-                      bool isValid =
-                          ref.watch(validateFormProvider(widget.formCode));
-                      logNoStack.i("PERSON_FORM: isValid $isValid");
-                      return ElevatedButton(
-                        key: const Key("person-submit"),
-                        onPressed: !isValid
-                            ? null
-                            : () async {
-                                if (_formKey.currentState != null &&
-                                    _formKey.currentState!.validate()) {
-                                  // var emailNotExisting =
-                                  //     await validateEmailAsync(
-                                  //         ref, context, fieldValues['email']!);
-
-                                  // if (emailNotExisting == false) {
-                                  //   logNoStack.e(
-                                  //       "error is ${nt.t.form.already_exists(item: nt.t.person_capitalized, field: nt.t.form.email)}");
-                                  //   StatusAlert.show(
-                                  //     context,
-                                  //     duration: const Duration(seconds: 4),
-                                  //     //title: nt.t.person,
-                                  //     title: nt.t.form.already_exists(
-                                  //         item: nt.t.person_capitalized,
-                                  //         field: nt.t.form.email),
-                                  //     configuration: const IconConfiguration(
-                                  //         icon: Icons.error),
-                                  //     maxWidth: 300,
-                                  //     dismissOnBackgroundTap: true,
-                                  //   );
-                                  // } else {
-                                    // If the form is valid, display a snackbar. In the real world,
-                                    // you'd often call a server or save the information in a database.
-
-                                    // save person
-                                    Person person = Person(
-                                      firstname:
-                                          fieldValues['given_name'], // name
-                                      lastname: fieldValues[
-                                          'family_name'], // description username
-                                      email: fieldValues['email'], // email
-                                    ); //fcm
-                                    logNoStack.i('person form: ${fieldValues['orgIds']}');
-                                    String queryParmOrgIds = "";
-                                    for (int orgId in fieldValues['orgIds']) {
-                                      queryParmOrgIds += "orgid=$orgId&";
-                                    }
-                                    queryParmOrgIds =queryParmOrgIds.substring(0,queryParmOrgIds.length-1);
-                                    var token = ref
-                                        .read(nestAuthProvider.notifier)
-                                        .token;
-                                    var apiPath =
-                                        "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/create?$queryParmOrgIds";
-
-                                    logNoStack.i(
-                                        "PERSON_FORM: sending $person to $apiPath");
-                                    apiPostDataNoLocaleRaw(
-                                            token!, apiPath, person)
-                                        .then((result) {
-                                      logNoStack.i("result is $result");
-
-                                      StatusAlert.show(
-                                        context,
-                                        duration: const Duration(seconds: 2),
-                                        title: nt.t.person,
-                                        subtitle: nt.t.form.saved,
-                                        configuration: const IconConfiguration(
-                                            icon: Icons.done),
-                                        maxWidth: 300,
-                                      );
-                                      ref.invalidate(fetchPersonsProvider);
-                                      Navigator.of(context).pop();
-                                    }, onError: (error) {
-                                      logNoStack.e("error is $error");
-                                      StatusAlert.show(
-                                        context,
-                                        duration: const Duration(seconds: 2),
-                                        title: nt.t.person,
-                                        subtitle: nt.t.form.error_saving,
-                                        configuration: const IconConfiguration(
-                                            icon: Icons.error),
-                                        maxWidth: 300,
-                                      );
-                                    });
-                                  }
-                          
-                              },
-                        child: Text(nt.t.response.submit),
-                      );
-                    })
-                    //   },
-                    //   ),
-                  ],
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
