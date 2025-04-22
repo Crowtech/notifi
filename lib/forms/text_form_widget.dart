@@ -82,6 +82,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
   bool initialValid = false;
   late List<TextInputFormatter>? inputFormatters;
   late String pureFieldCode;
+  bool _itemExists = false;
 
   @override
   void initState() {
@@ -218,24 +219,23 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
       validator: (value) {
         // return "bullshit";
         logNoStack.i("validating $value");
-        return validate(value!);
+        if (_itemExists == true) {
+          return widget.itemExists;
+        }
+  
 
-        // String? result = (!_isEmptyOlderValue(_olderValue)) && value!.isEmpty
-        //     ? null
-        //     : validate(value!);
-        //     if (result != null)
-        //     {
-        //       logNoStack.i("TEXT_FORM_WIDGET: SUBMIT: ${widget.fieldCode} enableWidget:$enableWidget result:$result");
-        //       return result;
-        //     }
-        // _olderValue = _isEmptyValue(value) ? value : _olderValue;
-        // isEmpty = _isEmptyValue(value);
-        // // remove the true/false-
-        // widget.fieldValues[pureFieldCode] = value;
-        // ref
-        //     .read(validateFormProvider(widget.formCode).notifier)
-        //     .add(pureFieldCode, isValid);
-        // return result;
+        String? result = (!_isEmptyOlderValue(_olderValue)) && value!.isEmpty
+            ? null
+            : isValidInput(value!)? null : widget.itemValidation;
+          
+        _olderValue = _isEmptyValue(value) ? value : _olderValue;
+        isEmpty = _isEmptyValue(value);
+        // remove the true/false-
+        widget.fieldValues[pureFieldCode] = value;
+        ref
+            .read(validateFormProvider(widget.formCode).notifier)
+            .add(pureFieldCode, isValid);
+        return result;
       },
       onChanged: (value) => _debouncer.run(() {
         _olderValue = value.isEmpty ? _olderValue : value;
@@ -247,7 +247,10 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
       }),
       onFieldSubmitted: (value) async {
         isValidInput(value);
-        validate(value);
+       // validate(value);
+      },
+      onSaved: (value) {
+        validate(value!);
       },
     );
   }
