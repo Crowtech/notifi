@@ -80,6 +80,9 @@ class _CreateOrganizationFormState
     }
   }
 
+Future<bool> defaultValidate(String value) async {
+  return true;
+}
 
   @override
   Widget build(BuildContext context) {
@@ -104,8 +107,9 @@ class _CreateOrganizationFormState
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
+                  validator: defaultValidate,
                   controller: nameController,
-                  fieldValues: fieldValues,
+                 // fieldValues: fieldValues,
                   formCode: widget.formCode,
                   fieldCode: "true-name",
                   itemCategory: nt.t.organization,
@@ -117,8 +121,9 @@ class _CreateOrganizationFormState
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
+                  validator: defaultValidate,
                   controller: descriptionController,
-                  fieldValues: fieldValues,
+                  //fieldValues: fieldValues,
                   formCode: widget.formCode,
                   fieldCode: "true-description",
                   enabled: true,
@@ -134,7 +139,7 @@ class _CreateOrganizationFormState
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
                     controller: emailController,
-                  fieldValues: fieldValues,
+                 // fieldValues: fieldValues,
                   formCode: widget.formCode,
                   fieldCode: "true-email",
                   enabled: true,
@@ -144,9 +149,9 @@ class _CreateOrganizationFormState
                   itemValidation: nt.t.form.email_validation(
                     item: nt.t.organization_capitalized,
                   ),
-                  onValidate: validateEmail,
+                  validator: defaultValidate,
                   regex: EMAIL_REGEX,
-                  forceLowercase: true,
+                 
                 ),
                 const SizedBox(height: 16),
                 RadioListTile<OrganizationType>(
@@ -193,7 +198,7 @@ class _CreateOrganizationFormState
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
                   controller: urlController,
-                  fieldValues: fieldValues,
+                  validator: defaultValidate,
                   formCode: widget.formCode,
                   fieldCode: "false-url",
                   enabled: false,
@@ -205,7 +210,6 @@ class _CreateOrganizationFormState
                   ),
                   regex: URL_REGEX,
                    optional: true,
-                  forceLowercase: true,
                 ),
                 const SizedBox(height: 16),
                 Row(

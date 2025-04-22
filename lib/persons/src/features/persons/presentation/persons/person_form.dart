@@ -55,6 +55,9 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
     super.dispose();
   }
 
+Future<bool> defaultValidate(String value) async {
+  return true;
+}
   @override
   Widget build(BuildContext context) {
     String capitalizedItem = nt.t.person_capitalized;
@@ -77,6 +80,7 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
+                  validator: defaultValidate,
                   controller: givenNameController,
                   validationDebounce: const Duration(milliseconds: 500),
                   formCode: widget.formCode,
@@ -92,7 +96,7 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
                   controller: familyNameController,
-            
+            validator: defaultValidate,
                   formCode: widget.formCode,
                   fieldCode: "true-family_name",
                   itemCategory: nt.t.person,
@@ -106,13 +110,13 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
                   controller: emailController,
-                 
+                 validator: defaultValidate,
                   formCode: widget.formCode,
                   fieldCode: "true-email",
                   enabled: true,
                   itemCategory: nt.t.person,
                   itemName: nt.t.form.email,
-                  itemExists: nt.t.form.already_exists(item: nt.t.person_capitalized, field: nt.t.form.email),
+                 // itemExists: nt.t.form.already_exists(item: nt.t.person_capitalized, field: nt.t.form.email),
                   itemValidation: nt.t.form.email_validation(
                     item: nt.t.person_capitalized,
                   ),
@@ -145,26 +149,26 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                             : () async {
                                 if (_formKey.currentState != null &&
                                     _formKey.currentState!.validate()) {
-                                  var emailNotExisting =
-                                      await validateEmailAsync(
-                                          ref, context, fieldValues['email']!);
+                                  // var emailNotExisting =
+                                  //     await validateEmailAsync(
+                                  //         ref, context, fieldValues['email']!);
 
-                                  if (emailNotExisting == false) {
-                                    logNoStack.e(
-                                        "error is ${nt.t.form.already_exists(item: nt.t.person_capitalized, field: nt.t.form.email)}");
-                                    StatusAlert.show(
-                                      context,
-                                      duration: const Duration(seconds: 4),
-                                      //title: nt.t.person,
-                                      title: nt.t.form.already_exists(
-                                          item: nt.t.person_capitalized,
-                                          field: nt.t.form.email),
-                                      configuration: const IconConfiguration(
-                                          icon: Icons.error),
-                                      maxWidth: 300,
-                                      dismissOnBackgroundTap: true,
-                                    );
-                                  } else {
+                                  // if (emailNotExisting == false) {
+                                  //   logNoStack.e(
+                                  //       "error is ${nt.t.form.already_exists(item: nt.t.person_capitalized, field: nt.t.form.email)}");
+                                  //   StatusAlert.show(
+                                  //     context,
+                                  //     duration: const Duration(seconds: 4),
+                                  //     //title: nt.t.person,
+                                  //     title: nt.t.form.already_exists(
+                                  //         item: nt.t.person_capitalized,
+                                  //         field: nt.t.form.email),
+                                  //     configuration: const IconConfiguration(
+                                  //         icon: Icons.error),
+                                  //     maxWidth: 300,
+                                  //     dismissOnBackgroundTap: true,
+                                  //   );
+                                  // } else {
                                     // If the form is valid, display a snackbar. In the real world,
                                     // you'd often call a server or save the information in a database.
 
@@ -219,7 +223,7 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                                       );
                                     });
                                   }
-                                }
+                          
                               },
                         child: Text(nt.t.response.submit),
                       );
