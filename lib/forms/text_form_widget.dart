@@ -109,7 +109,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
 
     isEmpty = widget.initialValue.isEmpty;
     enableWidget = widget.enabled;
-    initialValid = isValidInput(widget.initialValue);
+    //initialValid = isValidInput(widget.initialValue);
   }
 
   Color statusColor() {
@@ -130,7 +130,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
   }
 
   Future<bool> validate(String value) async {
-    var isValid = isValidInput(value);
+    var isValid = true; //isValidInput(value);
 
     if (isValid && (widget.valueIsExisting != null)) {
       setState(() {
@@ -140,6 +140,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
       var apiPath =
           "$defaultAPIBaseUrl$defaultApiPrefixPath/resources/check/$pureFieldCode/";
       apiPath = "$apiPath${Uri.encodeComponent(value)}";
+      logNoStack.i("ORG_FORM: check encodedApiPath is $apiPath");
       var response = await apiGetData(token!, apiPath, "application/json");
       isValid = response.body.contains("true");
       isValidating = false;
@@ -172,12 +173,12 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
     // );
 
     return TextFormField(
-      initialValue: widget.initialValue,
-      autocorrect: true,
-      readOnly: widget.readOnly,
-      enabled: enableWidget,
-      inputFormatters: inputFormatters,
-      textCapitalization: widget.textCapitalization,
+      //initialValue: widget.initialValue,
+      //autocorrect: true,
+      //readOnly: widget.readOnly,
+      //enabled: enableWidget,
+      //inputFormatters: inputFormatters,
+      //textCapitalization: widget.textCapitalization,
       key: itemFormFieldKey,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
