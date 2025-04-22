@@ -47,6 +47,7 @@
   "exposure_offset": "Exposure Offset",
   "favourite": "Favourite",
   "form" : {
+    "validating": "Please wait for the ${item} validation to complete",
     "already_exists": "A ${item} with this ${field} already exists",
     "create": "Create a new ${item}",
     "edit": "Edit ${item}",

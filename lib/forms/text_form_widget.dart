@@ -131,7 +131,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
   }
 
   Future<bool> validate(String value) async {
-    var isValid = true; //isValidInput(value);
+    var isValid = isValidInput(value);
     isExisting = false;
 
     if (isValid && (widget.isValidatingMessage != null)) {
@@ -213,7 +213,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
         if (text.isEmpty) {
           setState(() {
             isValid = false;
-            print('is empty');
+            logNoStack.i('is empty');
           });
           cancelTimer();
           return;
@@ -223,7 +223,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
         _debounce = Timer(widget.validationDebounce, () async {
           isWaiting = false;
           isValid = await validate(text);
-          print(isValid);
+          logNoStack.i(isValid);
           setState(() {});
           isValidating = false;
         });

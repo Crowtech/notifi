@@ -110,9 +110,8 @@ Future<bool> defaultValidate(String value) async {
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
                   controller: emailController,
-                  isValidatingMessage: "please wait for the validation to complete",
-                  valueIsExisting: "email already exists",
-                // validator: defaultValidate,
+                  isValidatingMessage: nt.t.form.validating(field: nt.t.form.email),
+                  valueIsExisting: nt.t.form.already_exists(item: nt.t.person_capitalized, field: nt.t.form.email),
                   formCode: widget.formCode,
                   fieldCode: "true-email",
                   enabled: true,

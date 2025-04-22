@@ -174,6 +174,7 @@ class _TranslationsFormZh implements TranslationsFormEn {
 	final TranslationsZh _root; // ignore: unused_field
 
 	// Translations
+	@override String validating({required Object item}) => '请等待${item}验证完成';
 	@override String already_exists({required Object field, required Object item}) => '具有此${field}的${item}已存在';
 	@override String create({required Object item}) => '创建${item}';
 	@override String edit({required Object item}) => '编辑${item}';
@@ -382,6 +383,7 @@ extension on TranslationsZh {
 			case 'favourite': return '最喜欢的';
 			case 'firstname': return '给定的名称';
 			case 'focus_mode': return '专注模式';
+			case 'form.validating': return ({required Object item}) => '请等待${item}验证完成';
 			case 'form.already_exists': return ({required Object field, required Object item}) => '具有此${field}的${item}已存在';
 			case 'form.create': return ({required Object item}) => '创建${item}';
 			case 'form.edit': return ({required Object item}) => '编辑${item}';

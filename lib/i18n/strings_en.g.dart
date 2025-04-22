@@ -177,6 +177,7 @@ class TranslationsFormEn {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
+	String validating({required Object item}) => 'Please wait for the ${item} validation to complete';
 	String already_exists({required Object item, required Object field}) => 'A ${item} with this ${field} already exists';
 	String create({required Object item}) => 'Create a new ${item}';
 	String edit({required Object item}) => 'Edit ${item}';
@@ -383,6 +384,7 @@ extension on Translations {
 			case 'exposure_mode': return 'Exposure Mode';
 			case 'exposure_offset': return 'Exposure Offset';
 			case 'favourite': return 'Favourite';
+			case 'form.validating': return ({required Object item}) => 'Please wait for the ${item} validation to complete';
 			case 'form.already_exists': return ({required Object item, required Object field}) => 'A ${item} with this ${field} already exists';
 			case 'form.create': return ({required Object item}) => 'Create a new ${item}';
 			case 'form.edit': return ({required Object item}) => 'Edit ${item}';
