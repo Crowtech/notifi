@@ -91,6 +91,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
   Timer? _debounce;
   var isValidating = false;
   var isValid = false;
+  var isExisting = false;
   var isDirty = false;
   var isWaiting = false;
 
@@ -131,10 +132,12 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
 
   Future<bool> validate(String value) async {
     var isValid = true; //isValidInput(value);
+    isExisting = false;
 
     if (isValid && (widget.isValidatingMessage != null)) {
       setState(() {
         isValidating = true;
+        isExisting = false;
       });
       var token = ref.read(nestAuthProvider.notifier).token;
       var apiPath =
@@ -142,8 +145,16 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
       apiPath = "$apiPath${Uri.encodeComponent(value)}";
       logNoStack.i("ORG_FORM: check encodedApiPath is $apiPath");
       var response = await apiGetData(token!, apiPath, "application/json");
-      isValid = !response.body.contains("true");  // if existing then it returns true
-      isValidating = false;
+      isExisting =
+          response.body.contains("true"); // if existing then it returns true
+      if (isExisting) {
+        isValid = false;
+      }
+      setState(() {
+        isValidating = false;
+        isExisting = isExisting;
+        isValid = false;
+      });
     }
     return isValid;
   }
@@ -187,6 +198,10 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
         }
         if (value?.isEmpty ?? false) {
           return widget.valueIsEmptyMessage;
+        }
+
+        if (!isWaiting && !isValid && isExisting) {
+          return widget.valueIsInvalidMessage;
         }
         if (!isWaiting && !isValid) {
           return widget.valueIsInvalidMessage;
