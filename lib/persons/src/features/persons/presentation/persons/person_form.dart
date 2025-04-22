@@ -38,6 +38,9 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
   final _formKey = GlobalKey<FormState>();
 
   final Map<String, dynamic> fieldValues = {};
+   final givenNameController =TextEditingController();
+    final familyNameController =TextEditingController();
+  final emailController =TextEditingController();
 
   @override
   void initState() {
@@ -46,6 +49,9 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
 
   @override
   void dispose() {
+    emailController.dispose();
+    familyNameController.dispose();
+    givenNameController.dispose();
     super.dispose();
   }
 
@@ -71,6 +77,7 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
+                  controller: givenNameController,
                   fieldValues: fieldValues,
                   formCode: widget.formCode,
                   fieldCode: "true-given_name",
@@ -84,6 +91,7 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
+                  controller: familyNameController,
                   fieldValues: fieldValues,
                   formCode: widget.formCode,
                   fieldCode: "true-family_name",
@@ -97,6 +105,7 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
+                  controller: emailController,
                   fieldValues: fieldValues,
                   formCode: widget.formCode,
                   fieldCode: "true-email",

@@ -43,7 +43,10 @@ class _CreateOrganizationFormState
   final Map<String, dynamic> fieldValues = {};
 
   OrganizationType? orgTypeIndex;
-
+ final nameController =TextEditingController();
+ final descriptionController =TextEditingController();
+ final emailController =TextEditingController();
+ final urlController =TextEditingController();
 
   @override
   void initState() {
@@ -54,6 +57,10 @@ class _CreateOrganizationFormState
 
   @override
   void dispose() {
+    emailController.dispose();
+    urlController.dispose();
+    descriptionController.dispose();
+    nameController.dispose();
     super.dispose();
   }
 
@@ -97,6 +104,7 @@ class _CreateOrganizationFormState
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
+                  controller: nameController,
                   fieldValues: fieldValues,
                   formCode: widget.formCode,
                   fieldCode: "true-name",
@@ -109,6 +117,7 @@ class _CreateOrganizationFormState
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
+                  controller: descriptionController,
                   fieldValues: fieldValues,
                   formCode: widget.formCode,
                   fieldCode: "true-description",
@@ -124,6 +133,7 @@ class _CreateOrganizationFormState
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
+                    controller: emailController,
                   fieldValues: fieldValues,
                   formCode: widget.formCode,
                   fieldCode: "true-email",
@@ -182,6 +192,7 @@ class _CreateOrganizationFormState
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
+                  controller: urlController,
                   fieldValues: fieldValues,
                   formCode: widget.formCode,
                   fieldCode: "false-url",
