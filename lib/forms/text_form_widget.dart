@@ -306,7 +306,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
       ).hasMatch(value);
     }
     logNoStack.i(
-      "Checking validation for enabled:$enableWidget ${widget.fieldCode} $value optional:${widget.optional} isValid:$isValid",
+      "Checking validation for enabled:$enableWidget ${widget.fieldCode} $value optional:${widget.optional} isValid:$isValid isDirty:$isDirty",
     );
 
     return isValid;
@@ -319,6 +319,9 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
   }
 
   Widget _getSuffixIcon() {
+    logNoStack.i(
+      "Checking validationSuffixIcon for enabled:$enableWidget ${widget.fieldCode} isValid:$isValid isDirty:$isDirty",
+    );
     if (isValidating) {
       return CircularProgressIndicator(
         strokeWidth: 2.0,
