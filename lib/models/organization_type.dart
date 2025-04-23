@@ -90,33 +90,33 @@ extension OrganizationTypeExtension on OrganizationType {
   String get name {
     switch (this) {
       case OrganizationType.DEFAULT:
-        return "Default";
+        return "DEFAULT";
       case OrganizationType.COMMERCIAL:
-        return "Commercial";
+        return "COMMERCIAL";
       case OrganizationType.GOVERNMENT:
-        return "Government";
+        return "GOVERNMENT";
       case OrganizationType.UNKNOWN:
-        return "Unknown";
+        return "UNKNOWN";
       case OrganizationType.PRIVATE:
-        return "Private";
+        return "PRIVATE";
       case OrganizationType.PERSON:
-        return "Person";
+        return "PERSON";
       case OrganizationType.ORG:
-        return "Organization";
+        return "ORGANIZATION";
       case OrganizationType.GROUP:
-        return "Group";
+        return "GROUP";
       case OrganizationType.FAMILY:
-        return "Family";
+        return "FAMILY";
       case OrganizationType.FRIENDS:
-        return "Friends";
+        return "FRIENDS";
       case OrganizationType.EDUCATION:
-        return "Education";
+        return "EDUCATION";
       case OrganizationType.TEAM:
-        return "Team";
+        return "TEAM";
       case OrganizationType.DEPARTMENT:
-        return "Department";
+        return "DEPARTMENT";
       case OrganizationType.COMPANY:
-        return "Company";
+        return "COMPANY";
     }
   }
 
