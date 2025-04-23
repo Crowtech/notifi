@@ -242,7 +242,7 @@ class _CreateOrganizationFormState
                   itemValidation: nt.t.form.url_validation(
                     item: nt.t.organization_capitalized,
                   ),
-                  hintText: nt.t.form.url_hint,
+                  hintText: nt.t.form.url_hint(item: nt.t.organization_capitalized),
                   onValidate: validateUrl,
                   regex: URL_REGEX,
                   inputFormatters: urlInputFormatter,
