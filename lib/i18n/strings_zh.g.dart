@@ -193,6 +193,8 @@ class _TranslationsFormZh implements TranslationsFormEn {
 	@override String description({required Object item}) => '${item} 的描述';
 	@override String description_validation({required Object item}) => '请输入${item}描述';
 	@override String get description_hint => '输入描述';
+	@override String email_administration({required Object item}) => '${item} 管理员的电子邮件';
+	@override String email_administration_hint({required Object item}) => '请输入${item}管理员的邮箱';
 	@override String get email => '电子邮件';
 	@override String email_validation({required Object item}) => '请输入有效的${item}邮箱地址';
 	@override String get email_hint => '输入邮箱';
@@ -403,6 +405,8 @@ extension on TranslationsZh {
 			case 'form.description': return ({required Object item}) => '${item} 的描述';
 			case 'form.description_validation': return ({required Object item}) => '请输入${item}描述';
 			case 'form.description_hint': return '输入描述';
+			case 'form.email_administration': return ({required Object item}) => '${item} 管理员的电子邮件';
+			case 'form.email_administration_hint': return ({required Object item}) => '请输入${item}管理员的邮箱';
 			case 'form.email': return '电子邮件';
 			case 'form.email_validation': return ({required Object item}) => '请输入有效的${item}邮箱地址';
 			case 'form.email_hint': return '输入邮箱';

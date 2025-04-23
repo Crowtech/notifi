@@ -68,6 +68,8 @@
     "description": "${item} 的描述",
     "description_validation": "请输入${item}描述",
     "description_hint": "输入描述",
+    "email_administration": "${item} 管理员的电子邮件",
+    "email_administration_hint": "请输入${item}管理员的邮箱",
     "email": "电子邮件",
     "email_validation": "请输入有效的${item}邮箱地址",
     "email_hint": "输入邮箱",
