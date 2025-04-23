@@ -1,4 +1,6 @@
+import 'package:flutter/services.dart';
 import 'package:logger/logger.dart' as logger;
+import 'package:notifi/helpers/text_formatter.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -13,8 +15,14 @@ var logNoStack = logger.Logger(
 
 String DESCRIPTION_REGEX = r"^[\p{L} ,.'-0-9]*$";
 
+List<TextInputFormatter> descriptionInputFormatter = [];
+
+
 bool validateDescription(String? description) {
 
+if (description == null) {
+  return true; // allow null for description
+}
     return RegExp(
       DESCRIPTION_REGEX,
       caseSensitive: false,
@@ -22,5 +30,3 @@ bool validateDescription(String? description) {
       dotAll: true,
     ).hasMatch(description!);
   }
-
-  

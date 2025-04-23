@@ -5,7 +5,9 @@ import 'package:logger/logger.dart' as logger;
 import 'package:notifi/api_utils.dart';
 import 'package:notifi/credentials.dart';
 import 'package:notifi/forms/cancel_button_widget.dart';
+import 'package:notifi/forms/checkbox_widget.dart';
 import 'package:notifi/forms/text_form_widget.dart';
+import 'package:notifi/forms/validations.dart/description_validation.dart';
 import 'package:notifi/forms/validations.dart/email_validation.dart';
 import 'package:notifi/forms/validations.dart/name_validation.dart';
 import 'package:notifi/forms/validations.dart/url_validation.dart';
@@ -75,8 +77,12 @@ class _CreateOrganizationFormState
       ref
           .read(validateFormProvider("organization").notifier)
           .add("orgType", true);
+     
       ref
           .read(enableWidgetProvider("false-url").notifier)
+          .setEnabled(value.isUrlable);
+            ref
+          .read(enableWidgetProvider("authorized").notifier)
           .setEnabled(value.isUrlable);
     }
   }
@@ -124,11 +130,14 @@ class _CreateOrganizationFormState
                   onValidate: validateName,
                   regex: NAME_REGEX,
                   inputFormatters: nameInputFormatter,
+                  textCapitalization: TextCapitalization.words,
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
-                  fieldValues: fieldValues,
                   controller: descriptionController,
+                  fieldValues: fieldValues,
+                  isValidatingMessage:
+                      nt.t.form.validating(field: nt.t.form.description),
                   formCode: widget.formCode,
                   fieldCode: "true-description",
                   enabled: true,
@@ -139,7 +148,11 @@ class _CreateOrganizationFormState
                   itemValidation: nt.t.form.description_validation(
                     item: nt.t.organization_capitalized,
                   ),
-                  regex: r"^[\p{L} ,.'-0-9]*$",
+                  hintText: nt.t.form.description_hint,
+                  onValidate: validateDescription,
+                  regex: DESCRIPTION_REGEX,
+                  inputFormatters: descriptionInputFormatter,
+                  textCapitalization: TextCapitalization.sentences,
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
@@ -206,6 +219,13 @@ class _CreateOrganizationFormState
                   onChanged: _handleRadioValueChanged,
                 ),
                 const SizedBox(height: 16),
+                CheckboxFormFieldWidget(
+                    fieldValues: fieldValues,
+                    formCode: widget.formCode,
+                    fieldCode: "authorized",
+                    initialValue: false,
+                    itemCategory: nt.t.organization,
+                    itemName: nt.t.form.authorized(item: nt.t.organization_capitalized)),
                 TextFormFieldWidget(
                   controller: urlController,
                   fieldValues: fieldValues,
@@ -247,59 +267,56 @@ class _CreateOrganizationFormState
                             : () async {
                                 if (_formKey.currentState != null &&
                                     _formKey.currentState!.validate()) {
-                               
-                                    // If the form is valid, display a snackbar. In the real world,
-                                    // you'd often call a server or save the information in a database.
+                                  // If the form is valid, display a snackbar. In the real world,
+                                  // you'd often call a server or save the information in a database.
 
-                                    // save organization
-                                    Organization organization = Organization(
-                                      name: fieldValues['name'],
-                                      description: fieldValues['description'],
-                                      orgType: fieldValues['orgType']!,
-                                      url: fieldValues['url']!,
-                                      email: fieldValues['email']!,
-                                      //email: _emailController.text,
+                                  // save organization
+                                  Organization organization = Organization(
+                                    name: fieldValues['name'],
+                                    description: fieldValues['description'],
+                                    orgType: fieldValues['orgType']!,
+                                    url: fieldValues['url']!,
+                                    email: fieldValues['email']!,
+                                    //email: _emailController.text,
+                                  );
+                                  var token =
+                                      ref.read(nestAuthProvider.notifier).token;
+                                  var apiPath =
+                                      "$defaultAPIBaseUrl$defaultApiPrefixPath/organizations/create?isauthorized=${fieldValues['authorized']}";
+
+                                  logNoStack.i(
+                                      "ORG_FORM: sending $organization to $apiPath");
+                                  apiPostDataNoLocaleRaw(
+                                          token!, apiPath, organization)
+                                      .then((result) {
+                                    logNoStack.i("result is $result");
+
+                                    StatusAlert.show(
+                                      context,
+                                      duration: const Duration(seconds: 2),
+                                      title: nt.t.organization,
+                                      subtitle: nt.t.form.saved,
+                                      configuration: const IconConfiguration(
+                                          icon: Icons.done),
+                                      maxWidth: 300,
                                     );
-                                    var token = ref
-                                        .read(nestAuthProvider.notifier)
-                                        .token;
-                                    var apiPath =
-                                        "$defaultAPIBaseUrl$defaultApiPrefixPath/organizations/create";
-
-                                    logNoStack.i(
-                                        "ORG_FORM: sending $organization to $apiPath");
-                                    apiPostDataNoLocaleRaw(
-                                            token!, apiPath, organization)
-                                        .then((result) {
-                                      logNoStack.i("result is $result");
-
-                                      StatusAlert.show(
-                                        context,
-                                        duration: const Duration(seconds: 2),
-                                        title: nt.t.organization,
-                                        subtitle: nt.t.form.saved,
-                                        configuration: const IconConfiguration(
-                                            icon: Icons.done),
-                                        maxWidth: 300,
-                                      );
-                                      ref.invalidate(
-                                          fetchOrganizationsNestFilterProvider);
-                                      Navigator.of(context).pop();
-                                    }, onError: (error) {
-                                      logNoStack.e("error is $error");
-                                      StatusAlert.show(
-                                        context,
-                                        duration: const Duration(seconds: 2),
-                                        title: nt.t.organization,
-                                        subtitle: nt.t.form.error_saving,
-                                        configuration: const IconConfiguration(
-                                            icon: Icons.error),
-                                        maxWidth: 300,
-                                      );
-                                    });
-                                  }
-                                },
-                           
+                                    ref.invalidate(
+                                        fetchOrganizationsNestFilterProvider);
+                                    Navigator.of(context).pop();
+                                  }, onError: (error) {
+                                    logNoStack.e("error is $error");
+                                    StatusAlert.show(
+                                      context,
+                                      duration: const Duration(seconds: 2),
+                                      title: nt.t.organization,
+                                      subtitle: nt.t.form.error_saving,
+                                      configuration: const IconConfiguration(
+                                          icon: Icons.error),
+                                      maxWidth: 300,
+                                    );
+                                  });
+                                }
+                              },
                         child: Text(nt.t.response.submit),
                       );
                     })

@@ -1,15 +1,11 @@
 import 'dart:async';
 
-import 'package:async_textformfield/async_textformfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/api_utils.dart';
 import 'package:notifi/credentials.dart';
-import 'package:notifi/i18n/strings.g.dart' as nt;
-import 'package:notifi/helpers/debouncer.dart';
-import 'package:notifi/helpers/text_formatter.dart';
 import 'package:notifi/riverpod/enable_widget.dart';
 import 'package:notifi/riverpod/refresh_widget.dart';
 import 'package:notifi/riverpod/validate_form.dart';
@@ -186,21 +182,12 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
     logNoStack.i(
         "TEXT_FORM_WIDGET: BUILD: ${widget.fieldCode} enableWidget:$enableWidget");
 
-    // return AsyncTextFormField(
-    //   controller: widget.controller,
-    //   validationDebounce: Duration(milliseconds: 500),
-    //   validator: validate,
-    //   hintText: widget.hintText ?? widget.itemName,
-    //   isValidatingMessage: 'Checking if email already exists ..',
-    //   valueIsInvalidMessage: 'Nope, Try harder..',
-    //   valueIsEmptyMessage: 'No one sets an empty email!',
-    // );
 
     return TextFormField(
-      //initialValue: widget.initialValue,
-      //autocorrect: true,
-      //readOnly: widget.readOnly,
-      //enabled: enableWidget,
+      initialValue: widget.initialValue,
+      autocorrect: true,
+      readOnly: widget.readOnly,
+      enabled: enableWidget,
       inputFormatters: inputFormatters,
       textCapitalization: widget.textCapitalization,
       key: itemFormFieldKey,

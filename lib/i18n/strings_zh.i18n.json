@@ -49,6 +49,7 @@
   "firstname": "给定的名称",
   "focus_mode": "专注模式",
   "form" : {
+    "authorized": "我声明我被授权创建此${item}",
     "validating": "请等待${field}验证完成",
     "already_exists": "具有此${field}的${item}已存在",
     "create": "创建${item}",
