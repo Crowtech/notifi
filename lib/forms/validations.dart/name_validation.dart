@@ -15,7 +15,7 @@ var logNoStack = logger.Logger(
 
 String NAME_REGEX = r"^[\p{L} ,.'-0-9\\ \\:\\(\\)\\!\\@\\&\\\\_\\.]*$";
 
-List<TextInputFormatter> nameInputFormatter = [LowerCaseTextFormatter(),FilteringTextInputFormatter.allow(RegExp("[a-zA-Z0-9+\\+\\@\\\\_\\ \\.\\&\\-\\(\\)\\!\\@\\\\_\\.]"))];
+List<TextInputFormatter> nameInputFormatter = [FilteringTextInputFormatter.allow(RegExp("[a-zA-Z0-9+\\+\\@\\\\_\\ \\.\\&\\-\\(\\)\\!\\@\\\\_\\.]"))];
 
 bool validateName(String? name) {
     if (name == null) {
