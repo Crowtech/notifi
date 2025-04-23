@@ -181,7 +181,16 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
 
     logNoStack.i(
         "TEXT_FORM_WIDGET: BUILD: ${widget.fieldCode} enableWidget:$enableWidget");
-
+    if (enableWidget == false) {
+      isValid = true; // force it.
+      widget.controller.text = "";
+      widget.fieldValues[pureFieldCode] = "";
+      isEmpty = true;
+      isWaiting = false;
+      isValidating = false;
+      isExisting = false;
+      isDirty = false;
+    }
 
     return TextFormField(
      // initialValue: widget.initialValue,

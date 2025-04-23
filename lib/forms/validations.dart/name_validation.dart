@@ -13,7 +13,7 @@ var logNoStack = logger.Logger(
 );
 
 
-String NAME_REGEX = r"^[\p{L} ,.'-0-9]*$";
+String NAME_REGEX = r"^[\p{L} ,.'-0-9\\ \\:\\(\\)\\!\\@\\&]*$";
 
 List<TextInputFormatter> nameInputFormatter = [LowerCaseTextFormatter(),FilteringTextInputFormatter.allow(RegExp("[a-zA-Z0-9+\\+\\@\\\\_.]"))];
 
