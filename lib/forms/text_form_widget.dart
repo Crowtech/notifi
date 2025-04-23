@@ -202,6 +202,9 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
       key: itemFormFieldKey,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
+        if (enableWidget == false) {
+          return null;
+        }
         if (isValidating) {
           return widget.isValidatingMessage;
         }
