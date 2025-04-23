@@ -116,8 +116,6 @@ class _CreateOrganizationFormState
                 TextFormFieldWidget(
                   controller: nameController,
                   fieldValues: fieldValues,
-                  isValidatingMessage:
-                      nt.t.form.validating(field: nt.t.form.name),
                   formCode: widget.formCode,
                   fieldCode: "true-name",
                   enabled: true,
@@ -136,8 +134,6 @@ class _CreateOrganizationFormState
                 TextFormFieldWidget(
                   controller: descriptionController,
                   fieldValues: fieldValues,
-                  isValidatingMessage:
-                      nt.t.form.validating(field: nt.t.form.description),
                   formCode: widget.formCode,
                   fieldCode: "true-description",
                   enabled: true,
@@ -158,8 +154,6 @@ class _CreateOrganizationFormState
                 TextFormFieldWidget(
                   controller: emailController,
                   fieldValues: fieldValues,
-                  isValidatingMessage:
-                      nt.t.form.validating(field: nt.t.form.email),
                   valueIsExisting: nt.t.form.already_exists(
                       item: nt.t.organization_capitalized,
                       field: nt.t.form.email),
