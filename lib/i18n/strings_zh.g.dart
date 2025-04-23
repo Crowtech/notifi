@@ -198,7 +198,7 @@ class _TranslationsFormZh implements TranslationsFormEn {
 	@override String get email_hint => '输入邮箱';
 	@override String get url => '网址';
 	@override String url_validation({required Object item}) => '请输入有效的${item}网址，例如https://www.google.com';
-	@override String get url_hint => '输入网站地址';
+	@override String url_hint({required Object item}) => '输入${item}网址';
 	@override String org_type({required Object item}) => '${item} 类型';
 	@override String get saved => '已保存';
 	@override String deleted({required Object item}) => '已删除${item}';
@@ -408,7 +408,7 @@ extension on TranslationsZh {
 			case 'form.email_hint': return '输入邮箱';
 			case 'form.url': return '网址';
 			case 'form.url_validation': return ({required Object item}) => '请输入有效的${item}网址，例如https://www.google.com';
-			case 'form.url_hint': return '输入网站地址';
+			case 'form.url_hint': return ({required Object item}) => '输入${item}网址';
 			case 'form.org_type': return ({required Object item}) => '${item} 类型';
 			case 'form.saved': return '已保存';
 			case 'form.deleted': return ({required Object item}) => '已删除${item}';

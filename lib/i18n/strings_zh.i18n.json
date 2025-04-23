@@ -73,7 +73,7 @@
     "email_hint": "输入邮箱",
     "url": "网址",
     "url_validation": "请输入有效的${item}网址，例如https://www.google.com",
-    "url_hint": "输入网站地址",
+    "url_hint": "输入${item}网址",
     "org_type": "${item} 类型",
     "saved": "已保存",
     "deleted": "已删除${item}"
