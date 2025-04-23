@@ -71,7 +71,7 @@
     "email_hint": "Enter email",
     "url": "Web Address",
     "url_validation": "Please enter valid ${item} web address e.g. https://www.google.com",
-    "url_hint": "Enter web address",
+    "url_hint": "Enter ${item}web address",
     "org_type": "${item} Type",
     "saved": "Saved",
     "deleted": "Deleted ${item}"

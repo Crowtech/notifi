@@ -201,7 +201,7 @@ class TranslationsFormEn {
 	String get email_hint => 'Enter email';
 	String get url => 'Web Address';
 	String url_validation({required Object item}) => 'Please enter valid ${item} web address e.g. https://www.google.com';
-	String get url_hint => 'Enter web address';
+	String url_hint({required Object item}) => 'Enter ${item}web address';
 	String org_type({required Object item}) => '${item} Type';
 	String get saved => 'Saved';
 	String deleted({required Object item}) => 'Deleted ${item}';
@@ -409,7 +409,7 @@ extension on Translations {
 			case 'form.email_hint': return 'Enter email';
 			case 'form.url': return 'Web Address';
 			case 'form.url_validation': return ({required Object item}) => 'Please enter valid ${item} web address e.g. https://www.google.com';
-			case 'form.url_hint': return 'Enter web address';
+			case 'form.url_hint': return ({required Object item}) => 'Enter ${item}web address';
 			case 'form.org_type': return ({required Object item}) => '${item} Type';
 			case 'form.saved': return 'Saved';
 			case 'form.deleted': return ({required Object item}) => 'Deleted ${item}';
