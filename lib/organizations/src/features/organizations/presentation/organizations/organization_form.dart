@@ -77,11 +77,14 @@ class _CreateOrganizationFormState
       ref
           .read(validateFormProvider("organization").notifier)
           .add("orgType", true);
-     
+
+      ref
+          .read(enableWidgetProvider("false-email").notifier)
+          .setEnabled(value.isUrlable);
       ref
           .read(enableWidgetProvider("false-url").notifier)
           .setEnabled(value.isUrlable);
-            ref
+      ref
           .read(enableWidgetProvider("authorized").notifier)
           .setEnabled(value.isUrlable);
     }
@@ -151,26 +154,6 @@ class _CreateOrganizationFormState
                   textCapitalization: TextCapitalization.sentences,
                 ),
                 const SizedBox(height: 16),
-                TextFormFieldWidget(
-                  controller: emailController,
-                  fieldValues: fieldValues,
-                  valueIsExisting: nt.t.form.already_exists(
-                      item: nt.t.organization_capitalized,
-                      field: nt.t.form.email),
-                  formCode: widget.formCode,
-                  fieldCode: "true-email",
-                  enabled: true,
-                  itemCategory: nt.t.organization,
-                  itemName: nt.t.form.email,
-                  itemValidation: nt.t.form.email_validation(
-                    item: nt.t.organization_capitalized,
-                  ),
-                  hintText: nt.t.form.email_hint,
-                  onValidate: validateEmail,
-                  regex: EMAIL_REGEX,
-                  inputFormatters: emailInputFormatter,
-                ),
-                const SizedBox(height: 16),
                 RadioListTile<OrganizationType>(
                   key: const Key("group"),
                   dense: true,
@@ -219,7 +202,32 @@ class _CreateOrganizationFormState
                     fieldCode: "authorized",
                     initialValue: false,
                     itemCategory: nt.t.organization,
-                    itemName: nt.t.form.authorized(item: nt.t.organization_capitalized)),
+                    itemName: nt.t.form
+                        .authorized(item: nt.t.organization_capitalized)),
+                TextFormFieldWidget(
+                  controller: emailController,
+                  fieldValues: fieldValues,
+                  valueIsExisting: nt.t.form.already_exists(
+                      item: nt.t.organization_capitalized,
+                      field: nt.t.form.email),
+                  formCode: widget.formCode,
+                  fieldCode: "false-email",
+                  enabled: false,
+                  itemCategory: nt.t.organization,
+                  itemName: nt.t.form.email_administration(
+                    item: nt.t.organization_capitalized,
+                  ),
+                  itemValidation: nt.t.form.email_validation(
+                    item: nt.t.organization_capitalized,
+                  ),
+                  hintText: nt.t.form.email_administration_hint(
+                    item: nt.t.organization_capitalized,
+                  ),
+                  onValidate: validateEmail,
+                  regex: EMAIL_REGEX,
+                  inputFormatters: emailInputFormatter,
+                ),
+                const SizedBox(height: 16),
                 TextFormFieldWidget(
                   controller: urlController,
                   fieldValues: fieldValues,
@@ -236,11 +244,12 @@ class _CreateOrganizationFormState
                   itemValidation: nt.t.form.url_validation(
                     item: nt.t.organization_capitalized,
                   ),
-                  hintText: nt.t.form.url_hint(item: nt.t.organization_capitalized),
+                  hintText:
+                      nt.t.form.url_hint(item: nt.t.organization_capitalized),
                   onValidate: validateUrl,
                   regex: URL_REGEX,
                   inputFormatters: urlInputFormatter,
-                  optional: true,
+                  optional: false,
                 ),
                 const SizedBox(height: 16),
                 Row(

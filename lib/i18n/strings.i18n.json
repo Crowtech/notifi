@@ -66,6 +66,8 @@
     "description": "Description of ${item}",
     "description_validation": "Please enter ${item} description",
     "description_hint": "Enter description",
+    "email_administration": "${item} Administrator's Email",
+    "email_administration_hint": "Please enter the ${item} administrator's email",
     "email": "Email",
     "email_validation": "Please enter valid ${item} email",
     "email_hint": "Enter email",
