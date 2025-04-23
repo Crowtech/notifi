@@ -184,10 +184,10 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
 
 
     return TextFormField(
-      initialValue: widget.initialValue,
-      autocorrect: true,
-      readOnly: widget.readOnly,
-      enabled: enableWidget,
+     // initialValue: widget.initialValue,
+     // autocorrect: true,
+    //  readOnly: widget.readOnly,
+    //  enabled: enableWidget,
       inputFormatters: inputFormatters,
       textCapitalization: widget.textCapitalization,
       key: itemFormFieldKey,
