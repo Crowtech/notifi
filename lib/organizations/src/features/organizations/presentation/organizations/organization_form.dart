@@ -73,7 +73,7 @@ class _CreateOrganizationFormState
         orgTypeIndex = value;
         logNoStack.i(orgTypeIndex!.name);
       });
-      fieldValues['orgType'] = orgTypeIndex!.name;
+      fieldValues['orgType'] = orgTypeIndex!;
       ref
           .read(validateFormProvider("organization").notifier)
           .add("orgType", true);
