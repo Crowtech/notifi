@@ -15,6 +15,7 @@ var logger = Logger(
 class GPS extends CrowtechBase<GPS> {
   static String className = "GPS";
   static String tablename = className.toLowerCase();
+  static String PREFIX = "GPS_";
   // static String typename = "gps";
   String resourcecode;
   int resourceid;

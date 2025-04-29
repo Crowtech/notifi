@@ -17,6 +17,7 @@ var logger = Logger(
 class Organization extends Resource {
   static String className = "Organization";
   static String tablename = className.toLowerCase();
+  static String PREFIX = "ORG_";
 
   String orgType;
   String? url;

@@ -55,6 +55,8 @@
     "error_saving": "Error saving",
     "join": "Join ${item}",
     "code": "Code",
+    "code_validation": "Please enter ${item} code",
+    "code_hint": "Enter ${item} code",
     "name": "Name",
     "name_validation": "Please enter ${item} name",
     "name_hint": "Enter name",

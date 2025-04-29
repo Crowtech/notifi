@@ -17,6 +17,7 @@ var logger = Logger(
 class NestNotifi extends CrowtechObject implements PagingDataItem {
   static String className = "NestNotifi";
   static String tablename = className.toLowerCase();
+  static String PREFIX = "NOT_";
 
   final int _pageId = 0;
 

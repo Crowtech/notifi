@@ -17,6 +17,7 @@ var logger = Logger(
 class Equipment extends Resource {
   static String className = "Equipment";
   static String tablename = className.toLowerCase();
+  static String PREFIX = "EQP_";
 
   String etype;
   String model;

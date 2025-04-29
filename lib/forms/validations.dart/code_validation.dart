@@ -21,7 +21,7 @@ var logNoStack = logger.Logger(
 
 String CODE_REGEX =  r"^[A-Z]3\\_[A-Z0-9\\_]*$";
 
-List<TextInputFormatter> urlInputFormatter = [UpperCaseTextFormatter(),FilteringTextInputFormatter.allow(RegExp(CODE_REGEX))];
+List<TextInputFormatter> codeInputFormatter = [UpperCaseTextFormatter(),FilteringTextInputFormatter.allow(RegExp(CODE_REGEX))];
 
 bool validateCode(String? code) {
     if (code == null || code.isEmpty) {

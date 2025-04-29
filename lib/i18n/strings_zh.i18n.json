@@ -57,6 +57,8 @@
     "error_saving": "保存错误",
     "join": "加入${item}",
     "code": "代码",
+    "code_validation": "请输入${item}代码",
+    "code_hint": "输入${item}代码",
     "name": "姓名",
     "name_validation": "请输入${item}名称",
     "name_hint": "输入姓名",

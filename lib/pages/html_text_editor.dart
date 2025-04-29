@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:minio/io.dart';
 import 'package:minio/minio.dart';
 import 'package:notifi/credentials.dart';
+import 'package:notifi/forms/template_form.dart';
 import 'package:notifi/models/person.dart';
 import 'package:notifi/state/nest_auth2.dart';
 import 'package:open_file/open_file.dart';
@@ -113,6 +114,7 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
         resizeToAvoidBottomInset: true,
         body: Column(
           children: [
+            CreateTemplateForm(formCode: "template",),
             ToolBar(
               toolBarColor: _toolbarColor,
               padding: const EdgeInsets.all(8),

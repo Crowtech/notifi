@@ -18,6 +18,7 @@ var logger = Logger(
 class Person extends Resource {
   static String className = "Person";
   static String tablename = className.toLowerCase();
+  static String PREFIX = "PER_";
 
   bool isSignedIn;
 
