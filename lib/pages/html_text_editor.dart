@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 import 'dart:io';
 
@@ -16,6 +15,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:xml/xml.dart';
 import 'package:path/path.dart' as path;
 import 'package:http/http.dart' as http;
+import 'package:web/web.dart' as web;
+
 import 'package:logger/logger.dart' as logger;
 
 var log = logger.Logger(
@@ -31,18 +32,15 @@ var logNoStack = logger.Logger(
 class HtmlTextEditor extends ConsumerStatefulWidget {
   HtmlTextEditor({super.key});
 
-    @override
-  ConsumerState<HtmlTextEditor> createState() =>
-      _HtmlTextEditorState();
+  @override
+  ConsumerState<HtmlTextEditor> createState() => _HtmlTextEditorState();
 }
 
-class _HtmlTextEditorState
-    extends ConsumerState<HtmlTextEditor> {
+class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
   final GlobalKey<FormFieldState> itemFormFieldKey =
       GlobalKey<FormFieldState>();
 
-
- late QuillEditorController controller;
+  late QuillEditorController controller;
 
   ///[customToolBarList] pass the custom toolbarList to show only selected styles in the editor
 
@@ -102,11 +100,11 @@ class _HtmlTextEditorState
   Widget build(BuildContext context) {
     Person currentUser = ref.read(nestAuthProvider.notifier).currentUser;
     void tap2clipboard(String text) =>
-      Clipboard.setData(ClipboardData(text: text)).then((_) {
-        // ScaffoldMessenger.of(context).showSnackBar(
-     // SnackBar(content: Text(nt.t.copied_to_clipboard(item: nt.t.text)))
-      //);
-      });
+        Clipboard.setData(ClipboardData(text: text)).then((_) {
+          // ScaffoldMessenger.of(context).showSnackBar(
+          // SnackBar(content: Text(nt.t.copied_to_clipboard(item: nt.t.text)))
+          //);
+        });
 
     return SafeArea(
       child: Scaffold(
@@ -181,7 +179,8 @@ class _HtmlTextEditorState
                     _hasFocus = focus;
                   });
                 },
-                onTextChanged: (text) => logNoStack.i('widget text change $text'),
+                onTextChanged: (text) =>
+                    logNoStack.i('widget text change $text'),
                 onEditorCreated: () {
                   logNoStack.i('Editor has been loaded');
                   setHtmlText('Testing text on load');
@@ -189,7 +188,7 @@ class _HtmlTextEditorState
                 onEditorResized: (height) =>
                     logNoStack.i('Editor resized $height'),
                 onSelectionChanged: (sel) =>
-                     logNoStack.i('index ${sel.index}, range ${sel.length}'),
+                    logNoStack.i('index ${sel.index}, range ${sel.length}'),
               ),
             ),
           ],
@@ -200,7 +199,7 @@ class _HtmlTextEditorState
           padding: const EdgeInsets.all(8),
           child: Wrap(
             children: [
-               textButton(
+              textButton(
                   text: 'Save to Minio',
                   onPressed: () {
                     saveHtmlToMinio("TPL_TEST.html");
@@ -296,7 +295,7 @@ class _HtmlTextEditorState
     );
   }
 
-   Widget textButton({required String text, required VoidCallback onPressed}) {
+  Widget textButton({required String text, required VoidCallback onPressed}) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: MaterialButton(
@@ -347,19 +346,28 @@ class _HtmlTextEditorState
 
   /// method to un focus editor
   void unFocusEditor() => controller.unFocus();
-  
+
   void saveHtmlToMinio(String filename) async {
-   String? htmlText = await controller.getText();
+    String? htmlText = await controller.getText();
     logNoStack.i(htmlText);
     String path2 = "";
     logNoStack.i("SAVE HTML: about to work out  file path");
     if (kIsWeb) {
-        path2 = "/$filename";
+      path2 = "/$filename";
+      final bytes = utf8.encode(htmlText);
+      final web.HTMLAnchorElement anchor = web.document.createElement('a')
+          as web.HTMLAnchorElement
+        ..href = "data:application/octet-stream;base64,${base64Encode(bytes)}"
+        ..style.display = 'none'
+        ..download = filename;
+
+      web.document.body!.appendChild(anchor);
     } else {
-          Directory directory = await getApplicationDocumentsDirectory();
-        path2 = path.join(directory.path, '$filename');
+      Directory directory = await getApplicationDocumentsDirectory();
+      path2 = path.join(directory.path, '$filename');
     }
     logNoStack.i("SAVE HTML: path2 = $path2");
+
     final file = File('${path2}');
     File file2 = await file.writeAsString(htmlText, flush: true);
     saveFileToMinio(file2);
@@ -413,14 +421,12 @@ class _HtmlTextEditorState
 //     };
 
     var filename = path.basename(file!.path);
-    final etag =
-        await minio.fPutObject(defaultRealm, filename, file.path);
+    final etag = await minio.fPutObject(defaultRealm, filename, file.path);
     logNoStack.i("uploaded file ${file.path} with etag $etag");
+  }
 
-}
-
- Future<dynamic> getMinioTokenResponse() async {
-   String? token = ref.read(nestAuthProvider.notifier).token!;
+  Future<dynamic> getMinioTokenResponse() async {
+    String? token = ref.read(nestAuthProvider.notifier).token!;
     final Uri uri = Uri.parse(
         "$defaultMinioEndpointUrl?Action=AssumeRoleWithWebIdentity&Version=2011-06-15&WebIdentityToken=$token");
     final response = await http.post(
@@ -432,6 +438,4 @@ class _HtmlTextEditorState
     );
     return response.body;
   }
-
-  
 }
