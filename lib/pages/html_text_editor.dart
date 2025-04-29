@@ -351,6 +351,7 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
     String? htmlText = await controller.getText();
     logNoStack.i(htmlText);
     String path2 = "";
+    File file2 ;
     logNoStack.i("SAVE HTML: about to work out  file path");
     if (kIsWeb) {
       path2 = "/$filename";
@@ -362,14 +363,16 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
         ..download = filename;
 
       web.document.body!.appendChild(anchor);
+      file2 = File('${filename}');
     } else {
       Directory directory = await getApplicationDocumentsDirectory();
       path2 = path.join(directory.path, '$filename');
+       final file = File('${path2}');
+    file2 = await file.writeAsString(htmlText, flush: true);
     }
     logNoStack.i("SAVE HTML: path2 = $path2");
 
-    final file = File('${path2}');
-    File file2 = await file.writeAsString(htmlText, flush: true);
+   
     saveFileToMinio(file2);
   }
 
