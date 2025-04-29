@@ -351,34 +351,34 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
   void saveHtmlToMinio(String filename) async {
     String? htmlText = await controller.getText();
     logNoStack.i(htmlText);
-    String path2 = "";
-    File file2 ;
-    logNoStack.i("SAVE HTML: about to work out  file path");
-    if (kIsWeb) {
-      path2 = "/$filename";
-      final bytes = utf8.encode(htmlText);
-      final web.HTMLAnchorElement anchor = web.document.createElement('a')
-          as web.HTMLAnchorElement
-        ..href = "data:application/octet-stream;base64,${base64Encode(bytes)}"
-        ..style.display = 'none'
-        ..download = filename;
+    // String path2 = "";
+    // File file2 ;
+    // logNoStack.i("SAVE HTML: about to work out  file path");
+    // if (kIsWeb) {
+    //   path2 = "/$filename";
+    //   final bytes = utf8.encode(htmlText);
+    //   final web.HTMLAnchorElement anchor = web.document.createElement('a')
+    //       as web.HTMLAnchorElement
+    //     ..href = "data:application/octet-stream;base64,${base64Encode(bytes)}"
+    //     ..style.display = 'none'
+    //     ..download = filename;
 
-      web.document.body!.appendChild(anchor);
-      file2 = File('${filename}');
-    } else {
-      Directory directory = await getApplicationDocumentsDirectory();
-      path2 = path.join(directory.path, '$filename');
-       final file = File('${path2}');
-    file2 = await file.writeAsString(htmlText, flush: true);
-    }
-    logNoStack.i("SAVE HTML: path2 = $path2");
+    //   web.document.body!.appendChild(anchor);
+    //   file2 = File('${filename}');
+    // } else {
+    //   Directory directory = await getApplicationDocumentsDirectory();
+    //   path2 = path.join(directory.path, '$filename');
+    //    final file = File('${path2}');
+    // file2 = await file.writeAsString(htmlText, flush: true);
+    // }
+    // logNoStack.i("SAVE HTML: path2 = $path2");
 
    
-    saveFileToMinio(file2);
+    saveFileToMinio(filename,htmlText);
   }
 
-  void saveFileToMinio(File? file) async {
-    logNoStack.i("SAVE HTML: about to get minio ${file!.path}");
+  void saveFileToMinio(String filename,String htmlText) async {
+    logNoStack.i("SAVE HTML: about to get minio ${htmlText}");
     var response = await getMinioTokenResponse();
 
     logNoStack.i("SAVE HTML: Minio reponse=> $response");
@@ -423,19 +423,45 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
 //       'X-Amz-Meta-Testing': 1234,
 //       example: 5678,
 //     };
+Uint8List data = Uint8List.fromList(utf8.encode(htmlText));
 
-    var filename = path.basename(file.path);
+    // Step 3: Upload
+    String bucketName = defaultRealm;
+    String objectName = filename;
+    Map<String,String> metadata = {
+      'Content-Type': 'text/html',
+    };
+    try {
+      await minio.putObject(
+        bucketName,
+        objectName,
+        Stream.value(data),
+        size: data.length,
+        metadata: metadata,
+      );
+      debugPrint('✅ File uploaded successfully');
+    } catch (e) {
+      debugPrint('❌ Upload failed: $e');
+    }
+// if (!kIsWeb) {
+//  var filename = path.basename(file.path);
+//    final etag = await minio.fPutObject(defaultRealm, filename, file.path);
+//    // final etag = await minio.fPutObject(defaultRealm, filename, file.path);
+//     logNoStack.i("uploaded file ${file.path} with etag $etag");
+// } else {
+//   logNoStack.i("SAVE HTML: about to upload file ${file.path}");
+// }
+   
 // read it and print out
 //  final reader = web.FileReader();
 //    reader.readAsText();
 
 //    await reader.onLoad.first;
-OpenResult result = await OpenFile.open("$filename");
+//OpenResult result = await OpenFile.open("$filename");
 
   // String data = await file.readAsString();
-   logNoStack.i("SAVE HTML: read file data = $result");
-    final etag = await minio.fPutObject(defaultRealm, filename, file.path);
-    logNoStack.i("uploaded file ${file.path} with etag $etag");
+   //logNoStack.i("SAVE HTML: read file data = $result");
+   
   }
 
   Future<dynamic> getMinioTokenResponse() async {
