@@ -125,6 +125,8 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get skip => 'Skip';
 	String get splash_text => 'Splash Screen';
 	String get still => 'Still';
+	String get template => 'template';
+	String get template_capitalized => 'Template';
 	String get terms_and_conditions => 'Terms & Conditions';
 	String get test_page => 'Test Page';
 	String get text => 'Text';
@@ -184,6 +186,7 @@ class TranslationsFormEn {
 	String edit({required Object item}) => 'Edit ${item}';
 	String get error_saving => 'Error saving';
 	String join({required Object item}) => 'Join ${item}';
+	String get code => 'Code';
 	String get name => 'Name';
 	String name_validation({required Object item}) => 'Please enter ${item} name';
 	String get name_hint => 'Enter name';
@@ -204,6 +207,9 @@ class TranslationsFormEn {
 	String get url => 'Web Address';
 	String url_validation({required Object item}) => 'Please enter valid ${item} web address e.g. https://www.google.com';
 	String url_hint({required Object item}) => 'Enter ${item} web address';
+	String get template => 'Template';
+	String template_validation({required Object item}) => 'Please enter valid ${item} code e.g. TPL_XYZ123';
+	String template_hint({required Object item}) => 'Enter ${item} template code';
 	String org_type({required Object item}) => '${item} Type';
 	String get saved => 'Saved';
 	String deleted({required Object item}) => 'Deleted ${item}';
@@ -394,6 +400,7 @@ extension on Translations {
 			case 'form.edit': return ({required Object item}) => 'Edit ${item}';
 			case 'form.error_saving': return 'Error saving';
 			case 'form.join': return ({required Object item}) => 'Join ${item}';
+			case 'form.code': return 'Code';
 			case 'form.name': return 'Name';
 			case 'form.name_validation': return ({required Object item}) => 'Please enter ${item} name';
 			case 'form.name_hint': return 'Enter name';
@@ -414,6 +421,9 @@ extension on Translations {
 			case 'form.url': return 'Web Address';
 			case 'form.url_validation': return ({required Object item}) => 'Please enter valid ${item} web address e.g. https://www.google.com';
 			case 'form.url_hint': return ({required Object item}) => 'Enter ${item} web address';
+			case 'form.template': return 'Template';
+			case 'form.template_validation': return ({required Object item}) => 'Please enter valid ${item} code e.g. TPL_XYZ123';
+			case 'form.template_hint': return ({required Object item}) => 'Enter ${item} template code';
 			case 'form.org_type': return ({required Object item}) => '${item} Type';
 			case 'form.saved': return 'Saved';
 			case 'form.deleted': return ({required Object item}) => 'Deleted ${item}';
@@ -524,6 +534,8 @@ extension on Translations {
 			case 'skip': return 'Skip';
 			case 'splash_text': return 'Splash Screen';
 			case 'still': return 'Still';
+			case 'template': return 'template';
+			case 'template_capitalized': return 'Template';
 			case 'terms_and_conditions': return 'Terms & Conditions';
 			case 'test_page': return 'Test Page';
 			case 'text': return 'Text';

@@ -122,6 +122,8 @@ class TranslationsZh implements Translations {
 	@override String get skip => '跳过';
 	@override String get splash_text => '启动画面';
 	@override String get still => '固定的';
+	@override String get template => '模板';
+	@override String get template_capitalized => '模板';
 	@override String get terms_and_conditions => '条款和条件';
 	@override String get test_page => '测试页';
 	@override String get text => '文本';
@@ -181,6 +183,7 @@ class _TranslationsFormZh implements TranslationsFormEn {
 	@override String edit({required Object item}) => '编辑${item}';
 	@override String get error_saving => '保存错误';
 	@override String join({required Object item}) => '加入${item}';
+	@override String get code => '代码';
 	@override String get name => '姓名';
 	@override String name_validation({required Object item}) => '请输入${item}名称';
 	@override String get name_hint => '输入姓名';
@@ -198,6 +201,9 @@ class _TranslationsFormZh implements TranslationsFormEn {
 	@override String get email => '电子邮件';
 	@override String email_validation({required Object item}) => '请输入有效的${item}邮箱地址';
 	@override String get email_hint => '输入邮箱';
+	@override String get template => '模板';
+	@override String template_validation({required Object item}) => '请输入有效的${item}代码，例如TPL_XYZ123';
+	@override String template_hint({required Object item}) => '输入${item}模板代码';
 	@override String get url => '网址';
 	@override String url_validation({required Object item}) => '请输入有效的${item}网址，例如https://www.google.com';
 	@override String url_hint({required Object item}) => '输入${item}网址';
@@ -393,6 +399,7 @@ extension on TranslationsZh {
 			case 'form.edit': return ({required Object item}) => '编辑${item}';
 			case 'form.error_saving': return '保存错误';
 			case 'form.join': return ({required Object item}) => '加入${item}';
+			case 'form.code': return '代码';
 			case 'form.name': return '姓名';
 			case 'form.name_validation': return ({required Object item}) => '请输入${item}名称';
 			case 'form.name_hint': return '输入姓名';
@@ -410,6 +417,9 @@ extension on TranslationsZh {
 			case 'form.email': return '电子邮件';
 			case 'form.email_validation': return ({required Object item}) => '请输入有效的${item}邮箱地址';
 			case 'form.email_hint': return '输入邮箱';
+			case 'form.template': return '模板';
+			case 'form.template_validation': return ({required Object item}) => '请输入有效的${item}代码，例如TPL_XYZ123';
+			case 'form.template_hint': return ({required Object item}) => '输入${item}模板代码';
 			case 'form.url': return '网址';
 			case 'form.url_validation': return ({required Object item}) => '请输入有效的${item}网址，例如https://www.google.com';
 			case 'form.url_hint': return ({required Object item}) => '输入${item}网址';
@@ -521,6 +531,8 @@ extension on TranslationsZh {
 			case 'skip': return '跳过';
 			case 'splash_text': return '启动画面';
 			case 'still': return '固定的';
+			case 'template': return '模板';
+			case 'template_capitalized': return '模板';
 			case 'terms_and_conditions': return '条款和条件';
 			case 'test_page': return '测试页';
 			case 'text': return '文本';
