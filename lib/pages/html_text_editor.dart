@@ -366,6 +366,7 @@ class _HtmlTextEditorState
   }
 
   void saveFileToMinio(File? file) async {
+    logNoStack.i("SAVE HTML: about to get minio ${file!.path}");
     var response = await getMinioTokenResponse();
 
     logNoStack.i("SAVE HTML: Minio reponse=> $response");
