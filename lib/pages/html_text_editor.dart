@@ -10,6 +10,7 @@ import 'package:minio/minio.dart';
 import 'package:notifi/credentials.dart';
 import 'package:notifi/models/person.dart';
 import 'package:notifi/state/nest_auth2.dart';
+import 'package:open_file/open_file.dart';
 import 'package:quill_html_editor/quill_html_editor.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:xml/xml.dart';
@@ -429,9 +430,10 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
 //    reader.readAsText();
 
 //    await reader.onLoad.first;
+OpenResult result = await OpenFile.open("$filename");
 
-   String data = await file.readAsString();
-   logNoStack.i("SAVE HTML: read file data = $data");
+  // String data = await file.readAsString();
+   logNoStack.i("SAVE HTML: read file data = $result");
     final etag = await minio.fPutObject(defaultRealm, filename, file.path);
     logNoStack.i("uploaded file ${file.path} with etag $etag");
   }
