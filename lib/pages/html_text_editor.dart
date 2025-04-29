@@ -1,12 +1,31 @@
 
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:minio/io.dart';
+import 'package:minio/minio.dart';
+import 'package:notifi/credentials.dart';
 import 'package:notifi/models/person.dart';
 import 'package:notifi/state/nest_auth2.dart';
 import 'package:quill_html_editor/quill_html_editor.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:xml/xml.dart';
+import 'package:path/path.dart' as path;
+import 'package:http/http.dart' as http;
+import 'package:logger/logger.dart' as logger;
+
+var log = logger.Logger(
+  printer: logger.PrettyPrinter(),
+  level: logger.Level.info,
+);
+
+var logNoStack = logger.Logger(
+  printer: logger.PrettyPrinter(methodCount: 0),
+  level: logger.Level.info,
+);
 
 class HtmlTextEditor extends ConsumerStatefulWidget {
   HtmlTextEditor({super.key});
@@ -56,10 +75,10 @@ class _HtmlTextEditorState
   void initState() {
     controller = QuillEditorController();
     controller.onTextChanged((text) {
-      debugPrint('listening to $text');
+      logNoStack.i('listening to $text');
     });
     controller.onEditorLoaded(() {
-      debugPrint('Editor Loaded :)');
+      logNoStack.i('Editor Loaded :)');
     });
     super.initState();
   }
@@ -120,10 +139,10 @@ class _HtmlTextEditorState
                 InkWell(
                     onTap: () async {
                       var selectedText = await controller.getSelectedText();
-                      debugPrint('selectedText $selectedText');
+                      logNoStack.i('selectedText $selectedText');
                       var selectedHtmlText =
                           await controller.getSelectedHtmlText();
-                      debugPrint('selectedHtmlText $selectedHtmlText');
+                      logNoStack.i('selectedHtmlText $selectedHtmlText');
                     },
                     child: const Icon(
                       Icons.add_circle,
@@ -147,7 +166,7 @@ class _HtmlTextEditorState
                 hintTextPadding: const EdgeInsets.only(left: 20),
                 backgroundColor: _backgroundColor,
                 inputAction: InputAction.newline,
-                onEditingComplete: (s) => debugPrint('Editing completed $s'),
+                onEditingComplete: (s) => logNoStack.i('Editing completed $s'),
                 loadingBuilder: (context) {
                   return const Center(
                       child: CircularProgressIndicator(
@@ -156,20 +175,20 @@ class _HtmlTextEditorState
                   ));
                 },
                 onFocusChanged: (focus) {
-                  debugPrint('has focus $focus');
+                  logNoStack.i('has focus $focus');
                   setState(() {
                     _hasFocus = focus;
                   });
                 },
-                onTextChanged: (text) => debugPrint('widget text change $text'),
+                onTextChanged: (text) => logNoStack.i('widget text change $text'),
                 onEditorCreated: () {
-                  debugPrint('Editor has been loaded');
+                  logNoStack.i('Editor has been loaded');
                   setHtmlText('Testing text on load');
                 },
                 onEditorResized: (height) =>
-                    debugPrint('Editor resized $height'),
+                    logNoStack.i('Editor resized $height'),
                 onSelectionChanged: (sel) =>
-                    debugPrint('index ${sel.index}, range ${sel.length}'),
+                     logNoStack.i('index ${sel.index}, range ${sel.length}'),
               ),
             ),
           ],
@@ -180,6 +199,11 @@ class _HtmlTextEditorState
           padding: const EdgeInsets.all(8),
           child: Wrap(
             children: [
+               textButton(
+                  text: 'Save to Minio',
+                  onPressed: () {
+                    saveHtmlToMinio("TPL_TEST.html");
+                  }),
               textButton(
                   text: 'Set Text',
                   onPressed: () {
@@ -288,7 +312,7 @@ class _HtmlTextEditorState
   ///[getHtmlText] to get the html text from editor
   void getHtmlText() async {
     String? htmlText = await controller.getText();
-    debugPrint(htmlText);
+    logNoStack.i(htmlText);
   }
 
   ///[setHtmlText] to set the html text to editor
@@ -322,4 +346,82 @@ class _HtmlTextEditorState
 
   /// method to un focus editor
   void unFocusEditor() => controller.unFocus();
+  
+  void saveHtmlToMinio(String filename) async {
+   String? htmlText = await controller.getText();
+    logNoStack.i(htmlText);
+    final directory = await getApplicationDocumentsDirectory();
+    final file = File('${directory.path}/$filename');
+    await file.writeAsString(htmlText);
+    saveFileToMinio(file);
+  }
+
+  void saveFileToMinio(File? file) async {
+    var response = await getMinioTokenResponse();
+
+    logNoStack.i("SAVE HTML: Minio reponse=> $response");
+    final document = XmlDocument.parse(response);
+
+    String accessKeyId = document
+        .getElement('AssumeRoleWithWebIdentityResponse')!
+        .getElement('AssumeRoleWithWebIdentityResult')!
+        .getElement('Credentials')!
+        .getElement('AccessKeyId')!
+        .innerText;
+    String secretAccessKey = document
+        .getElement('AssumeRoleWithWebIdentityResponse')!
+        .getElement('AssumeRoleWithWebIdentityResult')!
+        .getElement('Credentials')!
+        .getElement('SecretAccessKey')!
+        .innerText;
+    String sessionToken = document
+        .getElement('AssumeRoleWithWebIdentityResponse')!
+        .getElement('AssumeRoleWithWebIdentityResult')!
+        .getElement('Credentials')!
+        .getElement('SessionToken')!
+        .innerText;
+
+    logNoStack
+        .i("accessKeyId=$accessKeyId , secretAccessKey = $secretAccessKey");
+
+    final minioUri = defaultMinioEndpointUrl.substring('https://'.length);
+    final minio = Minio(
+      endPoint: minioUri,
+      port: 443,
+      accessKey: accessKeyId,
+      secretKey: secretAccessKey,
+      sessionToken: sessionToken,
+      useSSL: true,
+      // enableTrace: true,
+    );
+
+//  var metaData = {
+//       'Content-Type': 'image/jpg',
+//       'Content-Language': 123,
+//       'X-Amz-Meta-Testing': 1234,
+//       example: 5678,
+//     };
+
+    var filename = path.basename(file!.path);
+    final etag =
+        await minio.fPutObject(defaultRealm, filename, file.path);
+    logNoStack.i("uploaded file ${file.path} with etag $etag");
+
+}
+
+ Future<dynamic> getMinioTokenResponse() async {
+   String? token = ref.read(nestAuthProvider.notifier).token!;
+    final Uri uri = Uri.parse(
+        "$defaultMinioEndpointUrl?Action=AssumeRoleWithWebIdentity&Version=2011-06-15&WebIdentityToken=$token");
+    final response = await http.post(
+      uri,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      encoding: Encoding.getByName('utf-8'),
+    );
+    return response.body;
+  }
+
+  
 }
