@@ -361,8 +361,8 @@ class _HtmlTextEditorState
     }
     logNoStack.i("SAVE HTML: path2 = $path2");
     final file = File('${path2}');
-    await file.writeAsString(htmlText);
-    saveFileToMinio(file);
+    File file2 = await file.writeAsString(htmlText, flush: true);
+    saveFileToMinio(file2);
   }
 
   void saveFileToMinio(File? file) async {
