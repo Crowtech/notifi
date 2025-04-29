@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
-import 'package:notifi/riverpod/refresh_widget.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),

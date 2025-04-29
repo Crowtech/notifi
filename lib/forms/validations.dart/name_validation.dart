@@ -1,6 +1,5 @@
 import 'package:flutter/services.dart';
 import 'package:logger/logger.dart' as logger;
-import 'package:notifi/helpers/text_formatter.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),

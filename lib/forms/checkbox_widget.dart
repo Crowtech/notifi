@@ -78,7 +78,7 @@ class _CheckboxFormFieldWidgetState
   void initState() {
     super.initState();
     pureFieldCode =
-        widget.fieldCode.substring(widget.fieldCode.indexOf('-') + 1);
+        widget.fieldCode;
 
     isEmpty = widget.initialValue == null;
     enableWidget = widget.enabled;

@@ -350,19 +350,19 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
       "Checking validationSuffixIcon for enabled:$enableWidget ${widget.fieldCode} isValid:$isValid isDirty:$isDirty",
     );
     if (isValidating) {
-      return CircularProgressIndicator(
+      return const CircularProgressIndicator(
         strokeWidth: 2.0,
         valueColor: AlwaysStoppedAnimation(Colors.blue),
       );
     } else {
       if (!isValid && isDirty) {
-        return Icon(
+        return const Icon(
           Icons.cancel,
           color: Colors.red,
           size: 20,
         );
       } else if (isValid) {
-        return Icon(
+        return const Icon(
           Icons.check_circle,
           color: Colors.green,
           size: 20,

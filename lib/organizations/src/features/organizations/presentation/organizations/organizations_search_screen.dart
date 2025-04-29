@@ -1,25 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:notifi/api_utils.dart';
 import 'package:notifi/credentials.dart';
 
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
-import 'package:notifi/models/nest_filter_type.dart';
 import 'package:notifi/models/nestfilter.dart';
 import 'package:notifi/organizations/src/features/organizations/data/organizations_repository_nf.dart';
 import 'package:notifi/organizations/src/features/organizations/presentation/organization_details/organization_details_screen.dart';
 import 'package:notifi/organizations/src/features/organizations/presentation/organizations/organization_form.dart';
-import 'package:notifi/organizations/src/features/organizations/presentation/organizations/organization_form2.dart';
-import 'package:notifi/organizations/src/features/organizations/presentation/organizations/organization_form3.dart';
-import 'package:notifi/riverpod/nest_filter_provider.dart';
 import 'package:notifi/state/nest_auth2.dart';
 import 'package:notifi/widgets/slide_left_background.dart';
 import 'package:notifi/widgets/slide_right_background.dart';
 import 'package:status_alert/status_alert.dart';
 
-import '../../data/organizations_repository.dart';
 import 'organization_list_tile.dart';
 import 'organization_list_tile_shimmer.dart';
 import 'organizations_search_bar.dart';

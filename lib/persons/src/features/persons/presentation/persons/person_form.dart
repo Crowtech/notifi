@@ -83,7 +83,7 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                     child: AnimatedSize(
                       // animate changes in size, when the list
                       //size is changing, e.g. search functionality
-                      duration: Duration(milliseconds: 200),
+                      duration: const Duration(milliseconds: 200),
                       child: Column(
                         children: [
                           Text(

@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 import 'package:logger/logger.dart' as logger;
-import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:notifi/helpers/debouncer.dart';
 import 'package:notifi/helpers/text_formatter.dart';
 import 'package:notifi/riverpod/enable_widget.dart';
