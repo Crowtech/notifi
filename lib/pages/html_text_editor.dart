@@ -402,7 +402,10 @@ String bucket = defaultRealm;
   logNoStack.i("GetObject length = ${stream.contentLength}");
 
   // Write object data stream to file
-  String data = stream.pipe(File('output.txt').openWrite()).toString();
+  String data = "";
+  await for (var chunk in stream) {
+    data += utf8.decode(chunk);
+  } 
   // Get object length
   print(stream.contentLength);
 
