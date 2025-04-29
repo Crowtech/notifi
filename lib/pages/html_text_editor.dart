@@ -423,7 +423,15 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
 //       example: 5678,
 //     };
 
-    var filename = path.basename(file!.path);
+    var filename = path.basename(file.path);
+// read it and print out
+//  final reader = web.FileReader();
+//    reader.readAsText();
+
+//    await reader.onLoad.first;
+
+   String data = await file.readAsString();
+   logNoStack.i("SAVE HTML: read file data = $data");
     final etag = await minio.fPutObject(defaultRealm, filename, file.path);
     logNoStack.i("uploaded file ${file.path} with etag $etag");
   }
