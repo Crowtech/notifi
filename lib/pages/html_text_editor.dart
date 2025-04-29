@@ -2,6 +2,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -350,8 +351,16 @@ class _HtmlTextEditorState
   void saveHtmlToMinio(String filename) async {
    String? htmlText = await controller.getText();
     logNoStack.i(htmlText);
-    final directory = await getApplicationDocumentsDirectory();
-    final file = File('${directory.path}/$filename');
+    String path2 = "";
+    logNoStack.i("SAVE HTML: about to work out  file path");
+    if (kIsWeb) {
+        path2 = "/$filename";
+    } else {
+          Directory directory = await getApplicationDocumentsDirectory();
+        path2 = path.join(directory.path, '$filename');
+    }
+    logNoStack.i("SAVE HTML: path2 = $path2");
+    final file = File('${path2}');
     await file.writeAsString(htmlText);
     saveFileToMinio(file);
   }
