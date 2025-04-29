@@ -397,9 +397,19 @@ String bucket = defaultRealm;
     Map<String, String> metadata = {
       'Content-Type': 'text/html',
     };
-    var data = await minio.getObject(bucket, object);
+    var stream = await minio.getObject(bucket, object);
+      // Get object length
+  logNoStack.i("GetObject length = ${stream.contentLength}");
+
+  // Write object data stream to file
+  String data = stream.pipe(File('output.txt').openWrite()).toString();
+  // Get object length
+  print(stream.contentLength);
+
+  // Write object data stream to file
+  
     logNoStack.i("SAVE HTML: data = $data");
-    await controller.setText(data.toString());
+    await controller.setText(data);
 
   }
 
