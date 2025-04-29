@@ -206,6 +206,11 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
                     saveHtmlToMinio("TPL_TEST.html");
                   }),
               textButton(
+                  text: 'Read from Minio',
+                  onPressed: () {
+                    loadHtmlFromMinio("TPL_TEST.html");
+                  }),
+              textButton(
                   text: 'Set Text',
                   onPressed: () {
                     setHtmlText('This text is set by you 🫵');
@@ -348,6 +353,56 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
   /// method to un focus editor
   void unFocusEditor() => controller.unFocus();
 
+void loadHtmlFromMinio(String filename) async {
+   // String? htmlText = await controller.getText();
+    var response = await getMinioTokenResponse();
+
+    logNoStack.i("SAVE HTML: Minio reponse=> $response");
+    final document = XmlDocument.parse(response);
+
+    String accessKeyId = document
+        .getElement('AssumeRoleWithWebIdentityResponse')!
+        .getElement('AssumeRoleWithWebIdentityResult')!
+        .getElement('Credentials')!
+        .getElement('AccessKeyId')!
+        .innerText;
+    String secretAccessKey = document
+        .getElement('AssumeRoleWithWebIdentityResponse')!
+        .getElement('AssumeRoleWithWebIdentityResult')!
+        .getElement('Credentials')!
+        .getElement('SecretAccessKey')!
+        .innerText;
+    String sessionToken = document
+        .getElement('AssumeRoleWithWebIdentityResponse')!
+        .getElement('AssumeRoleWithWebIdentityResult')!
+        .getElement('Credentials')!
+        .getElement('SessionToken')!
+        .innerText;
+
+    logNoStack
+        .i("accessKeyId=$accessKeyId , secretAccessKey = $secretAccessKey");
+
+    final minioUri = defaultMinioEndpointUrl.substring('https://'.length);
+    final minio = Minio(
+      endPoint: minioUri,
+      port: 443,
+      accessKey: accessKeyId,
+      secretKey: secretAccessKey,
+      sessionToken: sessionToken,
+      useSSL: true,
+      // enableTrace: true,
+    );
+String bucket = defaultRealm;
+  String object = filename;
+    Map<String, String> metadata = {
+      'Content-Type': 'text/html',
+    };
+    var data = await minio.getObject(bucket, object);
+    logNoStack.i("SAVE HTML: data = $data");
+    await controller.setText(data.toString());
+
+  }
+
   void saveHtmlToMinio(String filename) async {
     String? htmlText = await controller.getText();
     logNoStack.i(htmlText);
@@ -373,11 +428,10 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
     // }
     // logNoStack.i("SAVE HTML: path2 = $path2");
 
-   
-    saveFileToMinio(filename,htmlText);
+    saveFileToMinio(filename, htmlText);
   }
 
-  void saveFileToMinio(String filename,String htmlText) async {
+  void saveFileToMinio(String filename, String htmlText) async {
     logNoStack.i("SAVE HTML: about to get minio ${htmlText}");
     var response = await getMinioTokenResponse();
 
@@ -423,12 +477,12 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
 //       'X-Amz-Meta-Testing': 1234,
 //       example: 5678,
 //     };
-Uint8List data = Uint8List.fromList(utf8.encode(htmlText));
+    Uint8List data = Uint8List.fromList(utf8.encode(htmlText));
 
     // Step 3: Upload
     String bucketName = defaultRealm;
     String objectName = filename;
-    Map<String,String> metadata = {
+    Map<String, String> metadata = {
       'Content-Type': 'text/html',
     };
     try {
@@ -451,7 +505,7 @@ Uint8List data = Uint8List.fromList(utf8.encode(htmlText));
 // } else {
 //   logNoStack.i("SAVE HTML: about to upload file ${file.path}");
 // }
-   
+
 // read it and print out
 //  final reader = web.FileReader();
 //    reader.readAsText();
@@ -459,9 +513,8 @@ Uint8List data = Uint8List.fromList(utf8.encode(htmlText));
 //    await reader.onLoad.first;
 //OpenResult result = await OpenFile.open("$filename");
 
-  // String data = await file.readAsString();
-   //logNoStack.i("SAVE HTML: read file data = $result");
-   
+    // String data = await file.readAsString();
+    //logNoStack.i("SAVE HTML: read file data = $result");
   }
 
   Future<dynamic> getMinioTokenResponse() async {
