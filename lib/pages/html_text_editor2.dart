@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:http/http.dart' as http;
 //import 'package:web/web.dart' as web;
 
@@ -27,18 +26,18 @@ var logNoStack = logger.Logger(
   level: logger.Level.info,
 );
 
-class HtmlTextEditor extends ConsumerStatefulWidget {
-  const HtmlTextEditor({super.key});
+class HtmlTextEditor2 extends ConsumerStatefulWidget {
+  const HtmlTextEditor2({super.key});
 
   @override
-  ConsumerState<HtmlTextEditor> createState() => _HtmlTextEditorState();
+  ConsumerState<HtmlTextEditor2> createState() => _HtmlTextEditor2State();
 }
 
-class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
+class _HtmlTextEditor2State extends ConsumerState<HtmlTextEditor2> {
   final GlobalKey<FormFieldState> itemFormFieldKey =
       GlobalKey<FormFieldState>();
 
-  late HtmlEditorController controller;
+  //late QuillEditorController controller;
 
   ///[customToolBarList] pass the custom toolbarList to show only selected styles in the editor
 
@@ -55,29 +54,37 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
 //     ToolBarStyle.editTable,
 //   ];
 
-  final _toolbarColor = Colors.grey.shade200;
-  final _backgroundColor = Colors.white70;
-  final _toolbarIconColor = Colors.black87;
-  final _editorTextStyle = const TextStyle(
-      fontSize: 18,
-      color: Colors.black,
-      fontWeight: FontWeight.normal,
-      fontFamily: 'Roboto');
-  final _hintTextStyle = const TextStyle(
-      fontSize: 18, color: Colors.black38, fontWeight: FontWeight.normal);
+//   final _toolbarColor = Colors.grey.shade200;
+//   final _backgroundColor = Colors.white70;
+//   final _toolbarIconColor = Colors.black87;
+//   final _editorTextStyle = const TextStyle(
+//       fontSize: 18,
+//       color: Colors.black,
+//       fontWeight: FontWeight.normal,
+//       fontFamily: 'Roboto');
+//   final _hintTextStyle = const TextStyle(
+//       fontSize: 18, color: Colors.black38, fontWeight: FontWeight.normal);
 
 //   bool _hasFocus = false;
 
-  @override
-  void initState() {
-    controller = HtmlEditorController();
-    super.initState();
-  }
+//   @override
+//   void initState() {
+//     controller = QuillEditorController();
+//     controller.onTextChanged((text) {
+//       logNoStack.i('listening to $text');
+//     });
+//     controller.onEditorLoaded(() {
+//       logNoStack.i('Editor Loaded :)');
+//     });
+//     super.initState();
+//   }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
+//   @override
+//   void dispose() {
+//     /// please do not forget to dispose the controller
+//     controller.dispose();
+//     super.dispose();
+//   }
 // //  Person currentUser = ref.read(nestAuthProvider.notifier).currentUser;
 // //     void tap2clipboard(String text) =>
 // //       Clipboard.setData(ClipboardData(text: text)).then((_) {
@@ -102,43 +109,7 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
         resizeToAvoidBottomInset: true,
         body: Column(
           children: [
-            CreateTemplateForm(
-              formCode: "template",
-            ),
-            HtmlEditor(
-                controller: controller, //required
-                htmlEditorOptions: HtmlEditorOptions(
-                  hint: "Your text here...",
-                  //initalText: "text content initial, if any",
-                ),
-                otherOptions: OtherOptions(
-                  height: 400,
-                ),
-                htmlToolbarOptions: HtmlToolbarOptions(defaultToolbarButtons: [
-                  StyleButtons(),
-                  FontSettingButtons(),
-                  FontButtons(),
-                  ColorButtons(),
-                  ListButtons(),
-                  ParagraphButtons(),
-                  InsertButtons(),
-                  OtherButtons(),
-                ], customToolbarButtons: [
-                  //your widgets here
-                  textButton(
-                      text: 'Clear Editor',
-                      onPressed: () {
-                        controller.clear();
-                      }),
-                  textButton(
-                      text: 'Read from Minio',
-                      onPressed: () {
-                        loadHtmlFromMinio("TPL_TEST.html");
-                      }),
-                ], customToolbarInsertionIndices: [
-                  2,
-                  5
-                ]))
+            CreateTemplateForm(formCode: "template",),
             // ToolBar(
             //   toolBarColor: _toolbarColor,
             //   padding: const EdgeInsets.all(8),
@@ -322,24 +293,24 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
         //           }),
         //    ],
         //  ),
-      ),
-    );
-    // );
+        ),
+      );
+   // );
   }
 
-  Widget textButton({required String text, required VoidCallback onPressed}) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: MaterialButton(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          color: _toolbarIconColor,
-          onPressed: onPressed,
-          child: Text(
-            text,
-            style: TextStyle(color: _toolbarColor),
-          )),
-    );
-  }
+//   Widget textButton({required String text, required VoidCallback onPressed}) {
+//     return Padding(
+//       padding: const EdgeInsets.all(8.0),
+//       child: MaterialButton(
+//           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+//           color: _toolbarIconColor,
+//           onPressed: onPressed,
+//           child: Text(
+//             text,
+//             style: TextStyle(color: _toolbarColor),
+//           )),
+//     );
+//   }
 
 //   ///[getHtmlText] to get the html text from editor
 //   void getHtmlText() async {
@@ -379,67 +350,68 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
 //   /// method to un focus editor
 //   void unFocusEditor() => controller.unFocus();
 
-  void loadHtmlFromMinio(String filename) async {
-    // String? htmlText = await controller.getText();
-    var response = await getMinioTokenResponse();
+// void loadHtmlFromMinio(String filename) async {
+//    // String? htmlText = await controller.getText();
+//     var response = await getMinioTokenResponse();
 
-    logNoStack.i("SAVE HTML: Minio reponse=> $response");
-    final document = XmlDocument.parse(response);
+//     logNoStack.i("SAVE HTML: Minio reponse=> $response");
+//     final document = XmlDocument.parse(response);
 
-    String accessKeyId = document
-        .getElement('AssumeRoleWithWebIdentityResponse')!
-        .getElement('AssumeRoleWithWebIdentityResult')!
-        .getElement('Credentials')!
-        .getElement('AccessKeyId')!
-        .innerText;
-    String secretAccessKey = document
-        .getElement('AssumeRoleWithWebIdentityResponse')!
-        .getElement('AssumeRoleWithWebIdentityResult')!
-        .getElement('Credentials')!
-        .getElement('SecretAccessKey')!
-        .innerText;
-    String sessionToken = document
-        .getElement('AssumeRoleWithWebIdentityResponse')!
-        .getElement('AssumeRoleWithWebIdentityResult')!
-        .getElement('Credentials')!
-        .getElement('SessionToken')!
-        .innerText;
+//     String accessKeyId = document
+//         .getElement('AssumeRoleWithWebIdentityResponse')!
+//         .getElement('AssumeRoleWithWebIdentityResult')!
+//         .getElement('Credentials')!
+//         .getElement('AccessKeyId')!
+//         .innerText;
+//     String secretAccessKey = document
+//         .getElement('AssumeRoleWithWebIdentityResponse')!
+//         .getElement('AssumeRoleWithWebIdentityResult')!
+//         .getElement('Credentials')!
+//         .getElement('SecretAccessKey')!
+//         .innerText;
+//     String sessionToken = document
+//         .getElement('AssumeRoleWithWebIdentityResponse')!
+//         .getElement('AssumeRoleWithWebIdentityResult')!
+//         .getElement('Credentials')!
+//         .getElement('SessionToken')!
+//         .innerText;
 
-    logNoStack
-        .i("accessKeyId=$accessKeyId , secretAccessKey = $secretAccessKey");
+//     logNoStack
+//         .i("accessKeyId=$accessKeyId , secretAccessKey = $secretAccessKey");
 
-    final minioUri = defaultMinioEndpointUrl.substring('https://'.length);
-    final minio = Minio(
-      endPoint: minioUri,
-      port: 443,
-      accessKey: accessKeyId,
-      secretKey: secretAccessKey,
-      sessionToken: sessionToken,
-      useSSL: true,
-      // enableTrace: true,
-    );
-    String bucket = defaultRealm;
-    String object = filename;
-    Map<String, String> metadata = {
-      'Content-Type': 'text/html',
-    };
-    var stream = await minio.getObject(bucket, object);
-    // Get object length
-    logNoStack.i("GetObject length = ${stream.contentLength}");
+//     final minioUri = defaultMinioEndpointUrl.substring('https://'.length);
+//     final minio = Minio(
+//       endPoint: minioUri,
+//       port: 443,
+//       accessKey: accessKeyId,
+//       secretKey: secretAccessKey,
+//       sessionToken: sessionToken,
+//       useSSL: true,
+//       // enableTrace: true,
+//     );
+// String bucket = defaultRealm;
+//   String object = filename;
+//     Map<String, String> metadata = {
+//       'Content-Type': 'text/html',
+//     };
+//     var stream = await minio.getObject(bucket, object);
+//       // Get object length
+//   logNoStack.i("GetObject length = ${stream.contentLength}");
 
-    // Write object data stream to file
-    String data = "";
-    await for (var chunk in stream) {
-      data += utf8.decode(chunk);
-    }
-    // Get object length
-    print(stream.contentLength);
+//   // Write object data stream to file
+//   String data = "";
+//   await for (var chunk in stream) {
+//     data += utf8.decode(chunk);
+//   } 
+//   // Get object length
+//   print(stream.contentLength);
 
-    // Write object data stream to file
+//   // Write object data stream to file
+  
+//     logNoStack.i("SAVE HTML: data = $data");
+//     await controller.setText(data);
 
-    logNoStack.i("SAVE HTML: data = $data");
-    controller.setText(data);
-  }
+//   }
 
 //   void saveHtmlToMinio(String filename) async {
 //     String? htmlText = await controller.getText();
@@ -555,17 +527,17 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
 //     //logNoStack.i("SAVE HTML: read file data = $result");
 //   }
 
-  Future<dynamic> getMinioTokenResponse() async {
-    String? token = ref.read(nestAuthProvider.notifier).token!;
-    final Uri uri = Uri.parse(
-        "$defaultMinioEndpointUrl?Action=AssumeRoleWithWebIdentity&Version=2011-06-15&WebIdentityToken=$token");
-    final response = await http.post(
-      uri,
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      encoding: Encoding.getByName('utf-8'),
-    );
-    return response.body;
-  }
+//   Future<dynamic> getMinioTokenResponse() async {
+//     String? token = ref.read(nestAuthProvider.notifier).token!;
+//     final Uri uri = Uri.parse(
+//         "$defaultMinioEndpointUrl?Action=AssumeRoleWithWebIdentity&Version=2011-06-15&WebIdentityToken=$token");
+//     final response = await http.post(
+//       uri,
+//       headers: {
+//         "Content-Type": "application/x-www-form-urlencoded",
+//       },
+//       encoding: Encoding.getByName('utf-8'),
+//     );
+//     return response.body;
+//   }
 }
