@@ -34,7 +34,7 @@ bool validateEmail(String? email) {
     return emailValidator.EmailValidator.validate(email);
   }
 
-  Future<bool> validateEmailAsync(WidgetRef ref,BuildContext context,String? email) async {
+  Future<bool> validateEmailAsync2(WidgetRef ref,BuildContext context,String? email) async {
     if (email == null) {
       return false;
     }

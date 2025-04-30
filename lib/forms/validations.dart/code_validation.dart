@@ -19,7 +19,7 @@ var logNoStack = logger.Logger(
   level: logger.Level.info,
 );
 
-String CODE_REGEX =  r"^.*$";
+String CODE_REGEX =  r"^\\w+$";
 
 List<TextInputFormatter> codeInputFormatter = [UpperCaseTextFormatter(),FilteringTextInputFormatter.allow(RegExp(CODE_REGEX))];
 
@@ -36,7 +36,7 @@ bool validateCode(String? code) {
   }
 
 
-Future<bool> validateCodesync(WidgetRef ref,BuildContext context,String? code) async {
+Future<bool> validateCodesync(WidgetRef ref,BuildContext context,String itemCode,String? code) async {
     if (code == null) {
       return false;
     }
@@ -52,7 +52,7 @@ Future<bool> validateCodesync(WidgetRef ref,BuildContext context,String? code) a
       // check if url exists
       var token = ref.read(nestAuthProvider.notifier).token;
       var apiPath =
-          "$defaultAPIBaseUrl$defaultApiPrefixPath/resources/check/code/";
+          "$defaultAPIBaseUrl$defaultApiPrefixPath/${itemCode}s/check/code/";
       apiPath = "$apiPath${Uri.encodeComponent(code)}";
       logNoStack.i("CODE_FORM: encodedApiPath is $apiPath");
       var response = await apiGetData(token!, apiPath, "application/json");
@@ -63,7 +63,7 @@ Future<bool> validateCodesync(WidgetRef ref,BuildContext context,String? code) a
           duration: const Duration(seconds: 3),
           title: nt.t.template,
           subtitle: nt.t.form.already_exists(
-              item: nt.t.template_capitalized, field: nt.t.form.code),
+              item: nt.t['${itemCode}_capitalized}'], field: nt.t.form.code),
           configuration: const IconConfiguration(icon: Icons.error),
           maxWidth: 260,
         );
