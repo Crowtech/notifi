@@ -1,25 +1,20 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:minio/io.dart';
+import 'package:http/http.dart' as http;
+//import 'package:web/web.dart' as web;
+
+import 'package:logger/logger.dart' as logger;
 import 'package:minio/minio.dart';
 import 'package:notifi/credentials.dart';
 import 'package:notifi/forms/template_form.dart';
 import 'package:notifi/models/person.dart';
 import 'package:notifi/state/nest_auth2.dart';
-import 'package:open_file/open_file.dart';
 import 'package:quill_html_editor/quill_html_editor.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:xml/xml.dart';
-import 'package:path/path.dart' as path;
-import 'package:http/http.dart' as http;
-//import 'package:web/web.dart' as web;
-
-import 'package:logger/logger.dart' as logger;
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
