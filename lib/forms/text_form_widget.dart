@@ -139,9 +139,9 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
       });
       var token = ref.read(nestAuthProvider.notifier).token;
       var apiPath =
-          "$defaultAPIBaseUrl$defaultApiPrefixPath/resources/check/$pureFieldCode/";
+          "$defaultAPIBaseUrl$defaultApiPrefixPath/${pureFieldCode}s/check/$pureFieldCode/";
       apiPath = "$apiPath${Uri.encodeComponent(value)}";
-      logNoStack.i("ORG_FORM: check encodedApiPath is $apiPath");
+      logNoStack.i("TEXT_FORM_WIDGET: check encodedApiPath is $apiPath");
       var response = await apiGetData(token!, apiPath, "application/json");
       isExisting =
           response.body.contains("true"); // if existing then it returns true
