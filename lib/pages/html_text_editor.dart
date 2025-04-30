@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:http/http.dart' as http;
+import 'package:notifi/i18n/strings.g.dart' as nt;
 //import 'package:web/web.dart' as web;
 
 import 'package:logger/logger.dart' as logger;
@@ -14,6 +15,7 @@ import 'package:notifi/credentials.dart';
 import 'package:notifi/forms/template_form.dart';
 import 'package:notifi/models/person.dart';
 import 'package:notifi/state/nest_auth2.dart';
+import 'package:status_alert/status_alert.dart';
 //import 'package:quill_html_editor/quill_html_editor.dart';
 import 'package:xml/xml.dart';
 
@@ -541,8 +543,26 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
         metadata: metadata,
       );
       debugPrint('✅ File uploaded successfully');
+       StatusAlert.show(
+                                      context,
+                                      duration: const Duration(seconds: 2),
+                                      title: nt.t.template,
+                                      subtitle: nt.t.form.saved,
+                                      configuration: const IconConfiguration(
+                                          icon: Icons.done),
+                                      maxWidth: 300,
+                                    );
     } catch (e) {
       debugPrint('❌ Upload failed: $e');
+        StatusAlert.show(
+                                      context,
+                                      duration: const Duration(seconds: 2),
+                                      title: nt.t.template,
+                                      subtitle: nt.t.form.error_saving,
+                                      configuration: const IconConfiguration(
+                                          icon: Icons.error),
+                                      maxWidth: 300,
+                                    );
     }
 // if (!kIsWeb) {
 //  var filename = path.basename(file.path);

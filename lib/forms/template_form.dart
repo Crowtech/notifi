@@ -78,13 +78,13 @@ class _CreateTemplateFormState
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  nt.t.form.create(item: capitalizedItem),
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                // Text(
+                //   nt.t.form.create(item: capitalizedItem),
+                //   style: const TextStyle(
+                //     fontSize: 24,
+                //     fontWeight: FontWeight.bold,
+                //   ),
+                // ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
                   controller: codeController,
@@ -100,10 +100,10 @@ class _CreateTemplateFormState
                   hintText: nt.t.form.code_hint(
                     item: nt.t.template_capitalized,
                   ),
-                  onValidate: validateCode,
+                  //onValidate: validateCode,
                   regex: CODE_REGEX,
-                  inputFormatters: codeInputFormatter,
-                  textCapitalization: TextCapitalization.characters,
+                  //inputFormatters: codeInputFormatter,
+                  //textCapitalization: TextCapitalization.characters,
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
