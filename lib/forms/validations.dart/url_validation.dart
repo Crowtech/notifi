@@ -19,7 +19,8 @@ var logNoStack = logger.Logger(
   level: logger.Level.info,
 );
 
-String URL_REGEX =  r"^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$";
+//String URL_REGEX =  r"^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$";
+String URL_REGEX = r"^\\w+$";
 
 List<TextInputFormatter> urlInputFormatter = [LowerCaseTextFormatter(),FilteringTextInputFormatter.allow(RegExp(URL_REGEX))];
 
