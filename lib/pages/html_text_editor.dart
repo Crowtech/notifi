@@ -98,6 +98,9 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
 
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+        title: Text('Message Template Editor'), 
+      ),
         backgroundColor: Colors.white,
         resizeToAvoidBottomInset: true,
         body: Column(
@@ -111,9 +114,9 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
                   hint: "Your text here...",
                   //initalText: "text content initial, if any",
                 ),
-                otherOptions: OtherOptions(
-                  height: 400,
-                ),
+                // otherOptions: OtherOptions(
+                //   height: 400,
+                // ),
                 htmlToolbarOptions: HtmlToolbarOptions(defaultToolbarButtons: [
                   StyleButtons(),
                   FontSettingButtons(),
@@ -135,9 +138,15 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
                       onPressed: () {
                         loadHtmlFromMinio("TPL_TEST.html");
                       }),
+                             textButton(
+                  text: 'Save to Minio',
+                  onPressed: () {
+                    saveHtmlToMinio("TPL_TEST.html");
+                  }),
                 ], customToolbarInsertionIndices: [
                   2,
-                  5
+                  5,
+                  6
                 ]))
             // ToolBar(
             //   toolBarColor: _toolbarColor,
@@ -441,119 +450,119 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
     controller.setText(data);
   }
 
-//   void saveHtmlToMinio(String filename) async {
-//     String? htmlText = await controller.getText();
-//     logNoStack.i(htmlText);
-//     // String path2 = "";
-//     // File file2 ;
-//     // logNoStack.i("SAVE HTML: about to work out  file path");
-//     // if (kIsWeb) {
-//     //   path2 = "/$filename";
-//     //   final bytes = utf8.encode(htmlText);
-//     //   final web.HTMLAnchorElement anchor = web.document.createElement('a')
-//     //       as web.HTMLAnchorElement
-//     //     ..href = "data:application/octet-stream;base64,${base64Encode(bytes)}"
-//     //     ..style.display = 'none'
-//     //     ..download = filename;
+  void saveHtmlToMinio(String filename) async {
+    String? htmlText = await controller.getText();
+    logNoStack.i(htmlText);
+    // String path2 = "";
+    // File file2 ;
+    // logNoStack.i("SAVE HTML: about to work out  file path");
+    // if (kIsWeb) {
+    //   path2 = "/$filename";
+    //   final bytes = utf8.encode(htmlText);
+    //   final web.HTMLAnchorElement anchor = web.document.createElement('a')
+    //       as web.HTMLAnchorElement
+    //     ..href = "data:application/octet-stream;base64,${base64Encode(bytes)}"
+    //     ..style.display = 'none'
+    //     ..download = filename;
 
-//     //   web.document.body!.appendChild(anchor);
-//     //   file2 = File('${filename}');
-//     // } else {
-//     //   Directory directory = await getApplicationDocumentsDirectory();
-//     //   path2 = path.join(directory.path, '$filename');
-//     //    final file = File('${path2}');
-//     // file2 = await file.writeAsString(htmlText, flush: true);
-//     // }
-//     // logNoStack.i("SAVE HTML: path2 = $path2");
+    //   web.document.body!.appendChild(anchor);
+    //   file2 = File('${filename}');
+    // } else {
+    //   Directory directory = await getApplicationDocumentsDirectory();
+    //   path2 = path.join(directory.path, '$filename');
+    //    final file = File('${path2}');
+    // file2 = await file.writeAsString(htmlText, flush: true);
+    // }
+    // logNoStack.i("SAVE HTML: path2 = $path2");
 
-//     saveFileToMinio(filename, htmlText);
-//   }
+    saveFileToMinio(filename, htmlText);
+  }
 
-//   void saveFileToMinio(String filename, String htmlText) async {
-//     logNoStack.i("SAVE HTML: about to get minio $htmlText");
-//     var response = await getMinioTokenResponse();
+  void saveFileToMinio(String filename, String htmlText) async {
+    logNoStack.i("SAVE HTML: about to get minio $htmlText");
+    var response = await getMinioTokenResponse();
 
-//     logNoStack.i("SAVE HTML: Minio reponse=> $response");
-//     final document = XmlDocument.parse(response);
+    logNoStack.i("SAVE HTML: Minio reponse=> $response");
+    final document = XmlDocument.parse(response);
 
-//     String accessKeyId = document
-//         .getElement('AssumeRoleWithWebIdentityResponse')!
-//         .getElement('AssumeRoleWithWebIdentityResult')!
-//         .getElement('Credentials')!
-//         .getElement('AccessKeyId')!
-//         .innerText;
-//     String secretAccessKey = document
-//         .getElement('AssumeRoleWithWebIdentityResponse')!
-//         .getElement('AssumeRoleWithWebIdentityResult')!
-//         .getElement('Credentials')!
-//         .getElement('SecretAccessKey')!
-//         .innerText;
-//     String sessionToken = document
-//         .getElement('AssumeRoleWithWebIdentityResponse')!
-//         .getElement('AssumeRoleWithWebIdentityResult')!
-//         .getElement('Credentials')!
-//         .getElement('SessionToken')!
-//         .innerText;
+    String accessKeyId = document
+        .getElement('AssumeRoleWithWebIdentityResponse')!
+        .getElement('AssumeRoleWithWebIdentityResult')!
+        .getElement('Credentials')!
+        .getElement('AccessKeyId')!
+        .innerText;
+    String secretAccessKey = document
+        .getElement('AssumeRoleWithWebIdentityResponse')!
+        .getElement('AssumeRoleWithWebIdentityResult')!
+        .getElement('Credentials')!
+        .getElement('SecretAccessKey')!
+        .innerText;
+    String sessionToken = document
+        .getElement('AssumeRoleWithWebIdentityResponse')!
+        .getElement('AssumeRoleWithWebIdentityResult')!
+        .getElement('Credentials')!
+        .getElement('SessionToken')!
+        .innerText;
 
-//     logNoStack
-//         .i("accessKeyId=$accessKeyId , secretAccessKey = $secretAccessKey");
+    logNoStack
+        .i("accessKeyId=$accessKeyId , secretAccessKey = $secretAccessKey");
 
-//     final minioUri = defaultMinioEndpointUrl.substring('https://'.length);
-//     final minio = Minio(
-//       endPoint: minioUri,
-//       port: 443,
-//       accessKey: accessKeyId,
-//       secretKey: secretAccessKey,
-//       sessionToken: sessionToken,
-//       useSSL: true,
-//       // enableTrace: true,
-//     );
+    final minioUri = defaultMinioEndpointUrl.substring('https://'.length);
+    final minio = Minio(
+      endPoint: minioUri,
+      port: 443,
+      accessKey: accessKeyId,
+      secretKey: secretAccessKey,
+      sessionToken: sessionToken,
+      useSSL: true,
+      // enableTrace: true,
+    );
 
-// //  var metaData = {
-// //       'Content-Type': 'image/jpg',
-// //       'Content-Language': 123,
-// //       'X-Amz-Meta-Testing': 1234,
-// //       example: 5678,
-// //     };
-//     Uint8List data = Uint8List.fromList(utf8.encode(htmlText));
-
-//     // Step 3: Upload
-//     String bucketName = defaultRealm;
-//     String objectName = filename;
-//     Map<String, String> metadata = {
-//       'Content-Type': 'text/html',
+//  var metaData = {
+//       'Content-Type': 'image/jpg',
+//       'Content-Language': 123,
+//       'X-Amz-Meta-Testing': 1234,
+//       example: 5678,
 //     };
-//     try {
-//       await minio.putObject(
-//         bucketName,
-//         objectName,
-//         Stream.value(data),
-//         size: data.length,
-//         metadata: metadata,
-//       );
-//       debugPrint('✅ File uploaded successfully');
-//     } catch (e) {
-//       debugPrint('❌ Upload failed: $e');
-//     }
-// // if (!kIsWeb) {
-// //  var filename = path.basename(file.path);
-// //    final etag = await minio.fPutObject(defaultRealm, filename, file.path);
-// //    // final etag = await minio.fPutObject(defaultRealm, filename, file.path);
-// //     logNoStack.i("uploaded file ${file.path} with etag $etag");
-// // } else {
-// //   logNoStack.i("SAVE HTML: about to upload file ${file.path}");
-// // }
+    Uint8List data = Uint8List.fromList(utf8.encode(htmlText));
 
-// // read it and print out
-// //  final reader = web.FileReader();
-// //    reader.readAsText();
+    // Step 3: Upload
+    String bucketName = defaultRealm;
+    String objectName = filename;
+    Map<String, String> metadata = {
+      'Content-Type': 'text/html',
+    };
+    try {
+      await minio.putObject(
+        bucketName,
+        objectName,
+        Stream.value(data),
+        size: data.length,
+        metadata: metadata,
+      );
+      debugPrint('✅ File uploaded successfully');
+    } catch (e) {
+      debugPrint('❌ Upload failed: $e');
+    }
+// if (!kIsWeb) {
+//  var filename = path.basename(file.path);
+//    final etag = await minio.fPutObject(defaultRealm, filename, file.path);
+//    // final etag = await minio.fPutObject(defaultRealm, filename, file.path);
+//     logNoStack.i("uploaded file ${file.path} with etag $etag");
+// } else {
+//   logNoStack.i("SAVE HTML: about to upload file ${file.path}");
+// }
 
-// //    await reader.onLoad.first;
-// //OpenResult result = await OpenFile.open("$filename");
+// read it and print out
+//  final reader = web.FileReader();
+//    reader.readAsText();
 
-//     // String data = await file.readAsString();
-//     //logNoStack.i("SAVE HTML: read file data = $result");
-//   }
+//    await reader.onLoad.first;
+//OpenResult result = await OpenFile.open("$filename");
+
+    // String data = await file.readAsString();
+    //logNoStack.i("SAVE HTML: read file data = $result");
+  }
 
   Future<dynamic> getMinioTokenResponse() async {
     String? token = ref.read(nestAuthProvider.notifier).token!;
