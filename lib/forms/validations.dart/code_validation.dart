@@ -19,7 +19,7 @@ var logNoStack = logger.Logger(
   level: logger.Level.info,
 );
 
-String CODE_REGEX =  r"^[A-Z]3\\_[A-Z0-9\\_]*$";
+String CODE_REGEX =  r"^.*$";
 
 List<TextInputFormatter> codeInputFormatter = [UpperCaseTextFormatter(),FilteringTextInputFormatter.allow(RegExp(CODE_REGEX))];
 
