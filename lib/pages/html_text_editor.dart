@@ -32,7 +32,7 @@ var logNoStack = logger.Logger(
 );
 
 class HtmlTextEditor extends ConsumerStatefulWidget {
-  HtmlTextEditor({super.key});
+  const HtmlTextEditor({super.key});
 
   @override
   ConsumerState<HtmlTextEditor> createState() => _HtmlTextEditorState();
@@ -447,7 +447,7 @@ String bucket = defaultRealm;
   }
 
   void saveFileToMinio(String filename, String htmlText) async {
-    logNoStack.i("SAVE HTML: about to get minio ${htmlText}");
+    logNoStack.i("SAVE HTML: about to get minio $htmlText");
     var response = await getMinioTokenResponse();
 
     logNoStack.i("SAVE HTML: Minio reponse=> $response");

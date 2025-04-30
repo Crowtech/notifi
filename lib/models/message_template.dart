@@ -2,10 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'package:logger/logger.dart';
 import 'package:notifi/entities/paging_data_item.dart';
-import 'package:notifi/models/gps.dart';
-import 'package:notifi/models/nest_notifi_type.dart';
 
-import '../jwt_utils.dart';
 import 'crowtech_object.dart';
  part 'message_template.g.dart';
 
