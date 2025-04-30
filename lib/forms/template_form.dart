@@ -97,7 +97,9 @@ class _CreateTemplateFormState
                   itemValidation: nt.t.form.code_validation(
                     item: nt.t.template_capitalized,
                   ),
-                  hintText: nt.t.form.code_hint,
+                  hintText: nt.t.form.code_hint(
+                    item: nt.t.template_capitalized,
+                  ),
                   onValidate: validateCode,
                   regex: CODE_REGEX,
                   inputFormatters: codeInputFormatter,
