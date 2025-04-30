@@ -245,9 +245,9 @@ class _CreateOrganizationFormState
                   ),
                   hintText:
                       nt.t.form.url_hint(item: nt.t.organization_capitalized),
-                  onValidate: validateUrl,
+                //  onValidate: validateUrl,
                   regex: URL_REGEX,
-                  inputFormatters: urlInputFormatter,
+                //  inputFormatters: urlInputFormatter,
                   optional: false,
                 ),
                 const SizedBox(height: 16),
