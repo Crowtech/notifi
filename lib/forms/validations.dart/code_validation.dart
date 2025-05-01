@@ -19,7 +19,7 @@ var logNoStack = logger.Logger(
   level: logger.Level.info,
 );
 
-String CODE_REGEX =  r"^\\w+$";
+String CODE_REGEX =  r"^.*$";
 
 List<TextInputFormatter> codeInputFormatter = [UpperCaseTextFormatter(),FilteringTextInputFormatter.allow(RegExp(CODE_REGEX))];
 
