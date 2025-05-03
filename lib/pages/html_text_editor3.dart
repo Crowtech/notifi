@@ -67,7 +67,7 @@ class _HtmlTextEditor3State extends ConsumerState<HtmlTextEditor3> {
 
   Future<void> _initController() async {
     try {
-      final result = await rootBundle.loadString('assets/welcome.json');
+      final result = await rootBundle.loadString('welcome.json');
       final heuristics = ParchmentHeuristics(
         formatRules: [],
         insertRules: [
