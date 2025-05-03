@@ -87,7 +87,14 @@ class _HtmlTextEditor3State extends ConsumerState<HtmlTextEditor3> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(elevation: 0, title: const Text('Html Text Editor')),
+      appBar: AppBar(elevation: 0, title: const Text('Html Text Editor'),
+      actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.save),
+            onPressed: () => _saveDocument(context),
+          ),
+        ],),
+      
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           final picker = ImagePicker();
@@ -263,13 +270,17 @@ class _HtmlTextEditor3State extends ConsumerState<HtmlTextEditor3> {
 
     // Write object data stream to file
 
-    logNoStack.i("SAVE HTML: data = $data");
+    logNoStack.i("LOADING HTML: data = $data");
      const codec = ParchmentHtmlCodec();
     // String html = '<hr>'; // works
     String html = data; // fails
+    Delta delta = codec.decode(html).toDelta(); // Fleather compatible Delta
+ ParchmentDocument doc = ParchmentDocument.fromDelta(delta);
     // String html = '<p><hr></p><p>a</p><p></p>'; // fails
+//      Delta delta = codec.decode(html); // Fleather compatible Delta
+//  ParchmentDocument document = ParchmentDocument.fromDelta(delta);
 
-    final ParchmentDocument doc = codec.decode(html);
+    //final ParchmentDocument doc = codec.decode(html);
     _controller = FleatherController(document: doc);
     setState(() {});
  
