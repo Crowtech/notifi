@@ -6,20 +6,42 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:notifi/credentials.dart';
+import 'package:notifi/forms/template_form.dart';
+import 'package:notifi/state/nest_auth2.dart';
+import 'package:status_alert/status_alert.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:parchment/codecs.dart';
+import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
+import 'package:notifi/i18n/strings.g.dart' as nt;
+import 'package:xml/xml.dart';
+//import 'package:web/web.dart' as web;
+
+import 'package:logger/logger.dart' as logger;
+import 'package:minio/minio.dart';
+
+var log = logger.Logger(
+  printer: logger.PrettyPrinter(),
+  level: logger.Level.info,
+);
+
+var logNoStack = logger.Logger(
+  printer: logger.PrettyPrinter(methodCount: 0),
+  level: logger.Level.info,
+);
 
 
-
-class HtmlTextEditor3 extends StatefulWidget {
+class HtmlTextEditor3 extends ConsumerStatefulWidget {
   HtmlTextEditor3({super.key});
 
   @override
-  State<HtmlTextEditor3> createState() => _HtmlTextEditor3State();
+  ConsumerState<HtmlTextEditor3> createState() => _HtmlTextEditor3State();
 }
 
-class _HtmlTextEditor3State extends State<HtmlTextEditor3> {
+class _HtmlTextEditor3State extends ConsumerState<HtmlTextEditor3> {
   final FocusNode _focusNode = FocusNode();
   final GlobalKey<EditorState> _editorKey = GlobalKey();
   FleatherController? _controller;
@@ -64,7 +86,7 @@ class _HtmlTextEditor3State extends State<HtmlTextEditor3> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(elevation: 0, title: const Text('Fleather Demo')),
+      appBar: AppBar(elevation: 0, title: const Text('Html Text Editor')),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           final picker = ImagePicker();
@@ -94,6 +116,9 @@ class _HtmlTextEditor3State extends State<HtmlTextEditor3> {
           ? const Center(child: CircularProgressIndicator())
           : Column(
               children: [
+                CreateTemplateForm(
+                  formCode: "template",
+                ),
                 FleatherToolbar.basic(
                     controller: _controller!, editorKey: _editorKey),
                 Divider(height: 1, thickness: 1, color: Colors.grey.shade200),
@@ -125,10 +150,10 @@ class _HtmlTextEditor3State extends State<HtmlTextEditor3> {
   Widget _embedBuilder(BuildContext context, EmbedNode node) {
     if (node.value.type == 'icon') {
       final data = node.value.data;
-       return const Icon(
-          Icons.star,
-         color: Colors.red,
-         size: 18,
+      return const Icon(
+        Icons.star,
+        color: Colors.red,
+        size: 18,
       );
       // Icons.rocket_launch_outlined
       // return Icon(
@@ -174,6 +199,207 @@ class _HtmlTextEditor3State extends State<HtmlTextEditor3> {
       await launchUrl(uri);
     }
   }
+
+  void loadHtmlFromMinio(String filename) async {
+    // String? htmlText = await controller.getText();
+    var response = await getMinioTokenResponse();
+
+    logNoStack.i("SAVE HTML: Minio reponse=> $response");
+    final document = XmlDocument.parse(response);
+
+    String accessKeyId = document
+        .getElement('AssumeRoleWithWebIdentityResponse')!
+        .getElement('AssumeRoleWithWebIdentityResult')!
+        .getElement('Credentials')!
+        .getElement('AccessKeyId')!
+        .innerText;
+    String secretAccessKey = document
+        .getElement('AssumeRoleWithWebIdentityResponse')!
+        .getElement('AssumeRoleWithWebIdentityResult')!
+        .getElement('Credentials')!
+        .getElement('SecretAccessKey')!
+        .innerText;
+    String sessionToken = document
+        .getElement('AssumeRoleWithWebIdentityResponse')!
+        .getElement('AssumeRoleWithWebIdentityResult')!
+        .getElement('Credentials')!
+        .getElement('SessionToken')!
+        .innerText;
+
+    logNoStack
+        .i("accessKeyId=$accessKeyId , secretAccessKey = $secretAccessKey");
+
+    final minioUri = defaultMinioEndpointUrl.substring('https://'.length);
+    final minio = Minio(
+      endPoint: minioUri,
+      port: 443,
+      accessKey: accessKeyId,
+      secretKey: secretAccessKey,
+      sessionToken: sessionToken,
+      useSSL: true,
+      // enableTrace: true,
+    );
+    String bucket = defaultRealm;
+    String object = filename;
+    Map<String, String> metadata = {
+      'Content-Type': 'text/html',
+    };
+    var stream = await minio.getObject(bucket, object);
+    // Get object length
+    logNoStack.i("GetObject length = ${stream.contentLength}");
+
+    // Write object data stream to file
+    String data = "";
+    await for (var chunk in stream) {
+      data += utf8.decode(chunk);
+    }
+    // Get object length
+    print(stream.contentLength);
+
+    // Write object data stream to file
+
+    logNoStack.i("SAVE HTML: data = $data");
+   // controller.setText(data);
+  }
+
+  void saveHtmlToMinio(String filename) async {
+   // String? htmlText = await controller.getText();
+   // logNoStack.i(htmlText);
+    // String path2 = "";
+    // File file2 ;
+    // logNoStack.i("SAVE HTML: about to work out  file path");
+    // if (kIsWeb) {
+    //   path2 = "/$filename";
+    //   final bytes = utf8.encode(htmlText);
+    //   final web.HTMLAnchorElement anchor = web.document.createElement('a')
+    //       as web.HTMLAnchorElement
+    //     ..href = "data:application/octet-stream;base64,${base64Encode(bytes)}"
+    //     ..style.display = 'none'
+    //     ..download = filename;
+
+    //   web.document.body!.appendChild(anchor);
+    //   file2 = File('${filename}');
+    // } else {
+    //   Directory directory = await getApplicationDocumentsDirectory();
+    //   path2 = path.join(directory.path, '$filename');
+    //    final file = File('${path2}');
+    // file2 = await file.writeAsString(htmlText, flush: true);
+    // }
+    // logNoStack.i("SAVE HTML: path2 = $path2");
+
+   // saveFileToMinio(filename, htmlText);
+  }
+
+  void saveFileToMinio(String filename, String htmlText) async {
+    logNoStack.i("SAVE HTML: about to get minio $htmlText");
+    var response = await getMinioTokenResponse();
+
+    logNoStack.i("SAVE HTML: Minio reponse=> $response");
+    final document = XmlDocument.parse(response);
+
+    String accessKeyId = document
+        .getElement('AssumeRoleWithWebIdentityResponse')!
+        .getElement('AssumeRoleWithWebIdentityResult')!
+        .getElement('Credentials')!
+        .getElement('AccessKeyId')!
+        .innerText;
+    String secretAccessKey = document
+        .getElement('AssumeRoleWithWebIdentityResponse')!
+        .getElement('AssumeRoleWithWebIdentityResult')!
+        .getElement('Credentials')!
+        .getElement('SecretAccessKey')!
+        .innerText;
+    String sessionToken = document
+        .getElement('AssumeRoleWithWebIdentityResponse')!
+        .getElement('AssumeRoleWithWebIdentityResult')!
+        .getElement('Credentials')!
+        .getElement('SessionToken')!
+        .innerText;
+
+    logNoStack
+        .i("accessKeyId=$accessKeyId , secretAccessKey = $secretAccessKey");
+
+    final minioUri = defaultMinioEndpointUrl.substring('https://'.length);
+    final minio = Minio(
+      endPoint: minioUri,
+      port: 443,
+      accessKey: accessKeyId,
+      secretKey: secretAccessKey,
+      sessionToken: sessionToken,
+      useSSL: true,
+      // enableTrace: true,
+    );
+
+//  var metaData = {
+//       'Content-Type': 'image/jpg',
+//       'Content-Language': 123,
+//       'X-Amz-Meta-Testing': 1234,
+//       example: 5678,
+//     };
+    Uint8List data = Uint8List.fromList(utf8.encode(htmlText));
+
+    // Step 3: Upload
+    String bucketName = defaultRealm;
+    String objectName = filename;
+    Map<String, String> metadata = {
+      'Content-Type': 'text/html',
+    };
+    try {
+      await minio.putObject(
+        bucketName,
+        objectName,
+        Stream.value(data),
+        size: data.length,
+        metadata: metadata,
+      );
+      debugPrint('✅ File uploaded successfully');
+       StatusAlert.show(
+                                      context,
+                                      duration: const Duration(seconds: 2),
+                                      title: nt.t.template,
+                                      subtitle: nt.t.form.saved,
+                                      configuration: const IconConfiguration(
+                                          icon: Icons.done),
+                                      maxWidth: 300,
+                                    );
+    } catch (e) {
+      debugPrint('❌ Upload failed: $e');
+      
+    }
+// if (!kIsWeb) {
+//  var filename = path.basename(file.path);
+//    final etag = await minio.fPutObject(defaultRealm, filename, file.path);
+//    // final etag = await minio.fPutObject(defaultRealm, filename, file.path);
+//     logNoStack.i("uploaded file ${file.path} with etag $etag");
+// } else {
+//   logNoStack.i("SAVE HTML: about to upload file ${file.path}");
+// }
+
+// read it and print out
+//  final reader = web.FileReader();
+//    reader.readAsText();
+
+//    await reader.onLoad.first;
+//OpenResult result = await OpenFile.open("$filename");
+
+    // String data = await file.readAsString();
+    //logNoStack.i("SAVE HTML: read file data = $result");
+  }
+
+  Future<dynamic> getMinioTokenResponse() async {
+    String? token = ref.read(nestAuthProvider.notifier).token!;
+    final Uri uri = Uri.parse(
+        "$defaultMinioEndpointUrl?Action=AssumeRoleWithWebIdentity&Version=2011-06-15&WebIdentityToken=$token");
+    final response = await http.post(
+      uri,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      encoding: Encoding.getByName('utf-8'),
+    );
+    return response.body;
+  }
+
 }
 
 /// This is an example insert rule that will insert a new line before and
