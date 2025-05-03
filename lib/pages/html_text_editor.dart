@@ -110,46 +110,46 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
             CreateTemplateForm(
               formCode: "template",
             ),
-            HtmlEditor(
-                controller: controller, //required
-                htmlEditorOptions: HtmlEditorOptions(
-                  hint: "Your text here...",
-                  //initalText: "text content initial, if any",
-                ),
-                // otherOptions: OtherOptions(
-                //   height: 400,
-                // ),
-                htmlToolbarOptions: HtmlToolbarOptions(defaultToolbarButtons: [
-                  StyleButtons(),
-                  FontSettingButtons(),
-                  FontButtons(),
-                  ColorButtons(),
-                  ListButtons(),
-                  ParagraphButtons(),
-                  InsertButtons(),
-                  OtherButtons(),
-                ], customToolbarButtons: [
-                  //your widgets here
-                  textButton(
-                      text: 'Clear Editor',
-                      onPressed: () {
-                        controller.clear();
-                      }),
-                  textButton(
-                      text: 'Read from Minio',
-                      onPressed: () {
-                        loadHtmlFromMinio("TPL_TEST.html");
-                      }),
-                             textButton(
-                  text: 'Save to Minio',
-                  onPressed: () {
-                    saveHtmlToMinio("TPL_TEST.html");
-                  }),
-                ], customToolbarInsertionIndices: [
-                  2,
-                  5,
-                  6
-                ]))
+            // HtmlEditor(
+            //     controller: controller, //required
+            //     htmlEditorOptions: HtmlEditorOptions(
+            //       hint: "Your text here...",
+            //       //initalText: "text content initial, if any",
+            //     ),
+            //     // otherOptions: OtherOptions(
+            //     //   height: 400,
+            //     // ),
+            //     htmlToolbarOptions: HtmlToolbarOptions(defaultToolbarButtons: [
+            //       StyleButtons(),
+            //       FontSettingButtons(),
+            //       FontButtons(),
+            //       ColorButtons(),
+            //       ListButtons(),
+            //       ParagraphButtons(),
+            //       InsertButtons(),
+            //       OtherButtons(),
+            //     ], customToolbarButtons: [
+            //       //your widgets here
+            //       textButton(
+            //           text: 'Clear Editor',
+            //           onPressed: () {
+            //             controller.clear();
+            //           }),
+            //       textButton(
+            //           text: 'Read from Minio',
+            //           onPressed: () {
+            //             loadHtmlFromMinio("TPL_TEST.html");
+            //           }),
+            //                  textButton(
+            //       text: 'Save to Minio',
+            //       onPressed: () {
+            //         saveHtmlToMinio("TPL_TEST.html");
+            //       }),
+            //     ], customToolbarInsertionIndices: [
+            //       2,
+            //       5,
+            //       6
+            //     ]))
             // ToolBar(
             //   toolBarColor: _toolbarColor,
             //   padding: const EdgeInsets.all(8),
@@ -554,15 +554,7 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
                                     );
     } catch (e) {
       debugPrint('❌ Upload failed: $e');
-        StatusAlert.show(
-                                      context,
-                                      duration: const Duration(seconds: 2),
-                                      title: nt.t.template,
-                                      subtitle: nt.t.form.error_saving,
-                                      configuration: const IconConfiguration(
-                                          icon: Icons.error),
-                                      maxWidth: 300,
-                                    );
+      
     }
 // if (!kIsWeb) {
 //  var filename = path.basename(file.path);
