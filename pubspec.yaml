@@ -167,3 +167,4 @@ flutter:
 assets:
     - assets/
     - assets/images/markers/
+    - welcome.json

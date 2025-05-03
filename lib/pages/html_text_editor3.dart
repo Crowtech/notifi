@@ -201,7 +201,7 @@ class _HtmlTextEditor3State extends ConsumerState<HtmlTextEditor3> {
   }
 
   void loadHtmlFromMinio(String filename) async {
-    // String? htmlText = await controller.getText();
+   // String? htmlText = await _controller!.document.toPlainText();
     var response = await getMinioTokenResponse();
 
     logNoStack.i("SAVE HTML: Minio reponse=> $response");
@@ -259,7 +259,7 @@ class _HtmlTextEditor3State extends ConsumerState<HtmlTextEditor3> {
     // Write object data stream to file
 
     logNoStack.i("SAVE HTML: data = $data");
-   // controller.setText(data);
+   _controller!.document.insert(0, data);
   }
 
   void saveHtmlToMinio(String filename) async {
