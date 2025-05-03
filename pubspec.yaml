@@ -100,7 +100,8 @@ dependencies:
   async_textformfield: ^3.0.1+1
   #html_editor_enhanced: ^2.6.0
   osm_flutter_hooks: ^1.4.1
-  
+ 
+  fleather: ^1.22.0
 
   
 
