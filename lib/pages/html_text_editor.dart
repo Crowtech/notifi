@@ -72,7 +72,7 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
 
   @override
   void initState() {
-    controller = HtmlEditorController();
+  //  controller = HtmlEditorController();
     super.initState();
   }
 
@@ -449,12 +449,12 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
     // Write object data stream to file
 
     logNoStack.i("SAVE HTML: data = $data");
-    controller.setText(data);
+   // controller.setText(data);
   }
 
   void saveHtmlToMinio(String filename) async {
-    String? htmlText = await controller.getText();
-    logNoStack.i(htmlText);
+   // String? htmlText = await controller.getText();
+   // logNoStack.i(htmlText);
     // String path2 = "";
     // File file2 ;
     // logNoStack.i("SAVE HTML: about to work out  file path");
@@ -477,7 +477,7 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
     // }
     // logNoStack.i("SAVE HTML: path2 = $path2");
 
-    saveFileToMinio(filename, htmlText);
+   // saveFileToMinio(filename, htmlText);
   }
 
   void saveFileToMinio(String filename, String htmlText) async {
