@@ -40,7 +40,7 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
   final GlobalKey<FormFieldState> itemFormFieldKey =
       GlobalKey<FormFieldState>();
 
-  late HtmlEditorController controller;
+//  late HtmlEditorController controller;
 
   ///[customToolBarList] pass the custom toolbarList to show only selected styles in the editor
 
