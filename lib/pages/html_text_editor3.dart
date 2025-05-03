@@ -94,6 +94,10 @@ class _HtmlTextEditor3State extends ConsumerState<HtmlTextEditor3> {
     return Scaffold(
       appBar: AppBar(elevation: 0, title: const Text('Html Text Editor'),
       actions: <Widget>[
+            IconButton(
+            icon: const Icon(Icons.import_contacts),
+            onPressed: () => loadHtmlFromMinio("TPL_TEST.html"),
+          ),
           IconButton(
             icon: const Icon(Icons.save),
             onPressed: () => _saveDocument(context),
