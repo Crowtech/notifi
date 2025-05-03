@@ -271,6 +271,8 @@ class _HtmlTextEditor3State extends ConsumerState<HtmlTextEditor3> {
 
     final ParchmentDocument doc = codec.decode(html);
     _controller = FleatherController(document: doc);
+    setState(() {});
+ 
 
 
   }
