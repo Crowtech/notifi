@@ -225,7 +225,7 @@ class _HtmlTextEditor3State extends ConsumerState<HtmlTextEditor3> {
    // String? htmlText = await _controller!.document.toPlainText();
     var response = await getMinioTokenResponse();
 
-    logNoStack.i("SAVE HTML: Minio reponse=> $response");
+    logNoStack.i("LOAD_HTML: Minio reponse=> $response");
     final document = XmlDocument.parse(response);
 
     String accessKeyId = document
@@ -248,7 +248,7 @@ class _HtmlTextEditor3State extends ConsumerState<HtmlTextEditor3> {
         .innerText;
 
     logNoStack
-        .i("accessKeyId=$accessKeyId , secretAccessKey = $secretAccessKey");
+        .i("LOAD_HTML: accessKeyId=$accessKeyId , secretAccessKey = $secretAccessKey");
 
     final minioUri = defaultMinioEndpointUrl.substring('https://'.length);
     final minio = Minio(
@@ -267,7 +267,7 @@ class _HtmlTextEditor3State extends ConsumerState<HtmlTextEditor3> {
     };
     var stream = await minio.getObject(bucket, object);
     // Get object length
-    logNoStack.i("GetObject length = ${stream.contentLength}");
+    logNoStack.i("LOAD_HTML: GetObject length = ${stream.contentLength}");
 
     // Write object data stream to file
     String data = "";
@@ -285,13 +285,16 @@ class _HtmlTextEditor3State extends ConsumerState<HtmlTextEditor3> {
     String html = data; // fails
     Delta delta = codec.decode(html).toDelta(); // Fleather compatible Delta
  ParchmentDocument doc = ParchmentDocument.fromDelta(delta);
+  logNoStack.i("LOADING HTML: doc created");
     // String html = '<p><hr></p><p>a</p><p></p>'; // fails
 //      Delta delta = codec.decode(html); // Fleather compatible Delta
 //  ParchmentDocument document = ParchmentDocument.fromDelta(delta);
 
     //final ParchmentDocument doc = codec.decode(html);
-    _controller = FleatherController(document: doc);
-    setState(() {});
+    
+    setState(() {
+      _controller = FleatherController(document: doc);
+    });
  
 
 
@@ -313,6 +316,7 @@ class _HtmlTextEditor3State extends ConsumerState<HtmlTextEditor3> {
    void _saveDocument(BuildContext context) {
     // Parchment documents can be easily serialized to JSON by passing to
     // `jsonEncode` directly
+     logNoStack.i("DSAVE_DOC: doc saving to quick_start");
     final contents = jsonEncode(_controller!.document);
     // For this example we save our document to a temporary file.
 
