@@ -52,6 +52,11 @@ class _HtmlTextEditor3State extends ConsumerState<HtmlTextEditor3> {
     super.initState();
     if (kIsWeb) BrowserContextMenu.disableContextMenu();
     _initController();
+    _loadDocument().then((document) {
+      setState(() {
+        _controller = FleatherController(document: document);
+      });
+    });
   }
 
   @override
@@ -286,6 +291,34 @@ class _HtmlTextEditor3State extends ConsumerState<HtmlTextEditor3> {
  
 
 
+  }
+
+/// Loads the document asynchronously from a file if it exists, otherwise
+  /// returns default document.
+  Future<ParchmentDocument> _loadDocument() async {
+    final file = File(Directory.systemTemp.path + "/quick_start.json");
+    if (await file.exists()) {
+      final contents = await file.readAsString();
+      return ParchmentDocument.fromJson(jsonDecode(contents));
+    }
+    final Delta delta = Delta()
+      ..insert("Fleather Quick Start\n");
+    return ParchmentDocument.fromDelta(delta);
+  }
+
+   void _saveDocument(BuildContext context) {
+    // Parchment documents can be easily serialized to JSON by passing to
+    // `jsonEncode` directly
+    final contents = jsonEncode(_controller!.document);
+    // For this example we save our document to a temporary file.
+
+    final file = File('${Directory.systemTemp.path}/quick_start.json');
+    // And show a snack bar on success.
+    file.writeAsString(contents).then((_) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Saved.')),
+      );
+    });
   }
 
   void saveHtmlToMinio(String filename) async {
