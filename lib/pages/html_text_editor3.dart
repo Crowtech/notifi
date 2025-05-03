@@ -204,6 +204,8 @@ class _HtmlTextEditor3State extends ConsumerState<HtmlTextEditor3> {
   }
 
   void loadHtmlFromMinio(String filename) async {
+    logNoStack.i("Loading $filename");
+    filename = "TPL_TEST.html";
    // String? htmlText = await _controller!.document.toPlainText();
     var response = await getMinioTokenResponse();
 
