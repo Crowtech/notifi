@@ -305,6 +305,7 @@ class _HtmlTextEditor3State extends ConsumerState<HtmlTextEditor3> {
   Future<ParchmentDocument> _loadDocument() async {
     final file = File(Directory.systemTemp.path + "/quick_start.json");
     if (await file.exists()) {
+      logNoStack.i("LOAD_DOC: quick start file exists");
       final contents = await file.readAsString();
       return ParchmentDocument.fromJson(jsonDecode(contents));
     }
