@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:html_editor_enhanced/html_editor.dart';
+//import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:http/http.dart' as http;
 import 'package:notifi/i18n/strings.g.dart' as nt;
 //import 'package:web/web.dart' as web;
