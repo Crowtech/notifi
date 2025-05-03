@@ -45,6 +45,7 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
   final FocusNode _focusNode = FocusNode();
   final GlobalKey<EditorState> _editorKey = GlobalKey();
        FleatherController? _controller;
+       String templateCode = "";
 //late AppFlowyEditor editor;
 //  late HtmlEditorController controller;
 
@@ -179,6 +180,8 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
           children: [
             CreateTemplateForm(
               formCode: "template",
+              templateCode: templateCode,
+              onSubmit: loadHtmlFromMinio,
             ),
            _controller == null
           ? const Center(child: CircularProgressIndicator())

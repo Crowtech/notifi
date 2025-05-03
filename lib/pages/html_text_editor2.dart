@@ -36,6 +36,7 @@ class HtmlTextEditor2 extends ConsumerStatefulWidget {
 class _HtmlTextEditor2State extends ConsumerState<HtmlTextEditor2> {
   final GlobalKey<FormFieldState> itemFormFieldKey =
       GlobalKey<FormFieldState>();
+  String templateCode = "";
 
   //late QuillEditorController controller;
 
@@ -109,7 +110,11 @@ class _HtmlTextEditor2State extends ConsumerState<HtmlTextEditor2> {
         resizeToAvoidBottomInset: true,
         body: Column(
           children: [
-            CreateTemplateForm(formCode: "template",),
+            CreateTemplateForm(
+              formCode: "template",
+              templateCode: templateCode,
+              onSubmit: loadHtmlFromMinio,
+            ),
             // ToolBar(
             //   toolBarColor: _toolbarColor,
             //   padding: const EdgeInsets.all(8),
@@ -293,9 +298,9 @@ class _HtmlTextEditor2State extends ConsumerState<HtmlTextEditor2> {
         //           }),
         //    ],
         //  ),
-        ),
-      );
-   // );
+      ),
+    );
+    // );
   }
 
 //   Widget textButton({required String text, required VoidCallback onPressed}) {
@@ -402,12 +407,12 @@ class _HtmlTextEditor2State extends ConsumerState<HtmlTextEditor2> {
 //   String data = "";
 //   await for (var chunk in stream) {
 //     data += utf8.decode(chunk);
-//   } 
+//   }
 //   // Get object length
 //   print(stream.contentLength);
 
 //   // Write object data stream to file
-  
+
 //     logNoStack.i("SAVE HTML: data = $data");
 //     await controller.setText(data);
 
@@ -540,4 +545,6 @@ class _HtmlTextEditor2State extends ConsumerState<HtmlTextEditor2> {
 //     );
 //     return response.body;
 //   }
+
+  void loadHtmlFromMinio(String filename) async {}
 }

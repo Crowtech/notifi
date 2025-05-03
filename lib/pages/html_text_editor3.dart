@@ -45,6 +45,7 @@ class _HtmlTextEditor3State extends ConsumerState<HtmlTextEditor3> {
   final FocusNode _focusNode = FocusNode();
   final GlobalKey<EditorState> _editorKey = GlobalKey();
   FleatherController? _controller;
+  String templateCode = "";
 
   @override
   void initState() {
@@ -118,6 +119,8 @@ class _HtmlTextEditor3State extends ConsumerState<HtmlTextEditor3> {
               children: [
                 CreateTemplateForm(
                   formCode: "template",
+                  templateCode: templateCode,
+                  onSubmit: loadHtmlFromMinio,
                 ),
                 FleatherToolbar.basic(
                     controller: _controller!, editorKey: _editorKey),
@@ -260,6 +263,7 @@ class _HtmlTextEditor3State extends ConsumerState<HtmlTextEditor3> {
 
     logNoStack.i("SAVE HTML: data = $data");
    _controller!.document.insert(0, data);
+
   }
 
   void saveHtmlToMinio(String filename) async {
