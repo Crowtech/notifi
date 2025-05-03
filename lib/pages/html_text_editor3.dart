@@ -264,7 +264,14 @@ class _HtmlTextEditor3State extends ConsumerState<HtmlTextEditor3> {
     // Write object data stream to file
 
     logNoStack.i("SAVE HTML: data = $data");
-   _controller!.document.insert(0, data);
+     const codec = ParchmentHtmlCodec();
+    // String html = '<hr>'; // works
+    String html = data; // fails
+    // String html = '<p><hr></p><p>a</p><p></p>'; // fails
+
+    final ParchmentDocument doc = codec.decode(html);
+    _controller = FleatherController(document: doc);
+
 
   }
 
