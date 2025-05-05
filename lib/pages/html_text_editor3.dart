@@ -54,7 +54,7 @@ class _HtmlTextEditor3State extends ConsumerState<HtmlTextEditor3> {
     _initController();
     _loadDocument().then((document) {
       setState(() {
-        _controller = FleatherController(document: document);
+       // _controller = FleatherController(document: document);
       });
     });
   }
