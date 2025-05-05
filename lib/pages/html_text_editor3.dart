@@ -282,9 +282,10 @@ class _HtmlTextEditor3State extends ConsumerState<HtmlTextEditor3> {
     logNoStack.i("LOADING HTML: data = $data");
      const codec = ParchmentHtmlCodec();
     // String html = '<hr>'; // works
-    String html = data; // fails
-    Delta delta = codec.decode(html).toDelta(); // Fleather compatible Delta
- ParchmentDocument doc = ParchmentDocument.fromDelta(delta);
+   // String html = data; // fails
+     final ParchmentDocument doc = codec.decode(data);  
+//     Delta delta = codec.decode(html).toDelta(); // Fleather compatible Delta
+//  ParchmentDocument doc = ParchmentDocument.fromDelta(delta);
   logNoStack.i("LOADING HTML: doc created");
     // String html = '<p><hr></p><p>a</p><p></p>'; // fails
 //      Delta delta = codec.decode(html); // Fleather compatible Delta
@@ -300,18 +301,104 @@ class _HtmlTextEditor3State extends ConsumerState<HtmlTextEditor3> {
 
   }
 
+  Future<ParchmentDocument> loadHtmlFromMinio2(String filename) async {
+    logNoStack.i("Loading $filename");
+    filename = "TPL_TEST.html";
+   // String? htmlText = await _controller!.document.toPlainText();
+    var response = await getMinioTokenResponse();
+
+    logNoStack.i("LOAD_HTML: Minio reponse=> $response");
+    final document = XmlDocument.parse(response);
+
+    String accessKeyId = document
+        .getElement('AssumeRoleWithWebIdentityResponse')!
+        .getElement('AssumeRoleWithWebIdentityResult')!
+        .getElement('Credentials')!
+        .getElement('AccessKeyId')!
+        .innerText;
+    String secretAccessKey = document
+        .getElement('AssumeRoleWithWebIdentityResponse')!
+        .getElement('AssumeRoleWithWebIdentityResult')!
+        .getElement('Credentials')!
+        .getElement('SecretAccessKey')!
+        .innerText;
+    String sessionToken = document
+        .getElement('AssumeRoleWithWebIdentityResponse')!
+        .getElement('AssumeRoleWithWebIdentityResult')!
+        .getElement('Credentials')!
+        .getElement('SessionToken')!
+        .innerText;
+
+    logNoStack
+        .i("LOAD_HTML: accessKeyId=$accessKeyId , secretAccessKey = $secretAccessKey");
+
+    final minioUri = defaultMinioEndpointUrl.substring('https://'.length);
+    final minio = Minio(
+      endPoint: minioUri,
+      port: 443,
+      accessKey: accessKeyId,
+      secretKey: secretAccessKey,
+      sessionToken: sessionToken,
+      useSSL: true,
+      // enableTrace: true,
+    );
+    String bucket = defaultRealm;
+    String object = filename;
+    Map<String, String> metadata = {
+      'Content-Type': 'text/html',
+    };
+    var stream = await minio.getObject(bucket, object);
+    // Get object length
+    logNoStack.i("LOAD_HTML: GetObject length = ${stream.contentLength}");
+
+    // Write object data stream to file
+    String data = "";
+    await for (var chunk in stream) {
+      data += utf8.decode(chunk);
+    }
+    // Get object length
+    print(stream.contentLength);
+
+    // Write object data stream to file
+
+    logNoStack.i("LOADING HTML: data = $data");
+     const codec = ParchmentHtmlCodec();
+    // String html = '<hr>'; // works
+   // String html = data; // fails
+     final ParchmentDocument doc = codec.decode(data);  
+//     Delta delta = codec.decode(html).toDelta(); // Fleather compatible Delta
+//  ParchmentDocument doc = ParchmentDocument.fromDelta(delta);
+  logNoStack.i("LOADING HTML: doc created");
+    // String html = '<p><hr></p><p>a</p><p></p>'; // fails
+//      Delta delta = codec.decode(html); // Fleather compatible Delta
+//  ParchmentDocument document = ParchmentDocument.fromDelta(delta);
+
+  
+ 
+return doc;
+
+  }
+
 /// Loads the document asynchronously from a file if it exists, otherwise
   /// returns default document.
   Future<ParchmentDocument> _loadDocument() async {
-    final file = File(Directory.systemTemp.path + "/quick_start.json");
-    if (await file.exists()) {
-      logNoStack.i("LOAD_DOC: quick start file exists");
-      final contents = await file.readAsString();
-      return ParchmentDocument.fromJson(jsonDecode(contents));
-    }
-    final Delta delta = Delta()
-      ..insert("Fleather Quick Start\n");
-    return ParchmentDocument.fromDelta(delta);
+    // final file = File(Directory.systemTemp.path + "/quick_start.json");
+    // if (await file.exists()) {
+    //   logNoStack.i("LOAD_DOC: quick start file exists");
+    //   final contents = await file.readAsString();
+    //   return ParchmentDocument.fromJson(jsonDecode(contents));
+    // }
+    // final Delta delta = Delta()
+    //   ..insert("Fleather Quick Start\n");
+    // return ParchmentDocument.fromDelta(delta);
+
+      //  const codec = ParchmentHtmlCodec();
+    // String html = '<hr>'; // works
+ParchmentDocument doc = await loadHtmlFromMinio2("TPL_TEST.html");
+    // String html = '<p><hr></p><p>a</p><p></p>'; // fails
+    //loadHtmlFromMinio("TPL_TEST.html")
+
+    return doc;
   }
 
    void _saveDocument(BuildContext context) {
