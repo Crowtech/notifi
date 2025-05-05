@@ -102,7 +102,7 @@ dependencies:
   osm_flutter_hooks: ^1.4.1
  
   fleather: ^1.22.0
-
+  quill_html_editor: ^2.2.8
   
 
 

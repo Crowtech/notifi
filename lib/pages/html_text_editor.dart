@@ -18,6 +18,7 @@ import 'package:notifi/credentials.dart';
 import 'package:notifi/forms/template_form.dart';
 import 'package:notifi/models/person.dart';
 import 'package:notifi/state/nest_auth2.dart';
+import 'package:quill_html_editor/quill_html_editor.dart';
 import 'package:status_alert/status_alert.dart';
 //import 'package:quill_html_editor/quill_html_editor.dart';
 import 'package:xml/xml.dart';
@@ -40,29 +41,22 @@ class HtmlTextEditor extends ConsumerStatefulWidget {
 }
 
 class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
-  final GlobalKey<FormFieldState> itemFormFieldKey =
-      GlobalKey<FormFieldState>();
-  final FocusNode _focusNode = FocusNode();
-  final GlobalKey<EditorState> _editorKey = GlobalKey();
-       FleatherController? _controller;
-       String templateCode = "";
-//late AppFlowyEditor editor;
-//  late HtmlEditorController controller;
+ late QuillEditorController controller;
 
   ///[customToolBarList] pass the custom toolbarList to show only selected styles in the editor
 
-//   final customToolBarList = [
-//     ToolBarStyle.bold,
-//     ToolBarStyle.italic,
-//     ToolBarStyle.align,
-//     ToolBarStyle.color,
-//     ToolBarStyle.background,
-//     ToolBarStyle.listBullet,
-//     ToolBarStyle.listOrdered,
-//     ToolBarStyle.clean,
-//     ToolBarStyle.addTable,
-//     ToolBarStyle.editTable,
-//   ];
+  final customToolBarList = [
+    ToolBarStyle.bold,
+    ToolBarStyle.italic,
+    ToolBarStyle.align,
+    ToolBarStyle.color,
+    ToolBarStyle.background,
+    ToolBarStyle.listBullet,
+    ToolBarStyle.listOrdered,
+    ToolBarStyle.clean,
+    ToolBarStyle.addTable,
+    ToolBarStyle.editTable,
+  ];
 
   final _toolbarColor = Colors.grey.shade200;
   final _backgroundColor = Colors.white70;
@@ -75,198 +69,213 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
   final _hintTextStyle = const TextStyle(
       fontSize: 18, color: Colors.black38, fontWeight: FontWeight.normal);
 
-//   bool _hasFocus = false;
+  bool _hasFocus = false;
 
   @override
   void initState() {
-  //  controller = HtmlEditorController();
-   if (defaultTargetPlatform == TargetPlatform.android) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge, overlays: []);
-    SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(systemNavigationBarColor: Colors.transparent),
-    );
-  }
-  //final json = jsonDecode('YOUR INPUT JSON STRING');
-  //final editorState = EditorState.blank(withInitialText: true);
-//final editorState = EditorState(document: Document.fromJson(json));
-// editor = AppFlowyEditor(
-//   editorState: editorState,
-//);
+    controller = QuillEditorController();
+    controller.onTextChanged((text) {
+      debugPrint('listening to $text');
+    });
+    controller.onEditorLoaded(() {
+      debugPrint('Editor Loaded :)');
+    });
     super.initState();
-        if (kIsWeb) BrowserContextMenu.disableContextMenu();
-    _initController();
   }
 
   @override
   void dispose() {
+    /// please do not forget to dispose the controller
+    controller.dispose();
     super.dispose();
-     if (kIsWeb) BrowserContextMenu.enableContextMenu();
   }
-
-    Future<void> _initController() async {
-    try {
-      final result = await rootBundle.loadString('assets/welcome.json');
-      final heuristics = ParchmentHeuristics(
-        formatRules: [],
-        insertRules: [
-          ForceNewlineForInsertsAroundInlineImageRule(),
-        ],
-        deleteRules: [],
-      ).merge(ParchmentHeuristics.fallback);
-      final doc = ParchmentDocument.fromJson(
-        jsonDecode(result),
-        heuristics: heuristics,
-      );
-      _controller = FleatherController(document: doc);
-    } catch (err, st) {
-      if (kDebugMode) {
-        print('Cannot read welcome.json: $err\n$st');
-      }
-      _controller = FleatherController();
-    }
-    setState(() {});
-  }
-// //  Person currentUser = ref.read(nestAuthProvider.notifier).currentUser;
-// //     void tap2clipboard(String text) =>
-// //       Clipboard.setData(ClipboardData(text: text)).then((_) {
-// //          ScaffoldMessenger.of(context).showSnackBar(
-// //       SnackBar(content: Text(nt.t.copied_to_clipboard(item: nt.t.text)))
-// //       );
-// //       });
 
   @override
   Widget build(BuildContext context) {
-    Person currentUser = ref.read(nestAuthProvider.notifier).currentUser;
-    void tap2clipboard(String text) =>
-        Clipboard.setData(ClipboardData(text: text)).then((_) {
-          // ScaffoldMessenger.of(context).showSnackBar(
-          // SnackBar(content: Text(nt.t.copied_to_clipboard(item: nt.t.text)))
-          //);
-        });
-
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-        title: Text('Message Template Editor'), 
-      ),
-            floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          final picker = ImagePicker();
-          final image = await picker.pickImage(source: ImageSource.gallery);
-          if (image != null) {
-            final selection = _controller!.selection;
-            _controller!.replaceText(
-              selection.baseOffset,
-              selection.extentOffset - selection.baseOffset,
-              EmbeddableObject('image', inline: false, data: {
-                'source_type': kIsWeb ? 'url' : 'file',
-                'source': image.path,
-              }),
-            );
-            _controller!.replaceText(
-              selection.baseOffset + 1,
-              0,
-              '\n',
-              selection:
-                  TextSelection.collapsed(offset: selection.baseOffset + 2),
-            );
-          }
-        },
-        child: const Icon(Icons.add_a_photo),
-      ),
+          appBar: AppBar(elevation: 0, title: const Text('Quill Html Text Editor')),
         backgroundColor: Colors.white,
         resizeToAvoidBottomInset: true,
         body: Column(
           children: [
-            CreateTemplateForm(
-              formCode: "template",
-              templateCode: templateCode,
-              onSubmit: loadHtmlFromMinio,
-            ),
-           _controller == null
-          ? const Center(child: CircularProgressIndicator())
-          : Column(
-              children: [
-                FleatherToolbar.basic(
-                    controller: _controller!, editorKey: _editorKey),
-                Divider(height: 1, thickness: 1, color: Colors.grey.shade200),
-                Expanded(
-                  child: FleatherEditor(
-                    controller: _controller!,
-                    focusNode: _focusNode,
-                    editorKey: _editorKey,
-                    padding: EdgeInsets.only(
-                      left: 16,
-                      right: 16,
-                      bottom: MediaQuery.of(context).padding.bottom,
-                    ),
-                    onLaunchUrl: _launchUrl,
-                    maxContentWidth: 800,
-                    embedBuilder: _embedBuilder,
-                    spellCheckConfiguration: SpellCheckConfiguration(
-                        spellCheckService: DefaultSpellCheckService(),
-                        misspelledSelectionColor: Colors.red,
-                        misspelledTextStyle:
-                            DefaultTextStyle.of(context).style),
-                  ),
+            ToolBar(
+              toolBarColor: _toolbarColor,
+              padding: const EdgeInsets.all(8),
+              iconSize: 25,
+              iconColor: _toolbarIconColor,
+              activeIconColor: Colors.greenAccent.shade400,
+              controller: controller,
+              crossAxisAlignment: WrapCrossAlignment.start,
+              direction: Axis.horizontal,
+              customButtons: [
+                Container(
+                  width: 25,
+                  height: 25,
+                  decoration: BoxDecoration(
+                      color: _hasFocus ? Colors.green : Colors.grey,
+                      borderRadius: BorderRadius.circular(15)),
                 ),
+                InkWell(
+                    onTap: () => unFocusEditor(),
+                    child: const Icon(
+                      Icons.favorite,
+                      color: Colors.black,
+                    )),
+                InkWell(
+                    onTap: () async {
+                      var selectedText = await controller.getSelectedText();
+                      debugPrint('selectedText $selectedText');
+                      var selectedHtmlText =
+                          await controller.getSelectedHtmlText();
+                      debugPrint('selectedHtmlText $selectedHtmlText');
+                    },
+                    child: const Icon(
+                      Icons.add_circle,
+                      color: Colors.black,
+                    )),
               ],
+            ),
+            Expanded(
+              child: QuillHtmlEditor(
+                text: "<h1>Hello</h1>This is a quill html editor example 😊",
+                hintText: 'Hint text goes here',
+                controller: controller,
+                isEnabled: true,
+                ensureVisible: false,
+                minHeight: 500,
+                autoFocus: false,
+                textStyle: _editorTextStyle,
+                hintTextStyle: _hintTextStyle,
+                hintTextAlign: TextAlign.start,
+                padding: const EdgeInsets.only(left: 10, top: 10),
+                hintTextPadding: const EdgeInsets.only(left: 20),
+                backgroundColor: _backgroundColor,
+                inputAction: InputAction.newline,
+                onEditingComplete: (s) => debugPrint('Editing completed $s'),
+                loadingBuilder: (context) {
+                  return const Center(
+                      child: CircularProgressIndicator(
+                    strokeWidth: 1,
+                    color: Colors.red,
+                  ));
+                },
+                onFocusChanged: (focus) {
+                  debugPrint('has focus $focus');
+                  setState(() {
+                    _hasFocus = focus;
+                  });
+                },
+                onTextChanged: (text) => debugPrint('widget text change $text'),
+                onEditorCreated: () {
+                  debugPrint('Editor has been loaded');
+                  setHtmlText('Testing text on load');
+                },
+                onEditorResized: (height) =>
+                    debugPrint('Editor resized $height'),
+                onSelectionChanged: (sel) =>
+                    debugPrint('index ${sel.index}, range ${sel.length}'),
+              ),
             ),
           ],
         ),
-        
+        bottomNavigationBar: Container(
+          width: double.maxFinite,
+          color: _toolbarColor,
+          padding: const EdgeInsets.all(8),
+          child: Wrap(
+            children: [
+              textButton(
+                  text: 'Set Text',
+                  onPressed: () {
+                    setHtmlText('This text is set by you 🫵');
+                  }),
+              textButton(
+                  text: 'Get Text',
+                  onPressed: () {
+                    getHtmlText();
+                  }),
+              textButton(
+                  text: 'Insert Video',
+                  onPressed: () {
+                    ////insert
+                    insertVideoURL(
+                        'https://www.youtube.com/watch?v=4AoFA19gbLo');
+                    insertVideoURL('https://vimeo.com/440421754');
+                    insertVideoURL(
+                        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+                  }),
+              textButton(
+                  text: 'Insert Image',
+                  onPressed: () {
+                    insertNetworkImage('https://i.imgur.com/0DVAOec.gif');
+                  }),
+              textButton(
+                  text: 'Insert Index',
+                  onPressed: () {
+                    insertHtmlText("This text is set by the insertText method",
+                        index: 10);
+                  }),
+              textButton(
+                  text: 'Undo',
+                  onPressed: () {
+                    controller.undo();
+                  }),
+              textButton(
+                  text: 'Redo',
+                  onPressed: () {
+                    controller.redo();
+                  }),
+              textButton(
+                  text: 'Clear History',
+                  onPressed: () async {
+                    controller.clearHistory();
+                  }),
+              textButton(
+                  text: 'Clear Editor',
+                  onPressed: () {
+                    controller.clear();
+                  }),
+              textButton(
+                  text: 'Get Delta',
+                  onPressed: () async {
+                    var delta = await controller.getDelta();
+                    debugPrint('delta');
+                    debugPrint(jsonEncode(delta));
+                  }),
+              textButton(
+                  text: 'Set Delta',
+                  onPressed: () {
+                    final Map<dynamic, dynamic> deltaMap = {
+                      "ops": [
+                        {
+                          "insert": {
+                            "video":
+                                "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                          }
+                        },
+                        {
+                          "insert": {
+                            "video": "https://www.youtube.com/embed/4AoFA19gbLo"
+                          }
+                        },
+                        {"insert": "Hello"},
+                        {
+                          "attributes": {"header": 1},
+                          "insert": "\n"
+                        },
+                        {"insert": "You just set the Delta text 😊\n"}
+                      ]
+                    };
+                    controller.setDelta(deltaMap);
+                  }),
+            ],
+          ),
+        ),
       ),
     );
-    // );
   }
 
-Widget _embedBuilder(BuildContext context, EmbedNode node) {
-    if (node.value.type == 'icon') {
-      final data = node.value.data;
-      // Icons.rocket_launch_outlined
-      return Icon(
-        IconData(int.parse(data['codePoint']), fontFamily: data['fontFamily']),
-        color: Color(int.parse(data['color'])),
-        size: 18,
-      );
-    }
-
-    if (node.value.type == 'image') {
-      final sourceType = node.value.data['source_type'];
-      ImageProvider? image;
-      if (sourceType == 'assets') {
-        image = AssetImage(node.value.data['source']);
-      } else if (sourceType == 'file') {
-        image = FileImage(File(node.value.data['source']));
-      } else if (sourceType == 'url') {
-        image = NetworkImage(node.value.data['source']);
-      }
-      if (image != null) {
-        return Padding(
-          // Caret takes 2 pixels, hence not symmetric padding values.
-          padding: const EdgeInsets.only(left: 4, right: 2, top: 2, bottom: 2),
-          child: Container(
-            width: 300,
-            height: 300,
-            decoration: BoxDecoration(
-              image: DecorationImage(image: image, fit: BoxFit.cover),
-            ),
-          ),
-        );
-      }
-    }
-
-    return defaultFleatherEmbedBuilder(context, node);
-  }
-
-  void _launchUrl(String? url) async {
-    if (url == null) return;
-    final uri = Uri.parse(url);
-    // final canLaunch = await canLaunchUrl(uri);
-    // if (canLaunch) {
-    //   await launchUrl(uri);
-    // }
-  }
   Widget textButton({required String text, required VoidCallback onPressed}) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -281,281 +290,41 @@ Widget _embedBuilder(BuildContext context, EmbedNode node) {
     );
   }
 
-//   ///[getHtmlText] to get the html text from editor
-//   void getHtmlText() async {
-//     String? htmlText = await controller.getText();
-//     logNoStack.i(htmlText);
-//   }
-
-//   ///[setHtmlText] to set the html text to editor
-//   void setHtmlText(String text) async {
-//     await controller.setText(text);
-//   }
-
-//   ///[insertNetworkImage] to set the html text to editor
-//   void insertNetworkImage(String url) async {
-//     await controller.embedImage(url);
-//   }
-
-//   ///[insertVideoURL] to set the video url to editor
-//   ///this method recognises the inserted url and sanitize to make it embeddable url
-//   ///eg: converts youtube video to embed video, same for vimeo
-//   void insertVideoURL(String url) async {
-//     await controller.embedVideo(url);
-//   }
-
-//   /// to set the html text to editor
-//   /// if index is not set, it will be inserted at the cursor postion
-//   void insertHtmlText(String text, {int? index}) async {
-//     await controller.insertText(text, index: index);
-//   }
-
-//   /// to clear the editor
-//   void clearEditor() => controller.clear();
-
-//   /// to enable/disable the editor
-//   void enableEditor(bool enable) => controller.enableEditor(enable);
-
-//   /// method to un focus editor
-//   void unFocusEditor() => controller.unFocus();
-
-  void loadHtmlFromMinio(String filename) async {
-    // String? htmlText = await controller.getText();
-    var response = await getMinioTokenResponse();
-
-    logNoStack.i("SAVE HTML: Minio reponse=> $response");
-    final document = XmlDocument.parse(response);
-
-    String accessKeyId = document
-        .getElement('AssumeRoleWithWebIdentityResponse')!
-        .getElement('AssumeRoleWithWebIdentityResult')!
-        .getElement('Credentials')!
-        .getElement('AccessKeyId')!
-        .innerText;
-    String secretAccessKey = document
-        .getElement('AssumeRoleWithWebIdentityResponse')!
-        .getElement('AssumeRoleWithWebIdentityResult')!
-        .getElement('Credentials')!
-        .getElement('SecretAccessKey')!
-        .innerText;
-    String sessionToken = document
-        .getElement('AssumeRoleWithWebIdentityResponse')!
-        .getElement('AssumeRoleWithWebIdentityResult')!
-        .getElement('Credentials')!
-        .getElement('SessionToken')!
-        .innerText;
-
-    logNoStack
-        .i("accessKeyId=$accessKeyId , secretAccessKey = $secretAccessKey");
-
-    final minioUri = defaultMinioEndpointUrl.substring('https://'.length);
-    final minio = Minio(
-      endPoint: minioUri,
-      port: 443,
-      accessKey: accessKeyId,
-      secretKey: secretAccessKey,
-      sessionToken: sessionToken,
-      useSSL: true,
-      // enableTrace: true,
-    );
-    String bucket = defaultRealm;
-    String object = filename;
-    Map<String, String> metadata = {
-      'Content-Type': 'text/html',
-    };
-    var stream = await minio.getObject(bucket, object);
-    // Get object length
-    logNoStack.i("GetObject length = ${stream.contentLength}");
-
-    // Write object data stream to file
-    String data = "";
-    await for (var chunk in stream) {
-      data += utf8.decode(chunk);
-    }
-    // Get object length
-    print(stream.contentLength);
-
-    // Write object data stream to file
-
-    logNoStack.i("SAVE HTML: data = $data");
-   // controller.setText(data);
+  ///[getHtmlText] to get the html text from editor
+  void getHtmlText() async {
+    String? htmlText = await controller.getText();
+    debugPrint(htmlText);
   }
 
-  void saveHtmlToMinio(String filename) async {
-   // String? htmlText = await controller.getText();
-   // logNoStack.i(htmlText);
-    // String path2 = "";
-    // File file2 ;
-    // logNoStack.i("SAVE HTML: about to work out  file path");
-    // if (kIsWeb) {
-    //   path2 = "/$filename";
-    //   final bytes = utf8.encode(htmlText);
-    //   final web.HTMLAnchorElement anchor = web.document.createElement('a')
-    //       as web.HTMLAnchorElement
-    //     ..href = "data:application/octet-stream;base64,${base64Encode(bytes)}"
-    //     ..style.display = 'none'
-    //     ..download = filename;
-
-    //   web.document.body!.appendChild(anchor);
-    //   file2 = File('${filename}');
-    // } else {
-    //   Directory directory = await getApplicationDocumentsDirectory();
-    //   path2 = path.join(directory.path, '$filename');
-    //    final file = File('${path2}');
-    // file2 = await file.writeAsString(htmlText, flush: true);
-    // }
-    // logNoStack.i("SAVE HTML: path2 = $path2");
-
-   // saveFileToMinio(filename, htmlText);
+  ///[setHtmlText] to set the html text to editor
+  void setHtmlText(String text) async {
+    await controller.setText(text);
   }
 
-  void saveFileToMinio(String filename, String htmlText) async {
-    logNoStack.i("SAVE HTML: about to get minio $htmlText");
-    var response = await getMinioTokenResponse();
-
-    logNoStack.i("SAVE HTML: Minio reponse=> $response");
-    final document = XmlDocument.parse(response);
-
-    String accessKeyId = document
-        .getElement('AssumeRoleWithWebIdentityResponse')!
-        .getElement('AssumeRoleWithWebIdentityResult')!
-        .getElement('Credentials')!
-        .getElement('AccessKeyId')!
-        .innerText;
-    String secretAccessKey = document
-        .getElement('AssumeRoleWithWebIdentityResponse')!
-        .getElement('AssumeRoleWithWebIdentityResult')!
-        .getElement('Credentials')!
-        .getElement('SecretAccessKey')!
-        .innerText;
-    String sessionToken = document
-        .getElement('AssumeRoleWithWebIdentityResponse')!
-        .getElement('AssumeRoleWithWebIdentityResult')!
-        .getElement('Credentials')!
-        .getElement('SessionToken')!
-        .innerText;
-
-    logNoStack
-        .i("accessKeyId=$accessKeyId , secretAccessKey = $secretAccessKey");
-
-    final minioUri = defaultMinioEndpointUrl.substring('https://'.length);
-    final minio = Minio(
-      endPoint: minioUri,
-      port: 443,
-      accessKey: accessKeyId,
-      secretKey: secretAccessKey,
-      sessionToken: sessionToken,
-      useSSL: true,
-      // enableTrace: true,
-    );
-
-//  var metaData = {
-//       'Content-Type': 'image/jpg',
-//       'Content-Language': 123,
-//       'X-Amz-Meta-Testing': 1234,
-//       example: 5678,
-//     };
-    Uint8List data = Uint8List.fromList(utf8.encode(htmlText));
-
-    // Step 3: Upload
-    String bucketName = defaultRealm;
-    String objectName = filename;
-    Map<String, String> metadata = {
-      'Content-Type': 'text/html',
-    };
-    try {
-      await minio.putObject(
-        bucketName,
-        objectName,
-        Stream.value(data),
-        size: data.length,
-        metadata: metadata,
-      );
-      debugPrint('✅ File uploaded successfully');
-       StatusAlert.show(
-                                      context,
-                                      duration: const Duration(seconds: 2),
-                                      title: nt.t.template,
-                                      subtitle: nt.t.form.saved,
-                                      configuration: const IconConfiguration(
-                                          icon: Icons.done),
-                                      maxWidth: 300,
-                                    );
-    } catch (e) {
-      debugPrint('❌ Upload failed: $e');
-      
-    }
-// if (!kIsWeb) {
-//  var filename = path.basename(file.path);
-//    final etag = await minio.fPutObject(defaultRealm, filename, file.path);
-//    // final etag = await minio.fPutObject(defaultRealm, filename, file.path);
-//     logNoStack.i("uploaded file ${file.path} with etag $etag");
-// } else {
-//   logNoStack.i("SAVE HTML: about to upload file ${file.path}");
-// }
-
-// read it and print out
-//  final reader = web.FileReader();
-//    reader.readAsText();
-
-//    await reader.onLoad.first;
-//OpenResult result = await OpenFile.open("$filename");
-
-    // String data = await file.readAsString();
-    //logNoStack.i("SAVE HTML: read file data = $result");
+  ///[insertNetworkImage] to set the html text to editor
+  void insertNetworkImage(String url) async {
+    await controller.embedImage(url);
   }
 
-  Future<dynamic> getMinioTokenResponse() async {
-    String? token = ref.read(nestAuthProvider.notifier).token!;
-    final Uri uri = Uri.parse(
-        "$defaultMinioEndpointUrl?Action=AssumeRoleWithWebIdentity&Version=2011-06-15&WebIdentityToken=$token");
-    final response = await http.post(
-      uri,
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      encoding: Encoding.getByName('utf-8'),
-    );
-    return response.body;
-  }
-}
-
-/// This is an example insert rule that will insert a new line before and
-/// after inline image embed.
-class ForceNewlineForInsertsAroundInlineImageRule extends InsertRule {
-  @override
-  Delta? apply(Delta document, int index, Object data) {
-    if (data is! String) return null;
-
-    final iter = DeltaIterator(document);
-    final previous = iter.skip(index);
-    final target = iter.next();
-    final cursorBeforeInlineEmbed = _isInlineImage(target.data);
-    final cursorAfterInlineEmbed =
-        previous != null && _isInlineImage(previous.data);
-
-    if (cursorBeforeInlineEmbed || cursorAfterInlineEmbed) {
-      final delta = Delta()..retain(index);
-      if (cursorAfterInlineEmbed && !data.startsWith('\n')) {
-        delta.insert('\n');
-      }
-      delta.insert(data);
-      if (cursorBeforeInlineEmbed && !data.endsWith('\n')) {
-        delta.insert('\n');
-      }
-      return delta;
-    }
-    return null;
+  ///[insertVideoURL] to set the video url to editor
+  ///this method recognises the inserted url and sanitize to make it embeddable url
+  ///eg: converts youtube video to embed video, same for vimeo
+  void insertVideoURL(String url) async {
+    await controller.embedVideo(url);
   }
 
-  bool _isInlineImage(Object data) {
-    if (data is EmbeddableObject) {
-      return data.type == 'image' && data.inline;
-    }
-    if (data is Map) {
-      return data[EmbeddableObject.kTypeKey] == 'image' &&
-          data[EmbeddableObject.kInlineKey];
-    }
-    return false;
+  /// to set the html text to editor
+  /// if index is not set, it will be inserted at the cursor postion
+  void insertHtmlText(String text, {int? index}) async {
+    await controller.insertText(text, index: index);
   }
+
+  /// to clear the editor
+  void clearEditor() => controller.clear();
+
+  /// to enable/disable the editor
+  void enableEditor(bool enable) => controller.enableEditor(enable);
+
+  /// method to un focus editor
+  void unFocusEditor() => controller.unFocus();
 }
