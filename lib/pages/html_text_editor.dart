@@ -133,24 +133,24 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
                       color: _hasFocus ? Colors.green : Colors.grey,
                       borderRadius: BorderRadius.circular(15)),
                 ),
-                InkWell(
-                    onTap: () => unFocusEditor(),
-                    child: const Icon(
-                      Icons.favorite,
-                      color: Colors.black,
-                    )),
-                InkWell(
-                    onTap: () async {
-                      var selectedText = await controller.getSelectedText();
-                      debugPrint('selectedText $selectedText');
-                      var selectedHtmlText =
-                          await controller.getSelectedHtmlText();
-                      debugPrint('selectedHtmlText $selectedHtmlText');
-                    },
-                    child: const Icon(
-                      Icons.add_circle,
-                      color: Colors.black,
-                    )),
+                // InkWell(
+                //     onTap: () => unFocusEditor(),
+                //     child: const Icon(
+                //       Icons.favorite,
+                //       color: Colors.black,
+                //     )),
+                // InkWell(
+                //     onTap: () async {
+                //       var selectedText = await controller.getSelectedText();
+                //       debugPrint('selectedText $selectedText');
+                //       var selectedHtmlText =
+                //           await controller.getSelectedHtmlText();
+                //       debugPrint('selectedHtmlText $selectedHtmlText');
+                //     },
+                //     child: const Icon(
+                //       Icons.add_circle,
+                //       color: Colors.black,
+                //     )),
               ],
             ),
             Expanded(
@@ -196,10 +196,9 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
             ),
           ],
         ),
-        bottomNavigationBar: Container(
-          width: double.maxFinite,
-          color: _toolbarColor,
-          padding: const EdgeInsets.all(8),
+        bottomNavigationBar: 
+        Visibility(
+          visible: false,
           child: Wrap(
             children: [
               textButton(
@@ -288,6 +287,7 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
                   }),
             ],
           ),
+        
         ),
       ),
     );
