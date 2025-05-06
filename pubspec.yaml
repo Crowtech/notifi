@@ -101,9 +101,12 @@ dependencies:
   #html_editor_enhanced: ^2.6.0
   osm_flutter_hooks: ^1.4.1
  
-  fleather: ^1.22.0
-  quill_html_editor: ^2.2.8
-  
+  #fleather: ^1.22.0
+  #quill_html_editor: ^2.2.8
+  flutter_quill: ^11.4.0  
+  flutter_quill_delta_from_html: ^1.5.2
+  flutter_quill_extensions: ^11.0.0
+  delta_to_html: ^0.2.2
 
 
   
