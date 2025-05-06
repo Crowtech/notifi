@@ -122,10 +122,19 @@ final QuillController _controller = () {
             },
           ),
            IconButton(
-            icon: const Icon(Icons.output),
+            icon: const Icon(Icons.read_more),
             tooltip: 'Load Minio',
             onPressed: () {
               loadHtmlFromMinio("TPL_TEST.html");
+            },
+          ),
+            IconButton(
+            icon: const Icon(Icons.read_more),
+            tooltip: 'Save to Minio',
+            onPressed: () {
+              var html = DeltaToHTML.encodeJson(_controller.document.toDelta().toJson());
+              logNoStack.i("SAVE HTML: about to save $html");
+              saveFileToMinio(ref,context,"TPL_TEST.html", html );
             },
           ),
         ],),
