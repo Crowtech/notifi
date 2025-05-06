@@ -95,7 +95,7 @@ class _CreateTemplateFormState extends ConsumerState<CreateTemplateForm> {
               const SizedBox(height: 16),
               TextFormFieldWidget(
                 controller: codeController,
-                fieldValues: fieldValues,
+                fieldValues: widget.fieldValues,
                 formCode: widget.formCode,
                 fieldCode: "true-code",
                 enabled: true,
@@ -115,7 +115,7 @@ class _CreateTemplateFormState extends ConsumerState<CreateTemplateForm> {
               const SizedBox(height: 16),
               TextFormFieldWidget(
                 controller: nameController,
-                fieldValues: fieldValues,
+                fieldValues: widget.fieldValues,
                 formCode: widget.formCode,
                 fieldCode: "true-name",
                 enabled: true,
@@ -133,7 +133,7 @@ class _CreateTemplateFormState extends ConsumerState<CreateTemplateForm> {
               const SizedBox(height: 16),
               TextFormFieldWidget(
                 controller: descriptionController,
-                fieldValues: fieldValues,
+                fieldValues: widget.fieldValues,
                 formCode: widget.formCode,
                 fieldCode: "true-description",
                 enabled: true,
@@ -172,50 +172,50 @@ class _CreateTemplateFormState extends ConsumerState<CreateTemplateForm> {
                                   _formKey.currentState!.validate()) {
                                 // If the form is valid, display a snackbar. In the real world,
                                 // you'd often call a server or save the information in a database.
-                                widget.templateCode = fieldValues['code'];
+                                widget.templateCode = widget.fieldValues['code'];
                                 widget.onSubmit!(widget.templateCode);
                                 // save template
                                 MessageTemplate template = MessageTemplate(
-                                  code: fieldValues['code'],
-                                  name: fieldValues['name'],
-                                  description: fieldValues['description'],
+                                  code: widget.fieldValues['code'],
+                                  name: widget.fieldValues['name'],
+                                  description: widget.fieldValues['description'],
                                 );
                                 var token =
                                     ref.read(nestAuthProvider.notifier).token;
                                 var apiPath =
-                                    "$defaultAPIBaseUrl$defaultApiPrefixPath/messagetemplates/create?isauthorized=${fieldValues['authorized']}";
+                                    "$defaultAPIBaseUrl$defaultApiPrefixPath/messagetemplates/create?isauthorized=${widget.fieldValues['authorized']}";
 
                                 logNoStack.i(
                                     "TEMPLATE_FORM: sending $template to $apiPath");
-                                // apiPostDataNoLocaleRaw(
-                                //         token!, apiPath, template)
-                                //     .then((result) {
-                                //   logNoStack.i("result is $result");
+                                apiPostDataNoLocaleRaw(
+                                        token!, apiPath, template)
+                                    .then((result) {
+                                  logNoStack.i("result is $result");
 
-                                //   StatusAlert.show(
-                                //     context,
-                                //     duration: const Duration(seconds: 2),
-                                //     title: nt.t.template,
-                                //     subtitle: nt.t.form.saved,
-                                //     configuration: const IconConfiguration(
-                                //         icon: Icons.done),
-                                //     maxWidth: 300,
-                                //   );
-                                //   // ref.invalidate(
-                                //   //     fetchTemplateNestFilterProvider);
-                                // //  Navigator.of(context).pop();
-                                // }, onError: (error) {
-                                //   logNoStack.e("error is $error");
-                                //   StatusAlert.show(
-                                //     context,
-                                //     duration: const Duration(seconds: 2),
-                                //     title: nt.t.template,
-                                //     subtitle: nt.t.form.error_saving,
-                                //     configuration: const IconConfiguration(
-                                //         icon: Icons.error),
-                                //     maxWidth: 300,
-                                //   );
-                                // });
+                                  StatusAlert.show(
+                                    context,
+                                    duration: const Duration(seconds: 2),
+                                    title: nt.t.template,
+                                    subtitle: nt.t.form.saved,
+                                    configuration: const IconConfiguration(
+                                        icon: Icons.done),
+                                    maxWidth: 300,
+                                  );
+                                  // ref.invalidate(
+                                  //     fetchTemplateNestFilterProvider);
+                                //  Navigator.of(context).pop();
+                                }, onError: (error) {
+                                  logNoStack.e("error is $error");
+                                  StatusAlert.show(
+                                    context,
+                                    duration: const Duration(seconds: 2),
+                                    title: nt.t.template,
+                                    subtitle: nt.t.form.error_saving,
+                                    configuration: const IconConfiguration(
+                                        icon: Icons.error),
+                                    maxWidth: 300,
+                                  );
+                                });
                               }
                             },
                       child: Text(nt.t.response.submit),
