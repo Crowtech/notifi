@@ -294,8 +294,8 @@ String bucket = defaultRealm;
 
     logNoStack.i("LOAD HTML: data = $data");
    // await _controller.document.
-
-    _controller.document = Document.fromJson(jsonDecode(data));
+ var delta = HtmlToDelta().convert(data, transformTableAsEmbed: false);
+    _controller.document = Document.fromDelta(delta);
 
   }
 
