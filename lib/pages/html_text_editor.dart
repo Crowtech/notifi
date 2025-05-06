@@ -18,6 +18,7 @@ import 'package:notifi/credentials.dart';
 import 'package:notifi/forms/template_form.dart';
 import 'package:notifi/models/person.dart';
 import 'package:notifi/state/nest_auth2.dart';
+import 'package:notifi/utils/minio_utils.dart';
 import 'package:quill_html_editor/quill_html_editor.dart';
 import 'package:status_alert/status_alert.dart';
 //import 'package:quill_html_editor/quill_html_editor.dart';
@@ -41,6 +42,10 @@ class HtmlTextEditor extends ConsumerStatefulWidget {
 }
 
 class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
+    final GlobalKey<FormFieldState> itemFormFieldKey =
+      GlobalKey<FormFieldState>();
+  String templateCode = "";
+  
  late QuillEditorController controller;
 
   ///[customToolBarList] pass the custom toolbarList to show only selected styles in the editor
@@ -92,6 +97,13 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
 
   @override
   Widget build(BuildContext context) {
+      Person currentUser = ref.read(nestAuthProvider.notifier).currentUser;
+    void tap2clipboard(String text) =>
+        Clipboard.setData(ClipboardData(text: text)).then((_) {
+          // ScaffoldMessenger.of(context).showSnackBar(
+          // SnackBar(content: Text(nt.t.copied_to_clipboard(item: nt.t.text)))
+          //);
+        });
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(elevation: 0, title: const Text('Quill Html Text Editor')),
@@ -99,6 +111,11 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
         resizeToAvoidBottomInset: true,
         body: Column(
           children: [
+             CreateTemplateForm(
+              formCode: "template",
+              templateCode: templateCode,
+              onSubmit: loadHtmlFromMinio,
+            ),
             ToolBar(
               toolBarColor: _toolbarColor,
               padding: const EdgeInsets.all(8),
@@ -274,6 +291,83 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
         ),
       ),
     );
+  }
+
+void loadHtmlFromMinio(String filename) async {
+   // String? htmlText = await controller.getText();
+    var response = await getMinioTokenResponse();
+
+    logNoStack.i("LOVE HTML: Minio reponse=> $response");
+    final document = XmlDocument.parse(response);
+
+    String accessKeyId = document
+        .getElement('AssumeRoleWithWebIdentityResponse')!
+        .getElement('AssumeRoleWithWebIdentityResult')!
+        .getElement('Credentials')!
+        .getElement('AccessKeyId')!
+        .innerText;
+    String secretAccessKey = document
+        .getElement('AssumeRoleWithWebIdentityResponse')!
+        .getElement('AssumeRoleWithWebIdentityResult')!
+        .getElement('Credentials')!
+        .getElement('SecretAccessKey')!
+        .innerText;
+    String sessionToken = document
+        .getElement('AssumeRoleWithWebIdentityResponse')!
+        .getElement('AssumeRoleWithWebIdentityResult')!
+        .getElement('Credentials')!
+        .getElement('SessionToken')!
+        .innerText;
+
+    logNoStack
+        .i("accessKeyId=$accessKeyId , secretAccessKey = $secretAccessKey");
+
+    final minioUri = defaultMinioEndpointUrl.substring('https://'.length);
+    final minio = Minio(
+      endPoint: minioUri,
+      port: 443,
+      accessKey: accessKeyId,
+      secretKey: secretAccessKey,
+      sessionToken: sessionToken,
+      useSSL: true,
+      // enableTrace: true,
+    );
+String bucket = defaultRealm;
+  String object = filename;
+    Map<String, String> metadata = {
+      'Content-Type': 'text/html',
+    };
+    var stream = await minio.getObject(bucket, object);
+      // Get object length
+  logNoStack.i("GetObject length = ${stream.contentLength}");
+
+  // Write object data stream to file
+  String data = "";
+  await for (var chunk in stream) {
+    data += utf8.decode(chunk);
+  }
+  // Get object length
+  print(stream.contentLength);
+
+  // Write object data stream to file
+
+    logNoStack.i("SAVE HTML: data = $data");
+    await controller.setText(data);
+
+  }
+  
+    Future<dynamic> getMinioTokenResponse() async {
+    String? token = ref.read(nestAuthProvider.notifier).token!;
+    final Uri uri = Uri.parse(
+        "$defaultMinioEndpointUrl?Action=AssumeRoleWithWebIdentity&Version=2011-06-15&WebIdentityToken=$token");
+    final response = await http.post(
+      uri,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      encoding: Encoding.getByName('utf-8'),
+    );
+    return response.body;
   }
 
   Widget textButton({required String text, required VoidCallback onPressed}) {
