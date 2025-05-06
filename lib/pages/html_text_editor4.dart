@@ -1,18 +1,16 @@
 import 'dart:convert';
 import 'dart:io' as io show Directory, File;
 
+import 'package:delta_to_html/delta_to_html.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_quill/flutter_quill.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+//import 'package:quill_html_editor/quill_html_editor.dart';
+import 'package:flutter_quill_delta_from_html/flutter_quill_delta_from_html.dart';
 import 'package:flutter_quill_extensions/flutter_quill_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:path/path.dart' as path;
 import 'package:http/http.dart' as http;
-import 'package:delta_to_html/delta_to_html.dart';
-
-import 'package:notifi/i18n/strings.g.dart' as nt;
 //import 'package:web/web.dart' as web;
 
 import 'package:logger/logger.dart' as logger;
@@ -22,10 +20,7 @@ import 'package:notifi/forms/template_form.dart';
 import 'package:notifi/models/person.dart';
 import 'package:notifi/state/nest_auth2.dart';
 import 'package:notifi/utils/minio_utils.dart';
-
-import 'package:status_alert/status_alert.dart';
-//import 'package:quill_html_editor/quill_html_editor.dart';
-import 'package:flutter_quill_delta_from_html/flutter_quill_delta_from_html.dart';
+import 'package:path/path.dart' as path;
 import 'package:xml/xml.dart';
 
 var log = logger.Logger(
@@ -49,6 +44,7 @@ class _HtmlTextEditor4State extends ConsumerState<HtmlTextEditor4> {
     final GlobalKey<FormFieldState> itemFormFieldKey =
       GlobalKey<FormFieldState>();
   String templateCode = "";
+  Map<String, dynamic> fieldValues = {};  // used to access live field values
   
 final QuillController _controller = () {
     return QuillController.basic(
@@ -85,7 +81,7 @@ final QuillController _controller = () {
     super.initState();
     
     //_controller.document = Document.fromJson(kQuillDefaultSample);
-    loadHtmlFromMinio("TPL_TEST.html");
+    //loadHtmlFromMinio("TPL_TEST.html");
   }
 
   @override
@@ -125,16 +121,18 @@ final QuillController _controller = () {
             icon: const Icon(Icons.read_more),
             tooltip: 'Load Minio',
             onPressed: () {
-              loadHtmlFromMinio("TPL_TEST.html");
+              String filename = fieldValues['code'];
+              loadHtmlFromMinio(filename);
             },
           ),
             IconButton(
             icon: const Icon(Icons.read_more),
             tooltip: 'Save to Minio',
             onPressed: () {
+              String filename = fieldValues['code'];
               var html = DeltaToHTML.encodeJson(_controller.document.toDelta().toJson());
-              logNoStack.i("SAVE HTML: about to save $html");
-              saveFileToMinio(ref,context,"TPL_TEST.html", html );
+              logNoStack.i("SAVE HTML: about to save $html to $filename");
+              saveFileToMinio(ref,context,filename, html );
             },
           ),
         ],),
@@ -146,6 +144,7 @@ final QuillController _controller = () {
               formCode: "template",
               templateCode: templateCode,
               onSubmit: loadHtmlFromMinio,
+              fieldValues: fieldValues,
             ),
             QuillSimpleToolbar(
               controller: _controller,
@@ -245,6 +244,9 @@ final QuillController _controller = () {
 
 void loadHtmlFromMinio(String filename) async {
    // String? htmlText = await controller.getText();
+   if (!filename.endsWith(".html")) {
+    filename = filename + ".html";
+   }
     var response = await getMinioTokenResponse();
 
     logNoStack.i("LOVE HTML: Minio reponse=> $response");

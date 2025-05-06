@@ -32,11 +32,14 @@ class CreateTemplateForm extends ConsumerStatefulWidget {
       {super.key,
       required this.formCode,
       required this.templateCode,
-      required this.onSubmit});
+      required this.onSubmit,
+      required this.fieldValues
+});
 
   String formCode;
   String templateCode;
   SubmitFunction<String>? onSubmit;
+  final Map<String, dynamic> fieldValues;
 
   @override
   _CreateTemplateFormState createState() => _CreateTemplateFormState();
@@ -45,7 +48,7 @@ class CreateTemplateForm extends ConsumerStatefulWidget {
 class _CreateTemplateFormState extends ConsumerState<CreateTemplateForm> {
   final _formKey = GlobalKey<FormState>();
 
-  final Map<String, dynamic> fieldValues = {};
+  
 
   OrganizationType? orgTypeIndex;
   final codeController = TextEditingController();
