@@ -320,7 +320,7 @@ void loadHtmlFromMinio(String filename) async {
         .innerText;
 
     logNoStack
-        .i("accessKeyId=$accessKeyId , secretAccessKey = $secretAccessKey");
+        .i("LOD_HTML: accessKeyId=$accessKeyId , secretAccessKey = $secretAccessKey");
 
     final minioUri = defaultMinioEndpointUrl.substring('https://'.length);
     final minio = Minio(
@@ -347,15 +347,15 @@ String bucket = defaultRealm;
     data += utf8.decode(chunk);
   }
   // Get object length
-  print(stream.contentLength);
+  logNoStack.i("LOAD HTML: GetObject length = ${stream.contentLength}"  );
 
   // Write object data stream to file
 
-    logNoStack.i("SAVE HTML: data = $data");
+    logNoStack.i("LOAD HTML: data = $data");
     await controller.setText(data);
 
   }
-  
+
     Future<dynamic> getMinioTokenResponse() async {
     String? token = ref.read(nestAuthProvider.notifier).token!;
     final Uri uri = Uri.parse(
