@@ -2,11 +2,13 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:minio/minio.dart';
 import 'package:notifi/credentials.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
+import 'package:notifi/models/message_template.dart';
 import 'package:notifi/state/nest_auth2.dart';
 import 'package:status_alert/status_alert.dart';
 import 'package:xml/xml.dart';
@@ -24,11 +26,16 @@ var logNoStack = logger.Logger(
 );
 
 Future<String> loadHtmlFromMinio(WidgetRef ref, String filename) async {
-  filename = filename.toLowerCase();
-  if (!filename.endsWith(".html")) {
-    filename = "$filename.html";
-  } 
-  logNoStack.i("Loading $filename");
+    filename = filename.toLowerCase();
+    logNoStack.i("LOAD HTML1: filename $filename");
+    if (!filename.startsWith("${MessageTemplate.PREFIX}")) {
+      filename = "${MessageTemplate.PREFIX}$filename";
+    }
+    logNoStack.i("LOAD HTML2: filename $filename");
+    if (!filename.endsWith(".html")) {
+      filename = "$filename.html";
+    }
+    logNoStack.i("LOAD HTML3: filename $filename");
   
   // String? htmlText = await _controller!.document.toPlainText();
   var response = await getMinioTokenResponse(ref);
@@ -130,10 +137,16 @@ void saveDocument(BuildContext context, String contents) {
 
 void saveFileToMinio(
     WidgetRef ref,BuildContext context, String filename, String htmlText) async {
-  filename = filename.toLowerCase();
-  if (!filename.endsWith(".html")) {
-    filename = "$filename.html";
-  } 
+    filename = filename.toLowerCase();
+    logNoStack.i("SAVE HTML1: filename $filename");
+    if (!filename.startsWith("${MessageTemplate.PREFIX}")) {
+      filename = "${MessageTemplate.PREFIX}$filename";
+    }
+    logNoStack.i("SAVE HTML2: filename $filename");
+    if (!filename.endsWith(".html")) {
+      filename = "$filename.html";
+    }
+    logNoStack.i("SAVE HTML3: filename $filename");
   logNoStack.i("SAVE HTML: about to get minio $htmlText");
   var response = await getMinioTokenResponse(ref);
 
@@ -183,8 +196,10 @@ void saveFileToMinio(
   // Step 3: Upload
   String bucketName = "templates";
   String objectName = filename;
+  String usercode = ref.read(nestAuthProvider.notifier).currentUser.code!;
   Map<String, String> metadata = {
     'Content-Type': 'text/html',
+    'author': usercode,
   };
   try {
     await minio.putObject(

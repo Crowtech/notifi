@@ -17,6 +17,7 @@ import 'package:logger/logger.dart' as logger;
 import 'package:minio/minio.dart';
 import 'package:notifi/credentials.dart';
 import 'package:notifi/forms/template_form.dart';
+import 'package:notifi/models/message_template.dart';
 import 'package:notifi/models/person.dart';
 import 'package:notifi/state/nest_auth2.dart';
 import 'package:notifi/utils/minio_utils.dart';
@@ -41,12 +42,12 @@ class HtmlTextEditor4 extends ConsumerStatefulWidget {
 }
 
 class _HtmlTextEditor4State extends ConsumerState<HtmlTextEditor4> {
-    final GlobalKey<FormFieldState> itemFormFieldKey =
+  final GlobalKey<FormFieldState> itemFormFieldKey =
       GlobalKey<FormFieldState>();
   String templateCode = "";
-  Map<String, dynamic> fieldValues = {};  // used to access live field values
-  
-final QuillController _controller = () {
+  Map<String, dynamic> fieldValues = {}; // used to access live field values
+
+  final QuillController _controller = () {
     return QuillController.basic(
         config: QuillControllerConfig(
       clipboardConfig: QuillClipboardConfig(
@@ -77,9 +78,8 @@ final QuillController _controller = () {
 
   @override
   void initState() {
-   
     super.initState();
-    
+
     //_controller.document = Document.fromJson(kQuillDefaultSample);
     //loadHtmlFromMinio("TPL_TEST.html");
   }
@@ -87,7 +87,7 @@ final QuillController _controller = () {
   @override
   void dispose() {
     /// please do not forget to dispose the controller
- _controller.dispose();
+    _controller.dispose();
     _editorScrollController.dispose();
     _editorFocusNode.dispose();
 
@@ -96,7 +96,7 @@ final QuillController _controller = () {
 
   @override
   Widget build(BuildContext context) {
-      Person currentUser = ref.read(nestAuthProvider.notifier).currentUser;
+    Person currentUser = ref.read(nestAuthProvider.notifier).currentUser;
     void tap2clipboard(String text) =>
         Clipboard.setData(ClipboardData(text: text)).then((_) {
           // ScaffoldMessenger.of(context).showSnackBar(
@@ -105,150 +105,162 @@ final QuillController _controller = () {
         });
     return SafeArea(
       child: Scaffold(
-          appBar: AppBar(elevation: 0, title: const Text('Quill Html Text Editor'),
-           actions: [
-          IconButton(
-            icon: const Icon(Icons.output),
-            tooltip: 'Print Delta JSON to log',
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                  content:
-                      Text('The JSON Delta has been printed to the console.')));
-              debugPrint(jsonEncode(_controller.document.toDelta().toJson()));
-            },
-          ),
-           IconButton(
-            icon: const Icon(Icons.read_more),
-            tooltip: 'Load Minio',
-            onPressed: () {
-              String filename = fieldValues['code'];
-              loadHtmlFromMinio(filename);
-            },
-          ),
+        appBar: AppBar(
+          elevation: 0,
+          title: const Text('Nest Html Text Editor'),
+          actions: [
+            // IconButton(
+            //   icon: const Icon(Icons.output),
+            //   tooltip: 'Print Delta JSON to log',
+            //   onPressed: () {
+            //     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            //         content: Text(
+            //             'The JSON Delta has been printed to the console.')));
+            //     debugPrint(jsonEncode(_controller.document.toDelta().toJson()));
+            //   },
+            // ),
             IconButton(
-            icon: const Icon(Icons.read_more),
-            tooltip: 'Save to Minio',
-            onPressed: () {
-              String filename = fieldValues['code'];
-            
-              var html = DeltaToHTML.encodeJson(_controller.document.toDelta().toJson());
-              logNoStack.i("SAVE HTML: about to save $html to $filename");
-              saveFileToMinio(ref,context,filename, html );
-            },
-          ),
-        ],),
+              icon: const Icon(Icons.read_more),
+              tooltip: 'Load Minio',
+              onPressed: () {
+                String filename = fieldValues['code'];
+                loadHtmlFromMinio(filename);
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.save),
+              tooltip: 'Save to Minio',
+              onPressed: () {
+                String filename = fieldValues['code'];
+
+                var html = DeltaToHTML.encodeJson(
+                    _controller.document.toDelta().toJson());
+                logNoStack.i("SAVE HTML: about to save $html to $filename");
+                saveFileToMinio(ref, context, filename, html);
+              },
+            ),
+          ],
+        ),
         backgroundColor: Colors.white,
         resizeToAvoidBottomInset: true,
         body: Column(
           children: [
-             CreateTemplateForm(
+            CreateTemplateForm(
               formCode: "template",
               templateCode: templateCode,
               onSubmit: loadHtmlFromMinio,
               fieldValues: fieldValues,
             ),
-            QuillSimpleToolbar(
-              controller: _controller,
-              config: QuillSimpleToolbarConfig(
-                embedButtons: FlutterQuillEmbeds.toolbarButtons(),
-                showClipboardPaste: true,
-                customButtons: [
-                  QuillToolbarCustomButtonOptions(
-                    icon: const Icon(Icons.add_alarm_rounded),
-                    onPressed: () {
-                      _controller.document.insert(
-                        _controller.selection.extentOffset,
-                        TimeStampEmbed(
-                          DateTime.now().toString(),
-                        ),
-                      );
+            SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  QuillSimpleToolbar(
+                    controller: _controller,
+                    config: QuillSimpleToolbarConfig(
+                      embedButtons: FlutterQuillEmbeds.toolbarButtons(),
+                      showClipboardPaste: true,
+                      customButtons: [
+                        QuillToolbarCustomButtonOptions(
+                          icon: const Icon(Icons.add_alarm_rounded),
+                          onPressed: () {
+                            _controller.document.insert(
+                              _controller.selection.extentOffset,
+                              TimeStampEmbed(
+                                DateTime.now().toString(),
+                              ),
+                            );
 
-                      _controller.updateSelection(
-                        TextSelection.collapsed(
-                          offset: _controller.selection.extentOffset + 1,
+                            _controller.updateSelection(
+                              TextSelection.collapsed(
+                                offset: _controller.selection.extentOffset + 1,
+                              ),
+                              ChangeSource.local,
+                            );
+                          },
                         ),
-                        ChangeSource.local,
-                      );
-                    },
-                  ),
-                ],
-                buttonOptions: QuillSimpleToolbarButtonOptions(
-                  base: QuillToolbarBaseButtonOptions(
-                    afterButtonPressed: () {
-                      final isDesktop = {
-                        TargetPlatform.linux,
-                        TargetPlatform.windows,
-                        TargetPlatform.macOS
-                      }.contains(defaultTargetPlatform);
-                      if (isDesktop) {
-                        _editorFocusNode.requestFocus();
-                      }
-                    },
-                  ),
-                  linkStyle: QuillToolbarLinkStyleButtonOptions(
-                    validateLink: (link) {
-                      // Treats all links as valid. When launching the URL,
-                      // `https://` is prefixed if the link is incomplete (e.g., `google.com` → `https://google.com`)
-                      // however this happens only within the editor.
-                      return true;
-                    },
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              child: QuillEditor(
-                focusNode: _editorFocusNode,
-                scrollController: _editorScrollController,
-                controller: _controller,
-                config: QuillEditorConfig(
-                  placeholder: 'Start writing your notes...',
-                  padding: const EdgeInsets.all(16),
-                  embedBuilders: [
-                    ...FlutterQuillEmbeds.editorBuilders(
-                      imageEmbedConfig: QuillEditorImageEmbedConfig(
-                        imageProviderBuilder: (context, imageUrl) {
-                          // https://pub.dev/packages/flutter_quill_extensions#-image-assets
-                          if (imageUrl.startsWith('assets/')) {
-                            return AssetImage(imageUrl);
-                          }
-                          return null;
-                        },
-                      ),
-                      videoEmbedConfig: QuillEditorVideoEmbedConfig(
-                        customVideoBuilder: (videoUrl, readOnly) {
-                          // To load YouTube videos https://github.com/singerdmx/flutter-quill/releases/tag/v10.8.0
-                          return null;
-                        },
+                      ],
+                      buttonOptions: QuillSimpleToolbarButtonOptions(
+                        base: QuillToolbarBaseButtonOptions(
+                          afterButtonPressed: () {
+                            final isDesktop = {
+                              TargetPlatform.linux,
+                              TargetPlatform.windows,
+                              TargetPlatform.macOS
+                            }.contains(defaultTargetPlatform);
+                            if (isDesktop) {
+                              _editorFocusNode.requestFocus();
+                            }
+                          },
+                        ),
+                        linkStyle: QuillToolbarLinkStyleButtonOptions(
+                          validateLink: (link) {
+                            // Treats all links as valid. When launching the URL,
+                            // `https://` is prefixed if the link is incomplete (e.g., `google.com` → `https://google.com`)
+                            // however this happens only within the editor.
+                            return true;
+                          },
+                        ),
                       ),
                     ),
-                    TimeStampEmbedBuilder(),
-                  ],
-                ),
+                  ),
+                  Expanded(
+                    child: QuillEditor(
+                      focusNode: _editorFocusNode,
+                      scrollController: _editorScrollController,
+                      controller: _controller,
+                      config: QuillEditorConfig(
+                        placeholder: 'Start writing your notes...',
+                        padding: const EdgeInsets.all(16),
+                        embedBuilders: [
+                          ...FlutterQuillEmbeds.editorBuilders(
+                            imageEmbedConfig: QuillEditorImageEmbedConfig(
+                              imageProviderBuilder: (context, imageUrl) {
+                                // https://pub.dev/packages/flutter_quill_extensions#-image-assets
+                                if (imageUrl.startsWith('assets/')) {
+                                  return AssetImage(imageUrl);
+                                }
+                                return null;
+                              },
+                            ),
+                            videoEmbedConfig: QuillEditorVideoEmbedConfig(
+                              customVideoBuilder: (videoUrl, readOnly) {
+                                // To load YouTube videos https://github.com/singerdmx/flutter-quill/releases/tag/v10.8.0
+                                return null;
+                              },
+                            ),
+                          ),
+                          TimeStampEmbedBuilder(),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
         ),
-        bottomNavigationBar: 
-        Visibility(
+        bottomNavigationBar: Visibility(
           visible: false,
           child: Wrap(
-            children: [
-             
-            ],
+            children: [],
           ),
-        
         ),
       ),
     );
   }
 
-void loadHtmlFromMinio(String filename) async {
-   // String? htmlText = await controller.getText();
-   filename = filename.toLowerCase();
-   if (!filename.endsWith(".html")) {
-    filename = filename + ".html";
-   }
+  void loadHtmlFromMinio(String filename) async {
+    filename = filename.toLowerCase();
+    logNoStack.i("LOAD HTML1: filename $filename");
+    if (!filename.startsWith("${MessageTemplate.PREFIX}")) {
+      filename = "${MessageTemplate.PREFIX}$filename";
+    }
+    logNoStack.i("LOAD HTML2: filename $filename");
+    if (!filename.endsWith(".html")) {
+      filename = "$filename.html";
+    }
+    logNoStack.i("LOAD HTML3: filename $filename");
     var response = await getMinioTokenResponse();
 
     logNoStack.i("LOAD HTML: Minio reponse=> $response");
@@ -273,8 +285,8 @@ void loadHtmlFromMinio(String filename) async {
         .getElement('SessionToken')!
         .innerText;
 
-    logNoStack
-        .i("LOAD_HTML: accessKeyId=$accessKeyId , secretAccessKey = $secretAccessKey");
+    logNoStack.i(
+        "LOAD_HTML: accessKeyId=$accessKeyId , secretAccessKey = $secretAccessKey");
 
     final minioUri = defaultMinioEndpointUrl.substring('https://'.length);
     final minio = Minio(
@@ -286,33 +298,32 @@ void loadHtmlFromMinio(String filename) async {
       useSSL: true,
       // enableTrace: true,
     );
-String bucket = "templates";
-  String object = filename;
+    String bucket = "templates";
+    String object = filename;
     Map<String, String> metadata = {
       'Content-Type': 'text/html',
     };
     var stream = await minio.getObject(bucket, object);
-      // Get object length
-  logNoStack.i("LOAD_HTML: GetObject length = ${stream.contentLength}");
+    // Get object length
+    logNoStack.i("LOAD_HTML: GetObject length = ${stream.contentLength}");
 
-  // Write object data stream to file
-  String data = "";
-  await for (var chunk in stream) {
-    data += utf8.decode(chunk);
-  }
-  // Get object length
-  logNoStack.i("LOAD HTML: GetObject length = ${stream.contentLength}"  );
+    // Write object data stream to file
+    String data = "";
+    await for (var chunk in stream) {
+      data += utf8.decode(chunk);
+    }
+    // Get object length
+    logNoStack.i("LOAD HTML: GetObject length = ${stream.contentLength}");
 
-  // Write object data stream to file
+    // Write object data stream to file
 
     logNoStack.i("LOAD HTML: data = $data");
-   // await _controller.document.
- var delta = HtmlToDelta().convert(data, transformTableAsEmbed: false);
+    // await _controller.document.
+    var delta = HtmlToDelta().convert(data, transformTableAsEmbed: false);
     _controller.document = Document.fromDelta(delta);
-
   }
 
-    Future<dynamic> getMinioTokenResponse() async {
+  Future<dynamic> getMinioTokenResponse() async {
     String? token = ref.read(nestAuthProvider.notifier).token!;
     final Uri uri = Uri.parse(
         "$defaultMinioEndpointUrl?Action=AssumeRoleWithWebIdentity&Version=2011-06-15&WebIdentityToken=$token");
@@ -325,8 +336,6 @@ String bucket = "templates";
     );
     return response.body;
   }
-
-  
 }
 
 class TimeStampEmbed extends Embeddable {
