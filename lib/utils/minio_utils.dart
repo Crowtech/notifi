@@ -139,8 +139,8 @@ void saveFileToMinio(
     WidgetRef ref,BuildContext context, String filename, String htmlText) async {
     filename = filename.toLowerCase();
     logNoStack.i("SAVE HTML1: filename $filename");
-    if (!filename.startsWith("${MessageTemplate.PREFIX}")) {
-      filename = "${MessageTemplate.PREFIX}$filename";
+    if (!filename.startsWith("${MessageTemplate.PREFIX.toLowerCase()}")) {
+      filename = "${MessageTemplate.PREFIX.toLowerCase()}$filename";
     }
     logNoStack.i("SAVE HTML2: filename $filename");
     if (!filename.endsWith(".html")) {

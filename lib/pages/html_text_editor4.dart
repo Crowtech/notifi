@@ -253,8 +253,8 @@ class _HtmlTextEditor4State extends ConsumerState<HtmlTextEditor4> {
   void loadHtmlFromMinio(String filename) async {
     filename = filename.toLowerCase();
     logNoStack.i("LOAD HTML1: filename $filename");
-    if (!filename.startsWith("${MessageTemplate.PREFIX}")) {
-      filename = "${MessageTemplate.PREFIX}$filename";
+    if (!filename.startsWith("${MessageTemplate.PREFIX.toLowerCase()}")) {
+      filename = "${MessageTemplate.PREFIX.toLowerCase()}$filename";
     }
     logNoStack.i("LOAD HTML2: filename $filename");
     if (!filename.endsWith(".html")) {
