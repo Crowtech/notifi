@@ -130,6 +130,7 @@ final QuillController _controller = () {
             tooltip: 'Save to Minio',
             onPressed: () {
               String filename = fieldValues['code'];
+            
               var html = DeltaToHTML.encodeJson(_controller.document.toDelta().toJson());
               logNoStack.i("SAVE HTML: about to save $html to $filename");
               saveFileToMinio(ref,context,filename, html );
@@ -244,12 +245,13 @@ final QuillController _controller = () {
 
 void loadHtmlFromMinio(String filename) async {
    // String? htmlText = await controller.getText();
+   filename = filename.toLowerCase();
    if (!filename.endsWith(".html")) {
     filename = filename + ".html";
    }
     var response = await getMinioTokenResponse();
 
-    logNoStack.i("LOVE HTML: Minio reponse=> $response");
+    logNoStack.i("LOAD HTML: Minio reponse=> $response");
     final document = XmlDocument.parse(response);
 
     String accessKeyId = document
@@ -272,7 +274,7 @@ void loadHtmlFromMinio(String filename) async {
         .innerText;
 
     logNoStack
-        .i("LOD_HTML: accessKeyId=$accessKeyId , secretAccessKey = $secretAccessKey");
+        .i("LOAD_HTML: accessKeyId=$accessKeyId , secretAccessKey = $secretAccessKey");
 
     final minioUri = defaultMinioEndpointUrl.substring('https://'.length);
     final minio = Minio(
@@ -284,14 +286,14 @@ void loadHtmlFromMinio(String filename) async {
       useSSL: true,
       // enableTrace: true,
     );
-String bucket = defaultRealm;
+String bucket = "templates";
   String object = filename;
     Map<String, String> metadata = {
       'Content-Type': 'text/html',
     };
     var stream = await minio.getObject(bucket, object);
       // Get object length
-  logNoStack.i("GetObject length = ${stream.contentLength}");
+  logNoStack.i("LOAD_HTML: GetObject length = ${stream.contentLength}");
 
   // Write object data stream to file
   String data = "";

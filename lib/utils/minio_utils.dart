@@ -24,8 +24,12 @@ var logNoStack = logger.Logger(
 );
 
 Future<String> loadHtmlFromMinio(WidgetRef ref, String filename) async {
+  filename = filename.toLowerCase();
+  if (!filename.endsWith(".html")) {
+    filename = "$filename.html";
+  } 
   logNoStack.i("Loading $filename");
-  filename = "TPL_TEST.html";
+  
   // String? htmlText = await _controller!.document.toPlainText();
   var response = await getMinioTokenResponse(ref);
 
@@ -64,7 +68,7 @@ Future<String> loadHtmlFromMinio(WidgetRef ref, String filename) async {
     useSSL: true,
     // enableTrace: true,
   );
-  String bucket = defaultRealm;
+  String bucket = "templates";
   String object = filename;
   Map<String, String> metadata = {
     'Content-Type': 'text/html',
@@ -126,6 +130,10 @@ void saveDocument(BuildContext context, String contents) {
 
 void saveFileToMinio(
     WidgetRef ref,BuildContext context, String filename, String htmlText) async {
+  filename = filename.toLowerCase();
+  if (!filename.endsWith(".html")) {
+    filename = "$filename.html";
+  } 
   logNoStack.i("SAVE HTML: about to get minio $htmlText");
   var response = await getMinioTokenResponse(ref);
 
@@ -173,7 +181,7 @@ void saveFileToMinio(
   Uint8List data = Uint8List.fromList(utf8.encode(htmlText));
 
   // Step 3: Upload
-  String bucketName = defaultRealm;
+  String bucketName = "templates";
   String objectName = filename;
   Map<String, String> metadata = {
     'Content-Type': 'text/html',
