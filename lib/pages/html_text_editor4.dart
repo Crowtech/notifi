@@ -151,10 +151,10 @@ class _HtmlTextEditor4State extends ConsumerState<HtmlTextEditor4> {
               onSubmit: loadHtmlFromMinio,
               fieldValues: fieldValues,
             ),
-            SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+           // SingleChildScrollView(
+              // child: Column(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
                   QuillSimpleToolbar(
                     controller: _controller,
                     config: QuillSimpleToolbarConfig(
@@ -237,9 +237,9 @@ class _HtmlTextEditor4State extends ConsumerState<HtmlTextEditor4> {
                   ),
                 ],
               ),
-            ),
-          ],
-        ),
+          //  ),
+        //  ],
+      //  ),
         bottomNavigationBar: Visibility(
           visible: false,
           child: Wrap(
