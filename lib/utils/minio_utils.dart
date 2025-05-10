@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart' as logger;
+import 'package:minio/io.dart';
 import 'package:minio/minio.dart';
 import 'package:notifi/credentials.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
@@ -28,7 +29,7 @@ var logNoStack = logger.Logger(
 Future<String> loadHtmlFromMinio(WidgetRef ref, String filename) async {
     filename = filename.toLowerCase();
     logNoStack.i("LOAD HTML1: filename $filename");
-    if (!filename.startsWith("${MessageTemplate.PREFIX}")) {
+    if (!filename.startsWith(MessageTemplate.PREFIX)) {
       filename = "${MessageTemplate.PREFIX}$filename";
     }
     logNoStack.i("LOAD HTML2: filename $filename");
@@ -110,7 +111,7 @@ Future<String> loadHtmlFromMinio(WidgetRef ref, String filename) async {
 }
 
 Future<String?> loadDocument() async {
-  final file = File(Directory.systemTemp.path + "/quick_start.json");
+  final file = File("${Directory.systemTemp.path}/quick_start.json");
   if (await file.exists()) {
     logNoStack.i("LOAD_DOC: quick start file exists");
     final contents = await file.readAsString();
@@ -139,7 +140,7 @@ void saveFileToMinio(
     WidgetRef ref,BuildContext context, String filename, String htmlText) async {
     filename = filename.toLowerCase();
     logNoStack.i("SAVE HTML1: filename $filename");
-    if (!filename.startsWith("${MessageTemplate.PREFIX.toLowerCase()}")) {
+    if (!filename.startsWith(MessageTemplate.PREFIX.toLowerCase())) {
       filename = "${MessageTemplate.PREFIX.toLowerCase()}$filename";
     }
     logNoStack.i("SAVE HTML2: filename $filename");
@@ -254,3 +255,54 @@ Future<dynamic> getMinioTokenResponse(WidgetRef ref) async {
   );
   return response.body;
 }
+
+Future<String> saveImageFileToMinio(WidgetRef ref,String bucket,String filename,File? file) async {
+    var response = await getMinioTokenResponse(ref);
+
+    debugPrint("MINIO UTILS: Minio reponse=> $response");
+    final document = XmlDocument.parse(response);
+
+    String accessKeyId = document
+        .getElement('AssumeRoleWithWebIdentityResponse')!
+        .getElement('AssumeRoleWithWebIdentityResult')!
+        .getElement('Credentials')!
+        .getElement('AccessKeyId')!
+        .innerText;
+    String secretAccessKey = document
+        .getElement('AssumeRoleWithWebIdentityResponse')!
+        .getElement('AssumeRoleWithWebIdentityResult')!
+        .getElement('Credentials')!
+        .getElement('SecretAccessKey')!
+        .innerText;
+    String sessionToken = document
+        .getElement('AssumeRoleWithWebIdentityResponse')!
+        .getElement('AssumeRoleWithWebIdentityResult')!
+        .getElement('Credentials')!
+        .getElement('SessionToken')!
+        .innerText;
+
+    logNoStack
+        .i("accessKeyId=$accessKeyId , secretAccessKey = $secretAccessKey");
+
+    final minioUri = defaultMinioEndpointUrl.substring('https://'.length);
+    final minio = Minio(
+      endPoint: minioUri,
+      port: 443,
+      accessKey: accessKeyId,
+      secretKey: secretAccessKey,
+      sessionToken: sessionToken,
+      useSSL: true,
+      // enableTrace: true,
+    );
+
+ var metaData = {
+      'Content-Type': 'image/png',
+
+    };
+
+    final etag = await minio.fPutObject(bucket, filename, file!.absolute.path,metaData);
+      //  await minio.putObject(bucket, object, data).fPutObject(defaultRealm, file!.absolute.path, file.path);
+    logNoStack.i("MINIO: uploaded file ${file.path} with etag $etag");
+    return etag;
+   }
+  

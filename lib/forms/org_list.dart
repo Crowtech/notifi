@@ -35,7 +35,7 @@ class OrganizationListWidget extends ConsumerWidget {
       // check if there are new organizations, keep the value
       orgs = responseAsync.value!.results;
       for (Organization org in orgs) {
-          org.selected = false;
+         // org.selected = false;
       }
     }
     return Container(

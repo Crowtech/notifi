@@ -216,6 +216,11 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
                           ...FlutterQuillEmbeds.editorBuilders(
                             imageEmbedConfig: QuillEditorImageEmbedConfig(
                               imageProviderBuilder: (context, imageUrl) {
+                                // if (imageUrl.startsWith('http://localhost') ) {
+                                //   saveImageFileToMinio(ref, defaultRealm, "embedded",imageUrl);
+                                // }
+                                //return null;
+                              //},
                                 // https://pub.dev/packages/flutter_quill_extensions#-image-assets
                                 if (imageUrl.startsWith('assets/')) {
                                   return AssetImage(imageUrl);
@@ -245,7 +250,7 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
           //  ),
         //  ],
       //  ),
-        bottomNavigationBar: Visibility(
+        bottomNavigationBar: const Visibility(
           visible: false,
           child: Wrap(
             children: [],
@@ -258,7 +263,7 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
   void loadHtmlFromMinio(String filename) async {
     filename = filename.toLowerCase();
     logNoStack.i("LOAD HTML1: filename $filename");
-    if (!filename.startsWith("${MessageTemplate.PREFIX.toLowerCase()}")) {
+    if (!filename.startsWith(MessageTemplate.PREFIX.toLowerCase())) {
       filename = "${MessageTemplate.PREFIX.toLowerCase()}$filename";
     }
     logNoStack.i("LOAD HTML2: filename $filename");
