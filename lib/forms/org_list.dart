@@ -86,7 +86,7 @@ class _OrganizationListWidgetState
                 _selections[index] ?? false, //widget.orgs[index].selected,
             value: _selections[index],
             onChanged: (value) {
-              logNoStack.i("OrgList selections = $_orgIds");
+             
               setState(() {
                 _selections[index] = value!;
                 
@@ -99,6 +99,7 @@ class _OrganizationListWidgetState
                 }
                  fieldValues['orgIds'] = _orgIds.toList();
               });
+          
               logNoStack.i("ORG_LIST: value=$value , orgs:$_orgIds");
             },
           );
