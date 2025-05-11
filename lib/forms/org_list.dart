@@ -66,7 +66,7 @@ class _OrganizationListWidgetState
             key: ValueKey(widget.orgs[index].id),
             dense: true,
             title: Text(widget.orgs[index].name!),
-           // selected: widget.orgs[index].selected,
+           selected: true,//widget.orgs[index].selected,
             value: widget.orgs[index].selected,
             onChanged: (value) {
               widget.orgs[index].selected = !value!;
