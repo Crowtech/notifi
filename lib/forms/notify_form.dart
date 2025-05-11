@@ -173,9 +173,12 @@ class _NotifyFormState extends ConsumerState<NotifyForm> {
                                   .watch(validateFormProvider(widget.formCode));
                               logNoStack.i("NOTIFY_FORM: isValid $isValid");
                               bool validGroupOk = true;
+                              int count=0;
                               for (String key in fieldValues.keys) {
                                 validGroupOk &= fieldValues[key];
+                                if (fieldValues[key]) count++;
                               }
+                              validGroupOk = validGroupOk && (count > 2);
                               return ElevatedButton(
                                 key: const Key("notify-submit"),
                                 onPressed: (!isValid && !validGroupOk)
