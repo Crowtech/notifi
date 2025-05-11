@@ -173,7 +173,7 @@ class _NotifyFormState extends ConsumerState<NotifyForm> {
                                   .watch(validateFormProvider(widget.formCode));
                               logNoStack.i("NOTIFY_FORM: isValid $isValid");
                               bool validGroupOk = true;
-                              for (String key : fieldValues.keys) {
+                              for (String key in fieldValues.keys) {
                                 validGroupOk &= fieldValues[key];
                               }
                               return ElevatedButton(
