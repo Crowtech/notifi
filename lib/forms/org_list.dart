@@ -69,15 +69,21 @@ class _OrganizationListWidgetState
            selected: widget.orgs[index].selected,
             value: widget.orgs[index].selected,
             onChanged: (value) {
-              widget.orgs[index].selected = value!;
+              
               if (widget.orgIds.contains(widget.orgs[index].id!)) {
                 widget.orgIds.remove(widget.orgs[index].id!);
+                widget.orgs[index].selected = false;
               } else {
                 widget.orgIds.add(widget.orgs[index].id!);
+                widget.orgs[index].selected = true;
               }
 
               widget.fieldValues['orgIds'] = widget.orgIds.toList();
               logNoStack.i("OrgList selections = ${widget.orgIds}");
+              // setState(() {
+              //   widget.orgs;
+
+              // });
             },
           );
         },
