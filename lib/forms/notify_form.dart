@@ -174,9 +174,11 @@ class _NotifyFormState extends ConsumerState<NotifyForm> {
                               logNoStack.i("NOTIFY_FORM: isValid $isValid");
                               bool validGroupOk = true;
                               int count=0;
+                              if (fieldValues.isNotEmpty) {
                               for (String key in fieldValues.keys) {
                                 validGroupOk &= fieldValues[key];
                                 if (fieldValues[key]) count++;
+                              }
                               }
                               validGroupOk = validGroupOk && (count > 2);
                               return ElevatedButton(
