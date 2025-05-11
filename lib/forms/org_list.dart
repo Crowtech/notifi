@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notifi/models/organization.dart';
 import 'package:notifi/organizations/src/features/organizations/data/organizations_repository_nf.dart';
 
-class OrganizationListWidget extends ConsumerWidget {
+class OrganizationListWidget extends ConsumerStatefulWidget {
   OrganizationListWidget({
     super.key,
     required this.formKey,
@@ -18,26 +18,41 @@ class OrganizationListWidget extends ConsumerWidget {
   final Map<String, dynamic> fieldValues;
   final String formCode;
   final String fieldCode;
+  int? totalResults = 0;
 
   int? value;
   Set<int> orgIds = {};
+  Map<int, bool> orgIdSelected = {};
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    logNoStack.i("orgList: build");
-    final responseAsync = ref.watch(
+  ConsumerState<OrganizationListWidget> createState() =>
+      _OrganizationListWidgetState();
+}
+
+class _OrganizationListWidgetState
+    extends ConsumerState<OrganizationListWidget> {
+  @override
+  void initState() {
+    super.initState();
+    final responseAsync = ref.read(
       //fetchOrganizationsNestFilterProvider(nestFilter: nestFilter),
       fetchOrganizationsNestFilterProvider,
     );
-    final totalResults = responseAsync.valueOrNull?.totalResults;
+    widget.totalResults = responseAsync.valueOrNull?.totalResults;
 
     if (responseAsync.hasValue) {
       // check if there are new organizations, keep the value
-      orgs = responseAsync.value!.results;
-      for (Organization org in orgs) {
-         // org.selected = false;
+      widget.orgs = responseAsync.value!.results;
+      for (Organization org in widget.orgs) {
+        org.selected = false;
       }
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    logNoStack.i("orgList: build");
+
     return Container(
       alignment: Alignment.centerLeft,
       constraints: const BoxConstraints(maxHeight: 201),
@@ -45,24 +60,24 @@ class OrganizationListWidget extends ConsumerWidget {
       child: ListView.builder(
         physics: const AlwaysScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemCount: totalResults, //_layers.length,
+        itemCount: widget.totalResults!, //_layers.length,
         itemBuilder: (context, index) {
           return CheckboxListTile(
-            key: ValueKey(orgs[index].id),
+            key: ValueKey(widget.orgs[index].id),
             dense: true,
-            title: Text(orgs[index].name!),
-            selected: orgs[index].selected,
-            value: orgs[index].selected,
-            onChanged: (value) {    
-              orgs[index].selected = !value!; 
-              if (orgIds.contains(orgs[index].id!)) {
-                orgIds.remove(orgs[index].id!);
+            title: Text(widget.orgs[index].name!),
+           // selected: widget.orgs[index].selected,
+            value: widget.orgs[index].selected,
+            onChanged: (value) {
+              widget.orgs[index].selected = !value!;
+              if (widget.orgIds.contains(widget.orgs[index].id!)) {
+                widget.orgIds.remove(widget.orgs[index].id!);
               } else {
-                orgIds.add(orgs[index].id!);
+                widget.orgIds.add(widget.orgs[index].id!);
               }
-              
-              fieldValues['orgIds'] = orgIds.toList();
-              logNoStack.i("OrgList selections = $orgIds");
+
+              widget.fieldValues['orgIds'] = widget.orgIds.toList();
+              logNoStack.i("OrgList selections = ${widget.orgIds}");
             },
           );
         },
