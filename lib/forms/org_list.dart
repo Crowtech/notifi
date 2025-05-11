@@ -89,11 +89,11 @@ class _OrganizationListWidgetState
               setState(() {
                 _selections[index] = value!;
                 fieldValues['orgIds'] = widget.orgIds.toList();
-                if (widget.orgIds.contains(widget.orgs[index].id!)) {
-                  widget.orgIds.remove(widget.orgs[index].id!);
+                if (widget.orgIds.contains(_orgs[index].id!)) {
+                  widget.orgIds.remove(_orgs[index].id!);
                   _orgs[index].selected = false;
                 } else {
-                  widget.orgIds.add(widget.orgs[index].id!);
+                  widget.orgIds.add(_orgs[index].id!);
                   _orgs[index].selected = true;
                 }
               });
