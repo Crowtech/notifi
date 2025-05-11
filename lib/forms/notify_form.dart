@@ -10,6 +10,7 @@ import 'package:notifi/forms/validations.dart/email_validation.dart';
 import 'package:notifi/forms/validations.dart/message_validation.dart';
 import 'package:notifi/forms/validations.dart/name_validation.dart';
 import 'package:notifi/forms/validations.dart/subject_validation.dart';
+import 'package:notifi/forms/validations.dart/topic_validation.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:notifi/models/person.dart';
 import 'package:notifi/persons/src/features/persons/data/persons_repository.dart';
@@ -151,8 +152,12 @@ final fcmController = TextEditingController();
                             enabled: true,
                             itemCategory: nt.t.form.topic,
                             itemName: nt.t.form.topic,
-                            itemValidation: nt.t.form.topic_validation,
-                            hintText: nt.t.form.topic_hint,
+                            itemValidation: nt.t.form.topic_validation(
+                              item: nt.t.topic_capitalized,
+                            ),
+                            hintText: nt.t.form.topic_hint(
+                              item: nt.t.topic_capitalized,
+                            ),
                             regex: TOPIC_REGEX,
                             inputFormatters: topicInputFormatter,
                           ),
