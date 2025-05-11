@@ -31,31 +31,37 @@ class OrganizationListWidget extends ConsumerStatefulWidget {
 
 class _OrganizationListWidgetState
     extends ConsumerState<OrganizationListWidget> {
-
-Map<int,bool> selections = {};
-Map<String, dynamic> fieldValues = {};
-int totalResults = 0;
+  Map<int, bool> _selections = {};
+  Map<String, dynamic> fieldValues = {};
+  int totalResults = 0;
+  List<Organization> _orgs = [];
 
   @override
   void initState() {
+    Map<int, bool> selections = {};
+    List<Organization> orgs = [];
     super.initState();
     fieldValues = widget.fieldValues;
     final responseAsync = ref.read(
       //fetchOrganizationsNestFilterProvider(nestFilter: nestFilter),
       fetchOrganizationsNestFilterProvider,
     );
-    totalResults = responseAsync.valueOrNull?.totalResults ?? 0;
 
     if (responseAsync.hasValue) {
       // check if there are new organizations, keep the value
-      widget.orgs = responseAsync.value!.results;
+      orgs = responseAsync.value!.results;
       int index = 0;
-      for (Organization org in widget.orgs) {
+      for (Organization org in orgs) {
         org.selected = false;
         selections[index] = false;
         index++;
       }
     }
+    setState(() {
+      totalResults = responseAsync.valueOrNull?.totalResults ?? 0;
+      _orgs = orgs;
+      _selections = selections;
+    });
   }
 
   @override
@@ -72,26 +78,24 @@ int totalResults = 0;
         itemCount: totalResults, //_layers.length,
         itemBuilder: (context, index) {
           return CheckboxListTile(
-            key: ValueKey(widget.orgs[index].id),
+            key: ValueKey(index),
             dense: true,
-            title: Text(widget.orgs[index].name!),
-           selected: selections[index]?? false, //widget.orgs[index].selected,
-            value: selections[index],
+            title: Text(_orgs[index].name!),
+            selected:
+                _selections[index] ?? false, //widget.orgs[index].selected,
+            value: _selections[index],
             onChanged: (value) {
-              
-              if (widget.orgIds.contains(widget.orgs[index].id!)) {
-                widget.orgIds.remove(widget.orgs[index].id!);
-                widget.orgs[index].selected = false;
-              } else {
-                widget.orgIds.add(widget.orgs[index].id!);
-                widget.orgs[index].selected = true;
-              }
-
-              
               logNoStack.i("OrgList selections = ${widget.orgIds}");
               setState(() {
-                selections[index] = value!;
+                _selections[index] = value!;
                 fieldValues['orgIds'] = widget.orgIds.toList();
+                if (widget.orgIds.contains(widget.orgs[index].id!)) {
+                  widget.orgIds.remove(widget.orgs[index].id!);
+                  _orgs[index].selected = false;
+                } else {
+                  widget.orgIds.add(widget.orgs[index].id!);
+                  _orgs[index].selected = true;
+                }
               });
             },
           );
