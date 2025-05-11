@@ -171,14 +171,16 @@ class _NotifyFormState extends ConsumerState<NotifyForm> {
                             Consumer(builder: (context, watch, child) {
                               bool isValid = ref
                                   .watch(validateFormProvider(widget.formCode));
-                              logNoStack.i("MESSAGE_FORM: isValid $isValid");
+                              logNoStack.i("NOTIFY_FORM: isValid $isValid");
                               return ElevatedButton(
                                 key: const Key("notify-submit"),
                                 onPressed: !isValid
                                     ? null
                                     : () async {
+                                      logNoStack.i("NOTIFY_FORM: Send onPressed");
                                         if (_formKey.currentState != null &&
                                             _formKey.currentState!.validate()) {
+                                               logNoStack.i("NOTIFY_FORM: Send onPressed and Valid");
 //"https://pantag.crowtech.com.au/g/firebase/send/${TITLE}/${MESSAGE}?fcm=${FCM}&usercode=${USERCODE}&username=${USERNAME}&topic=${TOPIC}"  -H "Content-Type: application/json" -H "Authorization: Bearer ${ACCESS_TOKEN}"`
                                           // send message
                                           String subject =
@@ -228,6 +230,8 @@ class _NotifyFormState extends ConsumerState<NotifyForm> {
                                               maxWidth: 300,
                                             );
                                           });
+                                        } else {
+                                           logNoStack.i("NOTIFY_FORM: Send onPressed NOT VALID");
                                         }
                                       },
                                 child: Text(nt.t.response.send),
