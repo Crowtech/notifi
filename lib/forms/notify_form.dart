@@ -45,7 +45,7 @@ class _NotifyFormState extends ConsumerState<NotifyForm> {
   final messageController = TextEditingController();
   final topicController = TextEditingController();
   final usernameController = TextEditingController();
-final fcmController = TextEditingController();
+  final fcmController = TextEditingController();
 
   @override
   void initState() {
@@ -72,184 +72,180 @@ final fcmController = TextEditingController();
     logNoStack.i("NOTIFY_FORM: BUILD ");
 
     return Dialog(
-     
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: SingleChildScrollView(
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Flexible(
-                    child: AnimatedSize(
-                      // animate changes in size, when the list
-                      //size is changing, e.g. search functionality
-                      duration: const Duration(milliseconds: 200),
-                      child: Column(
-                        children: [
-                          Text(
-                            nt.t.messages,
-                            style: const TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Flexible(
+                  child: AnimatedSize(
+                    // animate changes in size, when the list
+                    //size is changing, e.g. search functionality
+                    duration: const Duration(milliseconds: 200),
+                    child: Column(
+                      children: [
+                        Text(
+                          nt.t.messages,
+                          style: const TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
                           ),
-                          const SizedBox(height: 16),
-                          TextFormFieldWidget(
-                       
-                            controller: subjectController,
-                            validationDebounce:
-                                const Duration(milliseconds: 500),
-                                 fieldValues: fieldValues,
-                            formCode: widget.formCode,
-                            fieldCode: "true-subject",
-                            itemCategory: nt.t.subject,
-                            itemName: nt.t.subject,
-                            itemValidation: nt.t.form.subject_validation(
-                              item: nt.t.subject_capitalized,
-                            ),
-                            hintText: nt.t.form.subject_hint,
-                            regex: SUBJECT_REGEX,
+                        ),
+                        const SizedBox(height: 16),
+                        TextFormFieldWidget(
+                          controller: subjectController,
+                          validationDebounce: const Duration(milliseconds: 500),
+                          fieldValues: fieldValues,
+                          formCode: widget.formCode,
+                          fieldCode: "true-subject",
+                          itemCategory: nt.t.subject,
+                          itemName: nt.t.subject,
+                          itemValidation: nt.t.form.subject_validation(
+                            item: nt.t.subject_capitalized,
                           ),
-                          const SizedBox(height: 16),
-                          TextFormFieldWidget(
-                            controller: messageController,
-                             fieldValues: fieldValues,
-                            formCode: widget.formCode,
-                            fieldCode: "true-message",
-                            itemCategory: nt.t.form.message,
-                            itemName: nt.t.form.message,
-                            itemValidation: nt.t.form.message_validation,
-                            hintText: nt.t.form.message_hint,
-                            regex: MESSAGE_REGEX,
+                          hintText: nt.t.form.subject_hint,
+                          regex: SUBJECT_REGEX,
+                        ),
+                        const SizedBox(height: 16),
+                        TextFormFieldWidget(
+                          controller: messageController,
+                          fieldValues: fieldValues,
+                          formCode: widget.formCode,
+                          fieldCode: "true-message",
+                          itemCategory: nt.t.form.message,
+                          itemName: nt.t.form.message,
+                          itemValidation: nt.t.form.message_validation,
+                          hintText: nt.t.form.message_hint,
+                          regex: MESSAGE_REGEX,
+                        ),
+                        const SizedBox(height: 16),
+                        TextFormFieldWidget(
+                          controller: usernameController,
+                          fieldValues: fieldValues,
+                          // isValidatingMessage:
+                          //     nt.t.form.validating(field: nt.t.form.username),
+                          formCode: widget.formCode,
+                          fieldCode: "true-username",
+                          enabled: true,
+                          optional: true,
+                          itemCategory: nt.t.form.username,
+                          itemName: nt.t.form.username,
+                          itemValidation: nt.t.form.username_validation,
+                          hintText: nt.t.form.username_hint,
+                          regex: EMAIL_REGEX,
+                          inputFormatters: emailInputFormatter,
+                        ),
+                        const SizedBox(height: 16),
+                        TextFormFieldWidget(
+                          controller: topicController,
+                          fieldValues: fieldValues,
+                          // isValidatingMessage:
+                          //     nt.t.form.validating(field: nt.t.form.topic),
+                          formCode: widget.formCode,
+                          fieldCode: "true-topic",
+                          enabled: true,
+                          optional: true,
+                          itemCategory: nt.t.form.topic,
+                          itemName: nt.t.form.topic,
+                          itemValidation: nt.t.form.topic_validation(
+                            item: nt.t.topic_capitalized,
                           ),
-                          const SizedBox(height: 16),
-                          TextFormFieldWidget(
-                            controller: usernameController,
-                             fieldValues: fieldValues,
-                            isValidatingMessage:
-                                nt.t.form.validating(field: nt.t.form.username),             
-                            formCode: widget.formCode,
-                            fieldCode: "true-username",
-                            enabled: true,
-                            optional: true,
-                            itemCategory: nt.t.form.username,
-                            itemName: nt.t.form.username,
-                            itemValidation: nt.t.form.username_validation,
-                            hintText: nt.t.form.username_hint,
-                            regex: EMAIL_REGEX,
-                            inputFormatters: emailInputFormatter,
+                          hintText: nt.t.form.topic_hint(
+                            item: nt.t.topic_capitalized,
                           ),
-                                                const SizedBox(height: 16),
-                          TextFormFieldWidget(
-                            controller: topicController,
-                             fieldValues: fieldValues,
-                            // isValidatingMessage:
-                            //     nt.t.form.validating(field: nt.t.form.topic),             
-                            formCode: widget.formCode,
-                            fieldCode: "true-topic",
-                            enabled: true,
-                            optional: true,
-                            itemCategory: nt.t.form.topic,
-                            itemName: nt.t.form.topic,
-                            itemValidation: nt.t.form.topic_validation(
-                              item: nt.t.topic_capitalized,
-                            ),
-                            hintText: nt.t.form.topic_hint(
-                              item: nt.t.topic_capitalized,
-                            ),
-                            regex: TOPIC_REGEX,
-                            inputFormatters: topicInputFormatter,
-                          ),
-                          const SizedBox(height: 16),
-
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              CancelButtonWidget(
-                                  formKey: _formKey, formCode: widget.formCode),
-                              const SizedBox(width: 16),
-                              //SubmitButtonWidget(formKey: _formKey, formCode: widget.formCode)
-                              Consumer(builder: (context, watch, child) {
-                                bool isValid = ref.watch(
-                                    validateFormProvider(widget.formCode));
-                                logNoStack.i("MESSAGE_FORM: isValid $isValid");
-                                return ElevatedButton(
-                                  key: const Key("notify-submit"),
-                                  onPressed: !isValid
-                                      ? null
-                                      : () async {
-                                          if (_formKey.currentState != null &&
-                                              _formKey.currentState!
-                                                  .validate()) {
+                          regex: TOPIC_REGEX,
+                          inputFormatters: topicInputFormatter,
+                        ),
+                        const SizedBox(height: 16),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            CancelButtonWidget(
+                                formKey: _formKey, formCode: widget.formCode),
+                            const SizedBox(width: 16),
+                            //SubmitButtonWidget(formKey: _formKey, formCode: widget.formCode)
+                            Consumer(builder: (context, watch, child) {
+                              bool isValid = ref
+                                  .watch(validateFormProvider(widget.formCode));
+                              logNoStack.i("MESSAGE_FORM: isValid $isValid");
+                              return ElevatedButton(
+                                key: const Key("notify-submit"),
+                                onPressed: !isValid
+                                    ? null
+                                    : () async {
+                                        if (_formKey.currentState != null &&
+                                            _formKey.currentState!.validate()) {
 //"https://pantag.crowtech.com.au/g/firebase/send/${TITLE}/${MESSAGE}?fcm=${FCM}&usercode=${USERCODE}&username=${USERNAME}&topic=${TOPIC}"  -H "Content-Type: application/json" -H "Authorization: Bearer ${ACCESS_TOKEN}"`
-                                            // send message
-                                           String subject = fieldValues['subject'];
-String message = fieldValues['message'];
-String fcm = fieldValues['fcm'];
-String username = fieldValues['username'];
-String topic = fieldValues['topic'];
-                                            var token = ref
-                                                .read(nestAuthProvider.notifier)
-                                                .token;
-                                            var apiPath =
-                                                "$defaultAPIBaseUrl$defaultApiPrefixPath/notifications/send/$subject/$message?fcm=$fcm&username=$username&topic=$topic";
+                                          // send message
+                                          String subject =
+                                              fieldValues['subject'];
+                                          String message =
+                                              fieldValues['message'];
+                                          String fcm = fieldValues['fcm'];
+                                          String username =
+                                              fieldValues['username'];
+                                          String topic = fieldValues['topic'];
+                                          var token = ref
+                                              .read(nestAuthProvider.notifier)
+                                              .token;
+                                          var apiPath =
+                                              "$defaultAPIBaseUrl$defaultApiPrefixPath/notifications/send/$subject/$message?fcm=$fcm&username=$username&topic=$topic";
 
-                                            logNoStack.i(
-                                                "NOTIFY_FORM: sending message to $apiPath");
-                                            apiGet(
-                                                    token!, apiPath)
-                                                .then((result) {
-                                              logNoStack.i("result is $result");
+                                          logNoStack.i(
+                                              "NOTIFY_FORM: sending message to $apiPath");
+                                          apiGet(token!, apiPath).then(
+                                              (result) {
+                                            logNoStack.i("result is $result");
 
-                                              StatusAlert.show(
-                                                context,
-                                                duration:
-                                                    const Duration(seconds: 2),
-                                                title: nt.t.form.message,
-                                                subtitle: nt.t.form.saved,
-                                                configuration:
-                                                    const IconConfiguration(
-                                                        icon: Icons.done),
-                                                maxWidth: 300,
-                                              );
+                                            StatusAlert.show(
+                                              context,
+                                              duration:
+                                                  const Duration(seconds: 2),
+                                              title: nt.t.form.message,
+                                              subtitle: nt.t.form.saved,
+                                              configuration:
+                                                  const IconConfiguration(
+                                                      icon: Icons.done),
+                                              maxWidth: 300,
+                                            );
 
-                                              Navigator.of(context).pop();
-                                            }, onError: (error) {
-                                              logNoStack.e("error is $error");
-                                              StatusAlert.show(
-                                                context,
-                                                duration:
-                                                    const Duration(seconds: 2),
-                                                title: nt.t.form.message,
-                                                subtitle:
-                                                    nt.t.form.error_saving,
-                                                configuration:
-                                                    const IconConfiguration(
-                                                        icon: Icons.error),
-                                                maxWidth: 300,
-                                              );
-                                            });
-                                          }
-                                        },
-                                  child: Text(nt.t.response.send),
-                                );
-                              })
-                              //   },
-                              //   ),
-                            ],
-                          ),
-                        ],
-                      ),
+                                            Navigator.of(context).pop();
+                                          }, onError: (error) {
+                                            logNoStack.e("error is $error");
+                                            StatusAlert.show(
+                                              context,
+                                              duration:
+                                                  const Duration(seconds: 2),
+                                              title: nt.t.form.message,
+                                              subtitle: nt.t.form.error_saving,
+                                              configuration:
+                                                  const IconConfiguration(
+                                                      icon: Icons.error),
+                                              maxWidth: 300,
+                                            );
+                                          });
+                                        }
+                                      },
+                                child: Text(nt.t.response.send),
+                              );
+                            })
+                            //   },
+                            //   ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
+      ),
     );
   }
 }
