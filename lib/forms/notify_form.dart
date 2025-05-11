@@ -172,9 +172,13 @@ class _NotifyFormState extends ConsumerState<NotifyForm> {
                               bool isValid = ref
                                   .watch(validateFormProvider(widget.formCode));
                               logNoStack.i("NOTIFY_FORM: isValid $isValid");
+                              bool validGroupOk = true;
+                              for (String key : fieldValues.keys) {
+                                validGroupOk &= fieldValues[key];
+                              }
                               return ElevatedButton(
                                 key: const Key("notify-submit"),
-                                onPressed: !isValid
+                                onPressed: (!isValid && !validGroupOk)
                                     ? null
                                     : () async {
                                       logNoStack.i("NOTIFY_FORM: Send onPressed");
