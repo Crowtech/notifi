@@ -90,7 +90,7 @@ final fcmController = TextEditingController();
                       child: Column(
                         children: [
                           Text(
-                            nt.t.form.create(item: capitalizedItem),
+                            nt.t.messages,
                             style: const TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
