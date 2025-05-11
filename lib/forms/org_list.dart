@@ -66,10 +66,10 @@ class _OrganizationListWidgetState
             key: ValueKey(widget.orgs[index].id),
             dense: true,
             title: Text(widget.orgs[index].name!),
-           selected: true,//widget.orgs[index].selected,
-            value: true,//widget.orgs[index].selected,
+           selected: widget.orgs[index].selected,
+            value: widget.orgs[index].selected,
             onChanged: (value) {
-              widget.orgs[index].selected = !value!;
+              widget.orgs[index].selected = value!;
               if (widget.orgIds.contains(widget.orgs[index].id!)) {
                 widget.orgIds.remove(widget.orgs[index].id!);
               } else {
