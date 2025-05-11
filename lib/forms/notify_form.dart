@@ -132,8 +132,9 @@ final fcmController = TextEditingController();
                             isValidatingMessage:
                                 nt.t.form.validating(field: nt.t.form.username),             
                             formCode: widget.formCode,
-                            fieldCode: "false-username",
+                            fieldCode: "true-username",
                             enabled: true,
+                            optional: true,
                             itemCategory: nt.t.form.username,
                             itemName: nt.t.form.username,
                             itemValidation: nt.t.form.username_validation,
@@ -148,8 +149,9 @@ final fcmController = TextEditingController();
                             isValidatingMessage:
                                 nt.t.form.validating(field: nt.t.form.topic),             
                             formCode: widget.formCode,
-                            fieldCode: "false-topic",
+                            fieldCode: "true-topic",
                             enabled: true,
+                            optional: true,
                             itemCategory: nt.t.form.topic,
                             itemName: nt.t.form.topic,
                             itemValidation: nt.t.form.topic_validation(
