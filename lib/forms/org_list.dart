@@ -21,7 +21,7 @@ class OrganizationListWidget extends ConsumerStatefulWidget {
   int? totalResults = 0;
 
   int? value;
-  Set<int> orgIds = {};
+
   Map<int, bool> orgIdSelected = {};
 
   @override
@@ -35,6 +35,7 @@ class _OrganizationListWidgetState
   Map<String, dynamic> fieldValues = {};
   int totalResults = 0;
   List<Organization> _orgs = [];
+    Set<int> _orgIds = {};
 
   @override
   void initState() {
@@ -85,17 +86,18 @@ class _OrganizationListWidgetState
                 _selections[index] ?? false, //widget.orgs[index].selected,
             value: _selections[index],
             onChanged: (value) {
-              logNoStack.i("OrgList selections = ${widget.orgIds}");
+              logNoStack.i("OrgList selections = ${_orgIds}");
               setState(() {
                 _selections[index] = value!;
-                fieldValues['orgIds'] = widget.orgIds.toList();
-                if (widget.orgIds.contains(_orgs[index].id!)) {
-                  widget.orgIds.remove(_orgs[index].id!);
+                
+                if (_orgIds.contains(_orgs[index].id!)) {
+                  _orgIds.remove(_orgs[index].id!);
                   _orgs[index].selected = false;
                 } else {
-                  widget.orgIds.add(_orgs[index].id!);
+                  _orgIds.add(_orgs[index].id!);
                   _orgs[index].selected = true;
                 }
+                 fieldValues['orgIds'] = _orgIds.toList();
               });
             },
           );
