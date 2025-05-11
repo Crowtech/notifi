@@ -33,15 +33,18 @@ class _OrganizationListWidgetState
     extends ConsumerState<OrganizationListWidget> {
 
 Map<int,bool> selections = {};
+Map<String, dynamic> fieldValues = {};
+int totalResults = 0;
 
   @override
   void initState() {
     super.initState();
+    fieldValues = widget.fieldValues;
     final responseAsync = ref.read(
       //fetchOrganizationsNestFilterProvider(nestFilter: nestFilter),
       fetchOrganizationsNestFilterProvider,
     );
-    widget.totalResults = responseAsync.valueOrNull?.totalResults;
+    totalResults = responseAsync.valueOrNull?.totalResults ?? 0;
 
     if (responseAsync.hasValue) {
       // check if there are new organizations, keep the value
@@ -66,7 +69,7 @@ Map<int,bool> selections = {};
       child: ListView.builder(
         physics: const AlwaysScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemCount: widget.totalResults!, //_layers.length,
+        itemCount: totalResults, //_layers.length,
         itemBuilder: (context, index) {
           return CheckboxListTile(
             key: ValueKey(widget.orgs[index].id),
@@ -84,11 +87,11 @@ Map<int,bool> selections = {};
                 widget.orgs[index].selected = true;
               }
 
-              widget.fieldValues['orgIds'] = widget.orgIds.toList();
+              
               logNoStack.i("OrgList selections = ${widget.orgIds}");
               setState(() {
                 selections[index] = value!;
-
+                fieldValues['orgIds'] = widget.orgIds.toList();
               });
             },
           );
