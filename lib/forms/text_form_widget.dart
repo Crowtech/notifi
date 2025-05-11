@@ -222,7 +222,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
       },
       onChanged: (text) async {
         isDirty = true;
-        if (text.isEmpty) {
+        if (text.isEmpty && !widget.optional) {
           setState(() {
             isValid = false;
             logNoStack.i('is empty');
