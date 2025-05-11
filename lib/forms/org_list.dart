@@ -46,9 +46,11 @@ Map<int,bool> selections = {};
     if (responseAsync.hasValue) {
       // check if there are new organizations, keep the value
       widget.orgs = responseAsync.value!.results;
+      int index = 0;
       for (Organization org in widget.orgs) {
         org.selected = false;
-        selections[org.id!] = false;
+        selections[index] = false;
+        index++;
       }
     }
   }
@@ -70,7 +72,7 @@ Map<int,bool> selections = {};
             key: ValueKey(widget.orgs[index].id),
             dense: true,
             title: Text(widget.orgs[index].name!),
-           selected: widget.orgs[index].selected,
+           selected: selections[index]?? false, //widget.orgs[index].selected,
             value: selections[index],
             onChanged: (value) {
               selections[index] = value!;
