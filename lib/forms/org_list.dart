@@ -75,7 +75,7 @@ Map<int,bool> selections = {};
            selected: selections[index]?? false, //widget.orgs[index].selected,
             value: selections[index],
             onChanged: (value) {
-              selections[index] = value!;
+              
               if (widget.orgIds.contains(widget.orgs[index].id!)) {
                 widget.orgIds.remove(widget.orgs[index].id!);
                 widget.orgs[index].selected = false;
@@ -86,10 +86,10 @@ Map<int,bool> selections = {};
 
               widget.fieldValues['orgIds'] = widget.orgIds.toList();
               logNoStack.i("OrgList selections = ${widget.orgIds}");
-              // setState(() {
-              //   widget.orgs;
+              setState(() {
+                selections[index] = value!;
 
-              // });
+              });
             },
           );
         },
