@@ -31,6 +31,9 @@ class OrganizationListWidget extends ConsumerStatefulWidget {
 
 class _OrganizationListWidgetState
     extends ConsumerState<OrganizationListWidget> {
+
+Map<int,bool> selections = {};
+
   @override
   void initState() {
     super.initState();
@@ -45,6 +48,7 @@ class _OrganizationListWidgetState
       widget.orgs = responseAsync.value!.results;
       for (Organization org in widget.orgs) {
         org.selected = false;
+        selections[org.id!] = false;
       }
     }
   }
@@ -67,9 +71,9 @@ class _OrganizationListWidgetState
             dense: true,
             title: Text(widget.orgs[index].name!),
            selected: widget.orgs[index].selected,
-            value: widget.orgs[index].selected,
+            value: selections[index],
             onChanged: (value) {
-              
+              selections[index] = value!;
               if (widget.orgIds.contains(widget.orgs[index].id!)) {
                 widget.orgIds.remove(widget.orgs[index].id!);
                 widget.orgs[index].selected = false;
