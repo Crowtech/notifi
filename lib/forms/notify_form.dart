@@ -146,8 +146,8 @@ final fcmController = TextEditingController();
                           TextFormFieldWidget(
                             controller: topicController,
                              fieldValues: fieldValues,
-                            isValidatingMessage:
-                                nt.t.form.validating(field: nt.t.form.topic),             
+                            // isValidatingMessage:
+                            //     nt.t.form.validating(field: nt.t.form.topic),             
                             formCode: widget.formCode,
                             fieldCode: "true-topic",
                             enabled: true,
