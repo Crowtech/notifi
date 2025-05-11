@@ -236,6 +236,11 @@ Future<http.Response> apiPutDataStrNoLocale(
   }
 }
 
+Future<http.Response> apiGet(
+    String? token, String apiPath) async {
+    return apiGetData(token,apiPath,"application/json");
+    }
+
 Future<http.Response> apiGetData(
     String? token, String apiPath, String accept) async {
   var url = Uri.parse(apiPath);

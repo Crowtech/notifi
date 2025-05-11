@@ -1,5 +1,5 @@
 {
-  "app_title(ignoreGpt)": "Crowtech", 
+  "app_title(ignoreGpt)": "Crowtech",
   "notfound_404": "404 - Page not found!",
   "menu": {
     "account": "Account Menu",
@@ -25,7 +25,7 @@
   "audio_access_denied": "You have denied audio access",
   "audio_access_denied_without_prompt": "Please go to Settings app to enable audio access",
   "audio_access_restricted": "Audio access is restricted",
-  "authored_by": "by ${name}" ,
+  "authored_by": "by ${name}",
   "auto": "Auto",
   "billing": "Billing",
   "camera_1": "Camera 1",
@@ -46,7 +46,7 @@
   "exposure_mode": "Exposure Mode",
   "exposure_offset": "Exposure Offset",
   "favourite": "Favourite",
-  "form" : {
+  "form": {
     "authorized": "I declare that I am Authorized to create this ${item}",
     "validating": "Please wait for the ${field} validation to complete",
     "already_exists": "A ${item} with this ${field} already exists",
@@ -74,12 +74,27 @@
     "email": "Email",
     "email_validation": "Please enter valid ${item} email",
     "email_hint": "Enter email",
+    "message": "Message",
+    "message_capitalized": "Message",
+    "message_validation": "Please enter valid message",
+    "message_hint": "Enter message",
     "url": "Web Address",
     "url_validation": "Please enter valid ${item} web address e.g. https://www.google.com",
     "url_hint": "Enter ${item} web address",
+    "username": "username",
+    "username_capitalized": "Username",
+    "username_validation": "Please enter valid username",
+    "username_hint": "Enter username",
+    "subject": "Subject",
+    "subject_validation": "Please enter valid ${item}, limit to 250 characters",
+    "subject_hint": "Enter subject",
     "template": "Template",
     "template_validation": "Please enter valid ${item} code e.g. TPL_XYZ123",
     "template_hint": "Enter ${item} template code",
+    "topic": "topic",
+    "topic_capitalized": "Topic",
+    "topic_validation": "Please enter valid ${item}",
+    "topic_hint": "Enter ${item}",
     "org_type": "${item} Type",
     "saved": "Saved",
     "deleted": "Deleted ${item}"
@@ -87,8 +102,8 @@
   "firstname": "Firstname",
   "focus_mode": "Focus Mode",
   "groups": "Groups",
-  "group_types_title" : "Group Types",
-  "group_types":{
+  "group_types_title": "Group Types",
+  "group_types": {
     "default": "Default",
     "commercial": "Commercial",
     "government": "Government",
@@ -114,7 +129,7 @@
   "intro_description": "Advanced Design",
   "language": "Language",
   "lastname": "Lastname",
-  "light" : "light",
+  "light": "light",
   "location_permission_denied": "Location permissions are denied",
   "location_services_disabled": "Location services are disabled. Please enable the services",
   "location_permission_permanent_denied": "Location permissions are permanently denied, we cannot request permissions.",
@@ -124,6 +139,7 @@
   "logout": "Logout",
   "map": "Map",
   "members": "Members",
+  "member": "Message",
   "messages": "Messages",
   "movement_status": "Is Moving?",
   "moving": "Moving",
@@ -131,7 +147,7 @@
   "next": "Next",
   "none": "None",
   "odometer": "Odometer",
-  "openstreetmap" : "OpenStreetMap contributors",
+  "openstreetmap": "OpenStreetMap contributors",
   "optional": "Optional",
   "organization": "organization",
   "organization_capitalized": "Organization",
@@ -140,7 +156,6 @@
   "privacy_policy": "Privacy Policy",
   "profile": "Profile",
   "pulltorefresh": "Pull to refresh",
-
   "resource": {
     "artifact": "Artifact",
     "equipment": "Equipment",
@@ -167,9 +182,10 @@
     "delete_sure": "Are you sure you want to delete this item?",
     "edit": "Edit",
     "save": "Save",
+    "send": "Send",
     "submit": "Submit",
     "update": "Update",
-    "create": "Create", 
+    "create": "Create",
     "join": "Join"
   },
   "saving": "Saving ...",
@@ -188,7 +204,6 @@
     "teams": "Select Teams ..",
     "vehicles": "Select Vehicles .."
   },
-  
   "reset_offset": "Reset Offset",
   "resetting_exposure_point": "Resetting exposure point",
   "resetting_focus_point": "Resetting focus point",
@@ -205,11 +220,15 @@
   "skip": "Skip",
   "splash_text": "Splash Screen",
   "still": "Still",
+  "subject": "subject",
+  "subject_capitalized": "Subject",
   "template": "template",
   "template_capitalized": "Template",
   "terms_and_conditions": "Terms & Conditions",
   "test_page": "Test Page",
   "text": "Text",
+  "topic": "topic",
+  "topic_capitalized": "Topic",
   "unknown": {
     "person": "Unnamed User",
     "organization": "Unnamed Organization",
@@ -223,10 +242,8 @@
   "update_account": "Update Account",
   "zoom_in": "Zoom In",
   "zoom_out": "Zoom out",
-
   "locales(map)": {
     "en": "English",
     "zh": "Chinese"
   }
- 
 }
