@@ -145,8 +145,9 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
         resizeToAvoidBottomInset: true,
         
         body: 
-        SingleChildScrollView(
-        child: Column(
+        // SingleChildScrollView(
+        // child: 
+        Column(
           children: [
             CreateTemplateForm(
               formCode: "template",
@@ -247,7 +248,7 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
                   ),
                 ],
               ),
-        ),
+     //   ),
         bottomNavigationBar: const Visibility(
           visible: false,
           child: Wrap(
