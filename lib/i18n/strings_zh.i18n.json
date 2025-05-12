@@ -27,6 +27,7 @@
   "audio_access_restricted": "音频访问受到限制",
   "authored_by": "作者 ${name}",
   "auto": "自动的",
+  "attributions": "归因",
   "billing": "计费",
   "camera_1": "相机 1",
   "camera_2": "相机 2",
@@ -242,6 +243,7 @@
   "update_account": "更新账户",
   "zoom_in": "放大",
   "zoom_out": "缩小",
+   "zoom_to_user": "放大到用户",
   "locales(map)": {
     "en": "英文",
     "zh": "中文"

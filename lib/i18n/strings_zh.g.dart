@@ -50,6 +50,7 @@ class TranslationsZh extends Translations {
 	@override String get audio_access_restricted => '音频访问受到限制';
 	@override String authored_by({required Object name}) => '作者 ${name}';
 	@override String get auto => '自动的';
+	@override String get attributions => '归因';
 	@override String get billing => '计费';
 	@override String get camera_1 => '相机 1';
 	@override String get camera_2 => '相机 2';
@@ -138,6 +139,7 @@ class TranslationsZh extends Translations {
 	@override String get update_account => '更新账户';
 	@override String get zoom_in => '放大';
 	@override String get zoom_out => '缩小';
+	@override String get zoom_to_user => '放大到用户';
 	@override Map<String, String> get locales => {
 		'en': '英文',
 		'zh': '中文',
@@ -396,6 +398,7 @@ extension on TranslationsZh {
 			case 'audio_access_restricted': return '音频访问受到限制';
 			case 'authored_by': return ({required Object name}) => '作者 ${name}';
 			case 'auto': return '自动的';
+			case 'attributions': return '归因';
 			case 'billing': return '计费';
 			case 'camera_1': return '相机 1';
 			case 'camera_2': return '相机 2';
@@ -595,6 +598,7 @@ extension on TranslationsZh {
 			case 'update_account': return '更新账户';
 			case 'zoom_in': return '放大';
 			case 'zoom_out': return '缩小';
+			case 'zoom_to_user': return '放大到用户';
 			case 'locales.en': return '英文';
 			case 'locales.zh': return '中文';
 			default: return null;

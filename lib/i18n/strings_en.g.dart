@@ -51,6 +51,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get audio_access_restricted => 'Audio access is restricted';
 	String authored_by({required Object name}) => 'by ${name}';
 	String get auto => 'Auto';
+	String get attributions => 'Attributions';
 	String get billing => 'Billing';
 	String get camera_1 => 'Camera 1';
 	String get camera_2 => 'Camera 2';
@@ -139,6 +140,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get update_account => 'Update Account';
 	String get zoom_in => 'Zoom In';
 	String get zoom_out => 'Zoom out';
+	String get zoom_to_user => 'Zoom in to user';
 	Map<String, String> get locales => {
 		'en': 'English',
 		'zh': 'Chinese',
@@ -397,6 +399,7 @@ extension on Translations {
 			case 'audio_access_restricted': return 'Audio access is restricted';
 			case 'authored_by': return ({required Object name}) => 'by ${name}';
 			case 'auto': return 'Auto';
+			case 'attributions': return 'Attributions';
 			case 'billing': return 'Billing';
 			case 'camera_1': return 'Camera 1';
 			case 'camera_2': return 'Camera 2';
@@ -596,6 +599,7 @@ extension on Translations {
 			case 'update_account': return 'Update Account';
 			case 'zoom_in': return 'Zoom In';
 			case 'zoom_out': return 'Zoom out';
+			case 'zoom_to_user': return 'Zoom in to user';
 			case 'locales.en': return 'English';
 			case 'locales.zh': return 'Chinese';
 			default: return null;
