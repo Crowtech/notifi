@@ -143,7 +143,10 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
         ),
         backgroundColor: Colors.white,
         resizeToAvoidBottomInset: true,
-        body: Column(
+        
+        body: 
+        SingleChildScrollView(
+        child: Column(
           children: [
             CreateTemplateForm(
               formCode: "template",
@@ -151,10 +154,7 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
               onSubmit: loadHtmlFromMinio,
               fieldValues: fieldValues,
             ),
-           // SingleChildScrollView(
-              // child: Column(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: [
+
                   QuillSimpleToolbar(
                     controller: _controller,
                     config: QuillSimpleToolbarConfig(
@@ -247,9 +247,7 @@ class _HtmlTextEditorState extends ConsumerState<HtmlTextEditor> {
                   ),
                 ],
               ),
-          //  ),
-        //  ],
-      //  ),
+        ),
         bottomNavigationBar: const Visibility(
           visible: false,
           child: Wrap(
