@@ -41,6 +41,7 @@ class NPerson extends Resource {
 
     @override
   GPS? gps;
+  String? zoneId;
 
   NPerson({
 
@@ -67,6 +68,7 @@ class NPerson extends Resource {
       required this.birthyear,
       required this.fcm,
        this.gps,
+      required this.zoneId,
   }) {
     super.resourceType = ResourceType.person;
   }
@@ -132,6 +134,7 @@ class NPerson extends Resource {
     int? birthyear,
     String? fcm,
     GPS? gps,
+    String? zoneId,
 
   }) {
     return NPerson(
@@ -158,6 +161,7 @@ class NPerson extends Resource {
      birthyear: birthyear ?? this.birthyear,
      fcm: fcm ?? this.fcm,
       gps: gps ?? this.gps,
+      zoneId: zoneId ?? this.zoneId,
     );
   }
 }
@@ -186,4 +190,5 @@ NPerson defaultPerson = NPerson(
   birthyear: 0, //birthyear,
   fcm: "FCM",
   avatarUrl: "https://gravatar.com/avatar/${generateMd5("user@email.com")}",
+  zoneId: "UTC",
 ); //fcm
