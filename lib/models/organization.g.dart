@@ -28,7 +28,9 @@ Organization _$OrganizationFromJson(Map<String, dynamic> json) => Organization(
       orgType: json['orgType'] as String,
       url: json['url'] as String?,
       email: json['email'] as String?,
-    )..orgid = (json['orgid'] as num?)?.toInt();
+    )
+      ..orgid = (json['orgid'] as num?)?.toInt()
+      ..zoneId = json['zoneId'] as String?;
 
 Map<String, dynamic> _$OrganizationToJson(Organization instance) =>
     <String, dynamic>{
@@ -44,6 +46,7 @@ Map<String, dynamic> _$OrganizationToJson(Organization instance) =>
       'devicecode': instance.devicecode,
       'avatarUrl': instance.avatarUrl,
       'gps': instance.gps?.toJson(),
+      'zoneId': instance.zoneId,
       'orgType': instance.orgType,
       'url': instance.url,
       'email': instance.email,

@@ -24,6 +24,7 @@ class Resource extends CrowtechObject implements PagingDataItem {
   String? devicecode;
   String? avatarUrl;
   GPS? gps;
+  String? zoneId;
   @JsonKey(includeFromJson: true, includeToJson: false)
   bool selected = false;
 

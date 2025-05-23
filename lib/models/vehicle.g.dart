@@ -31,6 +31,7 @@ Vehicle _$VehicleFromJson(Map<String, dynamic> json) => Vehicle(
           : GPS.fromJson(json['gps'] as Map<String, dynamic>),
     )
       ..orgid = (json['orgid'] as num?)?.toInt()
+      ..zoneId = json['zoneId'] as String?
       ..selected = json['selected'] as bool;
 
 Map<String, dynamic> _$VehicleToJson(Vehicle instance) => <String, dynamic>{
@@ -45,6 +46,7 @@ Map<String, dynamic> _$VehicleToJson(Vehicle instance) => <String, dynamic>{
       'location': instance.location,
       'devicecode': instance.devicecode,
       'avatarUrl': instance.avatarUrl,
+      'zoneId': instance.zoneId,
       'etype': instance.etype,
       'model': instance.model,
       'brand': instance.brand,

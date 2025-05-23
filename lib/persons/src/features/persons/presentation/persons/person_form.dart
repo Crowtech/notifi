@@ -218,7 +218,7 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                                                 .read(nestAuthProvider.notifier)
                                                 .token;
                                             var apiPath =
-                                                "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/create?$queryParmOrgIds";
+                                                "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/invite?$queryParmOrgIds";
 
                                             logNoStack.i(
                                                 "PERSON_FORM: sending $person to $apiPath");

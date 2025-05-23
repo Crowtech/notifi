@@ -28,6 +28,7 @@ Artifact _$ArtifactFromJson(Map<String, dynamic> json) => Artifact(
           : GPS.fromJson(json['gps'] as Map<String, dynamic>),
     )
       ..orgid = (json['orgid'] as num?)?.toInt()
+      ..zoneId = json['zoneId'] as String?
       ..selected = json['selected'] as bool;
 
 Map<String, dynamic> _$ArtifactToJson(Artifact instance) => <String, dynamic>{
@@ -42,6 +43,7 @@ Map<String, dynamic> _$ArtifactToJson(Artifact instance) => <String, dynamic>{
       'location': instance.location,
       'devicecode': instance.devicecode,
       'avatarUrl': instance.avatarUrl,
+      'zoneId': instance.zoneId,
       'author': instance.author.toJson(),
       'expiry': instance.expiry.toIso8601String(),
       'gps': instance.gps?.toJson(),
