@@ -20,12 +20,18 @@ Future<void> nestMain() async {
     //if (kReleaseMode) exit(1);
     // * Show some error UI if any uncaught exception happens
     FlutterError.onError = (FlutterErrorDetails details) {
-      FlutterError.presentError(details);
-      log.e(details.toString());
+     // FlutterError.presentError(details);
+      if (details.toString(minLevel: DiagnosticLevel.info).contains("MissingPluginException")) {
+        logNoStack.e("Missing PlugIn");
+      }
+      //log.e(details.toString());
     };
     // * Handle errors from the underlying platform/OS
     PlatformDispatcher.instance.onError = (Object error, StackTrace stack) {
-      log.e(error.toString());
+       if (error.toString().contains("MissingPluginException")) {
+        logNoStack.e("Missing PlugIn2");
+      }
+     // log.e(error.toString());
       return true;
     };
     // * Show some error UI when any widget in the app fails to build
