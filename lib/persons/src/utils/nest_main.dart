@@ -22,7 +22,7 @@ Future<void> nestMain() async {
     FlutterError.onError = (FlutterErrorDetails details) {
      // FlutterError.presentError(details);
       if (details.toString(minLevel: DiagnosticLevel.info).contains("MissingPluginException")) {
-        logNoStack.e("Missing PlugIn");
+        logNoStack.e("Missing PlugIn - details ${details.toStringShort()}");
       }
       //log.e(details.toString());
     };

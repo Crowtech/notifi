@@ -129,6 +129,7 @@ Future<String> sendGPS(Person currentUser,String token, bg.Location location) as
       gps.resourceid = currentUser.id!;
     } else {
       logNoStack.e("Dummy GPS has resourceid = null");
+      return jsonEncode(gps); // do not send
     }
 
     gps.orgid ??= 1;  // HACK
