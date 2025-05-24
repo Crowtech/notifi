@@ -55,10 +55,7 @@ class NestNotifis extends _$NestNotifis {
   try {
     var response = await apiPostDataStrNoLocale(token,
         "$defaultAPIBaseUrl$defaultApiPrefixPath/nestnotifis", jsonDataStr);
-  } on Exception catch (error) {
-    
-    return [];
-  }
+  
     // .then((response) {
     logNoStack.i("NEST_NOTIFIS: result ${response.body.toString()}");
     final map = jsonDecode(response.body);
@@ -81,6 +78,10 @@ class NestNotifis extends _$NestNotifis {
       final items2 = jsonDecode(itemsJson); // as List<Map<Org, dynamic>>;
       return items2.map(NestNotifi.fromJson).toList();
     }
+    } on Exception catch (error) {
+    
+    return [];
+  }
   }
 
   @override
