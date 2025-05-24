@@ -41,6 +41,7 @@ class NPerson extends Resource {
 
     @override
   GPS? gps;
+  @override
   String? zoneId;
 
   NPerson({
