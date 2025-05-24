@@ -1,18 +1,8 @@
-
-import 'dart:convert';
-import 'dart:io';
-import 'package:flutter/material.dart';
 import 'dart:ui';
 
-import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:flutter/material.dart';
 import 'package:logger/logger.dart' as logger;
-import 'package:notifi/credentials.dart';
-import 'package:notifi/jwt_utils.dart';
-import 'package:notifi/models/appversion.dart';
-import 'package:notifi/models/gps.dart';
-import 'package:notifi/models/nestfilter.dart';
-import 'package:notifi/models/person.dart';
-
+import 'package:notifi/i18n/string_hardcoded.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -24,11 +14,29 @@ var logNoStack = logger.Logger(
   level: logger.Level.info,
 );
 
-
-Future<void> NestMain() async 
-{
+Future<void> nestMain() async {
   FlutterError.onError = (details) {
     FlutterError.presentError(details);
     //if (kReleaseMode) exit(1);
+    // * Show some error UI if any uncaught exception happens
+    FlutterError.onError = (FlutterErrorDetails details) {
+      FlutterError.presentError(details);
+      debugPrint(details.toString());
+    };
+    // * Handle errors from the underlying platform/OS
+    PlatformDispatcher.instance.onError = (Object error, StackTrace stack) {
+      debugPrint(error.toString());
+      return true;
+    };
+    // * Show some error UI when any widget in the app fails to build
+    ErrorWidget.builder = (FlutterErrorDetails details) {
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.red,
+          title: Text('An error occurred'.hardcoded),
+        ),
+        body: Center(child: Text(details.toString())),
+      );
+    };
   };
 }
