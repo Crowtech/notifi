@@ -52,9 +52,13 @@ class NestNotifis extends _$NestNotifis {
     String token = ref.read(nestAuthProvider.notifier).token!;
     logNoStack.i(
         "NEST_NOTIFIS: Sending NestFilter org for ${currentUser.id} $nestFilter with json as $jsonDataStr");
-
+  try {
     var response = await apiPostDataStrNoLocale(token,
         "$defaultAPIBaseUrl$defaultApiPrefixPath/nestnotifis", jsonDataStr);
+  } on Exception catch (error) {
+    
+    return [];
+  }
     // .then((response) {
     logNoStack.i("NEST_NOTIFIS: result ${response.body.toString()}");
     final map = jsonDecode(response.body);

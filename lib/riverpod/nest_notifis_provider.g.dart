@@ -6,7 +6,7 @@ part of 'nest_notifis_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$nestNotifisHash() => r'0f10bea9e6e238029b49646e62f1edb1ec1ccf36';
+String _$nestNotifisHash() => r'6b833ead2866ec7bcb347c38c3e88e06951a160e';
 
 /// See also [NestNotifis].
 @ProviderFor(NestNotifis)
