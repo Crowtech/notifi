@@ -21,11 +21,11 @@ Future<void> nestMain() async {
     // * Show some error UI if any uncaught exception happens
     FlutterError.onError = (FlutterErrorDetails details) {
       FlutterError.presentError(details);
-      debugPrint(details.toString());
+      log.e(details.toString());
     };
     // * Handle errors from the underlying platform/OS
     PlatformDispatcher.instance.onError = (Object error, StackTrace stack) {
-      debugPrint(error.toString());
+      log.e(error.toString());
       return true;
     };
     // * Show some error UI when any widget in the app fails to build
