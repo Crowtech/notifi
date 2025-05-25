@@ -78,7 +78,7 @@ class NestNotifis extends _$NestNotifis {
       final items2 = jsonDecode(itemsJson); // as List<Map<Org, dynamic>>;
       return items2.map(NestNotifi.fromJson).toList();
     }
-    } on Exception catch (error) {
+    } on Exception {
     
     return [];
   }
