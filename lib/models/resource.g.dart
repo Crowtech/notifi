@@ -24,10 +24,9 @@ Resource _$ResourceFromJson(Map<String, dynamic> json) => Resource(
       gps: json['gps'] == null
           ? null
           : GPS.fromJson(json['gps'] as Map<String, dynamic>),
+      zoneId: json['zoneId'] as String?,
       selected: json['selected'] as bool? ?? false,
-    )
-      ..orgid = (json['orgid'] as num?)?.toInt()
-      ..zoneId = json['zoneId'] as String?;
+    )..orgid = (json['orgid'] as num?)?.toInt();
 
 Map<String, dynamic> _$ResourceToJson(Resource instance) => <String, dynamic>{
       'orgid': instance.orgid,

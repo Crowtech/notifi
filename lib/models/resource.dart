@@ -43,6 +43,7 @@ class Resource extends CrowtechObject implements PagingDataItem {
     this.devicecode,
     this.avatarUrl,
     this.gps,
+    this.zoneId,
     this.selected = false,
     this.resourceType = ResourceType.unknown,
   });
@@ -59,7 +60,7 @@ class Resource extends CrowtechObject implements PagingDataItem {
 
   @override
   String toString() {
-    return "Resource=>${super.toString()} $description, $location, $devicecode $gps $selected";
+    return "Resource=>${super.toString()} $description, $location, $devicecode $gps $zoneId $selected";
   }
 
   String getAvatarUrl() {
