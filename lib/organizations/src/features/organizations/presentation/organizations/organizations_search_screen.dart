@@ -40,7 +40,7 @@ class OrganizationsSearchScreen extends ConsumerWidget {
     // logNoStack.i("ORGS_SEARCH_SCREEN: query is $query , now setting AdamNestFilter");
     // ref.read(AdamNestFilterProvider(NestFilterType.organizations).notifier).setQuery(";name:$query;");
     // * get the first page so we can retrieve the total number of results
-    NestFilter nestFilter = NestFilter(query: ";name:$query");
+   // NestFilter nestFilter = NestFilter(query: ";name:$query");
 
     // final responseAsync = ref.watch(
     //   fetchOrganizationsNestFilterProvider,
@@ -48,7 +48,7 @@ class OrganizationsSearchScreen extends ConsumerWidget {
     final responseAsync = ref.watch(fetchOrganizationsNestFilterProvider);
     final totalResults = responseAsync.valueOrNull?.totalResults;
     return Scaffold(
-      appBar: AppBar(title: Text("${nt.t.resources.organization} !!")),
+      appBar: AppBar(title: Text("${nt.t.resources.organization}")),
       body: Column(
         children: [
           const OrganizationsSearchBar(),
