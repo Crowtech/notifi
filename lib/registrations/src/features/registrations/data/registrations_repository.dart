@@ -49,17 +49,10 @@ class RegistrationsRepository {
     logNoStack.i(
         "REGISTRATIONS_REPOSITORY: search currentUserId=${currentUser.id} token=${token.substring(0, 10)}");
 
-    int sourceOrgId = 10251;
-    if (currentUser.orgid != null) {
-      currentUser.orgid!;
-    }
-      if (!(selectedOrganizations.isEmpty)) {
-      sourceOrgId = selectedOrganizations.first.id!;
-    }
     final uri = Uri(
       scheme: 'https',
       host: defaultAPIBaseUrl.substring("https://".length),
-      path: "$defaultApiPrefixPath/resources/targets/$sourceOrgId",
+      path: "$defaultApiPrefixPath/registrations/${currentUser.id}",
       // queryParameters: {
       //   'api_key': token,
       //   'include_adult': 'false',
@@ -85,20 +78,11 @@ class RegistrationsRepository {
     logNoStack.i(
         "REGISTRATIONS_REPOSITORY: now Playing currentUserId=${currentUser.id} token=${token.substring(0, 10)}");
 
-    int sourceOrgId = 10251;
-    // if (currentUser != null) {
-    //   if (currentUser.orgid != null) {
-    //     currentUser.orgid!;
-    //   }
-    // }
-
-    if (!(selectedOrganizations.isEmpty)) {
-      sourceOrgId = selectedOrganizations.first.id!;
-    }
+   
     final uri = Uri(
       scheme: 'https',
       host: defaultAPIBaseUrl.substring("https://".length),
-      path: "$defaultApiPrefixPath/resources/targets/$sourceOrgId",
+      path: "$defaultApiPrefixPath/resgistrations/${currentUser.id}",
       // queryParameters: {
       //   'api_key': token,
       //   'include_adult': 'false',
@@ -121,13 +105,13 @@ class RegistrationsRepository {
     return RegistrationsResponse.fromJson(response.data);
   }
 
-  Future<Registration> registration({required int orgId, CancelToken? cancelToken}) async {
+  Future<Registration> registration({required int registrationId, CancelToken? cancelToken}) async {
     logNoStack.i(
         "REGISTRATIONS_REPOSITORY: registration currentUserId=${currentUser.id} token=${token.substring(0, 10)}");
     final url = Uri(
       scheme: 'https',
       host: defaultAPIBaseUrl.substring("https://".length),
-      path: "$defaultApiPrefixPath/registrations/get/$orgId}",
+      path: "$defaultApiPrefixPath/registrations/get/$registrationId}",
       // queryParameters: {
       //   'api_key': token,
       //   'include_adult': 'false',
@@ -165,7 +149,7 @@ Future<Registration> registration(
   final cancelToken = ref.cancelToken();
   return ref
       .watch(registrationsRepositoryProvider)
-      .registration(orgId: registrationId, cancelToken: cancelToken);
+      .registration(registrationId: registrationId, cancelToken: cancelToken);
 }
 
 /// Provider to fetch paginated registrations data
