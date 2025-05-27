@@ -67,6 +67,7 @@ class TranslationsZh extends Translations {
 	@override String get devpage => '开发者页面';
 	@override String get edit => '编辑';
 	@override String get email => '电子邮件';
+	@override String get error => '错误';
 	@override String get exposure_mode => '曝光模式';
 	@override String get exposure_offset => '曝光偏移';
 	@override String get favourite => '最喜欢的';
@@ -84,6 +85,7 @@ class TranslationsZh extends Translations {
 	@override String get image_uploaded_failure => '图片上传失败';
 	@override String get intro_title => '欢迎使用 Crowtech';
 	@override String get intro_description => '出行即服务';
+	@override String get loading => '加载中 ...';
 	@override String get location_permission_denied => '位置权限被拒绝';
 	@override String get location_services_disabled => '定位服务已禁用。请启用该服务';
 	@override String get location_permission_permanent_denied => '位置权限被永久拒绝，我们无法请求权限。';
@@ -113,6 +115,8 @@ class TranslationsZh extends Translations {
 	@override String get privacy_policy => '隐私政策';
 	@override String get profile => '轮廓';
 	@override String get pulltorefresh => '下拉刷新';
+	@override String get registration => '登记';
+	@override String get registration_capitalized => '登记';
 	@override String get reset_offset => '重置偏移';
 	@override String get resetting_exposure_point => '重置曝光点';
 	@override String get resetting_focus_point => '重置焦点';
@@ -273,6 +277,7 @@ class _TranslationsResourceZh extends TranslationsResourceEn {
 	@override String get location => '地点';
 	@override String get organization => '组织';
 	@override String get person => '人';
+	@override String get registration => '登记';
 	@override String get unknown => '未知';
 	@override String get vehicle => '车辆';
 }
@@ -289,6 +294,7 @@ class _TranslationsResourcesZh extends TranslationsResourcesEn {
 	@override String get location => '位置';
 	@override String get organization => '组织';
 	@override String get person => '人们';
+	@override String get registration => '注册';
 	@override String get unknown => '未知';
 	@override String get vehicle => '车辆';
 }
@@ -415,6 +421,7 @@ extension on TranslationsZh {
 			case 'devpage': return '开发者页面';
 			case 'edit': return '编辑';
 			case 'email': return '电子邮件';
+			case 'error': return '错误';
 			case 'exposure_mode': return '曝光模式';
 			case 'exposure_offset': return '曝光偏移';
 			case 'favourite': return '最喜欢的';
@@ -495,6 +502,7 @@ extension on TranslationsZh {
 			case 'image_uploaded_failure': return '图片上传失败';
 			case 'intro_title': return '欢迎使用 Crowtech';
 			case 'intro_description': return '出行即服务';
+			case 'loading': return '加载中 ...';
 			case 'location_permission_denied': return '位置权限被拒绝';
 			case 'location_services_disabled': return '定位服务已禁用。请启用该服务';
 			case 'location_permission_permanent_denied': return '位置权限被永久拒绝，我们无法请求权限。';
@@ -524,6 +532,8 @@ extension on TranslationsZh {
 			case 'privacy_policy': return '隐私政策';
 			case 'profile': return '轮廓';
 			case 'pulltorefresh': return '下拉刷新';
+			case 'registration': return '登记';
+			case 'registration_capitalized': return '登记';
 			case 'reset_offset': return '重置偏移';
 			case 'resetting_exposure_point': return '重置曝光点';
 			case 'resetting_focus_point': return '重置焦点';
@@ -532,6 +542,7 @@ extension on TranslationsZh {
 			case 'resource.location': return '地点';
 			case 'resource.organization': return '组织';
 			case 'resource.person': return '人';
+			case 'resource.registration': return '登记';
 			case 'resource.unknown': return '未知';
 			case 'resource.vehicle': return '车辆';
 			case 'resources.artifact': return '工件';
@@ -539,6 +550,7 @@ extension on TranslationsZh {
 			case 'resources.location': return '位置';
 			case 'resources.organization': return '组织';
 			case 'resources.person': return '人们';
+			case 'resources.registration': return '注册';
 			case 'resources.unknown': return '未知';
 			case 'resources.vehicle': return '车辆';
 			case 'response.ok': return '好的';

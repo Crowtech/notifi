@@ -68,6 +68,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get devpage => 'Dev';
 	String get edit => 'Edit';
 	String get email => 'Email';
+	String get error => 'Error';
 	String get exposure_mode => 'Exposure Mode';
 	String get exposure_offset => 'Exposure Offset';
 	String get favourite => 'Favourite';
@@ -88,6 +89,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get language => 'Language';
 	String get lastname => 'Lastname';
 	String get light => 'light';
+	String get loading => 'Loading...';
 	String get location_permission_denied => 'Location permissions are denied';
 	String get location_services_disabled => 'Location services are disabled. Please enable the services';
 	String get location_permission_permanent_denied => 'Location permissions are permanently denied, we cannot request permissions.';
@@ -114,6 +116,8 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get privacy_policy => 'Privacy Policy';
 	String get profile => 'Profile';
 	String get pulltorefresh => 'Pull to refresh';
+	String get registration => 'registration';
+	String get registration_capitalized => 'Registration';
 	late final TranslationsResourceEn resource = TranslationsResourceEn.internal(_root);
 	late final TranslationsResourcesEn resources = TranslationsResourcesEn.internal(_root);
 	late final TranslationsResponseEn response = TranslationsResponseEn.internal(_root);
@@ -274,6 +278,7 @@ class TranslationsResourceEn {
 	String get location => 'Location';
 	String get organization => 'Organization';
 	String get person => 'Person';
+	String get registration => 'Registration';
 	String get unknown => 'Unknown';
 	String get vehicle => 'Vehicle';
 }
@@ -290,6 +295,7 @@ class TranslationsResourcesEn {
 	String get location => 'Locations';
 	String get organization => 'Organizations';
 	String get person => 'People';
+	String get registration => 'Registrations';
 	String get unknown => 'Unknown';
 	String get vehicle => 'Vehicles';
 }
@@ -416,6 +422,7 @@ extension on Translations {
 			case 'devpage': return 'Dev';
 			case 'edit': return 'Edit';
 			case 'email': return 'Email';
+			case 'error': return 'Error';
 			case 'exposure_mode': return 'Exposure Mode';
 			case 'exposure_offset': return 'Exposure Offset';
 			case 'favourite': return 'Favourite';
@@ -499,6 +506,7 @@ extension on Translations {
 			case 'language': return 'Language';
 			case 'lastname': return 'Lastname';
 			case 'light': return 'light';
+			case 'loading': return 'Loading...';
 			case 'location_permission_denied': return 'Location permissions are denied';
 			case 'location_services_disabled': return 'Location services are disabled. Please enable the services';
 			case 'location_permission_permanent_denied': return 'Location permissions are permanently denied, we cannot request permissions.';
@@ -525,11 +533,14 @@ extension on Translations {
 			case 'privacy_policy': return 'Privacy Policy';
 			case 'profile': return 'Profile';
 			case 'pulltorefresh': return 'Pull to refresh';
+			case 'registration': return 'registration';
+			case 'registration_capitalized': return 'Registration';
 			case 'resource.artifact': return 'Artifact';
 			case 'resource.equipment': return 'Equipment';
 			case 'resource.location': return 'Location';
 			case 'resource.organization': return 'Organization';
 			case 'resource.person': return 'Person';
+			case 'resource.registration': return 'Registration';
 			case 'resource.unknown': return 'Unknown';
 			case 'resource.vehicle': return 'Vehicle';
 			case 'resources.artifact': return 'Artifacts';
@@ -537,6 +548,7 @@ extension on Translations {
 			case 'resources.location': return 'Locations';
 			case 'resources.organization': return 'Organizations';
 			case 'resources.person': return 'People';
+			case 'resources.registration': return 'Registrations';
 			case 'resources.unknown': return 'Unknown';
 			case 'resources.vehicle': return 'Vehicles';
 			case 'response.ok': return 'OK';
