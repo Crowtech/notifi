@@ -2,6 +2,8 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/credentials.dart';
 import 'package:notifi/models/gps.dart';
+import 'package:notifi/models/organization.dart';
+import 'package:notifi/models/person.dart';
 import 'package:notifi/models/resource.dart';
 
 part 'registration.g.dart';
@@ -25,9 +27,13 @@ class Registration extends Resource {
   String inviteeFirstname;
   String inviteeLastname;
   String? inviteeI18n;
+  Organization? organization;
   int? orgId;
+  Person? user;
   int? userId;
+  Person? inviter;
   int? inviterId;
+  Person? approver;
   int? approverId;
 
   bool? approvalNeeded;
@@ -53,9 +59,13 @@ class Registration extends Resource {
       required this.inviteeFirstname,
       required this.inviteeLastname,
       required this.inviteeI18n,
+      this.organization,
       required this.orgId,
+      this.user,
       required this.userId,
+      this.inviter,
       required this.inviterId,
+      this.approver,
       required this.approverId,
       required this.approvalNeeded,
       required this.approved,

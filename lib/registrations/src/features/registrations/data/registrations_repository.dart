@@ -52,7 +52,7 @@ class RegistrationsRepository {
     final uri = Uri(
       scheme: 'https',
       host: defaultAPIBaseUrl.substring("https://".length),
-      path: "$defaultApiPrefixPath/registrations/${currentUser.id}",
+      path: "$defaultApiPrefixPath/registrations/fetch/${currentUser.id}",
       // queryParameters: {
       //   'api_key': token,
       //   'include_adult': 'false',
@@ -73,7 +73,7 @@ class RegistrationsRepository {
 
   Future<RegistrationsResponse> nowPlayingRegistrations(
       {required int page, CancelToken? cancelToken}) async {
-    NestFilter nf = NestFilter(offset: 0);
+    NestFilter nf = NestFilter(offset: page);
     var data = jsonEncode(nf);
     logNoStack.i(
         "REGISTRATIONS_REPOSITORY: now Playing currentUserId=${currentUser.id} token=${token.substring(0, 10)}");
@@ -82,7 +82,7 @@ class RegistrationsRepository {
     final uri = Uri(
       scheme: 'https',
       host: defaultAPIBaseUrl.substring("https://".length),
-      path: "$defaultApiPrefixPath/resgistrations/${currentUser.id}",
+      path: "$defaultApiPrefixPath/registrations/get/",
       // queryParameters: {
       //   'api_key': token,
       //   'include_adult': 'false',

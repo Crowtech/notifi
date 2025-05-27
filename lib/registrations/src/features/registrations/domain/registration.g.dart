@@ -25,9 +25,21 @@ Registration _$RegistrationFromJson(Map<String, dynamic> json) => Registration(
       inviteeFirstname: json['inviteeFirstname'] as String,
       inviteeLastname: json['inviteeLastname'] as String,
       inviteeI18n: json['inviteeI18n'] as String?,
+      organization: json['organization'] == null
+          ? null
+          : Organization.fromJson(json['organization'] as Map<String, dynamic>),
       orgId: (json['orgId'] as num?)?.toInt(),
+      user: json['user'] == null
+          ? null
+          : Person.fromJson(json['user'] as Map<String, dynamic>),
       userId: (json['userId'] as num?)?.toInt(),
+      inviter: json['inviter'] == null
+          ? null
+          : Person.fromJson(json['inviter'] as Map<String, dynamic>),
       inviterId: (json['inviterId'] as num?)?.toInt(),
+      approver: json['approver'] == null
+          ? null
+          : Person.fromJson(json['approver'] as Map<String, dynamic>),
       approverId: (json['approverId'] as num?)?.toInt(),
       approvalNeeded: json['approvalNeeded'] as bool?,
       approved: json['approved'] as bool?,
@@ -66,9 +78,13 @@ Map<String, dynamic> _$RegistrationToJson(Registration instance) =>
       'inviteeFirstname': instance.inviteeFirstname,
       'inviteeLastname': instance.inviteeLastname,
       'inviteeI18n': instance.inviteeI18n,
+      'organization': instance.organization?.toJson(),
       'orgId': instance.orgId,
+      'user': instance.user?.toJson(),
       'userId': instance.userId,
+      'inviter': instance.inviter?.toJson(),
       'inviterId': instance.inviterId,
+      'approver': instance.approver?.toJson(),
       'approverId': instance.approverId,
       'approvalNeeded': instance.approvalNeeded,
       'approved': instance.approved,
