@@ -26,7 +26,7 @@ final registrationsRepositoryProvider =
 // ignore: unused_element
 typedef RegistrationsRepositoryRef
     = AutoDisposeProviderRef<RegistrationsRepository>;
-String _$registrationHash() => r'3226faa1ff913ead73b7fa2bd61d02ed8d8ec594';
+String _$registrationHash() => r'a029bba95845537eab5b750eb443f2780166789b';
 
 /// Copied from Dart SDK
 class _SystemHash {
