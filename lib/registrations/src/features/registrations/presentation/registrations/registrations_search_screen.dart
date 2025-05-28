@@ -100,13 +100,13 @@ class RegistrationsSearchScreen extends ConsumerWidget {
                               context: context,
                               builder: (context) {
                                 return AlertDialog(
-                                  title: Text(nt.t.response.delete),
-                                  content: Text(nt.t.response.delete_sure),
+                                  title: Text(nt.t.invite.reject),
+                                  content: Text(nt.t.invite.reject_sure),
                                   actions: [
                                     TextButton(
                                       onPressed: () =>
                                           Navigator.of(context).pop(false),
-                                      child: Text(nt.t.response.cancel),
+                                      child: Text(nt.t.invite.accept),
                                     ),
                                     TextButton(
                                       onPressed: () =>

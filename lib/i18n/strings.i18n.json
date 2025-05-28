@@ -133,6 +133,7 @@
     "organization":"Organization",
     "approve":"Approve",
     "reject": "Reject",
+    "reject_sure": "Are you sure?",
     "reason": "reason?",
     "approved":"Approved",
     "invited_date_time":"Invited",
