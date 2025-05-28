@@ -99,7 +99,7 @@ class Registration extends Resource {
   }
 
   String getInitials() {
-    return "${inviteeFirstname.substring(0, 1).toUpperCase()}${inviteeLastname.substring(0, 1).toUpperCase()}";
+    return "${inviteeFirstname != null ? inviteeFirstname!.substring(0, 1).toUpperCase():''}${inviteeLastname != null ? inviteeLastname!.substring(0, 1).toUpperCase():''}";
   }
 
   Registration copyWith({
