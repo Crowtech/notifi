@@ -22,8 +22,8 @@ Registration _$RegistrationFromJson(Map<String, dynamic> json) => Registration(
       devicecode: json['devicecode'] as String?,
       avatarUrl: json['avatarUrl'] as String?,
       email: json['email'] as String,
-      inviteeFirstname: json['inviteeFirstname'] as String,
-      inviteeLastname: json['inviteeLastname'] as String,
+      inviteeFirstname: json['inviteeFirstname'] as String?,
+      inviteeLastname: json['inviteeLastname'] as String?,
       inviteeI18n: json['inviteeI18n'] as String?,
       organization: json['organization'] == null
           ? null

@@ -24,8 +24,8 @@ class Registration extends Resource {
   static String tablename = className.toLowerCase();
 
   String email;
-  String inviteeFirstname;
-  String inviteeLastname;
+  String? inviteeFirstname;
+  String? inviteeLastname;
   String? inviteeI18n;
   Organization? organization;
   int? orgId;
