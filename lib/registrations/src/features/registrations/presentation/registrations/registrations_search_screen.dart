@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
+import 'package:notifi/api_utils.dart';
+import 'package:notifi/credentials.dart';
+import 'package:notifi/i18n/strings.g.dart' as nt;
+import 'package:notifi/registrations/src/features/registrations/domain/registration.dart';
 import 'package:notifi/registrations/src/features/registrations/presentation/registration_details/registration_details_screen.dart';
-
-import 'package:notifi/widgets/slide_left_background.dart';
+import 'package:notifi/state/nest_auth2.dart';
 import 'package:notifi/widgets/slide_left_reject.dart';
 import 'package:notifi/widgets/slide_right_approve.dart';
-import 'package:notifi/widgets/slide_right_background.dart';
 
 import '../../data/registrations_repository.dart';
 import 'registration_list_tile.dart';
@@ -106,14 +106,20 @@ class RegistrationsSearchScreen extends ConsumerWidget {
                                   content: Text(nt.t.invite.reject_sure),
                                   actions: [
                                     TextButton(
-                                      onPressed: () =>
-                                          Navigator.of(context).pop(false),
-                                      child: Text(nt.t.invite.approve),
+                                      onPressed: () {
+                                        String reason = "";
+                                        submitApproval(ref,registration,true,reason);
+                                          Navigator.of(context).pop(false);
+                                      },
+                                      child: Text(nt.t.response.ok),
                                     ),
                                     TextButton(
-                                      onPressed: () =>
-                                          Navigator.of(context).pop(true),
-                                      child: Text(nt.t.response.delete),
+                                      onPressed: () {
+                                              String reason = "";
+                                        submitApproval(ref,registration,false,reason);
+                                          Navigator.of(context).pop(true);
+                                      },
+                                      child: Text(nt.t.response.cancel),
                                     ),
                                   ],
                                 );
@@ -142,6 +148,13 @@ class RegistrationsSearchScreen extends ConsumerWidget {
       ),
      
     );
+  }
+
+  void submitApproval(WidgetRef ref,Registration registration,bool approved,String reason) async {
+    String token = ref.read(nestAuthProvider.notifier).token!;
+    String apiPath = "$defaultAPIBaseUrl$defaultApiPrefixPath/registrations/approve/${registration.code}/${approved?'true':'false'}?reason=${reason}";
+    var responseMap = await apiPostDataNoLocale( token, apiPath, null, null);
+    logNoStack.i("submitApproval resultMap = $responseMap");
   }
 }
 
