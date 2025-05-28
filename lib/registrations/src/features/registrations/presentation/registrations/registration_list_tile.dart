@@ -22,6 +22,12 @@ class RegistrationListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String inviteeAvatar = registration.getAvatarUrl();
+    if (registration.user!=null) {
+      if (registration.user?.getAvatarUrl() != null) {
+        inviteeAvatar = registration.user!.getAvatarUrl();
+      } 
+    }
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Row(
@@ -33,7 +39,7 @@ class RegistrationListTile extends StatelessWidget {
                 SizedBox(
                   width: posterHeight * NestPoster.width / NestPoster.height,
                   height: posterHeight,
-                  child: NestPoster(imagePath: registration.getAvatarUrl()),
+                  child: NestPoster(imagePath: inviteeAvatar),
                 ),
                 if (debugIndex != null) ...[
                   const Positioned.fill(child: TopGradient()),

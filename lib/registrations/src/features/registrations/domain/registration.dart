@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:logger/logger.dart' as logger;
+import 'package:notifi/credentials.dart';
 import 'package:notifi/models/crowtech_object.dart';
 import 'package:notifi/models/organization.dart';
 import 'package:notifi/models/person.dart';
@@ -84,7 +85,10 @@ class Registration extends CrowtechObject {
     return "Registration=>${super.toString()} $email $orgId $userId $inviterId $approverId";
   }
 
-  
+  String getAvatarUrl()
+  {
+    return "$defaultMinioEndpointUrl/$defaultRealm/generic_person.png";
+  }
 
   String getInitials() {
     return "${inviteeFirstname != null ? inviteeFirstname!.substring(0, 1).toUpperCase():''}${inviteeLastname != null ? inviteeLastname!.substring(0, 1).toUpperCase():''}";
