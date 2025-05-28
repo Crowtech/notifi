@@ -25,7 +25,7 @@ mixin _$RegistrationsResponse {
   int get page => throw _privateConstructorUsedError;
   @JsonKey(name: 'items')
   List<Registration> get results => throw _privateConstructorUsedError;
-  @JsonKey(name: 'resultCount')
+  @JsonKey(name: 'total_results')
   int get totalResults => throw _privateConstructorUsedError;
   @JsonKey(name: 'totalItems')
   int get totalPages => throw _privateConstructorUsedError;
@@ -50,7 +50,7 @@ abstract class $RegistrationsResponseCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'startIndex') int page,
       @JsonKey(name: 'items') List<Registration> results,
-      @JsonKey(name: 'resultCount') int totalResults,
+      @JsonKey(name: 'total_results') int totalResults,
       @JsonKey(name: 'totalItems') int totalPages,
       List<String> errors});
 }
@@ -114,7 +114,7 @@ abstract class _$$RegistrationsResponseImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'startIndex') int page,
       @JsonKey(name: 'items') List<Registration> results,
-      @JsonKey(name: 'resultCount') int totalResults,
+      @JsonKey(name: 'total_results') int totalResults,
       @JsonKey(name: 'totalItems') int totalPages,
       List<String> errors});
 }
@@ -170,7 +170,7 @@ class _$RegistrationsResponseImpl implements _RegistrationsResponse {
   _$RegistrationsResponseImpl(
       {@JsonKey(name: 'startIndex') required this.page,
       @JsonKey(name: 'items') required final List<Registration> results,
-      @JsonKey(name: 'resultCount') required this.totalResults,
+      @JsonKey(name: 'total_results') required this.totalResults,
       @JsonKey(name: 'totalItems') required this.totalPages,
       final List<String> errors = const []})
       : _results = results,
@@ -192,7 +192,7 @@ class _$RegistrationsResponseImpl implements _RegistrationsResponse {
   }
 
   @override
-  @JsonKey(name: 'resultCount')
+  @JsonKey(name: 'total_results')
   final int totalResults;
   @override
   @JsonKey(name: 'totalItems')
@@ -256,7 +256,7 @@ abstract class _RegistrationsResponse implements RegistrationsResponse {
   factory _RegistrationsResponse(
       {@JsonKey(name: 'startIndex') required final int page,
       @JsonKey(name: 'items') required final List<Registration> results,
-      @JsonKey(name: 'resultCount') required final int totalResults,
+      @JsonKey(name: 'total_results') required final int totalResults,
       @JsonKey(name: 'totalItems') required final int totalPages,
       final List<String> errors}) = _$RegistrationsResponseImpl;
 
@@ -270,7 +270,7 @@ abstract class _RegistrationsResponse implements RegistrationsResponse {
   @JsonKey(name: 'items')
   List<Registration> get results;
   @override
-  @JsonKey(name: 'resultCount')
+  @JsonKey(name: 'total_results')
   int get totalResults;
   @override
   @JsonKey(name: 'totalItems')

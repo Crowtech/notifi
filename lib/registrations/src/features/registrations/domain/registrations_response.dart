@@ -11,7 +11,7 @@ class RegistrationsResponse with _$RegistrationsResponse {
   factory RegistrationsResponse({
     @JsonKey(name: 'startIndex') required int page,
     @JsonKey(name: 'items') required List<Registration> results,
-    @JsonKey(name: 'resultCount') required int totalResults,
+    @JsonKey(name: 'total_results') required int totalResults,
     @JsonKey(name: 'totalItems') required int totalPages,
     @Default([]) List<String> errors,
   }) = _RegistrationsResponse;
