@@ -1,10 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/credentials.dart';
+import 'package:notifi/models/crowtech_object.dart';
 import 'package:notifi/models/gps.dart';
 import 'package:notifi/models/organization.dart';
 import 'package:notifi/models/person.dart';
-import 'package:notifi/models/resource.dart';
+
 
 part 'registration.g.dart';
 
@@ -19,7 +20,7 @@ var logNoStack = logger.Logger(
 );
 
 @JsonSerializable(explicitToJson: true)
-class Registration extends Resource {
+class Registration extends CrowtechObject {
   static String className = "Registration";
   static String tablename = className.toLowerCase();
 

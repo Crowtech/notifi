@@ -17,10 +17,6 @@ Registration _$RegistrationFromJson(Map<String, dynamic> json) => Registration(
           ? null
           : DateTime.parse(json['updated'] as String),
       name: json['name'] as String?,
-      description: json['description'] as String?,
-      location: json['location'] as String?,
-      devicecode: json['devicecode'] as String?,
-      avatarUrl: json['avatarUrl'] as String?,
       email: json['email'] as String,
       inviteeFirstname: json['inviteeFirstname'] as String?,
       inviteeLastname: json['inviteeLastname'] as String?,
@@ -51,13 +47,7 @@ Registration _$RegistrationFromJson(Map<String, dynamic> json) => Registration(
           ? null
           : DateTime.parse(json['firstLogin'] as String),
       joinCode: json['joinCode'] as String?,
-    )
-      ..orgid = (json['orgid'] as num?)?.toInt()
-      ..gps = json['gps'] == null
-          ? null
-          : GPS.fromJson(json['gps'] as Map<String, dynamic>)
-      ..zoneId = json['zoneId'] as String?
-      ..selected = json['selected'] as bool;
+    )..orgid = (json['orgid'] as num?)?.toInt();
 
 Map<String, dynamic> _$RegistrationToJson(Registration instance) =>
     <String, dynamic>{
@@ -68,12 +58,6 @@ Map<String, dynamic> _$RegistrationToJson(Registration instance) =>
       'code': instance.code,
       'updated': instance.updated?.toIso8601String(),
       'name': instance.name,
-      'description': instance.description,
-      'location': instance.location,
-      'devicecode': instance.devicecode,
-      'avatarUrl': instance.avatarUrl,
-      'gps': instance.gps?.toJson(),
-      'zoneId': instance.zoneId,
       'email': instance.email,
       'inviteeFirstname': instance.inviteeFirstname,
       'inviteeLastname': instance.inviteeLastname,
