@@ -129,7 +129,8 @@
   "image_uploaded_failure": "图片上传失败",
   "intro_title": "欢迎使用 Crowtech",
   "intro_description": "出行即服务",
-    "invite": {
+  "invite": {
+    "organization":"组织",
     "approve":"批准",
     "reject": "拒绝",
     "reason": "原因",

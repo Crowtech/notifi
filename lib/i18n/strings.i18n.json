@@ -130,6 +130,7 @@
   "intro_title": "Welcome to Crowtech",
   "intro_description": "Advanced Design",
   "invite": {
+    "organization":"Organization",
     "approve":"Approve",
     "reject": "Reject",
     "reason": "reason?",

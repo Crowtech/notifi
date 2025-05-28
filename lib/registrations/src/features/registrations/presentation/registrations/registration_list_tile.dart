@@ -23,11 +23,12 @@ class RegistrationListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String inviteeAvatar = registration.getAvatarUrl();
-    if (registration.user!=null) {
-      if (registration.user?.getAvatarUrl() != null) {
-        inviteeAvatar = registration.user!.getAvatarUrl();
+      if (registration.organization!=null) {
+      if (registration.organization?.getAvatarUrl() != null) {
+        inviteeAvatar = registration.organization!.getAvatarUrl();
       } 
     }
+   
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Row(
@@ -62,6 +63,10 @@ class RegistrationListTile extends StatelessWidget {
               children: [
                 Text(
                   "${nt.t.invite.invitee}: ${registration.email} ${registration.inviteeFirstname != null ?registration.inviteeFirstname:''} ${registration.inviteeLastname != null?registration.inviteeLastname:''}",
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                Text(
+                  "${nt.t.invite.organization}: ${registration.organization!.name} ",
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 Text(
