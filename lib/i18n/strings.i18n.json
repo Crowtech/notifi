@@ -129,6 +129,17 @@
   "image_uploaded_failure": "Image failed to upload",
   "intro_title": "Welcome to Crowtech",
   "intro_description": "Advanced Design",
+  "invite": {
+    "approve":"Approve",
+    "reject": "Reject",
+    "reason": "reason?",
+    "approved":"Approved",
+    "invited_date_time":"Invited",
+    "approved_date_time":"Approved",
+    "invitee":"Invitee",
+    "inviter":"Inviter",
+    "approver":"Approver"
+  },
   "language": "Language",
   "lastname": "Lastname",
   "light": "light",

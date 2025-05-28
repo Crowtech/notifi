@@ -10,7 +10,7 @@ import 'package:slang/generated.dart';
 import 'strings.g.dart';
 
 // Path: <root>
-class TranslationsZh extends Translations {
+class TranslationsZh implements Translations {
 	/// You can call this constructor and build your own translation instance of this locale.
 	/// Constructing via the enum [AppLocale.build] is preferred.
 	TranslationsZh({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver, TranslationMetadata<AppLocale, Translations>? meta})
@@ -20,9 +20,7 @@ class TranslationsZh extends Translations {
 		    overrides: overrides ?? {},
 		    cardinalResolver: cardinalResolver,
 		    ordinalResolver: ordinalResolver,
-		  ),
-		  super(cardinalResolver: cardinalResolver, ordinalResolver: ordinalResolver) {
-		super.$meta.setFlatMapFunction($meta.getTranslation); // copy base translations to super.$meta
+		  ) {
 		$meta.setFlatMapFunction(_flatMapFunction);
 	}
 
@@ -30,7 +28,7 @@ class TranslationsZh extends Translations {
 	@override final TranslationMetadata<AppLocale, Translations> $meta;
 
 	/// Access flat map
-	@override dynamic operator[](String key) => $meta.getTranslation(key) ?? super.$meta.getTranslation(key);
+	@override dynamic operator[](String key) => $meta.getTranslation(key);
 
 	late final TranslationsZh _root = this; // ignore: unused_field
 
@@ -85,6 +83,7 @@ class TranslationsZh extends Translations {
 	@override String get image_uploaded_failure => '图片上传失败';
 	@override String get intro_title => '欢迎使用 Crowtech';
 	@override String get intro_description => '出行即服务';
+	@override late final _TranslationsInviteZh invite = _TranslationsInviteZh._(_root);
 	@override String get loading => '加载中 ...';
 	@override String get location_permission_denied => '位置权限被拒绝';
 	@override String get location_services_disabled => '定位服务已禁用。请启用该服务';
@@ -151,8 +150,8 @@ class TranslationsZh extends Translations {
 }
 
 // Path: menu
-class _TranslationsMenuZh extends TranslationsMenuEn {
-	_TranslationsMenuZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsMenuZh implements TranslationsMenuEn {
+	_TranslationsMenuZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -162,8 +161,8 @@ class _TranslationsMenuZh extends TranslationsMenuEn {
 }
 
 // Path: account
-class _TranslationsAccountZh extends TranslationsAccountEn {
-	_TranslationsAccountZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsAccountZh implements TranslationsAccountEn {
+	_TranslationsAccountZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -183,8 +182,8 @@ class _TranslationsAccountZh extends TranslationsAccountEn {
 }
 
 // Path: form
-class _TranslationsFormZh extends TranslationsFormEn {
-	_TranslationsFormZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsFormZh implements TranslationsFormEn {
+	_TranslationsFormZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -243,8 +242,8 @@ class _TranslationsFormZh extends TranslationsFormEn {
 }
 
 // Path: group_types
-class _TranslationsGroupTypesZh extends TranslationsGroupTypesEn {
-	_TranslationsGroupTypesZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsGroupTypesZh implements TranslationsGroupTypesEn {
+	_TranslationsGroupTypesZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -265,9 +264,27 @@ class _TranslationsGroupTypesZh extends TranslationsGroupTypesEn {
 	@override String get company => '公司';
 }
 
+// Path: invite
+class _TranslationsInviteZh implements TranslationsInviteEn {
+	_TranslationsInviteZh._(this._root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get approve => '批准';
+	@override String get reject => '拒绝';
+	@override String get reason => '原因';
+	@override String get approved => '得到正式认可的';
+	@override String get invited_date_time => '受邀';
+	@override String get approved_date_time => '得到正式认可的';
+	@override String get invitee => '受邀者';
+	@override String get inviter => '邀请';
+	@override String get approver => '审批人';
+}
+
 // Path: resource
-class _TranslationsResourceZh extends TranslationsResourceEn {
-	_TranslationsResourceZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsResourceZh implements TranslationsResourceEn {
+	_TranslationsResourceZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -283,8 +300,8 @@ class _TranslationsResourceZh extends TranslationsResourceEn {
 }
 
 // Path: resources
-class _TranslationsResourcesZh extends TranslationsResourcesEn {
-	_TranslationsResourcesZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsResourcesZh implements TranslationsResourcesEn {
+	_TranslationsResourcesZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -300,8 +317,8 @@ class _TranslationsResourcesZh extends TranslationsResourcesEn {
 }
 
 // Path: response
-class _TranslationsResponseZh extends TranslationsResponseEn {
-	_TranslationsResponseZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsResponseZh implements TranslationsResponseEn {
+	_TranslationsResponseZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -321,8 +338,8 @@ class _TranslationsResponseZh extends TranslationsResponseEn {
 }
 
 // Path: select
-class _TranslationsSelectZh extends TranslationsSelectEn {
-	_TranslationsSelectZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsSelectZh implements TranslationsSelectEn {
+	_TranslationsSelectZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -343,8 +360,8 @@ class _TranslationsSelectZh extends TranslationsSelectEn {
 }
 
 // Path: search
-class _TranslationsSearchZh extends TranslationsSearchEn {
-	_TranslationsSearchZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsSearchZh implements TranslationsSearchEn {
+	_TranslationsSearchZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -359,8 +376,8 @@ class _TranslationsSearchZh extends TranslationsSearchEn {
 }
 
 // Path: unknown
-class _TranslationsUnknownZh extends TranslationsUnknownEn {
-	_TranslationsUnknownZh._(TranslationsZh root) : this._root = root, super.internal(root);
+class _TranslationsUnknownZh implements TranslationsUnknownEn {
+	_TranslationsUnknownZh._(this._root);
 
 	final TranslationsZh _root; // ignore: unused_field
 
@@ -502,6 +519,15 @@ extension on TranslationsZh {
 			case 'image_uploaded_failure': return '图片上传失败';
 			case 'intro_title': return '欢迎使用 Crowtech';
 			case 'intro_description': return '出行即服务';
+			case 'invite.approve': return '批准';
+			case 'invite.reject': return '拒绝';
+			case 'invite.reason': return '原因';
+			case 'invite.approved': return '得到正式认可的';
+			case 'invite.invited_date_time': return '受邀';
+			case 'invite.approved_date_time': return '得到正式认可的';
+			case 'invite.invitee': return '受邀者';
+			case 'invite.inviter': return '邀请';
+			case 'invite.approver': return '审批人';
 			case 'loading': return '加载中 ...';
 			case 'location_permission_denied': return '位置权限被拒绝';
 			case 'location_services_disabled': return '定位服务已禁用。请启用该服务';
