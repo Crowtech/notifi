@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
 
-Widget slideLeftBackground() {
+Widget slideLeftReject() {
   return Container(
     color: Colors.red,
     child: Align(

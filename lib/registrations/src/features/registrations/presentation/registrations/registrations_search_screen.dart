@@ -6,6 +6,8 @@ import 'package:logger/logger.dart' as logger;
 import 'package:notifi/registrations/src/features/registrations/presentation/registration_details/registration_details_screen.dart';
 
 import 'package:notifi/widgets/slide_left_background.dart';
+import 'package:notifi/widgets/slide_left_reject.dart';
+import 'package:notifi/widgets/slide_right_approve.dart';
 import 'package:notifi/widgets/slide_right_background.dart';
 
 import '../../data/registrations_repository.dart';
@@ -93,8 +95,8 @@ class RegistrationsSearchScreen extends ConsumerWidget {
                       return Dismissible(
                           key: Key(registration.id.toString()),
                           direction: DismissDirection.horizontal,
-                          background: slideRightBackground(),
-                          secondaryBackground: slideLeftBackground(),
+                          background: slideRightApprove(),
+                          secondaryBackground: slideLeftReject(),
                           confirmDismiss: (direction) {
                             return showDialog<bool>(
                               context: context,

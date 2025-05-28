@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
 
-Widget slideRightBackground() {
+Widget slideRightApprove() {
   return Container(
     color: Colors.green,
     child: Align(
