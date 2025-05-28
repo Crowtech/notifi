@@ -206,7 +206,8 @@
     "submit": "Submit",
     "update": "Update",
     "create": "Create",
-    "join": "Join"
+    "join": "Join",
+    "sure": "Are you sure?"
   },
   "saving": "Saving ...",
   "select": {

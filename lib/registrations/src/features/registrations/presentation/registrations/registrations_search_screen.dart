@@ -102,7 +102,7 @@ class RegistrationsSearchScreen extends ConsumerWidget {
                               context: context,
                               builder: (context) {
                                 return AlertDialog(
-                                  title: Text(nt.t.invite.reject),
+                                  title: Text(nt.t.response.sure),
                                   //content: Text(nt.t.invite.reject_sure),
                                   actions: [
                                     TextButton(
