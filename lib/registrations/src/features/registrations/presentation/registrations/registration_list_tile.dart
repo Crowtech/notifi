@@ -61,15 +61,15 @@ class RegistrationListTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "${nt.t.invite.invitee} ${registration.email} ${registration.inviteeFirstname} ${registration.inviteeLastname}",
+                  "${nt.t.invite.invitee}: ${registration.email} ${registration.inviteeFirstname != null ?registration.inviteeFirstname:''} ${registration.inviteeLastname != null?registration.inviteeLastname:''}",
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 Text(
-                  "${nt.t.invite.inviter} ${registration.inviter!.name} ",
+                  "${nt.t.invite.inviter}: ${registration.inviter!.name} ",
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                  Text(
-                  "${nt.t.invite.approver} ${registration.approver!.name} ",
+                  "${nt.t.invite.approver}: ${registration.approver!.name} ",
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 if (registration.created != null) ...[
