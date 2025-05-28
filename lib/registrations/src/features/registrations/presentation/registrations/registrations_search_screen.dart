@@ -106,7 +106,7 @@ class RegistrationsSearchScreen extends ConsumerWidget {
                                     TextButton(
                                       onPressed: () =>
                                           Navigator.of(context).pop(false),
-                                      child: Text(nt.t.invite.accept),
+                                      child: Text(nt.t.invite.approve),
                                     ),
                                     TextButton(
                                       onPressed: () =>
