@@ -91,7 +91,7 @@ class RegistrationsSearchScreen extends ConsumerWidget {
                       if (indexInPage >= response.results.length) {
                         return null;
                       }
-                      final registration = response.results[indexInPage];
+                      var registration = response.results[indexInPage];
                       return Dismissible(
                           key: Key(registration.id.toString()),
                           direction: DismissDirection.horizontal,
@@ -103,20 +103,20 @@ class RegistrationsSearchScreen extends ConsumerWidget {
                               builder: (context) {
                                 return AlertDialog(
                                   title: Text(nt.t.invite.reject),
-                                  content: Text(nt.t.invite.reject_sure),
+                                  //content: Text(nt.t.invite.reject_sure),
                                   actions: [
                                     TextButton(
-                                      onPressed: () {
+                                      onPressed: () async  {
                                         String reason = "";
-                                        submitApproval(ref,registration,true,reason);
+                                        registration = await submitApproval(ref,registration,true,reason);
                                           Navigator.of(context).pop(false);
                                       },
                                       child: Text(nt.t.response.ok),
                                     ),
                                     TextButton(
-                                      onPressed: () {
+                                      onPressed: () async {
                                               String reason = "";
-                                        submitApproval(ref,registration,false,reason);
+                                        registration = await submitApproval(ref,registration,false,reason);
                                           Navigator.of(context).pop(true);
                                       },
                                       child: Text(nt.t.response.cancel),
@@ -150,11 +150,16 @@ class RegistrationsSearchScreen extends ConsumerWidget {
     );
   }
 
-  void submitApproval(WidgetRef ref,Registration registration,bool approved,String reason) async {
+  Future<Registration> submitApproval(WidgetRef ref,Registration registration,bool approved,String reason) async {
     String token = ref.read(nestAuthProvider.notifier).token!;
+    logNoStack.i("submitApproval $token");
     String apiPath = "$defaultAPIBaseUrl$defaultApiPrefixPath/registrations/approve/${registration.code}/${approved?'true':'false'}?reason=${reason}";
+    logNoStack.i("apipath = $apiPath");
     var responseMap = await apiPostDataNoLocale( token, apiPath, null, null);
     logNoStack.i("submitApproval resultMap = $responseMap");
+    registration.approved = approved;
+    registration.approvalReason = reason;
+    return registration;
   }
 }
 
