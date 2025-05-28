@@ -1,8 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:logger/logger.dart' as logger;
-import 'package:notifi/credentials.dart';
 import 'package:notifi/models/crowtech_object.dart';
-import 'package:notifi/models/gps.dart';
 import 'package:notifi/models/organization.dart';
 import 'package:notifi/models/person.dart';
 
@@ -52,10 +50,6 @@ class Registration extends CrowtechObject {
       super.active,
       super.updated,
       super.name,
-      super.description,
-      super.location,
-      super.devicecode,
-      super.avatarUrl,
       required this.email,
       required this.inviteeFirstname,
       required this.inviteeLastname,
@@ -90,14 +84,7 @@ class Registration extends CrowtechObject {
     return "Registration=>${super.toString()} $email $orgId $userId $inviterId $approverId";
   }
 
-  @override
-  String getAvatarUrl() {
-    if (avatarUrl == null) {
-      return "$defaultMinioEndpointUrl/$defaultRealm/person.png";
-    } else {
-      return avatarUrl!;
-    }
-  }
+  
 
   String getInitials() {
     return "${inviteeFirstname != null ? inviteeFirstname!.substring(0, 1).toUpperCase():''}${inviteeLastname != null ? inviteeLastname!.substring(0, 1).toUpperCase():''}";
@@ -110,10 +97,6 @@ class Registration extends CrowtechObject {
     bool? active,
     DateTime? updated,
     String? name,
-    String? description,
-    String? location,
-    String? devicecode,
-    String? avatarUrl,
     String? email,
     String? inviteeFirstname,
     String? inviteeLastname,
@@ -136,10 +119,6 @@ class Registration extends CrowtechObject {
       active: active ?? this.active,
       updated: updated ?? this.updated,
       name: name ?? this.name,
-      description: description ?? this.description,
-      location: location ?? this.location,
-      devicecode: devicecode ?? this.devicecode,
-      avatarUrl: avatarUrl ?? this.avatarUrl,
       email: email ?? this.email,
       inviteeFirstname: inviteeFirstname ?? this.inviteeFirstname,
            inviteeLastname: inviteeLastname ?? this.inviteeLastname,
@@ -166,9 +145,6 @@ Registration defaultRegistration = Registration(
   active: true,
   updated: DateTime.now(), // updated
   name: "Default Registration", // name
-  description: "This is a default Registration", // description
-  location: "", // location
-  devicecode: "DEVICE-CODE", // device code
   email: "user@email.com", // email
   inviteeFirstname: "", // firstname
   inviteeLastname: "", // lastname
