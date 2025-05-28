@@ -133,6 +133,7 @@
     "organization":"组织",
     "approve":"批准",
     "reject": "拒绝",
+    "reject_sure": "你确定吗？",
     "reason": "原因",
     "approved":"得到正式认可的",
     "invited_date_time":"受邀",

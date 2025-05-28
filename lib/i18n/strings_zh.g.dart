@@ -274,6 +274,7 @@ class _TranslationsInviteZh implements TranslationsInviteEn {
 	@override String get organization => '组织';
 	@override String get approve => '批准';
 	@override String get reject => '拒绝';
+	@override String get reject_sure => '你确定吗？';
 	@override String get reason => '原因';
 	@override String get approved => '得到正式认可的';
 	@override String get invited_date_time => '受邀';
@@ -523,6 +524,7 @@ extension on TranslationsZh {
 			case 'invite.organization': return '组织';
 			case 'invite.approve': return '批准';
 			case 'invite.reject': return '拒绝';
+			case 'invite.reject_sure': return '你确定吗？';
 			case 'invite.reason': return '原因';
 			case 'invite.approved': return '得到正式认可的';
 			case 'invite.invited_date_time': return '受邀';
