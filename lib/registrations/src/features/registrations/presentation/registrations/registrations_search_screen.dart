@@ -165,17 +165,15 @@ class RegistrationsSearchScreen extends ConsumerWidget {
 
     var url = Uri.parse(apiPath);
 
-    http
-        .post(
+    http.get(
       url,
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",
         "Authorization": "Bearer $token",
       },
-      encoding: Encoding.getByName('utf-8'),
-    )
-        .then((response) {
+      // encoding: Encoding.getByName('utf-8'),
+    ).then((response) {
       logNoStack
           .i("submitApproval result = ${response.body} ${response.statusCode}");
     });
