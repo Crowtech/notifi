@@ -110,7 +110,7 @@ class RegistrationsSearchScreen extends ConsumerWidget {
                                   actions: [
                                     TextButton(
                                       onPressed: () async {
-                                        String reason = "";
+                                        String reason = "No problem";
                                         registration = await submitApproval(
                                             ref, registration, true, reason);
                                         Navigator.of(context).pop(false);
@@ -119,7 +119,7 @@ class RegistrationsSearchScreen extends ConsumerWidget {
                                     ),
                                     TextButton(
                                       onPressed: () async {
-                                        String reason = "";
+                                        String reason = "No";
                                         registration = await submitApproval(
                                             ref, registration, false, reason);
                                         Navigator.of(context).pop(true);
