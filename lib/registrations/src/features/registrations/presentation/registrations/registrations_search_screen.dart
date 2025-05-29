@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart' as logger;
-import 'package:notifi/api_utils.dart';
 import 'package:notifi/credentials.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:notifi/registrations/src/features/registrations/domain/registration.dart';
@@ -55,8 +54,8 @@ class RegistrationsSearchScreen extends ConsumerWidget {
                 // keep showing the progress indicator until the first page is fetched
                 try {
                   await ref.read(
-                    fetchRegistrationsProvider(queryData: (page: 1, query: query))
-                        .future,
+                    fetchRegistrationsProvider(
+                        queryData: (page: 1, query: query)).future,
                   );
                 } catch (e) {
                   // fail silently as the provider error state is handled inside the ListView
@@ -77,7 +76,8 @@ class RegistrationsSearchScreen extends ConsumerWidget {
                   // Note that ref.watch is called for up to pageSize items
                   // with the same page and query arguments (but this is ok since data is cached)
                   final responseAsync = ref.watch(
-                    fetchRegistrationsProvider(queryData: (page: page, query: query)),
+                    fetchRegistrationsProvider(
+                        queryData: (page: page, query: query)),
                   );
                   return responseAsync.when(
                     error: (err, stack) => RegistrationListTileError(
@@ -109,18 +109,20 @@ class RegistrationsSearchScreen extends ConsumerWidget {
                                   //content: Text(nt.t.invite.reject_sure),
                                   actions: [
                                     TextButton(
-                                      onPressed: () async  {
+                                      onPressed: () async {
                                         String reason = "";
-                                        registration = await submitApproval(ref,registration,true,reason);
-                                          Navigator.of(context).pop(false);
+                                        registration = await submitApproval(
+                                            ref, registration, true, reason);
+                                        Navigator.of(context).pop(false);
                                       },
                                       child: Text(nt.t.response.ok),
                                     ),
                                     TextButton(
                                       onPressed: () async {
-                                              String reason = "";
-                                        registration = await submitApproval(ref,registration,false,reason);
-                                          Navigator.of(context).pop(true);
+                                        String reason = "";
+                                        registration = await submitApproval(
+                                            ref, registration, false, reason);
+                                        Navigator.of(context).pop(true);
                                       },
                                       child: Text(nt.t.response.cancel),
                                     ),
@@ -137,7 +139,8 @@ class RegistrationsSearchScreen extends ConsumerWidget {
                               showDialog(
                                 context: context,
                                 builder: (context) => RegistrationDetailsScreen(
-                                    registrationId: registration.id!, registration: registration),
+                                    registrationId: registration.id!,
+                                    registration: registration),
                               );
                             },
                           ));
@@ -149,30 +152,47 @@ class RegistrationsSearchScreen extends ConsumerWidget {
           ),
         ],
       ),
-     
     );
   }
 
-  Future<Registration> submitApproval(WidgetRef ref,Registration registration,bool approved,String reason) async {
+  Future<Registration> submitApproval(WidgetRef ref, Registration registration,
+      bool approved, String reason) async {
     String token = ref.read(nestAuthProvider.notifier).token!;
     logNoStack.i("submitApproval $token");
-    String apiPath = "$defaultAPIBaseUrl$defaultApiPrefixPath/registrations/approve/${registration.code}/${approved?'true':'false'}?reason=$reason";
+    String apiPath =
+        "$defaultAPIBaseUrl$defaultApiPrefixPath/registrations/approve/${registration.code}/${approved ? 'true' : 'false'}?reason=$reason";
     logNoStack.i("apipath = $apiPath");
 
     var url = Uri.parse(apiPath);
-  
-  final http.Response response = await http.post(url,
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-          "Authorization": "Bearer $token",
-        },
-        encoding: Encoding.getByName('utf-8'),
-  );
 
+    http
+        .post(
+      url,
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": "Bearer $token",
+      },
+      encoding: Encoding.getByName('utf-8'),
+    )
+        .then((response) {
+      logNoStack
+          .i("submitApproval result = ${response.body} ${response.statusCode}");
+    });
 
     // var responseMap = await apiPostDataNoLocale( token, apiPath, null, null);
-    logNoStack.i("submitApproval result = ${response.body} ${response.statusCode}");
+
+    // final http.Response response = await http.post(url,
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //         "Accept": "application/json",
+    //         "Authorization": "Bearer $token",
+    //       },
+    //       encoding: Encoding.getByName('utf-8'),
+    // );
+
+    //   // var responseMap = await apiPostDataNoLocale( token, apiPath, null, null);
+    //   logNoStack.i("submitApproval result = ${response.body} ${response.statusCode}");
     registration.approved = approved;
     registration.approvalReason = reason;
     return registration;

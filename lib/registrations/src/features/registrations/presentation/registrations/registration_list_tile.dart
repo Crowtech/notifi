@@ -62,7 +62,7 @@ class RegistrationListTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "${nt.t.invite.invitee}: ${registration.email} ${registration.inviteeFirstname != null ?registration.inviteeFirstname:''} ${registration.inviteeLastname != null?registration.inviteeLastname:''}",
+                  "${nt.t.invite.invitee}: ${registration.email} ${registration.inviteeFirstname ?? ''} ${registration.inviteeLastname ?? ''}",
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 Text(

@@ -48,7 +48,7 @@ class OrganizationsSearchScreen extends ConsumerWidget {
     final responseAsync = ref.watch(fetchOrganizationsNestFilterProvider);
     final totalResults = responseAsync.valueOrNull?.totalResults;
     return Scaffold(
-      appBar: AppBar(title: Text("${nt.t.resources.organization}")),
+      appBar: AppBar(title: Text(nt.t.resources.organization)),
       body: Column(
         children: [
           const OrganizationsSearchBar(),
