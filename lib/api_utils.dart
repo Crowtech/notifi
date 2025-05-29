@@ -58,10 +58,12 @@ Future<dynamic> apiPostDataNoLocale(
   }
 
   logNoStack.i(response.statusCode);
-  if (response.statusCode == 202 ||
+  if (response.statusCode == 204 ||
+    response.statusCode == 203 ||
+    response.statusCode == 202 ||
       response.statusCode == 201 ||
       response.statusCode == 200) {
-    logNoStack.d(
+    logNoStack.i(
         "API POST No LOCALE: $apiPath created successfully! with status ${response.statusCode}");
     logNoStack.d("API POST No Locale: respose is ${response.body}");
     if (response.body.isEmpty) {
