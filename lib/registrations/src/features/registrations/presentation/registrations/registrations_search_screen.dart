@@ -175,7 +175,7 @@ class RegistrationsSearchScreen extends ConsumerWidget {
       // encoding: Encoding.getByName('utf-8'),
     ).then((response) {
       logNoStack
-          .i("submitApproval result = ${response.body} ${response.statusCode}");
+          .i("submitApproval result = [${response.body}] (${response.statusCode})");
     });
 
     // var responseMap = await apiPostDataNoLocale( token, apiPath, null, null);
