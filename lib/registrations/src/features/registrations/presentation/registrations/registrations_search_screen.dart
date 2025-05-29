@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart' as logger;
@@ -154,7 +156,7 @@ class RegistrationsSearchScreen extends ConsumerWidget {
   Future<Registration> submitApproval(WidgetRef ref,Registration registration,bool approved,String reason) async {
     String token = ref.read(nestAuthProvider.notifier).token!;
     logNoStack.i("submitApproval $token");
-    String apiPath = "$defaultAPIBaseUrl$defaultApiPrefixPath/registrations/approve/${registration.code}/${approved?'true':'false'}?reason=$reason}";
+    String apiPath = "$defaultAPIBaseUrl$defaultApiPrefixPath/registrations/approve/${registration.code}/${approved?'true':'false'}?reason=$reason";
     logNoStack.i("apipath = $apiPath");
 
     var url = Uri.parse(apiPath);
@@ -165,11 +167,12 @@ class RegistrationsSearchScreen extends ConsumerWidget {
           "Accept": "application/json",
           "Authorization": "Bearer $token",
         },
+        encoding: Encoding.getByName('utf-8'),
   );
 
 
     // var responseMap = await apiPostDataNoLocale( token, apiPath, null, null);
-    logNoStack.i("submitApproval result = $response");
+    logNoStack.i("submitApproval result = ${response.body} ${response.statusCode}");
     registration.approved = approved;
     registration.approvalReason = reason;
     return registration;
