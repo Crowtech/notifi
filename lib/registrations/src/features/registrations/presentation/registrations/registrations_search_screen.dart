@@ -161,7 +161,7 @@ class RegistrationsSearchScreen extends ConsumerWidget {
     logNoStack.i("submitApproval $token");
     logNoStack.i("Registration Code = [${registration.code}]");
     String apiPath =
-        "$defaultAPIBaseUrl$defaultApiPrefixPath/registrations/approve/testcode/${approved ? 'true' : 'false'}?reason=$reason";
+        "$defaultAPIBaseUrl$defaultApiPrefixPath/registrations/approve/${registration.code}/${approved ? 'true' : 'false'}?reason=$reason";
     logNoStack.i("apipath = $apiPath");
 
     var url = Uri.parse(apiPath);
