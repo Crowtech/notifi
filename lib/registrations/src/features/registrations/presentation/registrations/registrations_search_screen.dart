@@ -15,6 +15,7 @@ import 'registration_list_tile.dart';
 import 'registration_list_tile_shimmer.dart';
 import 'registrations_search_bar.dart';
 import 'registrations_search_query_notifier.dart';
+import 'package:http/http.dart' as http;
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -153,10 +154,22 @@ class RegistrationsSearchScreen extends ConsumerWidget {
   Future<Registration> submitApproval(WidgetRef ref,Registration registration,bool approved,String reason) async {
     String token = ref.read(nestAuthProvider.notifier).token!;
     logNoStack.i("submitApproval $token");
-    String apiPath = "$defaultAPIBaseUrl$defaultApiPrefixPath/registrations/approve/${registration.code}/${approved?'true':'false'}?reason=${reason}";
+    String apiPath = "$defaultAPIBaseUrl$defaultApiPrefixPath/registrations/approve/${registration.code}/${approved?'true':'false'}?reason=$reason}";
     logNoStack.i("apipath = $apiPath");
-    var responseMap = await apiPostDataNoLocale( token, apiPath, null, null);
-    logNoStack.i("submitApproval resultMap = $responseMap");
+
+    var url = Uri.parse(apiPath);
+  
+  final http.Response response = await http.post(url,
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Authorization": "Bearer $token",
+        },
+  );
+
+
+    // var responseMap = await apiPostDataNoLocale( token, apiPath, null, null);
+    logNoStack.i("submitApproval result = $response");
     registration.approved = approved;
     registration.approvalReason = reason;
     return registration;
