@@ -49,17 +49,20 @@ class PersonsRepository {
     logNoStack.i(
         "PERSONS_REPOSITORY: search currentUserId=${currentUser.id} token=${token.substring(0, 10)}");
 
-    int sourceOrgId = 10251;
+
     if (currentUser.orgid != null) {
       currentUser.orgid!;
     }
-      if (!(selectedOrganizations.isEmpty)) {
-      sourceOrgId = selectedOrganizations.first.id!;
-    }
+    //   if (!(selectedOrganizations.isEmpty)) {
+    //   sourceOrgId = selectedOrganizations.first.id!;
+    // }
+
+    String host = defaultAPIBaseUrl.substring("https://".length);
+    String path = "$defaultApiPrefixPath/resources/targets/0";
     final uri = Uri(
       scheme: 'https',
-      host: defaultAPIBaseUrl.substring("https://".length),
-      path: "$defaultApiPrefixPath/resources/targets/$sourceOrgId",
+      host: host,
+      path: path,
       // queryParameters: {
       //   'api_key': token,
       //   'include_adult': 'false',
@@ -72,6 +75,7 @@ class PersonsRepository {
       "Authorization": 'Bearer $token'
     });
 
+  logNoStack.i("host: $host$path $data");
     final response = await client.postUri(uri,
         options: options, data: data, cancelToken: cancelToken);
 
