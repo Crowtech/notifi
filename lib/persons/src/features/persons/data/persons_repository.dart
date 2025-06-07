@@ -84,13 +84,13 @@ class PersonsRepository {
 
   Future<NPersonsResponse> nowPlayingPersons(
       {required int page, CancelToken? cancelToken}) async {
-        var data = null;
+        String data;
     NestFilter nf = NestFilter(offset: page);
     
     logNoStack.i(
         "PERSONS_REPOSITORY: now Playing currentUserId=${currentUser.id} token=${token.substring(0, 10)}");
 
-    int sourceOrgId = 10251;
+   // int sourceOrgId = 10251;
     // if (currentUser != null) {
     //   if (currentUser.orgid != null) {
     //     currentUser.orgid!;
@@ -105,11 +105,14 @@ class PersonsRepository {
         orgList.add(o.id!);
       }
       nf.orgIdList = orgList;
-      data = jsonEncode(nf);
-      logNoStack.i("nf person: ${nf}");
+  
+      logNoStack.i("nf person: $nf");
       logNoStack.i(listOfOrgs);
      // sourceOrgId = selectedOrganizations.first.id!;
+    } else {
+       logNoStack.i("no selected orgs: $nf");
     }
+    data = jsonEncode(nf);
     final uri = Uri(
       scheme: 'https',
       host: defaultAPIBaseUrl.substring("https://".length),
