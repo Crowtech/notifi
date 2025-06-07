@@ -45,6 +45,7 @@ class PersonsSearchScreen extends ConsumerWidget {
           Expanded(
             child: RefreshIndicator(
               onRefresh: () async {
+                logNoStack.i("Refresh! ");
                 // dispose all the pages previously fetched. Next read will refresh them
                 ref.invalidate(fetchPersonsProvider);
                 // keep showing the progress indicator until the first page is fetched

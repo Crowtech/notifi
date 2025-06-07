@@ -131,12 +131,12 @@ class PersonsRepository {
       "Authorization": 'Bearer $token'
     });
 
-    logNoStack.i("PERSONS_REPOSITORY: now Playing uri=${uri.toString()}");
+    logNoStack.d("PERSONS_REPOSITORY: now Playing uri=${uri.toString()}");
     final response = await client.postUri(uri,
         options: options, data: data, cancelToken: cancelToken);
 
     logNoStack
-        .i("PERSONS_REPOSITORY: now Playing , responseData=${response.data}");
+        .d("PERSONS_REPOSITORY: now Playing , responseData=${response.data}");
     return NPersonsResponse.fromJson(response.data);
   }
 
