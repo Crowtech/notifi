@@ -84,7 +84,7 @@ class PersonsRepository {
 
   Future<NPersonsResponse> nowPlayingPersons(
       {required int page, CancelToken? cancelToken}) async {
-    NestFilter nf = NestFilter(offset: 0);
+    NestFilter nf = NestFilter(offset: page);
     var data = jsonEncode(nf);
     logNoStack.i(
         "PERSONS_REPOSITORY: now Playing currentUserId=${currentUser.id} token=${token.substring(0, 10)}");
