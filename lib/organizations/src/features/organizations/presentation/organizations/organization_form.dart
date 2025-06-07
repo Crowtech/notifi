@@ -284,7 +284,7 @@ class _CreateOrganizationFormState
                                   var token =
                                       ref.read(nestAuthProvider.notifier).token;
                                   var apiPath =
-                                      "$defaultAPIBaseUrl$defaultApiPrefixPath/organizations/create?isauthorized=${fieldValues['authorized']}";
+                                      "$defaultAPIBaseUrl$defaultApiPrefixPath/organizations/create?isauthorized=${fieldValues['authorized']?'true':'false'}";
 
                                   logNoStack.i(
                                       "ORG_FORM: sending $organization to $apiPath");

@@ -97,12 +97,21 @@ class PersonsRepository {
     // }
 
     if (!(selectedOrganizations.isEmpty)) {
-      sourceOrgId = selectedOrganizations.first.id!;
+      String listOfOrgs = "";
+      List<int> orgList = [];
+      for (Organization o in selectedOrganizations) {
+        listOfOrgs += "${o.id}:${o.name}\n";
+        orgList.add(o.id!);
+      }
+      nf.orgIdList = orgList;
+      logNoStack.i(listOfOrgs);
+     // sourceOrgId = selectedOrganizations.first.id!;
     }
     final uri = Uri(
       scheme: 'https',
       host: defaultAPIBaseUrl.substring("https://".length),
-      path: "$defaultApiPrefixPath/resources/targets/$sourceOrgId",
+      path: "$defaultApiPrefixPath/resources/targets/0",
+      //path: "$defaultApiPrefixPath/resources/targets/0', //$sourceOrgId",
       // queryParameters: {
       //   'api_key': token,
       //   'include_adult': 'false',
