@@ -84,8 +84,9 @@ class PersonsRepository {
 
   Future<NPersonsResponse> nowPlayingPersons(
       {required int page, CancelToken? cancelToken}) async {
+        var data = null;
     NestFilter nf = NestFilter(offset: page);
-    var data = jsonEncode(nf);
+    
     logNoStack.i(
         "PERSONS_REPOSITORY: now Playing currentUserId=${currentUser.id} token=${token.substring(0, 10)}");
 
@@ -104,6 +105,8 @@ class PersonsRepository {
         orgList.add(o.id!);
       }
       nf.orgIdList = orgList;
+      data = jsonEncode(nf);
+      logNoStack.i("nf person: ${nf}");
       logNoStack.i(listOfOrgs);
      // sourceOrgId = selectedOrganizations.first.id!;
     }
