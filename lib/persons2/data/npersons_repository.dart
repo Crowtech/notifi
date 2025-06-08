@@ -59,7 +59,7 @@ class NPersonsRepository {
     });
 
 logNoStack.i("NPERSONS_REPOSITORY: $host  ${uri} ${data}");
-    final response = await client.getUri(uri,
+    final response = await client.postUri(uri,
         options: options, data: data, cancelToken: cancelToken);
         logNoStack.i("NPERSONS_REPOSITORY ${response}");
     return NPersonsResponse.fromJson(response.data);
@@ -91,7 +91,7 @@ logNoStack.i("NPERSONS_REPOSITORY: $host  ${uri} ${data}");
     });
     //https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1
     final response =
-        await client.getUri(uri, options: options, data: data,cancelToken: cancelToken);
+        await client.postUri(uri, options: options, data: data,cancelToken: cancelToken);
     return NPersonsResponse.fromJson(response.data);
   }
 
@@ -114,7 +114,7 @@ logNoStack.i("NPERSONS_REPOSITORY: $host  ${uri} ${data}");
       "accept": 'application/json',
        "Authorization": 'Bearer $token'    });
     final response =
-        await client.get(url, options: options, cancelToken: cancelToken);
+        await client.post(url, options: options, cancelToken: cancelToken);
     return NPerson.fromJson(response.data);
   }
 }
