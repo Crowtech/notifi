@@ -81,7 +81,7 @@ class NPersonsSearchScreen extends ConsumerWidget {
                         nperson: nperson,
                         debugIndex: index + 1,
                         onPressed: () => context.goNamed(
-                          "movie",
+                          "nperson",
                           pathParameters: {'id': nperson.id.toString()},
                           extra: nperson,
                         ),
