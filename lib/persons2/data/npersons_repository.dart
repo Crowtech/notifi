@@ -37,7 +37,7 @@ class NPersonsRepository {
       {required Persons2QueryData queryData, CancelToken? cancelToken}) async {
     NestFilter nf = NestFilter(offset: queryData.page);
     var data = jsonEncode(nf);
-    logNoStack.i("PERSONS2_REPOSITORY: search token=${token.substring(0, 10)}");
+    logNoStack.i("NPERSONS_REPOSITORY: search token=${token.substring(0, 10)}");
 
     String host = defaultAPIBaseUrl.substring("https://".length);
     String path = "$defaultApiPrefixPath/resources/targets/0";
@@ -58,8 +58,10 @@ class NPersonsRepository {
       "Authorization": 'Bearer $token'
     });
 
+logNoStack.i("NPERSONS_REPOSITORY: $host  ${uri} ${data}");
     final response = await client.getUri(uri,
         options: options, data: data, cancelToken: cancelToken);
+        logNoStack.i("NPERSONS_REPOSITORY ${response}");
     return NPersonsResponse.fromJson(response.data);
   }
 
