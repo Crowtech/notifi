@@ -4,52 +4,56 @@ import 'package:notifi/movies/data/movies_repository.dart';
 import 'package:notifi/movies/domain/tmdb_movie.dart';
 import 'package:notifi/movies/presentation/movies/movie_list_tile.dart';
 import 'package:notifi/movies/presentation/movies/movie_list_tile_shimmer.dart';
+import 'package:notifi/persons/src/features/persons/domain/nperson.dart';
+import 'package:notifi/persons2/data/persons2_repository.dart';
+import 'package:notifi/persons2/presentation/movies/nperson_list_tile.dart';
+import 'package:notifi/persons2/presentation/movies/nperson_list_tile_shimmer.dart';
 
-class MovieDetailsScreen extends ConsumerWidget {
-  const MovieDetailsScreen(
+class NPersonDetailsScreen extends ConsumerWidget {
+  const NPersonDetailsScreen(
       {super.key, required this.movieId, required this.movie});
   final int movieId;
-  final TMDBMovie? movie;
+  final NPerson? movie;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     if (movie != null) {
       return Scaffold(
         appBar: AppBar(
-          title: Text(movie!.title),
+          title: Text(movie!.name!),
         ),
         body: Column(
           children: [
-            MovieListTile(movie: movie!),
+            NPersonListTile(nperson: movie!),
           ],
         ),
       );
     } else {
-      final movieAsync = ref.watch(movieProvider(movieId: movieId));
+      final movieAsync = ref.watch(personProvider(movieId: movieId));
       return movieAsync.when(
         error: (e, st) => Scaffold(
           appBar: AppBar(
-            title: Text(movie?.title ?? 'Error'),
+            title: Text(movie?.name ?? 'Error'),
           ),
           body: Center(child: Text(e.toString())),
         ),
         loading: () => Scaffold(
           appBar: AppBar(
-            title: Text(movie?.title ?? 'Loading'),
+            title: Text(movie?.name ?? 'Loading'),
           ),
           body: const Column(
             children: [
-              MovieListTileShimmer(),
+              NPersonListTileShimmer(),
             ],
           ),
         ),
         data: (movie) => Scaffold(
           appBar: AppBar(
-            title: Text(movie.title),
+            title: Text(movie.name!),
           ),
           body: Column(
             children: [
-              MovieListTile(movie: movie),
+              NPersonListTile(nperson: movie),
             ],
           ),
         ),
