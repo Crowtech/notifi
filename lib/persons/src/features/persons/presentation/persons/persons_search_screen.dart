@@ -36,7 +36,7 @@ class PersonsSearchScreen extends ConsumerWidget {
     final responseAsync = ref.watch(
       fetchPersonsProvider(queryData: (page: 0, query: query)),
     );
-    final totalResults = responseAsync.valueOrNull?.totalResults;
+    final totalResults = responseAsync.valueOrNull?.totalPages;
     return Scaffold(
       appBar: AppBar(title: Text(nt.t.resources.person)),
       body: Column(

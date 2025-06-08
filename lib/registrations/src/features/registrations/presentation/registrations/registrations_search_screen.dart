@@ -39,7 +39,7 @@ class RegistrationsSearchScreen extends ConsumerWidget {
     final responseAsync = ref.watch(
       fetchRegistrationsProvider(queryData: (page: 0, query: query)),
     );
-    final totalResults = responseAsync.valueOrNull?.totalResults;
+    final totalResults = responseAsync.valueOrNull?.totalPages;
     return Scaffold(
       appBar: AppBar(title: Text(nt.t.resources.registration)),
       body: Column(

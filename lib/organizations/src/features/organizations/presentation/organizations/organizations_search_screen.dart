@@ -46,7 +46,7 @@ class OrganizationsSearchScreen extends ConsumerWidget {
     //   fetchOrganizationsNestFilterProvider,
     // );
     final responseAsync = ref.watch(fetchOrganizationsNestFilterProvider);
-    final totalResults = responseAsync.valueOrNull?.totalResults;
+    final totalResults = responseAsync.valueOrNull?.totalPages;
     return Scaffold(
       appBar: AppBar(title: Text(nt.t.resources.organization)),
       body: Column(
