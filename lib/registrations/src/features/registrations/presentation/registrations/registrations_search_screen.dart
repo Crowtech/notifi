@@ -37,7 +37,7 @@ class RegistrationsSearchScreen extends ConsumerWidget {
     final query = ref.watch(registrationsSearchQueryNotifierProvider);
     // * get the first page so we can retrieve the total number of results
     final responseAsync = ref.watch(
-      fetchRegistrationsProvider(queryData: (0, query: query)),
+      fetchRegistrationsProvider(queryData: (page: 0, query: query)),
     );
     final totalResults = responseAsync.valueOrNull?.totalResults;
     return Scaffold(
