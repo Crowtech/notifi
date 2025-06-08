@@ -6,23 +6,24 @@ import 'package:notifi/persons2/presentation/movies/nperson_list_tile.dart';
 import 'package:notifi/persons2/presentation/movies/nperson_list_tile_shimmer.dart';
 import 'package:notifi/persons2/presentation/movies/npersons_search_bar.dart';
 import 'package:notifi/persons2/presentation/movies/npersons_search_query_notifier.dart';
+import 'package:notifi/i18n/strings.g.dart' as nt;
 
 
 class NPersonsSearchScreen extends ConsumerWidget {
   const NPersonsSearchScreen({super.key});
 
-  static const pageSize = 20;
+  static const pageSize =  10;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final query = ref.watch(nPersonsSearchQueryNotifierProvider);
     // * get the first page so we can retrieve the total number of results
     final responseAsync = ref.watch(
-      fetchNPersonsProvider(queryData: (page: 1, query: query)),
+      fetchNPersonsProvider(queryData: (page: 0, query: query)),
     );
     final totalResults = responseAsync.valueOrNull?.totalResults;
     return Scaffold(
-      appBar: AppBar(title: const Text('Persons2')),
+      appBar: AppBar(title: const Text(nt.t.resources.person)),
       body: Column(
         children: [
           const NPersonsSearchBar(),
@@ -34,7 +35,7 @@ class NPersonsSearchScreen extends ConsumerWidget {
                 // keep showing the progress indicator until the first page is fetched
                 try {
                   await ref.read(
-                    fetchNPersonsProvider(queryData: (page: 1, query: query))
+                    fetchNPersonsProvider(queryData: (page: 0, query: query))
                         .future,
                   );
                 } catch (e) {
