@@ -23,7 +23,7 @@ class NPersonsSearchScreen extends ConsumerWidget {
     );
     final totalResults = responseAsync.valueOrNull?.totalResults;
     return Scaffold(
-      appBar: AppBar(title: const Text(nt.t.resources.person)),
+      appBar: AppBar(title:  Text(nt.t.resources.person)),
       body: Column(
         children: [
           const NPersonsSearchBar(),
