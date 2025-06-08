@@ -44,6 +44,7 @@ class NPersonsSearchScreen extends ConsumerWidget {
                 }
               },
               child: ListView.builder(
+                physics: const AlwaysScrollableScrollPhysics(),
                 // use a different key for each query, ensuring the scroll
                 // position is reset when the query and results change
                 key: ValueKey(query),
