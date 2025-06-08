@@ -34,7 +34,7 @@ class PersonsSearchScreen extends ConsumerWidget {
     final query = ref.watch(personsSearchQueryNotifierProvider);
     // * get the first page so we can retrieve the total number of results
     final responseAsync = ref.watch(
-      fetchPersonsProvider(queryData: (page: 1, query: query)),
+      fetchPersonsProvider(queryData: (page: 0, query: query)),
     );
     final totalResults = responseAsync.valueOrNull?.totalResults;
     return Scaffold(
@@ -51,7 +51,7 @@ class PersonsSearchScreen extends ConsumerWidget {
                 // keep showing the progress indicator until the first page is fetched
                 try {
                   await ref.read(
-                    fetchPersonsProvider(queryData: (page: 1, query: query))
+                    fetchPersonsProvider(queryData: (page: 0, query: query))
                         .future,
                   );
                 } catch (e) {
