@@ -69,10 +69,12 @@ logNoStack.i("NPERSONS_REPOSITORY: $host  ${uri} ${data}");
       {required int page, CancelToken? cancelToken}) async {
             NestFilter nf = NestFilter(offset: page);
     var data = jsonEncode(nf);
-    logNoStack.i("PERSONS2_REPOSITORY: now playiong token=${token.substring(0, 10)}");
+    
 
     String host = defaultAPIBaseUrl.substring("https://".length);
     String path = "$defaultApiPrefixPath/resources/targets/0";
+
+    logNoStack.i("PERSONS2_REPOSITORY: now playiong token=${token.substring(0, 10)}\n$nf\n$host\n$path");
 
     final uri = Uri(
       scheme: 'https',
