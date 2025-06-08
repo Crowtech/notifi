@@ -28,8 +28,8 @@ var logNoStack = logger.Logger(
 /// Metadata used when fetching movies with the paginated search API.
 typedef Persons2QueryData = ({String query, int page});
 
-class Persons2Repository {
-  const Persons2Repository({required this.client, required this.token});
+class NPersonsRepository {
+  const NPersonsRepository({required this.client, required this.token});
   final Dio client;
   final String token;
 
@@ -118,7 +118,7 @@ class Persons2Repository {
 }
 
 @riverpod
-Persons2Repository persons2Repository(Persons2RepositoryRef ref) => Persons2Repository(
+NPersonsRepository persons2Repository(Persons2RepositoryRef ref) => NPersonsRepository(
       client: ref.watch(dioProvider),
       token: ref.read(nestAuthProvider.notifier).token!,
     );
