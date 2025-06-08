@@ -67,6 +67,7 @@ class MoviesSearchScreen extends ConsumerWidget {
                     ),
                     loading: () => const MovieListTileShimmer(),
                     data: (response) {
+                      logNoStack.i("movies reposnse = $response");
                       //log('index: $index, page: $page, indexInPage: $indexInPage, len: ${response.results.length}');
                       // * This condition only happens if a null itemCount is given
                       if (indexInPage >= response.results.length) {
