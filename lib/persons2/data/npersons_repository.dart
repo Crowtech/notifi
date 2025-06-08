@@ -13,7 +13,7 @@ import 'package:notifi/state/nest_auth2.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:logger/logger.dart' as logger;
 
-part 'persons2_repository.g.dart';
+part 'npersons_repository.g.dart';
 
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
@@ -118,7 +118,7 @@ class NPersonsRepository {
 }
 
 @riverpod
-NPersonsRepository persons2Repository(Persons2RepositoryRef ref) => NPersonsRepository(
+NPersonsRepository npersonsRepository(NpersonsRepositoryRef ref) => NPersonsRepository(
       client: ref.watch(dioProvider),
       token: ref.read(nestAuthProvider.notifier).token!,
     );
@@ -133,7 +133,7 @@ Future<NPerson> person(
 }) {
   final cancelToken = ref.cancelToken();
   return ref
-      .watch(persons2RepositoryProvider)
+      .watch(npersonsRepositoryProvider)
       .nperson(movieId: movieId, cancelToken: cancelToken);
 }
 
@@ -143,7 +143,7 @@ Future<NPersonsResponse> fetchNPersons(
   FetchNPersonsRef ref, {
   required Persons2QueryData queryData,
 }) async {
-  final persons2Repo = ref.watch(persons2RepositoryProvider);
+  final persons2Repo = ref.watch(npersonsRepositoryProvider);
   // See this for how the timeout is implemented:
   // https://codewithandrea.com/articles/flutter-riverpod-data-caching-providers-lifecycle/#caching-with-timeout
   // Cancel the page request if the UI no longer needs it.
