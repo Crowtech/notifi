@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:notifi/persons2/data/npersons_repository.dart';
-import 'package:notifi/persons2/presentation/movies/nperson_list_tile.dart';
-import 'package:notifi/persons2/presentation/movies/nperson_list_tile_shimmer.dart';
-import 'package:notifi/persons2/presentation/movies/npersons_search_bar.dart';
-import 'package:notifi/persons2/presentation/movies/npersons_search_query_notifier.dart';
+import 'package:notifi/npersons/data/npersons_repository.dart';
+import 'package:notifi/npersons/presentation/movies/nperson_list_tile.dart';
+import 'package:notifi/npersons/presentation/movies/nperson_list_tile_shimmer.dart';
+import 'package:notifi/npersons/presentation/movies/npersons_search_bar.dart';
+import 'package:notifi/npersons/presentation/movies/npersons_search_query_notifier.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
 
 
@@ -30,6 +30,7 @@ class NPersonsSearchScreen extends ConsumerWidget {
           Expanded(
             child: RefreshIndicator(
               onRefresh: () async {
+                logNoStack.i("Refresh! totalresults = $totalResults");
                 // dispose all the pages previously fetched. Next read will refresh them
                 ref.invalidate(fetchNPersonsProvider);
                 // keep showing the progress indicator until the first page is fetched

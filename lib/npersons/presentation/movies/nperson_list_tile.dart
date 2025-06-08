@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:notifi/organizations/src/common_widgets/nest_poster.dart';
 
 import 'package:notifi/organizations/src/common_widgets/top_gradient.dart';
 import 'package:notifi/persons/src/features/persons/domain/nperson.dart';
-import 'package:notifi/persons2/nperson_poster.dart';
+import 'package:notifi/npersons/nperson_poster.dart';
 
 class NPersonListTile extends StatelessWidget {
   const NPersonListTile({
@@ -31,7 +32,7 @@ class NPersonListTile extends StatelessWidget {
                 SizedBox(
                   width: posterHeight * NPersonPoster.width / NPersonPoster.height,
                   height: posterHeight,
-                  child: NPersonPoster(imagePath: nperson.avatarUrl),
+                  child: NestPoster(imagePath: nperson.avatarUrl),
                 ),
                 if (debugIndex != null) ...[
                   const Positioned.fill(child: TopGradient()),
