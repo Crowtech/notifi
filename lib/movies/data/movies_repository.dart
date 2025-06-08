@@ -7,9 +7,22 @@ import 'package:notifi/movies/domain/tmdb_movies_response.dart';
 import 'package:notifi/organizations/src/utils/cancel_token_ref.dart';
 import 'package:notifi/organizations/src/utils/dio_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:logger/logger.dart' as logger;
 
 
 part 'movies_repository.g.dart';
+
+
+var log = logger.Logger(
+  printer: logger.PrettyPrinter(),
+  level: logger.Level.info,
+);
+
+var logNoStack = logger.Logger(
+  printer: logger.PrettyPrinter(methodCount: 0),
+  level: logger.Level.info,
+);
+
 
 /// Metadata used when fetching movies with the paginated search API.
 typedef MoviesQueryData = ({String query, int page});
@@ -21,6 +34,7 @@ class MoviesRepository {
 
   Future<TMDBMoviesResponse> searchMovies(
       {required MoviesQueryData queryData, CancelToken? cancelToken}) async {
+        logNoStack.i("QueryData = $queryData");
     final uri = Uri(
       scheme: 'https',
       host: 'api.themoviedb.org',
@@ -44,6 +58,9 @@ class MoviesRepository {
 
   Future<TMDBMoviesResponse> nowPlayingMovies(
       {required int page, CancelToken? cancelToken}) async {
+      
+logNoStack.i("page= $page");
+        
     final uri = Uri(
       scheme: 'https',
       host: 'api.themoviedb.org',
