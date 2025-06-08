@@ -293,6 +293,7 @@ class _TranslationsResourceZh implements TranslationsResourceEn {
 	// Translations
 	@override String get artifact => '人工制品';
 	@override String get equipment => '设备';
+	@override String get group => '团体';
 	@override String get location => '地点';
 	@override String get organization => '组织';
 	@override String get person => '人';
@@ -310,6 +311,7 @@ class _TranslationsResourcesZh implements TranslationsResourcesEn {
 	// Translations
 	@override String get artifact => '工件';
 	@override String get equipment => '设备';
+	@override String get group => '团体';
 	@override String get location => '位置';
 	@override String get organization => '组织';
 	@override String get person => '人们';
@@ -570,6 +572,7 @@ extension on TranslationsZh {
 			case 'resetting_focus_point': return '重置焦点';
 			case 'resource.artifact': return '人工制品';
 			case 'resource.equipment': return '设备';
+			case 'resource.group': return '团体';
 			case 'resource.location': return '地点';
 			case 'resource.organization': return '组织';
 			case 'resource.person': return '人';
@@ -578,6 +581,7 @@ extension on TranslationsZh {
 			case 'resource.vehicle': return '车辆';
 			case 'resources.artifact': return '工件';
 			case 'resources.equipment': return '设备';
+			case 'resources.group': return '团体';
 			case 'resources.location': return '位置';
 			case 'resources.organization': return '组织';
 			case 'resources.person': return '人们';

@@ -180,6 +180,7 @@
   "resource": {
     "artifact": "人工制品",
     "equipment": "设备",
+    "group": "团体",
     "location": "地点",
     "organization": "组织",
     "person": "人",
@@ -190,6 +191,7 @@
   "resources": {
     "artifact": "工件",
     "equipment": "设备",
+    "group": "团体",
     "location": "位置",
     "organization": "组织",
     "person": "人们",

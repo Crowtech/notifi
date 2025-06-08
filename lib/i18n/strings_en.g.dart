@@ -296,6 +296,7 @@ class TranslationsResourceEn {
 	// Translations
 	String get artifact => 'Artifact';
 	String get equipment => 'Equipment';
+	String get group => 'Group';
 	String get location => 'Location';
 	String get organization => 'Organization';
 	String get person => 'Person';
@@ -313,6 +314,7 @@ class TranslationsResourcesEn {
 	// Translations
 	String get artifact => 'Artifacts';
 	String get equipment => 'Equipment';
+	String get group => 'Groups';
 	String get location => 'Locations';
 	String get organization => 'Organizations';
 	String get person => 'People';
@@ -570,6 +572,7 @@ extension on Translations {
 			case 'registration_capitalized': return 'Registration';
 			case 'resource.artifact': return 'Artifact';
 			case 'resource.equipment': return 'Equipment';
+			case 'resource.group': return 'Group';
 			case 'resource.location': return 'Location';
 			case 'resource.organization': return 'Organization';
 			case 'resource.person': return 'Person';
@@ -578,6 +581,7 @@ extension on Translations {
 			case 'resource.vehicle': return 'Vehicle';
 			case 'resources.artifact': return 'Artifacts';
 			case 'resources.equipment': return 'Equipment';
+			case 'resources.group': return 'Groups';
 			case 'resources.location': return 'Locations';
 			case 'resources.organization': return 'Organizations';
 			case 'resources.person': return 'People';

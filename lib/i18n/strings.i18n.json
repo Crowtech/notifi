@@ -177,6 +177,7 @@
   "resource": {
     "artifact": "Artifact",
     "equipment": "Equipment",
+    "group": "Group",
     "location": "Location",
     "organization": "Organization",
     "person": "Person",
@@ -187,6 +188,7 @@
   "resources": {
     "artifact": "Artifacts",
     "equipment": "Equipment",
+    "group": "Groups",
     "location": "Locations",
     "organization": "Organizations",
     "person": "People",
