@@ -45,7 +45,7 @@ class _SearchBarState extends ConsumerState<NPersonsSearchBar> {
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.zero,
                         isDense: true,
-                        hintText: nt.t.search,
+                        hintText: nt.t.search.person,
                         hintStyle: TextStyle(color: Colors.grey.shade400),
                       ),
                       onEditingComplete: () {

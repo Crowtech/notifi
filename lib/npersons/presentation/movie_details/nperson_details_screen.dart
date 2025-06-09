@@ -4,11 +4,12 @@ import 'package:notifi/npersons/data/npersons_repository.dart';
 import 'package:notifi/npersons/presentation/movies/nperson_list_tile.dart';
 import 'package:notifi/npersons/presentation/movies/nperson_list_tile_shimmer.dart';
 import 'package:notifi/persons/src/features/persons/domain/nperson.dart';
+import 'package:notifi/i18n/strings.g.dart' as nt;
 
 class NPersonDetailsScreen extends ConsumerWidget {
   const NPersonDetailsScreen(
-      {super.key, required this.movieId, required this.person});
-  final int movieId;
+      {super.key, required this.personId, required this.person});
+  final int personId;
   final NPerson? person;
 
   @override
@@ -25,8 +26,8 @@ class NPersonDetailsScreen extends ConsumerWidget {
         ),
       );
     } else {
-      final movieAsync = ref.watch(personProvider(movieId: movieId));
-      return movieAsync.when(
+      final personAsync = ref.watch(personProvider(personId: personId));
+      return personAsync.when(
         error: (e, st) => Scaffold(
           appBar: AppBar(
             title: Text(person?.name ?? 'Error'),
@@ -35,7 +36,7 @@ class NPersonDetailsScreen extends ConsumerWidget {
         ),
         loading: () => Scaffold(
           appBar: AppBar(
-            title: Text(person?.name ?? 'Loading'),
+            title: Text(person?.name ?? nt.t.loading),
           ),
           body: const Column(
             children: [
@@ -43,13 +44,13 @@ class NPersonDetailsScreen extends ConsumerWidget {
             ],
           ),
         ),
-        data: (movie) => Scaffold(
+        data: (person) => Scaffold(
           appBar: AppBar(
-            title: Text(movie.name!),
+            title: Text(person.name!),
           ),
           body: Column(
             children: [
-              NPersonListTile(nperson: movie),
+              NPersonListTile(nperson: person),
             ],
           ),
         ),

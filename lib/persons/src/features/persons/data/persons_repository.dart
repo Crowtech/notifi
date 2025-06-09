@@ -47,7 +47,7 @@ class PersonsRepository {
     NestFilter nf = NestFilter(offset: queryData.page);
     var data = jsonEncode(nf);
     logNoStack.i(
-        "PERSONS_REPOSITORY: search currentUserId=${currentUser.id} token=${token.substring(0, 10)}");
+        "PERSONS_REPOSITORY: search currentUserId=${currentUser.id} token=${token.substring(0, 10)} query ${queryData.query}");
 
 
     if (currentUser.orgid != null) {

@@ -75,7 +75,7 @@ class OrganizationDetailsScreen extends ConsumerWidget {
         ),
         loading: () => Scaffold(
           appBar: AppBar(
-            title: Text(organization?.name ?? 'Loading'),
+            title: Text(organization?.name ?? nt.t.loading),
           ),
           body: const Column(
             children: [
