@@ -59,8 +59,8 @@ Future<dynamic> apiPostDataNoLocale(
 
   logNoStack.i(response.statusCode);
   if (response.statusCode == 204 ||
-    response.statusCode == 203 ||
-    response.statusCode == 202 ||
+      response.statusCode == 203 ||
+      response.statusCode == 202 ||
       response.statusCode == 201 ||
       response.statusCode == 200) {
     logNoStack.i(
@@ -238,10 +238,9 @@ Future<http.Response> apiPutDataStrNoLocale(
   }
 }
 
-Future<http.Response> apiGet(
-    String? token, String apiPath) async {
-    return apiGetData(token,apiPath,"application/json");
-    }
+Future<http.Response> apiGet(String? token, String apiPath) async {
+  return apiGetData(token, apiPath, "application/json");
+}
 
 Future<http.Response> apiGetData(
     String? token, String apiPath, String accept) async {
@@ -309,6 +308,28 @@ Future<http.Response> apiPostDataStr(
   } else {
     log.d("apiPost created unsuccessfully!");
     throw "api Post created unsuccessfully!";
+  }
+}
+
+Future<http.Response> apiDeleteData(String? token, String apiPath) async {
+  var url = Uri.parse(apiPath);
+
+  final http.Response response;
+  logNoStack.i("Response code for apiDeleteData is $apiPath ");
+  response = await http.delete(url, headers: {
+    "Authorization": "Bearer $token",
+  });
+
+  logNoStack.i(
+      "Response code for apiDeleteData is ${response.statusCode} for $apiPath");
+  if (response.statusCode == 202 ||
+      response.statusCode == 201 ||
+      response.statusCode == 200) {
+    return response;
+  } else {
+    logNoStack.e(
+        "API DELETE DATA: apiDeleteData created unsuccessfully! ${response.statusCode}");
+    throw "api Get created unsuccessfully!";
   }
 }
 
