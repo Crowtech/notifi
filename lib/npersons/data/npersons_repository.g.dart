@@ -25,7 +25,7 @@ final npersonsRepositoryProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef NpersonsRepositoryRef = AutoDisposeProviderRef<NPersonsRepository>;
-String _$personHash() => r'2c332d36800481dbbd0bc26d6182fc6c2d382a71';
+String _$personHash() => r'130b593ec4c7bb2ec391edb99bdc6a125d3556ea';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -67,10 +67,10 @@ class PersonFamily extends Family<AsyncValue<NPerson>> {
   ///
   /// Copied from [person].
   PersonProvider call({
-    required int movieId,
+    required int personId,
   }) {
     return PersonProvider(
-      movieId: movieId,
+      personId: personId,
     );
   }
 
@@ -79,7 +79,7 @@ class PersonFamily extends Family<AsyncValue<NPerson>> {
     covariant PersonProvider provider,
   ) {
     return call(
-      movieId: provider.movieId,
+      personId: provider.personId,
     );
   }
 
@@ -106,11 +106,11 @@ class PersonProvider extends AutoDisposeFutureProvider<NPerson> {
   ///
   /// Copied from [person].
   PersonProvider({
-    required int movieId,
+    required int personId,
   }) : this._internal(
           (ref) => person(
             ref as PersonRef,
-            movieId: movieId,
+            personId: personId,
           ),
           from: personProvider,
           name: r'personProvider',
@@ -120,7 +120,7 @@ class PersonProvider extends AutoDisposeFutureProvider<NPerson> {
                   : _$personHash,
           dependencies: PersonFamily._dependencies,
           allTransitiveDependencies: PersonFamily._allTransitiveDependencies,
-          movieId: movieId,
+          personId: personId,
         );
 
   PersonProvider._internal(
@@ -130,10 +130,10 @@ class PersonProvider extends AutoDisposeFutureProvider<NPerson> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.movieId,
+    required this.personId,
   }) : super.internal();
 
-  final int movieId;
+  final int personId;
 
   @override
   Override overrideWith(
@@ -148,7 +148,7 @@ class PersonProvider extends AutoDisposeFutureProvider<NPerson> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        movieId: movieId,
+        personId: personId,
       ),
     );
   }
@@ -160,13 +160,13 @@ class PersonProvider extends AutoDisposeFutureProvider<NPerson> {
 
   @override
   bool operator ==(Object other) {
-    return other is PersonProvider && other.movieId == movieId;
+    return other is PersonProvider && other.personId == personId;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, movieId.hashCode);
+    hash = _SystemHash.combine(hash, personId.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -175,8 +175,8 @@ class PersonProvider extends AutoDisposeFutureProvider<NPerson> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin PersonRef on AutoDisposeFutureProviderRef<NPerson> {
-  /// The parameter `movieId` of this provider.
-  int get movieId;
+  /// The parameter `personId` of this provider.
+  int get personId;
 }
 
 class _PersonProviderElement extends AutoDisposeFutureProviderElement<NPerson>
@@ -184,10 +184,10 @@ class _PersonProviderElement extends AutoDisposeFutureProviderElement<NPerson>
   _PersonProviderElement(super.provider);
 
   @override
-  int get movieId => (origin as PersonProvider).movieId;
+  int get personId => (origin as PersonProvider).personId;
 }
 
-String _$fetchNPersonsHash() => r'a032acc160d8ad9a0e5c9f324e4eceac0a061fe8';
+String _$fetchNPersonsHash() => r'bbe6bbb00ede3c2d73c2d4e2c1c0a60957f1820d';
 
 /// Provider to fetch paginated movies data
 ///

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notifi/npersons/presentation/movies/npersons_search_query_notifier.dart';
-
+import 'package:notifi/i18n/strings.g.dart' as nt;
 
 class NPersonsSearchBar extends ConsumerStatefulWidget {
   const NPersonsSearchBar({super.key});
@@ -45,7 +45,7 @@ class _SearchBarState extends ConsumerState<NPersonsSearchBar> {
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.zero,
                         isDense: true,
-                        hintText: 'Search people',
+                        hintText: nt.t.search,
                         hintStyle: TextStyle(color: Colors.grey.shade400),
                       ),
                       onEditingComplete: () {

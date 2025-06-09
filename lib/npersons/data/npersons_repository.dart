@@ -33,11 +33,13 @@ class NPersonsRepository {
   final Dio client;
   final String token;
 
-  Future<NPersonsResponse> searchMovies(
+  Future<NPersonsResponse> searchPersons(
       {required Persons2QueryData queryData, CancelToken? cancelToken}) async {
     NestFilter nf = NestFilter(offset: queryData.page);
+
+
     var data = jsonEncode(nf);
-    logNoStack.i("NPERSONS_REPOSITORY: search token=${token.substring(0, 10)}");
+    logNoStack.i("NPERSONS_REPOSITORY: search token=${token.substring(0, 10)} with query ${queryData.query}");
 
     String host = defaultAPIBaseUrl.substring("https://".length);
     String path = "$defaultApiPrefixPath/resources/targets/0";
@@ -133,12 +135,12 @@ class AbortedException implements Exception {}
 @riverpod
 Future<NPerson> person(
   PersonRef ref, {
-  required int movieId,
+  required int personId,
 }) {
   final cancelToken = ref.cancelToken();
   return ref
       .watch(npersonsRepositoryProvider)
-      .nperson(movieId: movieId, cancelToken: cancelToken);
+      .nperson(movieId: personId, cancelToken: cancelToken);
 }
 
 /// Provider to fetch paginated movies data
@@ -183,7 +185,7 @@ Future<NPersonsResponse> fetchNPersons(
     );
   } else {
     // use search endpoint
-    return persons2Repo.searchMovies(
+    return persons2Repo.searchPersons(
       queryData: queryData,
       cancelToken: cancelToken,
     );

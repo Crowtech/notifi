@@ -1,30 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:notifi/movies/data/movies_repository.dart';
-import 'package:notifi/movies/domain/tmdb_movie.dart';
-import 'package:notifi/movies/presentation/movies/movie_list_tile.dart';
-import 'package:notifi/movies/presentation/movies/movie_list_tile_shimmer.dart';
-import 'package:notifi/persons/src/features/persons/domain/nperson.dart';
 import 'package:notifi/npersons/data/npersons_repository.dart';
 import 'package:notifi/npersons/presentation/movies/nperson_list_tile.dart';
 import 'package:notifi/npersons/presentation/movies/nperson_list_tile_shimmer.dart';
+import 'package:notifi/persons/src/features/persons/domain/nperson.dart';
 
 class NPersonDetailsScreen extends ConsumerWidget {
   const NPersonDetailsScreen(
-      {super.key, required this.movieId, required this.movie});
+      {super.key, required this.movieId, required this.person});
   final int movieId;
-  final NPerson? movie;
+  final NPerson? person;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    if (movie != null) {
+    if (person != null) {
       return Scaffold(
         appBar: AppBar(
-          title: Text(movie!.name!),
+          title: Text(person!.name!),
         ),
         body: Column(
           children: [
-            NPersonListTile(nperson: movie!),
+            NPersonListTile(nperson: person!),
           ],
         ),
       );
@@ -33,13 +29,13 @@ class NPersonDetailsScreen extends ConsumerWidget {
       return movieAsync.when(
         error: (e, st) => Scaffold(
           appBar: AppBar(
-            title: Text(movie?.name ?? 'Error'),
+            title: Text(person?.name ?? 'Error'),
           ),
           body: Center(child: Text(e.toString())),
         ),
         loading: () => Scaffold(
           appBar: AppBar(
-            title: Text(movie?.name ?? 'Loading'),
+            title: Text(person?.name ?? 'Loading'),
           ),
           body: const Column(
             children: [
