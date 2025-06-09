@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:notifi/state/nest_auth2.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import 'page_widget.dart';
+import 'onboarding_page.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
 
