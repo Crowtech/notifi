@@ -40,7 +40,7 @@ class OrganizationsRepositoryNestFilter {
 
   Future<OrganizationsResponse> searchOrganizations(
       {required NestFilter nestFilter, CancelToken? cancelToken}) async {
-  
+
     var data = jsonEncode(nestFilter);
     logNoStack.i(
         "ORGANIZATIONS_REPOSITORY_NF: search currentUserId=${currentUser.id} token=${token.substring(0, 10)} nestfilter=$nestFilter");

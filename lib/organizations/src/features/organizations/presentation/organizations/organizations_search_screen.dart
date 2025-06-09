@@ -84,7 +84,7 @@ class OrganizationsSearchScreen extends ConsumerWidget {
                   // Note that ref.watch is called for up to pageSize items
                   // with the same page and query arguments (but this is ok since data is cached)
                   NestFilter nestFilter =
-                      NestFilter(offset: page, query: ";name:$query;");
+                      NestFilter(offset: page, query: ";url:$query;name:$query;");
                   // final responseAsync = ref.watch(
                   //   fetchOrganizationsNestFilterProvider,
                   // );
