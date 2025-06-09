@@ -189,22 +189,22 @@ class _PersonProviderElement extends AutoDisposeFutureProviderElement<NPerson>
 
 String _$fetchNPersonsHash() => r'bbe6bbb00ede3c2d73c2d4e2c1c0a60957f1820d';
 
-/// Provider to fetch paginated movies data
+/// Provider to fetch paginated persons data
 ///
 /// Copied from [fetchNPersons].
 @ProviderFor(fetchNPersons)
 const fetchNPersonsProvider = FetchNPersonsFamily();
 
-/// Provider to fetch paginated movies data
+/// Provider to fetch paginated persons data
 ///
 /// Copied from [fetchNPersons].
 class FetchNPersonsFamily extends Family<AsyncValue<NPersonsResponse>> {
-  /// Provider to fetch paginated movies data
+  /// Provider to fetch paginated persons data
   ///
   /// Copied from [fetchNPersons].
   const FetchNPersonsFamily();
 
-  /// Provider to fetch paginated movies data
+  /// Provider to fetch paginated persons data
   ///
   /// Copied from [fetchNPersons].
   FetchNPersonsProvider call({
@@ -239,12 +239,12 @@ class FetchNPersonsFamily extends Family<AsyncValue<NPersonsResponse>> {
   String? get name => r'fetchNPersonsProvider';
 }
 
-/// Provider to fetch paginated movies data
+/// Provider to fetch paginated persons data
 ///
 /// Copied from [fetchNPersons].
 class FetchNPersonsProvider
     extends AutoDisposeFutureProvider<NPersonsResponse> {
-  /// Provider to fetch paginated movies data
+  /// Provider to fetch paginated persons data
   ///
   /// Copied from [fetchNPersons].
   FetchNPersonsProvider({

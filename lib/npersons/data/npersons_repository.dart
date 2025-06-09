@@ -36,7 +36,7 @@ class NPersonsRepository {
   Future<NPersonsResponse> searchPersons(
       {required Persons2QueryData queryData, CancelToken? cancelToken}) async {
     NestFilter nf = NestFilter(offset: queryData.page);
-
+    nf.query = ";email:${queryData.query};name:${queryData.query};";
 
     var data = jsonEncode(nf);
     logNoStack.i("NPERSONS_REPOSITORY: search token=${token.substring(0, 10)} with query ${queryData.query}");
@@ -143,7 +143,7 @@ Future<NPerson> person(
       .nperson(movieId: personId, cancelToken: cancelToken);
 }
 
-/// Provider to fetch paginated movies data
+/// Provider to fetch paginated persons data
 @riverpod
 Future<NPersonsResponse> fetchNPersons(
   FetchNPersonsRef ref, {

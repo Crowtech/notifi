@@ -71,7 +71,7 @@ class NPersonsSearchScreen extends ConsumerWidget {
                     ),
                     loading: () => const NPersonListTileShimmer(),
                     data: (response) {
-                      logNoStack.i("Response = $response");
+                      logNoStack.i("NPersons Response = $response");
                       //log('index: $index, page: $page, indexInPage: $indexInPage, len: ${response.results.length}');
                       // * This condition only happens if a null itemCount is given
                       if (indexInPage >= response.results.length) {
