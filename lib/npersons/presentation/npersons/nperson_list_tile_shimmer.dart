@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notifi/npersons/nperson_poster.dart';
-import 'package:notifi/npersons/presentation/movies/nperson_list_tile.dart';
+import 'package:notifi/npersons/presentation/npersons/nperson_list_tile.dart';
 import 'package:shimmer/shimmer.dart';
 
 class NPersonListTileShimmer extends StatelessWidget {
