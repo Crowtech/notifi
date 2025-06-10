@@ -9,7 +9,7 @@
 // import 'package:notifi/jwt_utils.dart';
 // import 'package:notifi/models/organization.dart';
 // import 'package:notifi/models/person.dart';
-// import 'package:notifi/npersons/presentation/movies/npersons_search_screen.dart';
+// import 'package:notifi/npersons/presentation/npersons/npersons_search_screen.dart';
 // import 'package:notifi/onboarding/onboarding_screen.dart';
 
 // import 'package:notifi/organizations/src/features/organizations/presentation/organization_details/organization_details_screen.dart';
