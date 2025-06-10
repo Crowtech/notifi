@@ -2,13 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:notifi/npersons/data/npersons_repository.dart';
+import 'package:notifi/npersons/presentation/movies/nperson_form.dart';
 import 'package:notifi/npersons/presentation/movies/nperson_list_tile.dart';
 import 'package:notifi/npersons/presentation/movies/nperson_list_tile_shimmer.dart';
 import 'package:notifi/npersons/presentation/movies/npersons_search_bar.dart';
 import 'package:notifi/npersons/presentation/movies/npersons_search_query_notifier.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
+import 'package:logger/logger.dart' as logger;
 
+var log = logger.Logger(
+  printer: logger.PrettyPrinter(),
+  level: logger.Level.info,
+);
 
+var logNoStack = logger.Logger(
+  printer: logger.PrettyPrinter(methodCount: 0),
+  level: logger.Level.info,
+);
 class NPersonsSearchScreen extends ConsumerWidget {
   const NPersonsSearchScreen({super.key});
 
@@ -93,7 +103,21 @@ class NPersonsSearchScreen extends ConsumerWidget {
               ),
             ),
           ),
+          
         ],
+      ),
+       floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          logNoStack.i("NPERSONS_SEARCH_SCREEN: Add button pressed");
+          showDialog(
+            context: context,
+            builder: (context) => CreateNPersonForm(formCode: "person"),
+          );
+        },
+        // foregroundColor: customizations[index].$1,
+        // backgroundColor: customizations[index].$2,
+        // shape:
+        child: const Icon(Icons.add),
       ),
     );
   }
