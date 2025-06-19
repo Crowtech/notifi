@@ -18,8 +18,8 @@ const _defaultRealm =
 const _defaultAuthBaseUrl = String.fromEnvironment('AUTH_BASE_URL',
     defaultValue: 'https://auth.crowtech.com.au');
 
-const _defaultAPIBaseUrl = String.fromEnvironment('API_BASE_URL');
-const _defaultDiscoveryUrl = String.fromEnvironment('AUTH_OPENID_URL');
+const _defaultAPIBaseUrl = "https://${String.fromEnvironment('API_BASE_URL')}";
+const _defaultDiscoveryUrl = "https://${String.fromEnvironment('AUTH_OPENID_URL')}";
 
 const _defaultClientId = String.fromEnvironment('AUTH_OPENID_CLIENT_ID');
 
