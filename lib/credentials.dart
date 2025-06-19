@@ -15,8 +15,8 @@ var logNoStack = logger.Logger(
 const _defaultRealm =
     String.fromEnvironment('AUTH_REALM', defaultValue: "crowtech");
 
-const _defaultAuthBaseUrl = String.fromEnvironment('AUTH_BASE_URL',
-    defaultValue: 'https://auth.crowtech.com.au');
+const _defaultAuthBaseUrl = "https://${String.fromEnvironment('AUTH_BASE_URL',
+    defaultValue: 'https://auth.crowtech.com.au')}";
 
 const _defaultAPIBaseUrl = "https://${String.fromEnvironment('API_BASE_URL')}";
 const _defaultDiscoveryUrl = "https://${String.fromEnvironment('AUTH_OPENID_URL')}";
