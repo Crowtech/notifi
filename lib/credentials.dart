@@ -33,7 +33,7 @@ const _defaultRedirectUrl = String.fromEnvironment('AUTH_OPENID_REDIRECT_URL');
 const _defaultRealmBaseUrl = String.fromEnvironment('AUTH_REALM_BASE_URL');
 
 const _defaultAuthEndpointUrl =
-    String.fromEnvironment('AUTHORIZATION_ENDPOINT_URL');
+    "https://${String.fromEnvironment('AUTHORIZATION_ENDPOINT_URL')}";
 
 const _defaultMinioEndpointUrl = String.fromEnvironment('MINIO_ENDPOINT_URL');
 const _defaultImageProxyUrl = String.fromEnvironment('IMAGE_PROXY_URL');
