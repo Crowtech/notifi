@@ -44,7 +44,7 @@ const _posthogKey = String.fromEnvironment('POSTHOG_KEY');
 const _transistorsoftKey = String.fromEnvironment('TRANSISTORSOFT_KEY');
 const _vapidKey = String.fromEnvironment('VAPID_KEY');
 const _displayName = String.fromEnvironment('DISPLAY_NAME');
-const _iosAppStoreId = String.fromEnvironment('IO_APPSTORE_ID');
+const _iosAppStoreId = String.fromEnvironment('APPSTOREID');
 
 const _defaultApiPrefixPath = String.fromEnvironment('API_PREFIX_PATH');
 
