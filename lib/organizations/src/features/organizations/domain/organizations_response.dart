@@ -3,8 +3,8 @@ library core;
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:notifi/models/organization.dart';
 
-part 'organization_response.freezed.dart';
-part 'organization_response.g.dart';
+part 'organizations_response.freezed.dart';
+part 'organizations_response.g.dart';
 
 @freezed
 class OrganizationsResponse with _$OrganizationsResponse {
@@ -20,15 +20,15 @@ class OrganizationsResponse with _$OrganizationsResponse {
       _$OrganizationsResponseFromJson(json);
 }
 
-extension NOrganizationsResponseX on OrganizationsResponse {
-  //@late
-  bool get isEmpty => !hasResults();
+// extension NOrganizationsResponseX on OrganizationsResponse {
+//   //@late
+//   bool get isEmpty => !hasResults();
 
-  bool hasResults() {
-    return results.isNotEmpty;
-  }
+//   bool hasResults() {
+//     return results.isNotEmpty;
+//   }
 
-  bool hasErrors() {
-    return errors.isNotEmpty;
-  }
-}
+//   bool hasErrors() {
+//     return errors.isNotEmpty;
+//   }
+// }
