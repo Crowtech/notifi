@@ -1,5 +1,3 @@
-library core;
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:notifi/models/organization.dart';
 
@@ -8,27 +6,34 @@ part 'organizations_response.g.dart';
 
 @freezed
 class OrganizationsResponse with _$OrganizationsResponse {
-  factory OrganizationsResponse({
-    @JsonKey(name: 'startIndex') required int page,
-    @JsonKey(name: 'items') required List<Organization> results,
-    @JsonKey(name: 'resultCount') required int totalResults,
-    @JsonKey(name: 'totalItems') required int totalPages,
-    @Default([]) List<String> errors,
-  }) = _OrganizationsResponse;
+  OrganizationsResponse({
+    @JsonKey(name: 'startIndex') required this.page,
+    @JsonKey(name: 'items') required this.results,
+    @JsonKey(name: 'resultCount') required this.totalResults,
+    @JsonKey(name: 'totalItems') required this.totalPages,
+   // @Default([]) List<String>?  this.errors,
+  }) ;
 
-  factory OrganizationsResponse.fromJson(Map<String, dynamic> json) =>
-      _$OrganizationsResponseFromJson(json);
-}
+  final int page;
+  final List<Organization> results;
+  final int totalResults;
+  final int totalPages;
+ // final List<String>? errors;
 
-extension NOrganizationsResponseX on OrganizationsResponse {
-  //@late
-  bool get isEmpty => !hasResults();
+//   factory OrganizationsResponse.fromJson(Map<String, dynamic> json) =>
+//       _$OrganizationsResponseFromJson(json);
+// }
 
-  bool hasResults() {
-    return results.isNotEmpty;
-  }
+// extension NOrganizationsResponseX on OrganizationsResponse {
+//   //@late
+//   bool get isEmpty => !hasResults();
 
-  bool hasErrors() {
-    return errors.isNotEmpty;
-  }
+//   bool hasResults() {
+//     return results.isNotEmpty;
+//   }
+
+//   bool hasErrors() {
+//     return errors.isNotEmpty;
+//   }
+// }
 }
