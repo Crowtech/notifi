@@ -1,12 +1,14 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:notifi/models/organization.dart';
 
-//part 'organizations_response.g.dart';
+
 part 'organizations_response.freezed.dart';
+part 'organizations_response.g.dart';
 
 
 @freezed
 sealed class OrganizationsResponse with _$OrganizationsResponse {
+   @JsonSerializable(explicitToJson: true)
   OrganizationsResponse({
     @JsonKey(name: 'startIndex') required this.page,
     @JsonKey(name: 'items') required this.results,
