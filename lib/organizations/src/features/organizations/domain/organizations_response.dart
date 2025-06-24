@@ -14,18 +14,15 @@ sealed class OrganizationsResponse with _$OrganizationsResponse {
     @JsonKey(name: 'items') required this.results,
     @JsonKey(name: 'resultCount') required this.totalResults,
     @JsonKey(name: 'totalItems') required this.totalPages,
-   // @Default([]) List<String>?  this.errors,
   }) ;
 
   final int page;
   final List<Organization> results;
   final int totalResults;
   final int totalPages;
- // final List<String>? errors;
 
-  factory OrganizationsResponse.fromJson(Map<String, dynamic> json) =>
-      _$OrganizationsResponseFromJson(json);
 
+factory OrganizationsResponse.fromJson(Map<String, dynamic> json) => _$OrganizationsResponseFromJson(json);
 
 // extension NOrganizationsResponseX on OrganizationsResponse {
 //   //@late
