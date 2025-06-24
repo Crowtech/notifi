@@ -1,8 +1,9 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:notifi/models/organization.dart';
 
+//part 'organizations_response.g.dart';
 part 'organizations_response.freezed.dart';
-part 'organizations_response.g.dart';
+
 
 @freezed
 sealed class OrganizationsResponse with _$OrganizationsResponse {
@@ -20,9 +21,9 @@ sealed class OrganizationsResponse with _$OrganizationsResponse {
   final int totalPages;
  // final List<String>? errors;
 
-//   factory OrganizationsResponse.fromJson(Map<String, dynamic> json) =>
-//       _$OrganizationsResponseFromJson(json);
-// }
+  // factory OrganizationsResponse.fromJson(Map<String, dynamic> json) =>
+  //     _$OrganizationsResponseFromJson(json);
+
 
 // extension NOrganizationsResponseX on OrganizationsResponse {
 //   //@late
