@@ -98,4 +98,4 @@ OrganizationsResponse({
 //   bool hasErrors() {
 //     return errors.isNotEmpty;
 //   }
-// }
+ }
