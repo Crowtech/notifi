@@ -5,7 +5,7 @@ part 'organizations_response.freezed.dart';
 part 'organizations_response.g.dart';
 
 @freezed
-class OrganizationsResponse with _$OrganizationsResponse {
+sealed class OrganizationsResponse with _$OrganizationsResponse {
   OrganizationsResponse({
     @JsonKey(name: 'startIndex') required this.page,
     @JsonKey(name: 'items') required this.results,
