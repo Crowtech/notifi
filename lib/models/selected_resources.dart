@@ -7,8 +7,9 @@ import 'package:notifi/credentials.dart';
 import 'package:notifi/state/nest_auth2.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'selected_resources.g.dart';
 part 'selected_resources.freezed.dart';
+part 'selected_resources.g.dart';
+
 
 
 var log = logger.Logger(
