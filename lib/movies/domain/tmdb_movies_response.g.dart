@@ -6,9 +6,8 @@ part of 'tmdb_movies_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$TMDBMoviesResponseImpl _$$TMDBMoviesResponseImplFromJson(
-        Map<String, dynamic> json) =>
-    _$TMDBMoviesResponseImpl(
+_TMDBMoviesResponse _$TMDBMoviesResponseFromJson(Map<String, dynamic> json) =>
+    _TMDBMoviesResponse(
       page: (json['page'] as num).toInt(),
       results: (json['results'] as List<dynamic>)
           .map((e) => TMDBMovie.fromJson(e as Map<String, dynamic>))
@@ -21,8 +20,7 @@ _$TMDBMoviesResponseImpl _$$TMDBMoviesResponseImplFromJson(
           const [],
     );
 
-Map<String, dynamic> _$$TMDBMoviesResponseImplToJson(
-        _$TMDBMoviesResponseImpl instance) =>
+Map<String, dynamic> _$TMDBMoviesResponseToJson(_TMDBMoviesResponse instance) =>
     <String, dynamic>{
       'page': instance.page,
       'results': instance.results,

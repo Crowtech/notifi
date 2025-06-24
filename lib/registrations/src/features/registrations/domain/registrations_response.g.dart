@@ -6,9 +6,9 @@ part of 'registrations_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$RegistrationsResponseImpl _$$RegistrationsResponseImplFromJson(
+_RegistrationsResponse _$RegistrationsResponseFromJson(
         Map<String, dynamic> json) =>
-    _$RegistrationsResponseImpl(
+    _RegistrationsResponse(
       page: (json['startIndex'] as num).toInt(),
       results: (json['items'] as List<dynamic>)
           .map((e) => Registration.fromJson(e as Map<String, dynamic>))
@@ -21,8 +21,8 @@ _$RegistrationsResponseImpl _$$RegistrationsResponseImplFromJson(
           const [],
     );
 
-Map<String, dynamic> _$$RegistrationsResponseImplToJson(
-        _$RegistrationsResponseImpl instance) =>
+Map<String, dynamic> _$RegistrationsResponseToJson(
+        _RegistrationsResponse instance) =>
     <String, dynamic>{
       'startIndex': instance.page,
       'items': instance.results,

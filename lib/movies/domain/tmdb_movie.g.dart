@@ -6,16 +6,15 @@ part of 'tmdb_movie.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$TMDBMovieBasicImpl _$$TMDBMovieBasicImplFromJson(Map<String, dynamic> json) =>
-    _$TMDBMovieBasicImpl(
+_TMDBMovieBasic _$TMDBMovieBasicFromJson(Map<String, dynamic> json) =>
+    _TMDBMovieBasic(
       id: (json['id'] as num).toInt(),
       title: json['title'] as String,
       posterPath: json['poster_path'] as String?,
       releaseDate: json['release_date'] as String?,
     );
 
-Map<String, dynamic> _$$TMDBMovieBasicImplToJson(
-        _$TMDBMovieBasicImpl instance) =>
+Map<String, dynamic> _$TMDBMovieBasicToJson(_TMDBMovieBasic instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,

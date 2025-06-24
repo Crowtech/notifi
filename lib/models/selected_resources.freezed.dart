@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,88 +10,65 @@ part of 'selected_resources.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-SelectedResources _$SelectedResourcesFromJson(Map<String, dynamic> json) {
-  return _SelectedResources.fromJson(json);
-}
 
 /// @nodoc
 mixin _$SelectedResources {
-  List<int> get selectedResourceIds => throw _privateConstructorUsedError;
-  List<int> get unselectedResourceIds => throw _privateConstructorUsedError;
-
-  /// Serializes this SelectedResources to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  List<int> get selectedResourceIds;
+  List<int> get unselectedResourceIds;
 
   /// Create a copy of SelectedResources
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $SelectedResourcesCopyWith<SelectedResources> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $SelectedResourcesCopyWith<$Res> {
-  factory $SelectedResourcesCopyWith(
-          SelectedResources value, $Res Function(SelectedResources) then) =
-      _$SelectedResourcesCopyWithImpl<$Res, SelectedResources>;
-  @useResult
-  $Res call({List<int> selectedResourceIds, List<int> unselectedResourceIds});
-}
-
-/// @nodoc
-class _$SelectedResourcesCopyWithImpl<$Res, $Val extends SelectedResources>
-    implements $SelectedResourcesCopyWith<$Res> {
-  _$SelectedResourcesCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of SelectedResources
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $SelectedResourcesCopyWith<SelectedResources> get copyWith =>
+      _$SelectedResourcesCopyWithImpl<SelectedResources>(
+          this as SelectedResources, _$identity);
+
+  /// Serializes this SelectedResources to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? selectedResourceIds = null,
-    Object? unselectedResourceIds = null,
-  }) {
-    return _then(_value.copyWith(
-      selectedResourceIds: null == selectedResourceIds
-          ? _value.selectedResourceIds
-          : selectedResourceIds // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      unselectedResourceIds: null == unselectedResourceIds
-          ? _value.unselectedResourceIds
-          : unselectedResourceIds // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is SelectedResources &&
+            const DeepCollectionEquality()
+                .equals(other.selectedResourceIds, selectedResourceIds) &&
+            const DeepCollectionEquality()
+                .equals(other.unselectedResourceIds, unselectedResourceIds));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(selectedResourceIds),
+      const DeepCollectionEquality().hash(unselectedResourceIds));
+
+  @override
+  String toString() {
+    return 'SelectedResources(selectedResourceIds: $selectedResourceIds, unselectedResourceIds: $unselectedResourceIds)';
   }
 }
 
 /// @nodoc
-abstract class _$$SelectedResourcesImplCopyWith<$Res>
-    implements $SelectedResourcesCopyWith<$Res> {
-  factory _$$SelectedResourcesImplCopyWith(_$SelectedResourcesImpl value,
-          $Res Function(_$SelectedResourcesImpl) then) =
-      __$$SelectedResourcesImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $SelectedResourcesCopyWith<$Res> {
+  factory $SelectedResourcesCopyWith(
+          SelectedResources value, $Res Function(SelectedResources) _then) =
+      _$SelectedResourcesCopyWithImpl;
   @useResult
   $Res call({List<int> selectedResourceIds, List<int> unselectedResourceIds});
 }
 
 /// @nodoc
-class __$$SelectedResourcesImplCopyWithImpl<$Res>
-    extends _$SelectedResourcesCopyWithImpl<$Res, _$SelectedResourcesImpl>
-    implements _$$SelectedResourcesImplCopyWith<$Res> {
-  __$$SelectedResourcesImplCopyWithImpl(_$SelectedResourcesImpl _value,
-      $Res Function(_$SelectedResourcesImpl) _then)
-      : super(_value, _then);
+class _$SelectedResourcesCopyWithImpl<$Res>
+    implements $SelectedResourcesCopyWith<$Res> {
+  _$SelectedResourcesCopyWithImpl(this._self, this._then);
+
+  final SelectedResources _self;
+  final $Res Function(SelectedResources) _then;
 
   /// Create a copy of SelectedResources
   /// with the given fields replaced by the non-null parameter values.
@@ -100,13 +78,13 @@ class __$$SelectedResourcesImplCopyWithImpl<$Res>
     Object? selectedResourceIds = null,
     Object? unselectedResourceIds = null,
   }) {
-    return _then(_$SelectedResourcesImpl(
+    return _then(_self.copyWith(
       selectedResourceIds: null == selectedResourceIds
-          ? _value._selectedResourceIds
+          ? _self.selectedResourceIds
           : selectedResourceIds // ignore: cast_nullable_to_non_nullable
               as List<int>,
       unselectedResourceIds: null == unselectedResourceIds
-          ? _value._unselectedResourceIds
+          ? _self.unselectedResourceIds
           : unselectedResourceIds // ignore: cast_nullable_to_non_nullable
               as List<int>,
     ));
@@ -115,15 +93,14 @@ class __$$SelectedResourcesImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$SelectedResourcesImpl implements _SelectedResources {
-  _$SelectedResourcesImpl(
+class _SelectedResources implements SelectedResources {
+  _SelectedResources(
       {required final List<int> selectedResourceIds,
       required final List<int> unselectedResourceIds})
       : _selectedResourceIds = selectedResourceIds,
         _unselectedResourceIds = unselectedResourceIds;
-
-  factory _$SelectedResourcesImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SelectedResourcesImplFromJson(json);
+  factory _SelectedResources.fromJson(Map<String, dynamic> json) =>
+      _$SelectedResourcesFromJson(json);
 
   final List<int> _selectedResourceIds;
   @override
@@ -143,16 +120,26 @@ class _$SelectedResourcesImpl implements _SelectedResources {
     return EqualUnmodifiableListView(_unselectedResourceIds);
   }
 
+  /// Create a copy of SelectedResources
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'SelectedResources(selectedResourceIds: $selectedResourceIds, unselectedResourceIds: $unselectedResourceIds)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$SelectedResourcesCopyWith<_SelectedResources> get copyWith =>
+      __$SelectedResourcesCopyWithImpl<_SelectedResources>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$SelectedResourcesToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SelectedResourcesImpl &&
+            other is _SelectedResources &&
             const DeepCollectionEquality()
                 .equals(other._selectedResourceIds, _selectedResourceIds) &&
             const DeepCollectionEquality()
@@ -166,41 +153,50 @@ class _$SelectedResourcesImpl implements _SelectedResources {
       const DeepCollectionEquality().hash(_selectedResourceIds),
       const DeepCollectionEquality().hash(_unselectedResourceIds));
 
-  /// Create a copy of SelectedResources
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$SelectedResourcesImplCopyWith<_$SelectedResourcesImpl> get copyWith =>
-      __$$SelectedResourcesImplCopyWithImpl<_$SelectedResourcesImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$SelectedResourcesImplToJson(
-      this,
-    );
+  String toString() {
+    return 'SelectedResources(selectedResourceIds: $selectedResourceIds, unselectedResourceIds: $unselectedResourceIds)';
   }
 }
 
-abstract class _SelectedResources implements SelectedResources {
-  factory _SelectedResources(
-          {required final List<int> selectedResourceIds,
-          required final List<int> unselectedResourceIds}) =
-      _$SelectedResourcesImpl;
-
-  factory _SelectedResources.fromJson(Map<String, dynamic> json) =
-      _$SelectedResourcesImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$SelectedResourcesCopyWith<$Res>
+    implements $SelectedResourcesCopyWith<$Res> {
+  factory _$SelectedResourcesCopyWith(
+          _SelectedResources value, $Res Function(_SelectedResources) _then) =
+      __$SelectedResourcesCopyWithImpl;
   @override
-  List<int> get selectedResourceIds;
-  @override
-  List<int> get unselectedResourceIds;
+  @useResult
+  $Res call({List<int> selectedResourceIds, List<int> unselectedResourceIds});
+}
+
+/// @nodoc
+class __$SelectedResourcesCopyWithImpl<$Res>
+    implements _$SelectedResourcesCopyWith<$Res> {
+  __$SelectedResourcesCopyWithImpl(this._self, this._then);
+
+  final _SelectedResources _self;
+  final $Res Function(_SelectedResources) _then;
 
   /// Create a copy of SelectedResources
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SelectedResourcesImplCopyWith<_$SelectedResourcesImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? selectedResourceIds = null,
+    Object? unselectedResourceIds = null,
+  }) {
+    return _then(_SelectedResources(
+      selectedResourceIds: null == selectedResourceIds
+          ? _self._selectedResourceIds
+          : selectedResourceIds // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      unselectedResourceIds: null == unselectedResourceIds
+          ? _self._unselectedResourceIds
+          : unselectedResourceIds // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+    ));
+  }
 }
+
+// dart format on

@@ -148,6 +148,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get zoom_to_user => 'Zoom in to user';
 	Map<String, String> get locales => {
 		'en': 'English',
+		'en-US': 'English-US',
 		'zh': '中文',
 	};
 }
@@ -651,6 +652,7 @@ extension on Translations {
 			case 'zoom_out': return 'Zoom out';
 			case 'zoom_to_user': return 'Zoom in to user';
 			case 'locales.en': return 'English';
+			case 'locales.en-US': return 'English-US';
 			case 'locales.zh': return '中文';
 			default: return null;
 		}

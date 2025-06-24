@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,174 +10,36 @@ part of 'tmdb_movie.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 TMDBMovie _$TMDBMovieFromJson(Map<String, dynamic> json) {
   return _TMDBMovieBasic.fromJson(json);
 }
 
 /// @nodoc
 mixin _$TMDBMovie {
-  int get id => throw _privateConstructorUsedError;
-  String get title => throw _privateConstructorUsedError;
+  int get id;
+  String get title;
   @JsonKey(name: 'poster_path')
-  String? get posterPath => throw _privateConstructorUsedError;
+  String? get posterPath;
   @JsonKey(name: 'release_date')
-  String? get releaseDate => throw _privateConstructorUsedError;
-
-  /// Serializes this TMDBMovie to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String? get releaseDate;
 
   /// Create a copy of TMDBMovie
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $TMDBMovieCopyWith<TMDBMovie> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$TMDBMovieCopyWithImpl<TMDBMovie>(this as TMDBMovie, _$identity);
 
-/// @nodoc
-abstract class $TMDBMovieCopyWith<$Res> {
-  factory $TMDBMovieCopyWith(TMDBMovie value, $Res Function(TMDBMovie) then) =
-      _$TMDBMovieCopyWithImpl<$Res, TMDBMovie>;
-  @useResult
-  $Res call(
-      {int id,
-      String title,
-      @JsonKey(name: 'poster_path') String? posterPath,
-      @JsonKey(name: 'release_date') String? releaseDate});
-}
-
-/// @nodoc
-class _$TMDBMovieCopyWithImpl<$Res, $Val extends TMDBMovie>
-    implements $TMDBMovieCopyWith<$Res> {
-  _$TMDBMovieCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of TMDBMovie
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? title = null,
-    Object? posterPath = freezed,
-    Object? releaseDate = freezed,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      posterPath: freezed == posterPath
-          ? _value.posterPath
-          : posterPath // ignore: cast_nullable_to_non_nullable
-              as String?,
-      releaseDate: freezed == releaseDate
-          ? _value.releaseDate
-          : releaseDate // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$TMDBMovieBasicImplCopyWith<$Res>
-    implements $TMDBMovieCopyWith<$Res> {
-  factory _$$TMDBMovieBasicImplCopyWith(_$TMDBMovieBasicImpl value,
-          $Res Function(_$TMDBMovieBasicImpl) then) =
-      __$$TMDBMovieBasicImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {int id,
-      String title,
-      @JsonKey(name: 'poster_path') String? posterPath,
-      @JsonKey(name: 'release_date') String? releaseDate});
-}
-
-/// @nodoc
-class __$$TMDBMovieBasicImplCopyWithImpl<$Res>
-    extends _$TMDBMovieCopyWithImpl<$Res, _$TMDBMovieBasicImpl>
-    implements _$$TMDBMovieBasicImplCopyWith<$Res> {
-  __$$TMDBMovieBasicImplCopyWithImpl(
-      _$TMDBMovieBasicImpl _value, $Res Function(_$TMDBMovieBasicImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of TMDBMovie
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? title = null,
-    Object? posterPath = freezed,
-    Object? releaseDate = freezed,
-  }) {
-    return _then(_$TMDBMovieBasicImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      posterPath: freezed == posterPath
-          ? _value.posterPath
-          : posterPath // ignore: cast_nullable_to_non_nullable
-              as String?,
-      releaseDate: freezed == releaseDate
-          ? _value.releaseDate
-          : releaseDate // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$TMDBMovieBasicImpl implements _TMDBMovieBasic {
-  _$TMDBMovieBasicImpl(
-      {required this.id,
-      required this.title,
-      @JsonKey(name: 'poster_path') this.posterPath,
-      @JsonKey(name: 'release_date') this.releaseDate});
-
-  factory _$TMDBMovieBasicImpl.fromJson(Map<String, dynamic> json) =>
-      _$$TMDBMovieBasicImplFromJson(json);
-
-  @override
-  final int id;
-  @override
-  final String title;
-  @override
-  @JsonKey(name: 'poster_path')
-  final String? posterPath;
-  @override
-  @JsonKey(name: 'release_date')
-  final String? releaseDate;
-
-  @override
-  String toString() {
-    return 'TMDBMovie(id: $id, title: $title, posterPath: $posterPath, releaseDate: $releaseDate)';
-  }
+  /// Serializes this TMDBMovie to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TMDBMovieBasicImpl &&
+            other is TMDBMovie &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.posterPath, posterPath) ||
@@ -190,49 +53,175 @@ class _$TMDBMovieBasicImpl implements _TMDBMovieBasic {
   int get hashCode =>
       Object.hash(runtimeType, id, title, posterPath, releaseDate);
 
-  /// Create a copy of TMDBMovie
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$TMDBMovieBasicImplCopyWith<_$TMDBMovieBasicImpl> get copyWith =>
-      __$$TMDBMovieBasicImplCopyWithImpl<_$TMDBMovieBasicImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$TMDBMovieBasicImplToJson(
-      this,
-    );
+  String toString() {
+    return 'TMDBMovie(id: $id, title: $title, posterPath: $posterPath, releaseDate: $releaseDate)';
   }
 }
 
-abstract class _TMDBMovieBasic implements TMDBMovie {
-  factory _TMDBMovieBasic(
-          {required final int id,
-          required final String title,
-          @JsonKey(name: 'poster_path') final String? posterPath,
-          @JsonKey(name: 'release_date') final String? releaseDate}) =
-      _$TMDBMovieBasicImpl;
+/// @nodoc
+abstract mixin class $TMDBMovieCopyWith<$Res> {
+  factory $TMDBMovieCopyWith(TMDBMovie value, $Res Function(TMDBMovie) _then) =
+      _$TMDBMovieCopyWithImpl;
+  @useResult
+  $Res call(
+      {int id,
+      String title,
+      @JsonKey(name: 'poster_path') String? posterPath,
+      @JsonKey(name: 'release_date') String? releaseDate});
+}
 
-  factory _TMDBMovieBasic.fromJson(Map<String, dynamic> json) =
-      _$TMDBMovieBasicImpl.fromJson;
+/// @nodoc
+class _$TMDBMovieCopyWithImpl<$Res> implements $TMDBMovieCopyWith<$Res> {
+  _$TMDBMovieCopyWithImpl(this._self, this._then);
+
+  final TMDBMovie _self;
+  final $Res Function(TMDBMovie) _then;
+
+  /// Create a copy of TMDBMovie
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? title = null,
+    Object? posterPath = freezed,
+    Object? releaseDate = freezed,
+  }) {
+    return _then(_self.copyWith(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      title: null == title
+          ? _self.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      posterPath: freezed == posterPath
+          ? _self.posterPath
+          : posterPath // ignore: cast_nullable_to_non_nullable
+              as String?,
+      releaseDate: freezed == releaseDate
+          ? _self.releaseDate
+          : releaseDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _TMDBMovieBasic implements TMDBMovie {
+  _TMDBMovieBasic(
+      {required this.id,
+      required this.title,
+      @JsonKey(name: 'poster_path') this.posterPath,
+      @JsonKey(name: 'release_date') this.releaseDate});
+  factory _TMDBMovieBasic.fromJson(Map<String, dynamic> json) =>
+      _$TMDBMovieBasicFromJson(json);
 
   @override
-  int get id;
+  final int id;
   @override
-  String get title;
+  final String title;
   @override
   @JsonKey(name: 'poster_path')
-  String? get posterPath;
+  final String? posterPath;
   @override
   @JsonKey(name: 'release_date')
-  String? get releaseDate;
+  final String? releaseDate;
 
   /// Create a copy of TMDBMovie
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$TMDBMovieBasicImplCopyWith<_$TMDBMovieBasicImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$TMDBMovieBasicCopyWith<_TMDBMovieBasic> get copyWith =>
+      __$TMDBMovieBasicCopyWithImpl<_TMDBMovieBasic>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$TMDBMovieBasicToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _TMDBMovieBasic &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.posterPath, posterPath) ||
+                other.posterPath == posterPath) &&
+            (identical(other.releaseDate, releaseDate) ||
+                other.releaseDate == releaseDate));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, id, title, posterPath, releaseDate);
+
+  @override
+  String toString() {
+    return 'TMDBMovie(id: $id, title: $title, posterPath: $posterPath, releaseDate: $releaseDate)';
+  }
 }
+
+/// @nodoc
+abstract mixin class _$TMDBMovieBasicCopyWith<$Res>
+    implements $TMDBMovieCopyWith<$Res> {
+  factory _$TMDBMovieBasicCopyWith(
+          _TMDBMovieBasic value, $Res Function(_TMDBMovieBasic) _then) =
+      __$TMDBMovieBasicCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {int id,
+      String title,
+      @JsonKey(name: 'poster_path') String? posterPath,
+      @JsonKey(name: 'release_date') String? releaseDate});
+}
+
+/// @nodoc
+class __$TMDBMovieBasicCopyWithImpl<$Res>
+    implements _$TMDBMovieBasicCopyWith<$Res> {
+  __$TMDBMovieBasicCopyWithImpl(this._self, this._then);
+
+  final _TMDBMovieBasic _self;
+  final $Res Function(_TMDBMovieBasic) _then;
+
+  /// Create a copy of TMDBMovie
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? title = null,
+    Object? posterPath = freezed,
+    Object? releaseDate = freezed,
+  }) {
+    return _then(_TMDBMovieBasic(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      title: null == title
+          ? _self.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      posterPath: freezed == posterPath
+          ? _self.posterPath
+          : posterPath // ignore: cast_nullable_to_non_nullable
+              as String?,
+      releaseDate: freezed == releaseDate
+          ? _self.releaseDate
+          : releaseDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+// dart format on

@@ -6,7 +6,7 @@ part of 'orgs.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$OrgImpl _$$OrgImplFromJson(Map<String, dynamic> json) => _$OrgImpl(
+_Org _$OrgFromJson(Map<String, dynamic> json) => _Org(
       orgid: (json['orgid'] as num).toInt(),
       id: (json['id'] as num).toInt(),
       code: json['code'] as String,
@@ -23,7 +23,7 @@ _$OrgImpl _$$OrgImplFromJson(Map<String, dynamic> json) => _$OrgImpl(
       url: json['url'] as String,
     );
 
-Map<String, dynamic> _$$OrgImplToJson(_$OrgImpl instance) => <String, dynamic>{
+Map<String, dynamic> _$OrgToJson(_Org instance) => <String, dynamic>{
       'orgid': instance.orgid,
       'id': instance.id,
       'code': instance.code,

@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,107 +10,67 @@ part of 'registrations_response.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-RegistrationsResponse _$RegistrationsResponseFromJson(
-    Map<String, dynamic> json) {
-  return _RegistrationsResponse.fromJson(json);
-}
 
 /// @nodoc
 mixin _$RegistrationsResponse {
   @JsonKey(name: 'startIndex')
-  int get page => throw _privateConstructorUsedError;
+  int get page;
   @JsonKey(name: 'items')
-  List<Registration> get results => throw _privateConstructorUsedError;
+  List<Registration> get results;
   @JsonKey(name: 'total_results')
-  int get totalResults => throw _privateConstructorUsedError;
+  int get totalResults;
   @JsonKey(name: 'totalItems')
-  int get totalPages => throw _privateConstructorUsedError;
-  List<String> get errors => throw _privateConstructorUsedError;
-
-  /// Serializes this RegistrationsResponse to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  int get totalPages;
+  List<String> get errors;
 
   /// Create a copy of RegistrationsResponse
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $RegistrationsResponseCopyWith<RegistrationsResponse> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $RegistrationsResponseCopyWith<$Res> {
-  factory $RegistrationsResponseCopyWith(RegistrationsResponse value,
-          $Res Function(RegistrationsResponse) then) =
-      _$RegistrationsResponseCopyWithImpl<$Res, RegistrationsResponse>;
-  @useResult
-  $Res call(
-      {@JsonKey(name: 'startIndex') int page,
-      @JsonKey(name: 'items') List<Registration> results,
-      @JsonKey(name: 'total_results') int totalResults,
-      @JsonKey(name: 'totalItems') int totalPages,
-      List<String> errors});
-}
-
-/// @nodoc
-class _$RegistrationsResponseCopyWithImpl<$Res,
-        $Val extends RegistrationsResponse>
-    implements $RegistrationsResponseCopyWith<$Res> {
-  _$RegistrationsResponseCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of RegistrationsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $RegistrationsResponseCopyWith<RegistrationsResponse> get copyWith =>
+      _$RegistrationsResponseCopyWithImpl<RegistrationsResponse>(
+          this as RegistrationsResponse, _$identity);
+
+  /// Serializes this RegistrationsResponse to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? page = null,
-    Object? results = null,
-    Object? totalResults = null,
-    Object? totalPages = null,
-    Object? errors = null,
-  }) {
-    return _then(_value.copyWith(
-      page: null == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
-              as int,
-      results: null == results
-          ? _value.results
-          : results // ignore: cast_nullable_to_non_nullable
-              as List<Registration>,
-      totalResults: null == totalResults
-          ? _value.totalResults
-          : totalResults // ignore: cast_nullable_to_non_nullable
-              as int,
-      totalPages: null == totalPages
-          ? _value.totalPages
-          : totalPages // ignore: cast_nullable_to_non_nullable
-              as int,
-      errors: null == errors
-          ? _value.errors
-          : errors // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is RegistrationsResponse &&
+            (identical(other.page, page) || other.page == page) &&
+            const DeepCollectionEquality().equals(other.results, results) &&
+            (identical(other.totalResults, totalResults) ||
+                other.totalResults == totalResults) &&
+            (identical(other.totalPages, totalPages) ||
+                other.totalPages == totalPages) &&
+            const DeepCollectionEquality().equals(other.errors, errors));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      page,
+      const DeepCollectionEquality().hash(results),
+      totalResults,
+      totalPages,
+      const DeepCollectionEquality().hash(errors));
+
+  @override
+  String toString() {
+    return 'RegistrationsResponse(page: $page, results: $results, totalResults: $totalResults, totalPages: $totalPages, errors: $errors)';
   }
 }
 
 /// @nodoc
-abstract class _$$RegistrationsResponseImplCopyWith<$Res>
-    implements $RegistrationsResponseCopyWith<$Res> {
-  factory _$$RegistrationsResponseImplCopyWith(
-          _$RegistrationsResponseImpl value,
-          $Res Function(_$RegistrationsResponseImpl) then) =
-      __$$RegistrationsResponseImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $RegistrationsResponseCopyWith<$Res> {
+  factory $RegistrationsResponseCopyWith(RegistrationsResponse value,
+          $Res Function(RegistrationsResponse) _then) =
+      _$RegistrationsResponseCopyWithImpl;
   @useResult
   $Res call(
       {@JsonKey(name: 'startIndex') int page,
@@ -120,13 +81,12 @@ abstract class _$$RegistrationsResponseImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$RegistrationsResponseImplCopyWithImpl<$Res>
-    extends _$RegistrationsResponseCopyWithImpl<$Res,
-        _$RegistrationsResponseImpl>
-    implements _$$RegistrationsResponseImplCopyWith<$Res> {
-  __$$RegistrationsResponseImplCopyWithImpl(_$RegistrationsResponseImpl _value,
-      $Res Function(_$RegistrationsResponseImpl) _then)
-      : super(_value, _then);
+class _$RegistrationsResponseCopyWithImpl<$Res>
+    implements $RegistrationsResponseCopyWith<$Res> {
+  _$RegistrationsResponseCopyWithImpl(this._self, this._then);
+
+  final RegistrationsResponse _self;
+  final $Res Function(RegistrationsResponse) _then;
 
   /// Create a copy of RegistrationsResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -139,25 +99,25 @@ class __$$RegistrationsResponseImplCopyWithImpl<$Res>
     Object? totalPages = null,
     Object? errors = null,
   }) {
-    return _then(_$RegistrationsResponseImpl(
+    return _then(_self.copyWith(
       page: null == page
-          ? _value.page
+          ? _self.page
           : page // ignore: cast_nullable_to_non_nullable
               as int,
       results: null == results
-          ? _value._results
+          ? _self.results
           : results // ignore: cast_nullable_to_non_nullable
               as List<Registration>,
       totalResults: null == totalResults
-          ? _value.totalResults
+          ? _self.totalResults
           : totalResults // ignore: cast_nullable_to_non_nullable
               as int,
       totalPages: null == totalPages
-          ? _value.totalPages
+          ? _self.totalPages
           : totalPages // ignore: cast_nullable_to_non_nullable
               as int,
       errors: null == errors
-          ? _value._errors
+          ? _self.errors
           : errors // ignore: cast_nullable_to_non_nullable
               as List<String>,
     ));
@@ -166,8 +126,8 @@ class __$$RegistrationsResponseImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$RegistrationsResponseImpl implements _RegistrationsResponse {
-  _$RegistrationsResponseImpl(
+class _RegistrationsResponse implements RegistrationsResponse {
+  _RegistrationsResponse(
       {@JsonKey(name: 'startIndex') required this.page,
       @JsonKey(name: 'items') required final List<Registration> results,
       @JsonKey(name: 'total_results') required this.totalResults,
@@ -175,9 +135,8 @@ class _$RegistrationsResponseImpl implements _RegistrationsResponse {
       final List<String> errors = const []})
       : _results = results,
         _errors = errors;
-
-  factory _$RegistrationsResponseImpl.fromJson(Map<String, dynamic> json) =>
-      _$$RegistrationsResponseImplFromJson(json);
+  factory _RegistrationsResponse.fromJson(Map<String, dynamic> json) =>
+      _$RegistrationsResponseFromJson(json);
 
   @override
   @JsonKey(name: 'startIndex')
@@ -206,16 +165,27 @@ class _$RegistrationsResponseImpl implements _RegistrationsResponse {
     return EqualUnmodifiableListView(_errors);
   }
 
+  /// Create a copy of RegistrationsResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'RegistrationsResponse(page: $page, results: $results, totalResults: $totalResults, totalPages: $totalPages, errors: $errors)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$RegistrationsResponseCopyWith<_RegistrationsResponse> get copyWith =>
+      __$RegistrationsResponseCopyWithImpl<_RegistrationsResponse>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$RegistrationsResponseToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RegistrationsResponseImpl &&
+            other is _RegistrationsResponse &&
             (identical(other.page, page) || other.page == page) &&
             const DeepCollectionEquality().equals(other._results, _results) &&
             (identical(other.totalResults, totalResults) ||
@@ -235,53 +205,70 @@ class _$RegistrationsResponseImpl implements _RegistrationsResponse {
       totalPages,
       const DeepCollectionEquality().hash(_errors));
 
-  /// Create a copy of RegistrationsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$RegistrationsResponseImplCopyWith<_$RegistrationsResponseImpl>
-      get copyWith => __$$RegistrationsResponseImplCopyWithImpl<
-          _$RegistrationsResponseImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$RegistrationsResponseImplToJson(
-      this,
-    );
+  String toString() {
+    return 'RegistrationsResponse(page: $page, results: $results, totalResults: $totalResults, totalPages: $totalPages, errors: $errors)';
   }
 }
 
-abstract class _RegistrationsResponse implements RegistrationsResponse {
-  factory _RegistrationsResponse(
-      {@JsonKey(name: 'startIndex') required final int page,
-      @JsonKey(name: 'items') required final List<Registration> results,
-      @JsonKey(name: 'total_results') required final int totalResults,
-      @JsonKey(name: 'totalItems') required final int totalPages,
-      final List<String> errors}) = _$RegistrationsResponseImpl;
+/// @nodoc
+abstract mixin class _$RegistrationsResponseCopyWith<$Res>
+    implements $RegistrationsResponseCopyWith<$Res> {
+  factory _$RegistrationsResponseCopyWith(_RegistrationsResponse value,
+          $Res Function(_RegistrationsResponse) _then) =
+      __$RegistrationsResponseCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'startIndex') int page,
+      @JsonKey(name: 'items') List<Registration> results,
+      @JsonKey(name: 'total_results') int totalResults,
+      @JsonKey(name: 'totalItems') int totalPages,
+      List<String> errors});
+}
 
-  factory _RegistrationsResponse.fromJson(Map<String, dynamic> json) =
-      _$RegistrationsResponseImpl.fromJson;
+/// @nodoc
+class __$RegistrationsResponseCopyWithImpl<$Res>
+    implements _$RegistrationsResponseCopyWith<$Res> {
+  __$RegistrationsResponseCopyWithImpl(this._self, this._then);
 
-  @override
-  @JsonKey(name: 'startIndex')
-  int get page;
-  @override
-  @JsonKey(name: 'items')
-  List<Registration> get results;
-  @override
-  @JsonKey(name: 'total_results')
-  int get totalResults;
-  @override
-  @JsonKey(name: 'totalItems')
-  int get totalPages;
-  @override
-  List<String> get errors;
+  final _RegistrationsResponse _self;
+  final $Res Function(_RegistrationsResponse) _then;
 
   /// Create a copy of RegistrationsResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$RegistrationsResponseImplCopyWith<_$RegistrationsResponseImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? page = null,
+    Object? results = null,
+    Object? totalResults = null,
+    Object? totalPages = null,
+    Object? errors = null,
+  }) {
+    return _then(_RegistrationsResponse(
+      page: null == page
+          ? _self.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      results: null == results
+          ? _self._results
+          : results // ignore: cast_nullable_to_non_nullable
+              as List<Registration>,
+      totalResults: null == totalResults
+          ? _self.totalResults
+          : totalResults // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalPages: null == totalPages
+          ? _self.totalPages
+          : totalPages // ignore: cast_nullable_to_non_nullable
+              as int,
+      errors: null == errors
+          ? _self._errors
+          : errors // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
 }
+
+// dart format on

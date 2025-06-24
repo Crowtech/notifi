@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,107 +10,67 @@ part of 'norganization_response.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-NOrganizationsResponse _$NOrganizationsResponseFromJson(
-    Map<String, dynamic> json) {
-  return _NOrganizationsResponse.fromJson(json);
-}
 
 /// @nodoc
 mixin _$NOrganizationsResponse {
   @JsonKey(name: 'startIndex')
-  int get page => throw _privateConstructorUsedError;
+  int get page;
   @JsonKey(name: 'items')
-  List<NOrganization> get results => throw _privateConstructorUsedError;
+  List<NOrganization> get results;
   @JsonKey(name: 'resultCount')
-  int get totalResults => throw _privateConstructorUsedError;
+  int get totalResults;
   @JsonKey(name: 'totalItems')
-  int get totalPages => throw _privateConstructorUsedError;
-  List<String> get errors => throw _privateConstructorUsedError;
-
-  /// Serializes this NOrganizationsResponse to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  int get totalPages;
+  List<String> get errors;
 
   /// Create a copy of NOrganizationsResponse
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $NOrganizationsResponseCopyWith<NOrganizationsResponse> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $NOrganizationsResponseCopyWith<$Res> {
-  factory $NOrganizationsResponseCopyWith(NOrganizationsResponse value,
-          $Res Function(NOrganizationsResponse) then) =
-      _$NOrganizationsResponseCopyWithImpl<$Res, NOrganizationsResponse>;
-  @useResult
-  $Res call(
-      {@JsonKey(name: 'startIndex') int page,
-      @JsonKey(name: 'items') List<NOrganization> results,
-      @JsonKey(name: 'resultCount') int totalResults,
-      @JsonKey(name: 'totalItems') int totalPages,
-      List<String> errors});
-}
-
-/// @nodoc
-class _$NOrganizationsResponseCopyWithImpl<$Res,
-        $Val extends NOrganizationsResponse>
-    implements $NOrganizationsResponseCopyWith<$Res> {
-  _$NOrganizationsResponseCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of NOrganizationsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $NOrganizationsResponseCopyWith<NOrganizationsResponse> get copyWith =>
+      _$NOrganizationsResponseCopyWithImpl<NOrganizationsResponse>(
+          this as NOrganizationsResponse, _$identity);
+
+  /// Serializes this NOrganizationsResponse to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? page = null,
-    Object? results = null,
-    Object? totalResults = null,
-    Object? totalPages = null,
-    Object? errors = null,
-  }) {
-    return _then(_value.copyWith(
-      page: null == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
-              as int,
-      results: null == results
-          ? _value.results
-          : results // ignore: cast_nullable_to_non_nullable
-              as List<NOrganization>,
-      totalResults: null == totalResults
-          ? _value.totalResults
-          : totalResults // ignore: cast_nullable_to_non_nullable
-              as int,
-      totalPages: null == totalPages
-          ? _value.totalPages
-          : totalPages // ignore: cast_nullable_to_non_nullable
-              as int,
-      errors: null == errors
-          ? _value.errors
-          : errors // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is NOrganizationsResponse &&
+            (identical(other.page, page) || other.page == page) &&
+            const DeepCollectionEquality().equals(other.results, results) &&
+            (identical(other.totalResults, totalResults) ||
+                other.totalResults == totalResults) &&
+            (identical(other.totalPages, totalPages) ||
+                other.totalPages == totalPages) &&
+            const DeepCollectionEquality().equals(other.errors, errors));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      page,
+      const DeepCollectionEquality().hash(results),
+      totalResults,
+      totalPages,
+      const DeepCollectionEquality().hash(errors));
+
+  @override
+  String toString() {
+    return 'NOrganizationsResponse(page: $page, results: $results, totalResults: $totalResults, totalPages: $totalPages, errors: $errors)';
   }
 }
 
 /// @nodoc
-abstract class _$$NOrganizationsResponseImplCopyWith<$Res>
-    implements $NOrganizationsResponseCopyWith<$Res> {
-  factory _$$NOrganizationsResponseImplCopyWith(
-          _$NOrganizationsResponseImpl value,
-          $Res Function(_$NOrganizationsResponseImpl) then) =
-      __$$NOrganizationsResponseImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $NOrganizationsResponseCopyWith<$Res> {
+  factory $NOrganizationsResponseCopyWith(NOrganizationsResponse value,
+          $Res Function(NOrganizationsResponse) _then) =
+      _$NOrganizationsResponseCopyWithImpl;
   @useResult
   $Res call(
       {@JsonKey(name: 'startIndex') int page,
@@ -120,14 +81,12 @@ abstract class _$$NOrganizationsResponseImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$NOrganizationsResponseImplCopyWithImpl<$Res>
-    extends _$NOrganizationsResponseCopyWithImpl<$Res,
-        _$NOrganizationsResponseImpl>
-    implements _$$NOrganizationsResponseImplCopyWith<$Res> {
-  __$$NOrganizationsResponseImplCopyWithImpl(
-      _$NOrganizationsResponseImpl _value,
-      $Res Function(_$NOrganizationsResponseImpl) _then)
-      : super(_value, _then);
+class _$NOrganizationsResponseCopyWithImpl<$Res>
+    implements $NOrganizationsResponseCopyWith<$Res> {
+  _$NOrganizationsResponseCopyWithImpl(this._self, this._then);
+
+  final NOrganizationsResponse _self;
+  final $Res Function(NOrganizationsResponse) _then;
 
   /// Create a copy of NOrganizationsResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -140,25 +99,25 @@ class __$$NOrganizationsResponseImplCopyWithImpl<$Res>
     Object? totalPages = null,
     Object? errors = null,
   }) {
-    return _then(_$NOrganizationsResponseImpl(
+    return _then(_self.copyWith(
       page: null == page
-          ? _value.page
+          ? _self.page
           : page // ignore: cast_nullable_to_non_nullable
               as int,
       results: null == results
-          ? _value._results
+          ? _self.results
           : results // ignore: cast_nullable_to_non_nullable
               as List<NOrganization>,
       totalResults: null == totalResults
-          ? _value.totalResults
+          ? _self.totalResults
           : totalResults // ignore: cast_nullable_to_non_nullable
               as int,
       totalPages: null == totalPages
-          ? _value.totalPages
+          ? _self.totalPages
           : totalPages // ignore: cast_nullable_to_non_nullable
               as int,
       errors: null == errors
-          ? _value._errors
+          ? _self.errors
           : errors // ignore: cast_nullable_to_non_nullable
               as List<String>,
     ));
@@ -167,8 +126,8 @@ class __$$NOrganizationsResponseImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$NOrganizationsResponseImpl implements _NOrganizationsResponse {
-  _$NOrganizationsResponseImpl(
+class _NOrganizationsResponse implements NOrganizationsResponse {
+  _NOrganizationsResponse(
       {@JsonKey(name: 'startIndex') required this.page,
       @JsonKey(name: 'items') required final List<NOrganization> results,
       @JsonKey(name: 'resultCount') required this.totalResults,
@@ -176,9 +135,8 @@ class _$NOrganizationsResponseImpl implements _NOrganizationsResponse {
       final List<String> errors = const []})
       : _results = results,
         _errors = errors;
-
-  factory _$NOrganizationsResponseImpl.fromJson(Map<String, dynamic> json) =>
-      _$$NOrganizationsResponseImplFromJson(json);
+  factory _NOrganizationsResponse.fromJson(Map<String, dynamic> json) =>
+      _$NOrganizationsResponseFromJson(json);
 
   @override
   @JsonKey(name: 'startIndex')
@@ -207,16 +165,27 @@ class _$NOrganizationsResponseImpl implements _NOrganizationsResponse {
     return EqualUnmodifiableListView(_errors);
   }
 
+  /// Create a copy of NOrganizationsResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'NOrganizationsResponse(page: $page, results: $results, totalResults: $totalResults, totalPages: $totalPages, errors: $errors)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$NOrganizationsResponseCopyWith<_NOrganizationsResponse> get copyWith =>
+      __$NOrganizationsResponseCopyWithImpl<_NOrganizationsResponse>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$NOrganizationsResponseToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$NOrganizationsResponseImpl &&
+            other is _NOrganizationsResponse &&
             (identical(other.page, page) || other.page == page) &&
             const DeepCollectionEquality().equals(other._results, _results) &&
             (identical(other.totalResults, totalResults) ||
@@ -236,53 +205,70 @@ class _$NOrganizationsResponseImpl implements _NOrganizationsResponse {
       totalPages,
       const DeepCollectionEquality().hash(_errors));
 
-  /// Create a copy of NOrganizationsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$NOrganizationsResponseImplCopyWith<_$NOrganizationsResponseImpl>
-      get copyWith => __$$NOrganizationsResponseImplCopyWithImpl<
-          _$NOrganizationsResponseImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$NOrganizationsResponseImplToJson(
-      this,
-    );
+  String toString() {
+    return 'NOrganizationsResponse(page: $page, results: $results, totalResults: $totalResults, totalPages: $totalPages, errors: $errors)';
   }
 }
 
-abstract class _NOrganizationsResponse implements NOrganizationsResponse {
-  factory _NOrganizationsResponse(
-      {@JsonKey(name: 'startIndex') required final int page,
-      @JsonKey(name: 'items') required final List<NOrganization> results,
-      @JsonKey(name: 'resultCount') required final int totalResults,
-      @JsonKey(name: 'totalItems') required final int totalPages,
-      final List<String> errors}) = _$NOrganizationsResponseImpl;
+/// @nodoc
+abstract mixin class _$NOrganizationsResponseCopyWith<$Res>
+    implements $NOrganizationsResponseCopyWith<$Res> {
+  factory _$NOrganizationsResponseCopyWith(_NOrganizationsResponse value,
+          $Res Function(_NOrganizationsResponse) _then) =
+      __$NOrganizationsResponseCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'startIndex') int page,
+      @JsonKey(name: 'items') List<NOrganization> results,
+      @JsonKey(name: 'resultCount') int totalResults,
+      @JsonKey(name: 'totalItems') int totalPages,
+      List<String> errors});
+}
 
-  factory _NOrganizationsResponse.fromJson(Map<String, dynamic> json) =
-      _$NOrganizationsResponseImpl.fromJson;
+/// @nodoc
+class __$NOrganizationsResponseCopyWithImpl<$Res>
+    implements _$NOrganizationsResponseCopyWith<$Res> {
+  __$NOrganizationsResponseCopyWithImpl(this._self, this._then);
 
-  @override
-  @JsonKey(name: 'startIndex')
-  int get page;
-  @override
-  @JsonKey(name: 'items')
-  List<NOrganization> get results;
-  @override
-  @JsonKey(name: 'resultCount')
-  int get totalResults;
-  @override
-  @JsonKey(name: 'totalItems')
-  int get totalPages;
-  @override
-  List<String> get errors;
+  final _NOrganizationsResponse _self;
+  final $Res Function(_NOrganizationsResponse) _then;
 
   /// Create a copy of NOrganizationsResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$NOrganizationsResponseImplCopyWith<_$NOrganizationsResponseImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? page = null,
+    Object? results = null,
+    Object? totalResults = null,
+    Object? totalPages = null,
+    Object? errors = null,
+  }) {
+    return _then(_NOrganizationsResponse(
+      page: null == page
+          ? _self.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      results: null == results
+          ? _self._results
+          : results // ignore: cast_nullable_to_non_nullable
+              as List<NOrganization>,
+      totalResults: null == totalResults
+          ? _self.totalResults
+          : totalResults // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalPages: null == totalPages
+          ? _self.totalPages
+          : totalPages // ignore: cast_nullable_to_non_nullable
+              as int,
+      errors: null == errors
+          ? _self._errors
+          : errors // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
 }
+
+// dart format on

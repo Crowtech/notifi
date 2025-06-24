@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,102 +10,65 @@ part of 'tmdb_movies_response.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-TMDBMoviesResponse _$TMDBMoviesResponseFromJson(Map<String, dynamic> json) {
-  return _TMDBMoviesResponse.fromJson(json);
-}
 
 /// @nodoc
 mixin _$TMDBMoviesResponse {
-  int get page => throw _privateConstructorUsedError;
-  List<TMDBMovie> get results => throw _privateConstructorUsedError;
+  int get page;
+  List<TMDBMovie> get results;
   @JsonKey(name: 'total_results')
-  int get totalResults => throw _privateConstructorUsedError;
+  int get totalResults;
   @JsonKey(name: 'total_pages')
-  int get totalPages => throw _privateConstructorUsedError;
-  List<String> get errors => throw _privateConstructorUsedError;
-
-  /// Serializes this TMDBMoviesResponse to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  int get totalPages;
+  List<String> get errors;
 
   /// Create a copy of TMDBMoviesResponse
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $TMDBMoviesResponseCopyWith<TMDBMoviesResponse> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $TMDBMoviesResponseCopyWith<$Res> {
-  factory $TMDBMoviesResponseCopyWith(
-          TMDBMoviesResponse value, $Res Function(TMDBMoviesResponse) then) =
-      _$TMDBMoviesResponseCopyWithImpl<$Res, TMDBMoviesResponse>;
-  @useResult
-  $Res call(
-      {int page,
-      List<TMDBMovie> results,
-      @JsonKey(name: 'total_results') int totalResults,
-      @JsonKey(name: 'total_pages') int totalPages,
-      List<String> errors});
-}
-
-/// @nodoc
-class _$TMDBMoviesResponseCopyWithImpl<$Res, $Val extends TMDBMoviesResponse>
-    implements $TMDBMoviesResponseCopyWith<$Res> {
-  _$TMDBMoviesResponseCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of TMDBMoviesResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $TMDBMoviesResponseCopyWith<TMDBMoviesResponse> get copyWith =>
+      _$TMDBMoviesResponseCopyWithImpl<TMDBMoviesResponse>(
+          this as TMDBMoviesResponse, _$identity);
+
+  /// Serializes this TMDBMoviesResponse to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? page = null,
-    Object? results = null,
-    Object? totalResults = null,
-    Object? totalPages = null,
-    Object? errors = null,
-  }) {
-    return _then(_value.copyWith(
-      page: null == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
-              as int,
-      results: null == results
-          ? _value.results
-          : results // ignore: cast_nullable_to_non_nullable
-              as List<TMDBMovie>,
-      totalResults: null == totalResults
-          ? _value.totalResults
-          : totalResults // ignore: cast_nullable_to_non_nullable
-              as int,
-      totalPages: null == totalPages
-          ? _value.totalPages
-          : totalPages // ignore: cast_nullable_to_non_nullable
-              as int,
-      errors: null == errors
-          ? _value.errors
-          : errors // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is TMDBMoviesResponse &&
+            (identical(other.page, page) || other.page == page) &&
+            const DeepCollectionEquality().equals(other.results, results) &&
+            (identical(other.totalResults, totalResults) ||
+                other.totalResults == totalResults) &&
+            (identical(other.totalPages, totalPages) ||
+                other.totalPages == totalPages) &&
+            const DeepCollectionEquality().equals(other.errors, errors));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      page,
+      const DeepCollectionEquality().hash(results),
+      totalResults,
+      totalPages,
+      const DeepCollectionEquality().hash(errors));
+
+  @override
+  String toString() {
+    return 'TMDBMoviesResponse(page: $page, results: $results, totalResults: $totalResults, totalPages: $totalPages, errors: $errors)';
   }
 }
 
 /// @nodoc
-abstract class _$$TMDBMoviesResponseImplCopyWith<$Res>
-    implements $TMDBMoviesResponseCopyWith<$Res> {
-  factory _$$TMDBMoviesResponseImplCopyWith(_$TMDBMoviesResponseImpl value,
-          $Res Function(_$TMDBMoviesResponseImpl) then) =
-      __$$TMDBMoviesResponseImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $TMDBMoviesResponseCopyWith<$Res> {
+  factory $TMDBMoviesResponseCopyWith(
+          TMDBMoviesResponse value, $Res Function(TMDBMoviesResponse) _then) =
+      _$TMDBMoviesResponseCopyWithImpl;
   @useResult
   $Res call(
       {int page,
@@ -115,12 +79,12 @@ abstract class _$$TMDBMoviesResponseImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$TMDBMoviesResponseImplCopyWithImpl<$Res>
-    extends _$TMDBMoviesResponseCopyWithImpl<$Res, _$TMDBMoviesResponseImpl>
-    implements _$$TMDBMoviesResponseImplCopyWith<$Res> {
-  __$$TMDBMoviesResponseImplCopyWithImpl(_$TMDBMoviesResponseImpl _value,
-      $Res Function(_$TMDBMoviesResponseImpl) _then)
-      : super(_value, _then);
+class _$TMDBMoviesResponseCopyWithImpl<$Res>
+    implements $TMDBMoviesResponseCopyWith<$Res> {
+  _$TMDBMoviesResponseCopyWithImpl(this._self, this._then);
+
+  final TMDBMoviesResponse _self;
+  final $Res Function(TMDBMoviesResponse) _then;
 
   /// Create a copy of TMDBMoviesResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -133,25 +97,25 @@ class __$$TMDBMoviesResponseImplCopyWithImpl<$Res>
     Object? totalPages = null,
     Object? errors = null,
   }) {
-    return _then(_$TMDBMoviesResponseImpl(
+    return _then(_self.copyWith(
       page: null == page
-          ? _value.page
+          ? _self.page
           : page // ignore: cast_nullable_to_non_nullable
               as int,
       results: null == results
-          ? _value._results
+          ? _self.results
           : results // ignore: cast_nullable_to_non_nullable
               as List<TMDBMovie>,
       totalResults: null == totalResults
-          ? _value.totalResults
+          ? _self.totalResults
           : totalResults // ignore: cast_nullable_to_non_nullable
               as int,
       totalPages: null == totalPages
-          ? _value.totalPages
+          ? _self.totalPages
           : totalPages // ignore: cast_nullable_to_non_nullable
               as int,
       errors: null == errors
-          ? _value._errors
+          ? _self.errors
           : errors // ignore: cast_nullable_to_non_nullable
               as List<String>,
     ));
@@ -160,8 +124,8 @@ class __$$TMDBMoviesResponseImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$TMDBMoviesResponseImpl implements _TMDBMoviesResponse {
-  _$TMDBMoviesResponseImpl(
+class _TMDBMoviesResponse implements TMDBMoviesResponse {
+  _TMDBMoviesResponse(
       {required this.page,
       required final List<TMDBMovie> results,
       @JsonKey(name: 'total_results') required this.totalResults,
@@ -169,9 +133,8 @@ class _$TMDBMoviesResponseImpl implements _TMDBMoviesResponse {
       final List<String> errors = const []})
       : _results = results,
         _errors = errors;
-
-  factory _$TMDBMoviesResponseImpl.fromJson(Map<String, dynamic> json) =>
-      _$$TMDBMoviesResponseImplFromJson(json);
+  factory _TMDBMoviesResponse.fromJson(Map<String, dynamic> json) =>
+      _$TMDBMoviesResponseFromJson(json);
 
   @override
   final int page;
@@ -198,16 +161,26 @@ class _$TMDBMoviesResponseImpl implements _TMDBMoviesResponse {
     return EqualUnmodifiableListView(_errors);
   }
 
+  /// Create a copy of TMDBMoviesResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'TMDBMoviesResponse(page: $page, results: $results, totalResults: $totalResults, totalPages: $totalPages, errors: $errors)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$TMDBMoviesResponseCopyWith<_TMDBMoviesResponse> get copyWith =>
+      __$TMDBMoviesResponseCopyWithImpl<_TMDBMoviesResponse>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$TMDBMoviesResponseToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TMDBMoviesResponseImpl &&
+            other is _TMDBMoviesResponse &&
             (identical(other.page, page) || other.page == page) &&
             const DeepCollectionEquality().equals(other._results, _results) &&
             (identical(other.totalResults, totalResults) ||
@@ -227,51 +200,70 @@ class _$TMDBMoviesResponseImpl implements _TMDBMoviesResponse {
       totalPages,
       const DeepCollectionEquality().hash(_errors));
 
-  /// Create a copy of TMDBMoviesResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$TMDBMoviesResponseImplCopyWith<_$TMDBMoviesResponseImpl> get copyWith =>
-      __$$TMDBMoviesResponseImplCopyWithImpl<_$TMDBMoviesResponseImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$TMDBMoviesResponseImplToJson(
-      this,
-    );
+  String toString() {
+    return 'TMDBMoviesResponse(page: $page, results: $results, totalResults: $totalResults, totalPages: $totalPages, errors: $errors)';
   }
 }
 
-abstract class _TMDBMoviesResponse implements TMDBMoviesResponse {
-  factory _TMDBMoviesResponse(
-      {required final int page,
-      required final List<TMDBMovie> results,
-      @JsonKey(name: 'total_results') required final int totalResults,
-      @JsonKey(name: 'total_pages') required final int totalPages,
-      final List<String> errors}) = _$TMDBMoviesResponseImpl;
+/// @nodoc
+abstract mixin class _$TMDBMoviesResponseCopyWith<$Res>
+    implements $TMDBMoviesResponseCopyWith<$Res> {
+  factory _$TMDBMoviesResponseCopyWith(
+          _TMDBMoviesResponse value, $Res Function(_TMDBMoviesResponse) _then) =
+      __$TMDBMoviesResponseCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {int page,
+      List<TMDBMovie> results,
+      @JsonKey(name: 'total_results') int totalResults,
+      @JsonKey(name: 'total_pages') int totalPages,
+      List<String> errors});
+}
 
-  factory _TMDBMoviesResponse.fromJson(Map<String, dynamic> json) =
-      _$TMDBMoviesResponseImpl.fromJson;
+/// @nodoc
+class __$TMDBMoviesResponseCopyWithImpl<$Res>
+    implements _$TMDBMoviesResponseCopyWith<$Res> {
+  __$TMDBMoviesResponseCopyWithImpl(this._self, this._then);
 
-  @override
-  int get page;
-  @override
-  List<TMDBMovie> get results;
-  @override
-  @JsonKey(name: 'total_results')
-  int get totalResults;
-  @override
-  @JsonKey(name: 'total_pages')
-  int get totalPages;
-  @override
-  List<String> get errors;
+  final _TMDBMoviesResponse _self;
+  final $Res Function(_TMDBMoviesResponse) _then;
 
   /// Create a copy of TMDBMoviesResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$TMDBMoviesResponseImplCopyWith<_$TMDBMoviesResponseImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? page = null,
+    Object? results = null,
+    Object? totalResults = null,
+    Object? totalPages = null,
+    Object? errors = null,
+  }) {
+    return _then(_TMDBMoviesResponse(
+      page: null == page
+          ? _self.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      results: null == results
+          ? _self._results
+          : results // ignore: cast_nullable_to_non_nullable
+              as List<TMDBMovie>,
+      totalResults: null == totalResults
+          ? _self.totalResults
+          : totalResults // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalPages: null == totalPages
+          ? _self.totalPages
+          : totalPages // ignore: cast_nullable_to_non_nullable
+              as int,
+      errors: null == errors
+          ? _self._errors
+          : errors // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
 }
+
+// dart format on
