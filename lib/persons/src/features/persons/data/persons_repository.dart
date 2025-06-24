@@ -14,7 +14,7 @@ import 'package:notifi/persons/src/utils/dio_provider.dart';
 import 'package:logger/logger.dart' as logger;
 
 import '../domain/nperson.dart';
-import '../domain/nperson_response.dart';
+import '../domain/npersons_response.dart';
 
 part 'persons_repository.g.dart';
 

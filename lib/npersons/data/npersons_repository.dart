@@ -8,7 +8,7 @@ import 'package:notifi/models/nestfilter.dart';
 import 'package:notifi/organizations/src/utils/cancel_token_ref.dart';
 import 'package:notifi/organizations/src/utils/dio_provider.dart';
 import 'package:notifi/persons/src/features/persons/domain/nperson.dart';
-import 'package:notifi/persons/src/features/persons/domain/nperson_response.dart';
+import 'package:notifi/persons/src/features/persons/domain/npersons_response.dart';
 import 'package:notifi/state/nest_auth2.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:logger/logger.dart' as logger;
