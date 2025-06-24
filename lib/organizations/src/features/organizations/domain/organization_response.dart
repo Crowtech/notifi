@@ -38,53 +38,64 @@ part 'organization_response.g.dart';
 
 @freezed
 class OrganizationsResponse with _$OrganizationsResponse {
-  factory OrganizationsResponse({
-    @JsonKey(name: 'startIndex') required int a_page,
-    @JsonKey(name: 'items') required List<Organization> a_results,
-    @JsonKey(name: 'resultCount') required int a_totalResults,
-    @JsonKey(name: 'totalItems') required int a_totalPages,
-    @Default([]) List<String> a_errors,
-  }) = _OrganizationsResponse;
+OrganizationsResponse({
+    @JsonKey(name: 'startIndex') required int page,
+    @JsonKey(name: 'items') required List<Organization> results,
+    @JsonKey(name: 'resultCount') required int totalResults,
+    @JsonKey(name: 'totalItems') required int totalPages,
+    @Default([]) List<String> errors,
+  });
 
-  factory OrganizationsResponse.fromJson(Map<String, dynamic> json) =>
-      _$OrganizationsResponseFromJson(json);
-      
-        @override
-        // TODO: implement errors
-        List<String> get errors => a_errors;
-      
-        @override
-        // TODO: implement page
-        int get page => a_page;
-      
-        @override
-        // TODO: implement results
-        List<Organization> get results => a_results;
-      
-        @override
-        Map<String, dynamic> toJson() {
-          // TODO: implement toJson
-          throw UnimplementedError();
-        }
-      
-        @override
-        // TODO: implement totalPages
-        int get totalPages => a_totalPages;
-      
-        @override
-        // TODO: implement totalResults
-        int get totalResults => a_totalResults;
-}
 
-extension OrganizationsResponseX on OrganizationsResponse {
-  //@late
-  bool get isEmpty => !hasResults();
+// @freezed
+// class OrganizationsResponse with _$OrganizationsResponse {
+//   factory OrganizationsResponse({
+//     @JsonKey(name: 'startIndex') required int a_page,
+//     @JsonKey(name: 'items') required List<Organization> a_results,
+//     @JsonKey(name: 'resultCount') required int a_totalResults,
+//     @JsonKey(name: 'totalItems') required int a_totalPages,
+//     @Default([]) List<String> a_errors,
+//   }) = _OrganizationsResponse;
 
-  bool hasResults() {
-    return results.isNotEmpty;
-  }
+//   factory OrganizationsResponse.fromJson(Map<String, dynamic> json) =>
+//       _$OrganizationsResponseFromJson(json);
+      
+//         @override
+//         // TODO: implement errors
+//         List<String> get errors => a_errors;
+      
+//         @override
+//         // TODO: implement page
+//         int get page => a_page;
+      
+//         @override
+//         // TODO: implement results
+//         List<Organization> get results => a_results;
+      
+//         @override
+//         Map<String, dynamic> toJson() {
+//           // TODO: implement toJson
+//           throw UnimplementedError();
+//         }
+      
+//         @override
+//         // TODO: implement totalPages
+//         int get totalPages => a_totalPages;
+      
+//         @override
+//         // TODO: implement totalResults
+//         int get totalResults => a_totalResults;
+// }
 
-  bool hasErrors() {
-    return errors.isNotEmpty;
-  }
-}
+// extension OrganizationsResponseX on OrganizationsResponse {
+//   //@late
+//   bool get isEmpty => !hasResults();
+
+//   bool hasResults() {
+//     return results.isNotEmpty;
+//   }
+
+//   bool hasErrors() {
+//     return errors.isNotEmpty;
+//   }
+// }
