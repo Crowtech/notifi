@@ -51,7 +51,7 @@ class OrganizationsResponse with _$OrganizationsResponse {
       
         @override
         // TODO: implement errors
-        List<String> get errors => throw UnimplementedError();
+        List<String> get errors => errors;
       
         @override
         // TODO: implement page
