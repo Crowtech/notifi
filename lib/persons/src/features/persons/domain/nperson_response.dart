@@ -10,7 +10,7 @@ part 'nperson_response.g.dart';
 //avatarUrl: ORG_PANTA-avatar-2025-03-09T16:40:51.725539.png, orgType: org, url: https://www.pantagroup.org}, {id: 10251, created: 2025-03-06T01:53:08.333173, updated: 2025-03-10T23:56:09.987446, code: ORG_CROWTECH, name: Crowtech, orgId: 2, description: Crowtech,
 //avatarUrl: ORG_CROWTECH-avatar-2025-03-09T16:40:51.725539.png, orgType: org, url: https://crowtech.com.au}], totalItems: 2, processingTime: 9414451}
 @freezed
-class NPersonsResponse with _$NPersonsResponse {
+sealed class NPersonsResponse with _$NPersonsResponse {
   factory NPersonsResponse({
     @JsonKey(name: 'startIndex') required int page,
     @JsonKey(name: 'items') required List<NPerson> results,
