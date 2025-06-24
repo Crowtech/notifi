@@ -7,7 +7,7 @@ part 'registrations_response.freezed.dart';
 part 'registrations_response.g.dart';
 
 @freezed
-class RegistrationsResponse with _$RegistrationsResponse {
+sealed class RegistrationsResponse with _$RegistrationsResponse {
   factory RegistrationsResponse({
     @JsonKey(name: 'startIndex') required int page,
     @JsonKey(name: 'items') required List<Registration> results,

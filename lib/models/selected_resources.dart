@@ -24,7 +24,7 @@ var logNoStack = logger.Logger(
 
 
 @freezed
-class SelectedResources with _$SelectedResources {
+sealed class SelectedResources with _$SelectedResources {
   factory SelectedResources({
     required List<int> selectedResourceIds,
     required List<int> unselectedResourceIds,
