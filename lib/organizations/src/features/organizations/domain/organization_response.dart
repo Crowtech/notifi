@@ -48,6 +48,32 @@ class OrganizationsResponse with _$OrganizationsResponse {
 
   factory OrganizationsResponse.fromJson(Map<String, dynamic> json) =>
       _$OrganizationsResponseFromJson(json);
+      
+        @override
+        // TODO: implement errors
+        List<String> get errors => throw UnimplementedError();
+      
+        @override
+        // TODO: implement page
+        int get page => page;
+      
+        @override
+        // TODO: implement results
+        List<Organization> get results => results;
+      
+        @override
+        Map<String, dynamic> toJson() {
+          // TODO: implement toJson
+          throw UnimplementedError();
+        }
+      
+        @override
+        // TODO: implement totalPages
+        int get totalPages => totalPages;
+      
+        @override
+        // TODO: implement totalResults
+        int get totalResults => totalResults;
 }
 
 extension OrganizationsResponseX on OrganizationsResponse {
