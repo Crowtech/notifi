@@ -88,7 +88,8 @@ dependencies:
     path: ../oidc/packages/oidc_default_store
   onboarding: ^4.0.2
   package_info_plus: ^8.1.1 
-  pointer_interceptor: ^0.10.1+2
+  #pointer_interceptor: ^0.10.1+2
+  pointer_interceptor_web: ^0.10.3
   posthog_flutter: ^5.0.0 
   provider: ^6.1.2
   riverpod_annotation: ^2.6.1
