@@ -41,6 +41,7 @@ mixin _$OrganizationsResponse {
                 other.totalPages == totalPages));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, page,
       const DeepCollectionEquality().hash(results), totalResults, totalPages);

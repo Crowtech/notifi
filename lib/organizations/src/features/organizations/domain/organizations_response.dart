@@ -21,8 +21,8 @@ sealed class OrganizationsResponse with _$OrganizationsResponse {
   final int totalPages;
  // final List<String>? errors;
 
-  // factory OrganizationsResponse.fromJson(Map<String, dynamic> json) =>
-  //     _$OrganizationsResponseFromJson(json);
+  factory OrganizationsResponse.fromJson(Map<String, dynamic> json) =>
+      _$OrganizationsResponseFromJson(json);
 
 
 // extension NOrganizationsResponseX on OrganizationsResponse {
