@@ -20,13 +20,10 @@ class NPersonsResponse with _$NPersonsResponse {
     @JsonKey(name: 'totalItems') required int totalItems,
   });
 
-  @override
+
   int startIndex=0;
-  @override
   List<NPerson> items=[];
-  @override
   int resultCount=0;
-  @override
   int totalItems=0;
 
   factory NPersonsResponse.fromJson(Map<String, Object?> json) =>
