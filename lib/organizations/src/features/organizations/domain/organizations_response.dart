@@ -38,13 +38,13 @@ sealed class OrganizationsResponse with _$OrganizationsResponse {
 //   OrganizationsResponse({
 //     @JsonKey(name: 'startIndex') required this.page,
 //     @JsonKey(name: 'items') required this.results,
-//     @JsonKey(name: 'resultCount') required this.totalResults,
+//     @JsonKey(name: 'resultCount') required this.totalItems,
 //     @JsonKey(name: 'totalItems') required this.totalPages,
 //   }) ;
 
 //   final int page;
 //   final List<Organization> results;
-//   final int totalResults;
+//   final int totalItems;
 //   final int totalPages;
 
 

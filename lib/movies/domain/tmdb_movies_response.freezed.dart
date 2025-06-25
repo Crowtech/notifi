@@ -18,7 +18,7 @@ mixin _$TMDBMoviesResponse {
   int get page;
   List<TMDBMovie> get results;
   @JsonKey(name: 'total_results')
-  int get totalResults;
+  int get totalItems;
   @JsonKey(name: 'total_pages')
   int get totalPages;
   List<String> get errors;
@@ -41,8 +41,8 @@ mixin _$TMDBMoviesResponse {
             other is TMDBMoviesResponse &&
             (identical(other.page, page) || other.page == page) &&
             const DeepCollectionEquality().equals(other.results, results) &&
-            (identical(other.totalResults, totalResults) ||
-                other.totalResults == totalResults) &&
+            (identical(other.totalItems, totalItems) ||
+                other.totalItems == totalItems) &&
             (identical(other.totalPages, totalPages) ||
                 other.totalPages == totalPages) &&
             const DeepCollectionEquality().equals(other.errors, errors));
@@ -54,13 +54,13 @@ mixin _$TMDBMoviesResponse {
       runtimeType,
       page,
       const DeepCollectionEquality().hash(results),
-      totalResults,
+      totalItems,
       totalPages,
       const DeepCollectionEquality().hash(errors));
 
   @override
   String toString() {
-    return 'TMDBMoviesResponse(page: $page, results: $results, totalResults: $totalResults, totalPages: $totalPages, errors: $errors)';
+    return 'TMDBMoviesResponse(page: $page, results: $results, totalItems: $totalItems, totalPages: $totalPages, errors: $errors)';
   }
 }
 
@@ -73,7 +73,7 @@ abstract mixin class $TMDBMoviesResponseCopyWith<$Res> {
   $Res call(
       {int page,
       List<TMDBMovie> results,
-      @JsonKey(name: 'total_results') int totalResults,
+      @JsonKey(name: 'total_results') int totalItems,
       @JsonKey(name: 'total_pages') int totalPages,
       List<String> errors});
 }
@@ -93,7 +93,7 @@ class _$TMDBMoviesResponseCopyWithImpl<$Res>
   $Res call({
     Object? page = null,
     Object? results = null,
-    Object? totalResults = null,
+    Object? totalItems = null,
     Object? totalPages = null,
     Object? errors = null,
   }) {
@@ -106,9 +106,9 @@ class _$TMDBMoviesResponseCopyWithImpl<$Res>
           ? _self.results
           : results // ignore: cast_nullable_to_non_nullable
               as List<TMDBMovie>,
-      totalResults: null == totalResults
-          ? _self.totalResults
-          : totalResults // ignore: cast_nullable_to_non_nullable
+      totalItems: null == totalItems
+          ? _self.totalItems
+          : totalItems // ignore: cast_nullable_to_non_nullable
               as int,
       totalPages: null == totalPages
           ? _self.totalPages
@@ -128,7 +128,7 @@ class _TMDBMoviesResponse implements TMDBMoviesResponse {
   _TMDBMoviesResponse(
       {required this.page,
       required final List<TMDBMovie> results,
-      @JsonKey(name: 'total_results') required this.totalResults,
+      @JsonKey(name: 'total_results') required this.totalItems,
       @JsonKey(name: 'total_pages') required this.totalPages,
       final List<String> errors = const []})
       : _results = results,
@@ -148,7 +148,7 @@ class _TMDBMoviesResponse implements TMDBMoviesResponse {
 
   @override
   @JsonKey(name: 'total_results')
-  final int totalResults;
+  final int totalItems;
   @override
   @JsonKey(name: 'total_pages')
   final int totalPages;
@@ -183,8 +183,8 @@ class _TMDBMoviesResponse implements TMDBMoviesResponse {
             other is _TMDBMoviesResponse &&
             (identical(other.page, page) || other.page == page) &&
             const DeepCollectionEquality().equals(other._results, _results) &&
-            (identical(other.totalResults, totalResults) ||
-                other.totalResults == totalResults) &&
+            (identical(other.totalItems, totalItems) ||
+                other.totalItems == totalItems) &&
             (identical(other.totalPages, totalPages) ||
                 other.totalPages == totalPages) &&
             const DeepCollectionEquality().equals(other._errors, _errors));
@@ -196,13 +196,13 @@ class _TMDBMoviesResponse implements TMDBMoviesResponse {
       runtimeType,
       page,
       const DeepCollectionEquality().hash(_results),
-      totalResults,
+      totalItems,
       totalPages,
       const DeepCollectionEquality().hash(_errors));
 
   @override
   String toString() {
-    return 'TMDBMoviesResponse(page: $page, results: $results, totalResults: $totalResults, totalPages: $totalPages, errors: $errors)';
+    return 'TMDBMoviesResponse(page: $page, results: $results, totalItems: $totalItems, totalPages: $totalPages, errors: $errors)';
   }
 }
 
@@ -217,7 +217,7 @@ abstract mixin class _$TMDBMoviesResponseCopyWith<$Res>
   $Res call(
       {int page,
       List<TMDBMovie> results,
-      @JsonKey(name: 'total_results') int totalResults,
+      @JsonKey(name: 'total_results') int totalItems,
       @JsonKey(name: 'total_pages') int totalPages,
       List<String> errors});
 }
@@ -237,7 +237,7 @@ class __$TMDBMoviesResponseCopyWithImpl<$Res>
   $Res call({
     Object? page = null,
     Object? results = null,
-    Object? totalResults = null,
+    Object? totalItems = null,
     Object? totalPages = null,
     Object? errors = null,
   }) {
@@ -250,9 +250,9 @@ class __$TMDBMoviesResponseCopyWithImpl<$Res>
           ? _self._results
           : results // ignore: cast_nullable_to_non_nullable
               as List<TMDBMovie>,
-      totalResults: null == totalResults
-          ? _self.totalResults
-          : totalResults // ignore: cast_nullable_to_non_nullable
+      totalItems: null == totalItems
+          ? _self.totalItems
+          : totalItems // ignore: cast_nullable_to_non_nullable
               as int,
       totalPages: null == totalPages
           ? _self.totalPages

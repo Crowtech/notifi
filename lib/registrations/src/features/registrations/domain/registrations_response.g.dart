@@ -13,7 +13,7 @@ _RegistrationsResponse _$RegistrationsResponseFromJson(
       items: (json['items'] as List<dynamic>)
           .map((e) => Registration.fromJson(e as Map<String, dynamic>))
           .toList(),
-      totalResults: (json['total_results'] as num).toInt(),
+      totalItems: (json['totalItems'] as num).toInt(),
       totalItems: (json['totalItems'] as num).toInt(),
       errors: (json['errors'] as List<dynamic>?)
               ?.map((e) => e as String)
@@ -26,7 +26,6 @@ Map<String, dynamic> _$RegistrationsResponseToJson(
     <String, dynamic>{
       'startIndex': instance.startIndex,
       'items': instance.items,
-      'total_results': instance.totalResults,
       'totalItems': instance.totalItems,
       'errors': instance.errors,
     };

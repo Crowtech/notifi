@@ -19,7 +19,7 @@ class MoviesSearchScreen extends ConsumerWidget {
     final responseAsync = ref.watch(
       fetchMoviesProvider(queryData: (page: 0, query: query)),
     );
-    final totalResults = responseAsync.valueOrNull?.totalResults;
+    final totalItems = responseAsync.valueOrNull?.totalItems;
     return Scaffold(
       appBar: AppBar(title: const Text('TMDB Movies')),
       body: Column(
@@ -46,7 +46,7 @@ class MoviesSearchScreen extends ConsumerWidget {
                 key: ValueKey(query),
                 // * pass the itemCount explicitly to prevent unnecessary renders
                 // * during overscroll
-                itemCount: totalResults,
+                itemCount: totalItems,
                 itemBuilder: (context, index) {
                   final page = index ~/ pageSize + 1;
                   final indexInPage = index % pageSize;

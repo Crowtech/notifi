@@ -31,7 +31,7 @@ class NOrganizationsSearchScreen extends ConsumerWidget {
     final responseAsync = ref.watch(
       fetchNOrganizationsProvider(queryData: (page: 0, query: query)),
     );
-    final totalResults = responseAsync.valueOrNull?.totalItems;
+    final totalItems = responseAsync.valueOrNull?.totalItems;
     return Scaffold(
       appBar: AppBar(title:  Text(nt.t.resources.person)),
       body: Column(
@@ -40,7 +40,7 @@ class NOrganizationsSearchScreen extends ConsumerWidget {
           Expanded(
             child: RefreshIndicator(
               onRefresh: () async {
-                logNoStack.i("Refresh! totalresults = $totalResults");
+                logNoStack.i("Refresh! totalresults = $totalItems");
                 // dispose all the pages previously fetched. Next read will refresh them
                 ref.invalidate(fetchNOrganizationsProvider);
                 // keep showing the progress indicator until the first page is fetched
@@ -60,7 +60,7 @@ class NOrganizationsSearchScreen extends ConsumerWidget {
                 key: ValueKey(query),
                 // * pass the itemCount explicitly to prevent unnecessary renders
                 // * during overscroll
-                itemCount: totalResults,
+                itemCount: totalItems,
                 itemBuilder: (context, index) {
                   final page = index ~/ pageSize + 1;
                   final indexInPage = index % pageSize;

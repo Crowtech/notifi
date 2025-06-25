@@ -12,7 +12,7 @@ _TMDBMoviesResponse _$TMDBMoviesResponseFromJson(Map<String, dynamic> json) =>
       results: (json['results'] as List<dynamic>)
           .map((e) => TMDBMovie.fromJson(e as Map<String, dynamic>))
           .toList(),
-      totalResults: (json['total_results'] as num).toInt(),
+      totalItems: (json['total_results'] as num).toInt(),
       totalPages: (json['total_pages'] as num).toInt(),
       errors: (json['errors'] as List<dynamic>?)
               ?.map((e) => e as String)
@@ -24,7 +24,7 @@ Map<String, dynamic> _$TMDBMoviesResponseToJson(_TMDBMoviesResponse instance) =>
     <String, dynamic>{
       'page': instance.page,
       'results': instance.results,
-      'total_results': instance.totalResults,
+      'total_results': instance.totalItems,
       'total_pages': instance.totalPages,
       'errors': instance.errors,
     };

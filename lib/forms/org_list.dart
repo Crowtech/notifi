@@ -18,7 +18,7 @@ class OrganizationListWidget extends ConsumerStatefulWidget {
   final Map<String, dynamic> fieldValues;
   final String formCode;
   final String fieldCode;
-  int? totalResults = 0;
+  int? totalItems = 0;
 
   int? value;
 
@@ -33,7 +33,7 @@ class _OrganizationListWidgetState
     extends ConsumerState<OrganizationListWidget> {
   Map<int, bool> _selections = {};
   Map<String, dynamic> fieldValues = {};
-  int totalResults = 0;
+  int totalItems = 0;
   List<Organization> _orgs = [];
     final Set<int> _orgIds = {};
 
@@ -59,7 +59,7 @@ class _OrganizationListWidgetState
       }
     }
     setState(() {
-      totalResults = responseAsync.valueOrNull?.totalResults ?? 0;
+      totalItems = responseAsync.valueOrNull?.totalItems ?? 0;
       _orgs = orgs;
       _selections = selections;
     });
@@ -76,7 +76,7 @@ class _OrganizationListWidgetState
       child: ListView.builder(
         physics: const AlwaysScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemCount: totalResults, //_layers.length,
+        itemCount: totalItems, //_layers.length,
         itemBuilder: (context, index) {
           return CheckboxListTile(
             key: ValueKey(index),

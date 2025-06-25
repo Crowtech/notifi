@@ -11,7 +11,7 @@ sealed class TMDBMoviesResponse with _$TMDBMoviesResponse {
   factory TMDBMoviesResponse({
     required int page,
     required List<TMDBMovie> results,
-    @JsonKey(name: 'total_results') required int totalResults,
+    @JsonKey(name: 'total_results') required int totalItems,
     @JsonKey(name: 'total_pages') required int totalPages,
     @Default([]) List<String> errors,
   }) = _TMDBMoviesResponse;

@@ -11,7 +11,7 @@ sealed class RegistrationsResponse with _$RegistrationsResponse {
   factory RegistrationsResponse({
     @JsonKey(name: 'startIndex') required int startIndex,
     @JsonKey(name: 'items') required List<Registration> items,
-    @JsonKey(name: 'total_results') required int totalResults,
+    @JsonKey(name: 'total_results') required int totalItems,
     @JsonKey(name: 'totalItems') required int totalItems,
     @Default([]) List<String> errors,
   }) = _RegistrationsResponse;
