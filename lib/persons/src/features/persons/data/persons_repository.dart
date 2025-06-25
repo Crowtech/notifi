@@ -223,10 +223,12 @@ Future<NPersonsResponse> fetchPersons(
   });
   if (queryData.query.isEmpty) {
     // use non-search endpoint
-    return personsRepo.nowPlayingPersons(
+    Future<NPersonsResponse> pr = personsRepo.nowPlayingPersons(
       page: queryData.page,
       cancelToken: cancelToken,
     );
+    logNoStack.i("PersonsRepository npersonsreposnse=$pr");
+    return pr;
   } else {
     // use search endpoint
     return personsRepo.searchPersons(

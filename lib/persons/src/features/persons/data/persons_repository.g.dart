@@ -186,7 +186,7 @@ class _PersonProviderElement extends AutoDisposeFutureProviderElement<Person>
   int get personId => (origin as PersonProvider).personId;
 }
 
-String _$fetchPersonsHash() => r'b24a9df50b26e6b4fb1d4753fa875cd4ed8d3b83';
+String _$fetchPersonsHash() => r'7b8dde47caebad71bc5387da0fc3b60e9dd5470d';
 
 /// Provider to fetch paginated persons data
 ///
