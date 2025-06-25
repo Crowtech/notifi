@@ -98,7 +98,9 @@ logNoStack.i("NPERSONS_REPOSITORY: $host  ${uri} ${data}");
         await client.postUri(uri, options: options, data: data,cancelToken: cancelToken);
     
     logNoStack.i("PERSONS2 REPOSITORY resposne=${response.data}");
-    return NPersonsResponse.fromJson(response.data);
+    logNoStack.i("RESULTCOUNT=${(response.data['resultCount'] as num).toInt()}");
+    NPersonsResponse np = NPersonsResponse.fromJson(response.data);
+    return np;
   }
 
   Future<NPerson> nperson(
