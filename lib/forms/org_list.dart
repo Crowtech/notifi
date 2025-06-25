@@ -50,7 +50,7 @@ class _OrganizationListWidgetState
 
     if (responseAsync.hasValue) {
       // check if there are new organizations, keep the value
-      orgs = responseAsync.value!.results;
+      orgs = responseAsync.value!.items;
       int index = 0;
       for (Organization org in orgs) {
         org.selected = false;
