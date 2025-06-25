@@ -7,28 +7,26 @@ part 'registrations_response.freezed.dart';
 part 'registrations_response.g.dart';
 
 @freezed
-sealed class RegistrationsResponse with _$RegistrationsResponse {
-  factory RegistrationsResponse({
-    @JsonKey(name: 'startIndex') required int startIndex,
-    @JsonKey(name: 'items') required List<Registration> items,
-    @JsonKey(name: 'resultCount') required int resultCount,
-    @JsonKey(name: 'totalItems') required int totalItems,
-    @Default([]) List<String> errors,
-  }) = _RegistrationsResponse;
+@JsonSerializable()
+class RegistrationsResponse with _$RegistrationsResponse {
+  const RegistrationsResponse({
+    @JsonKey(name: 'startIndex') required this.startIndex,
+    @JsonKey(name: 'items') required this.items,
+    @JsonKey(name: 'resultCount') required this.resultCount,
+    @JsonKey(name: 'totalItems') required this.totalItems,
+  });
 
-  factory RegistrationsResponse.fromJson(Map<String, dynamic> json) =>
-      _$RegistrationsResponseFromJson(json);
-}
+  @override
+  final int startIndex;
+  @override
+  final List<Registration> items;
+  @override
+  final int resultCount;
+  @override
+  final int totalItems;
 
-extension RegistrationResponseX on RegistrationsResponse {
-  //@late
-  bool get isEmpty => !hasItems();
+  factory RegistrationsResponse.fromJson(Map<String, Object?> json)
+      => _$RegistrationsResponseFromJson(json);
 
-  bool hasItems() {
-    return items.isNotEmpty;
-  }
-
-  bool hasErrors() {
-    return errors.isNotEmpty;
-  }
+  Map<String, Object?> toJson() => _$RegistrationsResponseToJson(this);
 }
