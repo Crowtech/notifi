@@ -19,7 +19,9 @@ mixin _$RegistrationsResponse {
   int get startIndex;
   @JsonKey(name: 'items')
   List<Registration> get items;
-  @JsonKey(name: 'total_results')
+  @JsonKey(name: 'resultCount')
+  int get resultCount;
+  @JsonKey(name: 'totalItems')
   int get totalItems;
   List<String> get errors;
 
@@ -42,6 +44,8 @@ mixin _$RegistrationsResponse {
             (identical(other.startIndex, startIndex) ||
                 other.startIndex == startIndex) &&
             const DeepCollectionEquality().equals(other.items, items) &&
+            (identical(other.resultCount, resultCount) ||
+                other.resultCount == resultCount) &&
             (identical(other.totalItems, totalItems) ||
                 other.totalItems == totalItems) &&
             const DeepCollectionEquality().equals(other.errors, errors));
@@ -53,12 +57,13 @@ mixin _$RegistrationsResponse {
       runtimeType,
       startIndex,
       const DeepCollectionEquality().hash(items),
+      resultCount,
       totalItems,
       const DeepCollectionEquality().hash(errors));
 
   @override
   String toString() {
-    return 'RegistrationsResponse(startIndex: $startIndex, items: $items, totalItems: $totalItems, errors: $errors)';
+    return 'RegistrationsResponse(startIndex: $startIndex, items: $items, resultCount: $resultCount, totalItems: $totalItems, errors: $errors)';
   }
 }
 
@@ -71,7 +76,7 @@ abstract mixin class $RegistrationsResponseCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'startIndex') int startIndex,
       @JsonKey(name: 'items') List<Registration> items,
-      @JsonKey(name: 'total_results') int totalItems,
+      @JsonKey(name: 'resultCount') int resultCount,
       @JsonKey(name: 'totalItems') int totalItems,
       List<String> errors});
 }
@@ -91,7 +96,7 @@ class _$RegistrationsResponseCopyWithImpl<$Res>
   $Res call({
     Object? startIndex = null,
     Object? items = null,
-    Object? totalItems = null,
+    Object? resultCount = null,
     Object? totalItems = null,
     Object? errors = null,
   }) {
@@ -104,9 +109,9 @@ class _$RegistrationsResponseCopyWithImpl<$Res>
           ? _self.items
           : items // ignore: cast_nullable_to_non_nullable
               as List<Registration>,
-      totalItems: null == totalItems
-          ? _self.totalItems
-          : totalItems // ignore: cast_nullable_to_non_nullable
+      resultCount: null == resultCount
+          ? _self.resultCount
+          : resultCount // ignore: cast_nullable_to_non_nullable
               as int,
       totalItems: null == totalItems
           ? _self.totalItems
@@ -126,7 +131,7 @@ class _RegistrationsResponse implements RegistrationsResponse {
   _RegistrationsResponse(
       {@JsonKey(name: 'startIndex') required this.startIndex,
       @JsonKey(name: 'items') required final List<Registration> items,
-      @JsonKey(name: 'total_results') required this.totalItems,
+      @JsonKey(name: 'resultCount') required this.resultCount,
       @JsonKey(name: 'totalItems') required this.totalItems,
       final List<String> errors = const []})
       : _items = items,
@@ -147,8 +152,8 @@ class _RegistrationsResponse implements RegistrationsResponse {
   }
 
   @override
-  @JsonKey(name: 'total_results')
-  final int totalItems;
+  @JsonKey(name: 'resultCount')
+  final int resultCount;
   @override
   @JsonKey(name: 'totalItems')
   final int totalItems;
@@ -185,8 +190,8 @@ class _RegistrationsResponse implements RegistrationsResponse {
             (identical(other.startIndex, startIndex) ||
                 other.startIndex == startIndex) &&
             const DeepCollectionEquality().equals(other._items, _items) &&
-            (identical(other.totalItems, totalItems) ||
-                other.totalItems == totalItems) &&
+            (identical(other.resultCount, resultCount) ||
+                other.resultCount == resultCount) &&
             (identical(other.totalItems, totalItems) ||
                 other.totalItems == totalItems) &&
             const DeepCollectionEquality().equals(other._errors, _errors));
@@ -198,13 +203,13 @@ class _RegistrationsResponse implements RegistrationsResponse {
       runtimeType,
       startIndex,
       const DeepCollectionEquality().hash(_items),
-      totalItems,
+      resultCount,
       totalItems,
       const DeepCollectionEquality().hash(_errors));
 
   @override
   String toString() {
-    return 'RegistrationsResponse(startIndex: $startIndex, items: $items, totalItems: $totalItems, totalItems: $totalItems, errors: $errors)';
+    return 'RegistrationsResponse(startIndex: $startIndex, items: $items, resultCount: $resultCount, totalItems: $totalItems, errors: $errors)';
   }
 }
 
@@ -219,7 +224,7 @@ abstract mixin class _$RegistrationsResponseCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'startIndex') int startIndex,
       @JsonKey(name: 'items') List<Registration> items,
-      @JsonKey(name: 'total_results') int totalItems,
+      @JsonKey(name: 'resultCount') int resultCount,
       @JsonKey(name: 'totalItems') int totalItems,
       List<String> errors});
 }
@@ -239,7 +244,7 @@ class __$RegistrationsResponseCopyWithImpl<$Res>
   $Res call({
     Object? startIndex = null,
     Object? items = null,
-    Object? totalItems = null,
+    Object? resultCount = null,
     Object? totalItems = null,
     Object? errors = null,
   }) {
@@ -252,9 +257,9 @@ class __$RegistrationsResponseCopyWithImpl<$Res>
           ? _self._items
           : items // ignore: cast_nullable_to_non_nullable
               as List<Registration>,
-      totalItems: null == totalItems
-          ? _self.totalItems
-          : totalItems // ignore: cast_nullable_to_non_nullable
+      resultCount: null == resultCount
+          ? _self.resultCount
+          : resultCount // ignore: cast_nullable_to_non_nullable
               as int,
       totalItems: null == totalItems
           ? _self.totalItems
