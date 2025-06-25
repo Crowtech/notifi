@@ -9,11 +9,11 @@ part of 'npersons_response.dart';
 NPersonsResponse _$NPersonsResponseFromJson(Map<String, dynamic> json) =>
     NPersonsResponse(
       startIndex: (json['startIndex'] as num).toInt(),
-      items: (json['items'] as List<dynamic>?)
-          ?.map((e) => Person.fromJson(e as Map<String, dynamic>))
+      items: (json['items'] as List<dynamic>)
+          .map((e) => Person.fromJson(e as Map<String, dynamic>))
           .toList(),
-      resultCount: (json['resultCount'] as num?)?.toInt(),
-      totalItems: (json['totalItems'] as num?)?.toInt(),
+      resultCount: (json['resultCount'] as num).toInt(),
+      totalItems: (json['totalItems'] as num).toInt(),
     );
 
 Map<String, dynamic> _$NPersonsResponseToJson(NPersonsResponse instance) =>

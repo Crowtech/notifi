@@ -16,13 +16,9 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$NPersonsResponse {
   int get startIndex;
-  set startIndex(int value);
-  List<Person>? get items;
-  set items(List<Person>? value);
-  int? get resultCount;
-  set resultCount(int? value);
-  int? get totalItems;
-  set totalItems(int? value);
+  List<Person> get items;
+  int get resultCount;
+  int get totalItems;
 
   /// Create a copy of NPersonsResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -65,9 +61,9 @@ abstract mixin class $NPersonsResponseCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'startIndex') int startIndex,
-      @JsonKey(name: 'items') List<Person>? items,
-      @JsonKey(name: 'resultCount') int? resultCount,
-      @JsonKey(name: 'totalItems') int? totalItems});
+      @JsonKey(name: 'items') List<Person> items,
+      @JsonKey(name: 'resultCount') int resultCount,
+      @JsonKey(name: 'totalItems') int totalItems});
 }
 
 /// @nodoc
@@ -84,27 +80,27 @@ class _$NPersonsResponseCopyWithImpl<$Res>
   @override
   $Res call({
     Object? startIndex = null,
-    Object? items = freezed,
-    Object? resultCount = freezed,
-    Object? totalItems = freezed,
+    Object? items = null,
+    Object? resultCount = null,
+    Object? totalItems = null,
   }) {
     return _then(NPersonsResponse(
       startIndex: null == startIndex
           ? _self.startIndex
           : startIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      items: freezed == items
+      items: null == items
           ? _self.items
           : items // ignore: cast_nullable_to_non_nullable
-              as List<Person>?,
-      resultCount: freezed == resultCount
+              as List<Person>,
+      resultCount: null == resultCount
           ? _self.resultCount
           : resultCount // ignore: cast_nullable_to_non_nullable
-              as int?,
-      totalItems: freezed == totalItems
+              as int,
+      totalItems: null == totalItems
           ? _self.totalItems
           : totalItems // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
     ));
   }
 }
