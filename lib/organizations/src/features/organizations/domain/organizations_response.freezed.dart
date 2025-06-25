@@ -16,13 +16,9 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$OrganizationsResponse {
   int get startIndex;
-  set startIndex(int value);
   List<Organization> get items;
-  set items(List<Organization> value);
   int get resultCount;
-  set resultCount(int value);
   int get totalItems;
-  set totalItems(int value);
 
   /// Create a copy of OrganizationsResponse
   /// with the given fields replaced by the non-null parameter values.
