@@ -28,7 +28,7 @@ var logNoStack = logger.Logger(
 
 
 @freezed
-class Org with _$Org {
+sealed class Org with _$Org {
   factory Org({
     required int orgid,
     required int id,

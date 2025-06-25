@@ -8,18 +8,18 @@ part of 'npersons_response.dart';
 
 NPersonsResponse _$NPersonsResponseFromJson(Map<String, dynamic> json) =>
     NPersonsResponse(
-      page: (json['page'] as num).toInt(),
-      results: (json['results'] as List<dynamic>)
+      startIndex: (json['startIndex'] as num).toInt(),
+      items: (json['items'] as List<dynamic>)
           .map((e) => NPerson.fromJson(e as Map<String, dynamic>))
           .toList(),
-      totalResults: (json['totalResults'] as num).toInt(),
-      totalPages: (json['totalPages'] as num).toInt(),
+      resultCount: (json['resultCount'] as num).toInt(),
+      totalItems: (json['totalItems'] as num).toInt(),
     );
 
 Map<String, dynamic> _$NPersonsResponseToJson(NPersonsResponse instance) =>
     <String, dynamic>{
-      'page': instance.page,
-      'results': instance.results,
-      'totalResults': instance.totalResults,
-      'totalPages': instance.totalPages,
+      'startIndex': instance.startIndex,
+      'items': instance.items,
+      'resultCount': instance.resultCount,
+      'totalItems': instance.totalItems,
     };

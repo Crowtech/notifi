@@ -104,7 +104,7 @@ class FcmNotifier extends _$FcmNotifier {
     );
 
     if (responseAsync.hasValue) {
-      for (Organization org in responseAsync.value!.results) {
+      for (Organization org in responseAsync.value!.items) {
         addTopic(org.code!);
       }
     }

@@ -6,7 +6,7 @@ part 'tmdb_movie.freezed.dart';
 part 'tmdb_movie.g.dart';
 
 @freezed
-class TMDBMovie with _$TMDBMovie {
+sealed class TMDBMovie with _$TMDBMovie {
   factory TMDBMovie({
     required int id,
     required String title,

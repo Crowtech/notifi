@@ -103,7 +103,7 @@ class OrganizationsRepositoryNestFilter {
         .d("ORGANIZATIONS_REPOSITORY_NF: all Orgs back from api, responseData=${response.data}");
 
     OrganizationsResponse or = OrganizationsResponse.fromJson(response.data);
-    logNoStack.i("ORGANIZATIONS_REPOSITORY_NF: all Orgs back from api \n${or.results}");
+    logNoStack.i("ORGANIZATIONS_REPOSITORY_NF: all Orgs back from api \n${or.items}");
     return or;
   }
 

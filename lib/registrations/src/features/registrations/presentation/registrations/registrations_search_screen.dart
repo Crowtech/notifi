@@ -39,7 +39,7 @@ class RegistrationsSearchScreen extends ConsumerWidget {
     final responseAsync = ref.watch(
       fetchRegistrationsProvider(queryData: (page: 0, query: query)),
     );
-    final totalResults = responseAsync.valueOrNull?.totalPages;
+    final totalResults = responseAsync.valueOrNull?.totalItems;
     return Scaffold(
       appBar: AppBar(title: Text(nt.t.resources.registration)),
       body: Column(
@@ -90,10 +90,10 @@ class RegistrationsSearchScreen extends ConsumerWidget {
                     data: (response) {
                       //log('index: $index, page: $page, indexInPage: $indexInPage, len: ${response.results.length}');
                       // * This condition only happens if a null itemCount is given
-                      if (indexInPage >= response.results.length) {
+                      if (indexInPage >= response.items.length) {
                         return null;
                       }
-                      var registration = response.results[indexInPage];
+                      var registration = response.items[indexInPage];
                       return Dismissible(
                           key: Key(registration.id.toString()),
                           direction: DismissDirection.horizontal,

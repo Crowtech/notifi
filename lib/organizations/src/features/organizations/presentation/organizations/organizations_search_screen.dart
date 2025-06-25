@@ -46,7 +46,7 @@ class OrganizationsSearchScreen extends ConsumerWidget {
     //   fetchOrganizationsNestFilterProvider,
     // );
     final responseAsync = ref.watch(fetchOrganizationsNestFilterProvider);
-    final totalResults = responseAsync.valueOrNull?.totalPages;
+    final totalResults = responseAsync.valueOrNull?.totalItems;
     return Scaffold(
       appBar: AppBar(title: Text(nt.t.resources.organization)),
       body: Column(
@@ -103,10 +103,10 @@ class OrganizationsSearchScreen extends ConsumerWidget {
                     data: (response) {
                       //log('index: $index, page: $page, indexInPage: $indexInPage, len: ${response.results.length}');
                       // * This condition only happens if a null itemCount is given
-                      if (indexInPage >= response.results.length) {
+                      if (indexInPage >= response.items.length) {
                         return null;
                       }
-                      final organization = response.results[indexInPage];
+                      final organization = response.items[indexInPage];
                       return Dismissible(
                           key: Key(organization.id.toString()),
                           direction: DismissDirection.horizontal,

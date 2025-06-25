@@ -15,10 +15,14 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$OrganizationsResponse {
-  int get page;
-  List<Organization> get results;
-  int get totalResults;
-  int get totalPages;
+  int get startIndex;
+  set startIndex(int value);
+  List<Organization> get items;
+  set items(List<Organization> value);
+  int get resultCount;
+  set resultCount(int value);
+  int get totalItems;
+  set totalItems(int value);
 
   /// Create a copy of OrganizationsResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -33,22 +37,23 @@ mixin _$OrganizationsResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is OrganizationsResponse &&
-            (identical(other.page, page) || other.page == page) &&
-            const DeepCollectionEquality().equals(other.results, results) &&
-            (identical(other.totalResults, totalResults) ||
-                other.totalResults == totalResults) &&
-            (identical(other.totalPages, totalPages) ||
-                other.totalPages == totalPages));
+            (identical(other.startIndex, startIndex) ||
+                other.startIndex == startIndex) &&
+            const DeepCollectionEquality().equals(other.items, items) &&
+            (identical(other.resultCount, resultCount) ||
+                other.resultCount == resultCount) &&
+            (identical(other.totalItems, totalItems) ||
+                other.totalItems == totalItems));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, page,
-      const DeepCollectionEquality().hash(results), totalResults, totalPages);
+  int get hashCode => Object.hash(runtimeType, startIndex,
+      const DeepCollectionEquality().hash(items), resultCount, totalItems);
 
   @override
   String toString() {
-    return 'OrganizationsResponse(page: $page, results: $results, totalResults: $totalResults, totalPages: $totalPages)';
+    return 'OrganizationsResponse(startIndex: $startIndex, items: $items, resultCount: $resultCount, totalItems: $totalItems)';
   }
 }
 
@@ -59,10 +64,10 @@ abstract mixin class $OrganizationsResponseCopyWith<$Res> {
       _$OrganizationsResponseCopyWithImpl;
   @useResult
   $Res call(
-      {@JsonKey(name: 'startIndex') int page,
-      @JsonKey(name: 'items') List<Organization> results,
-      @JsonKey(name: 'resultCount') int totalResults,
-      @JsonKey(name: 'totalItems') int totalPages});
+      {@JsonKey(name: 'startIndex') int startIndex,
+      @JsonKey(name: 'items') List<Organization> items,
+      @JsonKey(name: 'resultCount') int resultCount,
+      @JsonKey(name: 'totalItems') int totalItems});
 }
 
 /// @nodoc
@@ -78,27 +83,27 @@ class _$OrganizationsResponseCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? page = null,
-    Object? results = null,
-    Object? totalResults = null,
-    Object? totalPages = null,
+    Object? startIndex = null,
+    Object? items = null,
+    Object? resultCount = null,
+    Object? totalItems = null,
   }) {
     return _then(OrganizationsResponse(
-      page: null == page
-          ? _self.page
-          : page // ignore: cast_nullable_to_non_nullable
+      startIndex: null == startIndex
+          ? _self.startIndex
+          : startIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      results: null == results
-          ? _self.results
-          : results // ignore: cast_nullable_to_non_nullable
+      items: null == items
+          ? _self.items
+          : items // ignore: cast_nullable_to_non_nullable
               as List<Organization>,
-      totalResults: null == totalResults
-          ? _self.totalResults
-          : totalResults // ignore: cast_nullable_to_non_nullable
+      resultCount: null == resultCount
+          ? _self.resultCount
+          : resultCount // ignore: cast_nullable_to_non_nullable
               as int,
-      totalPages: null == totalPages
-          ? _self.totalPages
-          : totalPages // ignore: cast_nullable_to_non_nullable
+      totalItems: null == totalItems
+          ? _self.totalItems
+          : totalItems // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }

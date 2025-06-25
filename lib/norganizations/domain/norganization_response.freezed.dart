@@ -16,13 +16,13 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$NOrganizationsResponse {
   @JsonKey(name: 'startIndex')
-  int get page;
+  int get startIndex;
   @JsonKey(name: 'items')
-  List<NOrganization> get results;
+  List<NOrganization> get items;
   @JsonKey(name: 'resultCount')
-  int get totalResults;
+  int get resultCount;
   @JsonKey(name: 'totalItems')
-  int get totalPages;
+  int get totalItems;
   List<String> get errors;
 
   /// Create a copy of NOrganizationsResponse
@@ -41,12 +41,13 @@ mixin _$NOrganizationsResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is NOrganizationsResponse &&
-            (identical(other.page, page) || other.page == page) &&
-            const DeepCollectionEquality().equals(other.results, results) &&
-            (identical(other.totalResults, totalResults) ||
-                other.totalResults == totalResults) &&
-            (identical(other.totalPages, totalPages) ||
-                other.totalPages == totalPages) &&
+            (identical(other.startIndex, startIndex) ||
+                other.startIndex == startIndex) &&
+            const DeepCollectionEquality().equals(other.items, items) &&
+            (identical(other.resultCount, resultCount) ||
+                other.resultCount == resultCount) &&
+            (identical(other.totalItems, totalItems) ||
+                other.totalItems == totalItems) &&
             const DeepCollectionEquality().equals(other.errors, errors));
   }
 
@@ -54,15 +55,15 @@ mixin _$NOrganizationsResponse {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      page,
-      const DeepCollectionEquality().hash(results),
-      totalResults,
-      totalPages,
+      startIndex,
+      const DeepCollectionEquality().hash(items),
+      resultCount,
+      totalItems,
       const DeepCollectionEquality().hash(errors));
 
   @override
   String toString() {
-    return 'NOrganizationsResponse(page: $page, results: $results, totalResults: $totalResults, totalPages: $totalPages, errors: $errors)';
+    return 'NOrganizationsResponse(startIndex: $startIndex, items: $items, resultCount: $resultCount, totalItems: $totalItems, errors: $errors)';
   }
 }
 
@@ -73,10 +74,10 @@ abstract mixin class $NOrganizationsResponseCopyWith<$Res> {
       _$NOrganizationsResponseCopyWithImpl;
   @useResult
   $Res call(
-      {@JsonKey(name: 'startIndex') int page,
-      @JsonKey(name: 'items') List<NOrganization> results,
-      @JsonKey(name: 'resultCount') int totalResults,
-      @JsonKey(name: 'totalItems') int totalPages,
+      {@JsonKey(name: 'startIndex') int startIndex,
+      @JsonKey(name: 'items') List<NOrganization> items,
+      @JsonKey(name: 'resultCount') int resultCount,
+      @JsonKey(name: 'totalItems') int totalItems,
       List<String> errors});
 }
 
@@ -93,28 +94,28 @@ class _$NOrganizationsResponseCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? page = null,
-    Object? results = null,
-    Object? totalResults = null,
-    Object? totalPages = null,
+    Object? startIndex = null,
+    Object? items = null,
+    Object? resultCount = null,
+    Object? totalItems = null,
     Object? errors = null,
   }) {
     return _then(_self.copyWith(
-      page: null == page
-          ? _self.page
-          : page // ignore: cast_nullable_to_non_nullable
+      startIndex: null == startIndex
+          ? _self.startIndex
+          : startIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      results: null == results
-          ? _self.results
-          : results // ignore: cast_nullable_to_non_nullable
+      items: null == items
+          ? _self.items
+          : items // ignore: cast_nullable_to_non_nullable
               as List<NOrganization>,
-      totalResults: null == totalResults
-          ? _self.totalResults
-          : totalResults // ignore: cast_nullable_to_non_nullable
+      resultCount: null == resultCount
+          ? _self.resultCount
+          : resultCount // ignore: cast_nullable_to_non_nullable
               as int,
-      totalPages: null == totalPages
-          ? _self.totalPages
-          : totalPages // ignore: cast_nullable_to_non_nullable
+      totalItems: null == totalItems
+          ? _self.totalItems
+          : totalItems // ignore: cast_nullable_to_non_nullable
               as int,
       errors: null == errors
           ? _self.errors
@@ -128,34 +129,34 @@ class _$NOrganizationsResponseCopyWithImpl<$Res>
 @JsonSerializable()
 class _NOrganizationsResponse implements NOrganizationsResponse {
   _NOrganizationsResponse(
-      {@JsonKey(name: 'startIndex') required this.page,
-      @JsonKey(name: 'items') required final List<NOrganization> results,
-      @JsonKey(name: 'resultCount') required this.totalResults,
-      @JsonKey(name: 'totalItems') required this.totalPages,
+      {@JsonKey(name: 'startIndex') required this.startIndex,
+      @JsonKey(name: 'items') required final List<NOrganization> items,
+      @JsonKey(name: 'resultCount') required this.resultCount,
+      @JsonKey(name: 'totalItems') required this.totalItems,
       final List<String> errors = const []})
-      : _results = results,
+      : _items = items,
         _errors = errors;
   factory _NOrganizationsResponse.fromJson(Map<String, dynamic> json) =>
       _$NOrganizationsResponseFromJson(json);
 
   @override
   @JsonKey(name: 'startIndex')
-  final int page;
-  final List<NOrganization> _results;
+  final int startIndex;
+  final List<NOrganization> _items;
   @override
   @JsonKey(name: 'items')
-  List<NOrganization> get results {
-    if (_results is EqualUnmodifiableListView) return _results;
+  List<NOrganization> get items {
+    if (_items is EqualUnmodifiableListView) return _items;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_results);
+    return EqualUnmodifiableListView(_items);
   }
 
   @override
   @JsonKey(name: 'resultCount')
-  final int totalResults;
+  final int resultCount;
   @override
   @JsonKey(name: 'totalItems')
-  final int totalPages;
+  final int totalItems;
   final List<String> _errors;
   @override
   @JsonKey()
@@ -186,12 +187,13 @@ class _NOrganizationsResponse implements NOrganizationsResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _NOrganizationsResponse &&
-            (identical(other.page, page) || other.page == page) &&
-            const DeepCollectionEquality().equals(other._results, _results) &&
-            (identical(other.totalResults, totalResults) ||
-                other.totalResults == totalResults) &&
-            (identical(other.totalPages, totalPages) ||
-                other.totalPages == totalPages) &&
+            (identical(other.startIndex, startIndex) ||
+                other.startIndex == startIndex) &&
+            const DeepCollectionEquality().equals(other._items, _items) &&
+            (identical(other.resultCount, resultCount) ||
+                other.resultCount == resultCount) &&
+            (identical(other.totalItems, totalItems) ||
+                other.totalItems == totalItems) &&
             const DeepCollectionEquality().equals(other._errors, _errors));
   }
 
@@ -199,15 +201,15 @@ class _NOrganizationsResponse implements NOrganizationsResponse {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      page,
-      const DeepCollectionEquality().hash(_results),
-      totalResults,
-      totalPages,
+      startIndex,
+      const DeepCollectionEquality().hash(_items),
+      resultCount,
+      totalItems,
       const DeepCollectionEquality().hash(_errors));
 
   @override
   String toString() {
-    return 'NOrganizationsResponse(page: $page, results: $results, totalResults: $totalResults, totalPages: $totalPages, errors: $errors)';
+    return 'NOrganizationsResponse(startIndex: $startIndex, items: $items, resultCount: $resultCount, totalItems: $totalItems, errors: $errors)';
   }
 }
 
@@ -220,10 +222,10 @@ abstract mixin class _$NOrganizationsResponseCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'startIndex') int page,
-      @JsonKey(name: 'items') List<NOrganization> results,
-      @JsonKey(name: 'resultCount') int totalResults,
-      @JsonKey(name: 'totalItems') int totalPages,
+      {@JsonKey(name: 'startIndex') int startIndex,
+      @JsonKey(name: 'items') List<NOrganization> items,
+      @JsonKey(name: 'resultCount') int resultCount,
+      @JsonKey(name: 'totalItems') int totalItems,
       List<String> errors});
 }
 
@@ -240,28 +242,28 @@ class __$NOrganizationsResponseCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? page = null,
-    Object? results = null,
-    Object? totalResults = null,
-    Object? totalPages = null,
+    Object? startIndex = null,
+    Object? items = null,
+    Object? resultCount = null,
+    Object? totalItems = null,
     Object? errors = null,
   }) {
     return _then(_NOrganizationsResponse(
-      page: null == page
-          ? _self.page
-          : page // ignore: cast_nullable_to_non_nullable
+      startIndex: null == startIndex
+          ? _self.startIndex
+          : startIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      results: null == results
-          ? _self._results
-          : results // ignore: cast_nullable_to_non_nullable
+      items: null == items
+          ? _self._items
+          : items // ignore: cast_nullable_to_non_nullable
               as List<NOrganization>,
-      totalResults: null == totalResults
-          ? _self.totalResults
-          : totalResults // ignore: cast_nullable_to_non_nullable
+      resultCount: null == resultCount
+          ? _self.resultCount
+          : resultCount // ignore: cast_nullable_to_non_nullable
               as int,
-      totalPages: null == totalPages
-          ? _self.totalPages
-          : totalPages // ignore: cast_nullable_to_non_nullable
+      totalItems: null == totalItems
+          ? _self.totalItems
+          : totalItems // ignore: cast_nullable_to_non_nullable
               as int,
       errors: null == errors
           ? _self._errors

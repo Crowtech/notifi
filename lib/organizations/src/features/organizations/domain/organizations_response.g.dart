@@ -9,19 +9,19 @@ part of 'organizations_response.dart';
 OrganizationsResponse _$OrganizationsResponseFromJson(
         Map<String, dynamic> json) =>
     OrganizationsResponse(
-      page: (json['page'] as num).toInt(),
-      results: (json['results'] as List<dynamic>)
+      startIndex: (json['startIndex'] as num).toInt(),
+      items: (json['items'] as List<dynamic>)
           .map((e) => Organization.fromJson(e as Map<String, dynamic>))
           .toList(),
-      totalResults: (json['totalResults'] as num).toInt(),
-      totalPages: (json['totalPages'] as num).toInt(),
+      resultCount: (json['resultCount'] as num).toInt(),
+      totalItems: (json['totalItems'] as num).toInt(),
     );
 
 Map<String, dynamic> _$OrganizationsResponseToJson(
         OrganizationsResponse instance) =>
     <String, dynamic>{
-      'page': instance.page,
-      'results': instance.results,
-      'totalResults': instance.totalResults,
-      'totalPages': instance.totalPages,
+      'startIndex': instance.startIndex,
+      'items': instance.items,
+      'resultCount': instance.resultCount,
+      'totalItems': instance.totalItems,
     };

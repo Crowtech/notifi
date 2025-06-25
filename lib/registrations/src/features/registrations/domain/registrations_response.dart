@@ -9,10 +9,10 @@ part 'registrations_response.g.dart';
 @freezed
 sealed class RegistrationsResponse with _$RegistrationsResponse {
   factory RegistrationsResponse({
-    @JsonKey(name: 'startIndex') required int page,
-    @JsonKey(name: 'items') required List<Registration> results,
+    @JsonKey(name: 'startIndex') required int startIndex,
+    @JsonKey(name: 'items') required List<Registration> items,
     @JsonKey(name: 'total_results') required int totalResults,
-    @JsonKey(name: 'totalItems') required int totalPages,
+    @JsonKey(name: 'totalItems') required int totalItems,
     @Default([]) List<String> errors,
   }) = _RegistrationsResponse;
 
@@ -22,10 +22,10 @@ sealed class RegistrationsResponse with _$RegistrationsResponse {
 
 extension RegistrationResponseX on RegistrationsResponse {
   //@late
-  bool get isEmpty => !hasResults();
+  bool get isEmpty => !hasItems();
 
-  bool hasResults() {
-    return results.isNotEmpty;
+  bool hasItems() {
+    return items.isNotEmpty;
   }
 
   bool hasErrors() {

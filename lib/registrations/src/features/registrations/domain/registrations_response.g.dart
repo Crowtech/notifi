@@ -9,12 +9,12 @@ part of 'registrations_response.dart';
 _RegistrationsResponse _$RegistrationsResponseFromJson(
         Map<String, dynamic> json) =>
     _RegistrationsResponse(
-      page: (json['startIndex'] as num).toInt(),
-      results: (json['items'] as List<dynamic>)
+      startIndex: (json['startIndex'] as num).toInt(),
+      items: (json['items'] as List<dynamic>)
           .map((e) => Registration.fromJson(e as Map<String, dynamic>))
           .toList(),
       totalResults: (json['total_results'] as num).toInt(),
-      totalPages: (json['totalItems'] as num).toInt(),
+      totalItems: (json['totalItems'] as num).toInt(),
       errors: (json['errors'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -24,9 +24,9 @@ _RegistrationsResponse _$RegistrationsResponseFromJson(
 Map<String, dynamic> _$RegistrationsResponseToJson(
         _RegistrationsResponse instance) =>
     <String, dynamic>{
-      'startIndex': instance.page,
-      'items': instance.results,
+      'startIndex': instance.startIndex,
+      'items': instance.items,
       'total_results': instance.totalResults,
-      'totalItems': instance.totalPages,
+      'totalItems': instance.totalItems,
       'errors': instance.errors,
     };

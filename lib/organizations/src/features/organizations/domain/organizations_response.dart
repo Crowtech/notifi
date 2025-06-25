@@ -8,23 +8,23 @@ part 'organizations_response.g.dart';
 
 @freezed
 @JsonSerializable()
-class OrganizationsResponse with _$OrganizationsResponse {
-  const OrganizationsResponse({
-    @JsonKey(name: 'startIndex') required this.page,
-    @JsonKey(name: 'items') required this.results,
-    @JsonKey(name: 'resultCount') required this.totalResults,
-    @JsonKey(name: 'totalItems') required this.totalPages,
+sealed class OrganizationsResponse with _$OrganizationsResponse {
+  OrganizationsResponse({
+    @JsonKey(name: 'startIndex') required this.startIndex,
+    @JsonKey(name: 'items') required this.items,
+    @JsonKey(name: 'resultCount') required this.resultCount,
+    @JsonKey(name: 'totalItems') required int totalItems,
 
   });
 
   @override
-  final int page;
+  int startIndex=0;
   @override
-  final List<Organization> results;
+  List<Organization> items = [];
   @override
-    final int totalResults;
+  int resultCount=0;
     @override
-  final int totalPages;
+  int totalItems=0;
 
   factory OrganizationsResponse.fromJson(Map<String, Object?> json)
       => _$OrganizationsResponseFromJson(json);

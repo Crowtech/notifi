@@ -31,7 +31,7 @@ class NPersonsSearchScreen extends ConsumerWidget {
     final responseAsync = ref.watch(
       fetchNPersonsProvider(queryData: (page: 0, query: query)),
     );
-    final totalResults = responseAsync.valueOrNull?.totalPages;
+    final totalResults = responseAsync.valueOrNull?.totalItems;
     return Scaffold(
       appBar: AppBar(title:  Text(nt.t.resources.person)),
       body: Column(
@@ -84,10 +84,10 @@ class NPersonsSearchScreen extends ConsumerWidget {
                       logNoStack.i("NPersons Response = $response");
                       //log('index: $index, page: $page, indexInPage: $indexInPage, len: ${response.results.length}');
                       // * This condition only happens if a null itemCount is given
-                      if (indexInPage >= response.results.length) {
+                      if (indexInPage >= response.items.length) {
                         return null;
                       }
-                      final nperson = response.results[indexInPage];
+                      final nperson = response.items[indexInPage];
                       return NPersonListTile(
                         nperson: nperson,
                         debugIndex: index + 1,
