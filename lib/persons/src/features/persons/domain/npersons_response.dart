@@ -1,6 +1,7 @@
 library core;
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:notifi/models/person.dart';
 import 'nperson.dart';
 
 part 'npersons_response.freezed.dart';
@@ -9,10 +10,10 @@ part 'npersons_response.g.dart';
 
 @freezed
 @JsonSerializable()
-class NPersonsResponse with _$NPersonsResponse {
+sealed class NPersonsResponse with _$NPersonsResponse {
   NPersonsResponse({
     @JsonKey(name: 'startIndex') required int startIndex,
-    @JsonKey(name: 'items') required List<NPerson> items,
+    @JsonKey(name: 'items') required List<Person> items,
     @JsonKey(name: 'resultCount') required int resultCount,
     @JsonKey(name: 'totalItems') required int totalItems,
   });

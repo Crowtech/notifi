@@ -65,7 +65,7 @@ abstract mixin class $NPersonsResponseCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'startIndex') int startIndex,
-      @JsonKey(name: 'items') List<NPerson> items,
+      @JsonKey(name: 'items') List<Person> items,
       @JsonKey(name: 'resultCount') int resultCount,
       @JsonKey(name: 'totalItems') int totalItems});
 }
@@ -94,9 +94,9 @@ class _$NPersonsResponseCopyWithImpl<$Res>
           : startIndex // ignore: cast_nullable_to_non_nullable
               as int,
       items: null == items
-          ? _self.items
+          ? _self.items!
           : items // ignore: cast_nullable_to_non_nullable
-              as List<NPerson>,
+              as List<Person>,
       resultCount: null == resultCount
           ? _self.resultCount
           : resultCount // ignore: cast_nullable_to_non_nullable
