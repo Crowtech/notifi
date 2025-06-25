@@ -100,6 +100,7 @@ logNoStack.i("NPERSONS_REPOSITORY: $host  ${uri} ${data}");
     logNoStack.i("PERSONS2 REPOSITORY resposne=${response.data}");
     logNoStack.i("RESULTCOUNT=${(response.data['resultCount'] as num).toInt()}");
     NPersonsResponse np = NPersonsResponse.fromJson(response.data);
+    logNoStack.i("np=$np");
     return np;
   }
 
