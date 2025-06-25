@@ -10,7 +10,7 @@ part 'npersons_response.g.dart';
 
 @freezed
 @JsonSerializable()
-sealed class NPersonsResponse with _$NPersonsResponse {
+class NPersonsResponse with _$NPersonsResponse {
   NPersonsResponse({
     @JsonKey(name: 'startIndex') required int startIndex,
     @JsonKey(name: 'items') required List<Person> items,
@@ -18,10 +18,13 @@ sealed class NPersonsResponse with _$NPersonsResponse {
     @JsonKey(name: 'totalItems') required int totalItems,
   });
 
-
+  @override
   int startIndex=0;
-  List<NPerson> items=[];
+  @override
+  List<Person> items=[];
+  @override
   int resultCount=0;
+  @override
   int totalItems=0;
 
   factory NPersonsResponse.fromJson(Map<String, Object?> json) =>

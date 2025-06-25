@@ -17,8 +17,8 @@ T _$identity<T>(T value) => value;
 mixin _$NPersonsResponse {
   int get startIndex;
   set startIndex(int value);
-  List<NPerson> get items;
-  set items(List<NPerson> value);
+  List<Person> get items;
+  set items(List<Person> value);
   int get resultCount;
   set resultCount(int value);
   int get totalItems;
@@ -94,7 +94,7 @@ class _$NPersonsResponseCopyWithImpl<$Res>
           : startIndex // ignore: cast_nullable_to_non_nullable
               as int,
       items: null == items
-          ? _self.items!
+          ? _self.items
           : items // ignore: cast_nullable_to_non_nullable
               as List<Person>,
       resultCount: null == resultCount
