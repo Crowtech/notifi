@@ -81,7 +81,9 @@ class NPerson extends Resource {
 
   @override
   NPerson fromJson(Map<String, dynamic> json) {
-    return NPerson.fromJson(json);
+    NPerson p = NPerson.fromJson(json);
+    logNoStack.i("converting ${p.toShortString}");
+    return p;
   }
 
 @override

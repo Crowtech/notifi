@@ -96,6 +96,8 @@ logNoStack.i("NPERSONS_REPOSITORY: $host  ${uri} ${data}");
     //https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1
     final response =
         await client.postUri(uri, options: options, data: data,cancelToken: cancelToken);
+    
+    logNoStack.i("PERSONS2 REPOSITORY resposne=${response.data}");
     return NPersonsResponse.fromJson(response.data);
   }
 
