@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notifi/models/person.dart';
 import 'package:notifi/organizations/src/common_widgets/nest_poster.dart';
 
 import 'package:notifi/organizations/src/common_widgets/top_gradient.dart';
@@ -13,7 +14,7 @@ class NPersonListTile extends StatelessWidget {
     this.debugIndex,
     this.onPressed,
   });
-  final NPerson nperson;
+  final Person nperson;
   final int? debugIndex;
   final VoidCallback? onPressed;
 

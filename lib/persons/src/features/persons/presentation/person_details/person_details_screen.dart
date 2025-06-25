@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:notifi/models/person.dart';
 
 import '../../data/persons_repository.dart';
-import '../../domain/nperson.dart';
 import '../persons/person_list_tile.dart';
 import '../persons/person_list_tile_shimmer.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
@@ -12,7 +12,7 @@ class PersonDetailsScreen extends ConsumerWidget {
   const PersonDetailsScreen(
       {super.key, required this.personId, required this.person});
   final int personId;
-  final NPerson? person;
+  final Person? person;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -13,7 +13,7 @@ import 'package:notifi/persons/src/utils/cancel_token_ref.dart';
 import 'package:notifi/persons/src/utils/dio_provider.dart';
 import 'package:logger/logger.dart' as logger;
 
-import '../domain/nperson.dart';
+
 import '../domain/npersons_response.dart';
 
 part 'persons_repository.g.dart';
@@ -140,7 +140,7 @@ class PersonsRepository {
     return NPersonsResponse.fromJson(response.data);
   }
 
-  Future<NPerson> person({required int orgId, CancelToken? cancelToken}) async {
+  Future<Person> person({required int orgId, CancelToken? cancelToken}) async {
     logNoStack.i(
         "PERSONS_REPOSITORY: person currentUserId=${currentUser.id} token=${token.substring(0, 10)}");
     final url = Uri(
@@ -160,7 +160,7 @@ class PersonsRepository {
 
     final response =
         await client.get(url, options: options, cancelToken: cancelToken);
-    return NPerson.fromJson(response.data);
+    return Person.fromJson(response.data);
   }
 }
 
@@ -177,7 +177,7 @@ class AbortedException implements Exception {}
 
 /// Provider to fetch a person by ID
 @riverpod
-Future<NPerson> person(
+Future<Person> person(
   PersonRef ref, {
   required int personId,
 }) {

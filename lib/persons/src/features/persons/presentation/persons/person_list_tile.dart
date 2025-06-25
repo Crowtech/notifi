@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:notifi/models/person.dart';
 
 
 import '../../../../../../organizations/src/common_widgets/nest_poster.dart';
 import '../../../../../../organizations/src/common_widgets/top_gradient.dart';
-import '../../domain/nperson.dart';
+
 import 'package:notifi/i18n/strings.g.dart' as nt;
 
 class PersonListTile extends StatelessWidget {
@@ -14,7 +15,7 @@ class PersonListTile extends StatelessWidget {
     this.debugIndex,
     this.onPressed,
   });
-  final NPerson person;
+  final Person person;
   final int? debugIndex;
   final VoidCallback? onPressed;
 
