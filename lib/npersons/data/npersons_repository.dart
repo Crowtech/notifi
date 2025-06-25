@@ -4,10 +4,11 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:notifi/credentials.dart';
 import 'package:notifi/models/nestfilter.dart';
+import 'package:notifi/models/person.dart';
 
 import 'package:notifi/organizations/src/utils/cancel_token_ref.dart';
 import 'package:notifi/organizations/src/utils/dio_provider.dart';
-import 'package:notifi/persons/src/features/persons/domain/nperson.dart';
+
 import 'package:notifi/persons/src/features/persons/domain/npersons_response.dart';
 import 'package:notifi/state/nest_auth2.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -104,7 +105,7 @@ logNoStack.i("NPERSONS_REPOSITORY: $host  ${uri} ${data}");
     return np;
   }
 
-  Future<NPerson> nperson(
+  Future<Person> nperson(
       {required int movieId, CancelToken? cancelToken}) async {
 
  String host = defaultAPIBaseUrl.substring("https://".length);
@@ -124,7 +125,7 @@ logNoStack.i("NPERSONS_REPOSITORY: $host  ${uri} ${data}");
        "Authorization": 'Bearer $token'    });
     final response =
         await client.post(url, options: options, cancelToken: cancelToken);
-    return NPerson.fromJson(response.data);
+    return Person.fromJson(response.data);
   }
 }
 
@@ -138,7 +139,7 @@ class AbortedException implements Exception {}
 
 /// Provider to fetch a movie by ID
 @riverpod
-Future<NPerson> person(
+Future<Person> person(
   PersonRef ref, {
   required int personId,
 }) {

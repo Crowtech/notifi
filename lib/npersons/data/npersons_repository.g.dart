@@ -25,7 +25,7 @@ final npersonsRepositoryProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef NpersonsRepositoryRef = AutoDisposeProviderRef<NPersonsRepository>;
-String _$personHash() => r'130b593ec4c7bb2ec391edb99bdc6a125d3556ea';
+String _$personHash() => r'e1e8ef24c6d8d05bf05e96204aa8fcc8559a0d26';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -57,7 +57,7 @@ const personProvider = PersonFamily();
 /// Provider to fetch a movie by ID
 ///
 /// Copied from [person].
-class PersonFamily extends Family<AsyncValue<NPerson>> {
+class PersonFamily extends Family<AsyncValue<Person>> {
   /// Provider to fetch a movie by ID
   ///
   /// Copied from [person].
@@ -101,7 +101,7 @@ class PersonFamily extends Family<AsyncValue<NPerson>> {
 /// Provider to fetch a movie by ID
 ///
 /// Copied from [person].
-class PersonProvider extends AutoDisposeFutureProvider<NPerson> {
+class PersonProvider extends AutoDisposeFutureProvider<Person> {
   /// Provider to fetch a movie by ID
   ///
   /// Copied from [person].
@@ -137,7 +137,7 @@ class PersonProvider extends AutoDisposeFutureProvider<NPerson> {
 
   @override
   Override overrideWith(
-    FutureOr<NPerson> Function(PersonRef provider) create,
+    FutureOr<Person> Function(PersonRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -154,7 +154,7 @@ class PersonProvider extends AutoDisposeFutureProvider<NPerson> {
   }
 
   @override
-  AutoDisposeFutureProviderElement<NPerson> createElement() {
+  AutoDisposeFutureProviderElement<Person> createElement() {
     return _PersonProviderElement(this);
   }
 
@@ -174,12 +174,12 @@ class PersonProvider extends AutoDisposeFutureProvider<NPerson> {
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin PersonRef on AutoDisposeFutureProviderRef<NPerson> {
+mixin PersonRef on AutoDisposeFutureProviderRef<Person> {
   /// The parameter `personId` of this provider.
   int get personId;
 }
 
-class _PersonProviderElement extends AutoDisposeFutureProviderElement<NPerson>
+class _PersonProviderElement extends AutoDisposeFutureProviderElement<Person>
     with PersonRef {
   _PersonProviderElement(super.provider);
 
