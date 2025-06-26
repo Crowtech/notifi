@@ -15,7 +15,7 @@ Future<void> AboutUsDialog(BuildContext context, String appTitle, Widget logo)  
       builder: (BuildContext context) {
         return AlertDialog(
           icon: logo,
-          title:  Text(nt.t.about(appTitle)),
+          title:  Text(nt.t.about(name: appTitle)),
           content:  Text(nt.t.about_dialog(title: appTitle,version: packageInfo.version,deviceid: deviceId,project: defaultRealm.capitalise())),
           actions: <Widget>[
             // TextButton(
