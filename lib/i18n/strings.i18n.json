@@ -6,6 +6,7 @@
     "product": "Product Menu"
   },
   "about_us": "About Us",
+  "about_dialog": "${title}\nVersion\t${version}\nDevice\n${deviceid}\n\n© ${project} 2024,2025 under license to Crowtech Pty Ltd" ,
   "accept_terms_switch": "I Accept the terms and conditions",
   "account": {
     "title": "Account",

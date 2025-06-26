@@ -43,6 +43,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get notfound_404 => '404 - Page not found!';
 	late final TranslationsMenuEn menu = TranslationsMenuEn._(_root);
 	String get about_us => 'About Us';
+	String about_dialog({required Object title, required Object version, required Object deviceid, required Object project}) => '${title}\nVersion	${version}\nDevice\n${deviceid}\n\n© ${project} 2024,2025 under license to Crowtech Pty Ltd';
 	String get accept_terms_switch => 'I Accept the terms and conditions';
 	late final TranslationsAccountEn account = TranslationsAccountEn._(_root);
 	String get activity => 'Activity';
@@ -411,6 +412,7 @@ extension on Translations {
 			case 'menu.account': return 'Account Menu';
 			case 'menu.product': return 'Product Menu';
 			case 'about_us': return 'About Us';
+			case 'about_dialog': return ({required Object title, required Object version, required Object deviceid, required Object project}) => '${title}\nVersion	${version}\nDevice\n${deviceid}\n\n© ${project} 2024,2025 under license to Crowtech Pty Ltd';
 			case 'accept_terms_switch': return 'I Accept the terms and conditions';
 			case 'account.title': return 'Account';
 			case 'account.change_password': return 'Change password';

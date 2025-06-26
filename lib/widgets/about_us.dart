@@ -16,14 +16,7 @@ Future<void> AboutUsDialog(BuildContext context, String appTitle, Widget logo)  
         return AlertDialog(
           icon: logo,
           title:  Text('About $appTitle'),
-          content:  Text(
-            '$appTitle\n'
-            'Version\t${packageInfo.version}\n'
-            'Installed\t${packageInfo.installTime}\n'
-            'Device\t$deviceId\n'
-            '\n'
-            ' © Crowtech 2024,2025 under license to  ${defaultRealm.capitalise()}' ,
-          ),
+          content:  Text(nt.t.about_dialog(title: appTitle,version: packageInfo.version,deviceid: deviceId,project: defaultRealm.capitalise())),
           actions: <Widget>[
             // TextButton(
             //   style: TextButton.styleFrom(textStyle: Theme.of(context).textTheme.labelLarge),
