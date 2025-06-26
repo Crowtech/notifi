@@ -5,8 +5,9 @@
     "account": "帐户菜单",
     "product": "产品菜单"
   },
+  "about": "关于 ${name}",
   "about_us": "关于我们",
-  "about_dialog": "${title}\n版本\t${version}\n设备\n${deviceid}\n\n© ${project} 2024,2025 经 Crowtech Pty Ltd 授权" ,
+  "about_dialog": "${title}\n版本\t${version}\n设备\t${deviceid}\n\n© ${project} 2024,2025 经 Crowtech Pty Ltd 授权" ,
   "accept_terms_switch": "我接受条款和条件",
   "account": {
     "title": "帐户",

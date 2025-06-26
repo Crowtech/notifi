@@ -39,8 +39,9 @@ class TranslationsZh implements Translations {
 	@override String get app_title => 'Crowtech';
 	@override String get notfound_404 => '404-页面未找到！';
 	@override late final _TranslationsMenuZh menu = _TranslationsMenuZh._(_root);
+	@override String about({required Object name}) => '关于 ${name}';
 	@override String get about_us => '关于我们';
-	@override String about_dialog({required Object title, required Object version, required Object deviceid, required Object project}) => '${title}\n版本	${version}\n设备\n${deviceid}\n\n© ${project} 2024,2025 经 Crowtech Pty Ltd 授权';
+	@override String about_dialog({required Object title, required Object version, required Object deviceid, required Object project}) => '${title}\n版本	${version}\n设备	${deviceid}\n\n© ${project} 2024,2025 经 Crowtech Pty Ltd 授权';
 	@override String get accept_terms_switch => '我接受条款和条件';
 	@override late final _TranslationsAccountZh account = _TranslationsAccountZh._(_root);
 	@override String get activity => '活动';
@@ -407,8 +408,9 @@ extension on TranslationsZh {
 			case 'notfound_404': return '404-页面未找到！';
 			case 'menu.account': return '帐户菜单';
 			case 'menu.product': return '产品菜单';
+			case 'about': return ({required Object name}) => '关于 ${name}';
 			case 'about_us': return '关于我们';
-			case 'about_dialog': return ({required Object title, required Object version, required Object deviceid, required Object project}) => '${title}\n版本	${version}\n设备\n${deviceid}\n\n© ${project} 2024,2025 经 Crowtech Pty Ltd 授权';
+			case 'about_dialog': return ({required Object title, required Object version, required Object deviceid, required Object project}) => '${title}\n版本	${version}\n设备	${deviceid}\n\n© ${project} 2024,2025 经 Crowtech Pty Ltd 授权';
 			case 'accept_terms_switch': return '我接受条款和条件';
 			case 'account.title': return '帐户';
 			case 'account.change_password': return '更改密码';
