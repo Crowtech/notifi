@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dropdown.widget.dart';
+import 'package:notifi/i18n/strings.g.dart' as nt;
 
 class Pagination extends StatelessWidget {
   final int currentPage;
@@ -33,7 +34,7 @@ class Pagination extends StatelessWidget {
                 Flexible(
                   child: ElevatedButton(
                     onPressed: currentPage > 0 ? previousPage : null,
-                    child: const Text('Previous'),
+                    child: Text(nt.t.previous),
                   ),
                 ),
                 Padding(
@@ -58,7 +59,7 @@ class Pagination extends StatelessWidget {
                 Flexible(
                   child: ElevatedButton(
                     onPressed: currentPage < (totalItems / itemsPerPage).ceil() - 1 ? nextPage : null,
-                    child: const Text('Next'),
+                    child: Text(nt.t.next),
                   ),
                 ),
               ],
