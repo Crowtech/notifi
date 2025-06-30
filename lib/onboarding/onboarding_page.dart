@@ -35,7 +35,7 @@ double imageWidth = 400; // default
  
               children: [
                  SvgPicture.asset(
-              'assets/logo.svg',
+              'assets/images/onboarding-logo.svg',
               width: 100,
               height: 100,
               semanticsLabel: defaultRealm.capitalise(),
