@@ -102,17 +102,7 @@ Future<void> setupFlutterNotifications() async {
 bool notifi2AlreadyRunning = false;
 
 bool isDev(Ref ref) {
-  bool isDev = false;
-   var responseAsync = ref.read(permissionsProvider);
-   if (responseAsync.hasValue) {
-      logNoStack.i("NOTIFI2: permissionsProvider has value");
-      var role = responseAsync.value;
-            logNoStack.i("DEV_PAGE: permissionsProvider value is $role");
-      if (role == const UserRole.dev()) {
-        isDev = true;
-      }
-   }
-   return isDev;
+  return ref.read(nestAuthProvider.notifier).isLoggedIn;
 }
 
 @Riverpod(keepAlive: true)
@@ -372,9 +362,9 @@ void initialiseCamera(List<CameraDescription> cameras) async {
 
 void showFcmToast(Ref ref, String token, int secondsToast) {
  
- logNoStack.i("Displaying FCM Toast $token");
+  logNoStack.i("Displaying FCM  Toast for Dev User! ${isDev(ref)?'DEV':'NON DEV'} $token");
    if (isDev(ref)) {
-     logNoStack.i("Displaying FCM  Toast for Dev User! ${isDev(ref)?'DEV':'NON DEV'} $token");
+    
     
       Fluttertoast.showToast(
           msg: "FCM : $token",
