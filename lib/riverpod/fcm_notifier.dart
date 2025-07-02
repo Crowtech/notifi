@@ -146,6 +146,7 @@ void sendFcm(Ref ref) async {
   bool isLoggedIn = ref.read(nestAuthProvider.notifier).isLoggedIn;
   if (isLoggedIn) {
     logNoStack.i("SEND_FCM: Sending fcm to api : $fcm}");
+    showFcmToast(ref, 2);
     String devicecode = await fetchDeviceId();
     //Locale locale = (Locale)null;
     Map result = await registerFCM(token, devicecode, fcm);
