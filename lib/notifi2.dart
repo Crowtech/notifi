@@ -122,6 +122,8 @@ bool showFcmToast = false;
       }
    }
 
+ logNoStack.i(
+      "NOTIFI2: showFCMToast is  ${showFcmToast ? "ENABLED" : "DISABLED"}");
   FirebaseOptions? options0 = options;
 
   bool preventAutoLogin = false;
