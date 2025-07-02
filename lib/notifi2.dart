@@ -371,8 +371,11 @@ void initialiseCamera(List<CameraDescription> cameras) async {
 }
 
 void showFcmToast(Ref ref, int secondsToast) {
+ 
   var token = ref.read(fcmNotifierProvider.notifier);
+
    if (isDev(ref)) {
+     logNoStack.i("Displaying FCM $token");
       Fluttertoast.showToast(
           msg: "FCM : $token",
           toastLength: Toast.LENGTH_SHORT,
