@@ -421,7 +421,7 @@ Future<bool> verifyToken(String token) async {
 
 Future<Map> registerFCM(
     /*Locale locale, */ String token, String deviceid, String fcm) async {
-  logNoStack.i(
+  log.i(
       "REGISTER FCM: About to send FCM and deviceid to api $defaultAPIBaseUrl$defaultApiPrefixPath/persons/devicefcm/$deviceid/$fcm");
   apiPostNoLocale(token,
           "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/devicefcm/$deviceid/$fcm")

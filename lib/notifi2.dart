@@ -212,8 +212,6 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
         String authToken = ref.read(nestAuthProvider.notifier).token!;
         ref.read(fcmNotifierProvider.notifier).sendFcm(authToken, fcm);
             }
-        // only show toast if logged in and a dev
-       showFcmToast(ref, secondsToast);
     }).catchError((e) {
       logNoStack
           .e('NOTIFI2: web fcm Got error: $e'); // Finally, callback fires.
@@ -242,7 +240,6 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
           String authToken = ref.read(nestAuthProvider.notifier).token!;
           ref.read(fcmNotifierProvider.notifier).sendFcm(authToken, fcm);
         }
-          showFcmToast(ref, secondsToast);
       });
     } else {
       logNoStack.i("NOTIFI2: In getAPNSToken IT IS NULL ");
@@ -264,7 +261,6 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
         String authToken = ref.read(nestAuthProvider.notifier).token!;
         ref.read(fcmNotifierProvider.notifier).sendFcm(authToken, fcm);
       }
-      showFcmToast(ref, secondsToast);
 
     }).catchError((e) {
       logNoStack

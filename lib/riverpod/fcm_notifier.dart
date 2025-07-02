@@ -7,6 +7,7 @@ import 'package:notifi/credentials.dart';
 import 'package:notifi/jwt_utils.dart';
 import 'package:notifi/models/organization.dart';
 import 'package:notifi/models/person.dart';
+import 'package:notifi/notifi2.dart';
 import 'package:notifi/organizations/src/features/organizations/data/organizations_repository_nf.dart';
 import 'package:notifi/state/nest_auth2.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -68,7 +69,6 @@ class FcmNotifier extends _$FcmNotifier {
   void setFcm(String fcm) {
     logNoStack.i("FCM_NOTIFIER: Setting fcm : $fcm}");
 
-    //   ref.read(sendFcmProvider(fcm));
     state = fcm;
     //
   }
@@ -94,6 +94,7 @@ class FcmNotifier extends _$FcmNotifier {
 
   void sendFcm(String token, String fcm) async {
     logNoStack.i("SEND_FCM: Sending fcm to api : $fcm}");
+    showFcmToast(ref, 2);
     String devicecode = await fetchDeviceId();
     //Locale locale = (Locale)null;
     Map result = await registerFCM(token, devicecode, fcm);
