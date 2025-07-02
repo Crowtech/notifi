@@ -114,6 +114,7 @@ class FcmNotifier extends _$FcmNotifier {
     addTopic(currentUser.code!);
     addTopic(currentUser.username!);
     setTopics();
+    logNoStack.i("SEND_FCM: about to show toast");
     showFcmToast(ref, fcm,5);
   }
 }

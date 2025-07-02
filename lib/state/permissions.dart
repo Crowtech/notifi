@@ -60,7 +60,7 @@ Future<UserRole> permissions(PermissionsRef ref) async {
   for (var i = 0; i < rolesList.length; i++) {
     rolesStr += "${rolesList[i]}\n";
   }
-  logNoStack.i("PERMISSIONS: Roles for ${user.email} are $rolesStr");
+  logNoStack.i("PERMISSIONS: Roles for ${user.email} are \n$rolesStr");
 if (rolesList.contains("dev")) {
     return const UserRole.dev();
   }

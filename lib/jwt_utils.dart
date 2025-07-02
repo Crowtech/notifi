@@ -247,7 +247,7 @@ UserRole getRole(String? token)
       rolesStr += "${rolesList[i]}\n";
     }
   }
-  logNoStack.i("PERMISSIONS: Roles for user are $rolesStr");
+  logNoStack.i("PERMISSIONS: Roles for user are \n$rolesStr");
 if (rolesList.contains("dev")) {
     return const UserRole.dev();
   }

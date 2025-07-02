@@ -53,7 +53,7 @@ class InfoData extends _$InfoData {
         rolesStr += "${rolesList[i]}\n";
       }
     }
-    logNoStack.i("PERMISSIONS: Roles for user are $rolesStr");
+    logNoStack.i("PERMISSIONS: Roles for user are \n$rolesStr");
     return {
       "Name": currentUser.name,
       "Code": currentUser.code,
