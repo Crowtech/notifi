@@ -101,6 +101,20 @@ Future<void> setupFlutterNotifications() async {
 
 bool notifi2AlreadyRunning = false;
 
+bool isDev(Ref ref) {
+  bool isDev = false;
+   var responseAsync = ref.read(permissionsProvider);
+   if (responseAsync.hasValue) {
+      logNoStack.i("NOTIFI2: permissionsProvider has value");
+      var role = responseAsync.value;
+            logNoStack.i("DEV_PAGE: permissionsProvider value is $role");
+      if (role != const UserRole.dev()) {
+        isDev = true;
+      }
+   }
+   return isDev;
+}
+
 @Riverpod(keepAlive: true)
 void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
   logNoStack.i(
@@ -111,16 +125,8 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
     notifi2AlreadyRunning = true;
   }
 
-bool showFcmToast = false;
-      var responseAsync = ref.read(permissionsProvider);
-   if (responseAsync.hasValue) {
-      logNoStack.i("NOTIFI2: permissionsProvider has value");
-      var role = responseAsync.value;
-            logNoStack.i("DEV_PAGE: permissionsProvider value is $role");
-      if (role != const UserRole.dev()) {
-        showFcmToast = true;
-      }
-   }
+bool showFcmToast = isDev(ref);
+   
 
  logNoStack.i(
       "NOTIFI2: showFCMToast is  ${showFcmToast ? "ENABLED" : "DISABLED"}");
@@ -209,7 +215,7 @@ bool showFcmToast = false;
         ref.read(fcmNotifierProvider.notifier).sendFcm(authToken, fcm);
             }
         // only show toast if logged in and a dev
-      if (showFcmToast) {
+      if (isDev(ref)) {
       Fluttertoast.showToast(
           msg: "FCM : $fcm",
           toastLength: Toast.LENGTH_SHORT,
@@ -247,7 +253,7 @@ bool showFcmToast = false;
           String authToken = ref.read(nestAuthProvider.notifier).token!;
           ref.read(fcmNotifierProvider.notifier).sendFcm(authToken, fcm);
         }
-         if (showFcmToast) {
+         if (isDev(ref)) {
         Fluttertoast.showToast(
             msg: "FCM : $fcm",
             toastLength: Toast.LENGTH_SHORT,
@@ -278,7 +284,7 @@ bool showFcmToast = false;
         String authToken = ref.read(nestAuthProvider.notifier).token!;
         ref.read(fcmNotifierProvider.notifier).sendFcm(authToken, fcm);
       }
-       if (showFcmToast) {
+       if (isDev(ref)) {
       Fluttertoast.showToast(
           msg: "FCM : $token",
           toastLength: Toast.LENGTH_SHORT,
@@ -325,7 +331,7 @@ bool showFcmToast = false;
       ref.read(notificationsDataProvider(nestCode ?? "BROADCAST").notifier).update(mapData);
       logNoStack.i(
           "NOTIFI2: INCOMING DATA NOTIFICATION for $nestCode !:\n $output\n ");
-           if (showFcmToast) {
+           if (isDev(ref)) {
       Fluttertoast.showToast(
           msg: "Incoming ${message.category ?? ''} Data!",
           toastLength: Toast.LENGTH_SHORT,
