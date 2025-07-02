@@ -108,7 +108,7 @@ bool isDev(Ref ref) {
       logNoStack.i("NOTIFI2: permissionsProvider has value");
       var role = responseAsync.value;
             logNoStack.i("DEV_PAGE: permissionsProvider value is $role");
-      if (role != const UserRole.dev()) {
+      if (role == const UserRole.dev()) {
         isDev = true;
       }
    }
@@ -373,7 +373,7 @@ void initialiseCamera(List<CameraDescription> cameras) async {
 void showFcmToast(Ref ref, String token, int secondsToast) {
  
  logNoStack.i("Displaying FCM Toast $token");
-  // if (isDev(ref)) {
+   if (isDev(ref)) {
      logNoStack.i("Displaying FCM  Toast for Dev User! ${isDev(ref)?'DEV':'NON DEV'} $token");
     
       Fluttertoast.showToast(
@@ -384,5 +384,5 @@ void showFcmToast(Ref ref, String token, int secondsToast) {
           backgroundColor: Colors.red,
           textColor: Colors.white,
           fontSize: 16.0);
-  //     }
+       }
 }
