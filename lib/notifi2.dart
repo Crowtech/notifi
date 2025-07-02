@@ -124,16 +124,14 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
   } else {
     notifi2AlreadyRunning = true;
   }
-
-bool showFcmToast = isDev(ref);
    
 
  logNoStack.i(
-      "NOTIFI2: showFCMToast is  ${showFcmToast ? "ENABLED" : "DISABLED"}");
+      "NOTIFI2: showFCMToast is  ${isDev(ref) ? "ENABLED" : "DISABLED"}");
   FirebaseOptions? options0 = options;
 
   bool preventAutoLogin = false;
-  int secondsToast0 = secondsToast ?? 2;
+
   List<CameraDescription> cameras = <CameraDescription>[];
 
   //ref.read(deviceIdNotifierProvider.notifier).setDeviceId(deviceId);
@@ -215,16 +213,7 @@ bool showFcmToast = isDev(ref);
         ref.read(fcmNotifierProvider.notifier).sendFcm(authToken, fcm);
             }
         // only show toast if logged in and a dev
-      if (isDev(ref)) {
-      Fluttertoast.showToast(
-          msg: "FCM : $fcm",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: secondsToast,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0);
-      }
+       showFcmToast(ref, secondsToast);
     }).catchError((e) {
       logNoStack
           .e('NOTIFI2: web fcm Got error: $e'); // Finally, callback fires.
@@ -253,16 +242,7 @@ bool showFcmToast = isDev(ref);
           String authToken = ref.read(nestAuthProvider.notifier).token!;
           ref.read(fcmNotifierProvider.notifier).sendFcm(authToken, fcm);
         }
-         if (isDev(ref)) {
-        Fluttertoast.showToast(
-            msg: "FCM : $fcm",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: secondsToast,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0);
-         }
+          showFcmToast(ref, secondsToast);
       });
     } else {
       logNoStack.i("NOTIFI2: In getAPNSToken IT IS NULL ");
@@ -284,16 +264,8 @@ bool showFcmToast = isDev(ref);
         String authToken = ref.read(nestAuthProvider.notifier).token!;
         ref.read(fcmNotifierProvider.notifier).sendFcm(authToken, fcm);
       }
-       if (isDev(ref)) {
-      Fluttertoast.showToast(
-          msg: "FCM : $token",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: secondsToast,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0);
-       }
+      showFcmToast(ref, secondsToast);
+
     }).catchError((e) {
       logNoStack
           .e('NOTIFI2: android fcm Got error: $e'); // Finally, callback fires.
@@ -400,4 +372,18 @@ void initialiseCamera(List<CameraDescription> cameras) async {
   } on CameraException catch (e) {
     logNoStack.e("${e.code} ${e..description}");
   }
+}
+
+void showFcmToast(Ref ref, int secondsToast) {
+  var token = ref.read(fcmNotifierProvider.notifier);
+   if (isDev(ref)) {
+      Fluttertoast.showToast(
+          msg: "FCM : $token",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: secondsToast,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+       }
 }
