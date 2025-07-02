@@ -11,6 +11,7 @@ import 'package:notifi/models/appversion.dart';
 import 'package:notifi/models/gps.dart';
 import 'package:notifi/models/nestfilter.dart';
 import 'package:notifi/models/person.dart';
+import 'package:notifi/notifi2.dart';
 
 import 'models/crowtech_basepage.dart';
 
@@ -423,6 +424,7 @@ Future<Map> registerFCM(
     /*Locale locale, */ String token, String deviceid, String fcm) async {
   log.i(
       "REGISTER FCM: About to send FCM and deviceid to api $defaultAPIBaseUrl$defaultApiPrefixPath/persons/devicefcm/$deviceid/$fcm");
+   
   apiPostNoLocale(token,
           "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/devicefcm/$deviceid/$fcm")
       .then((response) {

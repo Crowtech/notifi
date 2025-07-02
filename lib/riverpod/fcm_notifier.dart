@@ -94,7 +94,7 @@ class FcmNotifier extends _$FcmNotifier {
 
   void sendFcm(String token, String fcm) async {
     logNoStack.i("SEND_FCM: Sending fcm to api : $fcm}");
-    showFcmToast(ref, 2);
+    
     String devicecode = await fetchDeviceId();
     //Locale locale = (Locale)null;
     Map result = await registerFCM(token, devicecode, fcm);
@@ -114,6 +114,7 @@ class FcmNotifier extends _$FcmNotifier {
     addTopic(currentUser.code!);
     addTopic(currentUser.username!);
     setTopics();
+    showFcmToast(ref, fcm,5);
   }
 }
 
@@ -146,7 +147,7 @@ void sendFcm(Ref ref) async {
   bool isLoggedIn = ref.read(nestAuthProvider.notifier).isLoggedIn;
   if (isLoggedIn) {
     logNoStack.i("SEND_FCM: Sending fcm to api : $fcm}");
-    showFcmToast(ref, 2);
+
     String devicecode = await fetchDeviceId();
     //Locale locale = (Locale)null;
     Map result = await registerFCM(token, devicecode, fcm);
