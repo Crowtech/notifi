@@ -12,10 +12,12 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:logger/logger.dart' as logger;
+import 'package:notifi/entities/user_role.dart';
 import 'package:notifi/riverpod/fcm_notifier.dart';
 import 'package:notifi/riverpod/nest_notifis_provider.dart';
 import 'package:notifi/riverpod/notifications_data.dart';
 import 'package:notifi/state/nest_auth2.dart';
+import 'package:notifi/state/permissions.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'credentials.dart';
@@ -109,6 +111,17 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
     notifi2AlreadyRunning = true;
   }
 
+bool showFcmToast = false;
+      var responseAsync = ref.read(permissionsProvider);
+   if (responseAsync.hasValue) {
+      logNoStack.i("NOTIFI2: permissionsProvider has value");
+      var role = responseAsync.value;
+            logNoStack.i("DEV_PAGE: permissionsProvider value is $role");
+      if (role != const UserRole.dev()) {
+        showFcmToast = true;
+      }
+   }
+
   FirebaseOptions? options0 = options;
 
   bool preventAutoLogin = false;
@@ -193,6 +206,8 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
         String authToken = ref.read(nestAuthProvider.notifier).token!;
         ref.read(fcmNotifierProvider.notifier).sendFcm(authToken, fcm);
             }
+        // only show toast if logged in and a dev
+      if (showFcmToast) {
       Fluttertoast.showToast(
           msg: "FCM : $fcm",
           toastLength: Toast.LENGTH_SHORT,
@@ -201,6 +216,7 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
           backgroundColor: Colors.red,
           textColor: Colors.white,
           fontSize: 16.0);
+      }
     }).catchError((e) {
       logNoStack
           .e('NOTIFI2: web fcm Got error: $e'); // Finally, callback fires.
@@ -229,6 +245,7 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
           String authToken = ref.read(nestAuthProvider.notifier).token!;
           ref.read(fcmNotifierProvider.notifier).sendFcm(authToken, fcm);
         }
+         if (showFcmToast) {
         Fluttertoast.showToast(
             msg: "FCM : $fcm",
             toastLength: Toast.LENGTH_SHORT,
@@ -237,6 +254,7 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
             backgroundColor: Colors.red,
             textColor: Colors.white,
             fontSize: 16.0);
+         }
       });
     } else {
       logNoStack.i("NOTIFI2: In getAPNSToken IT IS NULL ");
@@ -258,6 +276,7 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
         String authToken = ref.read(nestAuthProvider.notifier).token!;
         ref.read(fcmNotifierProvider.notifier).sendFcm(authToken, fcm);
       }
+       if (showFcmToast) {
       Fluttertoast.showToast(
           msg: "FCM : $token",
           toastLength: Toast.LENGTH_SHORT,
@@ -266,6 +285,7 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
           backgroundColor: Colors.red,
           textColor: Colors.white,
           fontSize: 16.0);
+       }
     }).catchError((e) {
       logNoStack
           .e('NOTIFI2: android fcm Got error: $e'); // Finally, callback fires.
@@ -303,6 +323,7 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
       ref.read(notificationsDataProvider(nestCode ?? "BROADCAST").notifier).update(mapData);
       logNoStack.i(
           "NOTIFI2: INCOMING DATA NOTIFICATION for $nestCode !:\n $output\n ");
+           if (showFcmToast) {
       Fluttertoast.showToast(
           msg: "Incoming ${message.category ?? ''} Data!",
           toastLength: Toast.LENGTH_SHORT,
@@ -312,6 +333,7 @@ void Notifi2(Ref ref, FirebaseOptions options, secondsToast) async {
           textColor: const Color.fromARGB(255, 250, 248, 248),
           webBgColor: "linear-gradient(139deg, #3a47d5, #purple)",
           fontSize: 16.0);
+           }
     } else if (message.notification != null) {
       final notification = message.notification;
       logNoStack.i("NOTIFI2: INCOMING NOTIFICATION: $notification");
