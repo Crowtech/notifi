@@ -374,7 +374,8 @@ void showFcmToast(Ref ref, String token, int secondsToast) {
  
  logNoStack.i("Displaying FCM Toast $token");
   // if (isDev(ref)) {
-     logNoStack.i("Displaying FCM  Toast for Dev User! $token");
+     logNoStack.i("Displaying FCM  Toast for Dev User! ${isDev(ref)?'DEV':'NON DEV'} $token");
+    
       Fluttertoast.showToast(
           msg: "FCM : $token",
           toastLength: Toast.LENGTH_SHORT,
