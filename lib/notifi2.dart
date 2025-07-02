@@ -373,7 +373,7 @@ void initialiseCamera(List<CameraDescription> cameras) async {
 void showFcmToast(Ref ref, String token, int secondsToast) {
  
  logNoStack.i("Displaying FCM Toast $token");
-   if (isDev(ref)) {
+  // if (isDev(ref)) {
      logNoStack.i("Displaying FCM  Toast for Dev User! $token");
       Fluttertoast.showToast(
           msg: "FCM : $token",
@@ -383,5 +383,5 @@ void showFcmToast(Ref ref, String token, int secondsToast) {
           backgroundColor: Colors.red,
           textColor: Colors.white,
           fontSize: 16.0);
-       }
+  //     }
 }
