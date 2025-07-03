@@ -77,8 +77,8 @@ logNoStack.i("NPERSONS_REPOSITORY: $host  ${uri} ${data}");
     String host = defaultAPIBaseUrl.substring("https://".length);
     String path = "$defaultApiPrefixPath/resources/targets/0";
 
-    logNoStack.i("PERSONS2_REPOSITORY: now playiong token=${token.substring(0, 10)}\n$nf\n$host\n$path");
-
+    logNoStack.i("NPERSONS_REPOSITORY: now playiong token=${token.substring(0, 10)}\n$nf\n$host\n$path");
+    logNoStack.i("NPERSONS_REPOSITORY ################################");
     final uri = Uri(
       scheme: 'https',
      host: host,
