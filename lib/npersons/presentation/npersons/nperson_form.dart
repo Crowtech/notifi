@@ -94,6 +94,28 @@ class _CreateNPersonFormState extends ConsumerState<CreateNPersonForm> {
                             ),
                           ),
                           const SizedBox(height: 16),
+                           TextFormFieldWidget(
+                            controller: emailController,
+                             fieldValues: fieldValues,
+                            isValidatingMessage:
+                                nt.t.form.validating(field: nt.t.form.email),
+                            valueIsExisting: nt.t.form.already_exists(
+                                item: nt.t.person_capitalized,
+                                field: nt.t.form.email),
+                            formCode: widget.formCode,
+                            fieldCode: "true-email",
+                            enabled: true,
+                            itemCategory: nt.t.person,
+                            itemName: nt.t.form.email,
+                            itemValidation: nt.t.form.email_validation(
+                              item: nt.t.person_capitalized,
+                            ),
+                            hintText: nt.t.form.email_hint,
+                            onValidate: validateEmail,
+                            regex: EMAIL_REGEX,
+                            inputFormatters: emailInputFormatter,
+                          ),
+                          const SizedBox(height: 16),
                           TextFormFieldWidget(
                        
                             controller: givenNameController,
@@ -125,28 +147,7 @@ class _CreateNPersonFormState extends ConsumerState<CreateNPersonForm> {
                             regex: NAME_REGEX,
                           ),
                           const SizedBox(height: 16),
-                          TextFormFieldWidget(
-                            controller: emailController,
-                             fieldValues: fieldValues,
-                            isValidatingMessage:
-                                nt.t.form.validating(field: nt.t.form.email),
-                            valueIsExisting: nt.t.form.already_exists(
-                                item: nt.t.person_capitalized,
-                                field: nt.t.form.email),
-                            formCode: widget.formCode,
-                            fieldCode: "true-email",
-                            enabled: true,
-                            itemCategory: nt.t.person,
-                            itemName: nt.t.form.email,
-                            itemValidation: nt.t.form.email_validation(
-                              item: nt.t.person_capitalized,
-                            ),
-                            hintText: nt.t.form.email_hint,
-                            onValidate: validateEmail,
-                            regex: EMAIL_REGEX,
-                            inputFormatters: emailInputFormatter,
-                          ),
-                          const SizedBox(height: 16),
+                         
                           OrganizationListWidget(
                               formKey: _formKey,
                               formCode: widget.formCode,
