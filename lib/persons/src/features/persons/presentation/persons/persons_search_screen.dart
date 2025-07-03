@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:notifi/forms/person_form.dart';
 
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/persons/src/features/persons/presentation/person_details/person_details_screen.dart';
-import 'package:notifi/persons/src/features/persons/presentation/persons/person_form.dart';
 import 'package:notifi/widgets/slide_left_background.dart';
 import 'package:notifi/widgets/slide_right_background.dart';
 

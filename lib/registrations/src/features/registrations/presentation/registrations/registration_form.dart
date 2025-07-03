@@ -62,7 +62,7 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
   @override
   Widget build(BuildContext context) {
     String capitalizedItem = nt.t.person_capitalized;
-    logNoStack.i("PERSON_FORM: BUILD ");
+    logNoStack.i("REGISTRATION_FORM: BUILD ");
     // e.g. dialog should be no bigger than 70% of the screen
     final maximumHeightOfDialog = MediaQuery.of(context).size.height * 0.8;
     return Dialog(
@@ -162,7 +162,7 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                               Consumer(builder: (context, watch, child) {
                                 bool isValid = ref.watch(
                                     validateFormProvider(widget.formCode));
-                                logNoStack.i("PERSON_FORM: isValid $isValid");
+                                logNoStack.i("REGISTRATION_FORM: isValid $isValid");
                                 return ElevatedButton(
                                   key: const Key("person-submit"),
                                   onPressed: !isValid
@@ -221,7 +221,7 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                                                 "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/invite?$queryParmOrgIds";
 
                                             logNoStack.i(
-                                                "PERSON_FORM: sending $person to $apiPath");
+                                                "REGISTRATION_FORM: sending $person to $apiPath");
                                             apiPostDataNoLocaleRaw(
                                                     token!, apiPath, person)
                                                 .then((result) {
