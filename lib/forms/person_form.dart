@@ -25,16 +25,16 @@ var logNoStack = logger.Logger(
   level: logger.Level.info,
 );
 
-class CreateNPersonForm extends ConsumerStatefulWidget {
-  CreateNPersonForm({super.key, required this.formCode});
+class CreatePersonForm extends ConsumerStatefulWidget {
+  CreatePersonForm({super.key, required this.formCode});
 
   String formCode;
 
   @override
-  _CreateNPersonFormState createState() => _CreateNPersonFormState();
+  _CreatePersonFormState createState() => _CreatePersonFormState();
 }
 
-class _CreateNPersonFormState extends ConsumerState<CreateNPersonForm> {
+class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
   final _formKey = GlobalKey<FormState>();
 
   final Map<String, dynamic> fieldValues = {};
@@ -62,7 +62,7 @@ class _CreateNPersonFormState extends ConsumerState<CreateNPersonForm> {
   @override
   Widget build(BuildContext context) {
     String capitalizedItem = nt.t.person_capitalized;
-    logNoStack.i("NPERSON_FORM: BUILD ");
+    logNoStack.i("PERSON_FORM: BUILD ");
     // e.g. dialog should be no bigger than 70% of the screen
     final maximumHeightOfDialog = MediaQuery.of(context).size.height * 0.8;
     return Dialog(
@@ -222,7 +222,7 @@ class _CreateNPersonFormState extends ConsumerState<CreateNPersonForm> {
                                                 "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/invite?$queryParmOrgIds";
 
                                             logNoStack.i(
-                                                "NPERSON_FORM: sending $person to $apiPath");
+                                                "PERSON_FORM: sending $person to $apiPath");
                                             apiPostDataNoLocaleRaw(
                                                     token!, apiPath, person)
                                                 .then((result) {

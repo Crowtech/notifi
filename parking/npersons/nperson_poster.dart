@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:notifi/npersons/domain/nest_person_poster.dart';
+import 'domain/nest_person_poster.dart';
 import 'package:shimmer/shimmer.dart';
 
 class NPersonPoster extends StatelessWidget {

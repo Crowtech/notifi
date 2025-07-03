@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notifi/models/person.dart';
-import 'package:notifi/npersons/data/npersons_repository.dart';
-import 'package:notifi/npersons/presentation/npersons/nperson_list_tile.dart';
-import 'package:notifi/npersons/presentation/npersons/nperson_list_tile_shimmer.dart';
+import '../../data/npersons_repository.dart';
+import '../npersons/nperson_list_tile.dart';
+import '../npersons/nperson_list_tile_shimmer.dart';
 
 import 'package:notifi/i18n/strings.g.dart' as nt;
 

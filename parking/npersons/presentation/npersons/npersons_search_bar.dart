@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:notifi/npersons/presentation/npersons/npersons_search_query_notifier.dart';
+import 'npersons_search_query_notifier.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
 
 class NPersonsSearchBar extends ConsumerStatefulWidget {

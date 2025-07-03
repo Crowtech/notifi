@@ -4,7 +4,7 @@ import 'package:notifi/organizations/src/common_widgets/nest_poster.dart';
 
 import 'package:notifi/organizations/src/common_widgets/top_gradient.dart';
 import 'package:notifi/persons/src/features/persons/domain/nperson.dart';
-import 'package:notifi/npersons/nperson_poster.dart';
+import '../../nperson_poster.dart';
 
 class NPersonListTile extends StatelessWidget {
   const NPersonListTile({

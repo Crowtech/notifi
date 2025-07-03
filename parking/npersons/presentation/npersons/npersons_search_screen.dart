@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:notifi/npersons/data/npersons_repository.dart';
-import 'package:notifi/npersons/presentation/npersons/nperson_form.dart';
-import 'package:notifi/npersons/presentation/npersons/nperson_list_tile.dart';
-import 'package:notifi/npersons/presentation/npersons/nperson_list_tile_shimmer.dart';
-import 'package:notifi/npersons/presentation/npersons/npersons_search_bar.dart';
-import 'package:notifi/npersons/presentation/npersons/npersons_search_query_notifier.dart';
+import '../../data/npersons_repository.dart';
+import 'package:notifi/forms/person_form.dart';
+import 'nperson_list_tile.dart';
+import 'nperson_list_tile_shimmer.dart';
+import 'npersons_search_bar.dart';
+import 'npersons_search_query_notifier.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
 
@@ -111,7 +111,7 @@ class NPersonsSearchScreen extends ConsumerWidget {
           logNoStack.i("NPERSONS_SEARCH_SCREEN: Add button pressed");
           showDialog(
             context: context,
-            builder: (context) => CreateNPersonForm(formCode: "person"),
+            builder: (context) => CreatePersonForm(formCode: "person"),
           );
         },
         // foregroundColor: customizations[index].$1,
