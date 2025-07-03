@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:notifi/credentials.dart';
-import 'package:notifi/movies/domain/tmdb_movie.dart';
-import 'package:notifi/movies/domain/tmdb_movies_response.dart';
+import '../domain/tmdb_movie.dart';
+import '../domain/tmdb_movies_response.dart';
 import 'package:notifi/organizations/src/utils/cancel_token_ref.dart';
 import 'package:notifi/organizations/src/utils/dio_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:notifi/movies/domain/tmdb_movie.dart';
-import 'package:notifi/movies/movie_poster.dart';
+import '../../domain/tmdb_movie.dart';
+import '../../movie_poster.dart';
 import 'package:notifi/organizations/src/common_widgets/top_gradient.dart';
 
 class MovieListTile extends StatelessWidget {

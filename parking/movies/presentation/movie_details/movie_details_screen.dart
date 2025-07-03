@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:notifi/movies/data/movies_repository.dart';
-import 'package:notifi/movies/domain/tmdb_movie.dart';
-import 'package:notifi/movies/presentation/movies/movie_list_tile.dart';
-import 'package:notifi/movies/presentation/movies/movie_list_tile_shimmer.dart';
+import '../../data/movies_repository.dart';
+import '../../domain/tmdb_movie.dart';
+import '../movies/movie_list_tile.dart';
+import '../movies/movie_list_tile_shimmer.dart';
 
 class MovieDetailsScreen extends ConsumerWidget {
   const MovieDetailsScreen(

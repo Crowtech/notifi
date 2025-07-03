@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:notifi/movies/data/movies_repository.dart';
-import 'package:notifi/movies/presentation/movies/movie_list_tile.dart';
-import 'package:notifi/movies/presentation/movies/movie_list_tile_shimmer.dart';
-import 'package:notifi/movies/presentation/movies/movies_search_bar.dart';
-import 'package:notifi/movies/presentation/movies/movies_search_query_notifier.dart';
+import '../../data/movies_repository.dart';
+import 'movie_list_tile.dart';
+import 'movie_list_tile_shimmer.dart';
+import 'movies_search_bar.dart';
+import 'movies_search_query_notifier.dart';
 
 class MoviesSearchScreen extends ConsumerWidget {
   const MoviesSearchScreen({super.key});

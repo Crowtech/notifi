@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:notifi/movies/movie_poster.dart';
-import 'package:notifi/movies/presentation/movies/movie_list_tile.dart';
+import '../../movie_poster.dart';
+import 'movie_list_tile.dart';
 import 'package:shimmer/shimmer.dart';
 
 class MovieListTileShimmer extends StatelessWidget {
