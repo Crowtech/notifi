@@ -103,7 +103,7 @@ class RegistrationsRepository {
         options: options, data: data, cancelToken: cancelToken);
 
     logNoStack
-        .i("REGISTRATIONS_REPOSITORY: now Playing , responseData=${response.data}");
+        .i("REGISTRATIONS_REPOSITORY: !fetching for list , responseData=${response.data}");
     return RegistrationsResponse.fromJson(response.data);
   }
 

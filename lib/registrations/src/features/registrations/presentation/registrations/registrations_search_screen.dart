@@ -88,7 +88,7 @@ class RegistrationsSearchScreen extends ConsumerWidget {
                     ),
                     loading: () => const RegistrationListTileShimmer(),
                     data: (response) {
-                      //log('index: $index, page: $page, indexInPage: $indexInPage, len: ${response.results.length}');
+                      logNoStack.i('Registrations list: index: $index, page: $page, indexInPage: $indexInPage, len: ${response.items!.length}');
                       // * This condition only happens if a null itemCount is given
                       if (indexInPage >= response.items!.length) {
                         return null;
