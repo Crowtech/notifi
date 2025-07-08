@@ -127,7 +127,7 @@ class RegistrationsRepository {
 
     final response =
         await client.get(url, options: options, cancelToken: cancelToken);
-        logNoStack.i("REGISTRATIONS_REPOSITORY: ${response.data}");
+        logNoStack.i("REGISTRATIONS_REPOSITORY: @@@@@ ${response.data}");
     return Registration.fromJson(response.data);
   }
 }
