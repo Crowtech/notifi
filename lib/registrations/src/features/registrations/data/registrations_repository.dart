@@ -104,7 +104,9 @@ class RegistrationsRepository {
 
     logNoStack
         .i("REGISTRATIONS_REPOSITORY: !fetching for list , responseData=${response.data}");
-    return RegistrationsResponse.fromJson(response.data);
+    RegistrationsResponse rr =  RegistrationsResponse.fromJson(response.data);
+    logNoStack.i("REGISTRATIONS_REPOSITORY AFTER JSON ${rr.toString()}");
+    return rr;
   }
 
   Future<Registration> registration({required int registrationId, CancelToken? cancelToken}) async {
@@ -189,6 +191,7 @@ Future<RegistrationsResponse> fetchRegistrations(
   ref.onResume(() {
     timer?.cancel();
   });
+
   if (queryData.query.isEmpty) {
     // use non-search endpoint
     return registrationsRepo.nowPlayingRegistrations(

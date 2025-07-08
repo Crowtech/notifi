@@ -40,6 +40,7 @@ class RegistrationsSearchScreen extends ConsumerWidget {
       fetchRegistrationsProvider(queryData: (page: 0, query: query)),
     );
     final totalItems = responseAsync.valueOrNull?.totalItems;
+    logNoStack.i("Registrations list: totalItems=${totalItems}");
     return Scaffold(
       appBar: AppBar(title: Text(nt.t.resources.registration)),
       body: Column(
