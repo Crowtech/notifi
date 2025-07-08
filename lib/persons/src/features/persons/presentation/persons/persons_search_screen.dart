@@ -87,10 +87,10 @@ class PersonsSearchScreen extends ConsumerWidget {
                     data: (response) {
                       //log('index: $index, page: $page, indexInPage: $indexInPage, len: ${response.results.length}');
                       // * This condition only happens if a null itemCount is given
-                      if (indexInPage >= response.items.length) {
+                      if (indexInPage >= response.items!.length) {
                         return null;
                       }
-                      final person = response.items[indexInPage];
+                      final person = response.items![indexInPage];
                       return Dismissible(
                           key: Key(person.id.toString()),
                           direction: DismissDirection.horizontal,

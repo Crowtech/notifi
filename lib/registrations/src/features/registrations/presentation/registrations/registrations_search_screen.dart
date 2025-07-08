@@ -90,10 +90,10 @@ class RegistrationsSearchScreen extends ConsumerWidget {
                     data: (response) {
                       //log('index: $index, page: $page, indexInPage: $indexInPage, len: ${response.results.length}');
                       // * This condition only happens if a null itemCount is given
-                      if (indexInPage >= response.items.length) {
+                      if (indexInPage >= response.items!.length) {
                         return null;
                       }
-                      var registration = response.items[indexInPage];
+                      var registration = response.items![indexInPage];
                       return Dismissible(
                           key: Key(registration.id.toString()),
                           direction: DismissDirection.horizontal,

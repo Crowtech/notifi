@@ -24,7 +24,7 @@ class UsersConsumer extends ConsumerWidget {
                     shrinkWrap: true,
                     itemCount: users.itemCount(),
                     itemBuilder: (context, index) {
-                      return Text(users.items![index].email);
+                      return Text(users.items![index].email!);
                     },
                   )
                 ],
