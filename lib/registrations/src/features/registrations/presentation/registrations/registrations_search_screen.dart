@@ -54,10 +54,10 @@ class RegistrationsSearchScreen extends ConsumerWidget {
                 ref.invalidate(fetchRegistrationsProvider);
                 // keep showing the progress indicator until the first page is fetched
                 try {
-                  await ref.read(
-                    fetchRegistrationsProvider(
-                        queryData: (page: 0, query: query)).future,
-                  );
+                  // await ref.read(
+                  //   fetchRegistrationsProvider(
+                  //       queryData: (page: 0, query: query)).future,
+                  // );
                 } catch (e) {
                   // fail silently as the provider error state is handled inside the ListView
                 }
@@ -76,10 +76,10 @@ class RegistrationsSearchScreen extends ConsumerWidget {
                   // as soon as the index exceeds the page size
                   // Note that ref.watch is called for up to pageSize items
                   // with the same page and query arguments (but this is ok since data is cached)
-                  final responseAsync = ref.watch(
-                    fetchRegistrationsProvider(
-                        queryData: (page: page, query: query)),
-                  );
+                  // final responseAsync = ref.watch(
+                  //   fetchRegistrationsProvider(
+                  //       queryData: (page: page, query: query)),
+                  // );
                   return responseAsync.when(
                     error: (err, stack) => RegistrationListTileError(
                       query: query,
@@ -90,6 +90,7 @@ class RegistrationsSearchScreen extends ConsumerWidget {
                     ),
                     loading: () => const RegistrationListTileShimmer(),
                     data: (response) {
+                      logNoStack.i("Registrations list0: items=${response.items}");
                       logNoStack.i("Registrations list1 ${response.items}");
                       logNoStack.i('Registrations list2: index: $index, page: $page, indexInPage: $indexInPage, len: ${response.items!.length}');
                       // * This condition only happens if a null itemCount is given
