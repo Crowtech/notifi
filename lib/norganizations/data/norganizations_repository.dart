@@ -60,10 +60,10 @@ class NOrganizationsRepository {
       "Authorization": 'Bearer $token'
     });
 
-logNoStack.i("NORGANIZATIONS_REPOSITORY: $host  ${uri} ${data}");
+logNoStack.i("NORGANIZATIONS_REPOSITORY: $host  $uri $data");
     final response = await client.postUri(uri,
         options: options, data: data, cancelToken: cancelToken);
-        logNoStack.i("NORGANIZATIONS_REPOSITORY ${response}");
+        logNoStack.i("NORGANIZATIONS_REPOSITORY $response");
     return NOrganizationsResponse.fromJson(response.data);
   }
 

@@ -5,7 +5,6 @@ import 'package:notifi/models/crowtech_object.dart';
 import 'package:notifi/models/organization.dart';
 import 'package:notifi/models/person.dart';
 
-
 part 'registration.g.dart';
 
 var log = logger.Logger(
@@ -27,6 +26,7 @@ class Registration extends CrowtechObject {
   String? inviteeFirstname;
   String? inviteeLastname;
   String? inviteeI18n;
+  bool? inviteeApproved;
   Organization? organization;
   int? orgId;
   Person? user;
@@ -55,6 +55,7 @@ class Registration extends CrowtechObject {
       required this.inviteeFirstname,
       required this.inviteeLastname,
       required this.inviteeI18n,
+      required this.inviteeApproved,
       this.organization,
       required this.orgId,
       this.user,
@@ -85,13 +86,12 @@ class Registration extends CrowtechObject {
     return "Registration=>${super.toString()} $email $orgId $userId $inviterId $approverId";
   }
 
-  String getAvatarUrl()
-  {
+  String getAvatarUrl() {
     return "$defaultMinioEndpointUrl/$defaultRealm/generic_person.png";
   }
 
   String getInitials() {
-    return "${inviteeFirstname != null ? inviteeFirstname!.substring(0, 1).toUpperCase():''}${inviteeLastname != null ? inviteeLastname!.substring(0, 1).toUpperCase():''}";
+    return "${inviteeFirstname != null ? inviteeFirstname!.substring(0, 1).toUpperCase() : ''}${inviteeLastname != null ? inviteeLastname!.substring(0, 1).toUpperCase() : ''}";
   }
 
   Registration copyWith({
@@ -105,6 +105,7 @@ class Registration extends CrowtechObject {
     String? inviteeFirstname,
     String? inviteeLastname,
     String? inviteeI18n,
+    bool? inviteeApproved,
     int? orgId,
     int? userId,
     int? inviterId,
@@ -125,19 +126,19 @@ class Registration extends CrowtechObject {
       name: name ?? this.name,
       email: email ?? this.email,
       inviteeFirstname: inviteeFirstname ?? this.inviteeFirstname,
-           inviteeLastname: inviteeLastname ?? this.inviteeLastname,
-
+      inviteeLastname: inviteeLastname ?? this.inviteeLastname,
       inviteeI18n: inviteeI18n ?? this.inviteeI18n,
+      inviteeApproved: inviteeApproved ?? this.inviteeApproved,
       orgId: orgId ?? this.orgId,
       userId: userId ?? this.userId,
       inviterId: inviterId ?? this.inviterId,
       approverId: approverId ?? this.approverId,
-approvalNeeded: approvalNeeded ?? this.approvalNeeded,
-approved: approved ?? this.approved,
-approvalDateTime: approvalDateTime ?? this.approvalDateTime,
-approvalReason: approvalReason ?? this.approvalReason,
-firstLogin: firstLogin ?? this.firstLogin,
-joinCode: joinCode ?? this.joinCode,
+      approvalNeeded: approvalNeeded ?? this.approvalNeeded,
+      approved: approved ?? this.approved,
+      approvalDateTime: approvalDateTime ?? this.approvalDateTime,
+      approvalReason: approvalReason ?? this.approvalReason,
+      firstLogin: firstLogin ?? this.firstLogin,
+      joinCode: joinCode ?? this.joinCode,
     );
   }
 }
@@ -153,6 +154,7 @@ Registration defaultRegistration = Registration(
   inviteeFirstname: "", // firstname
   inviteeLastname: "", // lastname
   inviteeI18n: "en", //i18n,
+  inviteeApproved: false,
   orgId: 1,
   userId: null,
   inviterId: null,
@@ -163,6 +165,4 @@ Registration defaultRegistration = Registration(
   approvalReason: null,
   firstLogin: null,
   joinCode: null,
-
-
 ); //fcm

@@ -21,6 +21,7 @@ Registration _$RegistrationFromJson(Map<String, dynamic> json) => Registration(
       inviteeFirstname: json['inviteeFirstname'] as String?,
       inviteeLastname: json['inviteeLastname'] as String?,
       inviteeI18n: json['inviteeI18n'] as String?,
+      inviteeApproved: json['inviteeApproved'] as bool?,
       organization: json['organization'] == null
           ? null
           : Organization.fromJson(json['organization'] as Map<String, dynamic>),
@@ -62,6 +63,7 @@ Map<String, dynamic> _$RegistrationToJson(Registration instance) =>
       'inviteeFirstname': instance.inviteeFirstname,
       'inviteeLastname': instance.inviteeLastname,
       'inviteeI18n': instance.inviteeI18n,
+      'inviteeApproved': instance.inviteeApproved,
       'organization': instance.organization?.toJson(),
       'orgId': instance.orgId,
       'user': instance.user?.toJson(),

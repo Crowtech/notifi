@@ -13,7 +13,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:logger/logger.dart' as logger;
 
-import '../domain/registration.dart';
+import '../../../../../models/registration.dart';
 import '../domain/registrations_response.dart';
 
 part 'registrations_repository.g.dart';

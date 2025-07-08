@@ -1,183 +1,251 @@
+# Notifi - Crowtech Notification and Management Library
+# A comprehensive Flutter library for notification management, user authentication,
+# organization management, and geolocation services built by Crowtech Pty Ltd.
 name: notifi
 description: "Crowtech Common Library."
 
+# Version: 8.72.0 - Current stable release
+# Use semantic versioning: MAJOR.MINOR.PATCH
+# MAJOR: Breaking changes
+# MINOR: New features (backward compatible)
+# PATCH: Bug fixes (backward compatible)
 version: 8.72.0
 #homepage:
 
+# Environment constraints for Dart SDK and Flutter framework
 environment:
-  sdk: ">=3.6.0 <4.0.0"
-  flutter: '>=3.27.0-2.0.pre.38697'
+  sdk: ">=3.6.0 <4.0.0"        # Dart SDK version range
+  flutter: '>=3.27.0-2.0.pre.38697'  # Minimum Flutter version
 
+# Main dependencies for the notifi library
 dependencies:
+  # Core Flutter framework dependencies
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
 
+  # Background geolocation tracking
   flutter_background_geolocation:
     git:
       url: https://github.com/transistorsoft/flutter_background_geolocation.git
 
-  android_id: ^0.4.0
-  app_badge_plus: ^1.1.2
-  app_set_id: ^1.2.1
-  async: ^2.11.0
-  async_textformfield: ^3.0.1+1
-  badges: ^3.1.2
-  background_fetch: ^1.3.7
+  # Device identification and platform utilities
+  android_id: ^0.4.0                    # Android device ID
+  app_badge_plus: ^1.1.2                # App badge notifications
+  app_set_id: ^1.2.1                    # App set identifier
+  
+  # Asynchronous programming and UI components
+  async: ^2.11.0                        # Async utilities
+  async_textformfield: ^3.0.1+1         # Async text form fields
+  badges: ^3.1.2                        # Badge widgets
+  background_fetch: ^1.3.7              # Background task execution
+  
+  # Shared value management (local path dependency)
+  # Provides efficient shared value state management
+  # Using local path for custom modifications
   #bdaya_shared_value: ^3.1.3
   bdaya_shared_value: #^3.1.3
      path: ../flutter-shared-value
-  cached_network_image: ^3.0.0
-  camera: ^0.11.1
-  device_info_plus: ^11.2.1
-  dio: ^5.4.3
-  dropdown_button2: ^2.3.9
-  email_validator: ^3.0.0
-  flutter_animate: ^4.5.2
-  flutter_native_splash: ^2.4.4
-  flutter_svg: ^2.0.17
-  flutter_map_animations: ^0.9.0
-  flutter_map_cancellable_tile_provider: ^3.1.0
+  
+  # Image and media handling
+  cached_network_image: ^3.0.0          # Network image caching
+  camera: ^0.11.1                       # Camera functionality
+  # Device and network utilities
+  device_info_plus: ^11.2.1             # Device information
+  dio: ^5.4.3                           # HTTP client
+  
+  # UI components and form handling
+  dropdown_button2: ^2.3.9              # Enhanced dropdown buttons
+  email_validator: ^3.0.0               # Email validation
+  flutter_animate: ^4.5.2               # Animation utilities
+  flutter_native_splash: ^2.4.4         # Native splash screen
+  flutter_svg: ^2.0.17                  # SVG support
+  flutter_form_builder: ^10.0.1         # Form building utilities
+  
+  # Map and geolocation components
+  flutter_map_animations: ^0.9.0        # Map animations
+  flutter_map_cancellable_tile_provider: ^3.1.0  # Cancellable tile provider
   #easy_web_view: ^2.1.0
-  flutter_form_builder: ^10.0.1
+  # OpenStreetMap integration for interactive maps
+  # Using git dependency for latest features/fixes
   #flutter_osm_plugin: ^1.3.8
-  flutter_osm_plugin: 
+  flutter_osm_plugin:                   # OpenStreetMap plugin
     git:
       url: git:liodali/osm_flutter.git 
-  flutter_hooks: ^0.21.2
-  flutter_map: ^8.1.1
-  flutter_map_location_marker: ^10.1.0
+  flutter_hooks: ^0.21.2                # React-style hooks for Flutter
+  flutter_map: ^8.1.1                   # Interactive maps
+  flutter_map_location_marker: ^10.1.0  # Location markers for maps
    #  path: ../flutter_map_location_marker
-  firebase_messaging: ^15.1.3
+  # Firebase and notification services
+  firebase_messaging: ^15.1.3           # Firebase Cloud Messaging
+  firebase_core: ^3.8.0                 # Firebase core functionality
+  flutter_local_notifications: ^19.3.0  # Local notifications
   
-  flutter_local_notifications: ^19.3.0
-  flutter_quill: ^11.4.0  
-  flutter_quill_delta_from_html: ^1.5.2
-  flutter_quill_extensions: ^11.0.0
-  flutter_regex: ^0.0.3
-  flutter_riverpod:
+  # Rich text editing
+  flutter_quill: ^11.4.0                # Rich text editor
+  flutter_quill_delta_from_html: ^1.5.2 # HTML to Delta conversion
+  flutter_quill_extensions: ^11.0.0     # Quill editor extensions
+  
+  # Utilities and validation
+  flutter_regex: ^0.0.3                 # Regular expression utilities
+  flutter_riverpod:                     # State management
   #flutter_rotation_sensor: ^0.1.0
-  fluttertoast: ^8.2.11
-  flutter_secure_storage: any
-  flutter_dotenv: ^5.2.1
-  firebase_core: ^3.8.0 
-  force_update_helper: ^0.2.1
-  form_builder_validators: ^11.1.2
-  freezed_annotation: ^3.0.0
+  fluttertoast: ^8.2.11                 # Toast notifications
+  flutter_secure_storage: any           # Secure local storage
+  flutter_dotenv: ^5.2.1                # Environment variables 
+  # App lifecycle and updates
+  force_update_helper: ^0.2.1           # Force app updates
+  
+  # Form validation and data handling
+  form_builder_validators: ^11.1.2      # Form validators
+  freezed_annotation: ^3.0.0            # Immutable data classes
   #get_storage: ^2.1.1
-  geolocator: ^14.0.1
-  go_router: ^16.0.0
-  google_fonts: ^6.1.0
-  hooks_riverpod: ^2.6.1
-  image_picker: ^1.1.2
-  intl: any
-  json_annotation: ^4.9.0
-  jwt_decoder: ^2.0.1
-  latlng: ^2.0.7 
-  latlong2: ^0.9.1
-  logger: ^2.6.0
-  minio: ^3.5.7
-  mockito: ^5.0.13
+  
+  # Geolocation and mapping utilities
+  geolocator: ^14.0.1                   # Location services
+  latlng: ^2.0.7                        # Latitude/longitude utilities
+  latlong2: ^0.9.1                      # Geographic coordinates
+  
+  # Navigation and routing
+  go_router: ^16.0.0                    # Declarative routing
+  
+  # UI and fonts
+  google_fonts: ^6.1.0                  # Google Fonts integration
+  
+  # State management
+  hooks_riverpod: ^2.6.1                # Riverpod with hooks
+  
+  # Media and data handling
+  image_picker: ^1.1.2                  # Image selection
+  intl: any                             # Internationalization
+  json_annotation: ^4.9.0               # JSON serialization annotations
+  jwt_decoder: ^2.0.1                   # JWT token decoding
+  logger: ^2.6.0                        # Logging utilities
+  minio: ^3.5.7                         # MinIO object storage
+  mockito: ^5.0.13                      # Mocking for tests
+  # Authentication (OIDC) - Local path dependencies
   #oidc: ^0.9.0+1
-  oidc: 
+  oidc:                                  # OpenID Connect client
     path: ../oidc/packages/oidc 
-  oidc_core: #^0.9.1
+  oidc_core: #^0.9.1                    # OIDC core functionality
     path: ../oidc/packages/oidc_core 
-  oidc_default_store: #^0.2.0+12
+  oidc_default_store: #^0.2.0+12        # OIDC default storage
     path: ../oidc/packages/oidc_default_store
-  onboarding: ^4.0.2
-  package_info_plus: ^8.1.1 
+  
+  # User experience
+  onboarding: ^4.0.2                    # App onboarding
+  package_info_plus: ^8.1.1             # Package information
+  
+  # Web and interaction utilities
   #pointer_interceptor: ^0.10.1+2
-  pointer_interceptor_web: ^0.10.3
-  posthog_flutter: ^5.0.0 
-  provider: ^6.1.2
-  riverpod_annotation: ^2.6.1
-  riverpod_cache: ^0.0.2
-  rxdart: any 
-  session_storage: any
-  shimmer: ^3.0.0
-  slang: ^4.6.0
-  slang_flutter: ^4.6.0
-  smooth_page_indicator: ^1.2.1
-  status_alert: 
+  pointer_interceptor_web: ^0.10.3      # Web pointer interception
+  
+  # Analytics and tracking
+  posthog_flutter: ^5.0.0               # PostHog analytics
+  
+  # Additional state management
+  provider: ^6.1.2                      # Provider state management
+  riverpod_annotation: ^2.6.1           # Riverpod annotations
+  riverpod_cache: ^0.0.2                # Riverpod caching
+  
+  # Reactive programming and storage
+  rxdart: any                           # Reactive extensions
+  session_storage: any                  # Session storage
+  shimmer: ^3.0.0                       # Shimmer loading effects
+  # Internationalization and localization
+  slang: ^4.6.0                         # Internationalization
+  slang_flutter: ^4.6.0                 # Flutter integration for slang
+  
+  # UI components and indicators
+  smooth_page_indicator: ^1.2.1         # Page indicators
+  status_alert:                         # Status alert widgets (local dependency)
      path: ../flutter-status-alert
-  url_strategy: ^0.3.0
-  uuid: ^4.5.1 
+  super_tooltip: ^2.0.9                 # Enhanced tooltips
   
-  video_player: ^2.9.2
+  # Navigation and utilities
+  url_strategy: ^0.3.0                  # URL strategy configuration
+  uuid: ^4.5.1                          # UUID generation
   
-  #html_editor_enhanced: ^2.6.0
-  #osm_flutter_hooks: ^1.4.1
- 
-  #fleather: ^1.22.0
-  #quill_html_editor: ^2.2.8
-
-  delta_to_html: ^0.2.2
-  super_tooltip: ^2.0.9
-  analyzer_plugin: ^0.13.1
-
-
-
+  # Media playback
+  video_player: ^2.9.2                  # Video player
   
+  # Rich text and HTML processing
+  # Commented packages below were previously tested alternatives
+  #html_editor_enhanced: ^2.6.0         # Alternative HTML editor
+  #osm_flutter_hooks: ^1.4.1             # OSM with hooks
+  #fleather: ^1.22.0                     # Alternative rich text editor
+  #quill_html_editor: ^2.2.8             # Alternative Quill-based editor
+  delta_to_html: ^0.2.2                 # Delta to HTML conversion
   
-  
-  
-
-#  riverpod_infinite_scroll_pagination: ^1.0.3
+  # Development and analysis tools
+  analyzer_plugin: ^0.13.1              # Static analysis plugin
 
 
 
-#  rxdart: ^0.27.7
+  # Pagination utilities (currently not used)
+  # Consider adding back for large list handling
+  #riverpod_infinite_scroll_pagination: ^1.0.3
   #infinite_scroll_pagination: 5.0.0
   #infinite_scroll_pagination: 
- #  path:  ../infinite_scroll_pagination
+  #  path:  ../infinite_scroll_pagination
 
 
 
+# Development dependencies for building, testing, and code generation
 dev_dependencies:
+  # Core testing framework
   flutter_test:
     sdk: flutter
-  build_runner: ^2.5.4
-  custom_lint: any 
-  json_serializable: ^6.9.0
-
-  flutter_launcher_icons: ^0.14.3
- 
   flutter_web_plugins:
     sdk: flutter
-
-  flutter_lints: ^6.0.0
-  freezed: ^3.0.6
-  go_router_builder: ^3.0.0
-  riverpod_lint: any #^2.6.4
-  riverpod_generator: any #^2.6.4
-  slang_build_runner: ^4.6.0 # ONLY if you use build_runner (2/2)
-  # Localization
-  slang_gpt: ^0.11.0
+  
+  # Code generation and build tools
+  build_runner: ^2.5.4                  # Code generation runner
+  json_serializable: ^6.9.0             # JSON serialization code generation
+  freezed: ^3.0.6                       # Immutable class generation
+  go_router_builder: ^3.0.0             # Go router code generation
+  
+  # Linting and static analysis
+  custom_lint: any                      # Custom lint rules
+  flutter_lints: ^6.0.0                 # Flutter-specific lint rules
+  riverpod_lint: any #^2.6.4            # Riverpod lint rules
+  riverpod_generator: any #^2.6.4       # Riverpod code generation
   #very_good_analysis: ^6.0.0
+  
+  # App configuration
+  flutter_launcher_icons: ^0.14.3       # App icon generation
+  
+  # Internationalization build tools
+  slang_build_runner: ^4.6.0            # Slang build runner integration
+  slang_gpt: ^0.11.0                    # GPT-powered localization
 
 
-# The following section is specific to Flutter packages.
+# Flutter-specific configuration
 flutter:
-
+  # Enable code generation for localization
   generate: true
+  # Use Material Design components
   uses-material-design: true
+  
+  # Custom font definitions
   fonts:
-    - family: Avenir
+    - family: Avenir                    # Primary font family
       fonts:
-        - asset: assets/fonts/AvenirLTStd-Roman.otf
-        - asset: assets/fonts/AvenirLTStd-Black.otf
+        - asset: assets/fonts/AvenirLTStd-Roman.otf     # Regular weight
+        - asset: assets/fonts/AvenirLTStd-Black.otf     # Bold weight
           weight: 700
-        - asset: assets/fonts/AvenirLTStd-Book.otf
+        - asset: assets/fonts/AvenirLTStd-Book.otf      # Light weight
           weight: 200
+    # Additional font families can be added here
     # - family: Schyler
     #   fonts:
     #     - asset: fonts/Schyler-Regular.ttf
     #     - asset: fonts/Schyler-Italic.ttf
     #       style : italic
 
+# Asset declarations
 assets:
-    - assets/
-    - assets/images/markers/
-    - assets/welcome.json
+    - assets/                           # General assets directory
+    - assets/images/markers/            # Map marker images
+    - assets/welcome.json               # Welcome screen configuration

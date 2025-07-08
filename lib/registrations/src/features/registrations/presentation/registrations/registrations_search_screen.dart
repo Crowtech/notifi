@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/credentials.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
-import 'package:notifi/registrations/src/features/registrations/domain/registration.dart';
+import 'package:notifi/models/registration.dart';
 import 'package:notifi/registrations/src/features/registrations/presentation/registration_details/registration_details_screen.dart';
 import 'package:notifi/state/nest_auth2.dart';
 import 'package:notifi/widgets/slide_left_reject.dart';

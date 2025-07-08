@@ -46,10 +46,36 @@ class SignedIn extends Auth {
       required this.token})
       : super._();
 
+  /// Unique identifier for the authenticated user
+  ///
+  /// This ID is used throughout the application to reference the user
+  /// in database operations, API calls, and business logic.
   final int id;
+
+  /// Display name shown in the user interface
+  ///
+  /// This is the human-readable name that appears in the UI, notifications,
+  /// and other user-facing elements. It may differ from the user's legal name.
   final String displayName;
+
+  /// User's email address
+  ///
+  /// Primary email for the user account, used for:
+  /// - Account identification and login
+  /// - Communication and notifications
+  /// - Password recovery and security alerts
   final String email;
+
+  /// Internal resource code for access control
+  ///
+  /// This identifier is used internally for resource access control,
+  /// permissions management, and organizational hierarchy.
   final String resourcecode;
+
+  /// Authentication token for API requests
+  ///
+  /// JWT or similar token that provides authentication and authorization
+  /// for API calls. Should be included in request headers for secured endpoints.
   final String token;
 
   /// Create a copy of Auth

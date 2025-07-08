@@ -1,7 +1,7 @@
-library core;
+library;
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'registration.dart';
+import '../../../../../models/registration.dart';
 
 part 'registrations_response.freezed.dart';
 part 'registrations_response.g.dart';

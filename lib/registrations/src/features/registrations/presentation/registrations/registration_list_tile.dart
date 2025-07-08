@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../../organizations/src/common_widgets/nest_poster.dart';
 import '../../../../../../organizations/src/common_widgets/top_gradient.dart';
-import '../../domain/registration.dart';
+import '../../../../../../models/registration.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
 
 class RegistrationListTile extends StatelessWidget {

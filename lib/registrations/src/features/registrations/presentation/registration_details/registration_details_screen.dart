@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/registrations_repository.dart';
-import '../../domain/registration.dart';
+import '../../../../../../models/registration.dart';
 import '../registrations/registration_list_tile.dart';
 import '../registrations/registration_list_tile_shimmer.dart';
 

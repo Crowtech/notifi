@@ -1,4 +1,35 @@
-library notifi;
+/// # Notifi Library
+/// 
+/// A comprehensive Flutter library for managing notifications, authentication, and device capabilities.
+/// This library provides a centralized system for handling Firebase Cloud Messaging (FCM),
+/// user authentication, camera access, and cross-platform device management.
+/// 
+/// ## Features
+/// - Firebase Cloud Messaging (FCM) integration
+/// - Cross-platform notification support (iOS, Android, Web)
+/// - Camera device management
+/// - User authentication and session management
+/// - Topic-based messaging system
+/// - Local notification display
+/// - Platform-specific behavior handling
+/// 
+/// ## Usage
+/// ```dart
+/// // Initialize the Notifi system
+/// final notifi = Notifi(
+///   ref: ref,
+///   packageInfo: packageInfo,
+///   deviceId: deviceId,
+///   topics: ['general', 'updates'],
+/// );
+/// 
+/// // Initialize notifications and camera
+/// await notifi.init();
+/// 
+/// // Subscribe to topics
+/// notifi.subscribeToTopics();
+/// ```
+library;
 
 import 'dart:convert';
 import 'dart:io' show Platform;
@@ -20,30 +51,60 @@ import 'package:logger/logger.dart' as logger;
 import 'credentials.dart';
 import 'firebase/firebase_api.dart';
 
+/// Global logger instance with stack trace information for debugging.
+/// Used for detailed error reporting and debugging information.
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
   level: logger.Level.info,
 );
 
+/// Global logger instance without stack trace information.
+/// Used for general information logging and cleaner output.
 var logNoStack = logger.Logger(
   printer: logger.PrettyPrinter(methodCount: 0),
   level: logger.Level.info,
 );
 
+/// Returns true if the current platform is Android and not running on web.
 bool get isAndroid => !kIsWeb && Platform.isAndroid;
+
+/// Returns true if the current platform is iOS and not running on web.
 bool get isIOS => !kIsWeb && Platform.isIOS;
+
+/// Returns true if the current platform is Windows and not running on web.
 bool get isWindows => !kIsWeb && Platform.isWindows;
 
+/// Global FCM token storage for Firebase Cloud Messaging.
+/// This token is used to identify the device for push notifications.
 String? _fcmToken = '';
+
+/// Getter for the current FCM token.
+/// Returns null if no token has been generated yet.
 String? get fcmToken => _fcmToken;
 
+/// Android-specific notification channel for high-importance notifications.
+/// This channel is used to display heads-up notifications on Android devices.
 late AndroidNotificationChannel _androidChannel;
 
+/// Flag to track whether Flutter Local Notifications has been initialized.
+/// Prevents multiple initialization attempts.
 bool isFlutterLocalNotificationsInitialized = false;
 
-// /// Initialize the [FlutterLocalNotificationsPlugin] package.
+/// Flutter Local Notifications plugin instance.
+/// Used to display local notifications across all platforms.
 late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
+/// Background message handler for Firebase Cloud Messaging.
+/// 
+/// This function is called when a push notification is received while the app
+/// is in the background or terminated. It must be a top-level function and
+/// marked with @pragma('vm:entry-point') to be accessible from native code.
+/// 
+/// **Parameters:**
+/// - `message`: The [RemoteMessage] containing notification data
+/// 
+/// **Note:** This function automatically initializes Firebase if needed
+/// and logs the message ID for debugging purposes.
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
@@ -53,6 +114,24 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   log.d("Handling a background message: ${message.messageId}");
 }
 
+/// Sets up Flutter Local Notifications for cross-platform notification display.
+/// 
+/// This function initializes the notification system with platform-specific
+/// configurations. It creates an Android notification channel for high-importance
+/// notifications and configures iOS foreground notification presentation.
+/// 
+/// **Features:**
+/// - Creates Android notification channel with heads-up notifications
+/// - Configures iOS foreground notification presentation (alert, badge, sound)
+/// - Prevents duplicate initialization
+/// - Enables cross-platform notification display
+/// 
+/// **Returns:** Future<void> that completes when setup is finished
+/// 
+/// **Example:**
+/// ```dart
+/// await setupFlutterNotifications();
+/// ```
 Future<void> setupFlutterNotifications() async {
   if (isFlutterLocalNotificationsInitialized) {
     log.d("Flutter Local Notifications not initialised, exiting");
@@ -88,60 +167,136 @@ Future<void> setupFlutterNotifications() async {
   isFlutterLocalNotificationsInitialized = true;
 }
 
+/// Main Notifi class that manages notifications, authentication, and device capabilities.
+/// 
+/// This class extends [ChangeNotifier] to provide reactive state management for
+/// the notification system. It handles Firebase Cloud Messaging, user authentication,
+/// camera access, and cross-platform device management.
+/// 
+/// **Key Features:**
+/// - Firebase Cloud Messaging integration
+/// - Topic-based messaging system
+/// - User authentication management
+/// - Camera device enumeration
+/// - Cross-platform notification support
+/// - Toast notification display
+/// 
+/// **Example Usage:**
+/// ```dart
+/// final notifi = Notifi(
+///   ref: ref,
+///   packageInfo: packageInfo,
+///   deviceId: deviceId,
+///   topics: ['general', 'updates'],
+/// );
+/// 
+/// await notifi.init();
+/// notifi.subscribeToTopics();
+/// ```
 class Notifi extends ChangeNotifier {
+  /// Riverpod reference for state management integration.
   Ref ref;
   
+  /// Duration in seconds for toast notifications display.
   int secondsToast = 2;
+  
+  /// List of FCM topics this device is subscribed to.
   final List<String> _topics = [];
+  
+  /// Current Firebase Cloud Messaging token.
   String _fcm = "Loading ...";
+  
+  /// Flag to prevent automatic login on app start.
   bool _preventAutoLogin = false;
 
+  /// Package information for the current app.
   late PackageInfo _packageInfo;
+  
+  /// Unique device identifier.
   late String _deviceId;
+  
+  /// List of available camera devices on the current platform.
   List<CameraDescription> _cameras = <CameraDescription>[];
 
+  /// Currently authenticated user.
   Person.Person? _user;
+  
+  /// Flag indicating if user data is ready for use.
   bool _userReady = false;
 
+  /// Firebase configuration options for initialization.
   FirebaseOptions? options;
 
+  /// Returns whether user data is ready for use.
   bool get userReady => _userReady;
+  
+  /// Sets the user ready state.
   set userReady(bool value) {
     _userReady = value;
   }
 
+  /// Returns the unique device identifier.
   String? get deviceId => _deviceId;
 
+  /// Returns the current app's package information.
   PackageInfo? get packageInfo => _packageInfo;
+  
+  /// Returns the current app version from package info.
   String get appVersion => _packageInfo.version;
 
-  /// List of items in the cart.
+  /// Returns the list of FCM topics this device is subscribed to.
+  /// Topics are used for targeted messaging to groups of devices.
   List<String> get topics => _topics;
 
+  /// Returns the current Firebase Cloud Messaging token.
   String get fcm => _fcm;
+  
+  /// Returns the list of available camera devices.
   List<CameraDescription> get cameras => _cameras;
 
+  /// Returns this Notifi instance (self-reference for convenience).
   Notifi get notifi => this;
 
+  /// Returns whether automatic login is prevented.
   bool get preventAutoLogin => _preventAutoLogin;
 
+  /// Sets whether to prevent automatic login on app start.
   set preventAutoLogin(bool value) {
     _preventAutoLogin = value;
   }
 
+  /// Returns the currently authenticated user.
   Person.Person? get currentUser => _user;
 
+  /// Sets the current user and marks user data as ready.
+  /// Notifies listeners when the user changes.
   set currentUser(Person.Person? user) {
     _user = user;
     _userReady = true;
     notifyListeners();
   }
 
+  /// Sets the FCM token and notifies listeners of the change.
+  /// This is called when a new FCM token is generated.
   set fcm(String newFcm) {
     _fcm = newFcm;
     notifyListeners();
   }
 
+  /// Adds a new topic to the subscription list.
+  /// 
+  /// Topics are used for targeted messaging to groups of devices.
+  /// After adding a topic, you should call [subscribeToTopics] to
+  /// actually subscribe to it with Firebase.
+  /// 
+  /// **Parameters:**
+  /// - `topic`: The topic name to add
+  /// 
+  /// **Example:**
+  /// ```dart
+  /// notifi.addTopic('news');
+  /// notifi.subscribeToTopics();
+  /// ```
   void addTopic(String topic) {
     _topics.add(topic);
     // This line tells [Model] that it should rebuild the widgets that
@@ -149,6 +304,18 @@ class Notifi extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Removes a topic from the subscription list.
+  /// 
+  /// This removes the topic from the local list but does not
+  /// automatically unsubscribe from it with Firebase.
+  /// 
+  /// **Parameters:**
+  /// - `topic`: The topic name to remove
+  /// 
+  /// **Example:**
+  /// ```dart
+  /// notifi.removeTopic('news');
+  /// ```
   void removeTopic(String topic) {
     _topics.remove(topic);
     // This line tells [Model] that it should rebuild the widgets that
@@ -156,6 +323,29 @@ class Notifi extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Creates a new Notifi instance with the specified configuration.
+  /// 
+  /// This constructor initializes the notification system with platform-specific
+  /// topics and device information. It automatically adds a platform-specific
+  /// topic (android, ios, web, etc.) to enable targeted messaging.
+  /// 
+  /// **Parameters:**
+  /// - `ref`: Riverpod reference for state management
+  /// - `options`: Optional Firebase configuration options
+  /// - `packageInfo`: App package information for version tracking
+  /// - `deviceId`: Unique device identifier
+  /// - `secondsToast`: Duration for toast notifications (default: 2 seconds)
+  /// - `topics`: Optional list of initial topics to subscribe to
+  /// 
+  /// **Example:**
+  /// ```dart
+  /// final notifi = Notifi(
+  ///   ref: ref,
+  ///   packageInfo: packageInfo,
+  ///   deviceId: 'device_123',
+  ///   topics: ['news', 'updates'],
+  /// );
+  /// ```
   Notifi(
       { required this.ref,
       this.options,
@@ -167,12 +357,15 @@ class Notifi extends ChangeNotifier {
     _packageInfo = packageInfo;
     _deviceId = deviceId;
 
+    // Clear topics for web platform due to limitations
     if (kIsWeb) {
       topics = [];
     }
+    // Add provided topics to the subscription list
     if (topics != null && topics.isNotEmpty) {
       _topics.addAll(topics);
     }
+    // Add platform-specific topic for targeted messaging
     if (defaultTargetPlatform == TargetPlatform.android) {
       _topics.add('android');
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
@@ -192,12 +385,43 @@ class Notifi extends ChangeNotifier {
     // log.d("PACKAGE ${packageInfo!.version} ${deviceId} ");
   }
 
+  /// Initializes the Notifi system synchronously.
+  /// 
+  /// This method starts the initialization process and returns immediately,
+  /// allowing the caller to continue while initialization happens in the background.
+  /// 
+  /// **Returns:** This [ChangeNotifier] instance for method chaining
+  /// 
+  /// **Example:**
+  /// ```dart
+  /// final notifi = Notifi(...).initialise();
+  /// ```
   ChangeNotifier initialise() {
     log.i("Initialising Notifi");
     init();
     return this;
   }
 
+  /// Initializes the Notifi system asynchronously.
+  /// 
+  /// This method sets up Firebase, notifications, camera access, and FCM token
+  /// management. It handles platform-specific initialization and sets up
+  /// message listeners for incoming notifications.
+  /// 
+  /// **Features initialized:**
+  /// - Firebase Core and Cloud Messaging
+  /// - Camera device enumeration (if enabled)
+  /// - Notification permissions and channels
+  /// - FCM token generation and refresh handling
+  /// - Platform-specific notification setup
+  /// - Message listeners for foreground and background notifications
+  /// 
+  /// **Returns:** Future<ChangeNotifier> that completes when initialization is done
+  /// 
+  /// **Example:**
+  /// ```dart
+  /// await notifi.init();
+  /// ```
   Future<ChangeNotifier> init() async {
     logNoStack.i("Notifi initing!");
 
@@ -348,6 +572,24 @@ class Notifi extends ChangeNotifier {
     return this;
   }
 
+  /// Subscribes to all topics in the current topics list.
+  /// 
+  /// This method iterates through all topics and subscribes to them with
+  /// Firebase Cloud Messaging. Topic subscriptions enable targeted messaging
+  /// to groups of devices.
+  /// 
+  /// **Behavior:**
+  /// - Only works if notifications are enabled
+  /// - Skips subscription on web platform due to limitations
+  /// - Logs successful subscriptions and errors
+  /// - Handles exceptions gracefully
+  /// 
+  /// **Example:**
+  /// ```dart
+  /// notifi.addTopic('news');
+  /// notifi.addTopic('updates');
+  /// notifi.subscribeToTopics();
+  /// ```
   void subscribeToTopics() {
     if (enableNotifications) {
       if (!kIsWeb) {
@@ -368,6 +610,23 @@ class Notifi extends ChangeNotifier {
     }
   }
 
+  /// Initializes camera access and enumerates available camera devices.
+  /// 
+  /// This method discovers all available camera devices on the current platform
+  /// and stores them in the [_cameras] list. It handles camera-specific exceptions
+  /// and logs any errors that occur during initialization.
+  /// 
+  /// **Behavior:**
+  /// - Fetches all available camera devices
+  /// - Handles [CameraException] gracefully
+  /// - Logs errors with code and description
+  /// - Updates the cameras list for UI consumption
+  /// 
+  /// **Example:**
+  /// ```dart
+  /// await notifi.initialiseCamera();
+  /// final cameras = notifi.cameras; // Access available cameras
+  /// ```
   void initialiseCamera() async {
     // Fetch the available cameras before initializing the app.
     try {

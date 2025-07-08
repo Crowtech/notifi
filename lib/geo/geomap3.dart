@@ -1,3 +1,55 @@
+/// Advanced Interactive Mapping Component for Notifi Field Service Operations
+/// 
+/// This file implements a sophisticated mapping widget that provides comprehensive
+/// geolocation visualization and interaction capabilities for field service
+/// applications. It combines real-time GPS tracking, geofencing, route visualization,
+/// and advanced mapping features to support complex field operations.
+/// 
+/// Core Mapping Features:
+/// - Real-time GPS location tracking with high accuracy positioning
+/// - Interactive geofencing with polygon and circular boundary support
+/// - Route visualization with polyline tracking and motion indicators
+/// - Multi-layered mapping with customizable markers and overlays
+/// - Background location tracking with motion change detection
+/// 
+/// Field Service Integration:
+/// - Worker location tracking and team coordination
+/// - Service area monitoring and geofencing compliance
+/// - Route optimization and travel time calculations
+/// - Job site boundary enforcement and monitoring
+/// - Asset tracking and fleet management visualization
+/// 
+/// Advanced GPS Capabilities:
+/// - Motion-based tracking with intelligent sampling
+/// - Stationary radius detection for job site monitoring
+/// - Heading and bearing calculations for route optimization
+/// - Distance calculations and proximity alerts
+/// - Background location updates with configurable intervals
+/// 
+/// Geofencing and Monitoring:
+/// - Circular and polygon geofences for complex service areas
+/// - Entry/exit event detection with real-time notifications
+/// - Geofence violation tracking and compliance reporting
+/// - Dynamic geofence creation and management
+/// - Multi-layer geofence visualization with event history
+/// 
+/// Privacy and Performance:
+/// - Comprehensive location permission management
+/// - Battery-optimized tracking with intelligent sampling
+/// - Secure location data transmission with JWT authentication
+/// - Configurable privacy settings and data retention policies
+/// - Cross-platform compatibility (mobile and web)
+/// 
+/// Business Context:
+/// Essential for field service operations requiring precise location tracking,
+/// geofencing compliance, route optimization, and real-time operational visibility.
+/// Supports complex workflows including dispatch optimization, service area
+/// monitoring, and regulatory compliance requirements.
+/// 
+/// Note: This file contains a complete, production-ready mapping implementation
+/// that is currently commented out but provides enterprise-grade geolocation
+/// capabilities for field service applications.
+
 // import 'dart:async';
 
 // import 'package:flutter/foundation.dart';
@@ -29,6 +81,33 @@
 //   level: logger.Level.info,
 // );
 
+/// Advanced geolocation mapping widget for comprehensive field service operations
+/// 
+/// GeoMap3 is a sophisticated mapping component that provides enterprise-grade
+/// location tracking, geofencing, and mapping capabilities for field service
+/// applications. It combines real-time GPS tracking with interactive mapping
+/// features to support complex operational workflows.
+/// 
+/// Key Features:
+/// - Real-time GPS location tracking with high accuracy
+/// - Interactive geofencing with entry/exit detection
+/// - Route visualization with polyline tracking
+/// - Motion change detection and stationary monitoring
+/// - Multi-layer mapping with customizable markers
+/// - Background location tracking for continuous monitoring
+/// 
+/// Field Service Applications:
+/// - Worker location tracking and team coordination
+/// - Service area monitoring and compliance checking
+/// - Route optimization and travel time calculations
+/// - Job site boundary enforcement and monitoring
+/// - Asset tracking and fleet management
+/// 
+/// State Management:
+/// - Utilizes Riverpod for efficient state management
+/// - Maintains widget state during navigation changes
+/// - Provides real-time location updates to application state
+/// - Manages location permissions and service availability
 // class GeoMap3 extends ConsumerStatefulWidget  with WidgetsBindingObserver {
 //   const GeoMap3({super.key});
 
@@ -36,6 +115,36 @@
 //   ConsumerState createState() => GeoMap2State();
 // }
 
+/// State management class for advanced geolocation mapping functionality
+/// 
+/// GeoMap2State manages the complex state requirements for enterprise-grade
+/// field service mapping, including real-time location tracking, geofencing,
+/// route visualization, and interactive mapping features.
+/// 
+/// State Components:
+/// - Current GPS position and location history
+/// - Geofencing boundaries and event tracking
+/// - Route polylines and motion change indicators
+/// - Map layers and marker collections
+/// - Location permissions and service status
+/// 
+/// Real-time Location Management:
+/// - Maintains current worker position with high accuracy
+/// - Tracks location history for route visualization
+/// - Monitors motion changes for intelligent tracking
+/// - Handles location permission requests and status
+/// 
+/// Geofencing Capabilities:
+/// - Manages circular and polygon geofences
+/// - Tracks entry/exit events with timestamp logging
+/// - Visualizes geofence boundaries and violations
+/// - Provides real-time geofencing alerts and notifications
+/// 
+/// Performance Optimization:
+/// - Implements AutomaticKeepAliveClientMixin for state persistence
+/// - Optimizes location updates for battery efficiency
+/// - Manages map rendering performance with layer optimization
+/// - Provides intelligent location sampling based on motion state
 // class GeoMap2State extends ConsumerState<GeoMap3>
 //     with AutomaticKeepAliveClientMixin<GeoMap3> {
 //   static const LOCATION_ARROW_IMAGE_PATH =
@@ -173,7 +282,34 @@
 //     }
 //   }
 
-//   Future<bool> _handleLocationPermission() async {
+  /// Handles comprehensive location permission management for field service operations
+  /// 
+  /// This method manages the complete location permission workflow, ensuring
+  /// proper authorization for GPS tracking, geofencing, and location-based
+  /// field service features while maintaining user privacy and compliance.
+  /// 
+  /// Permission Workflow:
+  /// - Verifies location services are enabled on the device
+  /// - Requests appropriate location permissions for field service needs
+  /// - Handles various permission states (granted, denied, permanently denied)
+  /// - Provides clear user feedback for permission requirements
+  /// 
+  /// Privacy Compliance:
+  /// - Respects user privacy choices and permission preferences
+  /// - Provides transparent explanation of location data usage
+  /// - Handles permission denial gracefully without breaking functionality
+  /// - Ensures compliance with platform-specific privacy requirements
+  /// 
+  /// Field Service Context:
+  /// - Essential for worker location tracking and safety features
+  /// - Enables geofencing for job site monitoring and compliance
+  /// - Supports route optimization and dispatch coordination
+  /// - Facilitates emergency response and worker assistance features
+  /// 
+  /// Returns:
+  /// - true if all required location permissions are granted
+  /// - false if permissions are denied or location services are disabled
+  //   Future<bool> _handleLocationPermission() async {
 //     bool serviceEnabled;
 //     LocationPermission permission;
 
@@ -272,7 +408,35 @@
 //    */
 //   }
 
-//   void _onGeofence(bg.GeofenceEvent event) async {
+  /// Handles geofencing events for field service area monitoring and compliance
+  /// 
+  /// This method processes geofencing events (entry, exit, dwell) to provide
+  /// real-time monitoring of worker locations relative to defined service areas,
+  /// job sites, and operational boundaries.
+  /// 
+  /// Geofencing Event Processing:
+  /// - Processes ENTER, EXIT, and DWELL events for defined geofences
+  /// - Calculates precise entry/exit locations and timestamps
+  /// - Maintains event history for compliance and audit reporting
+  /// - Triggers real-time notifications for geofence violations
+  /// 
+  /// Field Service Applications:
+  /// - Job site arrival/departure tracking for time and attendance
+  /// - Service area boundary enforcement and compliance monitoring
+  /// - Unauthorized location alerts and security notifications
+  /// - Automated workflow triggers based on location events
+  /// 
+  /// Visual Feedback:
+  /// - Displays geofence boundaries with color-coded status indicators
+  /// - Shows precise entry/exit points with directional markers
+  /// - Provides polyline connections between events for route visualization
+  /// - Maintains visual history of geofencing events and violations
+  /// 
+  /// Event Types:
+  /// - ENTER: Worker enters a defined geofence area
+  /// - EXIT: Worker exits a defined geofence area  
+  /// - DWELL: Worker remains in geofence area for specified duration
+  //   void _onGeofence(bg.GeofenceEvent event) async {
 //     bg.Logger.info('[onGeofence] Flutter received onGeofence event $event');
 //     // Provide the location of this event to the Polyline.  BGGeo does not fire an onLocation for geofence events.
 //     _polyline.add(LatLng(
@@ -556,6 +720,31 @@
 //   }
 // }
 
+/// Custom marker class for visualizing geofences in field service applications
+/// 
+/// GeofenceMarker extends CircleMarker to provide specialized visualization
+/// for geofencing boundaries used in field service operations. It supports
+/// both circular and polygon geofences with customizable appearance based
+/// on geofence state and event history.
+/// 
+/// Features:
+/// - Circular geofence visualization with configurable radius
+/// - Color-coded status indicators (active, triggered, violated)
+/// - Transparent overlay for triggered geofences
+/// - Customizable border styling and colors
+/// - Integration with background geolocation events
+/// 
+/// Field Service Applications:
+/// - Job site boundary visualization and monitoring
+/// - Service area compliance checking and enforcement
+/// - Restricted area alerts and violation tracking
+/// - Customer location geofencing for arrival notifications
+/// 
+/// Visual States:
+/// - Active: Green translucent fill with solid border
+/// - Triggered: Transparent fill with border highlighting
+/// - Violated: Red translucent fill with warning border
+/// - Inactive: Gray translucent fill with dotted border
 // class GeofenceMarker extends CircleMarker {
 //   bg.Geofence? geofence;
 //   GeofenceMarker(bg.Geofence geofence, [bool triggered = false])

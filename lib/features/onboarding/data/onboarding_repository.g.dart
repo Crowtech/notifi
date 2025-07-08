@@ -9,7 +9,23 @@ part of 'onboarding_repository.dart';
 String _$onboardingRepositoryHash() =>
     r'445c529dd1ac7515d8be0abd6159af6958ff3c5c';
 
-/// See also [onboardingRepository].
+/// Riverpod provider for the OnboardingRepository
+///
+/// This provider creates and manages the OnboardingRepository instance,
+/// ensuring proper dependency injection and lifecycle management. It's
+/// marked as keepAlive to maintain the repository instance across the
+/// application lifecycle, preventing unnecessary recreation.
+///
+/// The provider depends on the SharedPreferences provider and waits for
+/// it to be available before creating the repository instance. This ensures
+/// the repository is ready for use when accessed by other parts of the app.
+///
+/// Usage in widgets and other providers:
+/// ```dart
+/// final repository = await ref.watch(onboardingRepositoryProvider.future);
+/// ```
+///
+/// Copied from [onboardingRepository].
 @ProviderFor(onboardingRepository)
 final onboardingRepositoryProvider =
     FutureProvider<OnboardingRepository>.internal(

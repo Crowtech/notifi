@@ -1,4 +1,4 @@
-library notifi;
+library;
 
 import 'dart:convert';
 import 'dart:io' show Platform;

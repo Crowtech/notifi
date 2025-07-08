@@ -9,7 +9,31 @@ part of 'onboarding_controller.dart';
 String _$onboardingControllerHash() =>
     r'232966a6326a75bb5f5166c8b76bbbb15087adaf';
 
-/// See also [OnboardingController].
+/// Controller for managing onboarding flow and user interactions
+///
+/// This class implements the presentation layer logic for the onboarding feature,
+/// providing reactive state management and business logic coordination. It extends
+/// AsyncNotifier to handle asynchronous operations with proper loading states,
+/// error handling, and success callbacks.
+///
+/// Key Responsibilities:
+/// - Coordinate onboarding completion workflow
+/// - Manage async state for UI feedback
+/// - Handle errors gracefully during onboarding
+/// - Provide clean interface for UI components
+///
+/// State Management:
+/// - AsyncLoading: When completing onboarding process
+/// - AsyncData: When operations complete successfully
+/// - AsyncError: When operations fail (network, storage, etc.)
+///
+/// Usage in UI:
+/// ```dart
+/// final controller = ref.watch(onboardingControllerProvider.notifier);
+/// await controller.completeOnboarding();
+/// ```
+///
+/// Copied from [OnboardingController].
 @ProviderFor(OnboardingController)
 final onboardingControllerProvider =
     AutoDisposeAsyncNotifierProvider<OnboardingController, void>.internal(

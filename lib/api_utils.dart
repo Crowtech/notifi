@@ -1,3 +1,9 @@
+/// API utilities for making HTTP requests to the Notifi backend services.
+/// 
+/// This module provides a comprehensive set of functions for interacting with
+/// the Notifi API, including authentication, data fetching, and updates.
+/// All functions handle JWT token-based authentication and support localization.
+
 import 'dart:convert';
 import 'dart:io';
 
@@ -11,26 +17,67 @@ import 'package:notifi/models/appversion.dart';
 import 'package:notifi/models/gps.dart';
 import 'package:notifi/models/nestfilter.dart';
 import 'package:notifi/models/person.dart';
-import 'package:notifi/notifi2.dart';
 
 import 'models/crowtech_basepage.dart';
 
+/// Logger instance with full stack trace for detailed debugging
 var log = logger.Logger(
   printer: logger.PrettyPrinter(),
   level: logger.Level.info,
 );
 
+/// Logger instance without stack trace for cleaner output
 var logNoStack = logger.Logger(
   printer: logger.PrettyPrinter(methodCount: 0),
   level: logger.Level.info,
 );
 
+/// The default locale from the platform settings
 final String defaultLocale = Platform.localeName;
 
+/// Makes a POST request without locale headers.
+/// 
+/// This is a convenience wrapper around [apiPostDataNoLocale] for requests
+/// that don't require any request body data.
+/// 
+/// **Parameters:**
+/// - `token`: JWT authentication token
+/// - `apiPath`: Full API endpoint URL
+/// 
+/// **Returns:** Decoded JSON response as dynamic object
+/// 
+/// **Throws:** Error message if request fails
 Future<dynamic> apiPostNoLocale(String token, String apiPath) async {
   return apiPostDataNoLocale(token, apiPath, null, null);
 }
 
+/// Makes a POST request with optional data payload, without locale headers.
+/// 
+/// This function handles POST requests that don't require localization.
+/// It supports both empty requests and requests with JSON payloads.
+/// 
+/// **Parameters:**
+/// - `token`: JWT authentication token
+/// - `apiPath`: Full API endpoint URL
+/// - `dataName`: Optional key name for the data in JSON body
+/// - `data`: Optional data object to send in request body
+/// 
+/// **Returns:** Decoded JSON response or empty array if no content
+/// 
+/// **Throws:** Error message with status code if request fails
+/// 
+/// **Status Codes Handled:**
+/// - 200-204: Success responses
+/// 
+/// **Example:**
+/// ```dart
+/// final result = await apiPostDataNoLocale(
+///   token,
+///   'https://api.example.com/users',
+///   'user',
+///   {'name': 'John', 'email': 'john@example.com'}
+/// );
+/// ```
 Future<dynamic> apiPostDataNoLocale(
     String token, String apiPath, String? dataName, Object? data) async {
   logNoStack.i("API POST : APIPath -> $apiPath");
@@ -80,6 +127,29 @@ Future<dynamic> apiPostDataNoLocale(
   }
 }
 
+/// Makes a POST request with raw JSON data, without locale headers.
+/// 
+/// Unlike [apiPostDataNoLocale], this function sends the data object directly
+/// as JSON without wrapping it in another object. Useful for APIs that expect
+/// the payload at the root level.
+/// 
+/// **Parameters:**
+/// - `token`: JWT authentication token
+/// - `apiPath`: Full API endpoint URL
+/// - `data`: Data object to send as raw JSON in request body
+/// 
+/// **Returns:** Decoded JSON response or empty array if no content
+/// 
+/// **Throws:** Error message with status code if request fails
+/// 
+/// **Example:**
+/// ```dart
+/// final result = await apiPostDataNoLocaleRaw(
+///   token,
+///   'https://api.example.com/users',
+///   {'name': 'John', 'email': 'john@example.com'}
+/// );
+/// ```
 Future<dynamic> apiPostDataNoLocaleRaw(
     String token, String apiPath, Object? data) async {
   logNoStack.i("API POST RAW: APIPath -> $apiPath");
@@ -116,10 +186,49 @@ Future<dynamic> apiPostDataNoLocaleRaw(
   }
 }
 
+/// Makes a POST request with locale headers.
+/// 
+/// This is a convenience wrapper around [apiPostData] for requests
+/// that don't require any request body data but need localization.
+/// 
+/// **Parameters:**
+/// - `locale`: Locale for content localization
+/// - `token`: JWT authentication token
+/// - `apiPath`: Full API endpoint URL
+/// 
+/// **Returns:** Decoded JSON response as dynamic object
+/// 
+/// **Throws:** Error message if request fails
 Future<dynamic> apiPost(Locale locale, String token, String apiPath) async {
   return apiPostData(locale, token, apiPath, null, null);
 }
 
+/// Makes a POST request with optional data payload and locale headers.
+/// 
+/// This function handles POST requests that require localization support.
+/// The Accept-Language header is set based on the provided locale.
+/// 
+/// **Parameters:**
+/// - `locale`: Locale for content localization
+/// - `token`: JWT authentication token
+/// - `apiPath`: Full API endpoint URL
+/// - `dataName`: Optional key name for the data in JSON body
+/// - `data`: Optional data object to send in request body
+/// 
+/// **Returns:** Decoded JSON response as dynamic object
+/// 
+/// **Throws:** Error message with status code if request fails
+/// 
+/// **Example:**
+/// ```dart
+/// final result = await apiPostData(
+///   Locale('en', 'US'),
+///   token,
+///   'https://api.example.com/users',
+///   'user',
+///   {'name': 'John'}
+/// );
+/// ```
 Future<dynamic> apiPostData(Locale locale, String token, String apiPath,
     String? dataName, Object? data) async {
   logNoStack.i("APIPath -> $apiPath");
@@ -165,6 +274,25 @@ Future<dynamic> apiPostData(Locale locale, String token, String apiPath,
   }
 }
 
+/// Makes a POST request with pre-encoded JSON string, without locale headers.
+/// 
+/// This function is useful when you need fine control over the JSON encoding
+/// or when working with pre-encoded JSON strings.
+/// 
+/// **Parameters:**
+/// - `token`: JWT authentication token
+/// - `apiPath`: Full API endpoint URL
+/// - `jsonDataStr`: Pre-encoded JSON string to send in request body
+/// 
+/// **Returns:** Raw HTTP response object
+/// 
+/// **Throws:** Exception with error details if request fails
+/// 
+/// **Example:**
+/// ```dart
+/// final jsonStr = jsonEncode({'name': 'John'});
+/// final response = await apiPostDataStrNoLocale(token, url, jsonStr);
+/// ```
 Future<http.Response> apiPostDataStrNoLocale(
     String token, String apiPath, String? jsonDataStr) async {
   var url = Uri.parse(apiPath);
@@ -202,6 +330,19 @@ Future<http.Response> apiPostDataStrNoLocale(
   }
 }
 
+/// Makes a PUT request with pre-encoded JSON string, without locale headers.
+/// 
+/// Similar to [apiPostDataStrNoLocale] but uses PUT method for updates.
+/// Note: Falls back to POST if jsonDataStr is null (likely a bug).
+/// 
+/// **Parameters:**
+/// - `token`: JWT authentication token
+/// - `apiPath`: Full API endpoint URL
+/// - `jsonDataStr`: Pre-encoded JSON string to send in request body
+/// 
+/// **Returns:** Raw HTTP response object
+/// 
+/// **Throws:** Exception with error details if request fails
 Future<http.Response> apiPutDataStrNoLocale(
     String token, String apiPath, String? jsonDataStr) async {
   var url = Uri.parse(apiPath);
@@ -239,10 +380,43 @@ Future<http.Response> apiPutDataStrNoLocale(
   }
 }
 
+/// Makes a GET request with optional authentication.
+/// 
+/// This is a convenience wrapper around [apiGetData] that defaults to
+/// JSON content type.
+/// 
+/// **Parameters:**
+/// - `token`: Optional JWT authentication token (null for public endpoints)
+/// - `apiPath`: Full API endpoint URL
+/// 
+/// **Returns:** Raw HTTP response object
+/// 
+/// **Throws:** Exception if request fails
 Future<http.Response> apiGet(String? token, String apiPath) async {
   return apiGetData(token, apiPath, "application/json");
 }
 
+/// Makes a GET request with customizable content type and optional auth.
+/// 
+/// This function handles GET requests with flexible content type support,
+/// useful for downloading different types of content (JSON, images, files).
+/// 
+/// **Parameters:**
+/// - `token`: Optional JWT authentication token (null for public endpoints)
+/// - `apiPath`: Full API endpoint URL
+/// - `accept`: Content type for Accept header (e.g., 'application/json')
+/// 
+/// **Returns:** Raw HTTP response object
+/// 
+/// **Throws:** Exception with message "api Get created unsuccessfully!"
+/// 
+/// **Example:**
+/// ```dart
+/// // Get JSON data
+/// final response = await apiGetData(token, url, 'application/json');
+/// // Get image
+/// final image = await apiGetData(token, imageUrl, 'image/png');
+/// ```
 Future<http.Response> apiGetData(
     String? token, String apiPath, String accept) async {
   var url = Uri.parse(apiPath);
@@ -277,6 +451,20 @@ Future<http.Response> apiGetData(
   }
 }
 
+/// Makes a POST request with pre-encoded JSON string and locale headers.
+/// 
+/// Combines the functionality of sending raw JSON strings with localization
+/// support through Accept-Language header.
+/// 
+/// **Parameters:**
+/// - `locale`: Locale for content localization
+/// - `token`: JWT authentication token
+/// - `apiPath`: Full API endpoint URL
+/// - `jsonDataStr`: Pre-encoded JSON string to send in request body
+/// 
+/// **Returns:** Raw HTTP response object
+/// 
+/// **Throws:** Exception with message "api Post created unsuccessfully!"
 Future<http.Response> apiPostDataStr(
     Locale locale, String token, String apiPath, String? jsonDataStr) async {
   var url = Uri.parse(apiPath);
@@ -312,6 +500,23 @@ Future<http.Response> apiPostDataStr(
   }
 }
 
+/// Makes a DELETE request to remove a resource.
+/// 
+/// Sends a DELETE request with authentication to remove a resource
+/// at the specified endpoint.
+/// 
+/// **Parameters:**
+/// - `token`: JWT authentication token
+/// - `apiPath`: Full API endpoint URL of resource to delete
+/// 
+/// **Returns:** Raw HTTP response object
+/// 
+/// **Throws:** Exception with message "api Get created unsuccessfully!" (sic)
+/// 
+/// **Example:**
+/// ```dart
+/// final response = await apiDeleteData(token, '$baseUrl/users/123');
+/// ```
 Future<http.Response> apiDeleteData(String? token, String apiPath) async {
   var url = Uri.parse(apiPath);
 
@@ -334,6 +539,32 @@ Future<http.Response> apiDeleteData(String? token, String apiPath) async {
   }
 }
 
+/// Registers a login for the current device and returns user information.
+/// 
+/// This function performs device-based login by sending the device ID
+/// to the server and receiving back the authenticated user's information.
+/// 
+/// **Parameters:**
+/// - `token`: JWT authentication token
+/// 
+/// **Returns:** [Person] object containing authenticated user information
+/// 
+/// **Throws:** Error message with URL if login fails
+/// 
+/// **Process:**
+/// 1. Fetches device ID using platform-specific methods
+/// 2. Sends device ID to login endpoint
+/// 3. Parses response into Person object
+/// 
+/// **Example:**
+/// ```dart
+/// try {
+///   final user = await registerLogin(authToken);
+///   print('Logged in as: ${user.name}');
+/// } catch (e) {
+///   print('Login failed: $e');
+/// }
+/// ```
 Future<Person> registerLogin(
   String token,
 ) async {
@@ -354,6 +585,28 @@ Future<Person> registerLogin(
   }
 }
 
+/// Verifies if a JWT token is valid and not expired.
+/// 
+/// This function performs both client-side and server-side validation:
+/// 1. Checks if token is expired using JWT decoder
+/// 2. Extracts and logs token expiration time
+/// 3. Makes API call to verify token with server
+/// 
+/// **Parameters:**
+/// - `token`: JWT token to verify
+/// 
+/// **Returns:** 
+/// - `true` if token is valid and verified by server
+/// - `false` if token is expired or server validation fails
+/// 
+/// **Example:**
+/// ```dart
+/// if (await verifyToken(userToken)) {
+///   // Token is valid, proceed with authenticated requests
+/// } else {
+///   // Token invalid, redirect to login
+/// }
+/// ```
 Future<bool> verifyToken(String token) async {
   bool hasExpired = JwtDecoder.isExpired(token);
 
@@ -420,6 +673,25 @@ Future<bool> verifyToken(String token) async {
 //   });
 // }
 
+/// Registers a Firebase Cloud Messaging token for a device.
+/// 
+/// Associates an FCM token with a device ID on the server, enabling
+/// push notifications to be sent to this specific device.
+/// 
+/// **Parameters:**
+/// - `token`: JWT authentication token
+/// - `deviceid`: Unique device identifier
+/// - `fcm`: Firebase Cloud Messaging token
+/// 
+/// **Returns:** Map containing server response (currently returns empty map)
+/// 
+/// **Note:** This function has async issues - it doesn't properly await
+/// the API call, always returning an empty map immediately.
+/// 
+/// **Example:**
+/// ```dart
+/// await registerFCM(authToken, deviceId, fcmToken);
+/// ```
 Future<Map> registerFCM(
     /*Locale locale, */ String token, String deviceid, String fcm) async {
   log.i(
@@ -439,6 +711,28 @@ Future<Map> registerFCM(
   return <dynamic, dynamic>{};
 }
 
+/// Fetches the latest app version from the server.
+/// 
+/// Queries the server for the most recent app version information,
+/// useful for checking if updates are available.
+/// 
+/// **Returns:** Version string (e.g., "1.2.3")
+/// 
+/// **Throws:** Error message if request fails
+/// 
+/// **Note:** The endpoint has a typo: "appversionss" instead of "appversions"
+/// 
+/// **Example:**
+/// ```dart
+/// try {
+///   final latestVersion = await fetchLatestAppVersion();
+///   if (latestVersion != currentVersion) {
+///     // Prompt user to update
+///   }
+/// } catch (e) {
+///   // Handle error gracefully
+/// }
+/// ```
 Future<String> fetchLatestAppVersion() async {
   var apiPath = "$defaultAPIBaseUrl$defaultApiPrefixPath/appversionss/latest";
   try {
@@ -455,9 +749,50 @@ Future<String> fetchLatestAppVersion() async {
   }
 }
 
+/// Uploads a file to MinIO object storage.
+/// 
+/// **Parameters:**
+/// - `file`: File path or identifier to upload
+/// 
+/// **Note:** This function is currently not implemented (empty body)
+/// 
+/// TODO: Implement MinIO upload functionality
 Future<void> uploadMinio(String file) async {}
 
-//Future<CrowtechBasePage<GPS>> fetchGPS(
+/// Fetches paginated GPS data for a specific organization.
+/// 
+/// Retrieves GPS tracking information with filtering and pagination support.
+/// Uses NestFilter for complex query capabilities including sorting and
+/// distinct field selection.
+/// 
+/// **Parameters:**
+/// - `locale`: Locale for content localization
+/// - `token`: JWT authentication token
+/// - `orgid`: Organization ID to filter GPS data
+/// - `offset`: Pagination offset (starting index)
+/// - `limit`: Maximum number of items to return
+/// 
+/// **Returns:** [CrowtechBasePage<GPS>] containing:
+/// - List of GPS items
+/// - Total count of available items
+/// - Processing time and pagination metadata
+/// 
+/// **Filter Configuration:**
+/// - Sorts by ID descending
+/// - Case-insensitive search
+/// - Distinct by resource code
+/// 
+/// **Example:**
+/// ```dart
+/// final gpsData = await fetchGPS(
+///   Locale('en'),
+///   token,
+///   orgId: 123,
+///   offset: 0,
+///   limit: 50
+/// );
+/// print('Found ${gpsData.totalItems} GPS records');
+/// ```
 Future<CrowtechBasePage<GPS>> fetchGPS(
     Locale locale, String token, int orgid, int offset, int limit) async {
   List<int> orgIdList = [];
@@ -539,6 +874,35 @@ Future<CrowtechBasePage<GPS>> fetchGPS(
 //  throw Future.error("Nothing");
 }
 
+/// Updates user information in Keycloak identity provider.
+/// 
+/// Currently only updates the last name field, despite accepting all
+/// user fields as parameters.
+/// 
+/// **Parameters:**
+/// - `token`: JWT authentication token
+/// - `id`: User ID in Keycloak
+/// - `email`: User's email (currently unused)
+/// - `firstname`: User's first name (currently unused)
+/// - `lastname`: User's last name to update
+/// 
+/// **Returns:** 
+/// - `true` if update successful (2xx status)
+/// - `false` if update failed
+/// 
+/// **Note:** The implementation only sends lastname in the request body.
+/// Other fields are accepted but ignored.
+/// 
+/// **Example:**
+/// ```dart
+/// final success = await updateKeycloakUserInfo(
+///   token,
+///   userId,
+///   'john@example.com',
+///   'John',
+///   'Smith'
+/// );
+/// ```
 Future<bool> updateKeycloakUserInfo(String token, String id, String email,
     String firstname, String lastname) async {
 //PUT /{realm}/users/{id}
@@ -576,6 +940,33 @@ Future<bool> updateKeycloakUserInfo(String token, String id, String email,
   }
 }
 
+/// Updates a user's password in Keycloak.
+/// 
+/// Sends a password update request to the Keycloak admin API.
+/// 
+/// **Parameters:**
+/// - `token`: JWT authentication token with admin privileges
+/// - `id`: User ID in Keycloak
+/// - `password`: New password to set
+/// 
+/// **Returns:**
+/// - `true` if password updated successfully (2xx status)
+/// - `false` if update failed
+/// 
+/// **Security Note:** Ensure password meets complexity requirements
+/// before calling this function.
+/// 
+/// **Example:**
+/// ```dart
+/// final success = await updateKeycloakPassword(
+///   adminToken,
+///   userId,
+///   'NewSecurePassword123!'
+/// );
+/// if (!success) {
+///   // Handle password update failure
+/// }
+/// ```
 Future<bool> updateKeycloakPassword(
     String token, String id, String password) async {
 //PUT /{realm}/users/{id}

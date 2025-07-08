@@ -61,10 +61,10 @@ class NPersonsRepository {
       "Authorization": 'Bearer $token'
     });
 
-logNoStack.i("NPERSONS_REPOSITORY: $host  ${uri} ${data}");
+logNoStack.i("NPERSONS_REPOSITORY: $host  $uri $data");
     final response = await client.postUri(uri,
         options: options, data: data, cancelToken: cancelToken);
-        logNoStack.i("NPERSONS_REPOSITORY ${response}");
+        logNoStack.i("NPERSONS_REPOSITORY $response");
     return NPersonsResponse.fromJson(response.data);
   }
 
