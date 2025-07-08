@@ -105,7 +105,7 @@ class RegistrationsRepository {
     logNoStack
         .i("REGISTRATIONS_REPOSITORY: !fetching for list , responseData=${response.data}");
     RegistrationsResponse rr =  RegistrationsResponse.fromJson(response.data);
-    logNoStack.i("REGISTRATIONS_REPOSITORY AFTER JSON ${rr.toString()}");
+    logNoStack.i("REGISTRATIONS_REPOSITORY AFTER JSON ${rr.items}");
     return rr;
   }
 
