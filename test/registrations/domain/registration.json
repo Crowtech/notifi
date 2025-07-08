@@ -1,0 +1,62 @@
+{
+  "id": 1,
+  "code": "REG_COMPREHENSIVE",
+  "created": "2024-01-15T10:30:00.000Z",
+  "active": true,
+  "updated": "2024-01-15T12:45:00.000Z",
+  "name": "Comprehensive Registration Test",
+  "email": "comprehensive@test.com",
+  "inviteeFirstname": "John",
+  "inviteeLastname": "Doe",
+  "inviteeI18n": "en",
+  "inviteeApproved": true,
+  "organization": {
+    "id": 1,
+    "code": "ORG_TEST",
+    "name": "Test Organization",
+    "orgType": "COMPANY"
+  },
+  "orgId": 1,
+  "user": {
+    "id": 101,
+    "code": "USR_JOHN",
+    "email": "john.doe@test.com",
+    "firstname": "John",
+    "lastname": "Doe",
+    "username": "john.doe",
+    "isSignedIn": true,
+    "gender": "MALE",
+    "selected": false
+  },
+  "userId": 101,
+  "inviter": {
+    "id": 201,
+    "code": "USR_ADMIN",
+    "email": "admin@test.com",
+    "firstname": "Admin",
+    "lastname": "User",
+    "username": "admin",
+    "isSignedIn": true,
+    "gender": "UNDEFINED",
+    "selected": false
+  },
+  "inviterId": 201,
+  "approver": {
+    "id": 201,
+    "code": "USR_ADMIN",
+    "email": "admin@test.com",
+    "firstname": "Admin",
+    "lastname": "User",
+    "username": "admin",
+    "isSignedIn": true,
+    "gender": "UNDEFINED",
+    "selected": false
+  },
+  "approverId": 201,
+  "approvalNeeded": true,
+  "approved": true,
+  "approvalDateTime": "2024-01-15T11:00:00.000Z",
+  "approvalReason": "Valid registration approved by admin",
+  "firstLogin": "2024-01-15T13:30:00.000Z",
+  "joinCode": "JOIN123456"
+}
