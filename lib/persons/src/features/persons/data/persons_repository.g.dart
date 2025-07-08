@@ -186,7 +186,7 @@ class _PersonProviderElement extends AutoDisposeFutureProviderElement<Person>
   int get personId => (origin as PersonProvider).personId;
 }
 
-String _$fetchPersonsHash() => r'7b8dde47caebad71bc5387da0fc3b60e9dd5470d';
+String _$fetchPersonsHash() => r'bbf10f1df5abc6510ae75cb29ffc8b36cb15e351';
 
 /// Provider to fetch paginated persons data
 ///
@@ -197,7 +197,7 @@ const fetchPersonsProvider = FetchPersonsFamily();
 /// Provider to fetch paginated persons data
 ///
 /// Copied from [fetchPersons].
-class FetchPersonsFamily extends Family<AsyncValue<NPersonsResponse>> {
+class FetchPersonsFamily extends Family<AsyncValue<PersonsResponse>> {
   /// Provider to fetch paginated persons data
   ///
   /// Copied from [fetchPersons].
@@ -241,7 +241,7 @@ class FetchPersonsFamily extends Family<AsyncValue<NPersonsResponse>> {
 /// Provider to fetch paginated persons data
 ///
 /// Copied from [fetchPersons].
-class FetchPersonsProvider extends AutoDisposeFutureProvider<NPersonsResponse> {
+class FetchPersonsProvider extends AutoDisposeFutureProvider<PersonsResponse> {
   /// Provider to fetch paginated persons data
   ///
   /// Copied from [fetchPersons].
@@ -278,7 +278,7 @@ class FetchPersonsProvider extends AutoDisposeFutureProvider<NPersonsResponse> {
 
   @override
   Override overrideWith(
-    FutureOr<NPersonsResponse> Function(FetchPersonsRef provider) create,
+    FutureOr<PersonsResponse> Function(FetchPersonsRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -295,7 +295,7 @@ class FetchPersonsProvider extends AutoDisposeFutureProvider<NPersonsResponse> {
   }
 
   @override
-  AutoDisposeFutureProviderElement<NPersonsResponse> createElement() {
+  AutoDisposeFutureProviderElement<PersonsResponse> createElement() {
     return _FetchPersonsProviderElement(this);
   }
 
@@ -315,13 +315,13 @@ class FetchPersonsProvider extends AutoDisposeFutureProvider<NPersonsResponse> {
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin FetchPersonsRef on AutoDisposeFutureProviderRef<NPersonsResponse> {
+mixin FetchPersonsRef on AutoDisposeFutureProviderRef<PersonsResponse> {
   /// The parameter `queryData` of this provider.
   ({int page, String query}) get queryData;
 }
 
 class _FetchPersonsProviderElement
-    extends AutoDisposeFutureProviderElement<NPersonsResponse>
+    extends AutoDisposeFutureProviderElement<PersonsResponse>
     with FetchPersonsRef {
   _FetchPersonsProviderElement(super.provider);
 

@@ -1,0 +1,20 @@
+{
+  "items": [
+    {
+      "id": 100,
+      "email": "simple@test.com",
+      "isSignedIn": false,
+      "gender": "UNDEFINED",
+      "selected": false
+    },
+    {
+      "id": 101,
+      "email": "another@test.com",
+      "firstname": "Test",
+      "lastname": "User",
+      "isSignedIn": true,
+      "gender": "MALE",
+      "selected": false
+    }
+  ]
+}

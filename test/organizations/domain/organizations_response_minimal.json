@@ -1,0 +1,15 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "Minimal Org 1"
+    },
+    {
+      "id": 2,
+      "code": "ORG_002",
+      "active": true,
+      "name": "Minimal Org 2",
+      "orgType": "COMPANY"
+    }
+  ]
+}

@@ -52,24 +52,24 @@ class Registration extends CrowtechObject {
       super.updated,
       super.name,
       required this.email,
-      required this.inviteeFirstname,
-      required this.inviteeLastname,
-      required this.inviteeI18n,
-      required this.inviteeApproved,
+      this.inviteeFirstname,
+      this.inviteeLastname,
+      this.inviteeI18n,
+      this.inviteeApproved,
       this.organization,
-      required this.orgId,
+      this.orgId,
       this.user,
-      required this.userId,
+      this.userId,
       this.inviter,
-      required this.inviterId,
+      this.inviterId,
       this.approver,
-      required this.approverId,
-      required this.approvalNeeded,
-      required this.approved,
-      required this.approvalDateTime,
-      required this.approvalReason,
-      required this.firstLogin,
-      required this.joinCode});
+      this.approverId,
+      this.approvalNeeded,
+      this.approved,
+      this.approvalDateTime,
+      this.approvalReason,
+      this.firstLogin,
+      this.joinCode});
 
   factory Registration.fromJson(Map<String, dynamic> json) =>
       _$RegistrationFromJson(json);
@@ -91,7 +91,18 @@ class Registration extends CrowtechObject {
   }
 
   String getInitials() {
-    return "${inviteeFirstname != null ? inviteeFirstname!.substring(0, 1).toUpperCase() : ''}${inviteeLastname != null ? inviteeLastname!.substring(0, 1).toUpperCase() : ''}";
+    String firstInitial = '';
+    String lastInitial = '';
+    
+    if (inviteeFirstname != null && inviteeFirstname!.isNotEmpty) {
+      firstInitial = inviteeFirstname!.substring(0, 1).toUpperCase();
+    }
+    
+    if (inviteeLastname != null && inviteeLastname!.isNotEmpty) {
+      lastInitial = inviteeLastname!.substring(0, 1).toUpperCase();
+    }
+    
+    return '$firstInitial$lastInitial';
   }
 
   Registration copyWith({

@@ -103,10 +103,13 @@ class OrganizationsSearchScreen extends ConsumerWidget {
                     data: (response) {
                       //log('index: $index, page: $page, indexInPage: $indexInPage, len: ${response.results.length}');
                       // * This condition only happens if a null itemCount is given
-                      if (indexInPage >= response.items.length) {
+                      if (response.items == null) {
                         return null;
                       }
-                      final organization = response.items[indexInPage];
+                      if (indexInPage >= response.items!.length) {
+                        return null;
+                      }
+                      final organization = response.items![indexInPage];
                       return Dismissible(
                           key: Key(organization.id.toString()),
                           direction: DismissDirection.horizontal,

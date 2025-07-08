@@ -23,9 +23,9 @@ class Person extends Resource {
   bool isSignedIn;
 
   String? username;
-  String email;
-  String firstname;
-  String lastname;
+  String? email;
+  String? firstname;
+  String? lastname;
   String? nickname;
   GenderType gender;
   String? i18n;
@@ -52,9 +52,9 @@ class Person extends Resource {
     super.devicecode,
     super.avatarUrl,
     this.username,
-    required this.email,
-    required this.firstname,
-    required this.lastname,
+    this.email,
+    this.firstname,
+    this.lastname,
     this.nickname,
     this.gender = GenderType.UNDEFINED,
     this.i18n,
@@ -66,8 +66,13 @@ class Person extends Resource {
     this.gps,
   }) {
     super.resourceType = ResourceType.person;
-    username = email;
-    name = "$firstname $lastname";
+    username = email ?? username;
+    final tempName = "${firstname ?? ''} ${lastname ?? ''}".trim();
+    if (tempName.isEmpty) {
+      name = null;
+    } else {
+      name = tempName;
+    }
   }
 
   factory Person.fromJson(Map<String, dynamic> json) => _$PersonFromJson(json);
@@ -97,14 +102,29 @@ class Person extends Resource {
     // return "https://gravatar.com/avatar/e011911a71acf8c16ac28471deeeea2a?s=64";
 
     if (avatarUrl == null) {
-      return "https://gravatar.com/avatar/${generateMd5(email)}?s=64";
+      if (email != null) {
+        return "https://gravatar.com/avatar/${generateMd5(email!)}?s=64";
+      } else {
+        return "https://www.gravatar.com/avatar/default?s=64&d=identicon";
+      }
     } else {
       return avatarUrl!;
     }
   }
 
   String getInitials() {
-    return "${firstname.substring(0, 1).toUpperCase()}${lastname.substring(0, 1).toUpperCase()}";
+    String firstInitial = '';
+    String lastInitial = '';
+    
+    if (firstname != null && firstname!.isNotEmpty) {
+      firstInitial = firstname!.substring(0, 1).toUpperCase();
+    }
+    
+    if (lastname != null && lastname!.isNotEmpty) {
+      lastInitial = lastname!.substring(0, 1).toUpperCase();
+    }
+    
+    return '$firstInitial$lastInitial';
   }
 
   @override
@@ -129,9 +149,9 @@ Person defaultPerson = Person(
   location: "", // location
   devicecode: "DEVICE-CODE", // device code
   username: "USERNAME", // username
-  email: "user@email.com", // email
-  firstname: "", // firstname
-  lastname: "", // lastname
+  email: "adamcrow63+default@email.com", // email
+  firstname: "Default", // firstname
+  lastname: "Person", // lastname
   nickname: "", //nickname,
   gender: GenderType.UNDEFINED, //gender,
   i18n: "en", //i18n,
@@ -140,5 +160,5 @@ Person defaultPerson = Person(
   latitude: 0.0, //latitude,
   birthyear: 0, //birthyear,
   fcm: "FCM",
-  avatarUrl: "https://gravatar.com/avatar/${generateMd5("user@email.com")}",
+  avatarUrl: "https://gravatar.com/avatar/${generateMd5("adamcrow63+default@email.com")}",
 ); //fcm

@@ -19,7 +19,7 @@ class Organization extends Resource {
   static String tablename = className.toLowerCase();
   static String PREFIX = "ORG_";
 
-  String orgType;
+  String? orgType;
   String? url;
   String? email;
 
@@ -36,9 +36,9 @@ class Organization extends Resource {
     super.avatarUrl,
     super.gps,
     super.selected,
-    required this.orgType,
-    required this.url,
-    required this.email,
+    this.orgType,
+    this.url,
+    this.email,
   }) {
     super.resourceType = ResourceType.organization;
   }
@@ -72,7 +72,12 @@ class Organization extends Resource {
   }
 
   String getInitials() {
-    return "${name!.substring(0, 2).toUpperCase()}}";
+    if (name == null || name!.isEmpty) {
+      return "";
+    }
+    return name!.length >= 2 
+        ? name!.substring(0, 2).toUpperCase()
+        : name!.toUpperCase();
   }
 
   Organization copyWith({

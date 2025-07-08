@@ -104,8 +104,8 @@ class FcmNotifier extends _$FcmNotifier {
       fetchOrganizationsNestFilterProvider,
     );
 
-    if (responseAsync.hasValue) {
-      for (Organization org in responseAsync.value!.items) {
+    if (responseAsync.hasValue && responseAsync.value!.items != null) {
+      for (Organization org in responseAsync.value!.items!) {
         addTopic(org.code!);
       }
     }

@@ -1,0 +1,72 @@
+{
+  "startIndex": 0,
+  "resultCount": 3,
+  "totalItems": 25,
+  "items": [
+    {
+      "id": 1,
+      "code": "ORG_CROWTECH",
+      "created": "2024-01-15T10:30:00.000Z",
+      "active": true,
+      "updated": "2024-01-15T12:45:00.000Z",
+      "name": "Crowtech Pty Ltd",
+      "description": "Technology consulting and software development company",
+      "location": "Sydney, Australia",
+      "devicecode": "WEB001",
+      "avatarUrl": "https://example.com/avatars/crowtech.png",
+      "gps": {
+        "id": 100,
+        "resourcecode": "ORG_CROWTECH",
+        "resourceid": 1,
+        "devicecode": "WEB001",
+        "timestamp": 1705317000000,
+        "latitude": -33.8688,
+        "longitude": 151.2093,
+        "speed": 0.0,
+        "heading": 0.0,
+        "battery": 85.5,
+        "charging": false,
+        "moving": false
+      },
+      "zoneId": "Australia/Sydney",
+      "selected": false,
+      "orgType": "CORPORATION",
+      "url": "https://www.crowtech.com.au",
+      "email": "contact@crowtech.com.au"
+    },
+    {
+      "id": 2,
+      "code": "ORG_MINIMAL",
+      "name": "Minimal Organization",
+      "orgType": "STARTUP"
+    },
+    {
+      "id": 3,
+      "created": "2024-01-10T08:15:00.000Z",
+      "active": false,
+      "name": "Partial Organization",
+      "description": "An organization with some missing fields",
+      "orgType": "NON_PROFIT",
+      "url": "https://partial-org.com",
+      "selected": true
+    },
+    {
+      "id": 4,
+      "code": "ORG_NULL_FIELDS",
+      "created": "2024-01-20T14:00:00.000Z",
+      "active": true,
+      "updated": "2024-01-20T16:30:00.000Z",
+      "name": "Organization with Nulls",
+      "description": null,
+      "location": null,
+      "devicecode": null,
+      "avatarUrl": null,
+      "gps": null,
+      "zoneId": null,
+      "selected": false,
+      "orgType": null,
+      "url": null,
+      "email": null
+    }
+  ]
+}

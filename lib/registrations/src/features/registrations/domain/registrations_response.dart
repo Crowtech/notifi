@@ -7,26 +7,14 @@ part 'registrations_response.freezed.dart';
 part 'registrations_response.g.dart';
 
 @freezed
-@JsonSerializable()
-class RegistrationsResponse with _$RegistrationsResponse {
-  const RegistrationsResponse({
-    @JsonKey(name: 'startIndex') required this.startIndex,
-    @JsonKey(name: 'items') required this.items,
-    @JsonKey(name: 'resultCount') required this.resultCount,
-    @JsonKey(name: 'totalItems') required this.totalItems,
-  });
-
-  @override
-  final int startIndex;
-  @override
-  final List<Registration> items;
-  @override
-  final int resultCount;
-  @override
-  final int totalItems;
+abstract class RegistrationsResponse with _$RegistrationsResponse {
+  const factory RegistrationsResponse({
+    @JsonKey(name: 'startIndex') int? startIndex,
+    @JsonKey(name: 'items') List<Registration>? items,
+    @JsonKey(name: 'resultCount') int? resultCount,
+    @JsonKey(name: 'totalItems') int? totalItems,
+  }) = _RegistrationsResponse;
 
   factory RegistrationsResponse.fromJson(Map<String, Object?> json)
       => _$RegistrationsResponseFromJson(json);
-
-  Map<String, Object?> toJson() => _$RegistrationsResponseToJson(this);
 }

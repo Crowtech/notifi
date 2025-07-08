@@ -23,9 +23,9 @@ Person _$PersonFromJson(Map<String, dynamic> json) => Person(
       devicecode: json['devicecode'] as String?,
       avatarUrl: json['avatarUrl'] as String?,
       username: json['username'] as String?,
-      email: json['email'] as String,
-      firstname: json['firstname'] as String,
-      lastname: json['lastname'] as String,
+      email: json['email'] as String?,
+      firstname: json['firstname'] as String?,
+      lastname: json['lastname'] as String?,
       nickname: json['nickname'] as String?,
       gender: $enumDecodeNullable(_$GenderTypeEnumMap, json['gender']) ??
           GenderType.UNDEFINED,

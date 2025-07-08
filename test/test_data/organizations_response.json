@@ -1,0 +1,93 @@
+{
+  "created": "2025-07-08T04:35:33.073395975",
+  "startIndex": 0,
+  "items": [
+    {
+      "id": 11,
+      "created": "2025-06-19T05:55:52.811435",
+      "updated": "2025-06-19T05:55:52.811435",
+      "code": "ORG_PANTA",
+      "name": "Panta",
+      "active": true,
+      "description": "Panta",
+      "avatarUrl": "https://s3.pantagroup.org/panta/ORG_PANTA-avatar-2025-03-09T16:40:51.725539.png",
+      "zoneId": "UTC",
+      "selected": false,
+      "orgType": "org",
+      "url": "https://www.pantagroup.org"
+    },
+    {
+      "id": 12,
+      "created": "2025-06-19T05:55:52.813414",
+      "updated": "2025-06-19T05:55:52.813414",
+      "code": "ORG_DCLABS",
+      "name": "DCLABS Pty Ltd",
+      "active": true,
+      "description": "DCLABS Pty Ltd",
+      "zoneId": "UTC",
+      "selected": false,
+      "orgType": "org",
+      "url": "https://www.dclabs.com.au"
+    },
+    {
+      "id": 13,
+      "created": "2025-06-19T05:55:52.815482",
+      "updated": "2025-06-19T05:55:52.815482",
+      "code": "ORG_ONE_BY_ONE",
+      "name": "OneByOne",
+      "active": true,
+      "description": "OneByOne",
+      "zoneId": "UTC",
+      "selected": false,
+      "orgType": "org",
+      "url": "https://www.onebyone.io"
+    },
+    {
+      "id": 10,
+      "created": "2025-06-19T05:55:52.808787",
+      "updated": "2025-06-19T05:55:52.808787",
+      "code": "ORG_CROWTECH",
+      "name": "Crowtech",
+      "active": true,
+      "description": "Crowtech",
+      "avatarUrl": "https://s3.industry.shop/industry/crowtech-logo.png",
+      "zoneId": "UTC",
+      "selected": false,
+      "orgType": "org",
+      "url": "https://crowtech.com.au"
+    },
+    {
+      "id": 222,
+      "created": "2025-06-20T00:50:16.50035",
+      "updated": "2025-06-20T00:50:16.50035",
+      "code": "ORG_UMD_COM_AU",
+      "name": "UMD",
+      "active": true,
+      "description": "Unique Micro Design",
+      "devicecode": "Web:chrome",
+      "avatarUrl": "https://www.google.com/s2/favicons?sz=64&domain_url=https://umd.com.au",
+      "zoneId": "UTC",
+      "selected": false,
+      "orgType": "ORGANIZATION",
+      "url": "https://umd.com.au"
+    },
+    {
+      "id": 974,
+      "created": "2025-06-28T07:17:16.206895",
+      "updated": "2025-06-28T07:17:16.206895",
+      "code": "ORG_ICADA_COM_AU",
+      "name": "ICADA",
+      "active": true,
+      "description": "IoT Control and Data Acquistion",
+      "devicecode": "ANDgoogle7c4c9fb0-8fa3-2a6d-d095-e5dc2270c02e",
+      "avatarUrl": "https://www.google.com/s2/favicons?sz=64&domain_url=https://www.icada.com.au",
+      "zoneId": "UTC",
+      "selected": false,
+      "orgType": "ORGANIZATION",
+      "url": "https://www.icada.com.au"
+    }
+  ],
+  "totalItems": 6,
+  "processingTime": 2175059,
+  "total_results": 6
+}

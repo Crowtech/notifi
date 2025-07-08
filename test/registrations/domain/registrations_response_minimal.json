@@ -1,0 +1,14 @@
+{
+  "items": [
+    {
+      "id": 100,
+      "email": "simple@test.com"
+    },
+    {
+      "id": 101,
+      "email": "another@test.com",
+      "inviteeFirstname": "Test",
+      "inviteeLastname": "User"
+    }
+  ]
+}

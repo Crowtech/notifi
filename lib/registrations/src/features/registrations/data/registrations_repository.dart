@@ -68,6 +68,8 @@ class RegistrationsRepository {
     final response = await client.postUri(uri,
         options: options, data: data, cancelToken: cancelToken);
 
+    logNoStack.i("REGISTRATIONS_REPOSITORY ######: ${response.data}");
+
     return RegistrationsResponse.fromJson(response.data);
   }
 

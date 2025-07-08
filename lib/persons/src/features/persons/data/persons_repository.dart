@@ -6,15 +6,13 @@ import 'package:notifi/models/nestfilter.dart';
 import 'package:notifi/models/organization.dart';
 import 'package:notifi/models/person.dart';
 import 'package:notifi/organizations/src/features/organizations/presentation/organizations/selected_organizations.dart';
+import 'package:notifi/persons/src/features/persons/presentation/person_details/persons_response.dart';
 import 'package:notifi/state/nest_auth2.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:notifi/persons/src/utils/cancel_token_ref.dart';
 import 'package:notifi/persons/src/utils/dio_provider.dart';
 import 'package:logger/logger.dart' as logger;
-
-
-import '../domain/npersons_response.dart';
 
 part 'persons_repository.g.dart';
 
@@ -42,7 +40,7 @@ class PersonsRepository {
   final Person currentUser;
   final List<Organization> selectedOrganizations;
 
-  Future<NPersonsResponse> searchPersons(
+  Future<PersonsResponse> searchPersons(
       {required NestQueryData queryData, CancelToken? cancelToken}) async {
     NestFilter nf = NestFilter(offset: queryData.page);
     var data = jsonEncode(nf);
@@ -79,10 +77,10 @@ class PersonsRepository {
     final response = await client.postUri(uri,
         options: options, data: data, cancelToken: cancelToken);
 
-    return NPersonsResponse.fromJson(response.data);
+    return PersonsResponse.fromJson(response.data);
   }
 
-  Future<NPersonsResponse> nowPlayingPersons(
+  Future<PersonsResponse> nowPlayingPersons(
       {required int page, CancelToken? cancelToken}) async {
         String data;
     NestFilter nf = NestFilter(offset: page);
@@ -137,7 +135,7 @@ class PersonsRepository {
 
     logNoStack
         .d("PERSONS_REPOSITORY: now Playing , responseData=${response.data}");
-    return NPersonsResponse.fromJson(response.data);
+    return PersonsResponse.fromJson(response.data);
   }
 
   Future<Person> person({required int orgId, CancelToken? cancelToken}) async {
@@ -189,7 +187,7 @@ Future<Person> person(
 
 /// Provider to fetch paginated persons data
 @riverpod
-Future<NPersonsResponse> fetchPersons(
+Future<PersonsResponse> fetchPersons(
   FetchPersonsRef ref, {
   required NestQueryData queryData,
 }) async {
@@ -223,7 +221,7 @@ Future<NPersonsResponse> fetchPersons(
   });
   if (queryData.query.isEmpty) {
     // use non-search endpoint
-    Future<NPersonsResponse> pr = personsRepo.nowPlayingPersons(
+    Future<PersonsResponse> pr = personsRepo.nowPlayingPersons(
       page: queryData.page,
       cancelToken: cancelToken,
     );
