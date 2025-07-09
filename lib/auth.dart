@@ -7,7 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:notifi/credentials.dart';
 import 'package:notifi/jwt_utils.dart';
 
-import 'package:notifi/notifi.dart';
+import 'package:notifi/notifi_refactored.dart';
 import 'package:oidc/oidc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notifi/app_state.dart' as app_state;

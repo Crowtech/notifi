@@ -5,6 +5,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter/material.dart';
 
 import '../../riverpod/nest_notifis_provider.dart';
 import '../../riverpod/notifications_data.dart';
@@ -139,15 +140,14 @@ class NotificationHandler {
       // Check if message has nestCode
       final nestCode = message.data['nestCode'];
       if (nestCode != null) {
-        await ref.read(nestNotifisProvider.notifier).refresh();
+        // Invalidate the provider to refresh
+        ref.invalidate(nestNotifisProvider);
       }
       
-      // Update badge count if available
-      final badgeCount = message.data['badge'];
-      if (badgeCount != null) {
-        await ref.read(notificationsDataProvider.notifier).updateBadgeCount(
-          int.tryParse(badgeCount.toString()) ?? 0,
-        );
+      // Update notification data if available
+      final notificationData = message.data;
+      if (notificationData.isNotEmpty) {
+        ref.read(notificationsDataProvider(nestCode ?? 'default').notifier).update(notificationData);
       }
     } catch (e) {
       print('Error updating notifications data: $e');
@@ -246,7 +246,11 @@ class NotificationHandler {
       case 'mark_read':
         final notificationId = data['notification_id'];
         if (notificationId != null) {
-          await ref.read(notificationsDataProvider.notifier).markAsRead(notificationId);
+          // Update notification data to mark as read
+          ref.read(notificationsDataProvider(notificationId).notifier).update({
+            'read': true,
+            'notification_id': notificationId,
+          });
         }
         break;
       default:
@@ -259,12 +263,16 @@ class NotificationHandler {
     print('Handling nest notification');
     
     // Refresh nest notifications
-    await ref.read(nestNotifisProvider.notifier).refresh();
+    ref.invalidate(nestNotifisProvider);
     
     // Check if user needs to re-authenticate
-    final auth = ref.read(nestAuthProvider);
-    if (auth == null) {
-      print('User not authenticated for nest notification');
+    try {
+      final authController = ref.read(nestAuthProvider.notifier);
+      if (authController.currentUser.email?.isEmpty ?? true) {
+        print('User not authenticated for nest notification');
+      }
+    } catch (e) {
+      print('Error checking authentication: $e');
     }
   }
   

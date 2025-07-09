@@ -7,7 +7,7 @@ part of 'notification_service.dart';
 // **************************************************************************
 
 String _$notificationServiceHash() =>
-    r'd9317c9e999da0ca358f1296216334e6a498235a';
+    r'4cfdd3de48505eea128b6b9aca8e6a7fb85eec3f';
 
 /// Main notification service that handles Firebase messaging,
 /// local notifications, and topic management.

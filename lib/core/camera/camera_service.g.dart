@@ -6,26 +6,27 @@ part of 'camera_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$availableCamerasHash() => r'7a791b6a218540ef961ca805ab70a30dd83c8d14';
+String _$availableCamerasListHash() =>
+    r'cee710d8aa87d08e449f26a8622b01780d4824ce';
 
 /// Available cameras in the system
 ///
-/// Copied from [availableCameras].
-@ProviderFor(availableCameras)
-final availableCamerasProvider =
+/// Copied from [availableCamerasList].
+@ProviderFor(availableCamerasList)
+final availableCamerasListProvider =
     FutureProvider<List<CameraDescription>>.internal(
-  availableCameras,
-  name: r'availableCamerasProvider',
+  availableCamerasList,
+  name: r'availableCamerasListProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$availableCamerasHash,
+      : _$availableCamerasListHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef AvailableCamerasRef = FutureProviderRef<List<CameraDescription>>;
+typedef AvailableCamerasListRef = FutureProviderRef<List<CameraDescription>>;
 String _$cameraServiceHash() => r'ce1beeded908d1baa8b897db81f36708488e3d73';
 
 /// Camera service for managing camera functionality

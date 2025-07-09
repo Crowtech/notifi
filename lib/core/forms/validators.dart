@@ -2,6 +2,7 @@
 /// 
 /// This file consolidates all validation logic from the various
 /// validation files in lib/forms/validations/ into a single location
+library;
 
 /// Email validation
 String? validateEmail(String? value) {
@@ -120,6 +121,17 @@ String? validateSubject(String? value) {
     fieldName: 'Subject',
     minLength: 3,
     maxLength: 100,
+  );
+}
+
+/// Description validation
+String? validateDescription(String? value) {
+  return validateMessage(
+    value,
+    fieldName: 'Description',
+    required: false,
+    minLength: 0,
+    maxLength: 500,
   );
 }
 

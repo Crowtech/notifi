@@ -7,7 +7,7 @@ import 'package:notifi/credentials.dart';
 import 'package:notifi/jwt_utils.dart';
 import 'package:notifi/models/organization.dart';
 import 'package:notifi/models/person.dart';
-import 'package:notifi/notifi2.dart';
+import 'package:notifi/notifi_refactored.dart';
 import 'package:notifi/organizations/src/features/organizations/data/organizations_repository_nf.dart';
 import 'package:notifi/state/nest_auth2.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

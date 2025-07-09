@@ -3,17 +3,13 @@ import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+// Permission handling will be done through Firebase messaging directly
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 import '../../riverpod/fcm_notifier.dart';
-import '../../riverpod/nest_notifis_provider.dart';
-import '../../state/nest_auth2.dart';
 // Logger functionality will be replaced with print statements
 import 'notification_handler.dart';
-import 'platform_helper.dart';
 import 'topic_manager.dart';
 
 part 'notification_service.g.dart';
@@ -95,18 +91,20 @@ class NotificationService extends _$NotificationService {
 
   /// Request notification permissions
   Future<void> _requestPermissions() async {
-    if (PlatformHelper.isWeb) {
-      await _messaging.requestPermission(
-        alert: true,
-        announcement: false,
-        badge: true,
-        carPlay: false,
-        criticalAlert: false,
-        provisional: false,
-        sound: true,
-      );
-    } else if (Platform.isIOS || Platform.isAndroid) {
-      await Permission.notification.request();
+    final permission = await _messaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
+    
+    if (permission.authorizationStatus == AuthorizationStatus.authorized) {
+      print('Notification permissions granted');
+    } else {
+      print('Notification permissions denied');
     }
   }
 
@@ -157,13 +155,13 @@ class NotificationService extends _$NotificationService {
     // Get and update FCM token
     final token = await _messaging.getToken();
     if (token != null) {
-      await ref.read(fcmNotifierProvider.notifier).updateFcmToken(token);
+      ref.read(fcmNotifierProvider.notifier).setFcm(token);
       print('FCM Token: $token');
     }
 
     // Listen for token refresh
     _messaging.onTokenRefresh.listen((newToken) async {
-      await ref.read(fcmNotifierProvider.notifier).updateFcmToken(newToken);
+      ref.read(fcmNotifierProvider.notifier).setFcm(newToken);
       print('FCM Token refreshed: $newToken');
     });
   }
@@ -213,12 +211,8 @@ class NotificationService extends _$NotificationService {
 
   /// Check if notifications are enabled
   Future<bool> areNotificationsEnabled() async {
-    if (PlatformHelper.isWeb) {
-      final permission = await _messaging.getNotificationSettings();
-      return permission.authorizationStatus == AuthorizationStatus.authorized;
-    } else {
-      return await Permission.notification.isGranted;
-    }
+    final permission = await _messaging.getNotificationSettings();
+    return permission.authorizationStatus == AuthorizationStatus.authorized;
   }
 }
 

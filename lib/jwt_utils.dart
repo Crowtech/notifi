@@ -12,7 +12,7 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:logger/logger.dart' as logger;
 import 'package:notifi/entities/user_role.dart';
 import 'package:notifi/i18n/string_hardcoded.dart';
-import 'package:notifi/notifi.dart';
+import 'package:notifi/notifi_refactored.dart';
 import 'package:notifi/models/person.dart' as person;
 import 'package:oidc/oidc.dart';
 import 'package:package_info_plus/package_info_plus.dart';

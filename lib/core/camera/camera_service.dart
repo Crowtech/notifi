@@ -1,4 +1,5 @@
 import 'package:camera/camera.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 // Logger functionality replaced with print statements
 
@@ -6,7 +7,7 @@ part 'camera_service.g.dart';
 
 /// Available cameras in the system
 @Riverpod(keepAlive: true)
-Future<List<CameraDescription>> availableCameras(AvailableCamerasRef ref) async {
+Future<List<CameraDescription>> availableCamerasList(Ref ref) async {
   try {
     final cameras = await availableCameras();
     print('Found ${cameras.length} cameras');
