@@ -18,7 +18,6 @@
 /// - Responsive dialog layout with scroll support
 /// 
 /// ## Form Fields
-library;
 /// - **Subject**: Required notification title with length and character validation
 /// - **Message**: Required notification body with comprehensive text validation
 /// - **Username**: Optional recipient email address with email format validation
@@ -41,6 +40,10 @@ import 'package:notifi/api_utils.dart';
 import 'package:notifi/credentials.dart';
 import 'package:notifi/forms/cancel_button_widget.dart';
 import 'package:notifi/forms/text_form_widget.dart';
+import 'package:notifi/forms/validations.dart/email_validation.dart';
+import 'package:notifi/forms/validations.dart/message_validation.dart';
+import 'package:notifi/forms/validations.dart/subject_validation.dart';
+import 'package:notifi/forms/validations.dart/topic_validation.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:notifi/riverpod/validate_form.dart';
 import 'package:notifi/state/nest_auth2.dart';
@@ -225,6 +228,7 @@ class _NotifyFormState extends ConsumerState<NotifyForm> {
                             item: nt.t.subject_capitalized,
                           ),
                           hintText: nt.t.form.subject_hint,
+                          regex: SUBJECT_REGEX,
                         ),
                         const SizedBox(height: 16),
                         
@@ -247,6 +251,7 @@ class _NotifyFormState extends ConsumerState<NotifyForm> {
                           itemName: nt.t.form.message,
                           itemValidation: nt.t.form.message_validation,
                           hintText: nt.t.form.message_hint,
+                          regex: MESSAGE_REGEX,
                         ),
                         const SizedBox(height: 16),
                         
@@ -272,6 +277,8 @@ class _NotifyFormState extends ConsumerState<NotifyForm> {
                           itemName: nt.t.form.username,
                           itemValidation: nt.t.form.username_validation,
                           hintText: nt.t.form.username_hint,
+                          regex: EMAIL_REGEX,
+                          inputFormatters: emailInputFormatter,
                         ),
                         const SizedBox(height: 16),
                         
@@ -301,6 +308,8 @@ class _NotifyFormState extends ConsumerState<NotifyForm> {
                           hintText: nt.t.form.topic_hint(
                             item: nt.t.topic_capitalized,
                           ),
+                          regex: TOPIC_REGEX,
+                          inputFormatters: topicInputFormatter,
                         ),
                         const SizedBox(height: 16),
                         

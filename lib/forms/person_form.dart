@@ -51,6 +51,8 @@ import 'package:notifi/credentials.dart';
 import 'package:notifi/forms/cancel_button_widget.dart';
 import 'package:notifi/forms/org_list.dart';
 import 'package:notifi/forms/text_form_widget.dart';
+import 'package:notifi/forms/validations.dart/email_validation.dart';
+import 'package:notifi/forms/validations.dart/name_validation.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:notifi/models/person.dart';
 import 'package:notifi/persons/src/features/persons/data/persons_repository.dart';
@@ -278,6 +280,9 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                               item: nt.t.person_capitalized,
                             ),
                             hintText: nt.t.form.email_hint,
+                            onValidate: validateEmail,
+                            regex: EMAIL_REGEX,
+                            inputFormatters: emailInputFormatter,
                           ),
                           const SizedBox(height: 16),
                           
@@ -305,6 +310,7 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                               item: nt.t.person_capitalized,
                             ),
                             hintText: nt.t.form.given_name_hint,
+                            regex: NAME_REGEX,
                           ),
                           const SizedBox(height: 16),
                           
@@ -330,6 +336,7 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                               item: nt.t.person_capitalized,
                             ),
                             hintText: nt.t.form.family_name_hint,
+                            regex: NAME_REGEX,
                           ),
                           const SizedBox(height: 16),
                           

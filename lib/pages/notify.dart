@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'package:notifi/state/nuclear_codes.dart';
+
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:logger/logger.dart' as logger;
 
@@ -20,7 +20,7 @@ class NotifyPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final codes = ref.watch(nuclearCodesProvider);
+ 
 
     return Scaffold(
          appBar: AppBar(

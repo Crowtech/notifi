@@ -7,7 +7,7 @@ import 'package:notifi/credentials.dart';
 import 'package:notifi/jwt_utils.dart';
 import 'package:notifi/models/organization.dart';
 import 'package:notifi/models/person.dart';
-import 'package:notifi/notifi_refactored.dart';
+import 'package:notifi/notifi2.dart';
 import 'package:notifi/organizations/src/features/organizations/data/organizations_repository_nf.dart';
 import 'package:notifi/state/nest_auth2.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -115,8 +115,7 @@ class FcmNotifier extends _$FcmNotifier {
     addTopic(currentUser.username!);
     setTopics();
     logNoStack.i("SEND_FCM: about to show toast");
-    // TODO: Replace with proper toast implementation when needed
-    // showFcmToast(ref, fcm, 5);
+    showFcmToast(ref, fcm,5);
   }
 }
 

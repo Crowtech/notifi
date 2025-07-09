@@ -1,0 +1,271 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:logger/logger.dart' as logger;
+import 'package:notifi/api_utils.dart';
+import 'package:notifi/credentials.dart';
+import 'package:notifi/jwt_utils.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:oidc/oidc.dart';
+import 'package:flutter_background_geolocation/flutter_background_geolocation.dart'
+    as bg;
+import 'package:notifi/app_state.dart' as app_state;
+
+import '../models/person.dart';
+
+var log = logger.Logger(
+  printer: logger.PrettyPrinter(),
+  level: logger.Level.info,
+);
+
+var logNoStack = logger.Logger(
+  printer: logger.PrettyPrinter(methodCount: 0),
+  level: logger.Level.info,
+);
+
+bool get isAndroid => !kIsWeb && Platform.isAndroid;
+bool get isIOS => !kIsWeb && Platform.isIOS;
+bool get isWindows => !kIsWeb && Platform.isWindows;
+
+String? _fcmToken = '';
+String? get fcmToken => _fcmToken;
+
+late AndroidNotificationChannel _androidChannel;
+
+bool isFlutterLocalNotificationsInitialized = false;
+
+// /// Initialize the [FlutterLocalNotificationsPlugin] package.
+late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
+
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
+  await Firebase.initializeApp();
+
+  log.d("Handling a background message: ${message.messageId}");
+}
+
+Future<void> setupFlutterNotifications() async {
+  if (isFlutterLocalNotificationsInitialized) {
+    log.d("Flutter Local Notifications not initialised, exiting");
+    return;
+  }
+  _androidChannel = const AndroidNotificationChannel(
+    'high_importance_channel', // id
+    'High Importance Notifications', // title
+    description:
+        'This channel is used for important notifications.', // description
+    importance: Importance.high,
+  );
+
+  flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+
+  /// Create an Android Notification Channel.
+  ///
+  /// We use this channel in the `AndroidManifest.xml` file to override the
+  /// default FCM channel to enable heads up notifications.
+  await flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()
+      ?.createNotificationChannel(_androidChannel);
+
+  /// Update the iOS foreground notification presentation options to allow
+  /// heads up notifications.
+  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
+
+  isFlutterLocalNotificationsInitialized = true;
+}
+
+class Fcm2Fetcher extends Notifier<String> {
+  late SharedPreferences _sharedPreferences;
+  static const _sharedPrefsKey = 'token';
+  String? _vapidKey;
+  int secondsToast = 2;
+  final List<String> _topics = [];
+  String _fcm = "Loading ...";
+  bool _preventAutoLogin = false;
+
+  late PackageInfo _packageInfo;
+  late String _deviceId;
+
+  FirebaseOptions? options;
+
+  @override
+  String build() {
+    return "";
+  }
+
+  void init({List<String>? topics, FirebaseOptions? options}) async {
+    if (topics != null && topics.isNotEmpty) {
+      _topics.addAll(topics);
+    }
+    if (defaultTargetPlatform == TargetPlatform.android) {
+      _topics.add('android');
+    } else if (defaultTargetPlatform == TargetPlatform.iOS) {
+      _topics.add('ios');
+    } else if (defaultTargetPlatform == TargetPlatform.linux) {
+      _topics.add('linux');
+    } else if (defaultTargetPlatform == TargetPlatform.windows) {
+      _topics.add('windows');
+    } else if (defaultTargetPlatform == TargetPlatform.macOS) {
+      _topics.add('macos');
+    } else if (defaultTargetPlatform == TargetPlatform.fuchsia) {
+      _topics.add('fuchsia');
+    } else {
+      // We use 'web' as the default platform for unknown platforms.
+      _topics.add('web');
+    }
+    await Firebase.initializeApp(options: options);
+
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+    NotificationSettings settings = await messaging.requestPermission(
+      alert: true,
+      announcement: true,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: true,
+      sound: true,
+    );
+
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      logNoStack.i('FIREBASE: User granted notifications permission');
+    } else if (settings.authorizationStatus ==
+        AuthorizationStatus.provisional) {
+      logNoStack.i('FIREBASE: User granted provisional messaging permission');
+    } else {
+      logNoStack.i(
+          'FIREBASE: User declined or has not accepted messaging permission');
+    }
+    logNoStack.i(
+        'FIREBASE: User granted permission: ${settings.authorizationStatus}');
+
+    FirebaseMessaging.instance.onTokenRefresh.listen((fcmToken) async {
+      // TODO: If necessary send token to application server.
+
+      // Note: This callback is fired at each app startup and whenever a new
+      // token is generated.
+      log.i("FIREBASE: Refresh Notifi FCM TOKEN = $fcmToken");
+      state = fcmToken;
+    }).onError((err) {
+      // Error getting token.
+    });
+
+    if (kIsWeb) {
+      log.i("Got to here: WEB detected");
+    } else {
+      logNoStack.i("Got to here: WEB not detected");
+    }
+    if (kIsWeb) {
+      logNoStack.i("FIREBASE: vapidKey is $vapidKey");
+      FirebaseMessaging.instance.getToken(vapidKey: vapidKey).then((token) {
+        logNoStack.i("FIREBASE: Web fcm token is $token");
+        state = token!;
+      });
+    }
+
+    if (isIOS) {
+      logNoStack.i("FIREBASE: Fetching Mobile Apple fcm token ");
+      FirebaseMessaging.instance.getAPNSToken().then((apnsToken) {
+        if (apnsToken != null) {
+          // APNS token is available, make FCM plugin API requests...
+          FirebaseMessaging.instance.getToken().then((token) {
+            state = token!;
+            logNoStack.i("FIREBASE: Mobile Apple fcm token is $token");
+            subscribeToTopics();
+          });
+        }
+      });
+    }
+    if (isAndroid) {
+      FirebaseMessaging.instance.getToken().then((token) {
+        state = token!;
+
+        logNoStack.d("FIREBASE: Mobile Android fcm token is $token");
+        subscribeToTopics();
+      });
+    }
+
+    logNoStack.d("FIREBASE: Got to here before setup Flutter Notifications");
+    await setupFlutterNotifications();
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      final notification = message.notification;
+      if (notification == null) return;
+
+      logNoStack.i(
+          "FIREBASE: INCOMING NOTIFICATION:\nTITLE: ${notification.title}\nBODY: ${notification.body}");
+      flutterLocalNotificationsPlugin.show(
+        notification.hashCode,
+        notification.title,
+        notification.body,
+        NotificationDetails(
+          android: AndroidNotificationDetails(
+              _androidChannel.id, _androidChannel.name,
+              channelDescription: _androidChannel.description,
+              icon: '@drawable/ic_launcher'),
+        ),
+        payload: jsonEncode(message.toMap()),
+      );
+      logNoStack
+          .i("FIREBASE: INCOMING NOTIFICATION: AFter flutterLocalnotifixaiotn");
+      Fluttertoast.showToast(
+          msg: "${notification.title!}::${notification.body!}",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: secondsToast,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+      logNoStack.i("FIREBASE: INCOMING NOTIFICATION: AFter toast");
+    });
+
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  }
+
+  void subscribeToTopics() {
+    if (!kIsWeb) {
+      logNoStack.i("FIREBASE: Subscribing to topics");
+
+      for (final topic in _topics) {
+        try {
+          FirebaseMessaging.instance.subscribeToTopic(topic).then((_) {
+            logNoStack.i("FIREBASE: Subscribed to topic: $topic");
+          });
+        } on Exception catch (_) {
+          log.e("FIREBASE: Firebase error");
+        }
+      }
+    } else {
+      logNoStack.i("FIREBASE: Not subscribing to topics");
+    }
+  }
+
+  set fcm(String newFcm) {
+    state = newFcm;
+  }
+
+  void addTopic(String topic) {
+    _topics.add(topic);
+  }
+
+  void removeTopic(String topic) {
+    _topics.remove(topic);
+  }
+}
+
+// Notifier provider holding the state
+final fcmProvider = NotifierProvider<Fcm2Fetcher, String>(Fcm2Fetcher.new);

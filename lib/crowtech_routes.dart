@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:notifi/auth.dart';
 
-// import 'package:notifi/test_pages/test_page.dart'; // Removed - test page no longer exists
+import 'package:notifi/test_pages/test_page.dart';
 import 'package:oidc/oidc.dart';
 import 'package:posthog_flutter/posthog_flutter.dart';
 
@@ -58,11 +57,7 @@ final GoRouter router = GoRouter(
         }
         return null;
       },
-      builder: (context, state) => const Scaffold(
-        body: Center(
-          child: Text('Home Page - TestPage removed'),
-        ),
-      ),
+      builder: (context, state) => const TestPage(),
     ),
     GoRoute(
       path: CrowtechRoutes.auth,
