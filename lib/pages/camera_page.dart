@@ -618,13 +618,15 @@ class _CameraHomeState extends State<CameraHome>
       onNewCameraSelected(description);
     }
 
-    if (Provider.of<Notifi>(context, listen: false).cameras.isEmpty) {
+    // TODO: Replace with new camera service when needed
+    if (false) { // Provider.of<Notifi>(context, listen: false).cameras.isEmpty) {
       SchedulerBinding.instance.addPostFrameCallback((_) async {
         showInSnackBar(nt.t.camera_not_found);
       });
       return Text(nt.t.none);
     } else {
-      for (final CameraDescription cameraDescription in Provider.of<Notifi>(context, listen: false).cameras) {
+      // TODO: Replace with new camera service when needed
+      for (final CameraDescription cameraDescription in <CameraDescription>[]) { // Provider.of<Notifi>(context, listen: false).cameras) {
         toggles.add(
           SizedBox(
             width: 90.0,

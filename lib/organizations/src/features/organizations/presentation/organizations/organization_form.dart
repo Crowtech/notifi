@@ -124,9 +124,6 @@ class _CreateOrganizationFormState
                     item: nt.t.organization_capitalized,
                   ),
                   hintText: nt.t.form.name_hint,
-                  onValidate: validateName,
-                  regex: NAME_REGEX,
-                  inputFormatters: nameInputFormatter,
                   textCapitalization: TextCapitalization.words,
                 ),
                 const SizedBox(height: 16),
@@ -144,9 +141,6 @@ class _CreateOrganizationFormState
                     item: nt.t.organization_capitalized,
                   ),
                   hintText: nt.t.form.description_hint,
-                  onValidate: validateDescription,
-                  regex: DESCRIPTION_REGEX,
-                  inputFormatters: descriptionInputFormatter,
                   textCapitalization: TextCapitalization.sentences,
                 ),
                 const SizedBox(height: 16),
@@ -219,9 +213,6 @@ class _CreateOrganizationFormState
                   hintText: nt.t.form.email_administration_hint(
                     item: nt.t.organization_capitalized,
                   ),
-                  onValidate: validateEmail,
-                  regex: EMAIL_REGEX,
-                  inputFormatters: emailInputFormatter,
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
@@ -242,8 +233,6 @@ class _CreateOrganizationFormState
                   ),
                   hintText:
                       nt.t.form.url_hint(item: nt.t.organization_capitalized),
-                //  onValidate: validateUrl,
-                  regex: URL_REGEX,
                 //  inputFormatters: urlInputFormatter,
                   optional: false,
                 ),

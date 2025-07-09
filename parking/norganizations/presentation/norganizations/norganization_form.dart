@@ -6,10 +6,6 @@ import 'package:notifi/credentials.dart';
 import 'package:notifi/forms/cancel_button_widget.dart';
 import 'package:notifi/forms/checkbox_widget.dart';
 import 'package:notifi/forms/text_form_widget.dart';
-import 'package:notifi/forms/validations.dart/description_validation.dart';
-import 'package:notifi/forms/validations.dart/email_validation.dart';
-import 'package:notifi/forms/validations.dart/name_validation.dart';
-import 'package:notifi/forms/validations.dart/url_validation.dart';
 import 'package:notifi/i18n/strings.g.dart' as nt;
 import 'package:notifi/models/organization_type.dart';
 import '../../domain/norganization.dart';
@@ -127,9 +123,6 @@ class _CreateNOrganizationFormState
                     item: nt.t.organization_capitalized,
                   ),
                   hintText: nt.t.form.name_hint,
-                  onValidate: validateName,
-                  regex: NAME_REGEX,
-                  inputFormatters: nameInputFormatter,
                   textCapitalization: TextCapitalization.words,
                 ),
                 const SizedBox(height: 16),
@@ -147,9 +140,6 @@ class _CreateNOrganizationFormState
                     item: nt.t.organization_capitalized,
                   ),
                   hintText: nt.t.form.description_hint,
-                  onValidate: validateDescription,
-                  regex: DESCRIPTION_REGEX,
-                  inputFormatters: descriptionInputFormatter,
                   textCapitalization: TextCapitalization.sentences,
                 ),
                 const SizedBox(height: 16),
@@ -222,9 +212,6 @@ class _CreateNOrganizationFormState
                   hintText: nt.t.form.email_administration_hint(
                     item: nt.t.organization_capitalized,
                   ),
-                  onValidate: validateEmail,
-                  regex: EMAIL_REGEX,
-                  inputFormatters: emailInputFormatter,
                 ),
                 const SizedBox(height: 16),
                 TextFormFieldWidget(
@@ -246,7 +233,6 @@ class _CreateNOrganizationFormState
                   hintText:
                       nt.t.form.url_hint(item: nt.t.organization_capitalized),
                 //  onValidate: validateUrl,
-                  regex: URL_REGEX,
                 //  inputFormatters: urlInputFormatter,
                   optional: false,
                 ),

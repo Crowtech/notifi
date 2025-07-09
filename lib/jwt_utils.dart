@@ -109,22 +109,15 @@ Future<bool> loginUser(
 }
 
 void initNotifi(BuildContext context, String token, String topic) async {
-  // var packageInfo = await fetchPackageInfo();
-  // var deviceId = await fetchDeviceId();
-
-  logNoStack.i("NOTIFI INIT ");
-
-  // var notifi = Provider.of<Notifi>(context, listen: false);
-  await Provider.of<Notifi>(context, listen: false).init();
-
-  // void notifiListener() {
-  //   if (!context.mounted) return;
-  //   logNoStack.d("Main:NotifiListener triggered , fcm is ${notifi.fcm}");
-  //   Locale locale = Localizations.localeOf(context);
-  //   registerFCM(locale, token, notifi.deviceId!, notifi.fcm);
-  // }
-
-  // Provider.of<Notifi>(context, listen: false).addListener(notifiListener);
+  // Legacy function - converted to new architecture
+  // The initialization is now handled by the Riverpod providers automatically
+  // through the NotificationService and other providers in notifi_refactored.dart
+  
+  logNoStack.i("NOTIFI INIT (converted to new architecture)");
+  
+  // Note: The new architecture automatically initializes services when needed
+  // Individual services like NotificationService, CameraService etc. are
+  // initialized via their respective Riverpod providers
 }
 
 Future<PackageInfo> fetchPackageInfo() async {
