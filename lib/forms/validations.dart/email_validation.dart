@@ -55,6 +55,7 @@ Future<bool> validateEmailAsync2(
         "$defaultAPIBaseUrl$defaultApiPrefixPath/resources/check/email/";
     apiPath = "$apiPath${Uri.encodeComponent(email)}";
     var response = await apiGetData(token!, apiPath, "application/json");
+    logNoStack.i("Email validation response ${response.body}");
     if (!response.body.contains("true")) {
       StatusAlert.show(
         context,
