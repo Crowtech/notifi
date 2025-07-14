@@ -53,7 +53,8 @@ Future<bool> validateEmailAsync2(
     var token = ref.read(nestAuthProvider.notifier).token;
     var apiPath =
         "$defaultAPIBaseUrl$defaultApiPrefixPath/resources/check/email/";
-    apiPath = "$apiPath${Uri.encodeComponent(email)}";
+   // apiPath = "$apiPath${Uri.encodeComponent(email)}";
+     apiPath = "$apiPath${email}";
     var response = await apiGetData(token!, apiPath, "application/json");
     logNoStack.i("Email validation response ${response.body}");
     if (!response.body.contains("true")) {
