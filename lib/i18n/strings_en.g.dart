@@ -246,6 +246,16 @@ class TranslationsFormEn {
 	String org_type({required Object item}) => '${item} Type';
 	String get saved => 'Saved';
 	String deleted({required Object item}) => 'Deleted ${item}';
+	String get invite_person => 'Invite Person';
+	String get invitation => 'Invitation';
+	String get first_name => 'First Name';
+	String get last_name => 'Last Name';
+	String get new_user_detected => 'New user - please provide name details';
+	String get existing_user_detected => 'Existing user found';
+	String get select_organizations => 'Select Organizations';
+	String get send_invitation => 'Send Invitation';
+	String get invitation_sent => 'Invitation sent successfully';
+	String get error_sending_invitation => 'Error sending invitation';
 }
 
 // Path: group_types
@@ -507,6 +517,16 @@ extension on Translations {
 			case 'form.org_type': return ({required Object item}) => '${item} Type';
 			case 'form.saved': return 'Saved';
 			case 'form.deleted': return ({required Object item}) => 'Deleted ${item}';
+			case 'form.invite_person': return 'Invite Person';
+			case 'form.invitation': return 'Invitation';
+			case 'form.first_name': return 'First Name';
+			case 'form.last_name': return 'Last Name';
+			case 'form.new_user_detected': return 'New user - please provide name details';
+			case 'form.existing_user_detected': return 'Existing user found';
+			case 'form.select_organizations': return 'Select Organizations';
+			case 'form.send_invitation': return 'Send Invitation';
+			case 'form.invitation_sent': return 'Invitation sent successfully';
+			case 'form.error_sending_invitation': return 'Error sending invitation';
 			case 'firstname': return 'Firstname';
 			case 'focus_mode': return 'Focus Mode';
 			case 'groups': return 'Groups';

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:notifi/forms/invite_form.dart';
 import 'package:notifi/forms/person_form.dart';
 
 import 'package:notifi/i18n/strings.g.dart' as nt;
@@ -144,7 +145,8 @@ class PersonsSearchScreen extends ConsumerWidget {
           logNoStack.i("PERSONS_SEARCH_SCREEN: Add button pressed");
           showDialog(
             context: context,
-            builder: (context) => CreatePersonForm(formCode: "person"),
+           // builder: (context) => CreatePersonForm(formCode: "person"),
+             builder: (context) => InviteForm(formCode: "person"),
           );
         },
         // foregroundColor: customizations[index].$1,

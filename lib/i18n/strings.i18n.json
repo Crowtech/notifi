@@ -101,7 +101,17 @@
     "topic_hint": "Enter ${item}",
     "org_type": "${item} Type",
     "saved": "Saved",
-    "deleted": "Deleted ${item}"
+    "deleted": "Deleted ${item}",
+    "invite_person": "Invite Person",
+    "invitation": "Invitation",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "new_user_detected": "New user - please provide name details",
+    "existing_user_detected": "Existing user found",
+    "select_organizations": "Select Organizations",
+    "send_invitation": "Send Invitation",
+    "invitation_sent": "Invitation sent successfully",
+    "error_sending_invitation": "Error sending invitation"
   },
   "firstname": "Firstname",
   "focus_mode": "Focus Mode",

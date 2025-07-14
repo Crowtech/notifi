@@ -397,7 +397,7 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                                 /// and at least one organization is selected
                                 bool isValid = ref.watch(
                                     validateFormProvider(widget.formCode));
-                                logNoStack.i("NPERSON_FORM: isValid $isValid");
+                                logNoStack.i("PERSON_FORM: isValid $isValid");
                                 
                                 return ElevatedButton(
                                   key: const Key("person-submit"),
