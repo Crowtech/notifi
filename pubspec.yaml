@@ -127,11 +127,11 @@ dependencies:
   # Authentication (OIDC) - Local path dependencies
   #oidc: ^0.9.0+1
   oidc:                                  # OpenID Connect client
-    path: ../oidc/packages/oidc 
+    path: ../../oidc/packages/oidc 
   oidc_core: #^0.9.1                    # OIDC core functionality
-    path: ../oidc/packages/oidc_core 
+    path: ../../oidc/packages/oidc_core 
   oidc_default_store: #^0.2.0+12        # OIDC default storage
-    path: ../oidc/packages/oidc_default_store
+    path: ../../oidc/packages/oidc_default_store
   
   # User experience
   onboarding: ^4.0.2                    # App onboarding
