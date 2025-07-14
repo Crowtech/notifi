@@ -327,7 +327,7 @@ class _InviteFormState extends ConsumerState<InviteForm> {
                                 ? nt.t.form.new_user_detected
                                 : nt.t.form.existing_user_detected,
                             formCode: widget.formCode,
-                            fieldCode: "invite-email",
+                            fieldCode: "true-invite-email",
                             enabled: true,
                             itemCategory: nt.t.form.invitation,
                             itemName: nt.t.form.email,
@@ -363,7 +363,7 @@ class _InviteFormState extends ConsumerState<InviteForm> {
                               validationDebounce: const Duration(milliseconds: 500),
                               fieldValues: fieldValues,
                               formCode: widget.formCode,
-                              fieldCode: "invite-firstname",
+                              fieldCode: "true-invite-firstname",
                               itemCategory: nt.t.form.invitation,
                               itemName: nt.t.form.first_name,
                               itemValidation: nt.t.form.given_name_validation(
@@ -389,7 +389,7 @@ class _InviteFormState extends ConsumerState<InviteForm> {
                               controller: surnameController,
                               fieldValues: fieldValues,
                               formCode: widget.formCode,
-                              fieldCode: "invite-surname",
+                              fieldCode: "true-invite-surname",
                               itemCategory: nt.t.form.invitation,
                               itemName: nt.t.form.last_name,
                               itemValidation: nt.t.form.family_name_validation(
@@ -436,7 +436,7 @@ class _InviteFormState extends ConsumerState<InviteForm> {
                               formKey: _formKey,
                               formCode: widget.formCode,
                               fieldValues: fieldValues,
-                              fieldCode: "invite-orgids",
+                              fieldCode: "true-invite-orgids",
                             ),
                           ],
                           
@@ -481,10 +481,10 @@ class _InviteFormState extends ConsumerState<InviteForm> {
                                 
                                 // Additional validation: email must be validated and for new users, name fields must be filled
                                 bool canSubmit = isValid && _emailValidated && 
-                                    (!_showNameFields || (fieldValues['firstname'] != null && fieldValues['surname'] != null));
+                                    (!_showNameFields || (fieldValues['invite-firstname'] != null && fieldValues['invite-surname'] != null));
                                 
                                 return ElevatedButton(
-                                  key: const Key("invite-submit"),
+                                  key: const Key("true-invite-submit"),
                                   
                                   /// Button is disabled when validation fails
                                   /// This prevents invalid submissions and provides clear user feedback
@@ -502,13 +502,13 @@ class _InviteFormState extends ConsumerState<InviteForm> {
                                             /// For existing users, firstname/surname may be null
                                             /// For new users, all fields are required
                                             Person person = Person(
-                                              email: fieldValues['email'],
-                                              firstname: _showNameFields ? fieldValues['firstname'] : null,
-                                              lastname: _showNameFields ? fieldValues['surname'] : null,
+                                              email: fieldValues['invite-email'],
+                                              firstname: _showNameFields ? fieldValues['invite-firstname'] : null,
+                                              lastname: _showNameFields ? fieldValues['invite-surname'] : null,
                                               i18n: currentUser.i18n, // Use same language as inviter
                                             );
                                             
-                                            logNoStack.i('invite form: person=$person, orgIds=${fieldValues['orgIds']}');
+                                            logNoStack.i('invite form: person=$person, orgIds=${fieldValues['invite-orgids']}');
                                             
                                             /// **Organization Query Parameters Construction**
                                             /// 
@@ -516,7 +516,7 @@ class _InviteFormState extends ConsumerState<InviteForm> {
                                             /// Format: orgid=1&orgid=2&orgid=3 (removes trailing &)
                                             /// Each selected organization will be associated with the invited person
                                             String queryParmOrgIds = "";
-                                            for (int orgId in fieldValues['orgIds']) {
+                                            for (int orgId in fieldValues['invite-orgids']) {
                                               queryParmOrgIds += "orgid=$orgId&";
                                             }
                                             if (queryParmOrgIds.isNotEmpty) {
