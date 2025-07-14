@@ -46,6 +46,7 @@
 /// Authentication is handled through the NestAuth provider with Bearer token authorization.
 library;
 
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart' as logger;
@@ -156,12 +157,39 @@ class _InviteFormState extends ConsumerState<InviteForm> {
     super.initState();
     // Initialize form state - controllers are created above
     // Field values and organization selections will be populated as user interacts
+    
+    // Add listener to email controller for progressive disclosure logic
+    emailController.addListener(_onEmailChanged);
+  }
+
+  /// Timer for debouncing email validation to prevent excessive API calls
+  Timer? _emailValidationTimer;
+
+  /// Handles email field changes with debouncing for async validation
+  void _onEmailChanged() {
+    // Cancel previous timer
+    _emailValidationTimer?.cancel();
+    
+    // Set up debounced validation
+    _emailValidationTimer = Timer(const Duration(milliseconds: 1000), () {
+      final email = emailController.text.trim();
+      if (email.isNotEmpty && validateEmail(email)) {
+        validateEmailAndUpdateState(email);
+      } else {
+        setState(() {
+          _showNameFields = false;
+          _emailValidated = false;
+        });
+      }
+    });
   }
 
   @override
   void dispose() {
     // Clean up text controllers to prevent memory leaks
     // This is critical for preventing memory leaks in Flutter applications
+    _emailValidationTimer?.cancel();
+    emailController.removeListener(_onEmailChanged);
     emailController.dispose();
     firstnameController.dispose();
     surnameController.dispose();
@@ -174,13 +202,13 @@ class _InviteFormState extends ConsumerState<InviteForm> {
   /// 
   /// @param email The email address to validate
   /// @return Future<bool> true if email is valid and doesn't exist (new user)
-  Future<bool> validateEmailAndUpdateState(String? email) async {
-    if (email == null || email.isEmpty) {
+  Future<void> validateEmailAndUpdateState(String email) async {
+    if (email.isEmpty) {
       setState(() {
         _showNameFields = false;
         _emailValidated = false;
       });
-      return false;
+      return;
     }
 
     // Use the existing validateEmailAsync2 function to check email existence
@@ -190,8 +218,15 @@ class _InviteFormState extends ConsumerState<InviteForm> {
       _emailValidated = true;
       _showNameFields = emailDoesNotExist; // Show name fields only for new users
     });
+    
+    // Store the email validation result for form submission logic
+    fieldValues['email_exists'] = !emailDoesNotExist;
+  }
 
-    return emailDoesNotExist;
+  /// Synchronous email format validation for the onValidate parameter
+  /// This is used by TextFormFieldWidget for immediate validation feedback
+  bool validateEmailFormat(String value) {
+    return validateEmail(value);
   }
 
   /// ## Build Method - Invitation Form UI
@@ -300,7 +335,7 @@ class _InviteFormState extends ConsumerState<InviteForm> {
                               item: nt.t.form.invitation,
                             ),
                             hintText: nt.t.form.email_hint,
-                            onValidate: validateEmail,
+                            onValidate: validateEmailFormat,
                             regex: EMAIL_REGEX,
                             inputFormatters: emailInputFormatter,
                           ),
