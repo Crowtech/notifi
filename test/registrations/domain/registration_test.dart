@@ -7,6 +7,7 @@
 /// - copyWith method behavior
 /// - toString representation
 /// - Equality and property validation
+library;
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:notifi/models/registration.dart';

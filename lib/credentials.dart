@@ -3,6 +3,7 @@
 /// This module centralizes all environment-based configuration including
 /// authentication settings, API endpoints, feature flags, and theming.
 /// All values are loaded from environment variables at compile time.
+library;
 
 import 'dart:ui';
 import 'package:flutter/material.dart';

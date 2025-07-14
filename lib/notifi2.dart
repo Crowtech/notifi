@@ -12,12 +12,10 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:logger/logger.dart' as logger;
-import 'package:notifi/entities/user_role.dart';
 import 'package:notifi/riverpod/fcm_notifier.dart';
 import 'package:notifi/riverpod/nest_notifis_provider.dart';
 import 'package:notifi/riverpod/notifications_data.dart';
 import 'package:notifi/state/nest_auth2.dart';
-import 'package:notifi/state/permissions.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'credentials.dart';

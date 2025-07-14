@@ -32,6 +32,7 @@
 /// ## API Integration
 /// The form submits to: `/notifications/send/{subject}/{message}?fcm={fcm}&username={username}&topic={topic}`
 /// Authentication is handled through the NestAuth provider with Bearer token authorization.
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

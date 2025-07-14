@@ -42,6 +42,7 @@
 /// - Organizations are assigned at creation time and determine access permissions
 /// - Form validation prevents duplicate email submissions
 /// - Successful creation invalidates person cache and closes dialog
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

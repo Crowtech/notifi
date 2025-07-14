@@ -20,6 +20,7 @@
 ///   onSelectedTime: (time) => setState(() => _selectedTime = time),
 /// )
 /// ```
+library;
 
 import 'dart:async';
 

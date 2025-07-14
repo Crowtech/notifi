@@ -16,6 +16,7 @@
 ///   onPressed: () => Navigator.pop(context),
 /// )
 /// ```
+library;
 
 import 'package:flutter/material.dart';
 

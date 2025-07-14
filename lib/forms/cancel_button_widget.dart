@@ -35,6 +35,7 @@
 /// ## Navigation Behavior
 /// The button uses Navigator.pop() to close the current modal/dialog context.
 /// This is appropriate for forms presented as dialogs, bottom sheets, or pushed routes.
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

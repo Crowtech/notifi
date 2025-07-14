@@ -48,6 +48,7 @@
 /// - Optional vs required field handling
 /// - Custom validation functions
 /// - Localized messages and labels
+library;
 
 import 'dart:async';
 

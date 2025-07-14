@@ -24,6 +24,7 @@
 /// notification management functionality. It integrates with the app's routing
 /// system to determine whether to show onboarding or navigate directly to
 /// the main application flow.
+library;
 
 import '../../../utils/shared_preferences_provider.dart';
 import 'package:riverpod/riverpod.dart';

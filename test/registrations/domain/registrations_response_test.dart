@@ -7,6 +7,7 @@
 /// - Freezed class functionality (copyWith, equality, etc.)
 /// - Business logic for registrations
 /// - Edge cases and error handling
+library;
 
 import 'dart:convert';
 import 'dart:io';

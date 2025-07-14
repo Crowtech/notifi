@@ -22,6 +22,7 @@
 ///   onValueChanged: (value) => setState(() => _selectedMode = value),
 /// )
 /// ```
+library;
 
 import 'package:flutter/cupertino.dart';
 

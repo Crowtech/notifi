@@ -2,149 +2,232 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Overview
+## Project Overview
 
-Notifi is a comprehensive Flutter library (v8.72.0) providing notification management, authentication, organization management, and geolocation services. It's published by Crowtech Pty Ltd and uses Flutter >=3.27.0 with Dart SDK >=3.6.0.
+Notifi is a comprehensive Flutter library (v8.72.0) developed by Crowtech Pty Ltd that provides shared functionality for the Panta ecosystem. It serves as a foundation package for Flutter applications requiring notification management, authentication, organization structures, and location-based services.
 
-## Essential Development Commands
+## Key Commands
 
-### Code Generation
-Run after modifying models, repositories, or providers:
+### Code Generation (Required after model/provider changes)
 ```bash
+# Generate all .g.dart files (Freezed, JsonSerializable, Riverpod)
+./generate_g_dart.sh
+
+# Or manually:
 dart pub run build_runner build --delete-conflicting-outputs
+
+# Generate translations (requires API key)
+./generate_translations.sh [language_code]
 ```
 
-### Common Flutter Commands
+### Package Management
 ```bash
-flutter pub get                    # Install dependencies
-flutter analyze                    # Analyze code for issues
-flutter test                       # Run all tests
-flutter test test/specific_test.dart  # Run specific test file
-flutter pub run flutter_launcher_icons  # Generate app icons
-flutter pub run flutter_native_splash:create  # Generate splash screen
+# Get dependencies
+flutter pub get
+
+# Upgrade dependencies
+flutter pub upgrade
+
+# Clean and get dependencies
+flutter clean && flutter pub get
 ```
 
-### Internationalization
-The project uses `slang` for i18n. Translation files are in `lib/i18n/`. Configuration is in `slang.yaml`.
+### Testing
+```bash
+# Run all tests
+flutter test
 
-## Architecture & Code Organization
+# Run specific test file
+flutter test test/[path_to_test].dart
+
+# Run tests with coverage
+flutter test --coverage
+```
+
+### Development
+```bash
+# Analyze code
+flutter analyze
+
+# Format code
+dart format .
+
+# Check for dependency issues
+flutter pub deps
+```
+
+## Architecture Overview
 
 ### Feature-First Architecture
-The codebase follows a feature-first architecture pattern. Each feature module contains:
-- `data/` - Repository implementations, API clients
-- `domain/` - Business logic, entities, models (using Freezed)
-- `presentation/` - UI components, screens, widgets
+Each feature module follows a consistent structure:
+- `data/` - Data sources, repositories, DTOs
+- `domain/` - Business logic, entities, use cases
+- `presentation/` - UI components, controllers, state
 
-### Key Architectural Patterns
+### Core Features
+1. **Notification Management** (`lib/features/notification/`)
+   - Firebase Cloud Messaging integration
+   - Topic-based notifications
+   - Local notifications with scheduling
+   - Background notification handling
 
-1. **Repository Pattern**: Each feature has a repository class for data operations
-2. **Freezed Models**: Domain models use `@freezed` annotation for immutability
-3. **Riverpod Providers**: State management uses `@riverpod` annotation with code generation
-4. **JSON Serialization**: Models use `@JsonSerializable()` for API integration
+2. **Authentication** (`lib/features/auth/`)
+   - OIDC/OAuth2 with Keycloak
+   - Token management and refresh
+   - Multi-realm support
+   - Biometric authentication
 
-### Directory Structure
+3. **Organization Management** (`lib/features/organization/`)
+   - Multi-tenant organization structure
+   - Role-based access control
+   - Organization switching
 
-- `lib/common_widgets/` - Reusable UI components (buttons, cards, dialogs)
-- `lib/entities/` - Core domain entities shared across features
-- `lib/features/` - Feature modules (each with data/domain/presentation)
-- `lib/firebase/` - Firebase messaging and FCM integration
-- `lib/geo/` - Geolocation, mapping, background location tracking
-- `lib/i18n/` - Internationalization files and translations
-- `lib/routing/` - GoRouter configuration and route definitions
-- `lib/riverpod/` - Global providers and state management
-- `lib/norganizations/`, `lib/persons/`, `lib/registrations/` - Main feature modules
-- `parking/` - Experimental or deprecated features
+4. **Geolocation Services** (`lib/features/geolocation/`)
+   - Background location tracking
+   - Geofencing capabilities
+   - Location permissions handling
+   - Map integration with Flutter Map
+
+5. **Rich Content** (`lib/features/rich_text/`)
+   - Quill editor integration
+   - Rich text formatting
+   - Document persistence
 
 ### State Management
+- **Riverpod** for all state management
+- Code generation with `@riverpod` annotations
+- Providers in `lib/providers/` directory
+- Feature-specific providers within feature modules
 
-Uses Riverpod with these patterns:
-- Feature-specific providers in each module
-- Global providers in `lib/riverpod/`
-- Generated providers using `@riverpod` annotation
-- AsyncNotifierProvider for async operations
-- StateProvider for simple state
-- FutureProvider for one-time async data
+### Platform Support
+- iOS, Android, and Web platforms
+- Platform-specific implementations in `lib/services/platform/`
+- Conditional imports for web compatibility
 
-### Routing
+## Key Dependencies
 
-Uses GoRouter with typed routes:
-- Route definitions in `lib/routing/`
-- Routes use `@TypedGoRoute` for type safety
-- Navigation through `context.go()` or `context.push()`
+### State & Architecture
+- `flutter_riverpod`: State management
+- `freezed`: Immutable data classes
+- `json_serializable`: JSON serialization
+- `go_router`: Navigation
 
-## Important Technical Details
+### Backend Integration
+- `dio`: HTTP client
+- `retrofit`: REST API client
+- `openid_client`: OIDC authentication
+- `minio_new`: Object storage
 
-### Local Path Dependencies
-Several dependencies use local paths, indicating custom modifications:
-- `oidc` - OIDC authentication
-- `bdaya_shared_value` - Shared value utilities
-- `status_alert` - Status alert UI
+### UI & UX
+- `flutter_map`: OpenStreetMap integration
+- `flutter_quill`: Rich text editing
+- `slang`: Internationalization
+- `adaptive_breakpoints`: Responsive design
 
-### Firebase Integration
-- FCM for push notifications
-- Topic-based messaging
-- Background message handling
-- Token management in `lib/firebase/`
+### Device Features
+- `firebase_messaging`: Push notifications
+- `flutter_background_geolocation`: Location tracking
+- `image_picker`: Camera/gallery access
+- `permission_handler`: Permission management
 
-### Geolocation Features
-- Uses `flutter_background_geolocation` for background tracking
-- Map integration with Flutter Map and OSM
-- Geofencing capabilities
-- Location permissions handling
-
-### API Integration
-- Uses Dio for HTTP requests
-- Base URL and API configuration in `lib/api_utils.dart`
-- JWT token authentication
-- Interceptors for auth and error handling
+## Development Patterns
 
 ### Code Generation Requirements
-When modifying these file types, run code generation:
-- `*.g.dart` - JSON serialization
-- `*.freezed.dart` - Freezed models
-- `*.gr.dart` - GoRouter routes
-- `*_provider.dart` with `@riverpod` - Riverpod providers
+Always run `./generate_g_dart.sh` after modifying:
+- Models with `@freezed` or `@JsonSerializable`
+- Providers with `@riverpod` annotations
+- Retrofit API interfaces with `@RestApi`
 
-### Platform-Specific Considerations
-- Handles iOS, Android, and Web platforms
-- Platform-specific implementations for notifications
-- Different permission flows per platform
-- Web limitations for background geolocation
+### Error Handling
+- Custom exceptions in `lib/core/errors/`
+- Either type for functional error handling
+- Consistent error messaging through providers
 
-## Testing Approach
+### Service Layer
+- Abstract service interfaces in `lib/services/`
+- Platform-specific implementations
+- Dependency injection through Riverpod
 
-Currently minimal test coverage. When adding tests:
-- Place in `test/` mirroring `lib/` structure
-- Use `mockito` for mocking dependencies
-- Test repositories with mock Dio clients
-- Test providers with ProviderContainer
-- Focus on business logic in domain layer
+### Testing Strategy
+- Unit tests for business logic
+- Widget tests for UI components
+- Integration tests for feature flows
+- Mock services for testing
 
-## Common Development Tasks
+## Common Patterns
 
-### Adding a New Feature
-1. Create feature directory under `lib/features/`
-2. Add data/domain/presentation subdirectories
-3. Create repository in data layer
-4. Define models in domain with `@freezed`
-5. Create providers with `@riverpod`
-6. Build UI in presentation layer
-7. Run code generation
+### Provider Patterns
+```dart
+// Feature provider with code generation
+@riverpod
+class FeatureName extends _$FeatureName {
+  @override
+  FeatureState build() => FeatureState.initial();
+  
+  // Methods for state manipulation
+}
+```
 
-### Modifying API Endpoints
-1. Update repository methods in feature's data layer
-2. Ensure proper error handling with Dio interceptors
-3. Update corresponding models if response changes
-4. Run code generation if models modified
+### Model Patterns
+```dart
+// Freezed model with JSON serialization
+@freezed
+class ModelName with _$ModelName {
+  const factory ModelName({
+    required String id,
+    @Default([]) List<Item> items,
+  }) = _ModelName;
+  
+  factory ModelName.fromJson(Map<String, dynamic> json) =>
+      _$ModelNameFromJson(json);
+}
+```
 
-### Adding Translations
-1. Modify translation files in `lib/i18n/`
-2. Follow existing key naming patterns
-3. Ensure all languages are updated
-4. The project supports GPT-4 translation assistance
+### Service Integration
+```dart
+// Retrofit API client
+@RestApi(baseUrl: '')
+abstract class ApiClient {
+  factory ApiClient(Dio dio) = _ApiClient;
+  
+  @GET('/endpoint')
+  Future<Response> getData();
+}
+```
 
-### Working with Notifications
-1. FCM configuration in `lib/firebase/`
-2. Topic subscriptions managed per organization
-3. Background handling requires platform-specific setup
-4. Test with Firebase Console for push notifications
+## Platform Considerations
+
+### Web Limitations
+- No background geolocation on web
+- Limited camera functionality
+- Different storage mechanisms
+- Conditional imports required
+
+### iOS Requirements
+- Info.plist permissions for camera, location, notifications
+- Background modes configuration
+- Push notification certificates
+
+### Android Requirements
+- Manifest permissions
+- Firebase configuration
+- Background service setup
+- ProGuard rules for release builds
+
+## Local Dependencies
+The project uses local path dependencies for customized packages:
+- `bdaya_shared_value`: ../flutter-shared-value
+- `flutter_3d_controller`: ../flutter_3d_controller
+- `statusalert`: ../flutter-status-alert
+
+Ensure these repositories are cloned at the correct relative paths.
+
+## Integration with Panta Ecosystem
+This library is designed to be imported by Panta applications:
+```yaml
+dependencies:
+  notifi:
+    path: ../notifi  # Or git URL for production
+```
+
+Applications importing this library gain access to all core features and can extend them as needed.

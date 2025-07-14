@@ -41,7 +41,7 @@ class RegistrationsSearchScreen extends ConsumerWidget {
     );
     final totalItems = responseAsync.valueOrNull?.totalItems;
      logNoStack.i("Registrations list: items=${responseAsync.valueOrNull?.items}");
-    logNoStack.i("Registrations list: totalItems=${totalItems}");
+    logNoStack.i("Registrations list: totalItems=$totalItems");
     return Scaffold(
       appBar: AppBar(title: Text(nt.t.resources.registration)),
       body: Column(

@@ -15,6 +15,7 @@
 ///   message: 'You\'ll see your notifications here when you receive them',
 /// )
 /// ```
+library;
 
 import 'package:flutter/material.dart';
 

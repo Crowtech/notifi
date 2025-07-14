@@ -11,6 +11,7 @@
 /// The FirebaseApi class serves as the primary interface between the Notifi
 /// application and Firebase services, enabling real-time push notifications
 /// to keep users informed about important updates and communications.
+library;
 
 import 'dart:convert';
 import 'dart:io';

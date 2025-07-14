@@ -8,6 +8,7 @@
 /// The widgets use the application's breakpoint system to determine
 /// appropriate maximum widths and ensure content remains readable
 /// and well-proportioned on all devices.
+library;
 
 import 'package:flutter/material.dart';
 

@@ -17,6 +17,7 @@
 /// worker locations, asset positions, and service area coverage is critical.
 /// The visual representation helps dispatchers and managers monitor field
 /// operations and optimize resource allocation.
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

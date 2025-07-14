@@ -32,6 +32,7 @@
 /// 
 /// Important: When modifying these values, ensure they maintain the 4-point
 /// grid system for consistent spacing across all platforms and screen sizes.
+library;
 import 'package:flutter/material.dart';
 
 /// Core sizing constants following a 4-point grid system for consistent spacing.

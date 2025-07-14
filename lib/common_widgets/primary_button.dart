@@ -21,6 +21,7 @@
 ///   onPressed: _isSubmitting ? null : _submitForm,
 /// )
 /// ```
+library;
 
 import 'package:flutter/material.dart';
 

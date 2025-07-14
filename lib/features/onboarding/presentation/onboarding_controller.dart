@@ -26,6 +26,7 @@
 /// determine user flow. Once onboarding is complete, users gain access to
 /// the main notification management features, including organization management,
 /// person contacts, and notification settings.
+library;
 
 import 'dart:async';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

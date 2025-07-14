@@ -7,6 +7,7 @@
 /// 
 /// The widgets handle the common pattern of showing loading indicators,
 /// error messages, and success content based on the state of async operations.
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

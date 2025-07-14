@@ -3,6 +3,7 @@
 /// This module provides a comprehensive set of functions for interacting with
 /// the Notifi API, including authentication, data fetching, and updates.
 /// All functions handle JWT token-based authentication and support localization.
+library;
 
 import 'dart:convert';
 import 'dart:io';

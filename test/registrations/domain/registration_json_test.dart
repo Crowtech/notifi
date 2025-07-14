@@ -7,6 +7,7 @@
 /// - Business logic for registrations
 /// - Edge cases and error handling
 /// - Integration with Organization and Person objects
+library;
 
 import 'dart:convert';
 import 'dart:io';

@@ -20,6 +20,7 @@
 ///   onPressed: () => _showDatePicker(context),
 /// )
 /// ```
+library;
 
 import 'package:flutter/material.dart';
 
