@@ -41,12 +41,14 @@ class NOrganizationsRepository {
     var data = jsonEncode(nf);
     logNoStack.i("NORGANIZATIONS_REPOSITORY: search token=${token.substring(0, 10)} with query ${queryData.query}");
 
-    String host = defaultAPIBaseUrl.substring("https://".length);
+ 
     String path = "$defaultApiPrefixPath/resources/targets/0";
 
+ String scheme = defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf("/")-1);
+    String host = defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+1);
     final uri = Uri(
-      scheme: 'https',
-      host: host,
+      scheme: scheme,
+      host:  host,
       path: path,
       queryParameters: {
         // 'api_key': apiKey,
@@ -73,14 +75,16 @@ logNoStack.i("NORGANIZATIONS_REPOSITORY: $host  $uri $data");
     var data = jsonEncode(nf);
     
 
-    String host = defaultAPIBaseUrl.substring("https://".length);
+
     String path = "$defaultApiPrefixPath/resources/targets/0";
 
     logNoStack.i("NORGANIZATIONS_REPOSITORY: now playiong token=${token.substring(0, 10)}\n$nf\n$host\n$path");
 
+ String scheme = defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf("/")-1);
+    String host = defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+1);
     final uri = Uri(
-      scheme: 'https',
-     host: host,
+      scheme: scheme,
+      host:  host,
       path: path,
        queryParameters: {
         // 'api_key': apiKey,
@@ -102,12 +106,14 @@ logNoStack.i("NORGANIZATIONS_REPOSITORY: $host  $uri $data");
   Future<NOrganization> norganization(
       {required int movieId, CancelToken? cancelToken}) async {
 
- String host = defaultAPIBaseUrl.substring("https://".length);
+
     String path = "$defaultApiPrefixPath/organizations/$movieId";
 
-    final url = Uri(
-      scheme: 'https',
-      host: host,
+ String scheme = defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf("/")-1);
+    String host = defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+1);
+    final uri = Uri(
+      scheme: scheme,
+      host:  host,
       path: path,
       queryParameters: {
         // 'api_key': apiKey,
@@ -118,7 +124,7 @@ logNoStack.i("NORGANIZATIONS_REPOSITORY: $host  $uri $data");
       "accept": 'application/json',
        "Authorization": 'Bearer $token'    });
     final response =
-        await client.post(url, options: options, cancelToken: cancelToken);
+        await client.post(uri, options: options, cancelToken: cancelToken);
     return NOrganization.fromJson(response.data);
   }
 }

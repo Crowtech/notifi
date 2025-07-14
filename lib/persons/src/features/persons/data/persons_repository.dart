@@ -55,11 +55,12 @@ class PersonsRepository {
     //   sourceOrgId = selectedOrganizations.first.id!;
     // }
 
-    String host = defaultAPIBaseUrl.substring("https://".length);
-    String path = "$defaultApiPrefixPath/resources/targets/0";
+    String scheme = defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf("/")-1);
+    String host = defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+1);
+     String path = "$defaultApiPrefixPath/resources/targets/0";
     final uri = Uri(
-      scheme: 'https',
-      host: host,
+      scheme: scheme,
+      host:  host,
       path: path,
       // queryParameters: {
       //   'api_key': token,
@@ -111,9 +112,11 @@ class PersonsRepository {
        logNoStack.i("no selected orgs: $nf");
     }
     data = jsonEncode(nf);
+    String scheme = defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf("/")-1);
+    String host = defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+1);
     final uri = Uri(
-      scheme: 'https',
-      host: defaultAPIBaseUrl.substring("https://".length),
+      scheme: scheme,
+      host:  host,
       path: "$defaultApiPrefixPath/resources/targets/0",
       //path: "$defaultApiPrefixPath/resources/targets/0', //$sourceOrgId",
       // queryParameters: {
@@ -141,9 +144,12 @@ class PersonsRepository {
   Future<Person> person({required int orgId, CancelToken? cancelToken}) async {
     logNoStack.i(
         "PERSONS_REPOSITORY: person currentUserId=${currentUser.id} token=${token.substring(0, 10)}");
-    final url = Uri(
-      scheme: 'https',
-      host: defaultAPIBaseUrl.substring("https://".length),
+       
+ String scheme = defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf("/")-1);
+    String host = defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+1);
+    final uri = Uri(
+      scheme: scheme,
+      host:  host,
       path: "$defaultApiPrefixPath/persons/get/$orgId}",
       // queryParameters: {
       //   'api_key': token,
@@ -157,7 +163,7 @@ class PersonsRepository {
     });
 
     final response =
-        await client.get(url, options: options, cancelToken: cancelToken);
+        await client.get(uri, options: options, cancelToken: cancelToken);
     return Person.fromJson(response.data);
   }
 }

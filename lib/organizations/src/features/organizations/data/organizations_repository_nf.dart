@@ -44,9 +44,10 @@ class OrganizationsRepositoryNestFilter {
     var data = jsonEncode(nestFilter);
     logNoStack.i(
         "ORGANIZATIONS_REPOSITORY_NF: search currentUserId=${currentUser.id} token=${token.substring(0, 10)} nestfilter=$nestFilter");
+
     final uri = Uri(
       scheme: defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf(":")),
-      host: defaultAPIBaseUrl.substring("https://".length),
+      host: defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+2),
       path: "$defaultApiPrefixPath/resources/sources/${currentUser.id}",
       // queryParameters: {
       //   'api_key': token,

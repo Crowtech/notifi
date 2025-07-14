@@ -49,9 +49,11 @@ class RegistrationsRepository {
     logNoStack.i(
         "REGISTRATIONS_REPOSITORY: search currentUserId=${currentUser.id} token=${token.substring(0, 10)}");
 
+ String scheme = defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf("/")-1);
+    String host = defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+1);
     final uri = Uri(
-      scheme: 'https',
-      host: defaultAPIBaseUrl.substring("https://".length),
+      scheme: scheme,
+      host:  host,
       path: "$defaultApiPrefixPath/registrations/fetch/${currentUser.id}",
       // queryParameters: {
       //   'api_key': token,
@@ -81,9 +83,11 @@ class RegistrationsRepository {
         "REGISTRATIONS_REPOSITORY: now Playing currentUserId=${currentUser.id} token=${token.substring(0, 10)}");
 
    
+ String scheme = defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf("/")-1);
+    String host = defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+1);
     final uri = Uri(
-      scheme: 'https',
-      host: defaultAPIBaseUrl.substring("https://".length),
+      scheme: scheme,
+      host:  host,
       path: "$defaultApiPrefixPath/registrations/get/",
       // queryParameters: {
       //   'api_key': token,
@@ -112,9 +116,11 @@ class RegistrationsRepository {
   Future<Registration> registration({required int registrationId, CancelToken? cancelToken}) async {
     logNoStack.i(
         "REGISTRATIONS_REPOSITORY: registration currentUserId=${currentUser.id} token=${token.substring(0, 10)}");
-    final url = Uri(
-      scheme: 'https',
-      host: defaultAPIBaseUrl.substring("https://".length),
+ String scheme = defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf("/")-1);
+    String host = defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+1);
+    final uri = Uri(
+      scheme: scheme,
+      host:  host,
       path: "$defaultApiPrefixPath/registrations/get/$registrationId}",
       // queryParameters: {
       //   'api_key': token,
@@ -128,7 +134,7 @@ class RegistrationsRepository {
     });
 
     final response =
-        await client.get(url, options: options, cancelToken: cancelToken);
+        await client.get(uri, options: options, cancelToken: cancelToken);
         logNoStack.i("REGISTRATIONS_REPOSITORY: @@@@@ ${response.data}");
     return Registration.fromJson(response.data);
   }
