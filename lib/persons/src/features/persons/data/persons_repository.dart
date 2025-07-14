@@ -114,6 +114,7 @@ class PersonsRepository {
        logNoStack.i("no selected orgs: $nf");
     }
     data = jsonEncode(nf);
+    logNoStack.i("defaultAPIurl = $defaultAPIBaseUrl");
     String scheme = defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf("/")-1);
     String host = defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+2);
     logNoStack.i("scheme = $scheme");
