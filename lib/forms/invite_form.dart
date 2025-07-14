@@ -110,11 +110,11 @@ var logNoStack = logger.Logger(
 /// - Person repository invalidation for cache management
 /// - Status alert system for user feedback
 class InviteForm extends ConsumerStatefulWidget {
-  InviteForm({super.key, required this.formCode});
+  const InviteForm({super.key, required this.formCode});
 
   /// Unique identifier for this form instance, used for validation state management
   /// and distinguishing between multiple form instances in the application
-  String formCode;
+  final String formCode;
 
   @override
   _InviteFormState createState() => _InviteFormState();
@@ -201,7 +201,7 @@ class _InviteFormState extends ConsumerState<InviteForm> {
   /// and updates the UI state accordingly
   /// 
   /// @param email The email address to validate
-  /// @return Future<bool> true if email is valid and doesn't exist (new user)
+  /// @return Future<void> Updates state for progressive disclosure
   Future<void> validateEmailAndUpdateState(String email) async {
     if (email.isEmpty) {
       setState(() {
