@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:logger/logger.dart' as logger;
+import 'dart:developer' as developer;
 import 'package:notifi/credentials.dart';
 import 'package:notifi/jwt_utils.dart';
 import 'package:notifi/models/appversion.dart';
@@ -583,7 +584,7 @@ Future<Person> registerLogin(
   String url =
       "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/login?devicecode=$deviceId";
   try {
-    logNoStack.i("registerLogin: token ${token}");
+    developer.log("registerLogin: token ${token}");
     var currentUserMap =
         await apiPostDataNoLocale(token, url, "deviceid", deviceId);
  logNoStack.i("API_UTILS: registerLogin response $currentUserMap");
