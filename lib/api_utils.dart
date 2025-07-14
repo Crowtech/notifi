@@ -583,6 +583,7 @@ Future<Person> registerLogin(
   String url =
       "$defaultAPIBaseUrl$defaultApiPrefixPath/persons/login?devicecode=$deviceId";
   try {
+    logNoStack.i("registerLogin: token ${token}");
     var currentUserMap =
         await apiPostDataNoLocale(token, url, "deviceid", deviceId);
  logNoStack.i("API_UTILS: registerLogin response $currentUserMap");
