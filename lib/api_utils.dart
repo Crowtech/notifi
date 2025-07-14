@@ -100,6 +100,7 @@ Future<dynamic> apiPostDataNoLocale(
         body: jsonData);
   } else {
     if (apiPath.startsWith("http://")) {
+      developer.log(token);
       logNoStack.i("API POST : sending as http://");
       response = await http.post(url, headers: {
         "Content-Type": "application/json",
