@@ -111,6 +111,7 @@ logNoStack.i("NORGANIZATIONS_REPOSITORY: $host  $uri $data");
 
  String scheme = defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf("/")-1);
     String host = defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+1);
+
     final uri = Uri(
       scheme: scheme,
       host:  host,

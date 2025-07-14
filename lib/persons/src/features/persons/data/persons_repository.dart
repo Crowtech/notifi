@@ -58,6 +58,8 @@ class PersonsRepository {
     String scheme = defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf("/")-1);
     String host = defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+1);
      String path = "$defaultApiPrefixPath/resources/targets/0";
+
+         logNoStack.i("scheme = $scheme");
     final uri = Uri(
       scheme: scheme,
       host:  host,
@@ -114,6 +116,7 @@ class PersonsRepository {
     data = jsonEncode(nf);
     String scheme = defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf("/")-1);
     String host = defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+1);
+    logNoStack.i("scheme = $scheme");
     final uri = Uri(
       scheme: scheme,
       host:  host,
@@ -147,6 +150,7 @@ class PersonsRepository {
        
  String scheme = defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf("/")-1);
     String host = defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+1);
+    logNoStack.i("scheme = $scheme");
     final uri = Uri(
       scheme: scheme,
       host:  host,
