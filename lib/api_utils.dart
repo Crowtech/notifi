@@ -98,12 +98,20 @@ Future<dynamic> apiPostDataNoLocale(
         },
         body: jsonData);
   } else {
+    if (apiPath.startsWith("http://")) {
+response = await http.post(url, headers: {
+      "Content-Type": "application/json",
+      //"Accept": "application/json",
+      //"Authorization": "Bearer $token",
+    });
+    } else {
     // No data
     response = await http.post(url, headers: {
       "Content-Type": "application/json",
       //"Accept": "application/json",
       "Authorization": "Bearer $token",
     });
+    }
   }
 
   logNoStack.i(response.statusCode);
