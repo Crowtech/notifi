@@ -585,7 +585,7 @@ Future<Person> registerLogin(
   try {
     var currentUserMap =
         await apiPostDataNoLocale(token, url, "deviceid", deviceId);
-
+ logNoStack.i("API_UTILS: registerLogin response $currentUserMap");
     var currentUser = Person.fromJson(currentUserMap);
 
     logNoStack.i("API_UTILS: Logged in user $currentUser");
