@@ -45,7 +45,7 @@ class NOrganizationsRepository {
     String path = "$defaultApiPrefixPath/resources/targets/0";
 
  String scheme = defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf("/")-1);
-    String host = defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+1);
+    String host = defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+2);
     final uri = Uri(
       scheme: scheme,
       host:  host,
@@ -81,7 +81,7 @@ logNoStack.i("NORGANIZATIONS_REPOSITORY: $host  $uri $data");
     logNoStack.i("NORGANIZATIONS_REPOSITORY: now playiong token=${token.substring(0, 10)}\n$nf\n$host\n$path");
 
  String scheme = defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf("/")-1);
-    String host = defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+1);
+    String host = defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+2);
     final uri = Uri(
       scheme: scheme,
       host:  host,
@@ -110,7 +110,7 @@ logNoStack.i("NORGANIZATIONS_REPOSITORY: $host  $uri $data");
     String path = "$defaultApiPrefixPath/organizations/$movieId";
 
  String scheme = defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf("/")-1);
-    String host = defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+1);
+    String host = defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+2);
 
     final uri = Uri(
       scheme: scheme,

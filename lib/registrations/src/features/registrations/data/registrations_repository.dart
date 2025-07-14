@@ -50,7 +50,7 @@ class RegistrationsRepository {
         "REGISTRATIONS_REPOSITORY: search currentUserId=${currentUser.id} token=${token.substring(0, 10)}");
 
  String scheme = defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf("/")-1);
-    String host = defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+1);
+    String host = defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+2);
     final uri = Uri(
       scheme: scheme,
       host:  host,
@@ -84,7 +84,7 @@ class RegistrationsRepository {
 
    
  String scheme = defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf("/")-1);
-    String host = defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+1);
+    String host = defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+2);
     final uri = Uri(
       scheme: scheme,
       host:  host,
@@ -117,7 +117,7 @@ class RegistrationsRepository {
     logNoStack.i(
         "REGISTRATIONS_REPOSITORY: registration currentUserId=${currentUser.id} token=${token.substring(0, 10)}");
  String scheme = defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf("/")-1);
-    String host = defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+1);
+    String host = defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+2);
     final uri = Uri(
       scheme: scheme,
       host:  host,
