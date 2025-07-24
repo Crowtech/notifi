@@ -117,11 +117,20 @@ class PersonsRepository {
     logNoStack.i("defaultAPIurl = $defaultAPIBaseUrl");
     String scheme = defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf("/")-1);
     String host = defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+2);
-    logNoStack.i("scheme = $scheme");
+    int port = scheme=="https"?443:80;
+    if (host.contains(":")) {
+      String portString = host.substring(host.indexOf(":")+1);
+      host = host.substring(0,host.indexOf(":"));
+      port = int.parse(portString);
+    }
+    logNoStack.i("scheme = [$scheme]");
+    logNoStack.i("host = [$host]");
+    logNoStack.i("port = [$port]");
     final uri = Uri(
       scheme: scheme,
       host:  host,
       path: "$defaultApiPrefixPath/resources/targets/0",
+      port: port,
       //path: "$defaultApiPrefixPath/resources/targets/0', //$sourceOrgId",
       // queryParameters: {
       //   'api_key': token,

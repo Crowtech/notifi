@@ -49,11 +49,23 @@ class RegistrationsRepository {
     logNoStack.i(
         "REGISTRATIONS_REPOSITORY: search currentUserId=${currentUser.id} token=${token.substring(0, 10)}");
 
- String scheme = defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf("/")-1);
-    String host = defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+2);
+ String scheme =
+        defaultAPIBaseUrl.substring(0, defaultAPIBaseUrl.indexOf("/") - 1);
+    String host =
+        defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/") + 2);
+    int port = scheme == "https" ? 443 : 80;
+    if (host.contains(":")) {
+      String portString = host.substring(host.indexOf(":") + 1);
+      host = host.substring(0, host.indexOf(":"));
+      port = int.parse(portString);
+    }
+    logNoStack.i("scheme = [$scheme]");
+    logNoStack.i("host = [$host]");
+    logNoStack.i("port = [$port]");
     final uri = Uri(
       scheme: scheme,
-      host:  host,
+      host: host,
+      port: port,
       path: "$defaultApiPrefixPath/registrations/fetch/${currentUser.id}",
       // queryParameters: {
       //   'api_key': token,
@@ -82,12 +94,13 @@ class RegistrationsRepository {
     logNoStack.i(
         "REGISTRATIONS_REPOSITORY: now Playing currentUserId=${currentUser.id} token=${token.substring(0, 10)}");
 
-   
- String scheme = defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf("/")-1);
-    String host = defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+2);
+    String scheme =
+        defaultAPIBaseUrl.substring(0, defaultAPIBaseUrl.indexOf("/") - 1);
+    String host =
+        defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/") + 2);
     final uri = Uri(
       scheme: scheme,
-      host:  host,
+      host: host,
       path: "$defaultApiPrefixPath/registrations/get/",
       // queryParameters: {
       //   'api_key': token,
@@ -106,21 +119,34 @@ class RegistrationsRepository {
     final response = await client.postUri(uri,
         options: options, data: data, cancelToken: cancelToken);
 
-    logNoStack
-        .i("REGISTRATIONS_REPOSITORY: !fetching for list , responseData=${response.data}");
-    RegistrationsResponse rr =  RegistrationsResponse.fromJson(response.data);
+    logNoStack.i(
+        "REGISTRATIONS_REPOSITORY: !fetching for list , responseData=${response.data}");
+    RegistrationsResponse rr = RegistrationsResponse.fromJson(response.data);
     logNoStack.i("REGISTRATIONS_REPOSITORY AFTER JSON ${rr.items}");
     return rr;
   }
 
-  Future<Registration> registration({required int registrationId, CancelToken? cancelToken}) async {
+  Future<Registration> registration(
+      {required int registrationId, CancelToken? cancelToken}) async {
     logNoStack.i(
         "REGISTRATIONS_REPOSITORY: registration currentUserId=${currentUser.id} token=${token.substring(0, 10)}");
- String scheme = defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf("/")-1);
-    String host = defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+2);
+    String scheme =
+        defaultAPIBaseUrl.substring(0, defaultAPIBaseUrl.indexOf("/") - 1);
+    String host =
+        defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/") + 2);
+    int port = scheme == "https" ? 443 : 80;
+    if (host.contains(":")) {
+      String portString = host.substring(host.indexOf(":") + 1);
+      host = host.substring(0, host.indexOf(":"));
+      port = int.parse(portString);
+    }
+    logNoStack.i("scheme = [$scheme]");
+    logNoStack.i("host = [$host]");
+    logNoStack.i("port = [$port]");
     final uri = Uri(
       scheme: scheme,
-      host:  host,
+      host: host,
+      port: port,
       path: "$defaultApiPrefixPath/registrations/get/$registrationId}",
       // queryParameters: {
       //   'api_key': token,
@@ -135,13 +161,14 @@ class RegistrationsRepository {
 
     final response =
         await client.get(uri, options: options, cancelToken: cancelToken);
-        logNoStack.i("REGISTRATIONS_REPOSITORY: @@@@@ ${response.data}");
+    logNoStack.i("REGISTRATIONS_REPOSITORY: @@@@@ ${response.data}");
     return Registration.fromJson(response.data);
   }
 }
 
 @riverpod
-RegistrationsRepository registrationsRepository(RegistrationsRepositoryRef ref) =>
+RegistrationsRepository registrationsRepository(
+        RegistrationsRepositoryRef ref) =>
     RegistrationsRepository(
       client: ref.watch(dioProvider),
       token: ref.read(nestAuthProvider.notifier).token!,

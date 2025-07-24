@@ -17,9 +17,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
 import 'package:notifi/api_utils.dart';
-import 'package:notifi/models/person.dart';
-import 'package:notifi/models/gps.dart';
-import 'package:notifi/models/crowtech_basepage.dart';
 import 'package:notifi/models/nestfilter.dart';
 import 'package:notifi/credentials.dart';
 

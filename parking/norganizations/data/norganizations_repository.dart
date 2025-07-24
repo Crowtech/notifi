@@ -43,14 +43,22 @@ class NOrganizationsRepository {
 
  
     String path = "$defaultApiPrefixPath/resources/targets/0";
-
- String scheme = defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf("/")-1);
+  String scheme = defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf("/")-1);
     String host = defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+2);
+    int port = scheme=="https"?443:80;
+    if (host.contains(":")) {
+      String portString = host.substring(host.indexOf(":")+1);
+      host = host.substring(0,host.indexOf(":"));
+      port = int.parse(portString);
+    }
+    logNoStack.i("scheme = [$scheme]");
+    logNoStack.i("host = [$host]");
+    logNoStack.i("port = [$port]");
     final uri = Uri(
       scheme: scheme,
       host:  host,
-      path: path,
-      queryParameters: {
+      port: port,
+      path: path,      queryParameters: {
         // 'api_key': apiKey,
         // 'include_adult': 'false',
         // 'page': '${queryData.page}',
@@ -78,10 +86,19 @@ logNoStack.i("NORGANIZATIONS_REPOSITORY: $host  $uri $data");
 
     String path = "$defaultApiPrefixPath/resources/targets/0";
 
-    logNoStack.i("NORGANIZATIONS_REPOSITORY: now playiong token=${token.substring(0, 10)}\n$nf\n$host\n$path");
+    logNoStack.i("NORGANIZATIONS_REPOSITORY: now playiong token=${token.substring(0, 10)}");
 
- String scheme = defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf("/")-1);
+  String scheme = defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf("/")-1);
     String host = defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+2);
+    int port = scheme=="https"?443:80;
+    if (host.contains(":")) {
+      String portString = host.substring(host.indexOf(":")+1);
+      host = host.substring(0,host.indexOf(":"));
+      port = int.parse(portString);
+    }
+    logNoStack.i("scheme = [$scheme]");
+    logNoStack.i("host = [$host]");
+    logNoStack.i("port = [$port]");
     final uri = Uri(
       scheme: scheme,
       host:  host,

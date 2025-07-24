@@ -1,0 +1,23 @@
+name: oidc_platform_interface
+description: A common platform interface for the oidc plugin.
+version: 0.6.0+1
+repository: https://github.com/Bdaya-Dev/oidc/tree/main/packages/oidc_platform_interface
+homepage: https://bdaya-dev.github.io/oidc/
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+  flutter: ">=3.22.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  json_annotation: ^4.8.1
+  oidc_core: #^0.9.1
+    path: ../oidc_core
+  plugin_platform_interface: ^2.1.0
+
+dev_dependencies:
+  build_runner: ^2.4.6
+  flutter_test:
+    sdk: flutter
+  json_serializable: ^6.7.1
+  very_good_analysis: ">=5.0.0 <7.0.0"

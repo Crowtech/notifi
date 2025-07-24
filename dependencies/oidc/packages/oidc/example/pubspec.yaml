@@ -1,0 +1,36 @@
+name: oidc_example
+description: Demonstrates how to use the oidc plugin.
+version: 0.1.0+1
+publish_to: none
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
+  async: ^2.11.0
+  bdaya_shared_value: #^3.1.3
+    path: ../../../flutter-shared-value
+  dio: ^5.3.3
+  go_router: ^14.1.4
+  http: ^1.1.0
+  logging: ^1.2.0
+  oidc:
+    path: ../
+  oidc_core: ^0.9.1
+  oidc_default_store: ^0.2.0+12
+
+dev_dependencies:
+  flutter_driver:
+    sdk: flutter
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+  very_good_analysis: ^6.0.0
+
+flutter:
+  uses-material-design: true

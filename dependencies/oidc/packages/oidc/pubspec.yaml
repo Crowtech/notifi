@@ -1,0 +1,65 @@
+name: oidc
+description: A comprehensive OpenIdConnect plugin that works on all platforms (android, ios, windows, linux, web, macos)
+version: 0.9.0+1
+repository: https://github.com/Bdaya-Dev/oidc/tree/main/packages/oidc
+topics: ['oidc', 'openidconnect', 'oauth', 'authentication']
+homepage: https://bdaya-dev.github.io/oidc/
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+  flutter: ">=3.22.0"
+flutter:
+  plugin:
+    platforms:
+      android:
+        default_package: oidc_android
+      ios:
+        default_package: oidc_ios
+      linux:
+        default_package: oidc_linux
+      macos:
+        default_package: oidc_macos
+      web:
+        default_package: oidc_web
+      windows:
+        default_package: oidc_windows
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # Endorsed packages
+  oidc_android: #^0.6.0+1
+     path: ../oidc_android
+  oidc_core: #^0.9.1
+     path: ../oidc_core
+  oidc_ios: #^0.6.0+1
+     path: ../oidc_ios
+  oidc_linux: #^0.3.0+12
+     path: ../oidc_linux
+  oidc_macos: #^0.6.0+1
+     path: ../oidc_macos
+  oidc_platform_interface: #^0.6.0+1
+     path: ../oidc_platform_interface
+  oidc_web: #^0.6.0+1
+     path: ../oidc_web 
+  oidc_windows: #^0.3.1+6
+     path: ../oidc_windows
+  # ====================
+  http: ^1.1.0
+  jose_plus: ^0.4.4
+  retry: ^3.1.2
+  rxdart: ^0.28.0
+  logging: ^1.2.0
+  json_annotation: ^4.9.0
+  nonce: ^1.2.0
+  uuid: ^4.0.0
+  clock: ^1.1.1
+
+dev_dependencies:
+  build_runner: ^2.4.14
+  collection: ^1.17.2
+  flutter_test:
+    sdk: flutter
+  json_serializable: ^6.9.3
+  mocktail: ^1.0.0
+  plugin_platform_interface: ^2.0.0
+  very_good_analysis: ">=5.0.0 <7.0.0"

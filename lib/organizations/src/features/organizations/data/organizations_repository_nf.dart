@@ -9,7 +9,6 @@ import 'package:notifi/persons/src/utils/cancel_token_ref.dart';
 import 'package:notifi/state/nest_auth2.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-
 import 'package:notifi/organizations/src/utils/dio_provider.dart';
 import 'package:logger/logger.dart' as logger;
 
@@ -32,7 +31,9 @@ var logNoStack = logger.Logger(
 
 class OrganizationsRepositoryNestFilter {
   const OrganizationsRepositoryNestFilter(
-      {required this.client, required this.token, required this.currentUser/*, required this.nestFilter*/});
+      {required this.client,
+      required this.token,
+      required this.currentUser /*, required this.nestFilter*/});
   final Dio client;
   final String token;
   final Person currentUser;
@@ -40,15 +41,27 @@ class OrganizationsRepositoryNestFilter {
 
   Future<OrganizationsResponse> searchOrganizations(
       {required NestFilter nestFilter, CancelToken? cancelToken}) async {
-
     var data = jsonEncode(nestFilter);
     logNoStack.i(
         "ORGANIZATIONS_REPOSITORY_NF: search currentUserId=${currentUser.id} token=${token.substring(0, 10)} nestfilter=$nestFilter");
-
+    String scheme =
+        defaultAPIBaseUrl.substring(0, defaultAPIBaseUrl.indexOf("/") - 1);
+    String host =
+        defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/") + 2);
+    int port = scheme == "https" ? 443 : 80;
+    if (host.contains(":")) {
+      String portString = host.substring(host.indexOf(":") + 1);
+      host = host.substring(0, host.indexOf(":"));
+      port = int.parse(portString);
+    }
+    logNoStack.i("scheme = [$scheme]");
+    logNoStack.i("host = [$host]");
+    logNoStack.i("port = [$port]");
     final uri = Uri(
-      scheme: defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf(":")),
-      host: defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/")+2),
+      scheme: scheme,
+      host: host,
       path: "$defaultApiPrefixPath/resources/sources/${currentUser.id}",
+      port: port,
       // queryParameters: {
       //   'api_key': token,
       //   'include_adult': 'false',
@@ -69,26 +82,34 @@ class OrganizationsRepositoryNestFilter {
 
   Future<OrganizationsResponse> allOrganizations(
       {
-       // required NestFilter nestFilter, 
+      // required NestFilter nestFilter,
       CancelToken? cancelToken}) async {
-           NestFilter nestFilter = NestFilter(offset:0,limit:1000,includeGPS: false);
+    NestFilter nestFilter =
+        NestFilter(offset: 0, limit: 1000, includeGPS: false);
     var data = jsonEncode(nestFilter);
     logNoStack.i(
         "ORGANIZATIONS_REPOSITORY_NF: all Orgs currentUserId=${currentUser.id} token=${token.substring(0, 10)} $nestFilter");
 //     logNoStack.i("ORGANIZATIONS_REPOSITORY_NF: all Orgs: scheme:${defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf(":"))}");
 //     logNoStack.i("ORGANIZATIONS_REPOSITORY_NF: all Orgs: host:${defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf(":")+3)}");
 // logNoStack.i("ORGANIZATIONS_REPOSITORY_NF: all Orgs: path:${defaultApiPrefixPath}/resources/sources/${currentUser.id}}");
-
+    String scheme =
+        defaultAPIBaseUrl.substring(0, defaultAPIBaseUrl.indexOf("/") - 1);
+    String host =
+        defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/") + 2);
+    int port = scheme == "https" ? 443 : 80;
+    if (host.contains(":")) {
+      String portString = host.substring(host.indexOf(":") + 1);
+      host = host.substring(0, host.indexOf(":"));
+      port = int.parse(portString);
+    }
+    logNoStack.i("scheme = [$scheme]");
+    logNoStack.i("host = [$host]");
+    logNoStack.i("port = [$port]");
     final uri = Uri(
-      scheme: defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf(":")),
-      host: defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf(":")+3),
+      scheme: scheme,
+      host: host,
       path: "$defaultApiPrefixPath/resources/sources/${currentUser.id}",
-      // queryParameters: {
-      //   'api_key': token,
-      //   'include_adult': 'false',
-      //   'language': 'en-US',
-      //   'page': '$page',
-      // },
+      port: port,
     );
     Options options = Options(headers: {
       "Content-Type": 'application/json',
@@ -96,26 +117,41 @@ class OrganizationsRepositoryNestFilter {
       "Authorization": 'Bearer $token'
     });
 
-    logNoStack.i("ORGANIZATIONS_REPOSITORY_NF: all Orgs uri=${uri.toString()} about to call api");
+    logNoStack.i(
+        "ORGANIZATIONS_REPOSITORY_NF: all Orgs uri=${uri.toString()} about to call api");
     final response = await client.postUri(uri,
         options: options, data: data, cancelToken: cancelToken);
 
-    logNoStack
-        .d("ORGANIZATIONS_REPOSITORY_NF: all Orgs back from api, responseData=${response.data}");
+    logNoStack.d(
+        "ORGANIZATIONS_REPOSITORY_NF: all Orgs back from api, responseData=${response.data}");
 
     OrganizationsResponse or = OrganizationsResponse.fromJson(response.data);
-    logNoStack.i("ORGANIZATIONS_REPOSITORY_NF: all Orgs back from api \n${or.items}");
+    logNoStack
+        .i("ORGANIZATIONS_REPOSITORY_NF: all Orgs back from api \n${or.items}");
     return or;
   }
 
-  
   Future<Organization> organization(
       {required int orgId, CancelToken? cancelToken}) async {
     logNoStack.i(
         "ORGANIZATIONS_REPOSITORY_NF: organization currentUserId=${currentUser.id} token=${token.substring(0, 10)}");
+    String scheme =
+        defaultAPIBaseUrl.substring(0, defaultAPIBaseUrl.indexOf("/") - 1);
+    String host =
+        defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf("/") + 2);
+    int port = scheme == "https" ? 443 : 80;
+    if (host.contains(":")) {
+      String portString = host.substring(host.indexOf(":") + 1);
+      host = host.substring(0, host.indexOf(":"));
+      port = int.parse(portString);
+    }
+    logNoStack.i("scheme = [$scheme]");
+    logNoStack.i("host = [$host]");
+    logNoStack.i("port = [$port]");
     final url = Uri(
-      scheme: defaultAPIBaseUrl.substring(0,defaultAPIBaseUrl.indexOf(":")),
-      host: defaultAPIBaseUrl.substring(defaultAPIBaseUrl.indexOf(":")+3),
+      scheme: scheme,
+      host: host,
+      port: port,
       path: "$defaultApiPrefixPath/organizations/get/$orgId}",
       // queryParameters: {
       //   'api_key': token,
@@ -135,11 +171,13 @@ class OrganizationsRepositoryNestFilter {
 }
 
 @riverpod
-OrganizationsRepositoryNestFilter organizationsRepositoryNestFilter(OrganizationsRepositoryNestFilterRef ref) => OrganizationsRepositoryNestFilter(
+OrganizationsRepositoryNestFilter organizationsRepositoryNestFilter(
+        OrganizationsRepositoryNestFilterRef ref) =>
+    OrganizationsRepositoryNestFilter(
       client: ref.watch(dioProvider),
       token: ref.read(nestAuthProvider.notifier).token!,
       currentUser: ref.read(nestAuthProvider.notifier).currentUser,
-   //   nestFilter: ref.watch(AdamNestFilterProvider(NestFilterType.organizations)),
+      //   nestFilter: ref.watch(AdamNestFilterProvider(NestFilterType.organizations)),
     );
 
 class AbortedException implements Exception {}
@@ -159,13 +197,14 @@ Future<Organization> organization2(
 /// Provider to fetch paginated organizations data
 @riverpod
 Future<OrganizationsResponse> fetchOrganizationsNestFilter(
-  FetchOrganizationsNestFilterRef ref, 
+  FetchOrganizationsNestFilterRef ref,
   //{
   //required NestFilter nestFilter,
 //}
 ) async {
   // final organizationsRepo = ref.read(organizationsRepositoryNestFilterProvider);
-  final organizationsRepo = ref.watch(organizationsRepositoryNestFilterProvider);
+  final organizationsRepo =
+      ref.watch(organizationsRepositoryNestFilterProvider);
   // See this for how the timeout is implemented:
   // https://codewithandrea.com/articles/flutter-riverpod-data-caching-providers-lifecycle/#caching-with-timeout
   // Cancel the page request if the UI no longer needs it.
@@ -194,13 +233,13 @@ Future<OrganizationsResponse> fetchOrganizationsNestFilter(
     timer?.cancel();
   });
   //if (nestFilter.query.isEmpty) {
-    // use non-search endpoint
-    //logNoStack.i("FETCH_ORG_NF: about to call allOrgs nf=$nestFilter");
-     logNoStack.i("FETCH_ORG_NF: about to call allOrgs ");
-    return organizationsRepo.allOrganizations(
-     // nestFilter: nestFilter,
-      cancelToken: cancelToken,
-    );
+  // use non-search endpoint
+  //logNoStack.i("FETCH_ORG_NF: about to call allOrgs nf=$nestFilter");
+  logNoStack.i("FETCH_ORG_NF: about to call allOrgs ");
+  return organizationsRepo.allOrganizations(
+    // nestFilter: nestFilter,
+    cancelToken: cancelToken,
+  );
   // } else {
   //   // use search endpoint
   //   return organizationsRepo.searchOrganizations(

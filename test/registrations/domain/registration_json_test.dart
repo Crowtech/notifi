@@ -13,8 +13,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:notifi/models/registration.dart';
-import 'package:notifi/models/organization.dart';
-import 'package:notifi/models/person.dart';
 
 void main() {
   group('Registration JSON Input Tests', () {

@@ -1,0 +1,32 @@
+name: oidc_macos
+description: MacOS implementation of the oidc plugin
+version: 0.6.0+1
+repository: https://github.com/Bdaya-Dev/oidc/tree/main/packages/oidc_macos
+homepage: https://bdaya-dev.github.io/oidc/
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+  flutter: ">=3.22.0"
+
+flutter:
+  plugin:
+    implements: oidc
+    platforms:
+      macos:
+        pluginClass: OidcPlugin
+        dartPluginClass: OidcMacOS
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_appauth: ^6.0.2
+  oidc_core: #^0.9.1
+    path: ../oidc_core
+  oidc_flutter_appauth: #^0.5.0+1
+    path: ../oidc_flutter_appauth
+  oidc_platform_interface: #^0.6.0+1
+    path: ../oidc_platform_interface
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  very_good_analysis: ">=5.0.0 <7.0.0"
