@@ -84,6 +84,7 @@ class Person extends Resource {
     return Person.fromJson(json);
   }
 
+
   @override
   String toString() {
     String gpsStr = "";
@@ -96,6 +97,8 @@ class Person extends Resource {
   String toShortString() {
     return "Person=>$username $nickname $gender";
   }
+
+  String get displayName => '${firstname ?? ''} ${lastname ?? ''}'.trim();
 
   @override
   String getAvatarUrl() {
@@ -135,6 +138,21 @@ class Person extends Resource {
 
   @override
   int get hashCode => id.hashCode;
+
+   bool get hasGpsData {
+    return (latitude != null && longitude != null) ||
+           (gps != null && gps!.hasValidCoordinates);
+  }
+  
+  double? get displayLatitude {
+    if (latitude != null) return latitude;
+    return gps?.displayLatitude;
+  }
+  
+  double? get displayLongitude {
+    if (longitude != null) return longitude;
+    return gps?.displayLongitude;
+  }
 }
 
 Person defaultPerson = Person(

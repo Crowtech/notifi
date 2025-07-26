@@ -136,6 +136,7 @@ class TextFormFieldWidget extends ConsumerStatefulWidget {
     this.valueIsEmptyMessage = 'please enter a value',
     this.valueIsInvalidMessage = 'please enter a valid value',
     this.valueIsExisting,
+    this.existingIsError = false,
     this.hintText = '',
     required this.formCode,
     required this.fieldCode,
@@ -178,6 +179,8 @@ class TextFormFieldWidget extends ConsumerStatefulWidget {
   
   /// Error message displayed when value already exists (uniqueness check)
   String? valueIsExisting;
+
+  bool existingIsError;
   
   /// Unique identifier for the form containing this field
   final String formCode;
@@ -340,6 +343,8 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
       return Colors.black; // Required empty field (neutral)
     } else if (!isEmpty && isValid) {
       return Colors.green; // Valid non-empty field
+    } else if (!isEmpty && isExisting) {
+      return Colors.green; // Valid non-empty existing field
     } else {
       return Colors.red; // Invalid field
     }
@@ -411,7 +416,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
         setState(() {
           isValidating = false;
           isExisting = true;
-          isValid = false;
+          isValid = widget.existingIsError? false: true ;
         });
       } else {
         /// Value is unique - validation passes
@@ -518,10 +523,15 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
           return widget.isValidatingMessage; // Show loading message
         }
         if (value?.isEmpty ?? false) {
+          
           return widget.valueIsEmptyMessage; // Show empty error
         }
 
         if (!isWaiting && !isValid && isExisting) {
+          return widget.valueIsExisting; // Show uniqueness error
+        }
+
+        if (!isWaiting && isValid && isExisting) {
           return widget.valueIsExisting; // Show uniqueness error
         }
         if (!isWaiting && !isValid) {
@@ -680,7 +690,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
       /// Use custom validation function if provided
       /// This allows complex business rule validation beyond regex patterns
       logNoStack.i(
-        "Checking validation using onValidate ${widget.onValidate!(value) ? 'GOOD' : 'BAD'}",
+        "Checking validation using onValidate  ${widget.fieldCode} ${widget.onValidate!(value) ? 'GOOD' : 'BAD'}",
       );
       isValid = widget.onValidate!(value);
     } else {

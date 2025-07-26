@@ -20,7 +20,7 @@ class GPS extends CrowtechBase<GPS> {
   String resourcecode;
   int resourceid;
   String? devicecode;
-  int timestamp = DateTime.now().millisecondsSinceEpoch;
+  int? timestamp = DateTime.now().millisecondsSinceEpoch;
   double longitude;
   double latitude;
   double speed;
@@ -29,26 +29,30 @@ class GPS extends CrowtechBase<GPS> {
   bool charging;
   bool moving;
   Person? person;
+  final String? accuracy;
+  final GpsCoords? coords;
 
   GPS({
     super.id = 0,
     super.code,
     super.created,
-    super.active=true,
+    super.active = true,
     String? jwt,
     this.resourcecode = "",
     this.resourceid = 0,
     this.devicecode,
+    this.timestamp,
     String timestampStr = "",
-    required this.longitude,
-    required this.latitude,
+    this.longitude = 0.0,
+    this.latitude = 0.0,
     this.speed = 0.0,
     this.heading = 0.0,
     this.battery = 0.0,
     this.charging = false,
     this.moving = false,
     this.person,
-    
+    this.accuracy,
+    this.coords,
   }) {
     // if (person != null) {
     //   resourceid = person!.id!;
@@ -101,13 +105,57 @@ class GPS extends CrowtechBase<GPS> {
 
   @override
   bool operator ==(Object other) =>
-      other is GPS &&
-      other.runtimeType == runtimeType &&
-      other.id == id;
-      
+      other is GPS && other.runtimeType == runtimeType && other.id == id;
+
   @override
   int get hashCode => id.hashCode;
 
+  bool get hasValidCoordinates {
+    return (latitude != null && longitude != null) ||
+        (coords != null &&
+            coords!.latitude != null &&
+            coords!.longitude != null);
+  }
+
+  double? get displayLatitude {
+    if (latitude != null) return latitude;
+    return coords?.latitude;
+  }
+
+  double? get displayLongitude {
+    if (longitude != null) return longitude;
+    return coords?.longitude;
+  }
+
+  String? get timestampString {
+    if (timestamp == null) return created.toString();
+    if (timestamp is String) return timestamp.toString();
+    if (timestamp is int) return timestamp.toString();
+    return super.created.toString();
+  }
 }
 
 GPS defaultGPS = GPS(latitude: 0.0, longitude: 0.0);
+
+@JsonSerializable()
+class GpsCoords {
+  final double? latitude;
+  final double? longitude;
+  final double? accuracy;
+  final double? speed;
+  final double? heading;
+  final double? bearing;
+
+  GpsCoords({
+    this.latitude,
+    this.longitude,
+    this.accuracy,
+    this.speed,
+    this.heading,
+    this.bearing,
+  });
+
+  factory GpsCoords.fromJson(Map<String, dynamic> json) =>
+      _$GpsCoordsFromJson(json);
+  Map<String, dynamic> toJson() => _$GpsCoordsToJson(this);
+}

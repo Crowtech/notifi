@@ -16,8 +16,9 @@ GPS _$GPSFromJson(Map<String, dynamic> json) => GPS(
       resourcecode: json['resourcecode'] as String? ?? "",
       resourceid: (json['resourceid'] as num?)?.toInt() ?? 0,
       devicecode: json['devicecode'] as String?,
-      longitude: (json['longitude'] as num).toDouble(),
-      latitude: (json['latitude'] as num).toDouble(),
+      timestamp: (json['timestamp'] as num?)?.toInt(),
+      longitude: (json['longitude'] as num?)?.toDouble() ?? 0.0,
+      latitude: (json['latitude'] as num?)?.toDouble() ?? 0.0,
       speed: (json['speed'] as num?)?.toDouble() ?? 0.0,
       heading: (json['heading'] as num?)?.toDouble() ?? 0.0,
       battery: (json['battery'] as num?)?.toDouble() ?? 0.0,
@@ -26,9 +27,11 @@ GPS _$GPSFromJson(Map<String, dynamic> json) => GPS(
       person: json['person'] == null
           ? null
           : Person.fromJson(json['person'] as Map<String, dynamic>),
-    )
-      ..orgid = (json['orgid'] as num?)?.toInt()
-      ..timestamp = (json['timestamp'] as num).toInt();
+      accuracy: json['accuracy'] as String?,
+      coords: json['coords'] == null
+          ? null
+          : GpsCoords.fromJson(json['coords'] as Map<String, dynamic>),
+    )..orgid = (json['orgid'] as num?)?.toInt();
 
 Map<String, dynamic> _$GPSToJson(GPS instance) => <String, dynamic>{
       'orgid': instance.orgid,
@@ -48,4 +51,24 @@ Map<String, dynamic> _$GPSToJson(GPS instance) => <String, dynamic>{
       'charging': instance.charging,
       'moving': instance.moving,
       'person': instance.person?.toJson(),
+      'accuracy': instance.accuracy,
+      'coords': instance.coords?.toJson(),
+    };
+
+GpsCoords _$GpsCoordsFromJson(Map<String, dynamic> json) => GpsCoords(
+      latitude: (json['latitude'] as num?)?.toDouble(),
+      longitude: (json['longitude'] as num?)?.toDouble(),
+      accuracy: (json['accuracy'] as num?)?.toDouble(),
+      speed: (json['speed'] as num?)?.toDouble(),
+      heading: (json['heading'] as num?)?.toDouble(),
+      bearing: (json['bearing'] as num?)?.toDouble(),
+    );
+
+Map<String, dynamic> _$GpsCoordsToJson(GpsCoords instance) => <String, dynamic>{
+      'latitude': instance.latitude,
+      'longitude': instance.longitude,
+      'accuracy': instance.accuracy,
+      'speed': instance.speed,
+      'heading': instance.heading,
+      'bearing': instance.bearing,
     };

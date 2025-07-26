@@ -407,11 +407,15 @@ class _CreatePersonFormState extends ConsumerState<CreatePersonForm> {
                                   onPressed: !isValid
                                       ? null
                                       : () async {
+                                         logNoStack.i(
+                                                'person form: submit clicked!');
                                           /// Double-check form validation before submission
                                           /// This is a final safety check before making the API call
-                                          if (_formKey.currentState != null &&
-                                              _formKey.currentState!
-                                                  .validate()) {
+                                     if (_formKey.currentState != null &&
+                                              isValid) {
+                                          // if (_formKey.currentState != null &&
+                                          //     _formKey.currentState!
+                                          //         .validate()) {
                                             
                                             /// **Person Object Creation**
                                             /// 
