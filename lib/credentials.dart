@@ -35,7 +35,7 @@ const _defaultAuthBaseUrl = "https://${String.fromEnvironment('AUTH_BASE_URL',
 const _defaultAPIBaseUrl = String.fromEnvironment('API_BASE_URL');
 
 /// OpenID Connect discovery URL for authentication
-const _defaultDiscoveryUrl = "https://${String.fromEnvironment('AUTH_OPENID_URL')}";
+const  _defaultDiscoveryUrl = "https://${String.fromEnvironment('AUTH_OPENID_URL')}";
 
 /// OAuth2/OIDC client identifier
 const _defaultClientId = String.fromEnvironment('AUTH_OPENID_CLIENT_ID');
@@ -155,10 +155,10 @@ const _defaultscopes = [
 String get defaultRealm => _defaultRealm;
 
 /// Base URL for authentication services
-String get defaultAuthBaseUrl => _defaultAuthBaseUrl;
+String get defaultAuthBaseUrl => (_defaultAuthBaseUrl.contains('localhost')?'http':'https')+_defaultAuthBaseUrl.substring('https'.length);
 
 /// OpenID Connect discovery URL
-String get defaultDiscoveryUrl => _defaultDiscoveryUrl;
+String get defaultDiscoveryUrl => (_defaultDiscoveryUrl.contains('localhost')?'http':'https')+_defaultDiscoveryUrl.substring('https'.length);
 
 /// OAuth2/OIDC client ID
 String get defaultClientId => _defaultClientId;
@@ -176,7 +176,7 @@ String get defaultRedirectUrl => _defaultRedirectUrl;
 String get defaultRealmBaseUrl => _defaultRealmBaseUrl;
 
 /// Authorization endpoint URL
-String get defaultAuthEndpointUrl => _defaultAuthEndpointUrl;
+String get defaultAuthEndpointUrl => (_defaultAuthEndpointUrl.contains('localhost')?'http':'https')+_defaultAuthEndpointUrl.substring('https'.length);
 
 // Public Getters for API Configuration
 /// Backend API base URL
